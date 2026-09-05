@@ -1,0 +1,74 @@
+name: Android device smoke
+
+on:
+  workflow_run:
+    workflows: ["Build Android"]
+    types: [completed]
+    branches: [dev]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Optional prerelease tag. Empty means latest prerelease."
+        required: false
+        type: string
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: multimental-android-usb
+  cancel-in-progress: false
+
+jobs:
+  install-from-build:
+    name: Install verified APK on USB device
+    if: >-
+      (github.event_name == 'workflow_dispatch') ||
+      (github.event.workflow_run.conclusion == 'success')
+    runs-on: [self-hosted, Windows, X64, android-usb]
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout device scripts
+        uses: actions/checkout@v4
+
+      - name: Download APK from successful dev workflow
+        if: github.event_name == 'workflow_run'
+        uses: actions/download-artifact@v4
+        with:
+          name: multimental-android
+          path: downloaded-build
+          repository: neurofoxpro/multimental
+          run-id: ${{ github.event.workflow_run.id }}
+          github-token: ${{ github.token }}
+
+      - name: Install workflow artifact and collect diagnostics
+        if: github.event_name == 'workflow_run'
+        shell: powershell
+        run: |
+          $apk = Get-ChildItem downloaded-build -Recurse -Filter *.apk | Select-Object -First 1
+          if (-not $apk) { throw "APK was not found in workflow artifact." }
+          & ./scripts/device-smoke.ps1 -ApkPath $apk.FullName
+
+      - name: Install requested or latest prerelease
+        if: github.event_name == 'workflow_dispatch'
+        shell: powershell
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $tag = "${{ inputs.tag }}"
+          if ($tag) {
+            & ./scripts/install-latest.ps1 -Repository "neurofoxpro/multimental" -Tag $tag
+          } else {
+            & ./scripts/install-latest.ps1 -Repository "neurofoxpro/multimental"
+          }
+
+      - name: Upload screenshot and logcat
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: android-device-results-${{ github.run_id }}
+          path: device-results/
+          if-no-files-found: warn
+          retention-days: 14
