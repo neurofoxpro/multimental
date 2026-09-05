@@ -1,0 +1,157 @@
+name: Build Android
+
+on:
+  pull_request:
+    branches: [dev, main]
+  push:
+    branches:
+      - dev
+      - main
+      - "feature/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: multimental-build-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  GODOT_VERSION: "4.7.2"
+  GODOT_STATUS: "stable"
+  GODOT_BIN: /home/runner/.local/share/multimental/godot/4.7.2-stable/godot
+  GODOT_ANDROID_KEYSTORE_DEBUG_PATH: /home/runner/.android/debug.keystore
+  GODOT_ANDROID_KEYSTORE_DEBUG_USER: androiddebugkey
+  GODOT_ANDROID_KEYSTORE_DEBUG_PASSWORD: android
+
+jobs:
+  build:
+    name: Verify and export APK
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    outputs:
+      version: ${{ steps.meta.outputs.version }}
+      artifact_name: ${{ steps.meta.outputs.artifact_name }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+
+      - name: Set up Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Install required Android SDK packages
+        shell: bash
+        run: |
+          set -euo pipefail
+          SDK_ROOT="${ANDROID_SDK_ROOT:-${ANDROID_HOME:-}}"
+          test -n "$SDK_ROOT"
+          SDKMANAGER="$SDK_ROOT/cmdline-tools/latest/bin/sdkmanager"
+          if [[ ! -x "$SDKMANAGER" ]]; then
+            SDKMANAGER="$(command -v sdkmanager)"
+          fi
+          yes | "$SDKMANAGER" --licenses >/dev/null 2>&1 || true
+          "$SDKMANAGER" "platform-tools" "build-tools;35.0.1" "platforms;android-35"
+
+      - name: Install pinned Godot and export templates
+        shell: bash
+        run: bash scripts/setup-godot.sh
+
+      - name: Configure Android export
+        shell: bash
+        run: bash scripts/configure-android-ci.sh
+
+      - name: Compute and stamp build metadata
+        id: meta
+        shell: bash
+        run: |
+          set -euo pipefail
+          VERSION="0.0.1-alpha.${GITHUB_RUN_NUMBER}.${GITHUB_RUN_ATTEMPT}"
+          SHORT_SHA="${GITHUB_SHA:0:7}"
+          BUILD_LABEL="${GITHUB_RUN_NUMBER}.${GITHUB_RUN_ATTEMPT}"
+          BUILD_CODE=$((GITHUB_RUN_NUMBER * 100 + GITHUB_RUN_ATTEMPT))
+          ARTIFACT_NAME="multimental-${VERSION}-${SHORT_SHA}"
+          node tools/stamp-build.mjs "$VERSION" "$SHORT_SHA" "$BUILD_LABEL" "$BUILD_CODE"
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "artifact_name=$ARTIFACT_NAME" >> "$GITHUB_OUTPUT"
+
+      - name: Verify project headlessly
+        run: npm run verify
+
+      - name: Export Android debug APK
+        run: npm run build:android
+
+      - name: Prepare immutable artifacts
+        id: package
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p artifacts
+          APK="artifacts/${{ steps.meta.outputs.artifact_name }}.apk"
+          mv dist/multimental-debug.apk "$APK"
+          sha256sum "$APK" > artifacts/SHA256SUMS.txt
+          cat > artifacts/build-manifest.json <<JSON
+          {
+            "name": "Multimental",
+            "version": "${{ steps.meta.outputs.version }}",
+            "commit": "${GITHUB_SHA}",
+            "workflowRun": "${GITHUB_RUN_ID}",
+            "workflowAttempt": "${GITHUB_RUN_ATTEMPT}",
+            "androidPackage": "pro.neurofox.multimental",
+            "apk": "$(basename "$APK")"
+          }
+          JSON
+          echo "apk=$APK" >> "$GITHUB_OUTPUT"
+
+      - name: Upload Android artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: multimental-android
+          path: artifacts/
+          if-no-files-found: error
+          retention-days: 30
+
+  prerelease:
+    name: Publish development prerelease
+    needs: build
+    if: github.event_name == 'push' && github.ref == 'refs/heads/dev'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: write
+
+    steps:
+      - name: Download verified build
+        uses: actions/download-artifact@v4
+        with:
+          name: multimental-android
+          path: artifacts
+
+      - name: Publish GitHub prerelease
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ needs.build.outputs.version }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          TAG="v${VERSION}"
+          APK="$(find artifacts -maxdepth 1 -type f -name '*.apk' -print -quit)"
+          test -n "$APK"
+          gh release create "$TAG" \
+            "$APK" \
+            artifacts/SHA256SUMS.txt \
+            artifacts/build-manifest.json \
+            --repo "$GITHUB_REPOSITORY" \
+            --target "$GITHUB_SHA" \
+            --prerelease \
+            --title "Multimental ${VERSION}" \
+            --notes "Automated Android development build from dev. Commit: ${GITHUB_SHA}."
