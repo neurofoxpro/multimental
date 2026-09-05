@@ -1,0 +1,18 @@
+{
+  "name": "multimental",
+  "version": "0.0.1-alpha.1",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "doctor": "node tools/project.mjs doctor",
+    "verify": "node tools/project.mjs verify",
+    "test": "node tools/project.mjs test",
+    "build:android": "node tools/project.mjs build android",
+    "build:web": "node tools/project.mjs build web",
+    "device:smoke": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/device-smoke.ps1",
+    "device:install-latest": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/install-latest.ps1"
+  }
+}
