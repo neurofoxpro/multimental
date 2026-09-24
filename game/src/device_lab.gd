@@ -6,6 +6,7 @@ var ui: Control
 var worker: Thread
 var report: Dictionary = {}
 var finished: bool = false
+var worker_started_at: int = 0
 func _ready() -> void:
     if not OS.is_debug_build() or not FileAccess.file_exists("user://automation-request.json"):
         queue_free()
@@ -17,6 +18,8 @@ func _ready() -> void:
         return
     report = {"nonce": data.nonce, "mode": data.get("mode", "ui"), "status": "running", "version": BuildInfo.VERSION}
     _save()
+    worker_started_at = Time.get_ticks_msec()
+    _trace("ready", {"mode": report.mode})
     match str(data.get("mode", "ui")):
         "ui":
             call_deferred("_ui")
@@ -31,6 +34,30 @@ func _ready() -> void:
             worker.start(_tcp_client.bind(data))
         _:
             _done({"status": "failed", "error": "unsupported_mode"})
+func _process(_delta: float) -> void:
+    if finished or worker == null or not worker.is_started():
+        return
+    if not worker.is_alive():
+        var result: Variant = worker.wait_to_finish()
+        worker = null
+        if result is Dictionary:
+            _done(result)
+        else:
+            _done({"status": "failed", "error": "worker_exited_without_result", "trace": _last_trace()})
+    elif Time.get_ticks_msec() - worker_started_at > 140000:
+        report.merge({"status": "failed", "error": "worker_watchdog_timeout", "trace": _last_trace()}, true)
+        finished = true
+        _save()
+func _trace(phase: String, extra: Dictionary = {}) -> void:
+    var data: Dictionary = {"phase": phase, "at_ms": Time.get_ticks_msec()}
+    data.merge(extra)
+    var file := FileAccess.open("user://automation-trace.json", FileAccess.WRITE)
+    if file != null:
+        file.store_string(JSON.stringify(data))
+func _last_trace() -> Variant:
+    if FileAccess.file_exists("user://automation-trace.json"):
+        return JSON.parse_string(FileAccess.get_file_as_string("user://automation-trace.json"))
+    return null
 func _save() -> void:
     var file := FileAccess.open("user://automation-result.json", FileAccess.WRITE)
     if file != null:
@@ -39,8 +66,9 @@ func _stage(values: Dictionary) -> void:
     report.merge(values, true)
     _save()
 func _done(values: Dictionary) -> void:
-    if worker != null and worker.is_started():
+    if worker != null and worker.is_started() and not worker.is_alive():
         worker.wait_to_finish()
+        worker = null
     report.merge(values, true)
     finished = true
     _save()
@@ -99,12 +127,11 @@ func _ui() -> void:
         if not check.ok:
             all_ok = false
     _done({"status": "passed" if all_ok else "failed", "checks": checks, "viewport": [rect.size.x, rect.size.y], "input_source": "external_android_input_tap"})
-func _tcp_server(data: Dictionary) -> void:
+func _tcp_server(data: Dictionary) -> Dictionary:
     var server := TCPServer.new()
     var error: Error = server.listen(17843, "0.0.0.0")
     if error != OK:
-        call_deferred("_done", {"status": "failed", "error": "listen_failed"})
-        return
+        return {"status": "failed", "error": "listen_failed"}
     call_deferred("_stage", {"stage": "listening", "port": 17843})
     var end: int = Time.get_ticks_msec() + 90000
     var requests: int = 0
@@ -140,53 +167,63 @@ func _tcp_server(data: Dictionary) -> void:
         if requests >= 5:
             break
     server.stop()
-    call_deferred("_done", {"status": "passed" if requests >= 5 else "failed", "requests": requests, "transport": "tcp", "scope": "diagnostic_authoritative_session"})
-func _bluetooth_server(data: Dictionary) -> void:
+    return {"status": "passed" if requests >= 5 else "failed", "requests": requests, "transport": "tcp", "scope": "diagnostic_authoritative_session"}
+func _bluetooth_server(data: Dictionary) -> Dictionary:
     if not Engine.has_singleton("JavaClassWrapper"):
-        call_deferred("_done", {"status": "blocked", "error": "not_android"})
-        return
+        return {"status": "blocked", "error": "not_android"}
     var jw: Object = Engine.get_singleton("JavaClassWrapper")
     var adapter_class: Object = jw.wrap("android.bluetooth.BluetoothAdapter")
     var adapter: Object = adapter_class.getDefaultAdapter()
     if adapter == null or not adapter.isEnabled():
-        call_deferred("_done", {"status": "blocked", "error": "bluetooth_disabled"})
-        return
+        return {"status": "blocked", "error": "bluetooth_disabled"}
     var uuid_class: Object = jw.wrap("java.util.UUID")
     var uuid: Object = uuid_class.fromString("7e120e58-6fbd-4e4f-80e8-5685947c9dab")
     var listener: Object = adapter.listenUsingInsecureRfcommWithServiceRecord("MultimentalLab", uuid)
     if jw.get_exception() != null or listener == null:
-        call_deferred("_done", {"status": "blocked", "error": "bluetooth_permission_or_listen"})
-        return
+        return {"status": "blocked", "error": "bluetooth_permission_or_listen"}
     call_deferred("_stage", {"stage": "listening", "transport": "rfcomm"})
     var socket: Object = listener.accept(45000)
     var exception: Object = jw.get_exception()
     listener.close()
     if exception != null or socket == null:
-        call_deferred("_done", {"status": "failed", "error": "bluetooth_accept_timeout"})
-        return
+        return {"status": "failed", "error": "bluetooth_accept_timeout"}
     call_deferred("_stage", {"stage": "connected"})
+    _trace("get_input_stream")
+    var input: Object = socket.getInputStream()
+    _trace("get_output_stream")
+    var output: Object = socket.getOutputStream()
+    _trace("wrap_readers", {"input_class": input.get_java_class().get_java_class_name(), "output_class": output.get_java_class().get_java_class_name()})
     var reader_class: Object = jw.wrap("java.io.InputStreamReader")
     var buffer_class: Object = jw.wrap("java.io.BufferedReader")
     var writer_class: Object = jw.wrap("java.io.OutputStreamWriter")
-    call_deferred("_stage", {"stage": "classes_ready"})
-    var input_stream: Object = socket.getInputStream()
-    call_deferred("_stage", {"stage": "input_stream_ready"})
-    var raw_reader: Object = reader_class.InputStreamReader(input_stream, "UTF-8")
-    call_deferred("_stage", {"stage": "raw_reader_ready"})
-    var reader: Object = buffer_class.BufferedReader(raw_reader)
-    call_deferred("_stage", {"stage": "reader_ready"})
-    var writer: Object = writer_class.OutputStreamWriter(socket.getOutputStream(), "UTF-8")
-    call_deferred("_stage", {"stage": "streams_ready"})
-    if jw.get_exception() != null or reader == null or writer == null:
+    _trace("construct_input_reader")
+    var input_reader: Object = reader_class.InputStreamReader(input, "UTF-8")
+    if jw.get_exception() != null or input_reader == null:
         socket.close()
-        call_deferred("_done", {"status": "failed", "error": "bluetooth_stream_init"})
-        return
+        return {"status": "failed", "error": "construct_input_reader"}
+    _trace("construct_buffered_reader")
+    var reader: Object = buffer_class.BufferedReader(input_reader)
+    if jw.get_exception() != null or reader == null:
+        socket.close()
+        return {"status": "failed", "error": "construct_buffered_reader"}
+    _trace("construct_output_writer")
+    var writer: Object = writer_class.OutputStreamWriter(output, "UTF-8")
+    if jw.get_exception() != null or writer == null:
+        socket.close()
+        return {"status": "failed", "error": "construct_output_writer"}
+    _trace("stream_methods", {"ready": reader.has_java_method("ready"), "readLine": reader.has_java_method("readLine"), "write": writer.has_java_method("write"), "flush": writer.has_java_method("flush")})
     var p = Protocol.new(str(data.nonce))
     var requests: int = 0
     var end: int = Time.get_ticks_msec() + 45000
     var failure: String = ""
+    var first_poll: bool = true
     while Time.get_ticks_msec() < end and requests < 6:
+        if first_poll:
+            _trace("before_reader_ready")
         var ready: bool = bool(reader.ready())
+        if first_poll:
+            _trace("after_reader_ready", {"ready": ready})
+            first_poll = false
         if jw.get_exception() != null:
             failure = "reader_ready_exception"
             break
@@ -194,7 +231,9 @@ func _bluetooth_server(data: Dictionary) -> void:
             OS.delay_msec(10)
             continue
         call_deferred("_stage", {"stage": "reading_line", "requests": requests})
+        _trace("before_readline")
         var line: Variant = reader.readLine()
+        _trace("after_readline", {"length": str(line).length()})
         call_deferred("_stage", {"stage": "line_read", "requests": requests})
         if jw.get_exception() != null or line == null:
             failure = "reader_line_exception"
@@ -203,7 +242,9 @@ func _bluetooth_server(data: Dictionary) -> void:
             failure = "oversize_frame"
             break
         var response: Dictionary = p.receive(JSON.parse_string(str(line)))
+        _trace("before_write")
         writer.write(JSON.stringify(response) + "\n")
+        _trace("after_write")
         if jw.get_exception() != null:
             failure = "writer_exception"
             break
@@ -214,8 +255,8 @@ func _bluetooth_server(data: Dictionary) -> void:
         requests += 1
         call_deferred("_stage", {"stage": "exchanging", "requests": requests})
     socket.close()
-    call_deferred("_done", {"status": "passed" if requests == 6 else "failed", "requests": requests, "error": failure, "transport": "rfcomm", "scope": "diagnostic_only_not_production_pairing"})
-func _tcp_client(data: Dictionary) -> void:
+    return {"status": "passed" if requests == 6 else "failed", "requests": requests, "error": failure, "transport": "rfcomm", "scope": "diagnostic_only_not_production_pairing"}
+func _tcp_client(data: Dictionary) -> Dictionary:
     var peer := StreamPeerTCP.new()
     var err: Error = peer.connect_to_host(str(data.get("address", "")), 17843)
     var end: int = Time.get_ticks_msec() + 25000
@@ -225,8 +266,7 @@ func _tcp_client(data: Dictionary) -> void:
             break
         OS.delay_msec(10)
     if err != OK or peer.get_status() != StreamPeerTCP.STATUS_CONNECTED:
-        call_deferred("_done", {"status": "failed", "error": "connect_timeout"})
-        return
+        return {"status": "failed", "error": "connect_timeout"}
     var messages: Array[Dictionary] = [{"v": 1, "token": data.token, "op": "hello"}, {"v": 99, "token": data.token, "op": "hello"}, {"v": 1, "token": data.token, "op": "sync"}, {"v": 1, "token": data.token, "op": "command", "seq": 1, "command": {"type": "pass"}}, {"v": 1, "token": data.token, "op": "command", "seq": 1, "command": {"type": "pass"}}, {"v": 1, "token": data.token, "op": "sync"}]
     var replies: Array[Dictionary] = []
     var buffer: String = ""
@@ -247,4 +287,4 @@ func _tcp_client(data: Dictionary) -> void:
             replies.append(decoded)
     peer.disconnect_from_host()
     var success: bool = replies.size() == 6 and replies[0].get("ok", false) and replies[1].get("error") == "incompatible_protocol" and replies[3] == replies[4]
-    call_deferred("_done", {"status": "passed" if success else "failed", "reply_count": replies.size(), "transport": "tcp", "scope": "device_to_device_protocol"})
+    return {"status": "passed" if success else "failed", "reply_count": replies.size(), "transport": "tcp", "scope": "device_to_device_protocol"}

@@ -72,7 +72,7 @@ async function candidate(){
 }
 function qualify(options=[]){
  const c=readJSON(path.join(dir,'candidate.json'));if(c.head!==git('rev-parse','HEAD'))throw Error('Candidate is for an old HEAD');if(c.notRequired)return;
- for(const slot of ['A','B'])run('powershell.exe',['-NoProfile','-ExecutionPolicy','Bypass','-File','scripts/emulator.ps1','start',slot],{timeout:300000,quiet:true});
+ for(const slot of ['A','B'])run(process.execPath,['scripts/emulator.mjs','start',slot],{timeout:300000,quiet:true});
  run(process.execPath,['scripts/qualification.mjs','--config',path.join(workspace,'station.local.json'),...options],{timeout:1500000});
  const report=readJSON(path.join(dir,'qualification.json'));assertQualification(report,{head:c.head,apkHash:c.manifest.sha256,toolDigest:fingerprint(root,p),physical:options.includes('--physical')});
 }
@@ -124,6 +124,7 @@ try{switch(cmd){
  case 'emulator':run(process.execPath,['scripts/emulator.mjs',...args],{timeout:300000});break;
  case 'candidate':await candidate();break;
  case 'report':run(process.execPath,['scripts/report-production.mjs',...args]);break;
+ case 'record':run(process.execPath,['scripts/report.mjs']);break;
  case 'deploy-agent':run(process.execPath,['scripts/deploy-agent.mjs'],{timeout:120000});break;
  case 'roadmap':console.log(fs.readFileSync(inside(root,'docs/ROADMAP.ru.md'),'utf8'));break;
  default:throw Error('Unknown ops command');
