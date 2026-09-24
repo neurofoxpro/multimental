@@ -1,16 +1,85 @@
 [
-  {"id":"P01","status":"done","action":"Reusable production skill, authority guards and recovery records","evidence":"PR5/PR6; further guard tests in PR8"},
-  {"id":"P02","status":"done","action":"Provisional deterministic offline duel with separate UI","evidence":"100 simulations / 3002 checks; headless UI flow"},
-  {"id":"P03","status":"done","action":"First tested development APK installed on authorized phone","evidence":"alpha.20.1 installation and readiness receipt"},
-  {"id":"P04","status":"done","action":"Bounded updater installed and subsequent version updates verified","evidence":"20.1 -> 23.1 -> 26.1; same certificate; task exit 0; settings retained"},
-  {"id":"P05","status":"pending","action":"Owner manual play check: readability, card selection, adjacent combat, result and background behavior","manual":true},
-  {"id":"P05A","status":"done","action":"Recover device connection and check same-artifact install idempotence","evidence":"2026-09-24 resume: DEVICE_UPDATE_ALREADY_CURRENT, receipt unchanged, foreground game not interrupted"},
-  {"id":"P05B","status":"done","action":"Resolve local source indentation drift without weakening source hash checks","evidence":"Private Windows Godot profile; d1345081 verified twice with identical input fingerprints; personal settings hash unchanged; 17 Node tests"},
-  {"id":"P06","status":"deferred","action":"Data-driven catalogue, collection and deck builder with semantic validation"},
-  {"id":"P07","status":"deferred","action":"Atomic rewards, five-card packs, dust crafting and migration/corruption tests"},
-  {"id":"P08","status":"deferred","action":"Web layout/export and additional device matrix"},
-  {"id":"P09","status":"deferred","action":"LAN then Bluetooth: filtered private state, compatibility and reconnect tests"},
-  {"id":"P10","status":"deferred","action":"Owner's central elemental interaction system, advanced mechanics and online accounts/ranking"},
-  {"id":"P11","status":"deferred","action":"Production signing, full license inventory, action/dependency audit, branch protections, RC and owner-approved stable"},
-  {"id":"P12","status":"deferred","action":"Avoid redundant APK publication for documentation-only changes while retaining PR metadata validation"}
+  {
+    "id": "P01",
+    "status": "done",
+    "action": "Reusable production skill, authority guards and recovery records",
+    "evidence": "PR5/PR6; further guard tests in PR8"
+  },
+  {
+    "id": "P02",
+    "status": "done",
+    "action": "Provisional deterministic offline duel with separate UI",
+    "evidence": "100 simulations / 3002 checks; headless UI flow"
+  },
+  {
+    "id": "P03",
+    "status": "done",
+    "action": "First tested development APK installed on authorized phone",
+    "evidence": "alpha.20.1 installation and readiness receipt"
+  },
+  {
+    "id": "P04",
+    "status": "done",
+    "action": "Bounded updater installed and subsequent version updates verified",
+    "evidence": "20.1 -> 23.1 -> 26.1; same certificate; task exit 0; settings retained"
+  },
+  {
+    "id": "P05",
+    "status": "pending",
+    "action": "Owner manual play check: readability, card selection, adjacent combat, result and background behavior",
+    "manual": true
+  },
+  {
+    "id": "P05A",
+    "status": "done",
+    "action": "Recover device connection and check same-artifact install idempotence",
+    "evidence": "2026-09-24 resume: DEVICE_UPDATE_ALREADY_CURRENT, receipt unchanged, foreground game not interrupted"
+  },
+  {
+    "id": "P05B",
+    "status": "done",
+    "action": "Resolve local source indentation drift without weakening source hash checks",
+    "evidence": "Private Windows Godot profile; d1345081 verified twice with identical input fingerprints; personal settings hash unchanged; 17 Node tests"
+  },
+  {
+    "id": "P06",
+    "status": "deferred",
+    "action": "Data-driven catalogue, collection and deck builder with semantic validation"
+  },
+  {
+    "id": "P07",
+    "status": "deferred",
+    "action": "Atomic rewards, five-card packs, dust crafting and migration/corruption tests"
+  },
+  {
+    "id": "P08",
+    "status": "deferred",
+    "action": "Web layout/export and additional device matrix"
+  },
+  {
+    "id": "P09",
+    "status": "deferred",
+    "action": "LAN then Bluetooth: filtered private state, compatibility and reconnect tests"
+  },
+  {
+    "id": "P10",
+    "status": "deferred",
+    "action": "Owner's central elemental interaction system, advanced mechanics and online accounts/ranking"
+  },
+  {
+    "id": "P11",
+    "status": "deferred",
+    "action": "Production signing, full license inventory, action/dependency audit, branch protections, RC and owner-approved stable"
+  },
+  {
+    "id": "P12",
+    "status": "deferred",
+    "action": "Avoid redundant APK publication for documentation-only changes while retaining PR metadata validation"
+  },
+  {
+    "id": "OPS-V2",
+    "status": "in_progress",
+    "action": "Довести git/gh цикл, быстрый CI, эмуляторные/device проверки и roadmap; записать фактические результаты",
+    "dependsOn": []
+  }
 ]

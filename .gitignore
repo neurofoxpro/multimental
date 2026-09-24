@@ -11,3 +11,10 @@ downloaded-build/
 *.local.json
 .env
 .env.*
+
+# Station-only tools, generated engine sidecars and verification runtime
+.gameprod/runtime/
+*.gd.uid
+*.import
+*.apply-tmp
+*.chat-tmp
