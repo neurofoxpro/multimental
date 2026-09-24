@@ -18,3 +18,7 @@ downloaded-build/
 *.import
 *.apply-tmp
 *.chat-tmp
+
+# Prepared source-edit temporary files, never published
+*.author-*
+*.source-tmp-*

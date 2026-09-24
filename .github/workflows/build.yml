@@ -33,6 +33,10 @@ jobs:
       - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
           node-version-file: .nvmrc
+      - name: Install locked development tools
+        run: |
+          npm ci --ignore-scripts --no-fund
+          npm audit --audit-level=high
       - name: Select necessary stages
         id: plan
         run: node tools/ci-plan.mjs
@@ -40,6 +44,8 @@ jobs:
         run: |
           node skills/game-production/scripts/gameprod.mjs validate
           node tools/security-lint.mjs
+          node scripts/changelog.mjs check
+          node scripts/changelog.mjs policy
       - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         if: steps.plan.outputs.apk == 'true'
         with:
@@ -87,6 +93,14 @@ jobs:
           node skills/game-production/scripts/gameprod.mjs run build:android
           node skills/game-production/scripts/gameprod.mjs gate android-built
           node tools/package-build.mjs
+      - name: Generate Russian release notes
+        if: steps.plan.outputs.apk == 'true'
+        env:
+          CHANGELOG_BASE: ${{ github.event.pull_request.base.sha || github.event.before }}
+        run: |
+          node scripts/changelog.mjs release
+          cd artifacts
+          sha256sum RELEASE_NOTES.ru.md >> SHA256SUMS.txt
       - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         if: steps.plan.outputs.apk == 'true'
         with:
@@ -124,4 +138,4 @@ jobs:
           set -euo pipefail
           cd artifacts
           sha256sum --check SHA256SUMS.txt
-          gh release create "v$VERSION" ./*.apk SHA256SUMS.txt build-manifest.json --repo "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" --prerelease --title "Multimental $VERSION" --notes "Verified universal Android development build. Source: $GITHUB_SHA. Automated core/UI/protocol tests; source-bound receipts. Device lab is diagnostic, not a completed multiplayer lobby. Paired station re-signs with persistent local private test identity; both APK hashes are recorded. Stable production signing is separate."
+          gh release create "v$VERSION" ./*.apk SHA256SUMS.txt build-manifest.json RELEASE_NOTES.ru.md --repo "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" --prerelease --title "Multimental $VERSION" --notes-file RELEASE_NOTES.ru.md

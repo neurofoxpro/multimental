@@ -3,7 +3,7 @@ name: game-production
 description: Evidence-gated release-first production for a game: recover decisions, validate, test, build, publish prerelease and install exact Android artifacts. Universal Node scripts with project-specific engine adapters.
 ---
 
-# Game Production v2
+# Game Production v3 — reviewed releases and Russian changelog
 
 ## Working tools first
 Use scripts/chat.ps1 resume, verify, cycle, device-test, network and emulator instead of repeating Git/gh/ADB command sequences. See docs/production/OPS_V2.ru.md and docs/ROADMAP.ru.md. The Git worktree and portable tools are reused.
@@ -60,3 +60,12 @@ Report: scripts/chat.ps1 report --write writes sanitized observation files/state
 See docs/production/OPS_V2_RESULTS.ru.md and docs/production/evidence/production-v2-cycle.json. The full v2 cycle completed through PR11, 37 Node tests, 23 device scenarios and actual installed dev release. Roadmap 0.2.0 is player-facing LAN, not a repeat of station setup.
 
 Release delivery is bound to the exact expected merge commit. A stale release listing or deferred installation is waited for within a bound; neither exit 0 nor a receipt for another version can finish the delivery gate. Preserve prior engineering receipts before a documentation-only cycle replaces local latest-state files.
+
+## Russian release history and repeatable review
+Each meaningful code change adds a Russian change fragment: scripts/chat.ps1 changelog add --id UNIQUE-ID --kind added|changed|fixed|security --scope game|ui|network|automation|tests|docs --text "Понятное описание". The default base version is read from package.json. Never use raw Git logs as user-facing change descriptions or claim unverified tests in a fragment.
+
+cycle and prepare run the locked formatter and changelog renderer BEFORE recording the source-bound verification. verify itself stays read-only with respect to declared source. CI rejects stale changelogs and code PRs without a fragment; release notes are built in Russian and shipped alongside the manifest. Formatting uses the exact locked development dependency with npm lifecycle scripts disabled.
+
+The universal source-edit helper records expected old/new hashes and preserves a recovery journal. On Windows sharing violations, guarded in-place replacement is explicitly recorded; it is not described as an atomic filesystem transaction. Wrong roots, symlink ancestors, changed source and another operation lease are rejected.
+
+Before finalizing, run the real cycle, inspect its receipt, then commit the sanitized report and manual checklist as a docs-only PR. The latest release means the last observed successful dev artifact, not a claim that all future game mechanics are implemented.
