@@ -38,7 +38,11 @@ process.env.GIT_TERMINAL_PROMPT = '0';
 process.env.GH_PROMPT_DISABLED = '1';
 const dir = inside(root, '.gameprod/evidence');
 fs.mkdirSync(dir, { recursive: true });
-function run(exe, args, { optional = false, timeout = 120000, quiet = false } = {}) {
+function run(
+  exe,
+  args,
+  { optional = false, timeout = 120000, quiet = false, streaming = false } = {}
+) {
   const r = executeWithReadRetry(exe, args, {
     invoke: () =>
       spawnSync(exe, args, {
@@ -47,7 +51,8 @@ function run(exe, args, { optional = false, timeout = 120000, quiet = false } = 
         shell: false,
         timeout,
         maxBuffer: 24 * 1024 * 1024,
-        env: process.env
+        env: process.env,
+        stdio: streaming ? ['ignore', 'inherit', 'inherit'] : 'pipe'
       }),
     onRetry: ({ attempt, delay }) =>
       console.log('SAFE_READ_RETRY attempt=' + attempt + ' delayMs=' + delay)
@@ -81,6 +86,7 @@ function invoke(a) {
   return run(process.execPath, a, { quiet: true, timeout: 600000 });
 }
 function prepareSources() {
+  invoke(['tools/audio.mjs', 'write']);
   invoke(['scripts/format.mjs', 'write']);
   invoke(['scripts/changelog.mjs', 'render']);
   console.log('SOURCES_PREPARED');
@@ -329,7 +335,7 @@ function qualify(options = []) {
       path.join(workspace, 'station.local.json'),
       ...options
     ],
-    { timeout: 1500000 }
+    { timeout: 1500000, streaming: true }
   );
   const report = readJSON(path.join(dir, 'qualification.json'));
   assertQualification(report, {

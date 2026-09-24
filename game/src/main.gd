@@ -2,6 +2,10 @@ extends Control
 const Core = preload("res://src/match_core.gd")
 const COLORS: Array[Color] = [Color("e76f51"), Color("4ea8de"), Color("f6ce55"), Color("9cdbd3"), Color("ab9366")]
 var game = Core.new()
+var audio = preload("res://src/audio_director.gd").new()
+var tutorial: bool = false
+var tutorial_step: int = 0
+var tutorial_hint: Label
 var language: String = "ru"
 var battle: bool = false
 var selected_hand: int = -1
@@ -34,6 +38,7 @@ func _ready() -> void:
     var cfg := ConfigFile.new()
     if cfg.load("user://settings.cfg") == OK:
         language = str(cfg.get_value("ui", "language", "ru"))
+    add_child(audio)
     add_child(lan)
     lan.view_changed.connect(_network_view)
     lan.connection_changed.connect(_network_status)
@@ -72,7 +77,7 @@ func button(text: String, callback: Callable, height: int = 62) -> Button:
 
 func clear_screen() -> void:
     for child in get_children():
-        if child == lan:
+        if child == lan or child == audio:
             continue
         remove_child(child)
         child.queue_free()
@@ -94,6 +99,7 @@ func show_menu() -> void:
     online = false
     network_page = false
     battle = false
+    tutorial = false
     clear_screen()
     root.add_child(label("MULTIMENTAL", 36))
     root.add_child(label(t("Играбельная альфа · 5 стихий · поле 3×3", "Playable alpha · 5 elements · 3×3 board"), 18))
@@ -103,6 +109,8 @@ func show_menu() -> void:
     root.add_child(button(t("ИГРАТЬ ПРОТИВ ИИ", "PLAY AGAINST AI"), start_match, 78))
     root.add_child(button(t("ИГРА ПО ЛОКАЛЬНОЙ СЕТИ", "LOCAL NETWORK MATCH"), show_lan_menu, 70))
     root.add_child(label(t("Одна карта или одна атака за ход.\nЗайми 5 клеток. Атаки — по соседним клеткам.\nМонеты восстанавливаются каждый ход.", "One card or attack per turn.\nOccupy 5 cells. Attack adjacent enemies.\nCoins refill each turn."), 20))
+    root.add_child(button(t("ОБУЧЕНИЕ", "TUTORIAL"), start_tutorial, 58))
+    root.add_child(button(t("НАСТРОЙКИ ЗВУКА", "AUDIO SETTINGS"), show_audio_settings, 58))
     root.add_child(button(t("ЯЗЫК: РУССКИЙ", "LANGUAGE: ENGLISH"), toggle_language))
     root.add_child(label(t("Коллекция, магазин и сложные свойства — в следующих версиях.", "Collection, shop and advanced abilities come in later builds."), 16))
     var bottom := Control.new()
@@ -118,6 +126,9 @@ func toggle_language() -> void:
     show_menu()
 
 func start_match() -> void:
+    tutorial = false
+    tutorial_step = 0
+    last_second = -1
     lan.stop()
     online = false
     network_page = false
@@ -140,6 +151,10 @@ func build_battle() -> void:
     root.add_child(info)
     timer_text = label("", 18)
     root.add_child(timer_text)
+    tutorial_hint = null
+    if tutorial:
+        tutorial_hint = label("", 17)
+        root.add_child(tutorial_hint)
     var aspect := AspectRatioContainer.new()
     aspect.ratio = 1.0
     aspect.stretch_mode = AspectRatioContainer.STRETCH_FIT
@@ -177,6 +192,8 @@ func on_hand(index: int) -> void:
         return
     selected_hand = -1 if selected_hand == index else index
     selected_unit = -1
+    if tutorial and selected_hand >= 0:
+        tutorial_step = maxi(tutorial_step, 1)
     refresh()
 
 func on_cell(index: int) -> void:
@@ -200,6 +217,9 @@ func act(command: Dictionary) -> void:
         message.text = t("Недопустимая цель, недостаточно монет или ожидание соперника.", "Invalid target, insufficient coins or waiting for the opponent.")
         message.modulate = Color("ff8585")
         return
+    audio.play_action()
+    if tutorial:
+        tutorial_step = maxi(tutorial_step, 2)
     after_action()
 
 func pass_turn() -> void:
@@ -238,6 +258,8 @@ func _process(_delta: float) -> void:
         game.end_on_time_limit()
         after_action()
         return
+    if tutorial:
+        deadline = now + 30.0
     # Reconcile missed deadlines after suspension without relying on rendered frames.
     for i in range(6):
         if now < deadline or game.state.winner != -1:
@@ -299,6 +321,9 @@ func refresh() -> void:
         b.modulate = COLORS[int(def.element)] if i != selected_hand else Color.WHITE
         hand_row.add_child(b)
     message.modulate = Color.WHITE
+    if tutorial and is_instance_valid(tutorial_hint):
+        var hints: Array = [["Выбери доступную карту в руке. Число ◉ — её стоимость.", "Choose an affordable card in your hand. ◉ shows its cost."], ["Теперь коснись свободной подсвеченной клетки.", "Now tap a highlighted empty cell."], ["Продолжай до пяти клеток. Для атаки выбери своего юнита и соседнего врага. Таймер в обучении не наказывает за раздумья.", "Continue until you occupy five cells. Attack by selecting your unit and an adjacent enemy. The tutorial does not punish time spent reading."]]
+        tutorial_hint.text = t(hints[mini(tutorial_step,2)][0],hints[mini(tutorial_step,2)][1])
     if view.winner != -1:
         message.text = t("ПОБЕДА", "VICTORY") if view.winner == 0 else (t("НИЧЬЯ", "DRAW") if view.winner == 2 else t("ПОРАЖЕНИЕ", "DEFEAT"))
         message.text += " · " + reason_text(str(view.reason))
@@ -418,3 +443,33 @@ func _network_view(view: Dictionary) -> void:
         selected_hand = -1
         selected_unit = -1
         refresh()
+
+func start_tutorial() -> void:
+    start_match()
+    tutorial = true
+    tutorial_step = 0
+    game.start(42)
+    build_battle()
+    refresh()
+
+func show_audio_settings() -> void:
+    battle = false
+    online = false
+    tutorial = false
+    clear_screen()
+    root.add_child(label(t("НАСТРОЙКИ ЗВУКА", "AUDIO SETTINGS"), 30))
+    var categories: Dictionary = {"master": ["Общая громкость", "Master volume"], "music": ["Музыка", "Music"], "effects": ["Эффекты", "Effects"]}
+    for category in ["master", "music", "effects"]:
+        root.add_child(label(t(categories[category][0],categories[category][1]), 21))
+        var slider := HSlider.new()
+        slider.name = "Volume_" + category
+        slider.min_value = 0.0
+        slider.max_value = 1.0
+        slider.step = 0.01
+        slider.custom_minimum_size.y = 64
+        slider.value = float(audio.settings[category])
+        slider.value_changed.connect(func(value: float): audio.set_volume(category, value))
+        root.add_child(slider)
+    root.add_child(button(t("ПРОВЕРИТЬ ЭФФЕКТ", "TEST SOUND"), func(): audio.play_action()))
+    root.add_child(label(t("Настройки сохраняются автоматически. При сворачивании приложения звук приостанавливается.", "Settings save automatically. Audio pauses while the application is in the background."), 18))
+    root.add_child(button(t("В МЕНЮ", "MENU"), func(): audio.flush(); show_menu()))
