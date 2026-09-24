@@ -1,3 +1,4 @@
+import { waitWifiAddress } from '../skills/game-production/scripts/network-readiness.mjs';
 import { waitForPathsGone } from '../skills/game-production/scripts/device-coordination.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -396,7 +397,17 @@ try {
 } finally {
   if (wifiRestore) {
     optional('shell', 'svc', 'wifi', 'enable');
-    result.wifiRestored = true;
+    try {
+      await waitWifiAddress({
+        probe: () => optional('shell', 'ip', '-4', '-o', 'addr', 'show', 'wlan0')
+      });
+      result.wifiRestored = true;
+    } catch (e) {
+      result.wifiRestored = false;
+      result.status = 'failed';
+      result.error = e.message;
+      process.exitCode = 1;
+    }
   }
   if (lease) fs.unlinkSync(leasePath);
   writeJSON(path.join(out, 'device-' + target + '-' + result.mode + '.json'), result);
