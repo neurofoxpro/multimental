@@ -6,6 +6,7 @@ var ui: Control
 var worker: Thread
 var report: Dictionary = {}
 var finished: bool = false
+var tutorial_mode: bool = false
 var observed_cells: Array[int] = []
 var worker_started_at: int = 0
 func _ready() -> void:
@@ -23,6 +24,9 @@ func _ready() -> void:
     _trace("ready", {"mode": report.mode})
     match str(data.get("mode", "ui")):
         "ui":
+            call_deferred("_ui")
+        "tutorial":
+            tutorial_mode = true
             call_deferred("_ui")
         "pvp-host", "pvp-guest":
             var runner = load("res://src/net/room_device_test.gd").new()
@@ -97,7 +101,35 @@ func _ui() -> void:
     ui.set_process(false)
     var previous_language: String = ui.language
     ui.language = "ru"
-    ui.start_match()
+    var presentation_checks: Array[Dictionary] = []
+    if tutorial_mode:
+        var audio_before: Dictionary = ui.audio.settings.duplicate()
+        ui.show_audio_settings()
+        await get_tree().process_frame
+        await get_tree().process_frame
+        var slider: HSlider = ui.find_child("Volume_music", true, false)
+        var previous_volume: float = float(ui.audio.settings.music)
+        var point: Vector2 = Vector2(slider.size.x * (0.8 if previous_volume < 0.5 else 0.2), slider.size.y * 0.5)
+        point = get_viewport().get_screen_transform() * slider.get_global_transform_with_canvas() * point
+        _stage({"stage": "waiting_volume_tap", "tap": [int(round(point.x)), int(round(point.y))]})
+        var volume_deadline: int = Time.get_ticks_msec() + 20000
+        while Time.get_ticks_msec() < volume_deadline and absf(float(ui.audio.settings.music) - previous_volume) < 0.1:
+            await get_tree().create_timer(0.05).timeout
+        var changed_volume: bool = absf(float(ui.audio.settings.music) - previous_volume) >= 0.1
+        presentation_checks.append({"name": "os_volume_slider", "ok": changed_volume})
+        ui.audio.flush()
+        var config := ConfigFile.new()
+        var persisted: bool = config.load(ui.audio.settings_path) == OK and absf(float(config.get_value("volume", "music", -1)) - float(ui.audio.settings.music)) < 0.001
+        presentation_checks.append({"name": "volume_saved", "ok": persisted})
+        presentation_checks.append({"name": "audio_assets_initialized", "ok": ui.audio.music.stream.get_length() > 10 and ui.audio.effects.stream.get_length() > 0})
+        ui.audio.settings = audio_before
+        ui.audio.apply_volumes()
+        ui.audio.flush()
+        ui.start_tutorial()
+        presentation_checks.append({"name": "tutorial_mode", "ok": ui.tutorial})
+    else:
+        ui.start_match()
+
     ui.game.start(42)
     if int(ui.game.state.active) == 1:
         ui.game.apply(1, ui.game.choose_ai())
@@ -105,6 +137,7 @@ func _ui() -> void:
     await get_tree().process_frame
     await get_tree().process_frame
     var checks: Array[Dictionary] = [{"name": "board", "ok": ui.board_buttons.size() == 9}]
+    checks.append_array(presentation_checks)
     var chosen: Dictionary = {}
     for command in ui.game.legal(0):
         if command.type == "play":

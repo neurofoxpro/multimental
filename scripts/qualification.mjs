@@ -108,6 +108,7 @@ try {
   for (const target of ['emulator-A', 'emulator-B']) {
     if (device(target, 'install')) {
       device(target, 'ui');
+      device(target, 'tutorial');
       device(target, 'jni');
       device(target, 'reinstall');
       device(target, 'close');
@@ -127,6 +128,7 @@ try {
   if (args.includes('--physical')) {
     if (device('phone', 'install')) {
       device('phone', 'ui');
+      device('phone', 'tutorial');
       device('phone', 'tcp-usb');
       device('phone', 'tcp-lan');
       device('phone', 'tcp-peer');
