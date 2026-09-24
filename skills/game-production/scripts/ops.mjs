@@ -2,9 +2,10 @@ import fs from 'node:fs';
 import path from 'node:path';
 import os from 'node:os';
 import {spawnSync} from 'node:child_process';
-import {readJSON,writeJSON,inside,context,findRoot,gate} from './lib.mjs';
-import {featureBranch,readyTasks} from './policy.mjs';
+import {readJSON,writeJSON,inside,context,findRoot,gate,fingerprint,verifyManifest} from './lib.mjs';
+import {featureBranch,readyTasks,classify} from './policy.mjs';
 import {applyBundle} from './apply.mjs';
+import {assertQualification} from './qualification-policy.mjs';
 const root=findRoot(),p=readJSON(inside(root,'.gameprod/project.json')),workspace=path.dirname(root);
 // Private portable tools only; no global PATH/credential modifications.
 if(process.platform==='win32'){
@@ -48,7 +49,7 @@ async function checks(number,head,seconds=360){
  const end=Date.now()+seconds*1000;
  while(Date.now()<end){
   const pr=json('pr','view',String(number),'--repo',p.repository,'--json','headRefOid,headRefName,baseRefName,state,isDraft,statusCheckRollup');
-  if(pr.headRefOid!==head||pr.baseRefName!=='dev'||!featureBranch(pr.headRefName))throw Error('PR scope/head changed');
+  if(pr.baseRefName!=='dev'||!featureBranch(pr.headRefName))throw Error('PR scope changed');if(pr.headRefOid!==head){if(Date.now()<end-seconds*1000+10000){await new Promise(r=>setTimeout(r,2000));continue;}throw Error('PR head changed');}
   const latest=new Map();for(const x of pr.statusCheckRollup.filter(x=>x.__typename==='CheckRun')){const old=latest.get(x.name);if(!old||Date.parse(x.startedAt)>Date.parse(old.startedAt))latest.set(x.name,x);}
   const all=[...latest.values()],required=all.find(x=>x.name==='Production checks')||all.find(x=>x.name==='Verify and export APK');
   if(all.some(x=>['FAILURE','CANCELLED','TIMED_OUT','ACTION_REQUIRED'].includes(x.conclusion)))throw Error('CI failed: use ops logs RUN_ID');
@@ -57,9 +58,39 @@ async function checks(number,head,seconds=360){
  }
  throw Error('CI wait timeout; resume with wait '+number);
 }
+
+function prScope(number){const details=json('pr','view',String(number),'--repo',p.repository,'--json','files,headRefOid,baseRefName');if(details.baseRefName!=='dev')throw Error('Unexpected PR base');return {...classify(details.files.map(x=>x.path)),head:details.headRefOid};}
+async function candidate(){
+ const head=git('rev-parse','HEAD'),pr=json('pr','view',ownBranch(),'--repo',p.repository,'--json','number');
+ await checks(pr.number,head);const scope=prScope(pr.number);if(scope.head!==head)throw Error('PR changed');
+ if(!scope.needsApk){const result={head,pr:pr.number,notRequired:true,reason:'documentation_only'};writeJSON(path.join(dir,'candidate.json'),result);console.log('CANDIDATE_NOT_REQUIRED documentation_only');return result;}
+ const runs=json('run','list','--repo',p.repository,'--branch',ownBranch(),'--event','pull_request','--limit','10','--json','databaseId,headSha,status,conclusion').filter(x=>x.headSha===head&&x.status==='completed'&&x.conclusion==='success');if(!runs.length)throw Error('No verified PR run');
+ const id=runs[0].databaseId,target=path.join(dir,'candidate',String(id));
+ if(!fs.existsSync(path.join(target,'build-manifest.json'))){const stage=target+'.download-'+Date.now();fs.mkdirSync(stage,{recursive:true});run('gh',['run','download',String(id),'--repo',p.repository,'--name','multimental-android','--dir',stage],{timeout:180000,quiet:true});const m=readJSON(path.join(stage,'build-manifest.json'));verifyManifest(stage,m);if(fs.existsSync(target))throw Error('Incomplete old candidate directory; preserve and inspect it before promotion');fs.renameSync(stage,target);}
+ const manifest=readJSON(path.join(target,'build-manifest.json'));verifyManifest(target,manifest);if(manifest.repository!==p.repository||String(manifest.workflowRun)!==String(id))throw Error('Candidate provenance mismatch');
+ const result={head,pr:pr.number,run:id,directory:target,manifest};writeJSON(path.join(dir,'candidate.json'),result);console.log(JSON.stringify({directory:target,version:manifest.version,run:id}));return result;
+}
+function qualify(options=[]){
+ const c=readJSON(path.join(dir,'candidate.json'));if(c.head!==git('rev-parse','HEAD'))throw Error('Candidate is for an old HEAD');if(c.notRequired)return;
+ for(const slot of ['A','B'])run('powershell.exe',['-NoProfile','-ExecutionPolicy','Bypass','-File','scripts/emulator.ps1','start',slot],{timeout:300000,quiet:true});
+ run(process.execPath,['scripts/qualification.mjs','--config',path.join(workspace,'station.local.json'),...options],{timeout:1500000});
+ const report=readJSON(path.join(dir,'qualification.json'));assertQualification(report,{head:c.head,apkHash:c.manifest.sha256,toolDigest:fingerprint(root,p),physical:options.includes('--physical')});
+}
+async function cycle(message,title,options){
+ const record={schemaVersion:1,startedAt:new Date().toISOString(),status:'running',phases:[]},file=path.join(dir,'cycle.json');
+ const stage=async(name,fn)=>{record.current=name;writeJSON(file,record);const result=await fn();record.phases.push({name,status:'passed',finishedAt:new Date().toISOString()});writeJSON(file,record);return result;};
+ try{await stage('verify',()=>verify());const pr=await stage('publish',()=>publish(message,title));const c=await stage('candidate',()=>candidate());
+  if(!c.notRequired)await stage('emulator_qualification',()=>qualify(options.includes('--physical')?['--physical']:[]));
+  const commit=await stage('integrate_dev',()=>integrate(pr.number));record.commit=commit;await stage('dev_ci',()=>waitDev(commit));
+  if(!c.notRequired){await stage('deploy_reviewed_agent',()=>run(process.execPath,['scripts/deploy-agent.mjs'],{timeout:120000}));await stage('device_delivery',()=>run(process.execPath,['scripts/update-device.mjs','--config',path.join(workspace,'station.local.json')],{timeout:300000}));const actual=readJSON(path.join(workspace,'installations/installed.local.json'));if(actual.sourceCommit!==commit||!actual.readyMarker)throw Error('New dev release not yet observed on paired phone');record.installedVersion=actual.version;}
+  await stage('report',()=>run(process.execPath,['scripts/report-production.mjs'],{quiet:true}));record.status='passed';console.log('PRODUCTION_CYCLE_PASS '+commit);
+ }catch(e){record.status='failed';record.error=e.message;throw e;}finally{record.finishedAt=new Date().toISOString();writeJSON(file,record);}
+}
+
 async function integrate(number){
  clean();ownBranch();account();const head=git('rev-parse','HEAD'),pr=await checks(number,head);
  if(pr.state!=='OPEN'||pr.isDraft)throw Error('Only open non-draft dev PRs may merge');
+ const scope=prScope(number);if(scope.needsApk){const c=readJSON(path.join(dir,'candidate.json')),q=readJSON(path.join(dir,'qualification.json'));assertQualification(q,{head,apkHash:c.manifest.sha256,toolDigest:fingerprint(root,p),physical:false});}
  gh('pr','merge',String(number),'--repo',p.repository,'--merge','--match-head-commit',head);
  const done=json('pr','view',String(number),'--repo',p.repository,'--json','state,mergeCommit,url');
  if(done.state!=='MERGED')throw Error('Merge not confirmed');writeJSON(path.join(dir,'integration.json'),done);console.log(JSON.stringify(done));return done.mergeCommit.oid;
@@ -78,18 +109,21 @@ try{switch(cmd){
  case 'apply':applyBundle(root,readJSON(args[0]));break;
  case 'verify':verify();break;
  case 'publish':publish(args[0],args[1]);break;
+ case 'stage':{verify();publish(args[0],args[1]);run(process.execPath,['skills/game-production/scripts/ops.mjs','candidate'],{timeout:600000});break;}
  case 'wait':await checks(Number(args[0]),git('rev-parse','HEAD'));console.log('CI_PASS');break;
  case 'integrate':await integrate(Number(args[0]));break;
  case 'wait-dev':await waitDev(args[0]);break;
- case 'cycle':{verify();const pr=publish(args[0],args[1]),commit=await integrate(pr.number);await waitDev(commit);break;}
+ case 'cycle':await cycle(args[0],args[1],args.slice(2));break;
  case 'logs':{const r=run('gh',['run','view',args[0],'--repo',p.repository,'--log-failed'],{quiet:true,optional:true});fs.writeFileSync(path.join(dir,'ci-failure.log'),r||'Logs unavailable');console.log((r||'Logs unavailable').slice(-5000));break;}
  case 'device-status':run(process.execPath,['scripts/device-status.mjs','--config',path.join(workspace,'station.local.json')]);break;
  case 'network':run(process.execPath,['scripts/network-check.mjs','--config',path.join(workspace,'station.local.json')]);break;
+ case 'qualify':qualify(args);break;
  case 'device-suite':run(process.execPath,['scripts/device-suite.mjs','--config',path.join(workspace,'station.local.json'),...args],{timeout:600000});break;
  case 'device-test':run(process.execPath,['scripts/device-test.mjs','--config',path.join(workspace,'station.local.json'),...args],{timeout:240000});break;
  case 'delivery':run(process.execPath,['scripts/update-device.mjs','--config',path.join(workspace,'station.local.json')],{timeout:300000});break;
- case 'emulator':run('powershell.exe',['-NoProfile','-ExecutionPolicy','Bypass','-File','scripts/emulator.ps1',...args],{timeout:600000});break;
- case 'candidate':{const head=git('rev-parse','HEAD');const pr=JSON.parse(gh('pr','view',ownBranch(),'--repo',p.repository,'--json','number'));await checks(pr.number,head);const runs=json('run','list','--repo',p.repository,'--branch',ownBranch(),'--event','pull_request','--limit','10','--json','databaseId,headSha,status,conclusion').filter(x=>x.headSha===head&&x.status==='completed'&&x.conclusion==='success');if(!runs.length)throw Error('No verified PR run');const id=runs[0].databaseId,target=path.join(dir,'candidate',String(id));if(!fs.existsSync(target)){fs.mkdirSync(target,{recursive:true});run('gh',['run','download',String(id),'--repo',p.repository,'--name','multimental-android','--dir',target],{timeout:120000,quiet:true});}const manifest=readJSON(path.join(target,'build-manifest.json'));if(manifest.repository!==p.repository||String(manifest.workflowRun)!==String(id))throw Error('Candidate provenance mismatch');writeJSON(path.join(dir,'candidate.json'),{head,pr:pr.number,run:id,directory:target,manifest});console.log(JSON.stringify({directory:target,version:manifest.version,run:id}));break;}
+ case 'emulator':run(process.execPath,['scripts/emulator.mjs',...args],{timeout:300000});break;
+ case 'candidate':await candidate();break;
+ case 'report':run(process.execPath,['scripts/report-production.mjs',...args]);break;
  case 'deploy-agent':run(process.execPath,['scripts/deploy-agent.mjs'],{timeout:120000});break;
  case 'roadmap':console.log(fs.readFileSync(inside(root,'docs/ROADMAP.ru.md'),'utf8'));break;
  default:throw Error('Unknown ops command');

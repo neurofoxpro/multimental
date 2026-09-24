@@ -45,6 +45,9 @@ func _done(values: Dictionary) -> void:
     finished = true
     _save()
     print("MULTIMENTAL_AUTOMATION_DONE " + str(report.status))
+func _screen_center(control: Control) -> Array:
+    var point: Vector2 = get_viewport().get_screen_transform() * control.get_global_transform_with_canvas() * (control.size * 0.5)
+    return [int(round(point.x)), int(round(point.y))]
 func _ui() -> void:
     ui.set_process(false)
     var previous_language: String = ui.language
@@ -56,38 +59,34 @@ func _ui() -> void:
     ui.refresh()
     await get_tree().process_frame
     await get_tree().process_frame
-    var checks: Array[Dictionary] = []
-    checks.append({"name": "board", "ok": ui.board_buttons.size() == 9})
+    var checks: Array[Dictionary] = [{"name": "board", "ok": ui.board_buttons.size() == 9}]
     var chosen: Dictionary = {}
     for command in ui.game.legal(0):
         if command.type == "play":
             chosen = command
             break
     checks.append({"name": "playable_fixture", "ok": not chosen.is_empty()})
+    var selected: bool = false
+    var placed: bool = false
     if not chosen.is_empty():
-        var card = ui.hand_row.get_child(int(chosen.hand))
-        var touch := InputEventScreenTouch.new()
-        touch.index = 0
-        touch.position = card.get_global_rect().get_center()
-        touch.pressed = true
-        Input.parse_input_event(touch)
-        var up := InputEventScreenTouch.new()
-        up.index = 0
-        up.position = touch.position
-        up.pressed = false
-        Input.parse_input_event(up)
-        await get_tree().process_frame
-        # Direct signal path is also checked because headless platforms may not emulate touch-to-mouse.
-        var touch_selected: bool = ui.selected_hand == int(chosen.hand)
-        if not touch_selected:
-            ui.on_hand(int(chosen.hand))
-        ui.on_cell(int(chosen.cell))
-        checks.append({"name": "card_placement", "ok": ui.game.count_cells(0) == 1})
-        checks.append({"name": "touch_dispatch", "ok": touch_selected})
+        var card: Control = ui.hand_row.get_child(int(chosen.hand))
+        _stage({"stage": "waiting_card_tap", "tap": _screen_center(card)})
+        var end: int = Time.get_ticks_msec() + 25000
+        while Time.get_ticks_msec() < end and ui.selected_hand != int(chosen.hand):
+            await get_tree().create_timer(0.05).timeout
+        selected = ui.selected_hand == int(chosen.hand)
+        if selected:
+            _stage({"stage": "waiting_target_tap", "tap": _screen_center(ui.board_buttons[int(chosen.cell)])})
+            end = Time.get_ticks_msec() + 25000
+            while Time.get_ticks_msec() < end and ui.game.count_cells(0) != 1:
+                await get_tree().create_timer(0.05).timeout
+            placed = ui.game.count_cells(0) == 1
+    checks.append({"name": "os_card_tap", "ok": selected})
+    checks.append({"name": "os_target_tap_and_placement", "ok": placed})
     var rect: Rect2 = ui.get_viewport_rect()
     var bounds_ok: bool = true
-    for b in ui.board_buttons:
-        if not rect.encloses(b.get_global_rect()):
+    for button in ui.board_buttons:
+        if not rect.encloses(button.get_global_rect()):
             bounds_ok = false
     checks.append({"name": "board_within_viewport", "ok": bounds_ok})
     ui.show_menu()
@@ -96,10 +95,10 @@ func _ui() -> void:
     ui.show_menu()
     ui.set_process(true)
     var all_ok: bool = true
-    for c in checks:
-        if not c.ok:
+    for check in checks:
+        if not check.ok:
             all_ok = false
-    _done({"status": "passed" if all_ok else "failed", "checks": checks, "viewport": [rect.size.x, rect.size.y]})
+    _done({"status": "passed" if all_ok else "failed", "checks": checks, "viewport": [rect.size.x, rect.size.y], "input_source": "external_android_input_tap"})
 func _tcp_server(data: Dictionary) -> void:
     var server := TCPServer.new()
     var error: Error = server.listen(17843, "0.0.0.0")
@@ -169,8 +168,15 @@ func _bluetooth_server(data: Dictionary) -> void:
     var reader_class: Object = jw.wrap("java.io.InputStreamReader")
     var buffer_class: Object = jw.wrap("java.io.BufferedReader")
     var writer_class: Object = jw.wrap("java.io.OutputStreamWriter")
-    var reader: Object = buffer_class.BufferedReader(reader_class.InputStreamReader(socket.getInputStream(), "UTF-8"))
+    call_deferred("_stage", {"stage": "classes_ready"})
+    var input_stream: Object = socket.getInputStream()
+    call_deferred("_stage", {"stage": "input_stream_ready"})
+    var raw_reader: Object = reader_class.InputStreamReader(input_stream, "UTF-8")
+    call_deferred("_stage", {"stage": "raw_reader_ready"})
+    var reader: Object = buffer_class.BufferedReader(raw_reader)
+    call_deferred("_stage", {"stage": "reader_ready"})
     var writer: Object = writer_class.OutputStreamWriter(socket.getOutputStream(), "UTF-8")
+    call_deferred("_stage", {"stage": "streams_ready"})
     if jw.get_exception() != null or reader == null or writer == null:
         socket.close()
         call_deferred("_done", {"status": "failed", "error": "bluetooth_stream_init"})
@@ -187,7 +193,9 @@ func _bluetooth_server(data: Dictionary) -> void:
         if not ready:
             OS.delay_msec(10)
             continue
+        call_deferred("_stage", {"stage": "reading_line", "requests": requests})
         var line: Variant = reader.readLine()
+        call_deferred("_stage", {"stage": "line_read", "requests": requests})
         if jw.get_exception() != null or line == null:
             failure = "reader_line_exception"
             break
