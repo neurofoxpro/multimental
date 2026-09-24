@@ -1,3 +1,4 @@
+import { resumableDownload } from '../skills/game-production/scripts/resumable-download.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 import { spawnSync } from 'node:child_process';
@@ -53,45 +54,27 @@ if (matches.length !== 1) throw Error('Expected one unexpired Android artifact')
 const artifact = matches[0];
 if (artifact.size_in_bytes > 300 * 1024 * 1024) throw Error('Oversized artifact');
 const zip = path.join(target, 'candidate.zip');
-let downloaded = false;
-for (let attempt = 1; attempt <= 2 && !downloaded; attempt++) {
-  const response = await fetch(
-    'https://api.github.com/repos/' + p.repository + '/actions/artifacts/' + artifact.id + '/zip',
-    { headers, redirect: 'manual', signal: AbortSignal.timeout(30000) }
-  );
-  if (response.status !== 302) throw Error('Artifact redirect status ' + response.status);
-  const location = new URL(response.headers.get('location'));
-  if (location.protocol !== 'https:' || location.username || location.password)
-    throw Error('Unsafe signed download URL');
-  try {
-    const r = await fetch(location, { signal: AbortSignal.timeout(150000) });
-    if (!r.ok) throw Error('Storage download status ' + r.status);
-    let total = 0;
-    const fd = fs.openSync(zip + '.part', 'w');
-    try {
-      for await (const chunk of r.body) {
-        total += chunk.length;
-        if (total > 300 * 1024 * 1024) throw Error('Oversized artifact stream');
-        fs.writeSync(fd, chunk);
-      }
-    } finally {
-      fs.closeSync(fd);
-    }
-    if (
-      artifact.digest?.startsWith('sha256:') &&
-      sha(fs.readFileSync(zip + '.part')) !== artifact.digest.slice(7)
-    )
-      throw Error('Artifact ZIP digest mismatch');
-    fs.renameSync(zip + '.part', zip);
-    downloaded = true;
-    console.log('CANDIDATE_ARCHIVE_DOWNLOADED bytes=' + total + ' attempt=' + attempt);
-  } catch (e) {
-    if (attempt === 2) throw Error('Bounded artifact download failed: ' + e.message);
-  }
-}
+if (!/^sha256:[a-f0-9]{64}$/.test(artifact.digest || ''))
+  throw Error('Immutable GitHub artifact digest missing');
+const transfer = await resumableDownload({
+  file: zip,
+  id: String(artifact.id),
+  sha256: artifact.digest.slice(7),
+  resolveURL: async () => {
+    const response = await fetch(
+      'https://api.github.com/repos/' + p.repository + '/actions/artifacts/' + artifact.id + '/zip',
+      { headers, redirect: 'manual', signal: AbortSignal.timeout(30000) }
+    );
+    if (response.status !== 302) throw Error('Artifact redirect status ' + response.status);
+    return response.headers.get('location');
+  },
+  progress: (value) => console.log('DOWNLOAD_PROGRESS ' + JSON.stringify(value))
+});
+console.log('CANDIDATE_ARCHIVE_VERIFIED ' + JSON.stringify(transfer));
 token = '';
 delete headers.Authorization;
-const ps = String.raw`$ErrorActionPreference='Stop';Add-Type -AssemblyName System.IO.Compression.FileSystem;$z=[IO.Compression.ZipFile]::OpenRead($env:MM_CANDIDATE_ZIP);try{foreach($entry in $z.Entries){if($entry.FullName -notmatch '^(?:build-manifest\.json|SHA256SUMS\.txt|RELEASE_NOTES\.ru\.md|[A-Za-z0-9_.-]+\.apk)$'){throw 'Unexpected ZIP entry'};if($entry.Length -gt 300MB){throw 'Oversized ZIP entry'};$dest=Join-Path $env:MM_CANDIDATE_DIR $entry.FullName;if(Test-Path $dest){throw 'Existing extracted entry'};[IO.Compression.ZipFileExtensions]::ExtractToFile($entry,$dest,$false)}}finally{$z.Dispose()}`;
+const ps =
+  "$ErrorActionPreference='Stop';Add-Type -AssemblyName System.IO.Compression.FileSystem;$z=[IO.Compression.ZipFile]::OpenRead($env:MM_CANDIDATE_ZIP);$seen=New-Object 'System.Collections.Generic.HashSet[string]';try{foreach($entry in $z.Entries){if($entry.FullName -notmatch '^(?:build-manifest\\.json|SHA256SUMS\\.txt|RELEASE_NOTES\\.ru\\.md|[A-Za-z0-9_.-]+\\.apk)$' -or -not $seen.Add($entry.FullName)){throw 'Unexpected or duplicate ZIP entry'};if($entry.Length -gt 300MB){throw 'Oversized ZIP entry'};$dest=Join-Path $env:MM_CANDIDATE_DIR $entry.FullName;if(Test-Path $dest){$input=$entry.Open();$hash=[Security.Cryptography.SHA256]::Create();try{$expected=([BitConverter]::ToString($hash.ComputeHash($input))).Replace('-','');if((Get-FileHash $dest).Hash -ne $expected){throw 'Existing extracted file differs'}}finally{$input.Dispose();$hash.Dispose()}}else{[IO.Compression.ZipFileExtensions]::ExtractToFile($entry,$dest,$false)}}}finally{$z.Dispose()}";
 const extraction = spawnSync('powershell.exe', ['-NoProfile', '-Command', ps], {
   encoding: 'utf8',
   timeout: 60000,

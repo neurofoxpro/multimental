@@ -28,6 +28,7 @@ run(process.execPath, ['tools/security-lint.mjs']);
 run(process.execPath, ['tools/review.mjs'], ['AUTOMATED_REVIEW_PASS']);
 run(process.execPath, ['scripts/format.mjs', 'check'], ['FORMAT_PASS']);
 run(process.execPath, ['scripts/changelog.mjs', 'check'], ['RUSSIAN_CHANGELOG_PASS']);
+run(process.execPath, ['tools/audio.mjs', 'check'], ['AUDIO_ASSETS_PASS']);
 run(process.execPath, ['scripts/research.mjs', 'check'], ['RESEARCH_LEDGER_PASS']);
 run(process.execPath, ['scripts/readiness.mjs', 'check'], ['REQUIREMENTS_SCHEMA_PASS']);
 if (process.platform === 'win32')
@@ -55,7 +56,8 @@ for (const [file, marker] of [
   ['room_test.gd', 'MULTIMENTAL_ROOM_PASS'],
   ['lan_test.gd', 'MULTIMENTAL_LAN_PASS'],
   ['address_test.gd', 'MULTIMENTAL_ADDRESSES_PASS'],
-  ['bluetooth_session_test.gd', 'MULTIMENTAL_BLUETOOTH_MODEL_PASS']
+  ['bluetooth_session_test.gd', 'MULTIMENTAL_BLUETOOTH_MODEL_PASS'],
+  ['presentation_test.gd', 'MULTIMENTAL_PRESENTATION_PASS']
 ])
   run(godot, ['--headless', '--path', 'game', '--script', 'res://tests/' + file], [marker]);
 const core = fs.readFileSync('game/src/match_core.gd', 'utf8');

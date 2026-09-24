@@ -86,6 +86,7 @@ function invoke(a) {
   return run(process.execPath, a, { quiet: true, timeout: 600000 });
 }
 function prepareSources() {
+  invoke(['tools/audio.mjs', 'write']);
   invoke(['scripts/format.mjs', 'write']);
   invoke(['scripts/changelog.mjs', 'render']);
   console.log('SOURCES_PREPARED');

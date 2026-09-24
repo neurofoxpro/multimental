@@ -58,12 +58,12 @@
   },
   {
     "id": "P09",
-    "status": "in_progress",
-    "action": "LAN UI and local TCP/TLS match tests implemented; candidate/device qualification and dev integration pending, do not mark delivered",
+    "status": "done",
+    "action": "0.2.0 LAN-комната, TLS, приватная проекция и реальная партия проверены и доставлены",
     "dependsOn": [
       "OPS-V2"
     ],
-    "evidence": "PR14; docs/production/LAN_RESEARCH_RESUME_2026-09-24.ru.md"
+    "evidence": "PR14; docs/production/evidence/lan-release-completed.json"
   },
   {
     "id": "P10",
@@ -96,5 +96,13 @@
       "OPS-V2"
     ],
     "evidence": "PR13; installed 0.1.2-alpha.56.1 verified 2026-09-24"
+  },
+  {
+    "id": "BT-PVP",
+    "status": "in_progress",
+    "action": "0.3.0: защищённая Bluetooth-комната и аппаратная квалификация, PR15, repo-beta",
+    "dependsOn": [
+      "P09"
+    ]
   }
 ]

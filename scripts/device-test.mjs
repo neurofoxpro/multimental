@@ -260,14 +260,16 @@ try {
     const nonce = await startLab('jni-stream');
     result.lab = await awaitLab(nonce);
     result.status = 'passed';
-  } else if (mode === 'ui') {
+  } else if (mode === 'ui' || mode === 'tutorial') {
     if (target !== 'phone') {
       await launch();
       result.systemUi = dismissEmulatorTutorial(c);
     }
     const before = optional('shell', 'run-as', c.package, 'cat', 'files/settings.cfg');
-    const nonce = await startLab('ui');
-    for (const stage of ['waiting_card_tap', 'waiting_target_tap']) {
+    const nonce = await startLab(mode);
+    for (const stage of mode === 'tutorial'
+      ? ['waiting_volume_tap', 'waiting_card_tap', 'waiting_target_tap']
+      : ['waiting_card_tap', 'waiting_target_tap']) {
       const prompt = await awaitLab(nonce, stage);
       if (
         !Array.isArray(prompt.tap) ||
@@ -276,7 +278,7 @@ try {
       )
         throw Error('Invalid in-app tap target');
       const frame = exec(c.adb, ['-s', c.serial, 'exec-out', 'screencap', '-p'], { binary: true });
-      const screenshot = path.join(out, 'ui-' + target + '-' + stage + '.local.png');
+      const screenshot = path.join(out, mode + '-' + target + '-' + stage + '.local.png');
       fs.writeFileSync(screenshot, frame);
       result.checks.push({ stage, tap: prompt.tap, screenshot: path.basename(screenshot) });
       adb('shell', 'input', 'tap', String(prompt.tap[0]), String(prompt.tap[1]));

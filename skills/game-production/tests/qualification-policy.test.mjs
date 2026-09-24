@@ -4,10 +4,12 @@ import { assertQualification, updateDisposition } from '../scripts/qualification
 const names = [
   'emulator-A-install',
   'emulator-A-ui',
+  'emulator-A-tutorial',
   'emulator-A-jni',
   'emulator-A-reinstall',
   'emulator-B-install',
   'emulator-B-ui',
+  'emulator-B-tutorial',
   'emulator-B-jni',
   'emulator-B-reinstall',
   'emulator-pair',

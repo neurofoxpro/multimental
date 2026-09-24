@@ -1,13 +1,13 @@
 {
   "schemaVersion": 1,
   "repository": "neurofoxpro/multimental",
-  "updatedAt": "2026-09-24T05:18:03.168Z",
-  "phase": "lan_source_verified_review_pending",
+  "updatedAt": "2026-09-24T06:38:29.681Z",
+  "phase": "lan_released_bluetooth_candidate",
   "implementationCommit": "720063302dfe156a8186e8d2d68c5111a8fc1917",
   "testedProductionToolingCommit": "c929608f7fb425f65501fef0af4fd1b150dba6b5",
   "skillEntryPoint": "skills/game-production/SKILL.md",
-  "report": "docs/production/LAN_RESEARCH_RESUME_2026-09-24.ru.md",
-  "next": "PR14: кандидат и новая device-квалификация остаются невыполненными; автоматическое объединение/выпуск остановлены защитой инструмента. Не повторять готовую настройку среды.",
+  "report": "docs/production/CONTINUATION_2026-09-24.ru.md",
+  "next": "Проверить PR15 и worktree repo-beta; продолжить текущую квалификацию защищённого Bluetooth. Готовую LAN-доставку не создавать заново.",
   "observed": {
     "authorizedExecutionHost": "VENEL-SENDRIK",
     "githubAccount": "venelsendrik",
@@ -33,8 +33,8 @@
       "candidateVersion": "0.1.1-alpha.49.1",
       "evidence": "docs/production/evidence/production-v2-latest.json"
     },
-    "lastVerifiedInstalledRelease": "v0.1.2-alpha.56.1",
-    "lastVerifiedVersionCode": 15601,
+    "lastVerifiedInstalledRelease": "v0.2.0-alpha.65.1",
+    "lastVerifiedVersionCode": 16501,
     "lastVerifiedInstallAt": "2026-09-24T04:06:45.735Z",
     "ciRunForInstalledBuild": 35954123735,
     "ciConclusionForInstalledBuild": "success",
@@ -63,7 +63,20 @@
       "result": "blocked_by_tool_safety",
       "integrationNotPerformed": true
     },
-    "betaReadiness": "not_beta_ready"
+    "betaReadiness": "not_beta_ready",
+    "lanRelease": {
+      "commit": "e5714b2f56c85b7d32ded37e3cad51f6ca3aec3f",
+      "release": "0.2.0-alpha.65.1",
+      "qualifiedCases": 25,
+      "qualifiedCandidate": "0.2.0-alpha.62.1",
+      "receipt": "docs/production/evidence/lan-release-completed.json"
+    },
+    "activeEngineering": {
+      "branch": "feature/bluetooth-pvp-20260924",
+      "pr": 15,
+      "worktree": "repo-beta",
+      "state": "implementation_and_tests_in_progress"
+    }
   },
   "notClaimed": [
     "complete game",

@@ -1,31 +1,22 @@
 # Multimental
 
-Дуэльная пошаговая коллекционная игра на поле 3×3. **Рабочая ветка — dev.** Android первым; Web и полноценные LAN/Bluetooth-матчи — по roadmap.
+Дуэльная карточная игра: общее поле 3×3, пять стихий, офлайн и локальные матчи. **Рабочая ветка — dev**, Android первым.
 
-## Продолжить работу
-- [Скилл и рабочие инструменты](skills/game-production/SKILL.md)
-- [Фактически выполненное и установленная версия](docs/production/OPS_V2_RESULTS.ru.md)
-- [Машинная квитанция полного цикла](docs/production/evidence/production-v2-cycle.json)
-- [Принятые решения из чата](docs/production/CHAT_RECOVERY.ru.md)
-- [Roadmap по версиям](docs/ROADMAP.ru.md)
-- [.gameprod: состояние, решения, очередь](.gameprod)
+## Продолжение через чат
+Сначала прочитать **[NEXT_CHAT.ru.md](NEXT_CHAT.ru.md)** и **[актуальную точку продолжения](docs/production/CONTINUATION_2026-09-24.ru.md)**. Проверенный LAN-релиз: **0.2.0-alpha.65.1**, [квитанция](docs/production/evidence/lan-release-completed.json). Работа над Bluetooth-кандидатом ведётся отдельно в PR15; установленная версия всегда проверяется заново, а не выводится из текста README.
 
-Единственный репозиторий: neurofoxpro/multimental. Единственный личный исполнительный компьютер: VENEL-SENDRIK. Git/gh: venelsendrik. GitHub-hosted CI разрешён. К другим компьютерам/репозиториям не переключаться.
+Единственный репозиторий: neurofoxpro/multimental. Исполнительный компьютер: VENEL-SENDRIK. Git/gh: venelsendrik. На станции есть основной worktree repo и изолированный следующий repo-beta в %USERPROFILE%/MultimentalWork. Не переключаться на другой компьютер/репозиторий, не удалять незакоммиченные изменения и не настраивать Git/ADB заново.
 
-```powershell
-.\scripts\chat.ps1 resume
-.\scripts\chat.ps1 begin feature/next-change
-.\scripts\chat.ps1 cycle "feat: description" "Название изменения" --physical
-```
+Основной инструмент — scripts/chat.cmd. Команды: resume, audit, stage, candidate, qualify, integrate, wait-dev, deploy-agent, research, readiness, handoff. Полный допустимый цикл — cycle; после прерывания уже объединённой версии используется точная проверка delivery/resume-cycle. Source/HEAD/APK/квитанции должны совпадать; отсутствие ошибки команды не означает фактическую установку.
 
-Скрипты выполняют проверки, CI, квалификацию двух эмуляторов, дополнительные реальные радиотесты, merge в dev, prerelease, установку на авторизованный телефон и отчёт. Исходники не меняются во время проверки, устаревшие квитанции не принимаются. Документационные изменения не создают новый APK.
+## Документы
+- [Скилл производства](skills/game-production/SKILL.md)
+- [Восстановленные решения](docs/production/CHAT_RECOVERY.ru.md)
+- [31 группа требований и источники](.gameprod/requirements.json)
+- [Roadmap](docs/ROADMAP.ru.md)
+- [Русский changelog](CHANGELOG.ru.md)
+- [Ручная приёмка](docs/MANUAL_TESTS.ru.md)
+- [Текущие задачи и наблюдения](.gameprod)
 
-Тестовая игра против ИИ работает; лабораторные обмены по настоящим LAN/Bluetooth проверены. **Это не утверждение, что пользовательское PvP-лобби, магазин, крафт или финальные механики уже готовы.** Следующий этап — 0.2.0 LAN-комната и полноценное подключение игроков.
-
-CI APK переподписывается приватным постоянным dev-ключом станции; исходный и установленный SHA-256 разные и фиксируются отдельно. [Подпись и доставка](docs/production/DEVICE.md). Ключи/serial/полные логи не публикуются. main и stable — только после отдельного решения владельца.
-
-## История изменений и ручная приёмка
-
-[Русский changelog](CHANGELOG.ru.md) генерируется из changes/fragments и автоматически попадает в новые GitHub Releases. [Ручные проверки](docs/MANUAL_TESTS.ru.md) отделены от автоматического допуска. [Ревью и рефакторинг](docs/production/REVIEW_QUALITY.ru.md).
-
-Основной путь агента: scripts/chat.ps1 resume → необходимое изменение → changelog add → cycle. Форматирование, проверка истории изменений, CI, тестирование APK, dev merge и установка выполняются циклом.
+## Готовность
+Офлайн-игра и пользовательская LAN-комната проверены и выпущены. Bluetooth-режим и остальные beta-требования принимаются только после собственных проверок. Коллекция/экономика не считаются реализованными из-за наличия roadmap. Приватная dev-подпись остаётся на станции; оригинальный CI APK и установленный файл имеют отдельные хеши. Main, stable и Google Play требуют отдельного согласования.
