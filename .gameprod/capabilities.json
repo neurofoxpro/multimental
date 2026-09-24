@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "observedAt": "2026-09-24T04:08:40.225Z",
+  "observedAt": "2026-09-24T09:08:49.047Z",
   "execution": {
     "repository": "neurofoxpro/multimental",
     "host": "VENEL-SENDRIK",
@@ -28,17 +28,20 @@
     "physicalBluetoothWifiOff": true,
     "exactCommitDelivery": true,
     "scheduledUpdates": true,
-    "publicRedactedReport": true
+    "publicRedactedReport": true,
+    "secureBluetoothWindowsAndroid": true,
+    "tutorialAndAudioDeviceTests": true
   },
   "evidence": [
     "docs/production/evidence/production-v2-latest.json",
     "docs/production/evidence/production-v2-transports.json",
-    "docs/production/evidence/production-v2-cycle.json"
+    "docs/production/evidence/production-v2-cycle.json",
+    "docs/production/evidence/bluetooth-release-completed.json"
   ],
   "limits": {
-    "secondPhysicalPhone": "not_available_in_current_authorized_setup",
-    "multiplayerLobby": "roadmap_0.2_0.3",
-    "productionBluetoothPairing": "not_yet_implemented",
+    "secondPhysicalPhone": "required_not_connected",
+    "multiplayerLobby": "LAN and Bluetooth implemented; secure Windows/Android session verified",
+    "productionBluetoothPairing": "authenticated secure RFCOMM passed; second physical Android guest not tested",
     "googlePlaySigning": "separate_owner_gate",
     "subjectivePlayAcceptance": "human",
     "mainStable": "owner_approval"

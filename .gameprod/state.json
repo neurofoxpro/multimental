@@ -1,13 +1,13 @@
 {
   "schemaVersion": 1,
   "repository": "neurofoxpro/multimental",
-  "updatedAt": "2026-09-24T08:50:12.273Z",
-  "phase": "tutorial_audio_released_bluetooth_qualifying",
-  "implementationCommit": "117a3c43e21258673c09151fe96c08984687c571",
-  "testedProductionToolingCommit": "c929608f7fb425f65501fef0af4fd1b150dba6b5",
+  "updatedAt": "2026-09-24T09:08:49.047Z",
+  "phase": "bluetooth_dev_released_second_android_required",
+  "implementationCommit": "ef990b2b899b237a344e02ab8ce38eb017dc3e3f",
+  "testedProductionToolingCommit": "23911f31b0ffc512aa9e3810a4061b4183623f2f",
   "skillEntryPoint": "skills/game-production/SKILL.md",
-  "report": "docs/production/TUTORIAL_RELEASE_82.ru.md",
-  "next": "Continue repo-beta / PR15 from live candidate and Bluetooth qualification. USB and pairing have been confirmed; no setup reset.",
+  "report": "docs/production/BLUETOOTH_RELEASE_COMPLETED.ru.md",
+  "next": "Second physical Android is required for Android guest radio and phone-to-phone tests; do not repeat station setup. Collection/shop/crafting remain future automated development, not manual acceptance.",
   "observed": {
     "authorizedExecutionHost": "VENEL-SENDRIK",
     "githubAccount": "venelsendrik",
@@ -28,15 +28,15 @@
     },
     "qualification": {
       "status": "passed",
-      "scenarios": 23,
-      "sourceStable": true,
-      "candidateVersion": "0.1.1-alpha.49.1",
-      "evidence": "docs/production/evidence/production-v2-latest.json"
+      "scenarios": 29,
+      "candidateVersion": "0.3.0-alpha.84.1",
+      "candidateHead": "23911f31b0ffc512aa9e3810a4061b4183623f2f",
+      "evidence": "docs/production/evidence/bluetooth-release-completed.json"
     },
-    "lastVerifiedInstalledRelease": "v0.2.1-alpha.82.1",
-    "lastVerifiedVersionCode": 18201,
-    "lastVerifiedInstallAt": "2026-09-24T08:42:17.584Z",
-    "ciRunForInstalledBuild": 35954123735,
+    "lastVerifiedInstalledRelease": "v0.3.0-alpha.88.1",
+    "lastVerifiedVersionCode": 18801,
+    "lastVerifiedInstallAt": "2026-09-24T09:07:45.202Z",
+    "ciRunForInstalledBuild": 35978433737,
     "ciConclusionForInstalledBuild": "success",
     "deviceEvidence": "docs/production/evidence/production-v2-latest.json",
     "transportEvidence": "docs/production/evidence/production-v2-transports.json",
@@ -74,8 +74,8 @@
     "activeEngineering": {
       "branch": "feature/bluetooth-pvp-20260924",
       "pr": 15,
-      "worktree": "repo-beta",
-      "state": "combined_with_released_tutorial_audio_awaiting_secure_radio_qualification"
+      "state": "merged_dev_and_delivered",
+      "nextGate": "second_physical_android"
     },
     "tutorialAudioRelease": {
       "pr": 17,
@@ -83,12 +83,21 @@
       "commit": "117a3c43e21258673c09151fe96c08984687c571",
       "qualifiedCases": 28,
       "evidence": "docs/production/evidence/tutorial-audio-release-82.json"
+    },
+    "bluetoothRelease": {
+      "pr": 15,
+      "release": "v0.3.0-alpha.88.1",
+      "commit": "ef990b2b899b237a344e02ab8ce38eb017dc3e3f",
+      "windowsGuestAndroidHost": "passed",
+      "reconnect": true,
+      "wifiRestored": true,
+      "twoPhysicalAndroid": "not_tested"
     }
   },
   "notClaimed": [
     "complete game",
-    "multiplayer player lobby",
-    "production Bluetooth pairing/security",
+    "Bluetooth Android guest on physical hardware",
+    "two physical Android clients",
     "final balance",
     "collection/shop/crafting",
     "Web release",
