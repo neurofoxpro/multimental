@@ -1,3 +1,4 @@
+import { readJSONHTTP } from '../skills/game-production/scripts/http-read.mjs';
 import { claimUpdateLock } from '../skills/game-production/scripts/device-coordination.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -18,12 +19,9 @@ export function assetURL(url, repo) {
   return u.href;
 }
 async function json(url) {
-  const r = await fetch(url, {
-    headers: { 'User-Agent': 'multimental-device-updater', Accept: 'application/vnd.github+json' },
-    signal: AbortSignal.timeout(30000)
+  return readJSONHTTP(url, {
+    headers: { 'User-Agent': 'multimental-device-updater', Accept: 'application/vnd.github+json' }
   });
-  if (!r.ok) throw Error('GitHub returned ' + r.status);
-  return r.json();
 }
 async function download(url, file, max) {
   const r = await fetch(url, { signal: AbortSignal.timeout(120000) });

@@ -510,6 +510,22 @@ try {
     case 'verify':
       verify();
       break;
+    case 'audit': {
+      prepareSources();
+      run(process.execPath, ['scripts/readiness.mjs', 'render']);
+      verify();
+      run(process.execPath, ['scripts/research.mjs', 'plan']);
+      run(process.execPath, ['scripts/readiness.mjs', 'plan']);
+      writeJSON(path.join(dir, 'audit.json'), {
+        status: 'passed',
+        scope: 'local_checks_only_no_publication_no_device_install',
+        head: git('rev-parse', 'HEAD'),
+        sourceDigest: fingerprint(root, p),
+        finishedAt: new Date().toISOString()
+      });
+      console.log('LOCAL_AUDIT_PASS');
+      break;
+    }
     case 'prepare-sources':
       prepareSources();
       break;
@@ -702,6 +718,9 @@ try {
       break;
     case 'changelog':
       run(process.execPath, ['scripts/changelog.mjs', ...args]);
+      break;
+    case 'readiness':
+      run(process.execPath, ['scripts/readiness.mjs', ...args]);
       break;
     case 'research':
       run(process.execPath, ['scripts/research.mjs', ...args]);

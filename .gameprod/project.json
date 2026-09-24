@@ -22,7 +22,8 @@
     "changes",
     ".prettierrc.json",
     "package-lock.json",
-    ".gameprod/research.json"
+    ".gameprod/research.json",
+    ".gameprod/requirements.json"
   ],
   "generatedSuffixes": [
     ".gd.uid",

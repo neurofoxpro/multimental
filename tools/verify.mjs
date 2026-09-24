@@ -29,6 +29,7 @@ run(process.execPath, ['tools/review.mjs'], ['AUTOMATED_REVIEW_PASS']);
 run(process.execPath, ['scripts/format.mjs', 'check'], ['FORMAT_PASS']);
 run(process.execPath, ['scripts/changelog.mjs', 'check'], ['RUSSIAN_CHANGELOG_PASS']);
 run(process.execPath, ['scripts/research.mjs', 'check'], ['RESEARCH_LEDGER_PASS']);
+run(process.execPath, ['scripts/readiness.mjs', 'check'], ['REQUIREMENTS_SCHEMA_PASS']);
 if (process.platform === 'win32')
   run(
     'powershell.exe',

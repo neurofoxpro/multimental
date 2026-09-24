@@ -58,11 +58,12 @@
   },
   {
     "id": "P09",
-    "status": "pending",
-    "action": "0.2.0: implement player-facing LAN room/connection flow, two player authorities and reconnect UX using verified transport boundaries",
+    "status": "in_progress",
+    "action": "LAN UI and local TCP/TLS match tests implemented; candidate/device qualification and dev integration pending, do not mark delivered",
     "dependsOn": [
       "OPS-V2"
-    ]
+    ],
+    "evidence": "PR14; docs/production/LAN_RESEARCH_RESUME_2026-09-24.ru.md"
   },
   {
     "id": "P10",
@@ -89,10 +90,11 @@
   },
   {
     "id": "QUALITY-RU",
-    "status": "in_progress",
+    "status": "done",
     "action": "Русский changelog, единое форматирование, ревью границ и проверенный dev-релиз 0.1.2",
     "dependsOn": [
       "OPS-V2"
-    ]
+    ],
+    "evidence": "PR13; installed 0.1.2-alpha.56.1 verified 2026-09-24"
   }
 ]
