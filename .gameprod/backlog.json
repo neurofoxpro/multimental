@@ -100,9 +100,10 @@
   {
     "id": "BT-PVP",
     "status": "in_progress",
-    "action": "0.3.0: защищённая Bluetooth-комната и аппаратная квалификация, PR15, repo-beta",
+    "action": "Bluetooth dev выпущен и доставлен; 29/29 проверок с Windows guest и Android host. Остаётся настоящий Android guest/второй физический телефон.",
     "dependsOn": [
       "P09"
-    ]
+    ],
+    "evidence": "docs/production/evidence/bluetooth-release-completed.json"
   }
 ]
