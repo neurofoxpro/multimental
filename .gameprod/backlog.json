@@ -1,12 +1,15 @@
 [
-{"id":"P01","status":"in_progress","action":"Create and test reusable production skill, safeguards and recovery records"},
-{"id":"P02","status":"pending","action":"Complete minimal deterministic offline duel with separate UI; test invalid actions, replay and victory"},
-{"id":"P03","status":"pending","action":"Build, verify and install development APK on VENEL-SENDRIK attached phone; retain receipt"},
-{"id":"P04","status":"pending","action":"Install reviewed bounded automatic updater and verify repeat check is idempotent"},
-{"id":"P05","status":"pending","action":"Human play check: readability, card selection, combat, end conditions, background timer"},
-{"id":"P06","status":"deferred","action":"Data-driven card catalogue and full collection/deck builder"},
-{"id":"P07","status":"deferred","action":"Atomic rewards, 5-card packs, dust crafting, persistence/migrations"},
-{"id":"P08","status":"deferred","action":"Web UX and artifact build"},
-{"id":"P09","status":"deferred","action":"LAN then Bluetooth: filtered views, compatibility, idempotency, reconnect tests"},
-{"id":"P10","status":"deferred","action":"Server/account/rating, advanced mechanics, final art, RC and owner-approved stable release"}
+  {"id":"P01","status":"done","action":"Create and test reusable production skill, authority guards and recovery records","evidence":"PR5, PR6; 15 Node tests"},
+  {"id":"P02","status":"done","action":"Implement provisional deterministic offline duel with separate UI","evidence":"100 simulations / 3002 core checks; headless UI flow passed"},
+  {"id":"P03","status":"done","action":"Build and install first development APK on authorized attached phone","evidence":"v0.1.0-alpha.20.1, installation readiness receipt"},
+  {"id":"P04","status":"done","action":"Register reviewed bounded updater and execute a subsequent version update","evidence":"Scheduled task Limited/PT5M; 20.1 -> 23.1; exit 0; same certificate; settings retained"},
+  {"id":"P05","status":"pending","action":"Owner manual play check: readability, card selection, combat, match result, background behavior","manual":true},
+  {"id":"P05A","status":"pending","action":"When VENEL-SENDRIK reconnects, read the result of the final same-version check; do not use another computer","note":"Repeat scheduled check was started after successful update; result not read before remote disconnect"},
+  {"id":"P05B","status":"pending","action":"Explain the observed local main.gd whitespace modification and keep future test workspaces isolated; never ignore source changes to force a passing gate"},
+  {"id":"P06","status":"deferred","action":"Data-driven catalogue, collection and deck builder with content schema/semantic checks"},
+  {"id":"P07","status":"deferred","action":"Atomic rewards, five-card packs, dust crafting and migration/corruption tests"},
+  {"id":"P08","status":"deferred","action":"Web layout/export and additional device matrix"},
+  {"id":"P09","status":"deferred","action":"LAN then Bluetooth with filtered private state, compatibility and reconnect tests"},
+  {"id":"P10","status":"deferred","action":"Owner's central elemental interaction system, advanced mechanics, online accounts/ranking"},
+  {"id":"P11","status":"deferred","action":"Production signing setup, complete license inventory, dependency/action pin audit, server-enforced branch protections, RC and owner-approved stable release"}
 ]
