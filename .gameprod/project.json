@@ -53,6 +53,7 @@
         "MULTIMENTAL_PROTOCOL_PASS",
         "MULTIMENTAL_ROOM_PASS",
         "MULTIMENTAL_LAN_PASS",
+        "MULTIMENTAL_BLUETOOTH_MODEL_PASS",
         "MULTIMENTAL_PRESENTATION_PASS"
       ],
       "outputs": []
@@ -113,5 +114,11 @@
       "manual": true
     }
   },
-  "githubLogin": "venelsendrik"
+  "githubLogin": "venelsendrik",
+  "deviceValidation": {
+    "extraPhysicalChecks": [
+      "bluetooth-player-room"
+    ],
+    "selection": "hardware-sensitive PR paths require real-device tests; other cases default to emulators"
+  }
 }

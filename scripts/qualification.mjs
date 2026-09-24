@@ -134,6 +134,11 @@ try {
       device('phone', 'tcp-peer');
       device('phone', 'bluetooth');
       execute(
+        'bluetooth-player-room',
+        ['scripts/bluetooth-room-test.mjs', '--config', config],
+        '.gameprod/evidence/bluetooth-player-room.json'
+      );
+      execute(
         'pvp-phone-lan',
         ['scripts/room-qualification.mjs', '--config', config, '--physical'],
         '.gameprod/evidence/pvp-phone-lan.json'

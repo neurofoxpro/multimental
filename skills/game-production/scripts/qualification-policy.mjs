@@ -1,4 +1,7 @@
-export function assertQualification(report, { head, apkHash, toolDigest, physical = false }) {
+export function assertQualification(
+  report,
+  { head, apkHash, toolDigest, physical = false, extraPhysical = [] }
+) {
   if (
     report.status !== 'passed' ||
     report.candidateHead !== head ||
@@ -31,6 +34,7 @@ export function assertQualification(report, { head, apkHash, toolDigest, physica
       'phone-reinstall',
       'pvp-phone-lan'
     );
+  if (physical) names.push(...extraPhysical);
   if (!Array.isArray(report.results) || report.results.some((r) => r.status !== 'passed'))
     throw Error('Device checks failed');
   for (const name of names)
@@ -46,4 +50,15 @@ export function updateDisposition({ currentCode, candidateCode, currentHash, can
   if (currentCode === candidateCode && currentHash && currentHash !== candidateHash)
     return 'same_version_conflict';
   return 'install';
+}
+
+export function hardwareSensitive(files) {
+  return (
+    !Array.isArray(files) ||
+    files.some((f) =>
+      /^(?:game\/src\/(?:net\/|match_core\.gd|match_view\.gd|session_protocol\.gd)|game\/export_presets\.cfg|scripts\/(?:bluetooth-|room-qualification|device-test|device-pair)|tools\/BluetoothChannel\.cs)/.test(
+        f
+      )
+    )
+  );
 }

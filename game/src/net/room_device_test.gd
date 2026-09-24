@@ -23,7 +23,10 @@ func _ready() -> void:
     role = "host" if request.get("mode") == "pvp-host" else "guest"
     call_deferred("_start")
 func _start() -> void:
-    ui.show_lan_menu()
+    if request.get("transport", "lan") == "bluetooth":
+        ui.show_bluetooth_menu()
+    else:
+        ui.show_lan_menu()
     var result: Dictionary
     if role == "host":
         result = ui.create_lan_room(str(request.get("address", "127.0.0.1")), 17844)
@@ -55,7 +58,7 @@ func _process(_delta: float) -> void:
             complete_after = now + 1200
         if now >= complete_after:
             var ok: bool = actions > 0 and connected_before and (role == "host" or reconnect_confirmed)
-            _finish({"status": "passed" if ok else "failed", "role": role, "winner": int(view.winner), "reason": str(view.reason), "actions": actions, "turn": int(view.turn), "scores": view.scores, "reconnect": reconnect_confirmed if role == "guest" else true, "tls": true, "private_view": true, "input_source": "player_ui_handlers_over_real_network"})
+            _finish({"status": "passed" if ok else "failed", "role": role, "winner": int(view.winner), "reason": str(view.reason), "actions": actions, "turn": int(view.turn), "scores": view.scores, "reconnect": reconnect_confirmed if role == "guest" else true, "tls": request.get("transport", "lan") == "lan", "secure_bluetooth": request.get("transport", "lan") == "bluetooth", "private_view": true, "input_source": "player_ui_handlers_over_real_network"})
         return
     if role == "guest" and not reconnect_attempted and int(view.turn) >= 3 and ui.lan.connection_status == "connected":
         reconnect_attempted = true
@@ -87,5 +90,5 @@ func _finish(value: Dictionary) -> void:
     finished = true
     value.invitation = ""
     value.duration_ms = Time.get_ticks_msec() - started
-    value.scope = "player_lan_room_two_android_instances"
+    value.scope = "player_room_test"
     completed.emit(value)
