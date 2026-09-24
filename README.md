@@ -1,30 +1,24 @@
 # Multimental
 
-Release-first prototype of a deterministic 3x3 multiversal elemental card battler for Android and Web.
+Release-first 3x3 collectible elemental card duel. Canonical repository: `neurofoxpro/multimental`.
 
-## Development flow
-
-`feature/*` -> `dev` -> `main`
-
-- Every feature push and pull request runs headless verification and creates a signed debug APK artifact.
-- Every successful push to `dev` publishes an Android prerelease.
-- A configured Windows self-hosted runner installs the exact verified APK on a USB-connected phone and uploads screenshot/logcat diagnostics.
+## Start here
+- [Production skill](skills/game-production/SKILL.md)
+- [Recovered decisions and scope](docs/production/CHAT_RECOVERY.ru.md)
+- [Authority](docs/production/AUTHORITY.md)
+- [Device updater](docs/production/DEVICE.md)
+- [Signing boundary](docs/production/SIGNING.md)
+- [.gameprod](.gameprod): machine-readable decisions, lifecycle, backlog and observed state.
 
 ## Commands
-
-```bash
-npm run doctor
+```
+npm run production -- status
 npm run verify
 npm run build:android
 npm run build:web
+npm run device:update -- --config LOCAL_CONFIG
 ```
 
-Windows device check:
+Feature/PR: hosted checks and artifact. Passing dev push: development prerelease. Reviewed updater on VENEL-SENDRIK: check canonical provenance and hashes, sign with persistent private local development identity, update paired Android phone in place, record installation. No other computer is authorized. No automatic main merge or stable release.
 
-```powershell
-npm run device:smoke -- -ApkPath path\to\multimental.apk
-```
-
-Runner setup: [docs/device-runner.md](docs/device-runner.md)
-
-Android package: `pro.neurofox.multimental`
+The first playable alpha has provisional cost/attack/health rules, one action per turn, 3x3 placement, adjacent combat, deterministic simple AI, RU/EN and finite matches. Catalogue/economy/network and the owner's deferred central card mechanics remain in the backlog. A build is not a device test; see receipts and the session report for actual outcomes.
