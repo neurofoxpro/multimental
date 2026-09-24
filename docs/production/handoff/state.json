@@ -1,0 +1,179 @@
+{
+  "schemaVersion": 1,
+  "observedAt": "2026-09-24T05:40:13.755Z",
+  "repository": "neurofoxpro/multimental",
+  "host": "VENEL-SENDRIK",
+  "head": "10d870951f83d4aedcf622c1d87fa629f01d652f",
+  "branch": "feature/lan-pvp-20260924",
+  "dirty": true,
+  "pr": {
+    "baseRefName": "dev",
+    "headRefOid": "10d870951f83d4aedcf622c1d87fa629f01d652f",
+    "isDraft": true,
+    "number": 14,
+    "state": "OPEN",
+    "url": "https://github.com/neurofoxpro/multimental/pull/14"
+  },
+  "installed": {
+    "version": "0.2.0-alpha.59.1",
+    "versionCode": 15901,
+    "sourceCommit": "869a00f9a5cfe8cc62a4e32bba3965579790c15b",
+    "installedAt": "2026-09-24T05:32:35.408Z",
+    "readyMarker": true,
+    "originalSha256": "89e4ee41e0b87e52262aaf499dca690e8f12d404e8b2f389c6ee1015e1e54319",
+    "installedSha256": "ed61311ba6411cdbdf17520ada2f82ba29f883c28c873cf87bcd1f24fd26852e"
+  },
+  "candidate": {
+    "head": "10d870951f83d4aedcf622c1d87fa629f01d652f",
+    "version": "0.2.0-alpha.59.1"
+  },
+  "qualification": {
+    "status": "failed",
+    "candidateHead": "10d870951f83d4aedcf622c1d87fa629f01d652f",
+    "finishedAt": "2026-09-24T05:32:40.209Z",
+    "failed": [
+      "pvp-emulators",
+      "pvp-phone-lan"
+    ]
+  },
+  "remaining": [
+    {
+      "id": "UX-02",
+      "text": "Понятные подсветки, отказ без траты хода, объяснение причины результата",
+      "status": "implemented",
+      "version": "0.2.0"
+    },
+    {
+      "id": "UX-03",
+      "text": "Настройки громкости по категориям и 1–3 музыкальных композиции",
+      "status": "planned",
+      "version": "0.9.0"
+    },
+    {
+      "id": "UX-04",
+      "text": "Безопасная обучающая партия, короткое обучение",
+      "status": "planned",
+      "version": "0.9.0"
+    },
+    {
+      "id": "NET-01",
+      "text": "LAN-комната, приватное приглашение и партия двух игроков без внешнего сервера",
+      "status": "implemented",
+      "version": "0.2.0"
+    },
+    {
+      "id": "NET-02",
+      "text": "Хост-авторитет, несовместимость до игры, скрытые карты, идемпотентность и переподключение",
+      "status": "implemented",
+      "version": "0.2.0"
+    },
+    {
+      "id": "NET-04",
+      "text": "Пользовательский Bluetooth PvP, выбор/сопряжение и разрешения",
+      "status": "planned",
+      "version": "0.3.0"
+    },
+    {
+      "id": "META-01",
+      "text": "Коллекция и конструктор собственных колод",
+      "status": "planned",
+      "version": "0.4.0"
+    },
+    {
+      "id": "META-02",
+      "text": "Магазин, пак по пять случайных карт, отдельная валюта лобби",
+      "status": "planned",
+      "version": "0.5.0"
+    },
+    {
+      "id": "META-03",
+      "text": "Крафт карт из пыли, инвентарь и сохранность коллекции при поражении",
+      "status": "planned",
+      "version": "0.5.0"
+    },
+    {
+      "id": "META-04",
+      "text": "Награды за победу/ежедневные задания, уровни без обязательного гринда",
+      "status": "planned",
+      "version": "0.5.0"
+    },
+    {
+      "id": "META-05",
+      "text": "Атомарное сохранение после матча, пака, колоды и награды; миграции",
+      "status": "planned",
+      "version": "0.5.0"
+    },
+    {
+      "id": "AUTO-05",
+      "text": "Реестр исследований, источников, проверок и ограничений",
+      "status": "implemented",
+      "version": "0.2.0"
+    }
+  ],
+  "manual": [
+    {
+      "id": "CONTENT-01",
+      "text": "Основная особая система взаимодействий карт/стихий",
+      "kind": "product"
+    },
+    {
+      "id": "BETA-01",
+      "text": "Субъективная оценка интереса, читаемости и темпа партии",
+      "kind": "subjective"
+    }
+  ],
+  "readset": [
+    {
+      "path": "AGENTS.md",
+      "sha256": "a02a9c83c5b6dac76d02b16fca9c7154a30b4c923f3b30e6de5c5a04e329b86b"
+    },
+    {
+      "path": "docs/production/AUTHORITY.md",
+      "sha256": "f89e13d7d5ddf3038b25ecbb121996aa5a8d83778bfc5e085c0eca647af0e720"
+    },
+    {
+      "path": "skills/game-production/SKILL.md",
+      "sha256": "779f2bcc04c07a99ed3f9fa852c28194fe0285cb96751e523fa003570475bc65"
+    },
+    {
+      "path": ".gameprod/project.json",
+      "sha256": "379a663aa968db6062d6592e10c92dd42e07cb08858d8549b79e1bf339794848"
+    },
+    {
+      "path": ".gameprod/decisions.json",
+      "sha256": "dddf2b84502639c0fbf19330a378eea2e358c2d055890408e2910594dbbe1745"
+    },
+    {
+      "path": ".gameprod/requirements.json",
+      "sha256": "da9278cc4be8e19eff9ecd99cc954ae66f71f88bf18ae39f35bc623328ce75c2"
+    },
+    {
+      "path": ".gameprod/state.json",
+      "sha256": "781a3d7ba061e04f92040d4fce09e1a01e29cd2ca504abf51b6adb1d262a96d4"
+    },
+    {
+      "path": ".gameprod/backlog.json",
+      "sha256": "faf63a49dce2058da44a812d2044b73a89da8cf1c3113f41cd7bf794bfd218bf"
+    },
+    {
+      "path": ".gameprod/roadmap.json",
+      "sha256": "1a9d3ad571488a7f763e4cc9ddba2fce8a845411c00019e3ce270be84b0e81ab"
+    },
+    {
+      "path": ".gameprod/research.json",
+      "sha256": "4a450523deb27e09bc7ab64871b3ac6efe99678b2a2c0e2d2cd97c20ed753b68"
+    },
+    {
+      "path": "docs/MANUAL_TESTS.ru.md",
+      "sha256": "da08add93cc175c0d88e721dca02036463808a59c1cb23dc4b9814b0c366e13a"
+    },
+    {
+      "path": "CHANGELOG.ru.md",
+      "sha256": "a5d246dabf095c357bcb8237571175aa70b5f184d87ec4aac06cb7282c4a44bd"
+    }
+  ],
+  "next": {
+    "command": "audit",
+    "why": "Сначала сохранить и проверить текущие изменения; не делать reset/clone поверх работы."
+  }
+}

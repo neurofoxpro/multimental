@@ -1,5 +1,7 @@
 # Multimental: mandatory production entry point
 
+For a new chat first read NEXT_CHAT.ru.md when present, then refresh live state with scripts/chat.cmd resume. Handoff is timestamped evidence, not permission to skip gates.
+
 Read `docs/production/AUTHORITY.md`, `.gameprod/project.json`, `.gameprod/state.json`, `.gameprod/decisions.json` and `skills/game-production/SKILL.md` before acting.
 
 Only repository: `neurofoxpro/multimental`. Only authorized personal execution host: `VENEL-SENDRIK`. GitHub-hosted CI is allowed for this repository. Never select another online computer as a fallback. Never create/transfer/mirror/delete repositories or force-push. Preserve existing work.

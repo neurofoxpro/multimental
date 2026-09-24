@@ -1,3 +1,4 @@
+import { dedicatedEmulator } from '../skills/game-production/scripts/android-text.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
@@ -37,8 +38,11 @@ function validate(s, name) {
   chooseDevice(exec(c.adb, ['devices', '-l']), s);
   if (
     name &&
-    (call(s, 'shell', 'getprop', 'ro.kernel.qemu').trim() !== '1' ||
-      !call(s, 'emu', 'avd', 'name').split(/\r?\n/).includes(name))
+    !dedicatedEmulator(
+      call(s, 'emu', 'avd', 'name'),
+      call(s, 'shell', 'getprop', 'ro.kernel.qemu'),
+      name
+    )
   )
     throw Error('Wrong dedicated emulator');
 }

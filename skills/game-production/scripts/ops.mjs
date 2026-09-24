@@ -408,6 +408,9 @@ async function cycle(message, title, options) {
   } finally {
     record.finishedAt = new Date().toISOString();
     writeJSON(file, record);
+    const archive = path.join(dir, 'cycles', record.startedAt.replace(/[:.]/g, '-') + '.json');
+    writeJSON(archive, record);
+    run(process.execPath, ['scripts/handoff.mjs'], { optional: true, quiet: true, timeout: 30000 });
   }
 }
 
@@ -718,6 +721,9 @@ try {
       break;
     case 'changelog':
       run(process.execPath, ['scripts/changelog.mjs', ...args]);
+      break;
+    case 'handoff':
+      run(process.execPath, ['scripts/handoff.mjs', ...args]);
       break;
     case 'readiness':
       run(process.execPath, ['scripts/readiness.mjs', ...args]);
