@@ -108,6 +108,8 @@ try{switch(cmd){
  case 'begin':clean();if(!featureBranch(args[0]))throw Error('Unsafe branch');git('fetch','origin','dev');git('switch','-c',args[0],'origin/dev');console.log('BRANCH_READY '+args[0]);break;
  case 'apply':applyBundle(root,readJSON(args[0]));break;
  case 'verify':verify();break;
+ case 'prepare':verify();publish(args[0],args[1]);await candidate();break;
+ case 'probe-bluetooth':{const c=readJSON(path.join(dir,'candidate.json'));if(c.head!==git('rev-parse','HEAD'))throw Error('Old candidate');run(process.execPath,['scripts/emulator.mjs','start','A'],{timeout:300000,quiet:true});for(const [target,mode]of [['emulator-A','install'],['emulator-A','jni'],['phone','install'],['phone','bluetooth']])run(process.execPath,['scripts/device-test.mjs','--config',path.join(workspace,'station.local.json'),'--target',target,'--mode',mode,'--dir',c.directory],{timeout:210000});console.log('BLUETOOTH_PROBE_PASS');break;}
  case 'publish':publish(args[0],args[1]);break;
  case 'stage':{verify();publish(args[0],args[1]);run(process.execPath,['skills/game-production/scripts/ops.mjs','candidate'],{timeout:600000});break;}
  case 'wait':await checks(Number(args[0]),git('rev-parse','HEAD'));console.log('CI_PASS');break;

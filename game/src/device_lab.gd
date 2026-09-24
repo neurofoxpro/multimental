@@ -24,9 +24,15 @@ func _ready() -> void:
     match str(data.get("mode", "ui")):
         "ui":
             call_deferred("_ui")
+        "jni":
+            worker = Thread.new()
+            worker.start(_jni)
         "tcp-server":
             worker = Thread.new()
             worker.start(_tcp_server.bind(data))
+        "jni-stream":
+            worker = Thread.new()
+            worker.start(_jni_stream_test)
         "bluetooth-server":
             worker = Thread.new()
             worker.start(_bluetooth_server.bind(data))
@@ -134,6 +140,38 @@ func _ui() -> void:
         if not check.ok:
             all_ok = false
     _done({"status": "passed" if all_ok else "failed", "checks": checks, "viewport": [rect.size.x, rect.size.y], "input_source": "external_android_input_tap", "observed_cells": observed_cells})
+func _jni() -> Dictionary:
+    if not Engine.has_singleton("JavaClassWrapper"):
+        return {"status": "blocked", "error": "not_android"}
+    var jw: Object = Engine.get_singleton("JavaClassWrapper")
+    _trace("jni_memory_stream")
+    var byte_class: Object = jw.wrap("java.io.ByteArrayOutputStream")
+    var bytes: Object = byte_class.ByteArrayOutputStream()
+    var printer_class: Object = jw.wrap("java.io.PrintStream")
+    _trace("jni_printwriter_construct")
+    var printer: Object = printer_class.PrintStream(bytes, true, "UTF-8")
+    if jw.get_exception() != null or printer == null:
+        return {"status": "failed", "error": "jni_writer_constructor"}
+    var line: String = "{\"value\":\"multimental\"}"
+    _trace("jni_println")
+    printer.println(line)
+    if jw.get_exception() != null:
+        return {"status": "failed", "error": "jni_println_exception"}
+    _trace("jni_flush")
+    printer.flush()
+    if jw.get_exception() != null or printer.checkError():
+        return {"status": "failed", "error": "jni_flush_exception"}
+    _trace("jni_to_string")
+    var result: String = str(bytes.toString("UTF-8"))
+    var reader_class: Object = jw.wrap("java.io.StringReader")
+    var buffered_class: Object = jw.wrap("java.io.BufferedReader")
+    var reader: Object = buffered_class.BufferedReader(reader_class.StringReader(result))
+    _trace("jni_readline")
+    var returned: String = str(reader.readLine())
+    var good: bool = result.ends_with("\n") and returned == line and jw.get_exception() == null
+    reader.close()
+    printer.close()
+    return {"status": "passed" if good else "failed", "scope": "real_android_jni_memory_io_no_radio", "line_roundtrip": returned == line}
 func _tcp_server(data: Dictionary) -> Dictionary:
     var server := TCPServer.new()
     var error: Error = server.listen(17843, "0.0.0.0")
@@ -203,7 +241,7 @@ func _bluetooth_server(data: Dictionary) -> Dictionary:
     _trace("wrap_reader_classes")
     var reader_class: Object = jw.wrap("java.io.InputStreamReader")
     var buffer_class: Object = jw.wrap("java.io.BufferedReader")
-    var writer_class: Object = jw.wrap("java.io.PrintWriter")
+    var writer_class: Object = jw.wrap("java.io.OutputStreamWriter")
     _trace("construct_input_reader")
     var input_reader: Object = reader_class.InputStreamReader(input, "UTF-8")
     if jw.get_exception() != null or input_reader == null:
@@ -215,7 +253,7 @@ func _bluetooth_server(data: Dictionary) -> Dictionary:
         socket.close()
         return {"status": "failed", "error": "construct_buffered_reader"}
     _trace("construct_output_writer")
-    var writer: Object = writer_class.PrintWriter(output, true, "UTF-8")
+    var writer: Object = writer_class.OutputStreamWriter(output, "UTF-8")
     if jw.get_exception() != null or writer == null:
         socket.close()
         return {"status": "failed", "error": "construct_output_writer"}
@@ -252,14 +290,15 @@ func _bluetooth_server(data: Dictionary) -> Dictionary:
             break
         var response: Dictionary = p.receive(JSON.parse_string(str(line)))
         _trace("before_write")
-        writer.println(JSON.stringify(response))
+        var response_text: String = JSON.stringify(response) + "\n"
+        writer.write(response_text, 0, int(response_text.to_utf16_buffer().size() / 2))
         _trace("after_write")
         if jw.get_exception() != null:
             failure = "writer_exception"
             break
         _trace("before_flush")
         writer.flush()
-        if jw.get_exception() != null or writer.checkError():
+        if jw.get_exception() != null:
             failure = "flush_exception"
             break
         requests += 1
@@ -298,3 +337,27 @@ func _tcp_client(data: Dictionary) -> Dictionary:
     peer.disconnect_from_host()
     var success: bool = replies.size() == 6 and replies[0].get("ok", false) and replies[1].get("error") == "incompatible_protocol" and replies[3] == replies[4]
     return {"status": "passed" if success else "failed", "reply_count": replies.size(), "transport": "tcp", "scope": "device_to_device_protocol"}
+
+func _jni_stream_test() -> Dictionary:
+    if not Engine.has_singleton("JavaClassWrapper"):
+        return {"status": "blocked", "error": "android_jni_required"}
+    var jw: Object = Engine.get_singleton("JavaClassWrapper")
+    _trace("jni_construct_buffer")
+    var buffer_class: Object = jw.wrap("java.io.ByteArrayOutputStream")
+    var buffer: Object = buffer_class.ByteArrayOutputStream()
+    var writer_class: Object = jw.wrap("java.io.OutputStreamWriter")
+    var writer: Object = writer_class.OutputStreamWriter(buffer, "UTF-8")
+    if jw.get_exception() != null or buffer == null or writer == null:
+        return {"status": "failed", "error": "jni_construction"}
+    var text: String = "Multimental: русский ⚡ 🦊"
+    _trace("jni_write_three_args")
+    writer.write(text, 0, int(text.to_utf16_buffer().size() / 2))
+    if jw.get_exception() != null:
+        return {"status": "failed", "error": "jni_write"}
+    _trace("jni_flush")
+    writer.flush()
+    var value: Variant = buffer.toString("UTF-8")
+    if jw.get_exception() != null:
+        return {"status": "failed", "error": "jni_decode"}
+    writer.close()
+    return {"status": "passed" if str(value) == text else "failed", "test": "utf8_jni_round_trip", "supplementary_unicode": true}
