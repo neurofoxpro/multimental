@@ -1,3 +1,4 @@
+import { waitWifiAddress } from '../skills/game-production/scripts/network-readiness.mjs';
 import { dedicatedEmulator } from '../skills/game-production/scripts/android-text.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -121,11 +122,10 @@ try {
   held = true;
   await waitForPathsGone(['update.lock', 'install.lock'].map((x) => path.join(c.workDir, x)));
   const address = physical
-    ? optional(host, 'shell', 'ip', '-4', '-o', 'addr', 'show', 'wlan0').match(
-        /inet (\d+\.\d+\.\d+\.\d+)\//
-      )?.[1]
+    ? await waitWifiAddress({
+        probe: () => optional(host, 'shell', 'ip', '-4', '-o', 'addr', 'show', 'wlan0')
+      })
     : '127.0.0.1';
-  if (!address) throw Error('Phone not on local Wi-Fi');
   const hn = await request(host, 'pvp-host', { address });
   const lobby = await wait(host, hn, 'room_created', 15000);
   if (!String(lobby.invitation).startsWith('multimental://join/'))
