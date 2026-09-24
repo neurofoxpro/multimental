@@ -21,7 +21,8 @@
     ".nvmrc",
     "changes",
     ".prettierrc.json",
-    "package-lock.json"
+    "package-lock.json",
+    ".gameprod/research.json"
   ],
   "generatedSuffixes": [
     ".gd.uid",
@@ -42,12 +43,14 @@
         "node",
         "tools/verify.mjs"
       ],
-      "timeoutSeconds": 180,
+      "timeoutSeconds": 240,
       "markers": [
         "PRODUCTION_TESTS_PASS",
         "MULTIMENTAL_CORE_PASS",
         "MULTIMENTAL_UI_PASS",
-        "MULTIMENTAL_PROTOCOL_PASS"
+        "MULTIMENTAL_PROTOCOL_PASS",
+        "MULTIMENTAL_ROOM_PASS",
+        "MULTIMENTAL_LAN_PASS"
       ],
       "outputs": []
     },

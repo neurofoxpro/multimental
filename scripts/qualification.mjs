@@ -119,6 +119,11 @@ try {
     ['scripts/device-pair.mjs', '--config', config],
     '.gameprod/evidence/emulator-pair.json'
   );
+  execute(
+    'pvp-emulators',
+    ['scripts/room-qualification.mjs', '--config', config],
+    '.gameprod/evidence/pvp-emulators.json'
+  );
   if (args.includes('--physical')) {
     if (device('phone', 'install')) {
       device('phone', 'ui');
@@ -126,6 +131,11 @@ try {
       device('phone', 'tcp-lan');
       device('phone', 'tcp-peer');
       device('phone', 'bluetooth');
+      execute(
+        'pvp-phone-lan',
+        ['scripts/room-qualification.mjs', '--config', config, '--physical'],
+        '.gameprod/evidence/pvp-phone-lan.json'
+      );
       device('phone', 'reinstall');
       device('phone', 'close');
       device('phone', 'launch');

@@ -24,7 +24,8 @@ const files = [
   'scripts/device-launch.mjs',
   'scripts/register-updater.ps1',
   'skills/game-production/scripts/lib.mjs',
-  'skills/game-production/scripts/qualification-policy.mjs'
+  'skills/game-production/scripts/qualification-policy.mjs',
+  'skills/game-production/scripts/device-coordination.mjs'
 ];
 const inventory = files.map((file) => ({ file, sha256: sha(fs.readFileSync(file)) }));
 if (fs.existsSync(destination)) {

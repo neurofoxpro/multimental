@@ -1,3 +1,4 @@
+import { claimUpdateLock } from '../skills/game-production/scripts/device-coordination.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -58,9 +59,7 @@ export async function update(c, { expectedCommit = null } = {}) {
     return { status: 'deferred_foreground' };
   }
   const lock = path.join(c.workDir, 'update.lock');
-  const fd = fs.openSync(lock, 'wx');
-  fs.writeFileSync(fd, JSON.stringify({ pid: process.pid, time: new Date().toISOString() }));
-  fs.closeSync(fd);
+  if (!claimUpdateLock(lock)) return { status: 'deferred_busy' };
   try {
     if (fs.existsSync(path.join(c.workDir, 'device-test.lock'))) {
       return { status: 'deferred_test' };

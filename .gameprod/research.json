@@ -1,0 +1,72 @@
+{
+  "schemaVersion": 1,
+  "scope": "Only accepted Multimental requirements; recommendations are not final owner decisions",
+  "records": [
+    {
+      "id": "R-LAN-SECURE",
+      "question": "Как соединить два клиента в LAN без внешнего сервера и утечки руки?",
+      "status": "tested_recommendation",
+      "recommendation": "Хост-авторитет, ограниченные JSON-команды, отдельная проекция игрока, TLS с привязанным к приглашению сертификатом и capability комнаты.",
+      "sources": [
+        {
+          "url": "https://docs.godotengine.org/en/stable/classes/class_streampeertls.html",
+          "claim": "TLS поверх StreamPeer с явными опциями клиента/сервера"
+        },
+        {
+          "url": "https://docs.godotengine.org/en/stable/classes/class_tlsoptions.html",
+          "claim": "TLSOptions.client проверяет доверенный сертификат и имя; client_unsafe не используется"
+        }
+      ],
+      "tests": [
+        "game/tests/room_test.gd",
+        "game/tests/lan_test.gd",
+        "scripts/room-qualification.mjs"
+      ],
+      "limits": [
+        "Доверяем хосту в локальном режиме; это не античит независимого сервера",
+        "Приглашение секретно и относится только к текущей комнате"
+      ]
+    },
+    {
+      "id": "R-PEM-NUL",
+      "question": "Почему тест на Godot 4.7.2 сообщает NUL при экспорте сертификата?",
+      "status": "tested_workaround",
+      "recommendation": "Отдельный RoomCertificate экспортирует только публичный PEM через save(), затем удаляет временный файл; private key остаётся в памяти.",
+      "sources": [
+        {
+          "url": "https://github.com/godotengine/godot/blob/master/modules/mbedtls/crypto_mbedtls.cpp",
+          "claim": "save исключает терминатор PEM; save_to_string в наблюдаемой сборке включает его в span"
+        },
+        {
+          "url": "https://docs.godotengine.org/en/stable/classes/class_x509certificate.html",
+          "claim": "Поддержаны save/load_from_string для X509"
+        }
+      ],
+      "tests": [
+        "game/src/net/room_certificate.gd",
+        "game/tests/lan_test.gd"
+      ],
+      "limits": [
+        "Повторно проверить обход при обновлении закреплённой версии Godot"
+      ]
+    },
+    {
+      "id": "R-GH-RETRY",
+      "question": "Как не создавать повторные GitHub-операции при сбоях сети?",
+      "status": "tested_recommendation",
+      "recommendation": "Ограниченный повтор только явно разрешённых чтений, запрет повторного merge без чтения результата, отдельный контроль rate limit.",
+      "sources": [
+        {
+          "url": "https://docs.github.com/en/rest/using-the-rest-api/best-practices-for-using-the-rest-api",
+          "claim": "Сериализация запросов, осторожность с mutative requests и обработка rate limits"
+        }
+      ],
+      "tests": [
+        "skills/game-production/tests/command-retry.test.mjs"
+      ],
+      "limits": [
+        "403/429 требуют ожидания политики сервера, не форсированного повтора"
+      ]
+    }
+  ]
+}

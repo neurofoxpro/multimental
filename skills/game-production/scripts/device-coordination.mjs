@@ -16,3 +16,17 @@ export async function waitForPathsGone(
   }
   return { waitedMs: Math.round(now() - start) };
 }
+
+/** Nonblocking ownership claim. Existing locks are left untouched and reported as busy. */
+export function claimUpdateLock(file) {
+  let fd;
+  try {
+    fd = fs.openSync(file, 'wx');
+  } catch (e) {
+    if (e.code === 'EEXIST') return null;
+    throw e;
+  }
+  fs.writeFileSync(fd, JSON.stringify({ pid: process.pid, time: new Date().toISOString() }));
+  fs.closeSync(fd);
+  return true;
+}

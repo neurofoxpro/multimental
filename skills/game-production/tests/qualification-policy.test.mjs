@@ -10,7 +10,8 @@ const names = [
   'emulator-B-ui',
   'emulator-B-jni',
   'emulator-B-reinstall',
-  'emulator-pair'
+  'emulator-pair',
+  'pvp-emulators'
 ];
 const config = { head: 'h', apkHash: 'a', toolDigest: 'd' };
 const report = () => ({
