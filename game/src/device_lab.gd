@@ -6,6 +6,7 @@ var ui: Control
 var worker: Thread
 var report: Dictionary = {}
 var finished: bool = false
+var observed_cells: Array[int] = []
 var worker_started_at: int = 0
 func _ready() -> void:
     if not OS.is_debug_build() or not FileAccess.file_exists("user://automation-request.json"):
@@ -73,6 +74,8 @@ func _done(values: Dictionary) -> void:
     finished = true
     _save()
     print("MULTIMENTAL_AUTOMATION_DONE " + str(report.status))
+func _capture_cell(index: int) -> void:
+    observed_cells.append(index)
 func _screen_center(control: Control) -> Array:
     var point: Vector2 = get_viewport().get_screen_transform() * control.get_global_transform_with_canvas() * (control.size * 0.5)
     return [int(round(point.x)), int(round(point.y))]
@@ -94,6 +97,8 @@ func _ui() -> void:
             chosen = command
             break
     checks.append({"name": "playable_fixture", "ok": not chosen.is_empty()})
+    for index in range(ui.board_buttons.size()):
+        ui.board_buttons[index].pressed.connect(_capture_cell.bind(index))
     var selected: bool = false
     var placed: bool = false
     if not chosen.is_empty():
@@ -104,6 +109,8 @@ func _ui() -> void:
             await get_tree().create_timer(0.05).timeout
         selected = ui.selected_hand == int(chosen.hand)
         if selected:
+            await get_tree().process_frame
+            await get_tree().process_frame
             _stage({"stage": "waiting_target_tap", "tap": _screen_center(ui.board_buttons[int(chosen.cell)])})
             end = Time.get_ticks_msec() + 25000
             while Time.get_ticks_msec() < end and ui.game.count_cells(0) != 1:
@@ -126,7 +133,7 @@ func _ui() -> void:
     for check in checks:
         if not check.ok:
             all_ok = false
-    _done({"status": "passed" if all_ok else "failed", "checks": checks, "viewport": [rect.size.x, rect.size.y], "input_source": "external_android_input_tap"})
+    _done({"status": "passed" if all_ok else "failed", "checks": checks, "viewport": [rect.size.x, rect.size.y], "input_source": "external_android_input_tap", "observed_cells": observed_cells})
 func _tcp_server(data: Dictionary) -> Dictionary:
     var server := TCPServer.new()
     var error: Error = server.listen(17843, "0.0.0.0")
@@ -192,10 +199,11 @@ func _bluetooth_server(data: Dictionary) -> Dictionary:
     var input: Object = socket.getInputStream()
     _trace("get_output_stream")
     var output: Object = socket.getOutputStream()
-    _trace("wrap_readers", {"input_class": input.get_java_class().get_java_class_name(), "output_class": output.get_java_class().get_java_class_name()})
+    _trace("wrap_readers")
+    _trace("wrap_reader_classes")
     var reader_class: Object = jw.wrap("java.io.InputStreamReader")
     var buffer_class: Object = jw.wrap("java.io.BufferedReader")
-    var writer_class: Object = jw.wrap("java.io.OutputStreamWriter")
+    var writer_class: Object = jw.wrap("java.io.PrintWriter")
     _trace("construct_input_reader")
     var input_reader: Object = reader_class.InputStreamReader(input, "UTF-8")
     if jw.get_exception() != null or input_reader == null:
@@ -207,11 +215,11 @@ func _bluetooth_server(data: Dictionary) -> Dictionary:
         socket.close()
         return {"status": "failed", "error": "construct_buffered_reader"}
     _trace("construct_output_writer")
-    var writer: Object = writer_class.OutputStreamWriter(output, "UTF-8")
+    var writer: Object = writer_class.PrintWriter(output, true, "UTF-8")
     if jw.get_exception() != null or writer == null:
         socket.close()
         return {"status": "failed", "error": "construct_output_writer"}
-    _trace("stream_methods", {"ready": reader.has_java_method("ready"), "readLine": reader.has_java_method("readLine"), "write": writer.has_java_method("write"), "flush": writer.has_java_method("flush")})
+    _trace("streams_constructed")
     var p = Protocol.new(str(data.nonce))
     var requests: int = 0
     var end: int = Time.get_ticks_msec() + 45000
@@ -220,6 +228,7 @@ func _bluetooth_server(data: Dictionary) -> Dictionary:
     while Time.get_ticks_msec() < end and requests < 6:
         if first_poll:
             _trace("before_reader_ready")
+        _trace("reader_poll")
         var ready: bool = bool(reader.ready())
         if first_poll:
             _trace("after_reader_ready", {"ready": ready})
@@ -243,13 +252,14 @@ func _bluetooth_server(data: Dictionary) -> Dictionary:
             break
         var response: Dictionary = p.receive(JSON.parse_string(str(line)))
         _trace("before_write")
-        writer.write(JSON.stringify(response) + "\n")
+        writer.println(JSON.stringify(response))
         _trace("after_write")
         if jw.get_exception() != null:
             failure = "writer_exception"
             break
+        _trace("before_flush")
         writer.flush()
-        if jw.get_exception() != null:
+        if jw.get_exception() != null or writer.checkError():
             failure = "flush_exception"
             break
         requests += 1
