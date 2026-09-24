@@ -1,12 +1,158 @@
-import test from 'node:test';import assert from 'node:assert/strict';import fs from 'node:fs';import os from 'node:os';import path from 'node:path';import {normalizeRepo,inside,chooseDevice,verifyManifest,sha,writeJSON,fingerprint,receipt,gate,profile,context} from '../scripts/lib.mjs';
-function fixture(){const root=fs.mkdtempSync(path.join(os.tmpdir(),'gameprod-test-'));fs.mkdirSync(path.join(root,'src'));fs.writeFileSync(path.join(root,'src/game.txt'),'one');return {root,p:{schemaVersion:1,repository:'example/game',authorizedHosts:['TEST-HOST'],inputs:['src'],steps:{test:{command:['node','test.mjs'],timeoutSeconds:1}},gates:{ok:{steps:['test']},manual:{manual:true},empty:{steps:[]}}},close:()=>fs.rmSync(root,{recursive:true,force:true})};}
-test('remote normalization and allowlist',()=>{assert.equal(normalizeRepo('git@github.com:example/game.git'),'example/game');assert.equal(normalizeRepo('https://github.com/example/game.git'),'example/game');assert.throws(()=>normalizeRepo('https://evil.invalid/example/game'));});
-test('path escape blocked',()=>{const f=fixture();try{assert.throws(()=>inside(f.root,'../secret'));assert.throws(()=>inside(f.root,path.resolve(f.root,'x')));}finally{f.close();}});
-test('explicit profile mandatory',()=>{assert.throws(()=>profile({}));const f=fixture();try{assert.equal(profile(f.p),f.p);}finally{f.close();}});
-test('wrong computer or CI repository rejected',()=>{const f=fixture();try{assert.throws(()=>context(f.root,f.p,{hostname:'OTHER',env:{}}));assert.throws(()=>context(f.root,f.p,{hostname:'TEST-HOST',env:{GITHUB_ACTIONS:'true',GITHUB_REPOSITORY:'other/game'}}));}finally{f.close();}});
-test('source snapshot cannot point to another repo',()=>{const f=fixture();try{writeJSON(path.join(f.root,'.gameprod/source.json'),{repository:'other/game',commit:'a'.repeat(40)});assert.throws(()=>context(f.root,f.p,{hostname:'TEST-HOST',env:{}}));}finally{f.close();}});
-test('one authorized phone or explicit serial required',()=>{assert.equal(chooseDevice('List of devices attached\nABC device usb:1\n'),'ABC');assert.throws(()=>chooseDevice('ABC unauthorized'));assert.throws(()=>chooseDevice('ABC device\nDEF device'));assert.throws(()=>chooseDevice('ABC device','OTHER'));});
-test('APK checksum and manifest validated',()=>{const f=fixture();try{fs.writeFileSync(path.join(f.root,'game.apk'),'apk');const m={schemaVersion:1,repository:'example/game',commit:'a'.repeat(40),apk:'game.apk',sha256:sha('apk'),versionCode:1};assert.equal(verifyManifest(f.root,m),path.join(f.root,'game.apk'));assert.throws(()=>verifyManifest(f.root,{...m,apk:'../x.apk'}));assert.throws(()=>verifyManifest(f.root,{...m,sha256:'0'.repeat(64)}));assert.throws(()=>verifyManifest(f.root,{...m,versionCode:0}));}finally{f.close();}});
-test('absent receipt, empty gate and manual gate never pass',()=>{const f=fixture();try{assert.equal(gate(f.root,f.p,'ok').ok,false);assert.equal(gate(f.root,f.p,'empty').ok,false);assert.equal(gate(f.root,f.p,'manual').ok,false);}finally{f.close();}});
-test('stale source and altered log invalidate receipts',()=>{const f=fixture();try{const log='.gameprod/evidence/test.log';fs.mkdirSync(path.join(f.root,'.gameprod/evidence'),{recursive:true});fs.writeFileSync(path.join(f.root,log),'passed');writeJSON(path.join(f.root,'.gameprod/evidence/test.json'),{step:'test',status:'passed',exitCode:0,sourceDigest:fingerprint(f.root,f.p),log,logHash:sha('passed'),outputs:[]});assert.equal(receipt(f.root,f.p,'test').ok,true);fs.writeFileSync(path.join(f.root,log),'forged');assert.equal(receipt(f.root,f.p,'test').ok,false);fs.writeFileSync(path.join(f.root,log),'passed');fs.writeFileSync(path.join(f.root,'src/game.txt'),'changed');assert.equal(receipt(f.root,f.p,'test').ok,false);}finally{f.close();}});
-test('failed receipt never passes',()=>{const f=fixture();try{writeJSON(path.join(f.root,'.gameprod/evidence/test.json'),{step:'test',status:'failed',exitCode:1});assert.equal(gate(f.root,f.p,'ok').ok,false);}finally{f.close();}});
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
+import {
+  normalizeRepo,
+  inside,
+  chooseDevice,
+  verifyManifest,
+  sha,
+  writeJSON,
+  fingerprint,
+  receipt,
+  gate,
+  profile,
+  context
+} from '../scripts/lib.mjs';
+function fixture() {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'gameprod-test-'));
+  fs.mkdirSync(path.join(root, 'src'));
+  fs.writeFileSync(path.join(root, 'src/game.txt'), 'one');
+  return {
+    root,
+    p: {
+      schemaVersion: 1,
+      repository: 'example/game',
+      authorizedHosts: ['TEST-HOST'],
+      inputs: ['src'],
+      steps: { test: { command: ['node', 'test.mjs'], timeoutSeconds: 1 } },
+      gates: { ok: { steps: ['test'] }, manual: { manual: true }, empty: { steps: [] } }
+    },
+    close: () => fs.rmSync(root, { recursive: true, force: true })
+  };
+}
+test('remote normalization and allowlist', () => {
+  assert.equal(normalizeRepo('git@github.com:example/game.git'), 'example/game');
+  assert.equal(normalizeRepo('https://github.com/example/game.git'), 'example/game');
+  assert.throws(() => normalizeRepo('https://evil.invalid/example/game'));
+});
+test('path escape blocked', () => {
+  const f = fixture();
+  try {
+    assert.throws(() => inside(f.root, '../secret'));
+    assert.throws(() => inside(f.root, path.resolve(f.root, 'x')));
+  } finally {
+    f.close();
+  }
+});
+test('explicit profile mandatory', () => {
+  assert.throws(() => profile({}));
+  const f = fixture();
+  try {
+    assert.equal(profile(f.p), f.p);
+  } finally {
+    f.close();
+  }
+});
+test('wrong computer or CI repository rejected', () => {
+  const f = fixture();
+  try {
+    assert.throws(() => context(f.root, f.p, { hostname: 'OTHER', env: {} }));
+    assert.throws(() =>
+      context(f.root, f.p, {
+        hostname: 'TEST-HOST',
+        env: { GITHUB_ACTIONS: 'true', GITHUB_REPOSITORY: 'other/game' }
+      })
+    );
+  } finally {
+    f.close();
+  }
+});
+test('source snapshot cannot point to another repo', () => {
+  const f = fixture();
+  try {
+    writeJSON(path.join(f.root, '.gameprod/source.json'), {
+      repository: 'other/game',
+      commit: 'a'.repeat(40)
+    });
+    assert.throws(() => context(f.root, f.p, { hostname: 'TEST-HOST', env: {} }));
+  } finally {
+    f.close();
+  }
+});
+test('one authorized phone or explicit serial required', () => {
+  assert.equal(chooseDevice('List of devices attached\nABC device usb:1\n'), 'ABC');
+  assert.throws(() => chooseDevice('ABC unauthorized'));
+  assert.throws(() => chooseDevice('ABC device\nDEF device'));
+  assert.throws(() => chooseDevice('ABC device', 'OTHER'));
+});
+test('APK checksum and manifest validated', () => {
+  const f = fixture();
+  try {
+    fs.writeFileSync(path.join(f.root, 'game.apk'), 'apk');
+    const m = {
+      schemaVersion: 1,
+      repository: 'example/game',
+      commit: 'a'.repeat(40),
+      apk: 'game.apk',
+      sha256: sha('apk'),
+      versionCode: 1
+    };
+    assert.equal(verifyManifest(f.root, m), path.join(f.root, 'game.apk'));
+    assert.throws(() => verifyManifest(f.root, { ...m, apk: '../x.apk' }));
+    assert.throws(() => verifyManifest(f.root, { ...m, sha256: '0'.repeat(64) }));
+    assert.throws(() => verifyManifest(f.root, { ...m, versionCode: 0 }));
+  } finally {
+    f.close();
+  }
+});
+test('absent receipt, empty gate and manual gate never pass', () => {
+  const f = fixture();
+  try {
+    assert.equal(gate(f.root, f.p, 'ok').ok, false);
+    assert.equal(gate(f.root, f.p, 'empty').ok, false);
+    assert.equal(gate(f.root, f.p, 'manual').ok, false);
+  } finally {
+    f.close();
+  }
+});
+test('stale source and altered log invalidate receipts', () => {
+  const f = fixture();
+  try {
+    const log = '.gameprod/evidence/test.log';
+    fs.mkdirSync(path.join(f.root, '.gameprod/evidence'), { recursive: true });
+    fs.writeFileSync(path.join(f.root, log), 'passed');
+    writeJSON(path.join(f.root, '.gameprod/evidence/test.json'), {
+      step: 'test',
+      status: 'passed',
+      exitCode: 0,
+      sourceDigest: fingerprint(f.root, f.p),
+      log,
+      logHash: sha('passed'),
+      outputs: []
+    });
+    assert.equal(receipt(f.root, f.p, 'test').ok, true);
+    fs.writeFileSync(path.join(f.root, log), 'forged');
+    assert.equal(receipt(f.root, f.p, 'test').ok, false);
+    fs.writeFileSync(path.join(f.root, log), 'passed');
+    fs.writeFileSync(path.join(f.root, 'src/game.txt'), 'changed');
+    assert.equal(receipt(f.root, f.p, 'test').ok, false);
+  } finally {
+    f.close();
+  }
+});
+test('failed receipt never passes', () => {
+  const f = fixture();
+  try {
+    writeJSON(path.join(f.root, '.gameprod/evidence/test.json'), {
+      step: 'test',
+      status: 'failed',
+      exitCode: 1
+    });
+    assert.equal(gate(f.root, f.p, 'ok').ok, false);
+  } finally {
+    f.close();
+  }
+});

@@ -1,6 +1,6 @@
 {
   "name": "multimental",
-  "version": "0.1.1-alpha.1",
+  "version": "0.1.2-alpha.1",
   "private": true,
   "type": "module",
   "engines": {
@@ -16,6 +16,12 @@
     "device:update": "node scripts/update-device.mjs",
     "device:smoke": "node scripts/install-device.mjs",
     "ops": "node skills/game-production/scripts/ops.mjs",
-    "test:protocol": "node tools/test-protocol.mjs"
+    "test:protocol": "node tools/test-protocol.mjs",
+    "changelog": "node scripts/changelog.mjs",
+    "format": "node scripts/format.mjs write",
+    "format:check": "node scripts/format.mjs check"
+  },
+  "devDependencies": {
+    "prettier": "3.9.9"
   }
 }

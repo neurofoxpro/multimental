@@ -18,7 +18,10 @@
     ".gameprod/project.json",
     ".github/workflows",
     "package.json",
-    ".nvmrc"
+    ".nvmrc",
+    "changes",
+    ".prettierrc.json",
+    "package-lock.json"
   ],
   "generatedSuffixes": [
     ".gd.uid",
@@ -29,7 +32,9 @@
     "skills/game-production/SKILL.md",
     "docs/production/CHAT_RECOVERY.ru.md",
     ".gameprod/lifecycle.json",
-    ".gameprod/backlog.json"
+    ".gameprod/backlog.json",
+    "CHANGELOG.ru.md",
+    "docs/MANUAL_TESTS.ru.md"
   ],
   "steps": {
     "verify": {
