@@ -154,7 +154,6 @@ func _bluetooth_server(data: Dictionary) -> void:
         return
     var uuid_class: Object = jw.wrap("java.util.UUID")
     var uuid: Object = uuid_class.fromString("7e120e58-6fbd-4e4f-80e8-5685947c9dab")
-    # Diagnostic-only insecure RFCOMM with random nonce; no player secrets/production host.
     var listener: Object = adapter.listenUsingInsecureRfcommWithServiceRecord("MultimentalLab", uuid)
     if jw.get_exception() != null or listener == null:
         call_deferred("_done", {"status": "blocked", "error": "bluetooth_permission_or_listen"})
@@ -166,32 +165,48 @@ func _bluetooth_server(data: Dictionary) -> void:
     if exception != null or socket == null:
         call_deferred("_done", {"status": "failed", "error": "bluetooth_accept_timeout"})
         return
-    var input: Object = socket.getInputStream()
-    var output: Object = socket.getOutputStream()
+    call_deferred("_stage", {"stage": "connected"})
+    var reader_class: Object = jw.wrap("java.io.InputStreamReader")
+    var buffer_class: Object = jw.wrap("java.io.BufferedReader")
+    var writer_class: Object = jw.wrap("java.io.OutputStreamWriter")
+    var reader: Object = buffer_class.BufferedReader(reader_class.InputStreamReader(socket.getInputStream(), "UTF-8"))
+    var writer: Object = writer_class.OutputStreamWriter(socket.getOutputStream(), "UTF-8")
+    if jw.get_exception() != null or reader == null or writer == null:
+        socket.close()
+        call_deferred("_done", {"status": "failed", "error": "bluetooth_stream_init"})
+        return
     var p = Protocol.new(str(data.nonce))
-    var buffer: String = ""
     var requests: int = 0
-    var end: int = Time.get_ticks_msec() + 30000
+    var end: int = Time.get_ticks_msec() + 45000
+    var failure: String = ""
     while Time.get_ticks_msec() < end and requests < 6:
-        if int(input.available()) == 0:
+        var ready: bool = bool(reader.ready())
+        if jw.get_exception() != null:
+            failure = "reader_ready_exception"
+            break
+        if not ready:
             OS.delay_msec(10)
             continue
-        var b: int = int(input.read())
-        if b < 0 or buffer.length() > 16384:
+        var line: Variant = reader.readLine()
+        if jw.get_exception() != null or line == null:
+            failure = "reader_line_exception"
             break
-        if b == 10:
-            var response: Dictionary = p.receive(JSON.parse_string(buffer))
-            var bytes: PackedByteArray = (JSON.stringify(response) + "\n").to_utf8_buffer()
-            output.write(bytes)
-            output.flush()
-            if jw.get_exception() != null:
-                break
-            buffer = ""
-            requests += 1
-        else:
-            buffer += char(b)
+        if str(line).length() > 16384:
+            failure = "oversize_frame"
+            break
+        var response: Dictionary = p.receive(JSON.parse_string(str(line)))
+        writer.write(JSON.stringify(response) + "\n")
+        if jw.get_exception() != null:
+            failure = "writer_exception"
+            break
+        writer.flush()
+        if jw.get_exception() != null:
+            failure = "flush_exception"
+            break
+        requests += 1
+        call_deferred("_stage", {"stage": "exchanging", "requests": requests})
     socket.close()
-    call_deferred("_done", {"status": "passed" if requests >= 5 else "failed", "requests": requests, "transport": "rfcomm", "scope": "diagnostic_only_not_production_pairing"})
+    call_deferred("_done", {"status": "passed" if requests == 6 else "failed", "requests": requests, "error": failure, "transport": "rfcomm", "scope": "diagnostic_only_not_production_pairing"})
 func _tcp_client(data: Dictionary) -> void:
     var peer := StreamPeerTCP.new()
     var err: Error = peer.connect_to_host(str(data.get("address", "")), 17843)

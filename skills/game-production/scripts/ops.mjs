@@ -85,6 +85,7 @@ try{switch(cmd){
  case 'logs':{const r=run('gh',['run','view',args[0],'--repo',p.repository,'--log-failed'],{quiet:true,optional:true});fs.writeFileSync(path.join(dir,'ci-failure.log'),r||'Logs unavailable');console.log((r||'Logs unavailable').slice(-5000));break;}
  case 'device-status':run(process.execPath,['scripts/device-status.mjs','--config',path.join(workspace,'station.local.json')]);break;
  case 'network':run(process.execPath,['scripts/network-check.mjs','--config',path.join(workspace,'station.local.json')]);break;
+ case 'device-suite':run(process.execPath,['scripts/device-suite.mjs','--config',path.join(workspace,'station.local.json'),...args],{timeout:600000});break;
  case 'device-test':run(process.execPath,['scripts/device-test.mjs','--config',path.join(workspace,'station.local.json'),...args],{timeout:240000});break;
  case 'delivery':run(process.execPath,['scripts/update-device.mjs','--config',path.join(workspace,'station.local.json')],{timeout:300000});break;
  case 'emulator':run('powershell.exe',['-NoProfile','-ExecutionPolicy','Bypass','-File','scripts/emulator.ps1',...args],{timeout:600000});break;
