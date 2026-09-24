@@ -15,7 +15,8 @@ export function assertQualification(report, { head, apkHash, toolDigest, physica
     'emulator-B-ui',
     'emulator-B-jni',
     'emulator-B-reinstall',
-    'emulator-pair'
+    'emulator-pair',
+    'pvp-emulators'
   ];
   if (physical)
     names.push(
@@ -24,7 +25,8 @@ export function assertQualification(report, { head, apkHash, toolDigest, physica
       'phone-tcp-usb',
       'phone-tcp-lan',
       'phone-bluetooth',
-      'phone-reinstall'
+      'phone-reinstall',
+      'pvp-phone-lan'
     );
   if (!Array.isArray(report.results) || report.results.some((r) => r.status !== 'passed'))
     throw Error('Device checks failed');

@@ -24,6 +24,14 @@ func _ready() -> void:
     match str(data.get("mode", "ui")):
         "ui":
             call_deferred("_ui")
+        "pvp-host", "pvp-guest":
+            var runner = load("res://src/net/room_device_test.gd").new()
+            runner.ui = ui
+            runner.request = data
+            runner.changed.connect(_stage)
+            runner.completed.connect(_done)
+            add_child(runner)
+
         "jni":
             worker = Thread.new()
             worker.start(_jni)

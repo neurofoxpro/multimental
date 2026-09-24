@@ -89,7 +89,9 @@ function run(name) {
       r.status === 0 &&
       !r.error &&
       !sourceChanged &&
-      !/SCRIPT ERROR:|Parse Error:|PRODUCTION_TEST_FAIL/.test(output);
+      !/SCRIPT ERROR:|Parse Error:|PRODUCTION_TEST_FAIL|^ERROR:|Unicode parsing error/m.test(
+        output
+      );
     for (const marker of step.markers || []) if (!output.includes(marker)) ok = false;
     const outputs = [];
     for (const file of step.outputs || []) {

@@ -69,3 +69,17 @@ cycle and prepare run the locked formatter and changelog renderer BEFORE recordi
 The universal source-edit helper records expected old/new hashes and preserves a recovery journal. On Windows sharing violations, guarded in-place replacement is explicitly recorded; it is not described as an atomic filesystem transaction. Wrong roots, symlink ancestors, changed source and another operation lease are rejected.
 
 Before finalizing, run the real cycle, inspect its receipt, then commit the sanitized report and manual checklist as a docs-only PR. The latest release means the last observed successful dev artifact, not a claim that all future game mechanics are implemented.
+
+## Research and beta readiness
+Before selecting a new substantial approach use `research plan/check` and the explicit sources/tests/limits in .gameprod/research.json. A recommendation is not owner approval. `research capture` saves source fingerprints only, not private code or credentials.
+
+Use `readiness plan` to recover all chat requirements and `readiness gate` to assess the automated beta scope. Unimplemented code is an automatic blocker, never a manual checkbox. Subjective fun, specifically deferred product choices and release consent remain manual. The profile is not allowed to mark a missing feature verified without evidence.
+
+A tool safety block is a real gate. Do not route the blocked end-to-end publication through hidden shell calls or another computer. Read-only checks and preserving explicitly authorized source changes are separate from permission to resume blocked integration/deployment. Record exactly which version is installed, which branch is under review and which device checks were not run.
+
+## Durable handoff and interruption recovery
+Read NEXT_CHAT.ru.md first when present, then resolve its timestamped hints against live Git/CI/device state. `scripts/chat.cmd handoff --write` generates a public redacted next-chat packet and a hash-indexed readset. Never confuse the candidate APK, installed release, branch HEAD or historical test counts. Use the copied prompt in NEXT_CHAT.ru.md; do not request another export before reading the repository.
+
+Windows ADB output can contain CR-CR-LF. Use the tested android-text helper for strict AVD identity checks instead of broad substring matching. Real phone resets remain prohibited.
+
+A prior tool refusal remains in the history, not as proof that every future authorized scoped operation is impossible. Respect every actual current tool decision; do not impersonate permissions or bypass a refusal. The latest owner request is to continue authorized development, device checks and development releases. Main/stable and unrelated hosts remain outside that delegation.

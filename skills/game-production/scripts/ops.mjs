@@ -1,3 +1,4 @@
+import { executeWithReadRetry, confirmMerge } from './command-retry.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 import os from 'node:os';
@@ -38,13 +39,18 @@ process.env.GH_PROMPT_DISABLED = '1';
 const dir = inside(root, '.gameprod/evidence');
 fs.mkdirSync(dir, { recursive: true });
 function run(exe, args, { optional = false, timeout = 120000, quiet = false } = {}) {
-  const r = spawnSync(exe, args, {
-    cwd: root,
-    encoding: 'utf8',
-    shell: false,
-    timeout,
-    maxBuffer: 24 * 1024 * 1024,
-    env: process.env
+  const r = executeWithReadRetry(exe, args, {
+    invoke: () =>
+      spawnSync(exe, args, {
+        cwd: root,
+        encoding: 'utf8',
+        shell: false,
+        timeout,
+        maxBuffer: 24 * 1024 * 1024,
+        env: process.env
+      }),
+    onRetry: ({ attempt, delay }) =>
+      console.log('SAFE_READ_RETRY attempt=' + attempt + ' delayMs=' + delay)
   });
   const out = (r.stdout || '') + (r.stderr || '');
   if (r.status !== 0 || r.error) {
@@ -402,6 +408,9 @@ async function cycle(message, title, options) {
   } finally {
     record.finishedAt = new Date().toISOString();
     writeJSON(file, record);
+    const archive = path.join(dir, 'cycles', record.startedAt.replace(/[:.]/g, '-') + '.json');
+    writeJSON(archive, record);
+    run(process.execPath, ['scripts/handoff.mjs'], { optional: true, quiet: true, timeout: 30000 });
   }
 }
 
@@ -423,17 +432,30 @@ async function integrate(number) {
       physical: false
     });
   }
-  gh('pr', 'merge', String(number), '--repo', p.repository, '--merge', '--match-head-commit', head);
-  const done = json(
-    'pr',
-    'view',
-    String(number),
-    '--repo',
-    p.repository,
-    '--json',
-    'state,mergeCommit,url'
-  );
-  if (done.state !== 'MERGED') throw Error('Merge not confirmed');
+  const done = await confirmMerge({
+    expectedHead: head,
+    write: () =>
+      gh(
+        'pr',
+        'merge',
+        String(number),
+        '--repo',
+        p.repository,
+        '--merge',
+        '--match-head-commit',
+        head
+      ),
+    read: () =>
+      json(
+        'pr',
+        'view',
+        String(number),
+        '--repo',
+        p.repository,
+        '--json',
+        'state,headRefOid,baseRefName,mergeCommit,url'
+      )
+  });
   writeJSON(path.join(dir, 'integration.json'), done);
   console.log(JSON.stringify(done));
   return done.mergeCommit.oid;
@@ -491,6 +513,22 @@ try {
     case 'verify':
       verify();
       break;
+    case 'audit': {
+      prepareSources();
+      run(process.execPath, ['scripts/readiness.mjs', 'render']);
+      verify();
+      run(process.execPath, ['scripts/research.mjs', 'plan']);
+      run(process.execPath, ['scripts/readiness.mjs', 'plan']);
+      writeJSON(path.join(dir, 'audit.json'), {
+        status: 'passed',
+        scope: 'local_checks_only_no_publication_no_device_install',
+        head: git('rev-parse', 'HEAD'),
+        sourceDigest: fingerprint(root, p),
+        finishedAt: new Date().toISOString()
+      });
+      console.log('LOCAL_AUDIT_PASS');
+      break;
+    }
     case 'prepare-sources':
       prepareSources();
       break;
@@ -579,6 +617,18 @@ try {
       break;
     case 'qualify':
       qualify(args);
+      break;
+    case 'device-pvp':
+      run(
+        process.execPath,
+        [
+          'scripts/room-qualification.mjs',
+          '--config',
+          path.join(workspace, 'station.local.json'),
+          ...args
+        ],
+        { timeout: 240000 }
+      );
       break;
     case 'device-suite':
       run(
@@ -671,6 +721,15 @@ try {
       break;
     case 'changelog':
       run(process.execPath, ['scripts/changelog.mjs', ...args]);
+      break;
+    case 'handoff':
+      run(process.execPath, ['scripts/handoff.mjs', ...args]);
+      break;
+    case 'readiness':
+      run(process.execPath, ['scripts/readiness.mjs', ...args]);
+      break;
+    case 'research':
+      run(process.execPath, ['scripts/research.mjs', ...args]);
       break;
     case 'roadmap':
       console.log(fs.readFileSync(inside(root, 'docs/ROADMAP.ru.md'), 'utf8'));

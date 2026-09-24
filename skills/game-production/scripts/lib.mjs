@@ -5,11 +5,68 @@ import crypto from 'node:crypto';
 import { spawnSync } from 'node:child_process';
 export const sha = (data) => crypto.createHash('sha256').update(data).digest('hex');
 export const readJSON = (file) => JSON.parse(fs.readFileSync(file, 'utf8').replace(/^\uFEFF/, ''));
-export function writeJSON(file, data) {
+export function writeJSON(
+  file,
+  data,
+  {
+    rename = fs.renameSync,
+    platform = process.platform,
+    retries = 6,
+    sleep = (ms) => Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, ms)
+  } = {}
+) {
   fs.mkdirSync(path.dirname(file), { recursive: true });
-  const tmp = file + '.tmp-' + process.pid;
-  fs.writeFileSync(tmp, JSON.stringify(data, null, 2) + '\n');
-  fs.renameSync(tmp, file);
+  const bytes = JSON.stringify(data, null, 2) + '\n';
+  const tmp = file + '.tmp-' + process.pid + '-' + crypto.randomBytes(4).toString('hex');
+  const previous = fs.existsSync(file) ? fs.readFileSync(file) : null;
+  const fd = fs.openSync(tmp, 'wx');
+  try {
+    fs.writeFileSync(fd, bytes);
+    fs.fsyncSync(fd);
+  } finally {
+    fs.closeSync(fd);
+  }
+  for (let attempt = 0; ; attempt++) {
+    try {
+      rename(tmp, file);
+      return;
+    } catch (error) {
+      const sharing = platform === 'win32' && ['EPERM', 'EBUSY'].includes(error.code);
+      if (!sharing) throw error;
+      if (attempt < retries) {
+        sleep(Math.min(25 * 2 ** attempt, 800));
+        continue;
+      }
+      const current = fs.existsSync(file) ? fs.readFileSync(file) : null;
+      if ((current === null ? null : sha(current)) !== (previous === null ? null : sha(previous)))
+        throw Error('Metadata changed concurrently; recovery refused');
+      // Windows readers may prohibit rename while allowing writes. Preserve both
+      // versions first; this fallback is recoverable but explicitly NOT atomic.
+      if (previous !== null) fs.writeFileSync(file + '.previous.local.json', previous);
+      fs.copyFileSync(tmp, file + '.intended.local.json');
+      const target = fs.openSync(file, 'w');
+      try {
+        fs.writeFileSync(target, bytes);
+        fs.fsyncSync(target);
+      } finally {
+        fs.closeSync(target);
+      }
+      if (sha(fs.readFileSync(file)) !== sha(bytes))
+        throw Error('Metadata recovery verification failed');
+      fs.writeFileSync(
+        file + '.write-recovery.local.json',
+        JSON.stringify({
+          status: 'verified',
+          mode: 'journaled_windows_in_place',
+          at: new Date().toISOString(),
+          before: previous === null ? null : sha(previous),
+          after: sha(bytes)
+        }) + '\n'
+      );
+      fs.unlinkSync(tmp);
+      return;
+    }
+  }
 }
 export function inside(root, rel) {
   if (

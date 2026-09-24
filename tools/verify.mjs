@@ -16,7 +16,7 @@ function run(exe, args, markers = []) {
   if (
     r.error ||
     r.status !== 0 ||
-    /SCRIPT ERROR:|Parse Error:|PRODUCTION_TEST_FAIL/.test(out) ||
+    /SCRIPT ERROR:|Parse Error:|PRODUCTION_TEST_FAIL|^ERROR:|Unicode parsing error/m.test(out) ||
     markers.some((m) => !out.includes(m))
   )
     throw Error('Verification failed: ' + exe + ' ' + args.join(' '));
@@ -28,6 +28,8 @@ run(process.execPath, ['tools/security-lint.mjs']);
 run(process.execPath, ['tools/review.mjs'], ['AUTOMATED_REVIEW_PASS']);
 run(process.execPath, ['scripts/format.mjs', 'check'], ['FORMAT_PASS']);
 run(process.execPath, ['scripts/changelog.mjs', 'check'], ['RUSSIAN_CHANGELOG_PASS']);
+run(process.execPath, ['scripts/research.mjs', 'check'], ['RESEARCH_LEDGER_PASS']);
+run(process.execPath, ['scripts/readiness.mjs', 'check'], ['REQUIREMENTS_SCHEMA_PASS']);
 if (process.platform === 'win32')
   run(
     'powershell.exe',
@@ -49,7 +51,10 @@ run(godot, ['--headless', '--editor', '--path', 'game', '--quit']);
 for (const [file, marker] of [
   ['core_test.gd', 'MULTIMENTAL_CORE_PASS'],
   ['ui_test.gd', 'MULTIMENTAL_UI_PASS'],
-  ['protocol_test.gd', 'MULTIMENTAL_PROTOCOL_PASS']
+  ['protocol_test.gd', 'MULTIMENTAL_PROTOCOL_PASS'],
+  ['room_test.gd', 'MULTIMENTAL_ROOM_PASS'],
+  ['lan_test.gd', 'MULTIMENTAL_LAN_PASS'],
+  ['address_test.gd', 'MULTIMENTAL_ADDRESSES_PASS']
 ])
   run(godot, ['--headless', '--path', 'game', '--script', 'res://tests/' + file], [marker]);
 const core = fs.readFileSync('game/src/match_core.gd', 'utf8');
