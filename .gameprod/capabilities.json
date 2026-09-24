@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "observedAt": "2026-09-24T04:08:40.225Z",
+  "execution": {
+    "repository": "neurofoxpro/multimental",
+    "host": "VENEL-SENDRIK",
+    "githubLogin": "venelsendrik",
+    "permission": "MAINTAIN",
+    "gitPush": "verified",
+    "needsNewLogin": false
+  },
+  "automated": {
+    "localVerification": true,
+    "sourceMutationDetection": true,
+    "singleWriter": true,
+    "ciPrAndDev": true,
+    "docsOnlySkipsApk": true,
+    "candidateIntegrity": true,
+    "twoAndroidAvds": true,
+    "emulatorCleanInstall": true,
+    "physicalInPlaceReinstall": true,
+    "persistenceSentinel": true,
+    "osInputTaps": true,
+    "androidJniUnicode": true,
+    "emulatorPair": true,
+    "physicalLan": true,
+    "androidToPhoneLan": true,
+    "physicalBluetoothWifiOff": true,
+    "exactCommitDelivery": true,
+    "scheduledUpdates": true,
+    "publicRedactedReport": true
+  },
+  "evidence": [
+    "docs/production/evidence/production-v2-latest.json",
+    "docs/production/evidence/production-v2-transports.json",
+    "docs/production/evidence/production-v2-cycle.json"
+  ],
+  "limits": {
+    "secondPhysicalPhone": "not_available_in_current_authorized_setup",
+    "multiplayerLobby": "roadmap_0.2_0.3",
+    "productionBluetoothPairing": "not_yet_implemented",
+    "googlePlaySigning": "separate_owner_gate",
+    "subjectivePlayAcceptance": "human",
+    "mainStable": "owner_approval"
+  }
+}

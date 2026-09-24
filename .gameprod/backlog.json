@@ -58,8 +58,11 @@
   },
   {
     "id": "P09",
-    "status": "deferred",
-    "action": "LAN then Bluetooth: filtered private state, compatibility and reconnect tests"
+    "status": "pending",
+    "action": "0.2.0: implement player-facing LAN room/connection flow, two player authorities and reconnect UX using verified transport boundaries",
+    "dependsOn": [
+      "OPS-V2"
+    ]
   },
   {
     "id": "P10",
@@ -73,13 +76,15 @@
   },
   {
     "id": "P12",
-    "status": "deferred",
-    "action": "Avoid redundant APK publication for documentation-only changes while retaining PR metadata validation"
+    "status": "done",
+    "action": "Avoid redundant APK publication for documentation-only changes while retaining PR metadata validation",
+    "evidence": "Path classifier and selective CI implemented; docs-only behavior covered by tests; final documentation PR provides separate hosted proof."
   },
   {
     "id": "OPS-V2",
-    "status": "in_progress",
+    "status": "done",
     "action": "Довести git/gh цикл, быстрый CI, эмуляторные/device проверки и roadmap; записать фактические результаты",
-    "dependsOn": []
+    "dependsOn": [],
+    "evidence": "PR10 + PR11; 37 Node tests, 23 device scenarios; complete cycle and actual dev APK install"
   }
 ]

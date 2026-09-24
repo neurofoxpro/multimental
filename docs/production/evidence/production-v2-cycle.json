@@ -1,0 +1,106 @@
+{
+  "schemaVersion": 1,
+  "repository": "neurofoxpro/multimental",
+  "startedAt": "2026-09-24T03:58:48.509Z",
+  "status": "passed",
+  "phases": [
+    {
+      "name": "verify",
+      "status": "passed",
+      "finishedAt": "2026-09-24T03:59:04.039Z"
+    },
+    {
+      "name": "publish",
+      "status": "passed",
+      "finishedAt": "2026-09-24T03:59:12.360Z"
+    },
+    {
+      "name": "candidate",
+      "status": "passed",
+      "finishedAt": "2026-09-24T04:01:47.626Z"
+    },
+    {
+      "name": "reviewed_test_agent",
+      "status": "passed",
+      "finishedAt": "2026-09-24T04:01:50.580Z"
+    },
+    {
+      "name": "emulator_qualification",
+      "status": "passed",
+      "finishedAt": "2026-09-24T04:04:52.105Z"
+    },
+    {
+      "name": "integrate_dev",
+      "status": "passed",
+      "finishedAt": "2026-09-24T04:05:00.124Z"
+    },
+    {
+      "name": "dev_ci",
+      "status": "passed",
+      "finishedAt": "2026-09-24T04:06:08.620Z"
+    },
+    {
+      "name": "deploy_reviewed_agent",
+      "status": "passed",
+      "finishedAt": "2026-09-24T04:06:11.480Z"
+    },
+    {
+      "name": "device_delivery",
+      "status": "passed",
+      "finishedAt": "2026-09-24T04:06:45.972Z"
+    },
+    {
+      "name": "report",
+      "status": "passed",
+      "finishedAt": "2026-09-24T04:06:47.207Z"
+    }
+  ],
+  "current": "report",
+  "pr": 11,
+  "featureHead": "c929608f7fb425f65501fef0af4fd1b150dba6b5",
+  "commit": "720063302dfe156a8186e8d2d68c5111a8fc1917",
+  "installedVersion": "0.1.1-alpha.50.1",
+  "finishedAt": "2026-09-24T04:06:47.209Z",
+  "qualification": {
+    "status": "passed",
+    "candidateVersion": "0.1.1-alpha.49.1",
+    "candidateHead": "c929608f7fb425f65501fef0af4fd1b150dba6b5",
+    "checks": 23,
+    "sourceStable": true
+  },
+  "verification": {
+    "nodeTests": 37,
+    "failed": 0,
+    "coreChecks": 3002,
+    "simulations": 100,
+    "protocolChecks": 16,
+    "ui": "passed"
+  },
+  "delivery": {
+    "expectedCommit": "720063302dfe156a8186e8d2d68c5111a8fc1917",
+    "startedAt": "2026-09-24T04:06:11.586Z",
+    "status": "passed",
+    "attempts": [
+      {
+        "status": "installed_and_launched",
+        "elapsedMs": 34244
+      }
+    ],
+    "alreadyInstalled": false,
+    "installedVersion": "0.1.1-alpha.50.1",
+    "installedCommit": "720063302dfe156a8186e8d2d68c5111a8fc1917",
+    "versionCode": 15001,
+    "originalSha256": "3638bca5401291a3de4b53fd44aa9cb61d8c1128b2c09e5bdd402973848cd695",
+    "installedSha256": "b90352dd3eb6009c8b253c2fdebe170152962756b4f498775cb8dddfd0bfb21e",
+    "readyMarker": true,
+    "finishedAt": "2026-09-24T04:06:45.949Z"
+  },
+  "ci": {
+    "conclusion": "success",
+    "databaseId": 35954123735,
+    "headSha": "720063302dfe156a8186e8d2d68c5111a8fc1917",
+    "status": "completed",
+    "url": "https://github.com/neurofoxpro/multimental/actions/runs/35954123735",
+    "workflowName": "Build Android"
+  }
+}

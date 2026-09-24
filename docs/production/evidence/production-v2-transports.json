@@ -1,0 +1,79 @@
+{
+  "schemaVersion": 1,
+  "observedAt": "2026-09-24T04:08:40.225Z",
+  "qualificationVersion": "0.1.1-alpha.49.1",
+  "scope": "diagnostic_authoritative_session_not_complete_multiplayer_lobby",
+  "tests": {
+    "tcp-usb": {
+      "status": "passed",
+      "observedAt": "2026-09-24T04:04:06.072Z",
+      "path": "ADB_USB_TUNNEL_NOT_WIFI",
+      "version": "0.1.1-alpha.49.1",
+      "messages": 6,
+      "checks": [
+        "handshake",
+        "version_rejection",
+        "private_view",
+        "command",
+        "deduplication",
+        "conflict",
+        "resync"
+      ]
+    },
+    "tcp-lan": {
+      "status": "passed",
+      "observedAt": "2026-09-24T04:04:10.573Z",
+      "path": "PHYSICAL_WIFI_DIRECT_TCP",
+      "version": "0.1.1-alpha.49.1",
+      "messages": 6,
+      "checks": [
+        "handshake",
+        "version_rejection",
+        "private_view",
+        "command",
+        "deduplication",
+        "conflict",
+        "resync"
+      ]
+    },
+    "tcp-peer": {
+      "status": "passed",
+      "observedAt": "2026-09-24T04:04:15.349Z",
+      "path": "ANDROID_EMULATOR_TO_PHYSICAL_PHONE_OVER_LAN",
+      "version": "0.1.1-alpha.49.1",
+      "messages": 6,
+      "clientStatus": "passed",
+      "serverStatus": "passed"
+    },
+    "bluetooth": {
+      "status": "passed",
+      "observedAt": "2026-09-24T04:04:27.575Z",
+      "path": "PHYSICAL_RFCOMM_NO_WIFI_NO_USB_PAYLOAD",
+      "version": "0.1.1-alpha.49.1",
+      "messages": 6,
+      "wifiDisabledDuringTest": true,
+      "wifiRestored": true
+    },
+    "emulatorPair": {
+      "status": "passed",
+      "path": "EMULATOR_B_TO_HOST_LOOPBACK_TO_EMULATOR_A_ADB",
+      "physicalRadio": false,
+      "client": {
+        "status": "passed",
+        "reply_count": 6,
+        "version": "0.1.1-alpha.49.1"
+      },
+      "server": {
+        "status": "passed",
+        "requests": 6,
+        "version": "0.1.1-alpha.49.1"
+      }
+    }
+  },
+  "persistence": {
+    "realPhoneDataCleared": false,
+    "reinstallPassed": true,
+    "sentinelPreserved": true,
+    "settingsPreserved": true
+  }
+}

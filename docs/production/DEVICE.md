@@ -1,15 +1,15 @@
-# Device delivery and explicit signing boundary
+# Device delivery, tested hosts and signing
 
-Only VENEL-SENDRIK is authorized. The attached paired phone is selected by a private local configuration. ADB serial, signing identity and detailed logs are never committed.
+Canonical repository: neurofoxpro/multimental. Authorized personal execution host: VENEL-SENDRIK. Git/gh account venelsendrik has verified MAINTAIN/push access; no new browser authorization was needed. Main/stable require separate owner approval.
 
-The GitHub-connected account on this computer currently has read access, not write/admin. GitHub source changes are made through the chat connector. We do not ask for broad tokens or connect another computer.
+Read [OPS_V2_RESULTS.ru.md](OPS_V2_RESULTS.ru.md) for executed tests and actual installed version, [OPS_V2.ru.md](OPS_V2.ru.md) for commands, and [SKILL.md](../../skills/game-production/SKILL.md) before work.
 
-GitHub-hosted CI validates and exports an ephemeral-debug-signed `.dev` APK. The device station verifies the canonical release and successful dev workflow, original SHA-256, actual Android package and version using aapt, then applies a **persistent private local development key** using apksigner. This is an explicit packaging transform: the downloaded APK hash and installed APK hash differ and both are retained. We do not claim the re-signed APK is bit-identical to the CI APK. Production signing and a globally updatable Play release remain a later protected step. No key is published in Git or artifacts.
+GitHub-hosted CI builds arm64/x86_64 debug APKs. The station verifies canonical source/run/manifest/hash/package/version, then applies a persistent PRIVATE LOCAL development signature. The CI and installed APK hashes differ; both are recorded. Keys and device identifiers stay local. Production/Play signing is a separate future gate.
 
-`install-device.mjs` installs in place, checks process/version/readiness, records receipt and app-scoped diagnostics. It never uninstalls/clears data to work around signatures. The private local signing folder must be backed up by the owner before moving test stations.
+The owner explicitly authorized closing the development app for installation and testing. Station autoCloseForUpdate is enabled. Only pro.neurofox.multimental.dev is closed; update uses adb install -r and preserves app data. Clean uninstall is restricted to Multimental_Test_A/B after identity checks. Reinstall tests verify a persisted sentinel and settings.
 
-`update-device.mjs --config LOCAL_CONFIG` checks successful canonical dev prereleases only; downloads APK and manifest, never remote scripts. It defers when the game is foreground and records successful SHA to skip repeat installs. Lockfiles prevent overlapping runs. It does not start arbitrary GitHub workflows on the PC.
+Multimental-Dev-APK-Updater runs every five minutes as a limited interactive-user task. It downloads only approved dev APK/data, never new repository scripts. A test/qualification lease defers updates; a running installation is waited for with a bounded timeout. Live locks are not deleted. Exact-commit delivery in cycle/resume-cycle does not equate a zero exit code with the requested new installation.
 
-`scripts/register-updater.ps1` registers a limited per-user Windows task every five minutes while logged in. Config and reviewed scripts are installed outside source snapshots under MultimentalWork/agent. To stop: disable the named task `Multimental-Dev-APK-Updater`; to remove it use the script's -Remove switch. Missing phone/authorization fails without modifying the phone.
+Use scripts/chat.ps1 device-status, delivery, device-test, qualify and emulator. Detailed logs/screenshots/serial remain local. The reviewed updater copy is installed using deploy-agent; account permissions do not cause automatic execution of arbitrary remote scripts.
 
-A successful install is not human acceptance. Manual checks: launch, switch RU/EN, play cards, attack an adjacent opponent, win/lose, return from background, and report readability/tempo problems. Never claim Bluetooth, shop or drafting are present in this first release.
+A running app and passing diagnostic transport are not full human gameplay acceptance or a finished PvP lobby. Real Wi-Fi and Bluetooth tests are recorded separately from USB tunnels and emulator bridges. Two actual phones were not available; physical Bluetooth proof is VENEL-SENDRIK adapter to the attached phone.

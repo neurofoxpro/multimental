@@ -1,3 +1,5 @@
+> **Историческая инструкция; не выполнять как текущую настройку.** Generic self-hosted runner больше не используется для личного ПК. Актуальный режим: [производство v2](production/OPS_V2.ru.md), [установка и подпись](production/DEVICE.md), [результаты](production/OPS_V2_RESULTS.ru.md). Существующая Git/gh/ADB-настройка сохранена.
+
 # Android USB self-hosted runner
 
 This runner installs the exact APK produced by the successful `dev` workflow, launches it on a USB-connected Android phone, captures a screenshot and uploads `logcat`.

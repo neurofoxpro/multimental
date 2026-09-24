@@ -1,24 +1,25 @@
 # Multimental
 
-Release-first 3x3 collectible elemental card duel. Canonical repository: `neurofoxpro/multimental`.
+Дуэльная пошаговая коллекционная игра на поле 3×3. **Рабочая ветка — dev.** Android первым; Web и полноценные LAN/Bluetooth-матчи — по roadmap.
 
-## Start here
-- [Production skill](skills/game-production/SKILL.md)
-- [Recovered decisions and scope](docs/production/CHAT_RECOVERY.ru.md)
-- [Authority](docs/production/AUTHORITY.md)
-- [Device updater](docs/production/DEVICE.md)
-- [Signing boundary](docs/production/SIGNING.md)
-- [.gameprod](.gameprod): machine-readable decisions, lifecycle, backlog and observed state.
+## Продолжить работу
+- [Скилл и рабочие инструменты](skills/game-production/SKILL.md)
+- [Фактически выполненное и установленная версия](docs/production/OPS_V2_RESULTS.ru.md)
+- [Машинная квитанция полного цикла](docs/production/evidence/production-v2-cycle.json)
+- [Принятые решения из чата](docs/production/CHAT_RECOVERY.ru.md)
+- [Roadmap по версиям](docs/ROADMAP.ru.md)
+- [.gameprod: состояние, решения, очередь](.gameprod)
 
-## Commands
+Единственный репозиторий: neurofoxpro/multimental. Единственный личный исполнительный компьютер: VENEL-SENDRIK. Git/gh: venelsendrik. GitHub-hosted CI разрешён. К другим компьютерам/репозиториям не переключаться.
+
+```powershell
+.\scripts\chat.ps1 resume
+.\scripts\chat.ps1 begin feature/next-change
+.\scripts\chat.ps1 cycle "feat: description" "Название изменения" --physical
 ```
-npm run production -- status
-npm run verify
-npm run build:android
-npm run build:web
-npm run device:update -- --config LOCAL_CONFIG
-```
 
-Feature/PR: hosted checks and artifact. Passing dev push: development prerelease. Reviewed updater on VENEL-SENDRIK: check canonical provenance and hashes, sign with persistent private local development identity, update paired Android phone in place, record installation. No other computer is authorized. No automatic main merge or stable release.
+Скрипты выполняют проверки, CI, квалификацию двух эмуляторов, дополнительные реальные радиотесты, merge в dev, prerelease, установку на авторизованный телефон и отчёт. Исходники не меняются во время проверки, устаревшие квитанции не принимаются. Документационные изменения не создают новый APK.
 
-The first playable alpha has provisional cost/attack/health rules, one action per turn, 3x3 placement, adjacent combat, deterministic simple AI, RU/EN and finite matches. Catalogue/economy/network and the owner's deferred central card mechanics remain in the backlog. A build is not a device test; see receipts and the session report for actual outcomes.
+Тестовая игра против ИИ работает; лабораторные обмены по настоящим LAN/Bluetooth проверены. **Это не утверждение, что пользовательское PvP-лобби, магазин, крафт или финальные механики уже готовы.** Следующий этап — 0.2.0 LAN-комната и полноценное подключение игроков.
+
+CI APK переподписывается приватным постоянным dev-ключом станции; исходный и установленный SHA-256 разные и фиксируются отдельно. [Подпись и доставка](docs/production/DEVICE.md). Ключи/serial/полные логи не публикуются. main и stable — только после отдельного решения владельца.
