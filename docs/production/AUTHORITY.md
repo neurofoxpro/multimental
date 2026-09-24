@@ -15,3 +15,6 @@ Updated: 2026-09-24. Source: owner's latest instruction in the Multimental proje
 - Existing source is recovered from `feature/bootstrap-release-pipeline` at `1e878e02a7a7b677ca19e71ab7942afedaf5995a` without deleting its history.
 
 Latest owner authorization supersedes earlier suggestions involving other computers or repositories. Technical readiness, installation and human gameplay acceptance are separate gates.
+
+## Updated authorizations, latest owner messages
+The owner authorized the venelsendrik Git/gh account on VENEL-SENDRIK, automated app closing/reinstallation/relaunch, emulator-first tests, LAN/physical Bluetooth diagnostics and use of the newly attached Bluetooth adapter. This does not authorize another computer, repository or deletion of phone app data. Use in-place updates on the phone; clean installation belongs to dedicated emulators.

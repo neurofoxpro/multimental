@@ -1,0 +1,1 @@
+import {spawnSync} from 'node:child_process';const r=spawnSync(process.env.GODOT_BIN||'godot',['--headless','--path','game','--script','res://tests/protocol_test.gd'],{encoding:'utf8',timeout:20000});const text=(r.stdout||'')+(r.stderr||'');console.log(text);if(r.status!==0||!text.includes('MULTIMENTAL_PROTOCOL_PASS')||text.includes('SCRIPT ERROR:'))process.exitCode=1;

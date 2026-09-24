@@ -1,1 +1,21 @@
-{"name":"multimental","version":"0.1.0-alpha.1","private":true,"type":"module","engines":{"node":">=22"},"scripts":{"production":"node skills/game-production/scripts/gameprod.mjs","doctor":"node skills/game-production/scripts/gameprod.mjs doctor","verify":"node skills/game-production/scripts/gameprod.mjs run verify","test":"node tools/verify.mjs","build:android":"node skills/game-production/scripts/gameprod.mjs run build:android","build:web":"node skills/game-production/scripts/gameprod.mjs run build:web","device:update":"node scripts/update-device.mjs","device:smoke":"node scripts/install-device.mjs"}}
+{
+  "name": "multimental",
+  "version": "0.1.1-alpha.1",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "production": "node skills/game-production/scripts/gameprod.mjs",
+    "doctor": "node skills/game-production/scripts/gameprod.mjs doctor",
+    "verify": "node skills/game-production/scripts/gameprod.mjs run verify",
+    "test": "node tools/verify.mjs",
+    "build:android": "node skills/game-production/scripts/gameprod.mjs run build:android",
+    "build:web": "node skills/game-production/scripts/gameprod.mjs run build:web",
+    "device:update": "node scripts/update-device.mjs",
+    "device:smoke": "node scripts/install-device.mjs",
+    "ops": "node skills/game-production/scripts/ops.mjs",
+    "test:protocol": "node tools/test-protocol.mjs"
+  }
+}

@@ -28,6 +28,10 @@ func _ready() -> void:
         language = str(cfg.get_value("ui", "language", "ru"))
     show_menu()
     print("MULTIMENTAL_READY " + BuildInfo.VERSION)
+    if OS.is_debug_build():
+        var lab = load("res://src/device_lab.gd").new()
+        lab.ui = self
+        get_tree().root.call_deferred("add_child", lab)
 
 func label(text: String, size_px: int = 20) -> Label:
     var node := Label.new()

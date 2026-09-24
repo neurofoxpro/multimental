@@ -3,13 +3,16 @@ name: game-production
 description: Evidence-gated release-first production for a game: recover decisions, validate, test, build, publish prerelease and install exact Android artifacts. Universal Node scripts with project-specific engine adapters.
 ---
 
-# Game Production v1
+# Game Production v2
+
+## Working tools first
+Use scripts/chat.ps1 resume, verify, cycle, device-test, network and emulator instead of repeating Git/gh/ADB command sequences. See docs/production/OPS_V2.ru.md and docs/ROADMAP.ru.md. The Git worktree and portable tools are reused.
 
 ## Start / recovery
 Read AGENTS.md, docs/production/AUTHORITY.md and all .gameprod JSON files. Run `node skills/game-production/scripts/gameprod.mjs status` and `validate`. Inspect canonical Git branches, PRs, Actions and releases at exact SHAs. Continue from the first unmet gate, not from old assistant promises. Source decisions and observed implementation are separate.
 
 ## Authorization
-An explicit repository and execution host are required. Verify Remote Desktop device ID against its advertised name, then verify the OS hostname. The host scripts reject a different host or Git origin. A source snapshot must include canonical repository and commit metadata. No fallback repository, computer, credential escalation, repository creation, transfer, force-push or destructive cleanup. Do not modify other workspaces. Existing directories are preserved.
+An explicit repository and execution host are required. Verify Remote Desktop device ID against its advertised name, then verify the OS hostname. The host scripts reject a different host or Git origin. A source snapshot must include canonical repository and commit metadata. Active station account is venelsendrik with existing MAINTAIN access; no new tokens or Chrome sign-in are needed. No fallback repository, computer, credential escalation, repository creation, transfer, force-push or destructive cleanup. Do not modify other workspaces. Existing directories are preserved.
 
 ## Production loop
 Small approved increment -> code/data -> metadata validation -> tests -> build -> manifest/hash -> device preflight -> install -> launch check -> evidence report -> manual play acceptance. Keep release-first: advanced art, economy, new mechanics and network can be deferred without pretending they are finished.
@@ -23,7 +26,7 @@ Small approved increment -> code/data -> metadata validation -> tests -> build -
 Keep rules independent of Godot scenes, frames, animation and transport. Use versioned deterministic commands, ordered effects and a recorded seed. Private deck order and seed are not public client synchronization data. Future networks send player-filtered state; a full-state hash does not prove host honesty. Cards are data, effect implementations are reviewed code. Match log, economy ledger and technical diagnostics remain separate.
 
 ## Device/update safety
-The local updater is a reviewed installed script, not a generic public-repository self-hosted runner. It downloads APK/data only and never executes downloaded scripts. Require exact canonical release, manifest, APK hash, package allowlist and one selected authorized phone. Never uninstall, clear data or downgrade automatically. Do not interrupt a foreground manual play session. Repeated successful artifact installs are idempotent; failures remain retryable. Use a lock to avoid concurrent installs.
+The local updater is a reviewed installed script, not a generic public-repository self-hosted runner. It downloads APK/data only and never executes downloaded scripts. Require exact canonical release, manifest, APK hash, package allowlist and one selected authorized phone. Never uninstall, clear data or downgrade automatically. The current owner explicitly authorizes automatically closing the development game for update/tests. Respect the station autoCloseForUpdate setting; data is preserved. Clean installs are restricted to the dedicated emulator. Repeated successful artifact installs are idempotent; failures remain retryable. Use a lock to avoid concurrent installs.
 
 The early `.dev` APK is explicitly test-only, without sensitive permissions. Production identity and signing must be separate. A public development key, when used, offers update compatibility but NOT publisher authentication; canonical repository/build provenance must still be checked. Never expose a production key.
 

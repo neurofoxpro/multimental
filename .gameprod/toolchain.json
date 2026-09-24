@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "observedAt": "2026-09-24T02:25:55.959Z",
+  "git": {
+    "url": "https://github.com/git-for-windows/git/releases/download/v2.55.0.windows.5/MinGit-2.55.0.5-64-bit.zip",
+    "sha256": "56d7b226b7693196cfc71fef26568f536c4a021ab6c37ff2db4287bed908e96e",
+    "version": "v2.55.0.windows.5"
+  },
+  "node": "24.21.0 station / 22 from .nvmrc in CI",
+  "godot": "4.7.2-stable, archive checksums in setup-godot.sh and bootstrap-station.ps1",
+  "emulator": {
+    "version": "37.1.11.0",
+    "build": "15917651",
+    "image": "system-images;android-35;default;x86_64",
+    "acceleration": "WHPX verified",
+    "note": "SDK package checksums verified by sdkmanager; package.xml retained on station"
+  },
+  "windows": "VENEL-SENDRIK only",
+  "githubAccount": "venelsendrik",
+  "permissions": "MAINTAIN, git push checked; not ADMIN"
+}
