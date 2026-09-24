@@ -26,9 +26,9 @@ Small approved increment -> code/data -> metadata validation -> tests -> build -
 Keep rules independent of Godot scenes, frames, animation and transport. Use versioned deterministic commands, ordered effects and a recorded seed. Private deck order and seed are not public client synchronization data. Future networks send player-filtered state; a full-state hash does not prove host honesty. Cards are data, effect implementations are reviewed code. Match log, economy ledger and technical diagnostics remain separate.
 
 ## Device/update safety
-The local updater is a reviewed installed script, not a generic public-repository self-hosted runner. It downloads APK/data only and never executes downloaded scripts. Require exact canonical release, manifest, APK hash, package allowlist and one selected authorized phone. Never uninstall, clear data or downgrade automatically. The current owner explicitly authorizes automatically closing the development game for update/tests. Respect the station autoCloseForUpdate setting; data is preserved. Clean installs are restricted to the dedicated emulator. Repeated successful artifact installs are idempotent; failures remain retryable. Use a lock to avoid concurrent installs.
+The local updater is a reviewed installed script, not a generic public-repository self-hosted runner. It downloads APK/data only and never executes downloaded scripts. Require exact canonical release, manifest, APK hash, package allowlist and one selected authorized phone. Never uninstall or clear real-phone data, and never downgrade automatically. The current owner explicitly authorizes automatically closing the development game for update/tests. Respect the station autoCloseForUpdate setting; data is preserved. Clean installs are restricted to the dedicated emulator. Repeated successful artifact installs are idempotent; failures remain retryable. Use a lock to avoid concurrent installs.
 
-The early `.dev` APK is explicitly test-only, without sensitive permissions. Production identity and signing must be separate. A public development key, when used, offers update compatibility but NOT publisher authentication; canonical repository/build provenance must still be checked. Never expose a production key.
+The .dev APK is explicitly test-only. Permissions are reviewed and allowlisted; Bluetooth diagnostics require the Android Bluetooth connection permission. Current signing uses a persistent PRIVATE LOCAL development key; no public private key is used or published. Production identity/signing remain separate, and both original and locally re-signed APK hashes are recorded.
 
 ADB permission, connecting/unlocking a phone and subjective play acceptance are human boundaries. Report `blocked`, not success, when any of those is unavailable. Device serials and application logs stay local; only a redacted receipt may enter Git.
 
@@ -55,3 +55,8 @@ Commands prepare and probe-bluetooth narrow debugging without publishing a relea
 Device UI tests use actual Android input taps, not direct method calls. Dedicated emulator setup handles the Android full-screen tutorial; unexpected system dialogs are not blindly accepted. Real user gameplay acceptance remains separate.
 
 Report: scripts/chat.ps1 report --write writes sanitized observation files/state. Commit those in a documentation-only PR so recording work does not create another APK. No raw device IDs, addresses, nonce files, keys or app logs enter the public report.
+
+## Latest verified completion
+See docs/production/OPS_V2_RESULTS.ru.md and docs/production/evidence/production-v2-cycle.json. The full v2 cycle completed through PR11, 37 Node tests, 23 device scenarios and actual installed dev release. Roadmap 0.2.0 is player-facing LAN, not a repeat of station setup.
+
+Release delivery is bound to the exact expected merge commit. A stale release listing or deferred installation is waited for within a bound; neither exit 0 nor a receipt for another version can finish the delivery gate. Preserve prior engineering receipts before a documentation-only cycle replaces local latest-state files.

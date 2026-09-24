@@ -12,10 +12,12 @@
     },
     {
       "version": "0.1.1",
-      "status": "in_progress",
+      "status": "implemented_and_verified",
       "goal": "Производственный цикл через git/gh; эмуляторы; автоматический перезапуск; лаборатория LAN/Bluetooth",
       "gate": "Проверки ops, CI, установка/обновление без потери настроек; отдельные квитанции настоящих транспортов",
-      "notIncluded": "Готовое лобби PvP и финальная безопасность сети"
+      "notIncluded": "Готовое лобби PvP и финальная безопасность сети",
+      "deliveredVersion": "0.1.1-alpha.50.1",
+      "evidence": "docs/production/evidence/production-v2-cycle.json"
     },
     {
       "version": "0.2.0",
@@ -89,5 +91,6 @@
         "Публикация main/stable/Google Play не вытекает из наличия прав MAINTAIN"
       ]
     }
-  ]
+  ],
+  "updatedAt": "2026-09-24T04:08:40.225Z"
 }

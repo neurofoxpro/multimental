@@ -1,34 +1,69 @@
 {
   "schemaVersion": 1,
   "repository": "neurofoxpro/multimental",
-  "updatedAt": "2026-09-24T01:36:07.971Z",
-  "phase": "playable-alpha-and-repeatable-production-verified",
-  "implementationCommit": "cc689248267558ee3620e0e094bc79c972dadf0e",
-  "testedProductionToolingCommit": "d1345081af49b4e1da31ed8a8bbc1819de4fe5c4",
+  "updatedAt": "2026-09-24T04:08:40.225Z",
+  "phase": "production-v2-qualified-and-installed",
+  "implementationCommit": "720063302dfe156a8186e8d2d68c5111a8fc1917",
+  "testedProductionToolingCommit": "c929608f7fb425f65501fef0af4fd1b150dba6b5",
   "skillEntryPoint": "skills/game-production/SKILL.md",
-  "report": "docs/production/RESUME_2026-09-24.ru.md",
-  "next": "Manual play acceptance of installed Multimental Dev; do not interrupt the foreground game. Then implement feedback and the next small gameplay increment through the existing skill.",
+  "report": "docs/production/OPS_V2_RESULTS.ru.md",
+  "next": "Implement 0.2.0 LAN player room/connection flow on the verified protocol; keep manual play feedback independent of automated engineering tasks.",
   "observed": {
     "authorizedExecutionHost": "VENEL-SENDRIK",
-    "remoteConnection": "reconnected and hostname verified",
-    "productionSkill": "used for fresh and repeated verification",
-    "nodeTests": {"passed": 17, "failed": 0},
-    "coreTests": {"checks": 3002, "simulations": 100, "result": "passed"},
-    "headlessUiFlow": "passed",
-    "repeatedLocalVerification": "passed twice, source fingerprints equal, personal editor settings unchanged",
-    "ciRunForInstalledBuild": 35940619783,
+    "githubAccount": "venelsendrik",
+    "repositoryPermission": "MAINTAIN",
+    "productionSkill": "v2_in_use",
+    "nodeTests": {
+      "passed": 37,
+      "failed": 0
+    },
+    "coreTests": {
+      "checks": 3002,
+      "simulations": 100,
+      "result": "passed"
+    },
+    "protocolTests": {
+      "checks": 16,
+      "result": "passed"
+    },
+    "qualification": {
+      "status": "passed",
+      "scenarios": 23,
+      "sourceStable": true,
+      "candidateVersion": "0.1.1-alpha.49.1",
+      "evidence": "docs/production/evidence/production-v2-latest.json"
+    },
+    "lastVerifiedInstalledRelease": "v0.1.1-alpha.50.1",
+    "lastVerifiedVersionCode": 15001,
+    "lastVerifiedInstallAt": "2026-09-24T04:06:45.735Z",
+    "ciRunForInstalledBuild": 35954123735,
     "ciConclusionForInstalledBuild": "success",
-    "firstInstalledRelease": "v0.1.0-alpha.20.1",
-    "lastVerifiedInstalledRelease": "v0.1.0-alpha.26.1",
-    "lastVerifiedVersionCode": 12601,
-    "lastVerifiedInstallAt": "2026-09-24T01:02:42.174Z",
-    "deviceEvidence": "docs/production/evidence/device-alpha26.json",
-    "localTestEvidence": "docs/production/evidence/isolated-verification.json",
-    "sameArtifactCheck": "DEVICE_UPDATE_ALREADY_CURRENT; installation receipt unchanged",
-    "scheduledUpdater": {"task": "Multimental-Dev-APK-Updater", "interval": "PT5M", "runLevel": "Limited", "verifiedSubsequentUpdate": true, "lastObservedTaskResult": 0, "foregroundPolicyObserved": "deferred_foreground"},
+    "deviceEvidence": "docs/production/evidence/production-v2-latest.json",
+    "transportEvidence": "docs/production/evidence/production-v2-transports.json",
+    "cycleEvidence": "docs/production/evidence/production-v2-cycle.json",
+    "scheduledUpdater": {
+      "task": "Multimental-Dev-APK-Updater",
+      "interval": "PT5M",
+      "runLevel": "Limited",
+      "autoCloseForUpdate": true,
+      "realPhoneInstallMode": "update_in_place_preserving_data"
+    },
     "humanGameplayAcceptance": "pending"
   },
-  "notClaimed": ["complete game", "final balance", "collection/shop/crafting", "LAN/Bluetooth", "Web release", "production signing", "stable release", "autonomous future game design"],
-  "protected": {"mainIntegration": "owner_approval_required", "stableRelease": "owner_approval_required"},
-  "evidenceSemantics": "Timestamped observations, not a promise that this is forever the latest release. Recheck canonical GitHub and the paired phone. New tool integration requires passing CI in PR8. No local Android export is claimed; isolated local tests may warn about the absent full SDK."
+  "notClaimed": [
+    "complete game",
+    "multiplayer player lobby",
+    "production Bluetooth pairing/security",
+    "final balance",
+    "collection/shop/crafting",
+    "Web release",
+    "production signing/Google Play",
+    "stable release"
+  ],
+  "protected": {
+    "mainIntegration": "owner_approval_required",
+    "stableRelease": "owner_approval_required"
+  },
+  "evidenceSemantics": "Timestamped observed results. Full device matrix belongs to the stated PR candidate; the stamped dev release was separately built, verified, installed and started. Main/stable remain owner-protected. Recheck current Git/CI/device state on resume.",
+  "automationReport": "docs/production/evidence/production-v2-latest.json"
 }

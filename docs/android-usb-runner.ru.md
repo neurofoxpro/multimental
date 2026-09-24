@@ -1,3 +1,5 @@
+> **Историческая инструкция; не выполнять как текущую настройку.** Generic self-hosted runner больше не используется для личного ПК. Актуальный режим: [производство v2](production/OPS_V2.ru.md), [установка и подпись](production/DEVICE.md), [результаты](production/OPS_V2_RESULTS.ru.md). Существующая Git/gh/ADB-настройка сохранена.
+
 # GitHub Actions -> Windows PC -> Android по USB
 
 Эта схема устанавливает APK, собранный GitHub Actions, на Android-телефон через Windows-компьютер с self-hosted runner.
