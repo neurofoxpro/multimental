@@ -52,6 +52,27 @@ async function wait(stage) {
 }
 try {
   chooseDevice(exec(c.adb, ['devices', '-l']), c.serial);
+  const pairingProcess = spawnSync(
+    'powershell.exe',
+    [
+      '-NoProfile',
+      '-ExecutionPolicy',
+      'Bypass',
+      '-File',
+      'scripts/bluetooth-pairing.ps1',
+      '-ConfigPath',
+      path.resolve(a[a.indexOf('--config') + 1])
+    ],
+    { encoding: 'utf8', timeout: 20000 }
+  );
+  if (pairingProcess.status !== 0) throw Error('Pairing state cannot be verified');
+  r.pairing = JSON.parse(pairingProcess.stdout.trim());
+  if (!r.pairing.authenticated) {
+    r.manualAction =
+      'Pair the selected phone and VENEL-SENDRIK in OS settings; confirm the displayed code on both devices';
+    throw Error('PAIRING_REQUIRED: selected phone is known but not authenticated by Windows');
+  }
+
   const fd = fs.openSync(lease, 'wx');
   fs.writeFileSync(
     fd,
@@ -152,7 +173,7 @@ try {
   r.guest = guest;
   r.status = 'passed';
 } catch (e) {
-  r.status = 'failed';
+  r.status = e.message.startsWith('PAIRING_REQUIRED:') ? 'blocked' : 'failed';
   r.error = e.message;
   process.exitCode = 1;
   const v = report();

@@ -627,6 +627,17 @@ try {
     case 'qualify':
       qualify(args);
       break;
+    case 'bluetooth-pairing':
+      run('powershell.exe', [
+        '-NoProfile',
+        '-ExecutionPolicy',
+        'Bypass',
+        '-File',
+        'scripts/bluetooth-pairing.ps1',
+        '-ConfigPath',
+        path.join(workspace, 'station.local.json')
+      ]);
+      break;
     case 'bluetooth-room':
       run(
         process.execPath,

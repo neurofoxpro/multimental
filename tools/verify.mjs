@@ -68,7 +68,7 @@ if (process.platform === 'win32')
     [
       '-NoProfile',
       '-Command',
-      "Add-Type -Path 'tools/BluetoothChannel.cs'; Write-Output 'WINDOWS_NATIVE_INTEROP_COMPILE_PASS'"
+      "Add-Type -Path 'tools/BluetoothChannel.cs'; Add-Type -Path 'tools/BluetoothPairing.cs'; Write-Output 'WINDOWS_NATIVE_INTEROP_COMPILE_PASS'"
     ],
     ['WINDOWS_NATIVE_INTEROP_COMPILE_PASS']
   );
