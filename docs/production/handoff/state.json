@@ -1,125 +1,194 @@
 {
   "schemaVersion": 1,
-  "observedAt": "2026-09-24T05:40:13.755Z",
+  "observedAt": "2026-09-24T06:41:04.949Z",
   "repository": "neurofoxpro/multimental",
   "host": "VENEL-SENDRIK",
-  "head": "10d870951f83d4aedcf622c1d87fa629f01d652f",
-  "branch": "feature/lan-pvp-20260924",
-  "dirty": true,
+  "head": "a95fa93a495ba91d19b9aa17220214a3c1afbc73",
+  "branch": "feature/bluetooth-pvp-20260924",
+  "dirty": false,
   "pr": {
-    "baseRefName": "dev",
-    "headRefOid": "10d870951f83d4aedcf622c1d87fa629f01d652f",
-    "isDraft": true,
-    "number": 14,
+    "number": 15,
     "state": "OPEN",
-    "url": "https://github.com/neurofoxpro/multimental/pull/14"
+    "baseRefName": "dev",
+    "isDraft": true
   },
   "installed": {
-    "version": "0.2.0-alpha.59.1",
-    "versionCode": 15901,
-    "sourceCommit": "869a00f9a5cfe8cc62a4e32bba3965579790c15b",
-    "installedAt": "2026-09-24T05:32:35.408Z",
+    "version": "0.2.0-alpha.65.1",
+    "versionCode": 16501,
+    "sourceCommit": "e5714b2f56c85b7d32ded37e3cad51f6ca3aec3f",
+    "installedAt": "2026-09-24T06:25:52.412Z",
     "readyMarker": true,
-    "originalSha256": "89e4ee41e0b87e52262aaf499dca690e8f12d404e8b2f389c6ee1015e1e54319",
-    "installedSha256": "ed61311ba6411cdbdf17520ada2f82ba29f883c28c873cf87bcd1f24fd26852e"
+    "originalSha256": "5787519e9508330bbbf1a868b4f5871b7ca7cc401a741e6bf26b8708295094c6",
+    "installedSha256": "1750f935aff50b2af55f09739a9c79e337c95e1b51049b6faafb8448d30cedc8"
   },
   "candidate": {
-    "head": "10d870951f83d4aedcf622c1d87fa629f01d652f",
-    "version": "0.2.0-alpha.59.1"
+    "head": "a95fa93a495ba91d19b9aa17220214a3c1afbc73",
+    "version": "0.3.0-alpha.67.1"
   },
-  "qualification": {
-    "status": "failed",
-    "candidateHead": "10d870951f83d4aedcf622c1d87fa629f01d652f",
-    "finishedAt": "2026-09-24T05:32:40.209Z",
-    "failed": [
-      "pvp-emulators",
-      "pvp-phone-lan"
-    ]
-  },
+  "qualification": null,
   "remaining": [
     {
       "id": "UX-02",
       "text": "Понятные подсветки, отказ без траты хода, объяснение причины результата",
+      "version": "0.2.0",
       "status": "implemented",
-      "version": "0.2.0"
+      "kind": "ui",
+      "evidence": [
+        "game/src/main.gd"
+      ],
+      "source": "Этап 5; новая версия требует device-приёмки",
+      "requiredForBeta": true
     },
     {
       "id": "UX-03",
       "text": "Настройки громкости по категориям и 1–3 музыкальных композиции",
+      "version": "0.9.0",
       "status": "planned",
-      "version": "0.9.0"
+      "kind": "game",
+      "evidence": [],
+      "source": "Этапы 5,6",
+      "requiredForBeta": true
     },
     {
       "id": "UX-04",
       "text": "Безопасная обучающая партия, короткое обучение",
+      "version": "0.9.0",
       "status": "planned",
-      "version": "0.9.0"
+      "kind": "game",
+      "evidence": [],
+      "source": "Этапы 2,5,6",
+      "requiredForBeta": true
     },
     {
       "id": "NET-01",
       "text": "LAN-комната, приватное приглашение и партия двух игроков без внешнего сервера",
+      "version": "0.2.0",
       "status": "implemented",
-      "version": "0.2.0"
+      "kind": "network",
+      "evidence": [
+        "game/tests/lan_test.gd",
+        "scripts/room-qualification.mjs"
+      ],
+      "source": "Этапы 1,2,9,10; device-кандидат ещё не проверен",
+      "requiredForBeta": true
     },
     {
       "id": "NET-02",
       "text": "Хост-авторитет, несовместимость до игры, скрытые карты, идемпотентность и переподключение",
+      "version": "0.2.0",
       "status": "implemented",
-      "version": "0.2.0"
+      "kind": "network",
+      "evidence": [
+        "game/tests/room_test.gd",
+        "game/tests/lan_test.gd"
+      ],
+      "source": "Этапы 9,10",
+      "requiredForBeta": true
     },
     {
       "id": "NET-04",
       "text": "Пользовательский Bluetooth PvP, выбор/сопряжение и разрешения",
+      "version": "0.3.0",
       "status": "planned",
-      "version": "0.3.0"
+      "kind": "network",
+      "evidence": [],
+      "source": "Этапы 1,2,9,10",
+      "requiredForBeta": true
     },
     {
       "id": "META-01",
       "text": "Коллекция и конструктор собственных колод",
+      "version": "0.4.0",
       "status": "planned",
-      "version": "0.4.0"
+      "kind": "game",
+      "evidence": [],
+      "source": "Этапы 1,4,6",
+      "requiredForBeta": true
     },
     {
       "id": "META-02",
       "text": "Магазин, пак по пять случайных карт, отдельная валюта лобби",
+      "version": "0.5.0",
       "status": "planned",
-      "version": "0.5.0"
+      "kind": "game",
+      "evidence": [],
+      "source": "Этапы 4,6",
+      "requiredForBeta": true
     },
     {
       "id": "META-03",
       "text": "Крафт карт из пыли, инвентарь и сохранность коллекции при поражении",
+      "version": "0.5.0",
       "status": "planned",
-      "version": "0.5.0"
+      "kind": "game",
+      "evidence": [],
+      "source": "Этапы 4,6",
+      "requiredForBeta": true
     },
     {
       "id": "META-04",
       "text": "Награды за победу/ежедневные задания, уровни без обязательного гринда",
+      "version": "0.5.0",
       "status": "planned",
-      "version": "0.5.0"
+      "kind": "game",
+      "evidence": [],
+      "source": "Этапы 1,3,4",
+      "requiredForBeta": true
     },
     {
       "id": "META-05",
       "text": "Атомарное сохранение после матча, пака, колоды и награды; миграции",
+      "version": "0.5.0",
       "status": "planned",
-      "version": "0.5.0"
+      "kind": "game",
+      "evidence": [],
+      "source": "Этап 5; текущий файл последнего матча не равен всей системе",
+      "requiredForBeta": true
     },
     {
       "id": "AUTO-05",
       "text": "Реестр исследований, источников, проверок и ограничений",
+      "version": "0.2.0",
       "status": "implemented",
-      "version": "0.2.0"
+      "kind": "automation",
+      "evidence": [
+        "scripts/research.mjs",
+        ".gameprod/research.json"
+      ],
+      "source": "Последнее поручение об этапе research",
+      "requiredForBeta": true
     }
   ],
   "manual": [
     {
       "id": "CONTENT-01",
       "text": "Основная особая система взаимодействий карт/стихий",
-      "kind": "product"
+      "version": "0.6.0",
+      "status": "manual",
+      "kind": "product",
+      "evidence": [],
+      "source": "Владелец явно отложил выбор; не придумывать вместо него",
+      "requiredForBeta": true
     },
     {
       "id": "BETA-01",
       "text": "Субъективная оценка интереса, читаемости и темпа партии",
-      "kind": "subjective"
+      "version": "0.9.0",
+      "status": "manual",
+      "kind": "subjective",
+      "evidence": [],
+      "source": "Только человек; автоматические тесты не подменяют приёмку",
+      "requiredForBeta": true
+    },
+    {
+      "id": "RELEASE-01",
+      "text": "Production-подпись, разрешение main/stable и публикация Google Play",
+      "version": "1.0.0",
+      "status": "manual",
+      "kind": "release_approval",
+      "evidence": [],
+      "source": "Отдельное решение владельца; не выводится из MAINTAIN или слова «разрешение»",
+      "requiredForBeta": false
     }
   ],
   "readset": [
@@ -137,7 +206,7 @@
     },
     {
       "path": ".gameprod/project.json",
-      "sha256": "379a663aa968db6062d6592e10c92dd42e07cb08858d8549b79e1bf339794848"
+      "sha256": "030e5374c69bb8e4757368874ab1986f6e6d0a3e8e2f7044fdd16216dc544f18"
     },
     {
       "path": ".gameprod/decisions.json",
@@ -161,7 +230,7 @@
     },
     {
       "path": ".gameprod/research.json",
-      "sha256": "4a450523deb27e09bc7ab64871b3ac6efe99678b2a2c0e2d2cd97c20ed753b68"
+      "sha256": "86af209110361bcf9eee6ba3a274cfabe29bd8c80d9bf46f0ec9f01100cc54d9"
     },
     {
       "path": "docs/MANUAL_TESTS.ru.md",
@@ -169,11 +238,22 @@
     },
     {
       "path": "CHANGELOG.ru.md",
-      "sha256": "a5d246dabf095c357bcb8237571175aa70b5f184d87ec4aac06cb7282c4a44bd"
+      "sha256": "39c807651484c3dcbf2f5cac96b81c5f77c20e59380e5ecae0e118c29e50dcc8"
+    }
+  ],
+  "worktrees": [
+    {
+      "folder": "repo",
+      "role": "canonical verified release and documentation",
+      "release": "0.2.0-alpha.65.1"
+    },
+    {
+      "folder": "repo-beta",
+      "role": "current PR15 Bluetooth implementation and qualification"
     }
   ],
   "next": {
-    "command": "audit",
-    "why": "Сначала сохранить и проверить текущие изменения; не делать reset/clone поверх работы."
+    "command": "qualify --physical",
+    "why": "Новая квалификация текущего APK, а не старые радиоиспытания."
   }
 }
