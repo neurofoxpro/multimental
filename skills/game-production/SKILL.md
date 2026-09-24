@@ -46,3 +46,12 @@ For another game, copy the skill and run `scripts/init.mjs --root EXISTING_GIT_R
 
 ## Finish
 Record changed files and Git commit/PR, executed tests, source/artifact identity, actual install outcome, pending manual acceptance and next task. A script can formalize deterministic work, but it cannot automatically invent and approve all future design or replace human acceptance. Claim ongoing automation only after an actual scheduler/workflow is installed and verified.
+
+## Complete working loop (v2)
+Use scripts/chat.ps1 cycle "message" "title" --physical for changes that touch device transports. The default cycle qualifies two dedicated Android emulators before dev integration. The physical option adds actual phone UI, persistent reinstall, USB tunnel, LAN, emulator-to-phone LAN and real RFCOMM with Wi-Fi disabled/restored. A passing JNI memory-stream test is required in each emulator before the radio test.
+
+Commands prepare and probe-bluetooth narrow debugging without publishing a release. resume-cycle continues a matching post-merge delivery if interruption occurred. Operation leases reject overlapping writers; do not delete live lockfiles. Every qualification is bound to exact candidate SHA, APK hash and source fingerprint; zero errors is not inferred from an incomplete list.
+
+Device UI tests use actual Android input taps, not direct method calls. Dedicated emulator setup handles the Android full-screen tutorial; unexpected system dialogs are not blindly accepted. Real user gameplay acceptance remains separate.
+
+Report: scripts/chat.ps1 report --write writes sanitized observation files/state. Commit those in a documentation-only PR so recording work does not create another APK. No raw device IDs, addresses, nonce files, keys or app logs enter the public report.

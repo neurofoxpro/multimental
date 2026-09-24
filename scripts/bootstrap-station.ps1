@@ -34,18 +34,27 @@ $jar=(Get-ChildItem "$tools\build-tools" -Recurse -Filter apksigner.jar | Select
 $aapt=(Get-ChildItem "$tools\build-tools" -Recurse -Filter aapt.exe | Select-Object -First 1).FullName
 @{java=$java;apksigner=$jar;aapt=$aapt} | ConvertTo-Json | Set-Content -Encoding UTF8 "$tools\signing-tools.local.json"
 if ($PrepareAgent) {
- $snapshot=Get-Content -Raw "$source\.gameprod\source.json" | ConvertFrom-Json
+ if(Test-Path "$source\.git"){
+  $git=Join-Path $WorkRoot 'tools\mingit\cmd\git.exe'
+  if(-not(Test-Path $git)){throw 'Run bootstrap-workspace.ps1 first'}
+  $origin=& $git -C $source remote get-url origin
+  if($origin -ne 'https://github.com/neurofoxpro/multimental.git'){throw 'Wrong Git source'}
+  $commit=& $git -C $source rev-parse HEAD
+  if($commit -notmatch '^[a-f0-9]{40}$'){throw 'Invalid Git commit'}
+  $snapshot=@{repository=$profile.repository;commit=$commit}
+ }else{$snapshot=Get-Content -Raw "$source\.gameprod\source.json" | ConvertFrom-Json}
  if ($snapshot.repository -ne $profile.repository) { throw 'Snapshot origin mismatch' }
  $agent=Join-Path $WorkRoot ('agent-'+$snapshot.commit.Substring(0,12))
  if (Test-Path $agent) { throw 'Reviewed agent directory exists; do not overwrite' }
  New-Item -ItemType Directory -Force "$agent\scripts","$agent\skills\game-production\scripts" | Out-Null
- foreach ($f in @('install-device.mjs','update-device.mjs','device-readiness.mjs','register-updater.ps1')) { Copy-Item "$source\scripts\$f" "$agent\scripts\$f" }
+ foreach ($f in @('install-device.mjs','update-device.mjs','device-readiness.mjs','device-launch.mjs','register-updater.ps1')) { Copy-Item "$source\scripts\$f" "$agent\scripts\$f" }
  Copy-Item "$source\skills\game-production\scripts\lib.mjs" "$agent\skills\game-production\scripts\lib.mjs"
+ Copy-Item "$source\skills\game-production\scripts\qualification-policy.mjs" "$agent\skills\game-production\scripts\qualification-policy.mjs"
  if (-not (Test-Path "$WorkRoot\station.local.json")) {
   $adb="$tools\platform-tools\adb.exe";$rows=@(& $adb devices -l | Where-Object { $_ -match '^\S+\s+device(?:\s|$)' })
   if ($rows.Count -ne 1) { throw 'Pair exactly one authorized phone' }
   $serial=($rows[0] -split '\s+')[0]
-  @{repository=$profile.repository;allowedHost=[Environment]::MachineName;package=$profile.developmentPackage;serial=$serial;workDir="$WorkRoot\installations";adb=$adb;java=$java;keytool=(Join-Path (Split-Path $java) 'keytool.exe');apksigner=$jar;aapt=$aapt;allowedPermissions=@('android.permission.INTERNET','android.permission.ACCESS_NETWORK_STATE','android.permission.VIBRATE')} | ConvertTo-Json | Set-Content -Encoding UTF8 "$WorkRoot\station.local.json"
+  @{repository=$profile.repository;allowedHost=[Environment]::MachineName;package=$profile.developmentPackage;serial=$serial;workDir="$WorkRoot\installations";adb=$adb;java=$java;keytool=(Join-Path (Split-Path $java) 'keytool.exe');apksigner=$jar;aapt=$aapt;allowedPermissions=@('android.permission.INTERNET','android.permission.ACCESS_NETWORK_STATE','android.permission.VIBRATE','android.permission.BLUETOOTH_CONNECT');autoCloseForUpdate=$true} | ConvertTo-Json | Set-Content -Encoding UTF8 "$WorkRoot\station.local.json"
  }
  New-Item -ItemType Directory -Force "$WorkRoot\installations\private-signing" | Out-Null
  $user=[System.Security.Principal.WindowsIdentity]::GetCurrent().Name

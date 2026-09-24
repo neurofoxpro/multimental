@@ -6,6 +6,7 @@ import {readJSON,writeJSON,inside,context,findRoot,gate,fingerprint,verifyManife
 import {featureBranch,readyTasks,classify} from './policy.mjs';
 import {applyBundle} from './apply.mjs';
 import {assertQualification} from './qualification-policy.mjs';
+import {acquireOperation,headFreshness} from './operation-lock.mjs';
 const root=findRoot(),p=readJSON(inside(root,'.gameprod/project.json')),workspace=path.dirname(root);
 // Private portable tools only; no global PATH/credential modifications.
 if(process.platform==='win32'){
@@ -43,13 +44,14 @@ function publish(message,title){
   gh('pr','create','--repo',p.repository,'--base','dev','--head',branch,'--title',title,'--body-file',body);
   pr=gh('pr','view',branch,'--repo',p.repository,'--json','number,url,headRefOid,state');
  }
- writeJSON(path.join(dir,'publication.json'),JSON.parse(pr));console.log(pr);return JSON.parse(pr);
+ const publication={...JSON.parse(pr),expectedHead:head,readbackPending:JSON.parse(pr).headRefOid!==head};writeJSON(path.join(dir,'publication.json'),publication);console.log(JSON.stringify(publication));return publication;
 }
 async function checks(number,head,seconds=360){
  const end=Date.now()+seconds*1000;
  while(Date.now()<end){
   const pr=json('pr','view',String(number),'--repo',p.repository,'--json','headRefOid,headRefName,baseRefName,state,isDraft,statusCheckRollup');
-  if(pr.baseRefName!=='dev'||!featureBranch(pr.headRefName))throw Error('PR scope changed');if(pr.headRefOid!==head){if(Date.now()<end-seconds*1000+10000){await new Promise(r=>setTimeout(r,2000));continue;}throw Error('PR head changed');}
+  if(pr.baseRefName!=='dev'||!featureBranch(pr.headRefName))throw Error('PR scope changed');
+  const remote=git('ls-remote','--heads','origin','refs/heads/'+pr.headRefName).split(/\s+/)[0];const freshness=headFreshness(head,pr.headRefOid,remote,Date.now()-(end-seconds*1000));if(freshness==='wait'){await new Promise(r=>setTimeout(r,2000));continue;}if(freshness!=='current')throw Error('PR/remote head changed or readback timeout');
   const latest=new Map();for(const x of pr.statusCheckRollup.filter(x=>x.__typename==='CheckRun')){const old=latest.get(x.name);if(!old||Date.parse(x.startedAt)>Date.parse(old.startedAt))latest.set(x.name,x);}
   const all=[...latest.values()],required=all.find(x=>x.name==='Production checks')||all.find(x=>x.name==='Verify and export APK');
   if(all.some(x=>['FAILURE','CANCELLED','TIMED_OUT','ACTION_REQUIRED'].includes(x.conclusion)))throw Error('CI failed: use ops logs RUN_ID');
@@ -61,6 +63,7 @@ async function checks(number,head,seconds=360){
 
 function prScope(number){const details=json('pr','view',String(number),'--repo',p.repository,'--json','files,headRefOid,baseRefName');if(details.baseRefName!=='dev')throw Error('Unexpected PR base');return {...classify(details.files.map(x=>x.path)),head:details.headRefOid};}
 async function candidate(){
+ clean();
  const head=git('rev-parse','HEAD'),pr=json('pr','view',ownBranch(),'--repo',p.repository,'--json','number');
  await checks(pr.number,head);const scope=prScope(pr.number);if(scope.head!==head)throw Error('PR changed');
  if(!scope.needsApk){const result={head,pr:pr.number,notRequired:true,reason:'documentation_only'};writeJSON(path.join(dir,'candidate.json'),result);console.log('CANDIDATE_NOT_REQUIRED documentation_only');return result;}
@@ -71,15 +74,17 @@ async function candidate(){
  const result={head,pr:pr.number,run:id,directory:target,manifest};writeJSON(path.join(dir,'candidate.json'),result);console.log(JSON.stringify({directory:target,version:manifest.version,run:id}));return result;
 }
 function qualify(options=[]){
+ clean();
  const c=readJSON(path.join(dir,'candidate.json'));if(c.head!==git('rev-parse','HEAD'))throw Error('Candidate is for an old HEAD');if(c.notRequired)return;
  for(const slot of ['A','B'])run(process.execPath,['scripts/emulator.mjs','start',slot],{timeout:300000,quiet:true});
  run(process.execPath,['scripts/qualification.mjs','--config',path.join(workspace,'station.local.json'),...options],{timeout:1500000});
  const report=readJSON(path.join(dir,'qualification.json'));assertQualification(report,{head:c.head,apkHash:c.manifest.sha256,toolDigest:fingerprint(root,p),physical:options.includes('--physical')});
 }
 async function cycle(message,title,options){
- const record={schemaVersion:1,startedAt:new Date().toISOString(),status:'running',phases:[]},file=path.join(dir,'cycle.json');
+ const record={schemaVersion:1,repository:p.repository,startedAt:new Date().toISOString(),status:'running',phases:[]},file=path.join(dir,'cycle.json');
  const stage=async(name,fn)=>{record.current=name;writeJSON(file,record);const result=await fn();record.phases.push({name,status:'passed',finishedAt:new Date().toISOString()});writeJSON(file,record);return result;};
- try{await stage('verify',()=>verify());const pr=await stage('publish',()=>publish(message,title));const c=await stage('candidate',()=>candidate());
+ try{await stage('verify',()=>verify());const pr=await stage('publish',()=>publish(message,title));record.pr=pr.number;record.featureHead=git('rev-parse','HEAD');const c=await stage('candidate',()=>candidate());
+  if(!c.notRequired)await stage('reviewed_test_agent',()=>run(process.execPath,['scripts/deploy-agent.mjs'],{timeout:120000}));
   if(!c.notRequired)await stage('emulator_qualification',()=>qualify(options.includes('--physical')?['--physical']:[]));
   const commit=await stage('integrate_dev',()=>integrate(pr.number));record.commit=commit;await stage('dev_ci',()=>waitDev(commit));
   if(!c.notRequired){await stage('deploy_reviewed_agent',()=>run(process.execPath,['scripts/deploy-agent.mjs'],{timeout:120000}));await stage('device_delivery',()=>run(process.execPath,['scripts/update-device.mjs','--config',path.join(workspace,'station.local.json')],{timeout:300000}));const actual=readJSON(path.join(workspace,'installations/installed.local.json'));if(actual.sourceCommit!==commit||!actual.readyMarker)throw Error('New dev release not yet observed on paired phone');record.installedVersion=actual.version;}
@@ -102,8 +107,8 @@ async function waitDev(commit){
   await new Promise(r=>setTimeout(r,5000));
  }throw Error('Dev wait timeout; no release claimed');
 }
-const [cmd='resume',...args]=process.argv.slice(2);
-try{switch(cmd){
+const [cmd='resume',...args]=process.argv.slice(2);let releaseOperation;
+try{if(!['resume','logs','roadmap','device-status'].includes(cmd))releaseOperation=acquireOperation(path.join(dir,'ops.lock'),{command:cmd,repository:p.repository,host:os.hostname()});switch(cmd){
  case 'resume':resume();break;
  case 'begin':clean();if(!featureBranch(args[0]))throw Error('Unsafe branch');git('fetch','origin','dev');git('switch','-c',args[0],'origin/dev');console.log('BRANCH_READY '+args[0]);break;
  case 'apply':applyBundle(root,readJSON(args[0]));break;
@@ -111,7 +116,7 @@ try{switch(cmd){
  case 'prepare':verify();publish(args[0],args[1]);await candidate();break;
  case 'probe-bluetooth':{const c=readJSON(path.join(dir,'candidate.json'));if(c.head!==git('rev-parse','HEAD'))throw Error('Old candidate');run(process.execPath,['scripts/emulator.mjs','start','A'],{timeout:300000,quiet:true});for(const [target,mode]of [['emulator-A','install'],['emulator-A','jni'],['phone','install'],['phone','bluetooth']])run(process.execPath,['scripts/device-test.mjs','--config',path.join(workspace,'station.local.json'),'--target',target,'--mode',mode,'--dir',c.directory],{timeout:210000});console.log('BLUETOOTH_PROBE_PASS');break;}
  case 'publish':publish(args[0],args[1]);break;
- case 'stage':{verify();publish(args[0],args[1]);run(process.execPath,['skills/game-production/scripts/ops.mjs','candidate'],{timeout:600000});break;}
+ case 'stage':{verify();publish(args[0],args[1]);await candidate();break;}
  case 'wait':await checks(Number(args[0]),git('rev-parse','HEAD'));console.log('CI_PASS');break;
  case 'integrate':await integrate(Number(args[0]));break;
  case 'wait-dev':await waitDev(args[0]);break;
@@ -126,8 +131,9 @@ try{switch(cmd){
  case 'emulator':run(process.execPath,['scripts/emulator.mjs',...args],{timeout:300000});break;
  case 'candidate':await candidate();break;
  case 'report':run(process.execPath,['scripts/report-production.mjs',...args]);break;
+ case 'resume-cycle':{const record=readJSON(path.join(dir,'cycle.json'));if(record.repository!==p.repository||record.featureHead!==git('rev-parse','HEAD')||!record.commit)throw Error('No matching post-merge cycle to resume');clean();ownBranch();await waitDev(record.commit);run(process.execPath,['scripts/deploy-agent.mjs'],{timeout:120000});run(process.execPath,['scripts/update-device.mjs','--config',path.join(workspace,'station.local.json')],{timeout:300000});const actual=readJSON(path.join(workspace,'installations/installed.local.json'));if(actual.sourceCommit!==record.commit||!actual.readyMarker)throw Error('Release installation still pending');record.installedVersion=actual.version;record.status='passed';record.finishedAt=new Date().toISOString();record.resumed=true;writeJSON(path.join(dir,'cycle.json'),record);run(process.execPath,['scripts/report-production.mjs'],{quiet:true});console.log('PRODUCTION_CYCLE_RESUMED_PASS '+record.commit);break;}
  case 'record':run(process.execPath,['scripts/report.mjs']);break;
  case 'deploy-agent':run(process.execPath,['scripts/deploy-agent.mjs'],{timeout:120000});break;
  case 'roadmap':console.log(fs.readFileSync(inside(root,'docs/ROADMAP.ru.md'),'utf8'));break;
  default:throw Error('Unknown ops command');
-}}catch(e){console.error('OPS_BLOCKED: '+e.message);process.exitCode=1;}
+}}catch(e){console.error('OPS_BLOCKED: '+e.message);process.exitCode=1;}finally{if(releaseOperation)releaseOperation();}
