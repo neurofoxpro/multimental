@@ -1,1 +1,32 @@
-{"schemaVersion":1,"repository":"neurofoxpro/multimental","updatedAt":"2026-09-24","phase":"release-first-recovery","sourceCommit":"1e878e02a7a7b677ca19e71ab7942afedaf5995a","next":"Validate the skill and minimal match, build APK, install on the authorized attached phone","observed":{"repoReadable":true,"featureBranchWritable":true,"technicalAlphaExists":true,"executionHost":"VENEL-SENDRIK","phoneAuthorization":"device","newSkillTests":"not_run","newGameTests":"not_run","newApk":"not_built","newInstall":"not_run","humanAcceptance":"pending"},"protected":{"mainIntegration":"owner_approval_required","stableRelease":"owner_approval_required"}}
+{
+  "schemaVersion": 1,
+  "repository": "neurofoxpro/multimental",
+  "updatedAt": "2026-09-24T00:50:00Z",
+  "phase": "playable-alpha-and-device-delivery-verified",
+  "implementationCommit": "cc689248267558ee3620e0e094bc79c972dadf0e",
+  "skillEntryPoint": "skills/game-production/SKILL.md",
+  "report": "docs/production/SESSION_2026-09-24.ru.md",
+  "next": "Owner manual play check of Multimental Dev; recover authorized host connection before further device operations; then address gameplay/UX feedback in the next verified increment",
+  "observed": {
+    "authorizedExecutionHost": "VENEL-SENDRIK",
+    "productionSkill": "implemented_and_used",
+    "nodeTests": {"passed": 15, "failed": 0},
+    "coreTests": {"checks": 3002, "simulations": 100, "result": "passed"},
+    "headlessUiFlow": "passed",
+    "ciRun": 35939759522,
+    "ciConclusion": "success",
+    "firstInstalledRelease": "v0.1.0-alpha.20.1",
+    "lastVerifiedInstalledRelease": "v0.1.0-alpha.23.1",
+    "lastVerifiedVersionCode": 12301,
+    "lastVerifiedInstallAt": "2026-09-24T00:47:20.834Z",
+    "installationReceipt": "docs/production/evidence/device-alpha23.json",
+    "scheduledUpdater": {"task": "Multimental-Dev-APK-Updater", "interval": "PT5M", "runLevel": "Limited", "verifiedSubsequentUpdate": true, "lastObservedTaskResult": 0},
+    "settingsSurvivedUpdate": true,
+    "phoneAndroidVersion": "15",
+    "humanGameplayAcceptance": "pending",
+    "remoteControlLastObservation": "authorized device disconnected after successful update; no fallback computer used"
+  },
+  "notClaimed": ["complete game", "final balance", "collection/shop/crafting", "LAN/Bluetooth", "Web release", "production signing", "stable release", "full autonomous future game design"],
+  "protected": {"mainIntegration": "owner_approval_required", "stableRelease": "owner_approval_required"},
+  "evidenceSemantics": "These are timestamped observed results, not an assertion of the currently latest release or current phone connectivity. Recheck external state on resume. Local gate receipts must still match the source used for a new operation."
+}
