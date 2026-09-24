@@ -1,449 +1,264 @@
 extends Control
-
-const ELEMENTS: Array[Dictionary] = [
-    {"id": "fire", "ru": "Огонь", "en": "Fire", "short_ru": "ОГ", "short_en": "FI", "color": Color("d34b42")},
-    {"id": "water", "ru": "Вода", "en": "Water", "short_ru": "ВД", "short_en": "WA", "color": Color("3478c9")},
-    {"id": "lightning", "ru": "Молния", "en": "Lightning", "short_ru": "МЛ", "short_en": "LI", "color": Color("c6a62d")},
-    {"id": "air", "ru": "Воздух", "en": "Air", "short_ru": "ВЗ", "short_en": "AI", "color": Color("69a8a5")},
-    {"id": "earth", "ru": "Земля", "en": "Earth", "short_ru": "ЗМ", "short_en": "EA", "color": Color("7c643f")},
-]
-
-const TEXT: Dictionary = {
-    "ru": {
-        "subtitle": "Техническая альфа",
-        "play": "НАЧАТЬ ТЕХНИЧЕСКИЙ МАТЧ",
-        "cards": "КАРТЫ И КОЛОДЫ - СКОРО",
-        "shop": "МАГАЗИН - СКОРО",
-        "settings": "ЯЗЫК: РУССКИЙ",
-        "hint": "Проверьте запуск, масштабирование и нажатия по клеткам.",
-        "opponent": "ОППОНЕНТ",
-        "player": "ИГРОК",
-        "turn_player": "Ваш ход - выберите свободную клетку",
-        "turn_opponent": "Ход тестового оппонента",
-        "occupied": "Клетка уже занята",
-        "win_player": "Проверка завершена: игрок занял 5 клеток",
-        "win_opponent": "Проверка завершена: оппонент занял 5 клеток",
-        "reset": "СБРОСИТЬ",
-        "back": "В МЕНЮ",
-        "board_hint": "Каждое нажатие размещает следующий элемент. После хода игрока тестовый оппонент автоматически занимает клетку.",
-        "build": "Сборка",
-    },
-    "en": {
-        "subtitle": "Technical alpha",
-        "play": "START TECHNICAL MATCH",
-        "cards": "CARDS AND DECKS - SOON",
-        "shop": "STORE - SOON",
-        "settings": "LANGUAGE: ENGLISH",
-        "hint": "Verify startup, responsive layout and board taps.",
-        "opponent": "OPPONENT",
-        "player": "PLAYER",
-        "turn_player": "Your turn - choose an empty cell",
-        "turn_opponent": "Test opponent turn",
-        "occupied": "This cell is already occupied",
-        "win_player": "Check complete: player controls 5 cells",
-        "win_opponent": "Check complete: opponent controls 5 cells",
-        "reset": "RESET",
-        "back": "BACK TO MENU",
-        "board_hint": "Each tap places the next element. After your move, the test opponent automatically occupies a cell.",
-        "build": "Build",
-    },
-}
-
+const Core = preload("res://src/match_core.gd")
+const COLORS: Array[Color] = [Color("e76f51"), Color("4ea8de"), Color("f6ce55"), Color("9cdbd3"), Color("ab9366")]
+var game = Core.new()
 var language: String = "ru"
-var current_screen: String = "menu"
-var move_index: int = 0
-var match_finished: bool = false
-var cell_owners: Array[int] = []
-var cell_elements: Array[int] = []
-var cell_buttons: Array[Button] = []
-var player_count: int = 0
-var opponent_count: int = 0
+var battle: bool = false
+var selected_hand: int = -1
+var selected_unit: int = -1
+var deadline: float = 0.0
+var match_end: float = 0.0
+var bot_due: float = 0.0
+var last_second: int = -1
+var root: VBoxContainer
+var info: Label
+var timer_text: Label
+var message: Label
+var board_buttons: Array[Button] = []
+var hand_row: HBoxContainer
+var in_refresh: bool = false
 
-var content_root: VBoxContainer
-var menu_panel: VBoxContainer
-var battle_panel: VBoxContainer
-var title_label: Label
-var subtitle_label: Label
-var version_label: Label
-var language_button: Button
-var play_button: Button
-var cards_button: Button
-var shop_button: Button
-var menu_hint_label: Label
-var opponent_label: Label
-var player_label: Label
-var status_label: Label
-var board_hint_label: Label
-var reset_button: Button
-var back_button: Button
-var board_grid: GridContainer
+func t(ru: String, en: String) -> String:
+    return ru if language == "ru" else en
 
 func _ready() -> void:
-    set_process_unhandled_input(true)
-    _build_interface()
-    _reset_match()
-    _refresh_text()
-    resized.connect(_on_viewport_resized)
-    call_deferred("_on_viewport_resized")
+    RenderingServer.set_default_clear_color(Color("091322"))
+    var cfg := ConfigFile.new()
+    if cfg.load("user://settings.cfg") == OK:
+        language = str(cfg.get_value("ui", "language", "ru"))
+    show_menu()
+    print("MULTIMENTAL_READY " + BuildInfo.VERSION)
 
-func _build_interface() -> void:
-    var background := ColorRect.new()
-    background.color = Color("071022")
-    background.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-    add_child(background)
+func label(text: String, size_px: int = 20) -> Label:
+    var node := Label.new()
+    node.text = text
+    node.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+    node.add_theme_font_size_override("font_size", size_px)
+    node.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+    return node
 
+func button(text: String, callback: Callable, height: int = 62) -> Button:
+    var node := Button.new()
+    node.text = text
+    node.custom_minimum_size.y = height
+    node.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+    node.add_theme_font_size_override("font_size", 19)
+    var style := StyleBoxFlat.new()
+    style.bg_color = Color("203856")
+    style.set_corner_radius_all(10)
+    style.content_margin_left = 10
+    style.content_margin_right = 10
+    node.add_theme_stylebox_override("normal", style)
+    var hover := style.duplicate() as StyleBoxFlat
+    hover.bg_color = Color("345778")
+    node.add_theme_stylebox_override("hover", hover)
+    node.pressed.connect(callback)
+    return node
+
+func clear_screen() -> void:
+    for child in get_children():
+        remove_child(child)
+        child.queue_free()
+    board_buttons.clear()
     var margin := MarginContainer.new()
     margin.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-    margin.add_theme_constant_override("margin_left", 28)
-    margin.add_theme_constant_override("margin_right", 28)
-    margin.add_theme_constant_override("margin_top", 24)
-    margin.add_theme_constant_override("margin_bottom", 24)
+    margin.add_theme_constant_override("margin_left", 20)
+    margin.add_theme_constant_override("margin_right", 20)
+    margin.add_theme_constant_override("margin_top", 30)
+    margin.add_theme_constant_override("margin_bottom", 25)
     add_child(margin)
+    root = VBoxContainer.new()
+    root.add_theme_constant_override("separation", 12)
+    margin.add_child(root)
 
-    content_root = VBoxContainer.new()
-    content_root.add_theme_constant_override("separation", 16)
-    margin.add_child(content_root)
+func show_menu() -> void:
+    battle = false
+    clear_screen()
+    root.add_child(label("MULTIMENTAL", 36))
+    root.add_child(label(t("Играбельная альфа · 5 стихий · поле 3×3", "Playable alpha · 5 elements · 3×3 board"), 18))
+    var space := Control.new()
+    space.size_flags_vertical = Control.SIZE_EXPAND_FILL
+    root.add_child(space)
+    root.add_child(button(t("ИГРАТЬ ПРОТИВ ИИ", "PLAY AGAINST AI"), start_match, 86))
+    root.add_child(label(t("Одна карта или одна атака за ход.\nЗайми 5 клеток. Атаки — по соседним клеткам.\nМонеты восстанавливаются каждый ход.", "One card or attack per turn.\nOccupy 5 cells. Attack adjacent enemies.\nCoins refill each turn."), 20))
+    root.add_child(button(t("ЯЗЫК: РУССКИЙ", "LANGUAGE: ENGLISH"), toggle_language))
+    root.add_child(label(t("Коллекция, магазин и сложные свойства — в следующих версиях.", "Collection, shop and advanced abilities come in later builds."), 16))
+    var bottom := Control.new()
+    bottom.size_flags_vertical = Control.SIZE_EXPAND_FILL
+    root.add_child(bottom)
+    root.add_child(label(BuildInfo.VERSION + " · " + BuildInfo.COMMIT, 14))
 
-    var header := HBoxContainer.new()
-    header.add_theme_constant_override("separation", 12)
-    content_root.add_child(header)
-
-    var title_box := VBoxContainer.new()
-    title_box.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-    header.add_child(title_box)
-
-    title_label = Label.new()
-    title_label.text = "MULTIMENTAL"
-    title_label.add_theme_font_size_override("font_size", 38)
-    title_label.add_theme_color_override("font_color", Color("f5f7ff"))
-    title_box.add_child(title_label)
-
-    subtitle_label = Label.new()
-    subtitle_label.add_theme_font_size_override("font_size", 16)
-    subtitle_label.add_theme_color_override("font_color", Color("8295c8"))
-    title_box.add_child(subtitle_label)
-
-    language_button = Button.new()
-    language_button.custom_minimum_size = Vector2(140, 58)
-    language_button.pressed.connect(_toggle_language)
-    _apply_button_style(language_button, Color("17264a"), Color("2f467c"))
-    header.add_child(language_button)
-
-    var separator := HSeparator.new()
-    separator.add_theme_constant_override("separation", 8)
-    content_root.add_child(separator)
-
-    menu_panel = VBoxContainer.new()
-    menu_panel.size_flags_vertical = Control.SIZE_EXPAND_FILL
-    menu_panel.alignment = BoxContainer.ALIGNMENT_CENTER
-    menu_panel.add_theme_constant_override("separation", 16)
-    content_root.add_child(menu_panel)
-
-    var emblem := Label.new()
-    emblem.text = "●  ◉  ✦  ◌  ◆"
-    emblem.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-    emblem.add_theme_font_size_override("font_size", 42)
-    emblem.add_theme_color_override("font_color", Color("d7def7"))
-    menu_panel.add_child(emblem)
-
-    play_button = Button.new()
-    play_button.custom_minimum_size = Vector2(0, 84)
-    play_button.add_theme_font_size_override("font_size", 19)
-    play_button.pressed.connect(_show_battle)
-    _apply_button_style(play_button, Color("405fd0"), Color("5877ea"))
-    menu_panel.add_child(play_button)
-
-    cards_button = Button.new()
-    cards_button.custom_minimum_size = Vector2(0, 64)
-    cards_button.disabled = true
-    _apply_button_style(cards_button, Color("14203c"), Color("14203c"))
-    menu_panel.add_child(cards_button)
-
-    shop_button = Button.new()
-    shop_button.custom_minimum_size = Vector2(0, 64)
-    shop_button.disabled = true
-    _apply_button_style(shop_button, Color("14203c"), Color("14203c"))
-    menu_panel.add_child(shop_button)
-
-    menu_hint_label = Label.new()
-    menu_hint_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-    menu_hint_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-    menu_hint_label.add_theme_font_size_override("font_size", 15)
-    menu_hint_label.add_theme_color_override("font_color", Color("91a0c4"))
-    menu_panel.add_child(menu_hint_label)
-
-    battle_panel = VBoxContainer.new()
-    battle_panel.visible = false
-    battle_panel.size_flags_vertical = Control.SIZE_EXPAND_FILL
-    battle_panel.add_theme_constant_override("separation", 12)
-    content_root.add_child(battle_panel)
-
-    opponent_label = Label.new()
-    opponent_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-    opponent_label.add_theme_font_size_override("font_size", 18)
-    opponent_label.add_theme_color_override("font_color", Color("dc7180"))
-    battle_panel.add_child(opponent_label)
-
-    var board_aspect := AspectRatioContainer.new()
-    board_aspect.ratio = 1.0
-    board_aspect.stretch_mode = AspectRatioContainer.STRETCH_FIT
-    board_aspect.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-    board_aspect.size_flags_vertical = Control.SIZE_EXPAND_FILL
-    battle_panel.add_child(board_aspect)
-
-    board_grid = GridContainer.new()
-    board_grid.columns = 3
-    board_grid.add_theme_constant_override("h_separation", 10)
-    board_grid.add_theme_constant_override("v_separation", 10)
-    board_aspect.add_child(board_grid)
-
-    for index in range(9):
-        var cell := Button.new()
-        cell.name = "Cell%d" % index
-        cell.text = "·"
-        cell.focus_mode = Control.FOCUS_NONE
-        cell.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-        cell.size_flags_vertical = Control.SIZE_EXPAND_FILL
-        cell.add_theme_font_size_override("font_size", 25)
-        cell.pressed.connect(_on_cell_pressed.bind(index))
-        _apply_cell_style(cell, Color("111d38"), Color("1b2e56"), Color("405681"))
-        board_grid.add_child(cell)
-        cell_buttons.append(cell)
-
-    player_label = Label.new()
-    player_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-    player_label.add_theme_font_size_override("font_size", 18)
-    player_label.add_theme_color_override("font_color", Color("79b7ff"))
-    battle_panel.add_child(player_label)
-
-    status_label = Label.new()
-    status_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-    status_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-    status_label.add_theme_font_size_override("font_size", 17)
-    status_label.add_theme_color_override("font_color", Color("f1f4ff"))
-    battle_panel.add_child(status_label)
-
-    board_hint_label = Label.new()
-    board_hint_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-    board_hint_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-    board_hint_label.add_theme_font_size_override("font_size", 13)
-    board_hint_label.add_theme_color_override("font_color", Color("8290b4"))
-    battle_panel.add_child(board_hint_label)
-
-    var actions := HBoxContainer.new()
-    actions.add_theme_constant_override("separation", 12)
-    battle_panel.add_child(actions)
-
-    reset_button = Button.new()
-    reset_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-    reset_button.custom_minimum_size = Vector2(0, 60)
-    reset_button.pressed.connect(_reset_match)
-    _apply_button_style(reset_button, Color("243254"), Color("34476f"))
-    actions.add_child(reset_button)
-
-    back_button = Button.new()
-    back_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-    back_button.custom_minimum_size = Vector2(0, 60)
-    back_button.pressed.connect(_show_menu)
-    _apply_button_style(back_button, Color("243254"), Color("34476f"))
-    actions.add_child(back_button)
-
-    version_label = Label.new()
-    version_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-    version_label.add_theme_font_size_override("font_size", 12)
-    version_label.add_theme_color_override("font_color", Color("617092"))
-    content_root.add_child(version_label)
-
-func _apply_button_style(button: Button, normal_color: Color, hover_color: Color) -> void:
-    var normal := StyleBoxFlat.new()
-    normal.bg_color = normal_color
-    normal.corner_radius_top_left = 12
-    normal.corner_radius_top_right = 12
-    normal.corner_radius_bottom_left = 12
-    normal.corner_radius_bottom_right = 12
-    normal.content_margin_left = 16
-    normal.content_margin_right = 16
-    button.add_theme_stylebox_override("normal", normal)
-
-    var hover := normal.duplicate() as StyleBoxFlat
-    hover.bg_color = hover_color
-    button.add_theme_stylebox_override("hover", hover)
-    button.add_theme_stylebox_override("pressed", hover)
-
-    var disabled := normal.duplicate() as StyleBoxFlat
-    disabled.bg_color = normal_color.darkened(0.25)
-    button.add_theme_stylebox_override("disabled", disabled)
-    button.add_theme_color_override("font_disabled_color", Color("59647d"))
-
-func _apply_cell_style(button: Button, normal_color: Color, hover_color: Color, border_color: Color) -> void:
-    var normal := StyleBoxFlat.new()
-    normal.bg_color = normal_color
-    normal.border_width_left = 2
-    normal.border_width_top = 2
-    normal.border_width_right = 2
-    normal.border_width_bottom = 2
-    normal.border_color = border_color
-    normal.corner_radius_top_left = 14
-    normal.corner_radius_top_right = 14
-    normal.corner_radius_bottom_left = 14
-    normal.corner_radius_bottom_right = 14
-    button.add_theme_stylebox_override("normal", normal)
-
-    var hover := normal.duplicate() as StyleBoxFlat
-    hover.bg_color = hover_color
-    button.add_theme_stylebox_override("hover", hover)
-    button.add_theme_stylebox_override("pressed", hover)
-
-func _show_battle() -> void:
-    current_screen = "battle"
-    menu_panel.visible = false
-    battle_panel.visible = true
-    _reset_match()
-
-func _show_menu() -> void:
-    current_screen = "menu"
-    battle_panel.visible = false
-    menu_panel.visible = true
-
-func _toggle_language() -> void:
+func toggle_language() -> void:
     language = "en" if language == "ru" else "ru"
-    _refresh_text()
-    _refresh_board_labels()
+    var cfg := ConfigFile.new()
+    cfg.set_value("ui", "language", language)
+    cfg.save("user://settings.cfg")
+    show_menu()
 
-func _refresh_text() -> void:
-    var t: Dictionary = TEXT[language]
-    subtitle_label.text = t["subtitle"]
-    language_button.text = t["settings"]
-    play_button.text = t["play"]
-    cards_button.text = t["cards"]
-    shop_button.text = t["shop"]
-    menu_hint_label.text = t["hint"]
-    board_hint_label.text = t["board_hint"]
-    reset_button.text = t["reset"]
-    back_button.text = t["back"]
-    version_label.text = "%s %s · %s · #%s" % [t["build"], BuildInfo.VERSION, BuildInfo.COMMIT, BuildInfo.BUILD_NUMBER]
-    _update_match_labels()
+func start_match() -> void:
+    game.start(int(Time.get_unix_time_from_system()) % 2147483646 + 1)
+    match_end = Time.get_unix_time_from_system() + 900.0
+    deadline = Time.get_unix_time_from_system() + 30.0
+    bot_due = Time.get_unix_time_from_system() + 0.65
+    battle = true
+    selected_hand = -1
+    selected_unit = -1
+    build_battle()
+    refresh()
+    print("MULTIMENTAL_MATCH_STARTED")
 
-func _reset_match() -> void:
-    move_index = 0
-    match_finished = false
-    player_count = 0
-    opponent_count = 0
-    cell_owners.clear()
-    cell_elements.clear()
-    for index in range(9):
-        cell_owners.append(-1)
-        cell_elements.append(-1)
-        if index < cell_buttons.size():
-            var cell := cell_buttons[index]
-            cell.disabled = false
-            cell.text = "·"
-            cell.tooltip_text = "Cell %d" % (index + 1)
-            _apply_cell_style(cell, Color("111d38"), Color("1b2e56"), Color("405681"))
-    _update_match_labels()
+func build_battle() -> void:
+    clear_screen()
+    root.add_child(label("MULTIMENTAL", 27))
+    info = label("", 19)
+    root.add_child(info)
+    timer_text = label("", 18)
+    root.add_child(timer_text)
+    var aspect := AspectRatioContainer.new()
+    aspect.ratio = 1.0
+    aspect.stretch_mode = AspectRatioContainer.STRETCH_FIT
+    aspect.size_flags_vertical = Control.SIZE_EXPAND_FILL
+    root.add_child(aspect)
+    var grid := GridContainer.new()
+    grid.columns = 3
+    grid.add_theme_constant_override("h_separation", 8)
+    grid.add_theme_constant_override("v_separation", 8)
+    aspect.add_child(grid)
+    for cell in range(9):
+        var b: Button = button("·", on_cell.bind(cell), 112)
+        b.custom_minimum_size.x = 140
+        b.size_flags_vertical = Control.SIZE_EXPAND_FILL
+        grid.add_child(b)
+        board_buttons.append(b)
+    message = label("", 18)
+    root.add_child(message)
+    var scroll := ScrollContainer.new()
+    scroll.custom_minimum_size.y = 125
+    scroll.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+    root.add_child(scroll)
+    hand_row = HBoxContainer.new()
+    hand_row.add_theme_constant_override("separation", 8)
+    scroll.add_child(hand_row)
+    var row := HBoxContainer.new()
+    root.add_child(row)
+    row.add_child(button(t("ПРОПУСТИТЬ", "PASS"), pass_turn))
+    row.add_child(button(t("В МЕНЮ", "MENU"), show_menu))
+    root.add_child(label(BuildInfo.VERSION + " · " + BuildInfo.COMMIT, 12))
 
-func _on_cell_pressed(index: int) -> void:
-    if match_finished:
+func on_hand(index: int) -> void:
+    selected_hand = index
+    selected_unit = -1
+    refresh()
+
+func on_cell(index: int) -> void:
+    if game.state.winner != -1 or game.state.active != 0:
         return
-    if cell_owners[index] != -1:
-        status_label.text = TEXT[language]["occupied"]
-        _flash_invalid(cell_buttons[index])
-        return
-
-    _place_element(index, 0)
-    if _check_finish():
-        return
-
-    status_label.text = TEXT[language]["turn_opponent"]
-    await get_tree().create_timer(0.35).timeout
-    if match_finished:
-        return
-    _perform_opponent_move()
-    _check_finish()
-    if not match_finished:
-        status_label.text = TEXT[language]["turn_player"]
-
-func _place_element(index: int, owner: int) -> void:
-    cell_owners[index] = owner
-    var element_index := move_index % ELEMENTS.size()
-    cell_elements[index] = element_index
-    var element: Dictionary = ELEMENTS[element_index]
-    move_index += 1
-    var button := cell_buttons[index]
-    var short_key := "short_ru" if language == "ru" else "short_en"
-    button.text = str(element[short_key])
-    button.tooltip_text = str(element[language])
-
-    var base_color: Color = element["color"]
-    var border := Color("8ac4ff") if owner == 0 else Color("ff8997")
-    _apply_cell_style(button, base_color.darkened(0.38), base_color.darkened(0.18), border)
-
-    if owner == 0:
-        player_count += 1
+    if selected_hand >= 0:
+        act({"type": "play", "hand": selected_hand, "cell": index})
+    elif selected_unit >= 0 and game.state.board[index] != null and game.state.board[index].owner == 1:
+        act({"type": "attack", "source": selected_unit, "target": index})
+    elif game.state.board[index] != null and game.state.board[index].owner == 0:
+        selected_unit = index
+        selected_hand = -1
+        refresh()
     else:
-        opponent_count += 1
-    _update_match_labels()
+        message.text = t("Выбери карту в руке или своего юнита.", "Select a card or your unit first.")
 
-func _perform_opponent_move() -> void:
-    var free_cells: Array[int] = []
-    for index in range(cell_owners.size()):
-        if cell_owners[index] == -1:
-            free_cells.append(index)
-    if free_cells.is_empty():
+func act(command: Dictionary) -> void:
+    var result: Dictionary = game.apply(0, command)
+    if not result.ok:
+        message.text = t("Недопустимая цель или недостаточно монет.", "Invalid target or insufficient coins.")
+        message.modulate = Color("ff8585")
         return
-    var preferred_index := 4 if free_cells.has(4) else free_cells[0]
-    _place_element(preferred_index, 1)
+    after_action()
 
-func _check_finish() -> bool:
-    if player_count >= 5:
-        match_finished = true
-        status_label.text = TEXT[language]["win_player"]
-    elif opponent_count >= 5:
-        match_finished = true
-        status_label.text = TEXT[language]["win_opponent"]
-    elif player_count + opponent_count >= 9:
-        match_finished = true
-        status_label.text = TEXT[language]["win_player"] if player_count > opponent_count else TEXT[language]["win_opponent"]
+func pass_turn() -> void:
+    if game.state.active == 0 and game.state.winner == -1:
+        act({"type": "pass"})
 
-    if match_finished:
-        for cell in cell_buttons:
-            cell.disabled = true
-    return match_finished
+func after_action() -> void:
+    selected_hand = -1
+    selected_unit = -1
+    deadline = Time.get_unix_time_from_system() + 30.0
+    bot_due = Time.get_unix_time_from_system() + 0.65
+    refresh()
+    if game.state.winner != -1:
+        var file := FileAccess.open("user://last-match.json", FileAccess.WRITE)
+        if file != null:
+            file.store_string(JSON.stringify({"version": 1, "seed": game.initial_seed, "commands": game.commands, "result": game.state.reason}))
+        print("MULTIMENTAL_MATCH_FINISHED " + str(game.state.winner))
 
-func _update_match_labels() -> void:
-    if opponent_label == null or player_label == null or status_label == null:
+func _process(_delta: float) -> void:
+    if not battle or game.state.winner != -1:
         return
-    var t: Dictionary = TEXT[language]
-    opponent_label.text = "%s · %d/5" % [t["opponent"], opponent_count]
-    player_label.text = "%s · %d/5" % [t["player"], player_count]
-    if not match_finished:
-        status_label.text = t["turn_player"]
-
-func _refresh_board_labels() -> void:
-    for index in range(cell_buttons.size()):
-        if cell_owners[index] == -1:
-            continue
-        var element_index := cell_elements[index]
-        if element_index < 0:
-            continue
-        var element: Dictionary = ELEMENTS[element_index]
-        var short_key := "short_ru" if language == "ru" else "short_en"
-        cell_buttons[index].text = str(element[short_key])
-
-func _flash_invalid(button: Button) -> void:
-    var original := button.modulate
-    button.modulate = Color("ff6573")
-    var tween := create_tween()
-    tween.tween_property(button, "modulate", original, 0.25)
-
-func _on_viewport_resized() -> void:
-    if content_root == null:
+    var now: float = Time.get_unix_time_from_system()
+    if now >= match_end:
+        game.end_on_time_limit()
+        after_action()
         return
-    var compact := size.x < 600.0
-    title_label.add_theme_font_size_override("font_size", 30 if compact else 38)
-    language_button.custom_minimum_size.x = 120 if compact else 150
+    # Reconcile missed deadlines after suspension without relying on rendered frames.
+    for i in range(6):
+        if now < deadline or game.state.winner != -1:
+            break
+        if game.state.active == 1:
+            game.apply(1, game.choose_ai())
+        else:
+            game.timeout(0)
+        deadline += 30.0
+        bot_due = now + 0.65
+        selected_hand = -1
+        selected_unit = -1
+        refresh()
+    if game.state.winner == -1 and game.state.active == 1 and now >= bot_due:
+        game.apply(1, game.choose_ai())
+        after_action()
+    var second: int = maxi(0, int(ceil(deadline - now)))
+    if second != last_second:
+        last_second = second
+        timer_text.text = t("Ход %d · осталось %d с", "Turn %d · %d s remaining") % [game.state.turn, second]
 
-func _unhandled_input(event: InputEvent) -> void:
-    if event.is_action_pressed("ui_cancel") and current_screen == "battle":
-        _show_menu()
-        get_viewport().set_input_as_handled()
+func refresh() -> void:
+    if not battle:
+        return
+    var me: Dictionary = game.state.players[0]
+    var them: Dictionary = game.state.players[1]
+    info.text = t("Ты: %d/5 · ИИ: %d/5\nМонеты: %d · Колода: %d · Рука ИИ: %d", "You: %d/5 · AI: %d/5\nCoins: %d · Deck: %d · AI hand: %d") % [game.count_cells(0), game.count_cells(1), me.coins, me.deck.size(), them.hand.size()]
+    var legal: Array[Dictionary] = game.legal(0)
+    for i in range(9):
+        var unit: Variant = game.state.board[i]
+        var b: Button = board_buttons[i]
+        b.modulate = Color.WHITE
+        if unit == null:
+            b.text = "·"
+        else:
+            var def: Dictionary = game.card(int(unit.id))
+            b.text = (t("ТВОЙ", "YOURS") if unit.owner == 0 else t("ВРАГ", "ENEMY")) + "\n" + str(def[language]) + "\n⚔ %d   ♥ %d" % [unit.attack, unit.health]
+            b.modulate = COLORS[int(def.element)]
+        var highlight: bool = false
+        for c in legal:
+            if (c.type == "play" and selected_hand >= 0 and c.hand == selected_hand and c.cell == i) or (c.type == "attack" and selected_unit >= 0 and c.source == selected_unit and c.target == i):
+                highlight = true
+        if highlight:
+            b.modulate = Color("a4ffc3")
+    for child in hand_row.get_children():
+        hand_row.remove_child(child)
+        child.queue_free()
+    for i in range(me.hand.size()):
+        var def: Dictionary = game.card(int(me.hand[i]))
+        var b: Button = button(str(def[language]) + "\n◉ %d\n⚔ %d   ♥ %d" % [def.cost, def.attack, def.health], on_hand.bind(i), 116)
+        b.custom_minimum_size.x = 134
+        b.disabled = game.state.active != 0 or game.state.winner != -1 or int(def.cost) > int(me.coins)
+        b.modulate = COLORS[int(def.element)] if i != selected_hand else Color.WHITE
+        hand_row.add_child(b)
+    message.modulate = Color.WHITE
+    if game.state.winner != -1:
+        message.text = t("ПОБЕДА", "VICTORY") if game.state.winner == 0 else (t("НИЧЬЯ", "DRAW") if game.state.winner == 2 else t("ПОРАЖЕНИЕ", "DEFEAT"))
+        message.text += " · " + str(game.state.reason)
+    elif game.state.active == 1:
+        message.text = t("Ход ИИ…", "AI turn…")
+    elif selected_hand >= 0:
+        message.text = t("Выбери свободную подсвеченную клетку", "Choose a highlighted empty cell")
+    elif selected_unit >= 0:
+        message.text = t("Выбери соседнего врага для атаки", "Choose an adjacent enemy to attack")
+    else:
+        message.text = t("Выбери карту или своего юнита", "Choose a card or your unit")

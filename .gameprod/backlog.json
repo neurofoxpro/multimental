@@ -1,0 +1,12 @@
+[
+{"id":"P01","status":"in_progress","action":"Create and test reusable production skill, safeguards and recovery records"},
+{"id":"P02","status":"pending","action":"Complete minimal deterministic offline duel with separate UI; test invalid actions, replay and victory"},
+{"id":"P03","status":"pending","action":"Build, verify and install development APK on VENEL-SENDRIK attached phone; retain receipt"},
+{"id":"P04","status":"pending","action":"Install reviewed bounded automatic updater and verify repeat check is idempotent"},
+{"id":"P05","status":"pending","action":"Human play check: readability, card selection, combat, end conditions, background timer"},
+{"id":"P06","status":"deferred","action":"Data-driven card catalogue and full collection/deck builder"},
+{"id":"P07","status":"deferred","action":"Atomic rewards, 5-card packs, dust crafting, persistence/migrations"},
+{"id":"P08","status":"deferred","action":"Web UX and artifact build"},
+{"id":"P09","status":"deferred","action":"LAN then Bluetooth: filtered views, compatibility, idempotency, reconnect tests"},
+{"id":"P10","status":"deferred","action":"Server/account/rating, advanced mechanics, final art, RC and owner-approved stable release"}
+]
