@@ -1,13 +1,13 @@
 {
   "schemaVersion": 1,
   "repository": "neurofoxpro/multimental",
-  "updatedAt": "2026-09-24T06:38:29.681Z",
-  "phase": "lan_released_bluetooth_candidate",
-  "implementationCommit": "720063302dfe156a8186e8d2d68c5111a8fc1917",
+  "updatedAt": "2026-09-24T08:50:12.273Z",
+  "phase": "tutorial_audio_released_bluetooth_qualifying",
+  "implementationCommit": "117a3c43e21258673c09151fe96c08984687c571",
   "testedProductionToolingCommit": "c929608f7fb425f65501fef0af4fd1b150dba6b5",
   "skillEntryPoint": "skills/game-production/SKILL.md",
-  "report": "docs/production/CONTINUATION_2026-09-24.ru.md",
-  "next": "Проверить PR15 и worktree repo-beta; продолжить текущую квалификацию защищённого Bluetooth. Готовую LAN-доставку не создавать заново.",
+  "report": "docs/production/TUTORIAL_RELEASE_82.ru.md",
+  "next": "Continue repo-beta / PR15 from live candidate and Bluetooth qualification. USB and pairing have been confirmed; no setup reset.",
   "observed": {
     "authorizedExecutionHost": "VENEL-SENDRIK",
     "githubAccount": "venelsendrik",
@@ -33,9 +33,9 @@
       "candidateVersion": "0.1.1-alpha.49.1",
       "evidence": "docs/production/evidence/production-v2-latest.json"
     },
-    "lastVerifiedInstalledRelease": "v0.2.0-alpha.65.1",
-    "lastVerifiedVersionCode": 16501,
-    "lastVerifiedInstallAt": "2026-09-24T04:06:45.735Z",
+    "lastVerifiedInstalledRelease": "v0.2.1-alpha.82.1",
+    "lastVerifiedVersionCode": 18201,
+    "lastVerifiedInstallAt": "2026-09-24T08:42:17.584Z",
     "ciRunForInstalledBuild": 35954123735,
     "ciConclusionForInstalledBuild": "success",
     "deviceEvidence": "docs/production/evidence/production-v2-latest.json",
@@ -75,7 +75,14 @@
       "branch": "feature/bluetooth-pvp-20260924",
       "pr": 15,
       "worktree": "repo-beta",
-      "state": "implementation_and_tests_in_progress"
+      "state": "combined_with_released_tutorial_audio_awaiting_secure_radio_qualification"
+    },
+    "tutorialAudioRelease": {
+      "pr": 17,
+      "release": "v0.2.1-alpha.82.1",
+      "commit": "117a3c43e21258673c09151fe96c08984687c571",
+      "qualifiedCases": 28,
+      "evidence": "docs/production/evidence/tutorial-audio-release-82.json"
     }
   },
   "notClaimed": [
