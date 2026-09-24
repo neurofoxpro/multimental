@@ -51,7 +51,8 @@
         "MULTIMENTAL_UI_PASS",
         "MULTIMENTAL_PROTOCOL_PASS",
         "MULTIMENTAL_ROOM_PASS",
-        "MULTIMENTAL_LAN_PASS"
+        "MULTIMENTAL_LAN_PASS",
+        "MULTIMENTAL_BLUETOOTH_MODEL_PASS"
       ],
       "outputs": []
     },

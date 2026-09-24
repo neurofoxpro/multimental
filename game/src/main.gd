@@ -25,6 +25,8 @@ var lan = preload("res://src/net/lan_session.gd").new()
 var lobby_status: Label
 var invite_input: TextEdit
 var network_addresses: OptionButton
+var bluetooth_mode: bool = false
+var bluetooth_devices: OptionButton
 
 func t(ru: String, en: String) -> String:
     return ru if language == "ru" else en
@@ -102,6 +104,8 @@ func show_menu() -> void:
     root.add_child(space)
     root.add_child(button(t("ИГРАТЬ ПРОТИВ ИИ", "PLAY AGAINST AI"), start_match, 78))
     root.add_child(button(t("ИГРА ПО ЛОКАЛЬНОЙ СЕТИ", "LOCAL NETWORK MATCH"), show_lan_menu, 70))
+    if OS.has_feature("android"):
+        root.add_child(button(t("ИГРА ПО BLUETOOTH", "BLUETOOTH MATCH"), show_bluetooth_menu, 64))
     root.add_child(label(t("Одна карта или одна атака за ход.\nЗайми 5 клеток. Атаки — по соседним клеткам.\nМонеты восстанавливаются каждый ход.", "One card or attack per turn.\nOccupy 5 cells. Attack adjacent enemies.\nCoins refill each turn."), 20))
     root.add_child(button(t("ЯЗЫК: РУССКИЙ", "LANGUAGE: ENGLISH"), toggle_language))
     root.add_child(label(t("Коллекция, магазин и сложные свойства — в следующих версиях.", "Collection, shop and advanced abilities come in later builds."), 16))
@@ -320,6 +324,7 @@ func reason_text(reason: String) -> String:
     return reason
 
 func show_lan_menu() -> void:
+    _switch_transport(false)
     lan.stop()
     online = false
     network_page = true
@@ -372,7 +377,7 @@ func create_lan_room(address: String = "", port: int = 17844) -> Dictionary:
     root.add_child(button(t("СКОПИРОВАТЬ ПРИГЛАШЕНИЕ", "COPY INVITATION"), func(): DisplayServer.clipboard_set(lan.invitation)))
     lobby_status = label(t("Ожидаем второго игрока…", "Waiting for another player…"), 20)
     root.add_child(lobby_status)
-    root.add_child(label(t("Соединение шифруется. Сертификат комнаты проверяется по приглашению.", "The connection is encrypted. The invitation pins the room certificate."), 17))
+    root.add_child(label(t("Защищённое Bluetooth-соединение требует сопряжения устройств в Android.", "Secure Bluetooth requires Android device pairing.") if bluetooth_mode else t("Соединение шифруется. Сертификат комнаты проверяется по приглашению.", "The connection is encrypted. The invitation pins the room certificate."), 17))
     root.add_child(button(t("ЗАКРЫТЬ КОМНАТУ", "CLOSE ROOM"), show_menu))
     return result
 
@@ -395,6 +400,7 @@ func join_lan_room(text: String) -> Dictionary:
 
 func network_error(value: String) -> String:
     var messages: Dictionary = {"no_local_address": ["Подключись к Wi-Fi и попробуй снова.", "Connect to Wi-Fi and try again."], "port_busy": ["Порт комнаты занят. Закрой другую комнату.", "Room port is busy. Close the other room."], "invalid_invite": ["Приглашение повреждено или неполное.", "Invitation is invalid or incomplete."], "incompatible_or_nonlocal_invite": ["Нужна совместимая версия и приглашение из локальной сети.", "A compatible version and local-network invitation are required."], "certificate_mismatch": ["Сертификат комнаты не совпал. Подключение остановлено.", "Room certificate mismatch. Connection stopped."], "connection_failed": ["Не удалось подключиться. Проверь сеть и приглашение.", "Connection failed. Check the network and invitation."], "connection_lost": ["Связь не восстановлена. Вернись в меню.", "Connection could not be restored. Return to the menu."], "reconnecting": ["Восстанавливаем соединение…", "Reconnecting…"], "waiting_reconnect": ["Ожидаем возвращения соперника…", "Waiting for the opponent to reconnect…"]}
+    messages.merge({"android_bluetooth_required": ["Bluetooth доступен в Android-клиенте.", "Bluetooth is available in the Android client."], "bluetooth_permission_required": ["Разреши доступ к устройствам поблизости и обнови список.", "Allow nearby-device access and refresh the list."], "bluetooth_disabled": ["Включи Bluetooth в настройках Android.", "Enable Bluetooth in Android settings."], "select_paired_device": ["Выбери ранее сопряжённое устройство.", "Select an already paired device."], "pair_device_in_android_settings": ["Сначала сопряги устройства в настройках Android.", "Pair the devices in Android settings first."], "secure_connect_failed": ["Защищённое соединение не установлено. Проверь сопряжение и комнату.", "Secure connection failed. Check pairing and the room."]})
     return t(messages[value][0], messages[value][1]) if messages.has(value) else value
 
 func _network_status(status: String) -> void:
@@ -418,3 +424,53 @@ func _network_view(view: Dictionary) -> void:
         selected_hand = -1
         selected_unit = -1
         refresh()
+
+func _switch_transport(use_bluetooth: bool) -> void:
+    if bluetooth_mode == use_bluetooth and is_instance_valid(lan):
+        lan.stop()
+        return
+    online = false
+    if is_instance_valid(lan):
+        lan.stop()
+        remove_child(lan)
+        lan.queue_free()
+    bluetooth_mode = use_bluetooth
+    lan = preload("res://src/net/bluetooth_session.gd").new() if use_bluetooth else preload("res://src/net/lan_session.gd").new()
+    add_child(lan)
+    lan.view_changed.connect(_network_view)
+    lan.connection_changed.connect(_network_status)
+
+func show_bluetooth_menu() -> void:
+    _switch_transport(true)
+    online = false
+    battle = false
+    network_page = true
+    clear_screen()
+    root.add_child(label("BLUETOOTH", 30))
+    root.add_child(label(t("Сначала сопряги два устройства в настройках Android. Интернет и Wi-Fi не нужны.", "Pair the devices in Android settings first. Internet and Wi-Fi are not required."), 19))
+    var available: Dictionary = BluetoothChannel.available()
+    lobby_status = label("" if available.ok else network_error(str(available.error)), 18)
+    root.add_child(lobby_status)
+    root.add_child(button(t("РАЗРЕШИТЬ УСТРОЙСТВА ПОБЛИЗОСТИ", "ALLOW NEARBY DEVICES"), func(): OS.request_permission("android.permission.BLUETOOTH_CONNECT"), 60))
+    root.add_child(button(t("ОБНОВИТЬ СПИСОК", "REFRESH DEVICES"), show_bluetooth_menu, 60))
+    root.add_child(button(t("СОЗДАТЬ КОМНАТУ", "CREATE ROOM"), func(): create_lan_room(), 68))
+    bluetooth_devices = OptionButton.new()
+    bluetooth_devices.custom_minimum_size.y = 58
+    for device in BluetoothChannel.bonded():
+        bluetooth_devices.add_item(str(device.name))
+        bluetooth_devices.set_item_metadata(bluetooth_devices.item_count - 1, str(device.address))
+    root.add_child(bluetooth_devices)
+    invite_input = TextEdit.new()
+    invite_input.custom_minimum_size.y = 135
+    invite_input.wrap_mode = TextEdit.LINE_WRAPPING_BOUNDARY
+    invite_input.placeholder_text = "multimental-bt://join/…"
+    root.add_child(invite_input)
+    root.add_child(button(t("ВСТАВИТЬ ПРИГЛАШЕНИЕ", "PASTE INVITATION"), func(): invite_input.text = DisplayServer.clipboard_get(), 60))
+    root.add_child(button(t("ПОДКЛЮЧИТЬСЯ", "JOIN ROOM"), func():
+        if bluetooth_devices.item_count == 0:
+            lobby_status.text = network_error("select_paired_device")
+            return
+        lan.target_address = str(bluetooth_devices.get_selected_metadata())
+        join_lan_room(invite_input.text)
+    , 68))
+    root.add_child(button(t("В МЕНЮ", "MENU"), show_menu, 60))

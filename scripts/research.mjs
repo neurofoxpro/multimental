@@ -45,6 +45,7 @@ export function validateResearch(data, root) {
           'docs.godotengine.org',
           'developer.android.com',
           'docs.github.com',
+          'learn.microsoft.com',
           'github.com',
           'semver.org',
           'keepachangelog.com'

@@ -54,10 +54,21 @@ for (const [file, marker] of [
   ['protocol_test.gd', 'MULTIMENTAL_PROTOCOL_PASS'],
   ['room_test.gd', 'MULTIMENTAL_ROOM_PASS'],
   ['lan_test.gd', 'MULTIMENTAL_LAN_PASS'],
-  ['address_test.gd', 'MULTIMENTAL_ADDRESSES_PASS']
+  ['address_test.gd', 'MULTIMENTAL_ADDRESSES_PASS'],
+  ['bluetooth_session_test.gd', 'MULTIMENTAL_BLUETOOTH_MODEL_PASS']
 ])
   run(godot, ['--headless', '--path', 'game', '--script', 'res://tests/' + file], [marker]);
 const core = fs.readFileSync('game/src/match_core.gd', 'utf8');
 if (/extends\s+(Node|Control)|get_tree\(|Time\.|HTTP|OS\./.test(core))
   throw Error('Domain dependency violation');
 console.log('ARCHITECTURE_PASS');
+if (process.platform === 'win32')
+  run(
+    'powershell.exe',
+    [
+      '-NoProfile',
+      '-Command',
+      "Add-Type -Path 'tools/BluetoothChannel.cs'; Write-Output 'WINDOWS_NATIVE_INTEROP_COMPILE_PASS'"
+    ],
+    ['WINDOWS_NATIVE_INTEROP_COMPILE_PASS']
+  );

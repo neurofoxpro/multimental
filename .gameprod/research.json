@@ -67,6 +67,30 @@
       "limits": [
         "403/429 требуют ожидания политики сервера, не форсированного повтора"
       ]
+    },
+    {
+      "id": "R-BLUETOOTH-SECURE",
+      "question": "Как обеспечить пользовательскую Bluetooth-комнату без небезопасного fallback?",
+      "status": "proposed",
+      "recommendation": "Android secure RFCOMM только с системно сопряжённым устройством, capability комнаты и прежним host-ядром. Windows-испытание требует AUTHENTICATE и ENCRYPT; ошибки сопряжения не скрываются.",
+      "sources": [
+        {
+          "url": "https://developer.android.com/develop/connectivity/bluetooth/connect-bluetooth-devices",
+          "claim": "Accept/connect блокируют, close прерывает их, UI pairing остаётся у ОС"
+        },
+        {
+          "url": "https://learn.microsoft.com/en-us/windows/win32/bluetooth/bluetooth-and-socket-options",
+          "claim": "SO_BTH_AUTHENTICATE и SO_BTH_ENCRYPT запрещают соединение без требуемой защиты"
+        }
+      ],
+      "tests": [
+        "game/tests/bluetooth_session_test.gd",
+        "scripts/bluetooth-room-test.mjs"
+      ],
+      "limits": [
+        "Пока не проведён аппаратный тест, fake transport не доказывает физический Bluetooth",
+        "В наличии один физический Android; вторым аппаратным участником может быть Windows-клиент, не второй Android-телефон"
+      ]
     }
   ]
 }

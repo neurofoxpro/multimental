@@ -618,6 +618,13 @@ try {
     case 'qualify':
       qualify(args);
       break;
+    case 'bluetooth-room':
+      run(
+        process.execPath,
+        ['scripts/bluetooth-room-test.mjs', '--config', path.join(workspace, 'station.local.json')],
+        { timeout: 240000 }
+      );
+      break;
     case 'device-pvp':
       run(
         process.execPath,
