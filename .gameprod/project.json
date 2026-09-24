@@ -112,5 +112,11 @@
       "manual": true
     }
   },
-  "githubLogin": "venelsendrik"
+  "githubLogin": "venelsendrik",
+  "deviceValidation": {
+    "extraPhysicalChecks": [
+      "bluetooth-player-room"
+    ],
+    "selection": "hardware-sensitive PR paths require real-device tests; other cases default to emulators"
+  }
 }

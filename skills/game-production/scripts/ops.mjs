@@ -15,7 +15,7 @@ import {
 } from './lib.mjs';
 import { featureBranch, readyTasks, classify } from './policy.mjs';
 import { applyBundle } from './apply.mjs';
-import { assertQualification } from './qualification-policy.mjs';
+import { assertQualification, hardwareSensitive } from './qualification-policy.mjs';
 import { acquireOperation, headFreshness } from './operation-lock.mjs';
 const root = findRoot(),
   p = readJSON(inside(root, '.gameprod/project.json')),
@@ -321,6 +321,8 @@ function qualify(options = []) {
   const c = readJSON(path.join(dir, 'candidate.json'));
   if (c.head !== git('rev-parse', 'HEAD')) throw Error('Candidate is for an old HEAD');
   if (c.notRequired) return;
+  if (hardwareSensitive(prScope(c.pr).files) && !options.includes('--physical'))
+    options = [...options, '--physical'];
   for (const slot of ['A', 'B'])
     run(process.execPath, ['scripts/emulator.mjs', 'start', slot], {
       timeout: 300000,
@@ -341,7 +343,8 @@ function qualify(options = []) {
     head: c.head,
     apkHash: c.manifest.sha256,
     toolDigest: fingerprint(root, p),
-    physical: options.includes('--physical')
+    physical: options.includes('--physical'),
+    extraPhysical: p.deviceValidation?.extraPhysicalChecks || []
   });
 }
 async function cycle(message, title, options) {
@@ -434,7 +437,8 @@ async function integrate(number) {
       head,
       apkHash: c.manifest.sha256,
       toolDigest: fingerprint(root, p),
-      physical: false
+      physical: hardwareSensitive(scope.files),
+      extraPhysical: p.deviceValidation?.extraPhysicalChecks || []
     });
   }
   const done = await confirmMerge({
