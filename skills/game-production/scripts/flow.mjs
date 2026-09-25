@@ -5,7 +5,7 @@ import { fileURLToPath } from 'node:url';
 import { HubClient, allowedBranch, assertWriter } from './hub-client.mjs';
 import { memorySnapshot, syncMemory, upsertComment } from './issue-memory.mjs';
 import { REPO, TRUSTED } from './hub-identity.mjs';
-import { findRoot, inside, readJSON, writeJSON, normalizeRepo } from './lib.mjs';
+import { findRoot, inside, readJSON, writeJSON, normalizeRepo, context } from './lib.mjs';
 import { taskPacket, nextTasks } from './control.mjs';
 const SHA = /^[a-f0-9]{40}$/;
 export function mergePolicy(pr, runs, jobs, reviews, expected) {
@@ -210,8 +210,14 @@ export async function main(argv = process.argv.slice(2)) {
     process.env.PATH =
       path.join(path.dirname(root), 'tools/mingit/cmd') + path.delimiter + process.env.PATH;
   const [mode = 'resume', ...args] = argv;
-  const readonly = ['resume', 'task', 'doctor'].includes(mode);
+  const readonly = ['resume', 'task', 'doctor', 'offline'].includes(mode);
+  if (['ship', 'cycle', 'settle', 'release-dev'].includes(mode)) {
+    throw Error(
+      'AUTO_INTEGRATION_NOT_DEPLOYED: missing CI source-seal adapter; use reviewed PR checks, not a bypass'
+    );
+  }
   if (!readonly) {
+    context(root, project);
     assertWriter(process.env);
     const remote = invoke(root, 'git', ['remote', 'get-url', 'origin']).stdout.trim();
     if (normalizeRepo(remote) !== REPO) throw Error('Wrong origin');
@@ -223,6 +229,20 @@ export async function main(argv = process.argv.slice(2)) {
   const client = new HubClient(credential || null),
     plan = readJSON(inside(root, '.gameprod/workplan.json'));
   const out = (x) => console.log(JSON.stringify(x, null, 2));
+  if (mode === 'offline') {
+    if (args.length) throw Error('offline takes no arguments');
+    const snapshot = readJSON(inside(root, '.gameprod/evidence/issue-memory.local.json'));
+    if (snapshot.repository !== REPO) throw Error('Wrong cached repository');
+    out({
+      source: 'cached-issues-offline',
+      observedAt: snapshot.observedAt,
+      count: snapshot.records.length,
+      missing: snapshot.missing,
+      next: nextTasks(snapshot.plan).slice(0, 8),
+      writesAuthorized: false
+    });
+    return;
+  }
   if (mode === 'resume' || mode === 'task') {
     const snapshot = await memorySnapshot(client, plan);
     writeJSON(inside(root, '.gameprod/evidence/issue-memory.local.json'), snapshot);
@@ -254,6 +274,11 @@ export async function main(argv = process.argv.slice(2)) {
         .slice(0, 8),
       device: 'independent'
     });
+    return;
+  }
+  if (mode === 'record') {
+    if (args.length !== 3 || !/^[1-9][0-9]*$/.test(args[0])) throw Error('record ISSUE KEY TEXT');
+    out(await upsertComment(client, Number(args[0]), args[1], args[2]));
     return;
   }
   if (mode === 'sync') {
