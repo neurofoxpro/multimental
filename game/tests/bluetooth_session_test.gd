@@ -72,15 +72,15 @@ func run_test() -> void:
     guest.interrupt_for_test()
     await wait_until(func(): return not host.authority.guest_connected, "host observes radio disconnect")
     await wait_until(func(): return guest.connection_status == "connected" and host.authority.guest_connected, "radio identity reconnect")
-    for i in range(30):
+    for i in range(100):
         if host.authority.game.state.winner != -1:
             break
         var actor = host if host.authority.game.state.active == 0 else guest
         if not await wait_until(func(): return actor.current_view.get("active", 1) == 0 and actor.pending.is_empty(), "active peer synced"):
             break
-        var turn: int = host.authority.game.state.turn
+        var revision: int = host.authority.revision
         check(actor.submit(actor.current_view.legal[0]).ok, "Bluetooth session command")
-        await wait_until(func(): return host.authority.game.state.turn > turn or host.authority.game.state.winner != -1, "Bluetooth command reaches authority")
+        await wait_until(func(): return host.authority.revision > revision or host.authority.game.state.winner != -1, "Bluetooth command reaches authority")
     await wait_until(func(): return guest.current_view.get("winner", -1) != -1, "Bluetooth result reaches guest")
     check(host.authority.game.state.winner != -1, "Bluetooth model match complete")
     check(not guest.current_view.has("players"), "no private deck in Bluetooth projection")

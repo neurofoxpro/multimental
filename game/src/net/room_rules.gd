@@ -3,7 +3,7 @@ extends RefCounted
 ## Pure host authority. Time and randomness are injected; no nodes or transport.
 const Core = preload("res://src/match_core.gd")
 const VERSION: int = 2
-const RULES: String = "prototype-v1"
+const RULES: String = Core.RULES_ID
 const TURN_MS: int = 30000
 const MATCH_MS: int = 900000
 const RECONNECT_MS: int = 60000
@@ -28,23 +28,7 @@ static func is_integer(value: Variant, low: int, high: int) -> bool:
     return is_finite(n) and n == floor(n) and n >= low and n <= high
 
 static func normalize_command(value: Variant) -> Dictionary:
-    if not value is Dictionary or not value.get("type") is String:
-        return {"ok": false, "error": "invalid_command"}
-    var expected: Array[String] = []
-    match value.type:
-        "play": expected = ["hand", "cell"]
-        "attack": expected = ["source", "target"]
-        "pass": expected = []
-        _: return {"ok": false, "error": "invalid_command"}
-    if value.size() != expected.size() + 1:
-        return {"ok": false, "error": "unknown_command_field"}
-    var result: Dictionary = {"type": value.type}
-    for field in expected:
-        var maximum: int = 99 if field == "hand" else 8
-        if not is_integer(value.get(field), 0, maximum):
-            return {"ok": false, "error": "invalid_command_number"}
-        result[field] = int(value[field])
-    return {"ok": true, "command": result}
+    return Core.normalize_command(value)
 
 func configure(seed_value: int, room_secret: String, now: int) -> void:
     game.start(seed_value)
@@ -158,6 +142,7 @@ func act(player: int, sequence: Variant, value: Variant, now: int) -> Dictionary
         return {"ok": false, "error": "not_connected"}
     if phase == "finished":
         return {"ok": false, "error": "finished"}
+    var previous_turn: int = int(game.state.turn)
     var response: Dictionary = game.apply(player, command)
     next_sequence[player] += 1
     revision += 1
@@ -166,7 +151,7 @@ func act(player: int, sequence: Variant, value: Variant, now: int) -> Dictionary
     receipts[player][seq] = {"signature": signature, "response": response.duplicate(true)}
     if receipts[player].size() > 64:
         receipts[player].erase(seq - 64)
-    if response.ok:
+    if response.ok and int(game.state.turn) != previous_turn:
         turn_deadline = last_now + TURN_MS
         paused_remaining = TURN_MS
     if game.state.winner != -1:

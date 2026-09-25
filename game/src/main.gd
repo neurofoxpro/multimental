@@ -1,6 +1,7 @@
 extends Control
 const Core = preload("res://src/match_core.gd")
-const COLORS: Array[Color] = [Color("e76f51"), Color("4ea8de"), Color("f6ce55"), Color("9cdbd3"), Color("ab9366")]
+const Feedback = preload("res://src/combat_feedback.gd")
+const COLORS: Array[Color] = [Color("e76f51"), Color("4ea8de"), Color("f6ce55"), Color("9cdbd3"), Color("ab9366"), Color("fff0ad"), Color("ad8acc"), Color("9fafbb"), Color("a6cf64"), Color("d788c9")]
 var game = Core.new()
 var audio = preload("res://src/audio_director.gd").new()
 var tutorial: bool = false
@@ -10,6 +11,16 @@ var language: String = "ru"
 var battle: bool = false
 var selected_hand: int = -1
 var selected_unit: int = -1
+var selected_direction: int = 0
+var timed_turn: int = -1
+var last_animated_event: int = -1
+var damage_effects_total: int = 0
+var rotation_left: Button
+var rotation_right: Button
+var aim_label: Label
+var end_turn_button: Button
+var friendly_confirm: ConfirmationDialog
+var friendly_pending: Dictionary = {}
 var deadline: float = 0.0
 var match_end: float = 0.0
 var bot_due: float = 0.0
@@ -78,6 +89,8 @@ func button(text: String, callback: Callable, height: int = 62) -> Button:
     return node
 
 func clear_screen() -> void:
+    last_animated_event = -1
+    friendly_pending = {}
     for child in get_children():
         if child == lan or child == audio:
             continue
@@ -104,7 +117,7 @@ func show_menu() -> void:
     tutorial = false
     clear_screen()
     root.add_child(label("MULTIMENTAL", 36))
-    root.add_child(label(t("Играбельная альфа · 5 стихий · поле 3×3", "Playable alpha · 5 elements · 3×3 board"), 18))
+    root.add_child(label(t("Тактическая альфа · 10 стихий · поле 3×3", "Tactical alpha · 10 elements · 3×3 board"), 18))
     var space := Control.new()
     space.size_flags_vertical = Control.SIZE_EXPAND_FILL
     root.add_child(space)
@@ -112,7 +125,8 @@ func show_menu() -> void:
     root.add_child(button(t("ИГРА ПО ЛОКАЛЬНОЙ СЕТИ", "LOCAL NETWORK MATCH"), show_lan_menu, 70))
     if OS.has_feature("android"):
         root.add_child(button(t("ИГРА ПО BLUETOOTH", "BLUETOOTH MATCH"), show_bluetooth_menu, 64))
-    root.add_child(label(t("Одна карта или одна атака за ход.\nЗайми 5 клеток. Атаки — по соседним клеткам.\nМонеты восстанавливаются каждый ход.", "One card or attack per turn.\nOccupy 5 cells. Attack adjacent enemies.\nCoins refill each turn."), 20))
+    root.add_child(label(t("Выставь карту и по желанию атакуй.\nНовый юнит — бесплатно; прежний — за 1 монету.\nПоверни карту перед размещением. Займи 5 клеток.", "Place a card, then optionally attack.\nNew unit: free. Older unit: 1 coin.\nRotate before placing. Occupy five cells."), 20))
+    root.add_child(button(t("КАРТЫ И ПРАВИЛА", "CARDS AND RULES"), show_card_guide, 54))
     root.add_child(button(t("ОБУЧЕНИЕ", "TUTORIAL"), start_tutorial, 58))
     root.add_child(button(t("НАСТРОЙКИ ЗВУКА", "AUDIO SETTINGS"), show_audio_settings, 58))
     root.add_child(button(t("ЯЗЫК: РУССКИЙ", "LANGUAGE: ENGLISH"), toggle_language))
@@ -138,6 +152,8 @@ func start_match() -> void:
     network_page = false
     result_saved = false
     game.start(int(Time.get_unix_time_from_system()) % 2147483646 + 1)
+    selected_direction = 0
+    timed_turn = int(game.state.turn)
     match_end = Time.get_unix_time_from_system() + 900.0
     deadline = Time.get_unix_time_from_system() + 30.0
     bot_due = Time.get_unix_time_from_system() + 0.65
@@ -177,8 +193,30 @@ func build_battle() -> void:
         board_buttons.append(b)
     message = label("", 18)
     root.add_child(message)
+    var aim_row := HBoxContainer.new()
+    root.add_child(aim_row)
+    rotation_left = button("↶", rotate_card.bind(-1), 54)
+    rotation_left.name = "RotateLeft"
+    rotation_left.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+    rotation_left.custom_minimum_size.x = 64
+    aim_row.add_child(rotation_left)
+    aim_label = label("", 17)
+    aim_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+    aim_row.add_child(aim_label)
+    rotation_right = button("↷", rotate_card.bind(1), 54)
+    rotation_right.name = "RotateRight"
+    rotation_right.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+    rotation_right.custom_minimum_size.x = 64
+    aim_row.add_child(rotation_right)
+    friendly_confirm = ConfirmationDialog.new()
+    friendly_confirm.title = t("Удар по союзнику", "Friendly fire")
+    friendly_confirm.ok_button_text = t("Атаковать", "Attack")
+    friendly_confirm.cancel_button_text = t("Отмена", "Cancel")
+    friendly_confirm.confirmed.connect(confirm_friendly_attack)
+    friendly_confirm.canceled.connect(func(): friendly_pending = {})
+    add_child(friendly_confirm)
     var scroll := ScrollContainer.new()
-    scroll.custom_minimum_size.y = 125
+    scroll.custom_minimum_size.y = 156
     scroll.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
     root.add_child(scroll)
     hand_row = HBoxContainer.new()
@@ -186,7 +224,9 @@ func build_battle() -> void:
     scroll.add_child(hand_row)
     var row := HBoxContainer.new()
     root.add_child(row)
-    row.add_child(button(t("ПРОПУСТИТЬ", "PASS"), pass_turn))
+    end_turn_button = button(t("ЗАКОНЧИТЬ ХОД", "END TURN"), pass_turn)
+    end_turn_button.name = "EndTurn"
+    row.add_child(end_turn_button)
     row.add_child(button(t("В МЕНЮ", "MENU"), show_menu))
     root.add_child(label(BuildInfo.VERSION + " · " + BuildInfo.COMMIT, 12))
 
@@ -194,7 +234,10 @@ func on_hand(index: int) -> void:
     var view: Dictionary = _view()
     if view.is_empty() or index < 0 or index >= view.hand.size():
         return
+    if int(view.active) != 0 or int(view.winner) != -1 or int(view.get("placed_cell", -1)) >= 0:
+        return
     selected_hand = -1 if selected_hand == index else index
+    selected_direction = 0
     selected_unit = -1
     if tutorial and selected_hand >= 0:
         tutorial_step = maxi(tutorial_step, 1)
@@ -205,11 +248,20 @@ func on_cell(index: int) -> void:
     if view.is_empty() or view.winner != -1 or view.active != 0 or index < 0 or index >= 9:
         return
     if selected_hand >= 0:
-        act({"type": "play", "hand": selected_hand, "cell": index})
-    elif selected_unit >= 0 and view.board[index] != null and view.board[index].owner == 1:
-        act({"type": "attack", "source": selected_unit, "target": index})
-    elif view.board[index] != null and view.board[index].owner == 0:
-        selected_unit = -1 if selected_unit == index else index
+        act({"type": "play", "hand": selected_hand, "cell": index, "direction": selected_direction})
+    elif selected_unit == index:
+        selected_unit = -1
+        refresh()
+    elif selected_unit >= 0 and view.board[index] != null:
+        var command: Dictionary = {"type": "attack", "source": selected_unit, "target": index}
+        if int(view.board[index].owner) == 0 and command in view.legal:
+            friendly_pending = command
+            friendly_confirm.dialog_text = t("Этот удар нанесёт урон твоему союзнику. Продолжить?", "This attack will damage your ally. Continue?")
+            friendly_confirm.popup_centered(Vector2i(520, 180))
+        else:
+            act(command)
+    elif view.board[index] != null and int(view.board[index].owner) == 0:
+        selected_unit = index
         selected_hand = -1
         refresh()
     else:
@@ -237,7 +289,9 @@ func after_action() -> void:
     if online:
         refresh()
         return
-    deadline = Time.get_unix_time_from_system() + 30.0
+    if int(game.state.turn) != timed_turn:
+        timed_turn = int(game.state.turn)
+        deadline = Time.get_unix_time_from_system() + 30.0
     bot_due = Time.get_unix_time_from_system() + 0.65
     refresh()
     _save_finished_match()
@@ -247,7 +301,7 @@ func _save_finished_match() -> void:
         result_saved = true
         var file := FileAccess.open("user://last-match.json", FileAccess.WRITE)
         if file != null:
-            file.store_string(JSON.stringify({"version": 1, "seed": game.initial_seed, "commands": game.commands, "result": game.state.reason}))
+            file.store_string(JSON.stringify({"version": 2, "rules": Core.RULES_ID, "seed": game.initial_seed, "commands": game.commands, "result": game.state.reason}))
         print("MULTIMENTAL_MATCH_FINISHED " + str(game.state.winner))
 
 func _process(_delta: float) -> void:
@@ -269,10 +323,14 @@ func _process(_delta: float) -> void:
         if now < deadline or game.state.winner != -1:
             break
         if game.state.active == 1:
-            game.apply(1, game.choose_ai())
+            for action_index in range(2):
+                if int(game.state.active) != 1 or int(game.state.winner) != -1:
+                    break
+                game.apply(1, game.choose_ai())
         else:
             game.timeout(0)
         deadline += 30.0
+        timed_turn = int(game.state.turn)
         bot_due = now + 0.65
         selected_hand = -1
         selected_unit = -1
@@ -297,6 +355,16 @@ func refresh() -> void:
         return
     var opponent: String = t("Соперник", "Opponent") if online else t("ИИ", "AI")
     info.text = t("Ты: %d/5 · %s: %d/5\nМонеты: %d · Колода: %d · Рука соперника: %d", "You: %d/5 · %s: %d/5\nCoins: %d · Deck: %d · Opponent hand: %d") % [view.scores[0], opponent, view.scores[1], view.coins, view.deck_count, view.opponent_hand_count]
+    rotation_left.disabled = selected_hand < 0 or int(view.active) != 0 or int(view.winner) != -1 or int(view.get("placed_cell", -1)) >= 0
+    rotation_right.disabled = rotation_left.disabled
+    end_turn_button.disabled = int(view.active) != 0 or int(view.winner) != -1 or (online and not lan.pending.is_empty())
+    aim_label.text = t("Поворот перед размещением", "Rotate before placement")
+    if selected_hand >= 0 and selected_hand < view.hand.size():
+        var selected: Dictionary = game.card(int(view.hand[selected_hand]))
+        aim_label.text = t(Core.TYPES_RU[int(selected.role)], Core.TYPES_EN[int(selected.role)]) + " · " + Feedback.pattern(selected, selected_direction)
+    elif selected_unit >= 0 and view.board[selected_unit] != null:
+        var selected: Dictionary = game.card(int(view.board[selected_unit].id))
+        aim_label.text = Feedback.pattern(selected, int(view.board[selected_unit].direction)) + t(" · атака: %d мон.", " · attack: %d coin") % (0 if selected_unit == int(view.placed_cell) else 1)
     var legal: Array = view.legal
     for i in range(9):
         var unit: Variant = view.board[i]
@@ -306,27 +374,31 @@ func refresh() -> void:
             b.text = "·"
         else:
             var def: Dictionary = game.card(int(unit.id))
-            b.text = (t("ТВОЙ", "YOURS") if unit.owner == 0 else t("ВРАГ", "ENEMY")) + "\n" + str(def[language]) + "\n⚔ %d   ♥ %d" % [unit.attack, unit.health]
+            b.text = (t("ТВОЙ", "YOURS") if unit.owner == 0 else t("ВРАГ", "ENEMY")) + "\n" + str(def[language]) + " " + Feedback.pattern(def, int(unit.direction)) + "\n⚔ %d   ♥ %d" % [unit.attack, unit.health]
             b.modulate = COLORS[int(def.element)]
         var highlight: bool = false
         for c in legal:
             if (c.type == "play" and selected_hand >= 0 and c.hand == selected_hand and c.cell == i) or (c.type == "attack" and selected_unit >= 0 and c.source == selected_unit and c.target == i):
                 highlight = true
         if highlight:
-            b.modulate = Color("a4ffc3")
+            b.modulate = Color("ffb38f") if selected_unit >= 0 and unit != null and int(unit.owner) == 0 else Color("a4ffc3")
+        elif i == selected_unit:
+            b.modulate = Color.WHITE
     for child in hand_row.get_children():
         hand_row.remove_child(child)
         child.queue_free()
     for i in range(view.hand.size()):
         var def: Dictionary = game.card(int(view.hand[i]))
-        var b: Button = button(str(def[language]) + "\n◉ %d\n⚔ %d   ♥ %d" % [def.cost, def.attack, def.health], on_hand.bind(i), 116)
-        b.custom_minimum_size.x = 134
-        b.disabled = view.active != 0 or view.winner != -1 or int(def.cost) > int(view.coins) or (online and not lan.pending.is_empty())
+        var orientation: int = selected_direction if i == selected_hand else 0
+        var b: Button = button(str(def[language]) + "\n" + t(Core.ELEMENTS_RU[int(def.element)], Core.ELEMENTS_EN[int(def.element)]) + " · " + t(Core.TYPES_RU[int(def.role)], Core.TYPES_EN[int(def.role)]) + "\n◉ %d  ⚔ %d  ♥ %d\n" % [def.cost, def.attack, def.health] + Feedback.pattern(def, orientation), on_hand.bind(i), 146)
+        b.add_theme_font_size_override("font_size", 17)
+        b.custom_minimum_size.x = 170
+        b.disabled = view.active != 0 or view.winner != -1 or int(view.get("placed_cell", -1)) >= 0 or int(def.cost) > int(view.coins) or (online and not lan.pending.is_empty())
         b.modulate = COLORS[int(def.element)] if i != selected_hand else Color.WHITE
         hand_row.add_child(b)
     message.modulate = Color.WHITE
     if tutorial and is_instance_valid(tutorial_hint):
-        var hints: Array = [["Выбери доступную карту в руке. Число ◉ — её стоимость.", "Choose an affordable card in your hand. ◉ shows its cost."], ["Теперь коснись свободной подсвеченной клетки.", "Now tap a highlighted empty cell."], ["Продолжай до пяти клеток. Для атаки выбери своего юнита и соседнего врага. Таймер в обучении не наказывает за раздумья.", "Continue until you occupy five cells. Attack by selecting your unit and an adjacent enemy. The tutorial does not punish time spent reading."]]
+        var hints: Array = [["Выбери доступную карту в руке. Число ◉ — её стоимость.", "Choose an affordable card in your hand. ◉ shows its cost."], ["Поверни карту кнопками ↶ ↷, затем коснись свободной подсвеченной клетки.", "Rotate the card with ↶ ↷, then tap a highlighted empty cell."], ["После размещения выбери атакующего или закончи ход. Новый юнит атакует бесплатно; прежний — за 1 монету. Союзникам тоже можно нанести урон.", "After placement, choose an attacker or end the turn. New unit attacks free; an older unit costs 1 coin. Allies can be damaged."]]
         tutorial_hint.text = t(hints[mini(tutorial_step,2)][0],hints[mini(tutorial_step,2)][1])
     if view.winner != -1:
         message.text = t("ПОБЕДА", "VICTORY") if view.winner == 0 else (t("НИЧЬЯ", "DRAW") if view.winner == 2 else t("ПОРАЖЕНИЕ", "DEFEAT"))
@@ -338,9 +410,72 @@ func refresh() -> void:
     elif selected_hand >= 0:
         message.text = t("Выбери свободную подсвеченную клетку", "Choose a highlighted empty cell")
     elif selected_unit >= 0:
-        message.text = t("Выбери соседнего врага для атаки", "Choose an adjacent enemy to attack")
+        message.text = t("Выбери цель по стрелкам. Оранжевая цель — союзник! Повторное нажатие юнита снимает выбор.", "Choose a target in the firing arc. Orange means ally! Tap your selected unit again to deselect.")
+    elif int(view.get("placed_cell", -1)) >= 0:
+        message.text = t("Карта выставлена. Выбери нового юнита (бесплатно), прежнего (1 монета) или закончи ход.", "Card placed. Attack with the new unit (free), an older unit (1 coin), or end the turn.")
     else:
         message.text = t("Выбери карту или своего юнита", "Choose a card or your unit")
+
+    animate_damage(view)
+
+func rotate_card(step: int) -> void:
+    var view: Dictionary = _view()
+    if not battle or selected_hand < 0 or view.is_empty() or int(view.active) != 0 or int(view.winner) != -1 or int(view.get("placed_cell", -1)) >= 0:
+        return
+    selected_direction = posmod(selected_direction + step, 4)
+    refresh()
+
+func confirm_friendly_attack() -> void:
+    if friendly_pending.is_empty():
+        return
+    var command: Dictionary = friendly_pending.duplicate()
+    friendly_pending = {}
+    if is_instance_valid(friendly_confirm):
+        friendly_confirm.hide()
+    act(command)
+
+func animate_damage(view: Dictionary) -> void:
+    var event_id: int = int(view.get("event_id", -1))
+    if event_id <= last_animated_event:
+        return
+    last_animated_event = event_id
+    for event in view.get("events", []):
+        if event.get("type") == "damage":
+            var cell: int = int(event.cell)
+            if cell >= 0 and cell < board_buttons.size():
+                Feedback.show_damage(board_buttons[cell], int(event.amount))
+                damage_effects_total += 1
+
+func show_card_guide() -> void:
+    battle = false
+    tutorial = false
+    online = false
+    lan.stop()
+    clear_screen()
+    root.add_child(label(t("КАРТЫ И ПРАВИЛА", "CARDS AND RULES"), 28))
+    root.add_child(label(t("10 стихий — пока только метки. Поворот: 90° до размещения. Один вызов и одна добровольная атака за ход. Второй игрок получает +1 монету только в первый ход.", "Ten elements are labels for now. Rotate by 90° before placing. One summon and one optional attack per turn. The second player gets +1 coin on their first turn only."), 18))
+    var scroll := ScrollContainer.new()
+    scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
+    root.add_child(scroll)
+    var list := VBoxContainer.new()
+    list.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+    list.add_theme_constant_override("separation", 10)
+    scroll.add_child(list)
+    var descriptions: Array = [
+        ["Боец: соседняя клетка впереди.", "Fighter: one cell forward."],
+        ["Страж: вперёд и в обе стороны, много здоровья.", "Guard: forward and both flanks, high health."],
+        ["Копейщик: до двух клеток вперёд, первый юнит закрывает следующего.", "Lancer: up to two cells forward; the first unit blocks the next."],
+        ["Стрелок: до двух клеток вперёд, стреляет через стоящего между ними юнита.", "Archer: up to two cells forward; can fire over an intervening unit."],
+        ["Фланкер: две передние диагонали.", "Flanker: the two forward diagonals."]]
+    for description in descriptions:
+        list.add_child(label(t(description[0], description[1]), 18))
+    list.add_child(label(t("Удар по союзнику требует подтверждения. Ответный удар врага возможен только по его направлениям атаки. Пять занятых клеток сразу завершают матч.", "Friendly fire asks for confirmation. An enemy counters only within its own firing arc. Five occupied cells immediately end the match."), 18))
+    for id in range(Core.CARD_COUNT):
+        var definition: Dictionary = game.card(id)
+        var text: String = str(definition[language]) + " · " + t(Core.ELEMENTS_RU[int(definition.element)], Core.ELEMENTS_EN[int(definition.element)]) + " · " + t(Core.TYPES_RU[int(definition.role)], Core.TYPES_EN[int(definition.role)])
+        text += "\n◉ %d  ⚔ %d  ♥ %d  " % [definition.cost, definition.attack, definition.health] + Feedback.pattern(definition, 0)
+        list.add_child(label(text, 18))
+    root.add_child(button(t("В МЕНЮ", "MENU"), show_menu))
 
 func reason_text(reason: String) -> String:
     var texts: Dictionary = {"five": ["занято 5 клеток", "five cells occupied"], "empty": ["закончились карты", "no cards left"], "timeout": ["два пропущенных хода", "two missed turns"], "limit": ["истекло время матча", "match time limit"], "disconnect": ["соперник не вернулся", "opponent did not return"], "resigned": ["игрок вышел", "player left"]}

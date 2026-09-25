@@ -57,7 +57,9 @@ for (const [file, marker] of [
   ['lan_test.gd', 'MULTIMENTAL_LAN_PASS'],
   ['address_test.gd', 'MULTIMENTAL_ADDRESSES_PASS'],
   ['bluetooth_session_test.gd', 'MULTIMENTAL_BLUETOOTH_MODEL_PASS'],
-  ['presentation_test.gd', 'MULTIMENTAL_PRESENTATION_PASS']
+  ['presentation_test.gd', 'MULTIMENTAL_PRESENTATION_PASS'],
+  ['directional_test.gd', 'MULTIMENTAL_DIRECTIONAL_PASS'],
+  ['directional_ui_test.gd', 'MULTIMENTAL_DIRECTIONAL_UI_PASS']
 ])
   run(godot, ['--headless', '--path', 'game', '--script', 'res://tests/' + file], [marker]);
 const core = fs.readFileSync('game/src/match_core.gd', 'utf8');

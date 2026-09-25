@@ -1,6 +1,6 @@
 class_name MatchView
 extends RefCounted
-## One player-facing projection reused by offline UI and authoritative rooms.
+## Same coordinates and directions on both screens; ownership is player-relative.
 static func for_player(core, player: int) -> Dictionary:
     if player not in [0, 1] or core.state.is_empty():
         return {}
@@ -17,4 +17,6 @@ static func for_player(core, player: int) -> Dictionary:
         "deck_count": me.deck.size(), "opponent_hand_count": other.hand.size(),
         "opponent_deck_count": other.deck.size(), "active": 0 if int(core.state.active) == player else 1,
         "turn": core.state.turn, "winner": winner, "reason": core.state.reason,
+        "placed_cell": core.state.placed_cell, "event_id": core.state.event_id,
+        "events": core.state.events.duplicate(true),
         "scores": [core.count_cells(player), core.count_cells(1 - player)], "legal": core.legal(player)}

@@ -10,7 +10,9 @@ var connected: bool = false
 func _init(secret: String = "") -> void:
     token = secret
     game.start(42)
-    if int(game.state.active) == 1:
+    for step in range(2):
+        if int(game.state.active) != 1 or int(game.state.winner) != -1:
+            break
         game.apply(1, game.choose_ai())
 func view() -> Dictionary:
     var me: Dictionary = game.state.players[0]
@@ -44,7 +46,7 @@ func receive(message: Variant) -> Dictionary:
     var sequence: int = int(m.seq)
     var input: Dictionary = m.command
     var command: Dictionary = {"type": input.get("type", "")}
-    for field in ["hand", "cell", "source", "target"]:
+    for field in ["hand", "cell", "source", "target", "direction"]:
         if input.has(field):
             if not integer(input[field], 0, 1000):
                 return {"ok": false, "error": "invalid_command_number"}
@@ -59,8 +61,11 @@ func receive(message: Variant) -> Dictionary:
     if sequence != next_sequence:
         return {"ok": false, "error": "out_of_order", "next_sequence": next_sequence}
     var result: Dictionary = game.apply(0, command)
-    if result.ok and game.state.winner == -1 and game.state.active == 1:
-        game.apply(1, game.choose_ai())
+    if result.ok:
+        for step in range(2):
+            if int(game.state.winner) != -1 or int(game.state.active) != 1:
+                break
+            game.apply(1, game.choose_ai())
     next_sequence += 1
     var response: Dictionary = {"ok": result.ok, "error": result.get("error", ""), "seq": sequence, "next_sequence": next_sequence, "view": view()}
     cache[sequence] = {"signature": signature, "response": response.duplicate(true)}

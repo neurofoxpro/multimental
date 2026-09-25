@@ -33,11 +33,11 @@ func _initialize() -> void:
     var digest: String = room.game.digest()
     check(room.act(player, 1, command, 1000) == first, "same request gets same receipt")
     check(room.game.digest() == digest, "duplicate has no extra effect")
-    var conflict: Dictionary = {"type": "pass"} if command.type != "pass" else {"type": "play", "hand": 0, "cell": 0}
+    var conflict: Dictionary = {"type": "pass"} if command.type != "pass" else {"type": "play", "hand": 0, "cell": 0, "direction": 0}
     check(room.act(player, 1, conflict, 1000).error == "duplicate_conflict", "conflicting repeat rejected")
     check(room.act(player, 100, {"type": "pass"}, 1000).error == "out_of_order", "future sequence rejected")
     check(not room.act(9, 1, {"type": "pass"}, 1000).ok, "caller cannot choose third role")
-    check(not Rules.normalize_command({"type": "play", "hand": 0.5, "cell": 0}).ok, "fractional index rejected")
+    check(not Rules.normalize_command({"type": "play", "hand": 0.5, "cell": 0, "direction": 0}).ok, "fractional index rejected")
     check(not Rules.normalize_command({"type": "pass", "player": 1}).ok, "role injection rejected")
     room.disconnect_guest(1000)
     check(room.phase == "reconnecting", "disconnect state")

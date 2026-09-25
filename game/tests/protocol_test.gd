@@ -32,7 +32,7 @@ func _initialize() -> void:
     var move: Dictionary = wire_hello.view.legal[0]
     var wire_result: Dictionary = wire.receive(JSON.parse_string(JSON.stringify({"v": 1, "token": secret, "op": "command", "seq": 1, "command": move})))
     check(wire_result.ok, "real JSON wire command")
-    check(wire.receive({"v": 1, "token": secret, "op": "command", "seq": 2, "command": {"type": "play", "hand": 0.5, "cell": 0}}).error == "invalid_command_number", "fraction rejected")
+    check(wire.receive({"v": 1, "token": secret, "op": "command", "seq": 2, "command": {"type": "play", "hand": 0.5, "cell": 0, "direction": 0}}).error == "invalid_command_number", "fraction rejected")
     check(wire.receive({"v": 1, "token": secret, "op": "command", "seq": 2.5, "command": {"type": "pass"}}).error == "invalid_sequence", "fractional sequence")
     check(wire.receive({"v": 1, "token": secret, "op": "command", "seq": 2, "command": {"type": "pass", "admin": true}}).error == "unknown_command_field", "unknown field")
     if failures == 0:
