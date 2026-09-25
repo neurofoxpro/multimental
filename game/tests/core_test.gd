@@ -28,7 +28,7 @@ func _initialize() -> void:
     for i in range(4):
         game.state.board[i] = {"id": 0, "owner": who, "attack": 1, "health": 2}
     game.state.players[who].coins = 6
-    var result: Dictionary = game.apply(who, {"type": "play", "hand": 0, "cell": 4, "direction": 0})
+    var result: Dictionary = game.apply(who, {"type": "play", "hand": 0, "cell": 5, "direction": 0})
     check(result.ok and game.state.winner == who, "fifth cell wins")
     game.start(99)
     who = int(game.state.active)
@@ -41,7 +41,7 @@ func _initialize() -> void:
     game.state.board[0] = {"id": 0, "owner": who, "attack": 2, "health": 1, "direction": 1}
     game.state.board[1] = {"id": 1, "owner": 1 - who, "attack": 1, "health": 2, "direction": 3}
     check(game.apply(who, {"type": "attack", "source": 0, "target": 1}).ok, "combat accepted")
-    check(game.state.board[0] == null and game.state.board[1] == null, "simultaneous deaths")
+    check(game.state.board[0] != null and game.state.board[1] == null, "lethal opening hit prevents counterattack")
     for seed_value in range(1, 101):
         game.start(seed_value)
         for step in range(120):

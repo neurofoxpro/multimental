@@ -19,4 +19,5 @@ static func for_player(core, player: int) -> Dictionary:
         "turn": core.state.turn, "winner": winner, "reason": core.state.reason,
         "placed_cell": core.state.placed_cell, "event_id": core.state.event_id,
         "events": core.state.events.duplicate(true),
+        "terrain": core.state.terrain.duplicate(), "center_unlocked": core.center_available(), "income_bonus": core.state.income_bonus,
         "scores": [core.count_cells(player), core.count_cells(1 - player)], "legal": core.legal(player)}

@@ -13,6 +13,7 @@ func fixture(ui) -> void:
     ui.game.start(42)
     ui.game.state.players[0].hand = [0, 2, 4]
     ui.game.state.players[0].coins = 3
+    ui.game.state.center_unlocked = true # This fixture tests rotation, not lock thresholds.
     ui.selected_hand = -1
     ui.selected_unit = -1
     ui.selected_direction = 0

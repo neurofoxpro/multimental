@@ -6,12 +6,16 @@ const ELEMENTS_RU: Array[String] = ["Огонь", "Вода", "Молния", "�
 const ELEMENTS_EN: Array[String] = ["Fire", "Water", "Lightning", "Air", "Earth", "Light", "Dark", "Mecha", "Poison", "Mystery"]
 const NAMES_RU: Array[String] = ["Искра", "Пламя", "Капля", "Прилив", "Разряд", "Гроза", "Ветер", "Вихрь", "Камень", "Скала", "Луч", "Светоч", "Тень", "Мрак", "Дрон", "Титан", "Спора", "Токсин", "Шёпот", "Загадка"]
 const NAMES_EN: Array[String] = ["Spark", "Flame", "Drop", "Tide", "Bolt", "Storm", "Breeze", "Gust", "Stone", "Rock", "Ray", "Beacon", "Shade", "Gloom", "Drone", "Titan", "Spore", "Toxin", "Whisper", "Enigma"]
-const CARD_COUNT: int = 20
-const RULES_ID: String = "directional-v2"
+const ELITES_RU: Array[String] = ["Ифрит", "Хранитель глубин", "Громовержец", "Небесный охотник", "Обсидиановый страж", "Архонт", "Владыка теней", "Осадный титан", "Чумной колосс", "Сфинкс"]
+const ELITES_EN: Array[String] = ["Ifrit", "Deep Guardian", "Thunderlord", "Sky Hunter", "Obsidian Warden", "Archon", "Shadow Lord", "Siege Titan", "Plague Colossus", "Sphinx"]
+const OUTER_ELEMENTS: Array[int] = [0, 1, 2, 3, 4, 8]
+const CENTER_ELEMENTS: Array[int] = [5, 6, 7]
+const CARD_COUNT: int = 30
+const RULES_ID: String = "terrain-sweep-v3"
 const TYPES: Array[String] = ["fighter", "guard", "lancer", "archer", "flanker"]
 const TYPES_RU: Array[String] = ["Боец", "Страж", "Копейщик", "Стрелок", "Фланкер"]
 const TYPES_EN: Array[String] = ["Fighter", "Guard", "Lancer", "Archer", "Flanker"]
-const STARTER: Array[int] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 10, 12, 14, 16, 18, 19]
+const STARTER: Array[int] = [0, 1, 2, 3, 4, 6, 8, 10, 12, 14, 16, 18, 21, 23, 24]
 var state: Dictionary = {}
 var commands: Array[Dictionary] = []
 var random_state: int = 1
@@ -20,6 +24,11 @@ var initial_seed: int = 1
 func card(id: int) -> Dictionary:
     if id < 0 or id >= CARD_COUNT:
         return {}
+    if id >= 20:
+        var element: int = id - 20
+        var elite_role: int = element % 5
+        var elite_stats: Array = [[4, 4, 5], [5, 3, 8], [5, 4, 5], [6, 4, 4], [4, 3, 5]][elite_role]
+        return {"id": id, "element": element, "ru": ELITES_RU[element], "en": ELITES_EN[element], "cost": elite_stats[0], "attack": elite_stats[1], "health": elite_stats[2], "role": elite_role, "kind": TYPES[elite_role]}
     var role: int = 0 if id % 2 == 0 else 1 + int(id / 2) % 4
     var stats: Array = [[1, 1, 2], [2, 1, 4], [2, 2, 2], [2, 1, 2], [2, 2, 3]][role]
     return {"id": id, "element": int(id / 2), "ru": NAMES_RU[id], "en": NAMES_EN[id], "cost": stats[0], "attack": stats[1], "health": stats[2], "role": role, "kind": TYPES[role]}
@@ -33,7 +42,7 @@ func start(seed_value: int) -> void:
     random_state = initial_seed
     commands.clear()
     var first: int = next_random(2)
-    state = {"active": first, "first": first, "turn": 1, "winner": -1, "reason": "", "players": [], "board": [], "placed_cell": -1, "event_id": 0, "events": []}
+    state = {"active": first, "first": first, "turn": 1, "winner": -1, "reason": "", "players": [], "board": [], "placed_cell": -1, "event_id": 0, "events": [], "terrain": [], "center_unlocked": false, "income_bonus": 0}
     for i in range(9):
         state.board.append(null)
     for player in range(2):
@@ -48,6 +57,46 @@ func start(seed_value: int) -> void:
             hand.append(deck.pop_back())
         state.players.append({"deck": deck, "hand": hand, "coins": 1 if player == first else 2, "maximum": 1, "missed": 0, "started": 1 if player == first else 0})
     _draw(first)
+    state.terrain = generate_terrain()
+
+func generate_terrain() -> Array[int]:
+    var bag: Array[int] = []
+    for element in OUTER_ELEMENTS:
+        bag.append(element)
+        bag.append(element)
+    var terrain: Array[int] = []
+    for cell in range(9):
+        if cell == 4:
+            terrain.append(CENTER_ELEMENTS[next_random(CENTER_ELEMENTS.size())])
+        else:
+            var index: int = next_random(bag.size())
+            terrain.append(bag[index])
+            bag.remove_at(index)
+    return terrain
+
+func total_units() -> int:
+    return count_cells(0) + count_cells(1)
+
+func center_available() -> bool:
+    return bool(state.center_unlocked) or total_units() >= 5 or int(state.turn) >= 7
+
+func _observe_board(events: Array) -> void:
+    var count: int = total_units()
+    var bonus: int = 2 if count >= 6 else (1 if count >= 4 else 0)
+    if bonus > int(state.income_bonus):
+        state.income_bonus = bonus
+        events.append({"type": "income_unlocked", "cell": 4, "amount": bonus})
+    if not bool(state.center_unlocked) and center_available():
+        state.center_unlocked = true
+        events.append({"type": "center_unlocked", "cell": 4})
+
+func attack_targets(source: int, unit: Dictionary, board: Array) -> Array[int]:
+    var targets: Array[int] = []
+    for cell in attack_cells(source, unit, board):
+        if board[cell] != null:
+            targets.append(cell)
+    targets.sort()
+    return targets
 
 func count_cells(player: int) -> int:
     var count: int = 0
@@ -102,7 +151,7 @@ func legal(player: int) -> Array[Dictionary]:
             var definition: Dictionary = card(int(p.hand[hand_index]))
             if not definition.is_empty() and int(definition.cost) <= int(p.coins):
                 for cell in range(9):
-                    if state.board[cell] == null:
+                    if state.board[cell] == null and (cell != 4 or center_available()):
                         # Compact command list: any validated quarter-turn is legal.
                         result.append({"type": "play", "hand": hand_index, "cell": cell, "direction": 0})
     for source in range(9):
@@ -162,28 +211,15 @@ func apply(player: int, value: Dictionary) -> Dictionary:
         p.hand.remove_at(int(command.hand))
         p.coins = int(p.coins) - int(definition.cost)
         var cell: int = int(command.cell)
-        state.board[cell] = {"id": id, "owner": player, "attack": int(definition.attack), "health": int(definition.health), "direction": int(command.direction)}
+        var terrain_bonus: int = 1 if int(definition.element) == int(state.terrain[cell]) else 0
+        state.board[cell] = {"id": id, "owner": player, "attack": int(definition.attack), "health": int(definition.health) + terrain_bonus, "max_health": int(definition.health) + terrain_bonus, "terrain_bonus": terrain_bonus, "direction": int(command.direction)}
         state.placed_cell = cell
         events.append({"type": "unit_placed", "cell": cell})
     elif command.type == "attack":
         var source: int = int(command.source)
-        var target: int = int(command.target)
-        var a: Dictionary = state.board[source]
-        var b: Dictionary = state.board[target]
         p.coins = int(p.coins) - attack_cost(source)
-        # Enemy counterattacks only when its firing arc reaches the attacker.
-        # Friendly fire does not provoke an automatic allied counterattack.
-        var retaliation: int = int(b.attack) if int(b.owner) != player and source in attack_cells(target, b, state.board) else 0
-        var damage: int = int(a.attack)
-        b.health = int(b.health) - damage
-        a.health = int(a.health) - retaliation
-        events.append({"type": "damage", "cell": target, "amount": damage, "source": source})
-        if retaliation > 0:
-            events.append({"type": "damage", "cell": source, "amount": retaliation, "source": target})
-        if int(a.health) <= 0:
-            state.board[source] = null
-        if int(b.health) <= 0:
-            state.board[target] = null
+        _resolve_sweep(source, player, events)
+    _observe_board(events)
     p.missed = 0
     commands.append({"player": player, "command": command.duplicate(true)})
     state.event_id = int(state.event_id) + 1
@@ -192,6 +228,29 @@ func apply(player: int, value: Dictionary) -> Dictionary:
     if command.type != "play" and int(state.winner) == -1:
         _finish_turn()
     return {"ok": true, "events": events}
+
+func _resolve_sweep(source: int, player: int, events: Array) -> void:
+    var a: Dictionary = state.board[source]
+    var targets: Array[int] = attack_targets(source, a, state.board)
+    var damage: int = int(a.attack)
+    # Freeze the target set: outgoing strikes happen together, never pierce newly killed blockers.
+    for target in targets:
+        var defender: Dictionary = state.board[target]
+        defender.health = int(defender.health) - damage
+        events.append({"type": "damage", "cell": target, "amount": damage, "source": source, "wave": 0})
+    for target in targets:
+        if int(state.board[target].health) <= 0:
+            state.board[target] = null
+    # Only surviving enemies answer. Counters do not recursively trigger more attacks.
+    var retaliation: int = 0
+    for target in targets:
+        var defender: Variant = state.board[target]
+        if defender != null and int(defender.owner) != player and source in attack_cells(target, defender, state.board):
+            retaliation += int(defender.attack)
+            events.append({"type": "damage", "cell": source, "amount": int(defender.attack), "source": target, "wave": 1})
+    a.health = int(a.health) - retaliation
+    if int(a.health) <= 0:
+        state.board[source] = null
 
 func timeout(player: int) -> void:
     if state.winner != -1 or int(state.active) != player:
@@ -240,8 +299,9 @@ func _finish_turn() -> void:
     state.active = 1 - int(state.active)
     state.turn = int(state.turn) + 1
     state.placed_cell = -1
+    _observe_board(state.events)
     var next: Dictionary = state.players[int(state.active)]
-    next.maximum = mini(6, 1 + int((int(state.turn) - 1) / 2))
+    next.maximum = mini(6, 1 + int((int(state.turn) - 1) / 2)) + int(state.income_bonus)
     # The second player receives +1 only for their opening turn, not every turn.
     next.coins = int(next.maximum) + (1 if int(next.started) == 0 else 0)
     next.started = int(next.started) + 1
@@ -255,7 +315,10 @@ func choose_ai() -> Dictionary:
         var score: int = -100
         var candidate: Dictionary = command.duplicate()
         if command.type == "play":
-            score = 100 + (8 if int(command.cell) == 4 else 0)
+            var definition: Dictionary = card(int(state.players[player].hand[int(command.hand)]))
+            score = 100 + int(definition.attack) * 4 + int(definition.health) * 2 + (8 if int(command.cell) == 4 else 0)
+            if int(definition.element) == int(state.terrain[int(command.cell)]):
+                score += 15
             if count_cells(player) == 4:
                 score += 10000
             var facing_score: int = -10000
@@ -271,14 +334,26 @@ func choose_ai() -> Dictionary:
             score += facing_score
         elif command.type == "attack":
             var a: Dictionary = state.board[int(command.source)]
-            var b: Dictionary = state.board[int(command.target)]
-            score = 35 if int(b.owner) != player else -1000
-            if int(b.owner) != player and int(b.health) <= int(a.attack):
-                score += 100
-                if count_cells(1 - player) >= 4:
-                    score += 500
-            if int(b.owner) != player and int(command.source) in attack_cells(int(command.target), b, state.board) and int(a.health) <= int(b.attack):
-                score -= 70
+            score = 0
+            var incoming: int = 0
+            var primary_enemy: int = -1
+            for target in attack_targets(int(command.source), a, state.board):
+                var b: Dictionary = state.board[target]
+                if int(b.owner) == player:
+                    score -= 250
+                    continue
+                if primary_enemy < 0:
+                    primary_enemy = target
+                    candidate.target = target
+                score += 35
+                if int(b.health) <= int(a.attack):
+                    score += 160
+                    if count_cells(1 - player) >= 4:
+                        score += 500
+                elif int(command.source) in attack_cells(target, b, state.board):
+                    incoming += int(b.attack)
+            if incoming >= int(a.health):
+                score -= 90
         if score > best_score:
             best_score = score
             best = candidate
