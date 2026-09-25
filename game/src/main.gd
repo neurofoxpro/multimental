@@ -19,6 +19,9 @@ var rotation_left: Button
 var rotation_right: Button
 var aim_label: Label
 var end_turn_button: Button
+var sweep_button: Button
+var last_center_open: bool = false
+var center_unlock_effects: int = 0
 var friendly_confirm: ConfirmationDialog
 var friendly_pending: Dictionary = {}
 var deadline: float = 0.0
@@ -90,6 +93,7 @@ func button(text: String, callback: Callable, height: int = 62) -> Button:
 
 func clear_screen() -> void:
     last_animated_event = -1
+    last_center_open = false
     friendly_pending = {}
     for child in get_children():
         if child == lan or child == audio:
@@ -208,6 +212,10 @@ func build_battle() -> void:
     rotation_right.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
     rotation_right.custom_minimum_size.x = 64
     aim_row.add_child(rotation_right)
+    sweep_button = button(t("АТАКОВАТЬ", "ATTACK"), attack_selected, 54)
+    sweep_button.name = "SweepAttack"
+    sweep_button.custom_minimum_size.x = 140
+    aim_row.add_child(sweep_button)
     friendly_confirm = ConfirmationDialog.new()
     friendly_confirm.title = t("Удар по союзнику", "Friendly fire")
     friendly_confirm.ok_button_text = t("Атаковать", "Attack")
@@ -247,6 +255,9 @@ func on_cell(index: int) -> void:
     var view: Dictionary = _view()
     if view.is_empty() or view.winner != -1 or view.active != 0 or index < 0 or index >= 9:
         return
+    if index == 4 and not bool(view.get("center_unlocked", false)):
+        message.text = t("Центр закрыт: нужно 5 юнитов на поле или начало 7-го хода.", "Center locked: five units on the board or turn seven required.")
+        return
     if selected_hand >= 0:
         act({"type": "play", "hand": selected_hand, "cell": index, "direction": selected_direction})
     elif selected_unit == index:
@@ -254,18 +265,36 @@ func on_cell(index: int) -> void:
         refresh()
     elif selected_unit >= 0 and view.board[index] != null:
         var command: Dictionary = {"type": "attack", "source": selected_unit, "target": index}
-        if int(view.board[index].owner) == 0 and command in view.legal:
-            friendly_pending = command
-            friendly_confirm.dialog_text = t("Этот удар нанесёт урон твоему союзнику. Продолжить?", "This attack will damage your ally. Continue?")
-            friendly_confirm.popup_centered(Vector2i(520, 180))
-        else:
-            act(command)
+        request_sweep(command)
     elif view.board[index] != null and int(view.board[index].owner) == 0:
         selected_unit = index
         selected_hand = -1
         refresh()
     else:
         message.text = t("Выбери карту в руке или своего юнита.", "Select a card or your unit first.")
+
+func attack_selected() -> void:
+    var view: Dictionary = _view()
+    for command in view.get("legal", []):
+        if command.type == "attack" and int(command.source) == selected_unit:
+            request_sweep(command)
+            return
+
+func request_sweep(command: Dictionary) -> void:
+    var view: Dictionary = _view()
+    if command not in view.get("legal", []):
+        act(command)
+        return
+    var allies: int = 0
+    for target in game.attack_targets(int(command.source), view.board[int(command.source)], view.board):
+        if int(view.board[target].owner) == 0:
+            allies += 1
+    if allies > 0:
+        friendly_pending = command.duplicate()
+        friendly_confirm.dialog_text = t("Удар во все направления заденет союзников: %d. Продолжить?", "This sweep will hit %d allies. Continue?") % allies
+        friendly_confirm.popup_centered(Vector2i(520, 180))
+    else:
+        act(command)
 
 func act(command: Dictionary) -> void:
     var result: Dictionary = lan.submit(command) if online else game.apply(0, command)
@@ -355,6 +384,12 @@ func refresh() -> void:
         return
     var opponent: String = t("Соперник", "Opponent") if online else t("ИИ", "AI")
     info.text = t("Ты: %d/5 · %s: %d/5\nМонеты: %d · Колода: %d · Рука соперника: %d", "You: %d/5 · %s: %d/5\nCoins: %d · Deck: %d · Opponent hand: %d") % [view.scores[0], opponent, view.scores[1], view.coins, view.deck_count, view.opponent_hand_count]
+    info.text += t(" · Доход поля: +%d", " · Board income: +%d") % int(view.get("income_bonus", 0))
+    sweep_button.visible = selected_unit >= 0
+    sweep_button.disabled = true
+    for action in view.legal:
+        if action.type == "attack" and int(action.source) == selected_unit:
+            sweep_button.disabled = false
     rotation_left.disabled = selected_hand < 0 or int(view.active) != 0 or int(view.winner) != -1 or int(view.get("placed_cell", -1)) >= 0
     rotation_right.disabled = rotation_left.disabled
     end_turn_button.disabled = int(view.active) != 0 or int(view.winner) != -1 or (online and not lan.pending.is_empty())
@@ -370,20 +405,51 @@ func refresh() -> void:
         var unit: Variant = view.board[i]
         var b: Button = board_buttons[i]
         b.modulate = Color.WHITE
+        var element: int = int(view.terrain[i])
+        var terrain_name: String = t(Core.ELEMENTS_RU[element], Core.ELEMENTS_EN[element])
+        var style: StyleBoxFlat = b.get_theme_stylebox("normal").duplicate() as StyleBoxFlat
+        style.bg_color = COLORS[element].darkened(0.78)
+        style.border_color = COLORS[element].darkened(0.15)
+        style.set_border_width_all(2)
+        b.add_theme_font_size_override("font_size", 16)
+        b.disabled = i == 4 and not bool(view.center_unlocked)
         if unit == null:
-            b.text = "·"
+            b.text = terrain_name + "\n" + t("Свободно", "Empty")
+            if i == 4:
+                if b.disabled:
+                    b.text = t("ЗАКРЫТО", "LOCKED") + " · " + terrain_name + t("\n5 юнитов ИЛИ ход 7\nСейчас: %d/5 · ход %d/7", "\n5 units OR turn 7\nNow: %d/5 · turn %d/7") % [int(view.scores[0]) + int(view.scores[1]), mini(int(view.turn), 7)]
+                    style.bg_color = Color("252733")
+                    style.border_color = Color("636778")
+                else:
+                    b.text = terrain_name + t("\nЦЕНТР ОТКРЫТ", "\nCENTER OPEN")
+                    style.border_color = Color("a2ffe0")
+                    style.set_border_width_all(4)
+            if selected_hand >= 0 and selected_hand < view.hand.size() and int(game.card(int(view.hand[selected_hand])).element) == element and not b.disabled:
+                b.text += "\n+1 HP"
         else:
             var def: Dictionary = game.card(int(unit.id))
             b.text = (t("ТВОЙ", "YOURS") if unit.owner == 0 else t("ВРАГ", "ENEMY")) + "\n" + str(def[language]) + " " + Feedback.pattern(def, int(unit.direction)) + "\n⚔ %d   ♥ %d" % [unit.attack, unit.health]
-            b.modulate = COLORS[int(def.element)]
+            b.text = terrain_name + "\n" + b.text
+            if int(unit.get("terrain_bonus", 0)) == 1:
+                b.text += t("  (+1 от поля)", "  (+1 terrain)")
+            style.border_color = Color("70c5ff") if int(unit.owner) == 0 else Color("ff8b87")
         var highlight: bool = false
         for c in legal:
             if (c.type == "play" and selected_hand >= 0 and c.hand == selected_hand and c.cell == i) or (c.type == "attack" and selected_unit >= 0 and c.source == selected_unit and c.target == i):
                 highlight = true
         if highlight:
-            b.modulate = Color("ffb38f") if selected_unit >= 0 and unit != null and int(unit.owner) == 0 else Color("a4ffc3")
+            style.border_color = Color("ffb38f") if selected_unit >= 0 and unit != null and int(unit.owner) == 0 else Color("a4ffc3")
+            style.set_border_width_all(5)
         elif i == selected_unit:
-            b.modulate = Color.WHITE
+            style.border_color = Color.WHITE
+            style.set_border_width_all(5)
+        for theme_state in ["normal", "hover", "pressed", "disabled"]:
+            b.add_theme_stylebox_override(theme_state, style)
+        b.add_theme_color_override("font_disabled_color", Color("c8c8d0"))
+    if bool(view.center_unlocked) and not last_center_open:
+        Feedback.show_unlock(board_buttons[4], t("ЦЕНТР ОТКРЫТ", "CENTER OPEN"))
+        center_unlock_effects += 1
+    last_center_open = bool(view.center_unlocked)
     for child in hand_row.get_children():
         hand_row.remove_child(child)
         child.queue_free()
@@ -410,7 +476,7 @@ func refresh() -> void:
     elif selected_hand >= 0:
         message.text = t("Выбери свободную подсвеченную клетку", "Choose a highlighted empty cell")
     elif selected_unit >= 0:
-        message.text = t("Выбери цель по стрелкам. Оранжевая цель — союзник! Повторное нажатие юнита снимает выбор.", "Choose a target in the firing arc. Orange means ally! Tap your selected unit again to deselect.")
+        message.text = t("Ударит ВСЕ подсвеченные цели. Оранжевые — союзники! Нажми АТАКОВАТЬ или любую цель.", "Hits ALL highlighted targets. Orange means ally! Press ATTACK or tap any target.")
     elif int(view.get("placed_cell", -1)) >= 0:
         message.text = t("Карта выставлена. Выбери нового юнита (бесплатно), прежнего (1 монета) или закончи ход.", "Card placed. Attack with the new unit (free), an older unit (1 coin), or end the turn.")
     else:
@@ -443,7 +509,12 @@ func animate_damage(view: Dictionary) -> void:
         if event.get("type") == "damage":
             var cell: int = int(event.cell)
             if cell >= 0 and cell < board_buttons.size():
-                Feedback.show_damage(board_buttons[cell], int(event.amount))
+                if int(event.get("wave", 0)) == 0:
+                    Feedback.show_damage(board_buttons[cell], int(event.amount))
+                else:
+                    var delay := board_buttons[cell].create_tween()
+                    delay.tween_interval(0.32)
+                    delay.tween_callback(Feedback.show_damage.bind(board_buttons[cell], int(event.amount)))
                 damage_effects_total += 1
 
 func show_card_guide() -> void:
@@ -453,7 +524,7 @@ func show_card_guide() -> void:
     lan.stop()
     clear_screen()
     root.add_child(label(t("КАРТЫ И ПРАВИЛА", "CARDS AND RULES"), 28))
-    root.add_child(label(t("10 стихий — пока только метки. Поворот: 90° до размещения. Один вызов и одна добровольная атака за ход. Второй игрок получает +1 монету только в первый ход.", "Ten elements are labels for now. Rotate by 90° before placing. One summon and one optional attack per turn. The second player gets +1 coin on their first turn only."), 18))
+    root.add_child(label(t("Стихия юнита совпала с клеткой: +1 HP. Центр открывается при 5 юнитах или на ходу 7. Пороги 4/6 юнитов дают +1/+2 дохода с последующих ходов. Второму игроку +1 монета в первый ход.", "Matching terrain gives +1 HP. Center opens at five units or turn seven. Four/six units unlock +1/+2 income from subsequent turns. Second player gets +1 opening coin."), 18))
     var scroll := ScrollContainer.new()
     scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
     root.add_child(scroll)
@@ -469,7 +540,7 @@ func show_card_guide() -> void:
         ["Фланкер: две передние диагонали.", "Flanker: the two forward diagonals."]]
     for description in descriptions:
         list.add_child(label(t(description[0], description[1]), 18))
-    list.add_child(label(t("Удар по союзнику требует подтверждения. Ответный удар врага возможен только по его направлениям атаки. Пять занятых клеток сразу завершают матч.", "Friendly fire asks for confirmation. An enemy counters only within its own firing arc. Five occupied cells immediately end the match."), 18))
+    list.add_child(label(t("АТАКА бьёт всех по стрелкам одновременно, включая союзников. Сначала бьёт активный юнит; погибшие не отвечают. Только выжившие враги с подходящим направлением отвечают атакующему. Урон своим требует подтверждения. Пороги дохода и центр после открытия не закрываются.", "ATTACK hits all targets in the firing arcs, including allies. Active unit strikes first; dead enemies cannot retaliate. Only surviving enemies facing the attacker counter. Friendly fire requires confirmation. Income thresholds and center unlock are permanent."), 18))
     for id in range(Core.CARD_COUNT):
         var definition: Dictionary = game.card(id)
         var text: String = str(definition[language]) + " · " + t(Core.ELEMENTS_RU[int(definition.element)], Core.ELEMENTS_EN[int(definition.element)]) + " · " + t(Core.TYPES_RU[int(definition.role)], Core.TYPES_EN[int(definition.role)])

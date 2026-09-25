@@ -17,15 +17,16 @@ func fixture():
     g.start(42)
     g.state.players[0].hand = [0, 1, 3, 5, 7]
     g.state.players[0].coins = 6
+    g.state.center_unlocked = true # Isolate directional geometry; terrain locks tested separately.
     return g
 func _initialize() -> void:
     var g = fixture()
-    check(Core.ELEMENTS.size() == 10 and Core.CARD_COUNT == 20, "ten elements / twenty units")
+    check(Core.ELEMENTS.size() == 10 and Core.CARD_COUNT == 30, "ten elements / thirty units")
     check(Core.ELEMENTS.slice(5) == ["light", "dark", "mecha", "poison", "mystery"], "requested element names")
     var roles: Dictionary = {}
     for id in range(Core.CARD_COUNT):
         var c: Dictionary = g.card(id)
-        check(int(c.element) == int(id / 2) and not str(c.ru).is_empty() and not str(c.en).is_empty(), "catalogue identity/localization")
+        check(int(c.element) == (int(id / 2) if id < 20 else id - 20) and not str(c.ru).is_empty() and not str(c.en).is_empty(), "catalogue identity/localization")
         roles[c.kind] = true
     check(roles.size() == 5, "five independent archetypes")
     var starter_roles: Dictionary = {}
@@ -35,7 +36,7 @@ func _initialize() -> void:
         starter_roles[c.kind] = true
         starter_elements[c.element] = true
     check(starter_roles.size() == 5 and starter_elements.size() == 10, "all elements and archetypes actually playable in starter deck")
-    check(g.card(-1).is_empty() and g.card(20).is_empty(), "reject unknown card IDs")
+    check(g.card(-1).is_empty() and g.card(30).is_empty(), "reject unknown card IDs")
     for id in range(0, 20, 2):
         check(g.card(id).attack == g.card(0).attack and g.card(id).health == g.card(0).health, "element label grants no stat advantage")
     for facing in range(4):
