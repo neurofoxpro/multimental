@@ -22,6 +22,7 @@ func fixture(ui) -> void:
     ui.refresh()
 func run_test() -> void:
     var ui = load("res://src/main.tscn").instantiate()
+    ui.profile.enabled = false
     root.add_child(ui)
     await process_frame
     ui.set_process(false)

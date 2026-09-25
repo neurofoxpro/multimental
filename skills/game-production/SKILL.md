@@ -41,7 +41,11 @@ Serial resources: source mutation, branch integration, signing, a selected phone
 ## Preserve the accepted game
 D19–D21 remain: 30 cards/10 elements, rotation, optional directed attack, first strike and surviving replies, terrain and income rules. No faction-world binding or inherent elemental counterwheel. Do not invent the owner's deferred special mechanic or reinterpret rating without a decision.
 
-The new `profile_state.gd` is a pure validated model with idempotent match/language transactions and bounded receipts. It is NOT yet the disk store, migration, collection UI or completed META-05. Disk adapter work remains explicitly pending; don't mask missing code as a human checklist.
+The profile increment now includes a pure model, compact ordered journal, two-generation checksummed disk store and UI controller. Language migrates without rewriting legacy settings; completed ordinary AI matches save statistics and replay together. Local network matches store only the public result, never hidden hands, seed or deck order. Collection/shop/account synchronization are not implemented by this storage layer. Read docs/production/PROFILE_STORAGE.ru.md for limits, especially recovery to an older generation and single-writer scope.
+
+Use `profile-test model|storage|ui` through the common CLI, then full `check`. Device validation uses `device-suite --target phone --suite profile`; this runs real disk writes only in its random test namespace and verifies personal profile hashes are unchanged. Debug automation requests and isolated UI tests must disable personal-profile writes. Same-version reinstall checks existing profile files as well as settings. Never confuse fault-injected torn writes with an actual phone power-loss test.
+
+A compacted sequence is rejected as stale, never reapplied. After an uncertain write first reopen/read back; retain the original sequence and payload. Do not delete the journal or profile to resolve a conflict.
 
 ## GitHub and publication
 Fresh PR checks must match the head, and changes requested must not be bypassed. Source-seal policy additionally binds the tested base. Automated COMMENT reviews identify themselves as machine checks, never independent human approval. PR, merge, release, install and human acceptance are distinct.

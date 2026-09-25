@@ -36,6 +36,8 @@ func _ready() -> void:
             runner.completed.connect(_done)
             add_child(runner)
 
+        "profile-store":
+            _done(preload("res://src/profile_lab.gd").run(str(data.nonce)))
         "jni":
             worker = Thread.new()
             worker.start(_jni)

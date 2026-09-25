@@ -60,6 +60,14 @@ function rawInput(shellArgs, input) {
   if (r.status !== 0) throw Error('ADB input failed: ' + String(r.stderr || '').slice(0, 300));
   return r.stdout;
 }
+function profileHashes() {
+  return ['a.json', 'b.json'].map(
+    (name) =>
+      optional('shell', 'run-as', c.package, 'sha256sum', 'files/profile/' + name)
+        .trim()
+        .match(/^([a-f0-9]{64})\s/)?.[1] || null
+  );
+}
 function forceStop() {
   adb('shell', 'am', 'force-stop', c.package);
 }
@@ -234,6 +242,7 @@ try {
         marker
       );
     const before = optional('shell', 'run-as', c.package, 'cat', 'files/settings.cfg');
+    const profilesBefore = profileHashes();
     if (mode === 'reinstall') {
       probeValue = crypto.randomBytes(24).toString('hex');
       probeName = 'automation-preserve-' + probeValue.slice(0, 16) + '.txt';
@@ -261,11 +270,28 @@ try {
       assert.equal(optional('shell', 'run-as', c.package, 'cat', 'files/' + probeName), probeValue);
       result.sentinelPreserved = true;
     }
+    if (mode === 'reinstall') {
+      assert.deepEqual(
+        profileHashes(),
+        profilesBefore,
+        'Profile generations changed during same-version reinstall'
+      );
+      result.profileFilesChecked = profilesBefore.filter(Boolean).length;
+      result.profileFilesPreserved = true;
+    }
     result.settingsPreserved = mode === 'clean-install' ? null : before === after;
     result.status = 'passed';
-  } else if (mode === 'jni') {
-    const nonce = await startLab('jni-stream');
+  } else if (mode === 'jni' || mode === 'profile') {
+    const beforeProfile = profileHashes();
+    const nonce = await startLab(mode === 'profile' ? 'profile-store' : 'jni-stream');
     result.lab = await awaitLab(nonce);
+    if (mode === 'profile') {
+      assert.equal(result.lab.test, 'real_profile_storage');
+      assert.equal(result.lab.personal_profile_untouched, true);
+      assert.deepEqual(profileHashes(), beforeProfile);
+      result.profileFilesChecked = beforeProfile.filter(Boolean).length;
+      result.personalProfileUntouched = true;
+    }
     result.status = 'passed';
   } else if (mode === 'ui' || mode === 'tutorial') {
     if (target !== 'phone') {

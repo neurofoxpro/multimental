@@ -10,6 +10,7 @@ const MODES = [
   'reinstall',
   'clean-install',
   'jni',
+  'profile',
   'ui',
   'tutorial',
   'tcp-usb',
@@ -19,6 +20,7 @@ const MODES = [
 ];
 const SUITES = {
   ui: ['ui'],
+  profile: ['profile'],
   lifecycle: ['close', 'launch', 'ui'],
   smoke: ['close', 'launch', 'jni', 'tutorial', 'ui'],
   hardware: ['tcp-usb', 'tcp-lan', 'bluetooth'],

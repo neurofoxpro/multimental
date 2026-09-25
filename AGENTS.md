@@ -12,6 +12,6 @@ New flow auto-integration routes remain explicitly disabled until the source-sea
 
 Edit through the reviewed source helpers. Bind base HEAD and, for inspected uncommitted files, `expectedCurrentSha256`. Mismatches or active leases stop edits. Retain independent work and journals. Preparation may format/render; verification itself must not mutate source.
 
-Keep accepted D19–D21 unchanged. Pure profile model tests do not finish disk persistence/collection/quests. Missing code is engineering work, not manual acceptance.
+Keep accepted D19–D21 unchanged. Profile model/storage/UI tests are separate from collection/shop/quests and cloud synchronization. Use profile-test model|storage|ui and the isolated device profile suite. Do not clear personal saves to make tests pass. Missing features remain engineering work, not manual acceptance.
 
 Only report observed results with exact commit, run, artifact and installation identity. Record continuation and unresolved gates in #29 and the task Issue. Do not claim old archive test counts for a different current source. Respect each actual tool refusal; no alternate-path bypass.
