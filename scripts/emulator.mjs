@@ -78,7 +78,7 @@ try {
             '-no-audio',
             '-no-window',
             '-gpu',
-            'software',
+            'host',
             '-memory',
             '2048',
             '-cores',

@@ -11,7 +11,7 @@ const ELITES_EN: Array[String] = ["Ifrit", "Deep Guardian", "Thunderlord", "Sky 
 const OUTER_ELEMENTS: Array[int] = [0, 1, 2, 3, 4, 8]
 const CENTER_ELEMENTS: Array[int] = [5, 6, 7]
 const CARD_COUNT: int = 30
-const RULES_ID: String = "terrain-sweep-v3"
+const RULES_ID: String = "terrain-sweep-v3-balance1"
 const TYPES: Array[String] = ["fighter", "guard", "lancer", "archer", "flanker"]
 const TYPES_RU: Array[String] = ["Боец", "Страж", "Копейщик", "Стрелок", "Фланкер"]
 const TYPES_EN: Array[String] = ["Fighter", "Guard", "Lancer", "Archer", "Flanker"]
@@ -30,7 +30,7 @@ func card(id: int) -> Dictionary:
         var elite_stats: Array = [[4, 4, 5], [5, 3, 8], [5, 4, 5], [6, 4, 4], [4, 3, 5]][elite_role]
         return {"id": id, "element": element, "ru": ELITES_RU[element], "en": ELITES_EN[element], "cost": elite_stats[0], "attack": elite_stats[1], "health": elite_stats[2], "role": elite_role, "kind": TYPES[elite_role]}
     var role: int = 0 if id % 2 == 0 else 1 + int(id / 2) % 4
-    var stats: Array = [[1, 1, 2], [2, 1, 4], [2, 2, 2], [2, 1, 2], [2, 2, 3]][role]
+    var stats: Array = [[1, 1, 2], [2, 1, 4], [2, 2, 3], [2, 2, 2], [2, 2, 2]][role]
     return {"id": id, "element": int(id / 2), "ru": NAMES_RU[id], "en": NAMES_EN[id], "cost": stats[0], "attack": stats[1], "health": stats[2], "role": role, "kind": TYPES[role]}
 
 func next_random(maximum: int) -> int:

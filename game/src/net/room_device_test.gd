@@ -40,8 +40,8 @@ func _process(_delta: float) -> void:
     if finished or started == 0:
         return
     var now: int = Time.get_ticks_msec()
-    if now > deadline:
-        _finish({"status": "failed", "error": "pvp_match_timeout", "connection": ui.lan.connection_status})
+    if now > deadline and (ui.lan.current_view.is_empty() or int(ui.lan.current_view.get("winner", -1)) == -1):
+        _finish({"status": "failed", "error": "pvp_match_timeout", "connection": ui.lan.connection_status, "actions": actions, "turn": ui.lan.current_view.get("turn", -1), "confirmation_pending": not ui.friendly_pending.is_empty()})
         return
     var view: Dictionary = ui.lan.current_view
     if view.is_empty() or view.get("phase") == "waiting":
@@ -50,6 +50,8 @@ func _process(_delta: float) -> void:
         _finish({"status": "failed", "error": "private_state_leak"})
         return
     if ui.lan.connection_status == "connected":
+        if not connected_before:
+            deadline = now + 90000
         if reconnect_attempted:
             reconnect_confirmed = true
         connected_before = true
@@ -70,11 +72,7 @@ func _process(_delta: float) -> void:
     var options: Array = view.legal
     if options.is_empty():
         return
-    var command: Dictionary = {"type": "pass"}
-    for option in options:
-        if option.type == "play" or (option.type == "attack" and int(view.board[int(option.target)].owner) != 0):
-            command = option
-            break
+    var command: Dictionary = safe_command(view)
     if command.type == "play":
         ui.selected_hand = -1
         ui.on_hand(int(command.hand))
@@ -97,3 +95,20 @@ func _finish(value: Dictionary) -> void:
     value.duration_ms = Time.get_ticks_msec() - started
     value.scope = "player_room_test"
     completed.emit(value)
+
+static func safe_command(view: Dictionary) -> Dictionary:
+    var core = preload("res://src/match_core.gd").new()
+    for option in view.get("legal", []):
+        if option.type == "play":
+            return option
+        if option.type != "attack":
+            continue
+        var source: int = int(option.source)
+        var safe: bool = true
+        for target in core.attack_targets(source, view.board[source], view.board):
+            if int(view.board[target].owner) == 0:
+                safe = false
+                break
+        if safe:
+            return option
+    return {"type": "pass"}
