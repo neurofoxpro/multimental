@@ -18,3 +18,13 @@ Latest owner authorization supersedes earlier suggestions involving other comput
 
 ## Updated authorizations, latest owner messages
 The owner authorized the venelsendrik Git/gh account on VENEL-SENDRIK, automated app closing/reinstallation/relaunch, emulator-first tests, LAN/physical Bluetooth diagnostics and use of the newly attached Bluetooth adapter. This does not authorize another computer, repository or deletion of phone app data. Use in-place updates on the phone; clean installation belongs to dedicated emulators.
+
+## Owner delegation of 25 September 2026 — Issue-first automation
+
+The owner's subsequent explicit instructions permit automatic development-branch integration after applicable automated tests, and require that a disconnected phone not block source development or development releases. This supersedes the older mandatory-station-qualification gate for ordinary dev integration. It does not mark unperformed device checks as passed or authorize production.
+
+GitHub Issues are now the primary task/decision memory, with #29 as the index. Repository planning documents remain reviewed snapshots. Source changes and cloud tests can progress without the phone; device delivery and real-radio acceptance retain their own evidence.
+
+Merged-branch cleanup is requested, but only after checking exact tip, canonical merged PR, ancestry and absence of active work. Unmerged branches, main/dev and active working trees are not cleanup candidates. No force-push or phone data deletion is authorized.
+
+The currently deployed flow must report missing adapters instead of silently relaxing guards. The current increment has no enabled autonomous merge service because its source-seal adapter is not deployed. This is a technical implementation gap, not a request for the owner to repeat approvals already given for dev.

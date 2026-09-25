@@ -4,6 +4,19 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { spawnSync } from 'node:child_process';
 import { context, readJSON, inside, sha, writeJSON, findRoot } from './lib.mjs';
+export function assertCurrentEdit({ exists, tracked, dirty, actualHash, expectedCurrentSha256 }) {
+  const explicit = expectedCurrentSha256 !== undefined;
+  if (
+    explicit &&
+    (!/^[a-f0-9]{64}$/.test(expectedCurrentSha256) ||
+      !exists ||
+      expectedCurrentSha256 !== actualHash)
+  )
+    throw Error('Current-hash mismatch; preserve changed work');
+  if (exists && (!tracked || dirty) && !explicit)
+    throw Error('Uncommitted source requires exact expectedCurrentSha256');
+  return true;
+}
 export function safePath(root, p) {
   if (
     !/^[\w./-]+$/.test(p) ||
@@ -52,14 +65,18 @@ export function applyBundle(root, b) {
       encoding: 'utf8',
       timeout: 15000
     });
-    if (old !== null && original.status !== 0)
-      throw Error('Existing untracked file refused: ' + f.path);
-    if (
-      old !== null &&
-      spawnSync('git', ['diff', '--quiet', 'HEAD', '--', f.path], { cwd: root, timeout: 15000 })
-        .status !== 0
-    )
-      throw Error('Concurrent/local edits: ' + f.path);
+    const difference =
+      old !== null && original.status === 0
+        ? spawnSync('git', ['diff', '--quiet', 'HEAD', '--', f.path], { cwd: root, timeout: 15000 })
+        : { status: 0 };
+    if (![0, 1].includes(difference.status)) throw Error('Cannot inspect source difference');
+    assertCurrentEdit({
+      exists: old !== null,
+      tracked: original.status === 0,
+      dirty: difference.status === 1,
+      actualHash: old === null ? null : sha(old),
+      expectedCurrentSha256: f.expectedCurrentSha256
+    });
     if (f.beforeSha256 && old !== null && sha(old) !== f.beforeSha256)
       throw Error('Before-hash mismatch: ' + f.path);
     let content = f.content;

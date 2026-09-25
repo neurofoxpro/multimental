@@ -435,6 +435,15 @@ export async function main(argv = process.argv.slice(2)) {
   const { findRoot, inside, writeJSON, context, readJSON } = await import('./lib.mjs');
   const { acquireOperation } = await import('./operation-lock.mjs');
   const root = findRoot();
+  const [entry, ...entryArgs] = argv;
+  if (entry === 'github') {
+    await (await import('./flow.mjs')).main(entryArgs);
+    return;
+  }
+  if (['resume', 'next', 'task'].includes(entry)) {
+    await (await import('./flow.mjs')).main([entry === 'next' ? 'resume' : entry, ...entryArgs]);
+    return;
+  }
   if (process.platform === 'win32') {
     const bin = path.join(path.dirname(root), 'tools/mingit/cmd');
     if (fs.existsSync(path.join(bin, 'git.exe')))
