@@ -436,6 +436,14 @@ export async function main(argv = process.argv.slice(2)) {
   const { acquireOperation } = await import('./operation-lock.mjs');
   const root = findRoot();
   const [entry, ...entryArgs] = argv;
+  if (entry === 'inspect') {
+    (await import('../../../tools/source-inspect.mjs')).main(entryArgs);
+    return;
+  }
+  if (entry === 'branches') {
+    await (await import('./branches.mjs')).main(entryArgs);
+    return;
+  }
   if (entry === 'github') {
     await (await import('./flow.mjs')).main(entryArgs);
     return;
