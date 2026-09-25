@@ -1,5 +1,6 @@
 import { waitWifiAddress } from '../skills/game-production/scripts/network-readiness.mjs';
 import { waitForPathsGone } from '../skills/game-production/scripts/device-coordination.mjs';
+import { receiptName } from '../skills/game-production/scripts/device-suite-policy.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
@@ -20,6 +21,10 @@ if (!args.includes('--config')) throw Error('Explicit --config required');
 const original = validateConfig(readJSON(opt('config')));
 let c = { ...original };
 const target = opt('target', 'phone');
+const runId = opt('run-id', crypto.randomUUID());
+const uniqueReceipt = receiptName(runId, target, opt('mode', 'ui'));
+if (fs.existsSync(path.resolve('.gameprod/evidence', uniqueReceipt)))
+  throw Error('Device step ID already recorded');
 if (target !== 'phone') {
   if (!['emulator-A', 'emulator-B'].includes(target)) throw Error('Unknown test device');
   c.serial = target === 'emulator-A' ? 'emulator-5554' : 'emulator-5556';
@@ -35,6 +40,8 @@ chooseDevice(exec(c.adb, ['devices', '-l']), c.serial);
 const out = path.resolve('.gameprod/evidence');
 fs.mkdirSync(out, { recursive: true });
 const result = {
+  schemaVersion: 2,
+  runId,
   observedAt: new Date().toISOString(),
   target,
   package: c.package,
@@ -412,6 +419,11 @@ try {
     }
   }
   if (lease) fs.unlinkSync(leasePath);
+  fs.writeFileSync(
+    path.join(out, uniqueReceipt),
+    JSON.stringify(result, null, 2) + String.fromCharCode(10),
+    { flag: 'wx' }
+  );
   writeJSON(path.join(out, 'device-' + target + '-' + result.mode + '.json'), result);
   console.log(JSON.stringify(result, null, 2));
 }

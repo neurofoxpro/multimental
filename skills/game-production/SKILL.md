@@ -66,3 +66,11 @@ Unknown ancestry is an explicit kept/unproven item, not an implicit permission t
 The dev build workflow includes a separate post-publication memory job using tools/record-release.mjs. It reads the actual published release and matches the APK/manifest digests to the build's source and run. Then it adds or reuses one managed comment in #29. It does not claim installation or human acceptance.
 
 If recording fails after publication, retry only the failed memory job. Do not create a second release to repair documentation. This job needs only contents:read and issues:write; PR checks do not receive that write job. See docs/production/RELEASE_MEMORY.ru.md and confirm the real job result before claiming deployment.
+
+## Physical-device continuation
+
+After the owner connects the phone, run device-status first: an existing updater may already have installed the release. Do not claim that your read installed it, or reinstall needlessly. `device-suite --target phone --suite smoke` runs close/launch/JNI/tutorial/UI without a network. Use explicit usb/bluetooth/hardware suites for transport. A missing Wi-Fi address is a failed LAN check, not a USB or Bluetooth failure.
+
+Suites now bind unique run IDs, child process exit status, actual installed APK SHA-256 and source fingerprints before/after. They hold the existing qualification lease for the entire sequence. Unknown flags, stale or missing results, changed app bytes and changed test sources fail closed. Keep raw screenshots/logs and device IDs private; archive exact report and receipt hashes. See docs/production/DEVICE_SUITES.ru.md.
+
+Restore the normal application after radio labs and record the observed installation and actual checks in Issue #29. Windows-to-Android Bluetooth is not two-Android acceptance. Phone data must never be cleared; preserve the persistent signing identity.
