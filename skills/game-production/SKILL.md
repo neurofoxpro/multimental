@@ -1,85 +1,75 @@
 ---
 name: game-production
-description: Evidence-gated release-first production for a game: recover decisions, validate, test, build, publish prerelease and install exact Android artifacts. Universal Node scripts with project-specific engine adapters.
+description: Task-aware, evidence-gated game production from ideas and simulations to development releases, safe Android delivery and explicit Google Play prerequisites. One CLI over existing guarded adapters.
 ---
 
-# Game Production v3 — reviewed releases and Russian changelog
+# Game Production v4 — one task-aware entry point
 
-## Working tools first
-Use scripts/chat.ps1 resume, verify, cycle, device-test, network and emulator instead of repeating Git/gh/ADB command sequences. See docs/production/OPS_V2.ru.md and docs/ROADMAP.ru.md. The Git worktree and portable tools are reused.
+## Read the minimum authoritative context
 
-## Start / recovery
-Read AGENTS.md, docs/production/AUTHORITY.md and all .gameprod JSON files. Run `node skills/game-production/scripts/gameprod.mjs status` and `validate`. Inspect canonical Git branches, PRs, Actions and releases at exact SHAs. Continue from the first unmet gate, not from old assistant promises. Source decisions and observed implementation are separate.
+Read `NEXT_CHAT.ru.md`, `AGENTS.md`, `docs/production/AUTHORITY.md` and `.gameprod/project.json`. Resolve timestamps against live repository, PR, CI and device state. Use `npm run game -- next`, then `npm run game -- task TASK-ID` for the exact readset and acceptance. Do not reread every historical log or invent commands. Full task source: `.gameprod/workplan.json`; accepted rules: `.gameprod/decisions.json`; command details: `docs/production/CONTROL.ru.md`.
 
-## Authorization
-An explicit repository and execution host are required. Verify Remote Desktop device ID against its advertised name, then verify the OS hostname. The host scripts reject a different host or Git origin. A source snapshot must include canonical repository and commit metadata. Active station account is venelsendrik with existing MAINTAIN access; no new tokens or Chrome sign-in are needed. No fallback repository, computer, credential escalation, repository creation, transfer, force-push or destructive cleanup. Do not modify other workspaces. Existing directories are preserved.
+Only repository: neurofoxpro/multimental. Only personal execution host: VENEL-SENDRIK; verify connected device ID and OS hostname. GitHub-hosted CI is allowed. Internal offline analysis does not count as a device test. Never choose another computer, mirror/transfer/create repositories, force-push, escalate credentials or overwrite unrelated work. Existing station account/tools and private dev signing are reused.
 
-## Production loop
-Small approved increment -> code/data -> metadata validation -> tests -> build -> manifest/hash -> device preflight -> install -> launch check -> evidence report -> manual play acceptance. Keep release-first: advanced art, economy, new mechanics and network can be deferred without pretending they are finished.
+## One entry for agent and human
 
-`gameprod.mjs run STEP` executes configured argument arrays, shell disabled, bounded timeout, explicit dependencies. Each run writes a source-bound receipt and hashed log. `gate GATE` rejects absent, failed, stale or altered receipts. No empty gate succeeds. The tool does not accept an agent-edited boolean as stable-release approval.
+Use `npm run game -- COMMAND`. On authorized Windows, `scripts/chat.cmd COMMAND` calls the same controller. Existing ops commands remain compatible, not a second production system.
 
-## Coverage
-`.gameprod/lifecycle.json` covers every development phase from governance/concept to support. `.gameprod/decisions.json` distinguishes accepted, recommended, deferred and superseded choices. `.gameprod/backlog.json` lists executable targets and remaining work. Do not ask already answered questions. Apply delegated recommendations only where they do not silently alter the accepted game.
-
-## Core and content
-Keep rules independent of Godot scenes, frames, animation and transport. Use versioned deterministic commands, ordered effects and a recorded seed. Private deck order and seed are not public client synchronization data. Future networks send player-filtered state; a full-state hash does not prove host honesty. Cards are data, effect implementations are reviewed code. Match log, economy ledger and technical diagnostics remain separate.
-
-## Device/update safety
-The local updater is a reviewed installed script, not a generic public-repository self-hosted runner. It downloads APK/data only and never executes downloaded scripts. Require exact canonical release, manifest, APK hash, package allowlist and one selected authorized phone. Never uninstall or clear real-phone data, and never downgrade automatically. The current owner explicitly authorizes automatically closing the development game for update/tests. Respect the station autoCloseForUpdate setting; data is preserved. Clean installs are restricted to the dedicated emulator. Repeated successful artifact installs are idempotent; failures remain retryable. Use a lock to avoid concurrent installs.
-
-The .dev APK is explicitly test-only. Permissions are reviewed and allowlisted; Bluetooth diagnostics require the Android Bluetooth connection permission. Current signing uses a persistent PRIVATE LOCAL development key; no public private key is used or published. Production identity/signing remain separate, and both original and locally re-signed APK hashes are recorded.
-
-ADB permission, connecting/unlocking a phone and subjective play acceptance are human boundaries. Report `blocked`, not success, when any of those is unavailable. Device serials and application logs stay local; only a redacted receipt may enter Git.
-
-## Commands
-```
-node skills/game-production/scripts/gameprod.mjs status
-node skills/game-production/scripts/gameprod.mjs validate
-node skills/game-production/scripts/gameprod.mjs run verify
-node skills/game-production/scripts/gameprod.mjs gate verified
-node skills/game-production/scripts/gameprod.mjs run build:android
-node scripts/update-device.mjs --config PATH
+```text
+npm run game -- next
+npm run game -- task META-05
+npm run game -- start META-05
+npm run game -- check
+npm run game -- ship META-05
+npm run game -- resume-cycle
 ```
 
-For another game, copy the skill and run `scripts/init.mjs --root EXISTING_GIT_REPO --repository owner/repo --host HOST --name NAME`. It does not create remote repositories, overwrite profiles or invent test/build commands. Configure adapters before gates can pass.
+`next` selects dependency-ready work; `task` supplies sources, criteria and exact commands; `start` creates the scoped feature branch. Implement the accepted change before `check` and `ship`: the CLI does not autonomously write missing gameplay. `check` generates planning projections and delegates audit. `ship` delegates the existing qualified dev cycle; it cannot authorize main/stable/Play production.
 
-## Finish
-Record changed files and Git commit/PR, executed tests, source/artifact identity, actual install outcome, pending manual acceptance and next task. A script can formalize deterministic work, but it cannot automatically invent and approve all future design or replace human acceptance. Claim ongoing automation only after an actual scheduler/workflow is installed and verified.
+After interruption inspect `resume` and its real state; use the indicated step or `resume-cycle` for a matching already-integrated cycle. Do not start a second publication/install because an old response was lost. Follow operation locks; do not delete a live lock.
 
-## Complete working loop (v2)
-Use scripts/chat.ps1 cycle "message" "title" --physical for changes that touch device transports. The default cycle qualifies two dedicated Android emulators before dev integration. The physical option adds actual phone UI, persistent reinstall, USB tunnel, LAN, emulator-to-phone LAN and real RFCOMM with Wi-Fi disabled/restored. A passing JNI memory-stream test is required in each emulator before the radio test.
+## Ideas and experiments
 
-Commands prepare and probe-bluetooth narrow debugging without publishing a release. resume-cycle continues a matching post-merge delivery if interruption occurred. Operation leases reject overlapping writers; do not delete live lockfiles. Every qualification is bound to exact candidate SHA, APK hash and source fingerprint; zero errors is not inferred from an incomplete list.
+`idea IDEA-001 "description"` captures a proposal as data, never a shell command and never automatic approval. Link it to a reviewed workplan task or explicit deferral/rejection with reason and evidence. Do not invent the owner's intentionally deferred special mechanic or reinterpret rating-without-loss.
 
-Device UI tests use actual Android input taps, not direct method calls. Dedicated emulator setup handles the Android full-screen tutorial; unexpected system dialogs are not blindly accepted. Real user gameplay acceptance remains separate.
+`experiment TASK-ID` currently runs a bounded, seeded existing balance baseline. New experiment types need reviewed adapters, explicit budgets, controls and pass criteria. `research plan/check` and task readsets identify primary sources and limits. Simulations do not replace human gameplay or actual radio tests.
 
-Report: scripts/chat.ps1 report --write writes sanitized observation files/state. Commit those in a documentation-only PR so recording work does not create another APK. No raw device IDs, addresses, nonce files, keys or app logs enter the public report.
+## Source preparation and proof
 
-## Latest verified completion
-See docs/production/OPS_V2_RESULTS.ru.md and docs/production/evidence/production-v2-cycle.json. The full v2 cycle completed through PR11, 37 Node tests, 23 device scenarios and actual installed dev release. Roadmap 0.2.0 is player-facing LAN, not a repeat of station setup.
+Each substantive code change adds a Russian change fragment using `changelog add`; versions come from package metadata. Preparation runs the locked formatter and renderers BEFORE source-bound verification. Verification is read-only and rejects stale projections, logs, hashes, missing required markers and empty tests.
 
-Release delivery is bound to the exact expected merge commit. A stale release listing or deferred installation is waited for within a bound; neither exit 0 nor a receipt for another version can finish the delivery gate. Preserve prior engineering receipts before a documentation-only cycle replaces local latest-state files.
+The workplan is canonical. `render` regenerates requirements, backlog, roadmap JSON and the human roadmap; `render --check` is enforced by verification and CI. Archives and state.json remain history, not current percentage readiness. A historical verified status does not qualify a new RC.
 
-## Russian release history and repeatable review
-Each meaningful code change adds a Russian change fragment: scripts/chat.ps1 changelog add --id UNIQUE-ID --kind added|changed|fixed|security --scope game|ui|network|automation|tests|docs --text "Понятное описание". The default base version is read from package.json. Never use raw Git logs as user-facing change descriptions or claim unverified tests in a fragment.
+The bootstrap CI reconciler is restricted to owner push on feature/production-control-20260925. It prepares without write credentials, validates bounded allowlisted files and source hashes, then writes only that feature ref without force/merge/release. External PRs cannot run its writer. Verify fresh PR checks after a bot commit; do not infer that GITHUB_TOKEN retriggered them.
 
-cycle and prepare run the locked formatter and changelog renderer BEFORE recording the source-bound verification. verify itself stays read-only with respect to declared source. CI rejects stale changelogs and code PRs without a fragment; release notes are built in Russian and shipped alongside the manifest. Formatting uses the exact locked development dependency with npm lifecycle scripts disabled.
+Use the reviewed source-edit helper with old/new hashes and recovery journal. Windows in-place fallback must be identified honestly, not called atomic. Wrong root, symlink, changed inputs and another lease are errors.
 
-The universal source-edit helper records expected old/new hashes and preserves a recovery journal. On Windows sharing violations, guarded in-place replacement is explicitly recorded; it is not described as an atomic filesystem transaction. Wrong roots, symlink ancestors, changed source and another operation lease are rejected.
+## Core and privacy invariants
 
-Before finalizing, run the real cycle, inspect its receipt, then commit the sanitized report and manual checklist as a docs-only PR. The latest release means the last observed successful dev artifact, not a claim that all future game mechanics are implemented.
+Preserve current D19–D21, not obsolete early prototypes: directed/rotated attacks, optional attack phase, first strike and surviving replies, 30 cards/10 elements, terrain and income rules. Rules are independent of scene/FPS/animation/transport. Seeded replay includes exact rule/content versions. Never send another player's hidden hand, deck order or full RNG state to a client; state hash does not prove host honesty.
 
-## Research and beta readiness
-Before selecting a new substantial approach use `research plan/check` and the explicit sources/tests/limits in .gameprod/research.json. A recommendation is not owner approval. `research capture` saves source fingerprints only, not private code or credentials.
+Cards are validated data; effect implementations are reviewed code. Match journal, technical logs and economic transactions stay separate. Missing collection/shop/crafting/account/upload code is engineering work, never manual acceptance.
 
-Use `readiness plan` to recover all chat requirements and `readiness gate` to assess the automated beta scope. Unimplemented code is an automatic blocker, never a manual checkbox. Subjective fun, specifically deferred product choices and release consent remain manual. The profile is not allowed to mark a missing feature verified without evidence.
+## Existing dev cycle and device safety
 
-A tool safety block is a real gate. Do not route the blocked end-to-end publication through hidden shell calls or another computer. Read-only checks and preserving explicitly authorized source changes are separate from permission to resume blocked integration/deployment. Record exactly which version is installed, which branch is under review and which device checks were not run.
+Use the existing ops-backed cycle: prepare → verify/review → feature PR → CI candidate → required qualification → dev integration → matching prerelease → bounded safe delivery → redacted report. The default candidate uses two dedicated Android emulators; hardware-sensitive paths require the configured physical checks. A JNI stream test does not substitute real Bluetooth. Real Android↔Android testing remains distinct from Windows↔Android.
 
-## Durable handoff and interruption recovery
-Read NEXT_CHAT.ru.md first when present, then resolve its timestamped hints against live Git/CI/device state. `scripts/chat.cmd handoff --write` generates a public redacted next-chat packet and a hash-indexed readset. Never confuse the candidate APK, installed release, branch HEAD or historical test counts. Use the copied prompt in NEXT_CHAT.ru.md; do not request another export before reading the repository.
+The installed updater downloads APK/data, not remote scripts; it is not a generic public-repository personal runner. Exact canonical release, manifest, package, artifact hash and selected authorized phone are required. Never uninstall/clear real-phone data or downgrade automatically. Owner-authorized dev-app closing for update/tests respects the station setting. Clean resets belong only to dedicated emulators. Reinstallation of an already confirmed artifact is idempotent; failures remain retryable.
 
-Windows ADB output can contain CR-CR-LF. Use the tested android-text helper for strict AVD identity checks instead of broad substring matching. Real phone resets remain prohibited.
+Keep the persistent PRIVATE local dev key. Original release APK and locally re-signed installed APK have separate hashes; production identity is separate. Do not publish keys, device serials, nonce files, addresses or full phone logs. Windows ADB output is normalized with the tested android-text helper.
 
-A prior tool refusal remains in the history, not as proof that every future authorized scoped operation is impossible. Respect every actual current tool decision; do not impersonate permissions or bypass a refusal. The latest owner request is to continue authorized development, device checks and development releases. Main/stable and unrelated hosts remain outside that delegation.
+Connecting/unlocking the phone, approving real system permissions and subjective play are human boundaries. An offline station is a blocker, not an excuse to claim installation or use another host. No new GitHub login, Make bridge or self-hosted runner setup is assumed necessary.
+
+## Play and protected operations
+
+Read `docs/production/PLAY_RELEASE.ru.md`. `play-check` is only a fail-closed prerequisite inventory; `closeout` lists remaining work and unresolved ideas. Actual AAB pipeline, Publisher API adapter, live Play readback and store-installed validation are explicit tasks, not implemented by these checks.
+
+Main/stable/production publication requires separate owner approval of the exact candidate; a modifiable JSON boolean is not approval. Account verification, real test participation/time, policy declarations and Google's review cannot be forged by automation. Preserve the free-only budget; do not buy account registration or services silently.
+
+## Finish and handoff
+
+Report exact changed branch/commit/PR, completed tests, actual artifact and install identity, unresolved gates and the next task. Use `report --write` and `handoff --write`; record sanitized observations in a docs-only follow-up, not a new unnecessary APK. Prepared, built, published, installed and human-accepted are different states.
+
+Respect each current tool safety refusal and record the gap. Do not route a blocked operation through hidden shell code, another identity or computer. Authorized read-only inspection and preserving source are not permission to bypass a blocked release.
+
+Previous full skill and historical examples: `docs/production/archive/game-production-v3.md`. Current task graph takes precedence over old roadmap numbering, while accepted source decisions remain authoritative.

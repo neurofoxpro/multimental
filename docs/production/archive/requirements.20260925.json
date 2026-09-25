@@ -1,0 +1,362 @@
+{
+  "schemaVersion": 1,
+  "observedAt": "2026-09-24T05:09:56.887Z",
+  "repository": "neurofoxpro/multimental",
+  "requirements": [
+    {
+      "id": "AUTH-01",
+      "text": "Единственный репозиторий neurofoxpro/multimental и компьютер VENEL-SENDRIK",
+      "version": "0.1.1",
+      "status": "verified",
+      "kind": "automation",
+      "evidence": [
+        "docs/production/AUTHORITY.md"
+      ],
+      "source": "Последнее явное ограничение владельца",
+      "requiredForBeta": true
+    },
+    {
+      "id": "CORE-01",
+      "text": "Дуэльная пошаговая ККИ, общее поле 3×3; победа за пять клеток или пустые рука и колода соперника",
+      "version": "0.1.0",
+      "status": "verified",
+      "kind": "game",
+      "evidence": [
+        "game/tests/core_test.gd"
+      ],
+      "source": "Этапы 1, 4",
+      "requiredForBeta": true
+    },
+    {
+      "id": "CORE-02",
+      "text": "Одна операция за ход, случайный первый игрок и добор, ресурс стоимости",
+      "version": "0.1.0",
+      "status": "verified",
+      "kind": "game",
+      "evidence": [
+        "game/tests/core_test.gd"
+      ],
+      "source": "Этапы 3–6",
+      "requiredForBeta": true
+    },
+    {
+      "id": "CORE-03",
+      "text": "Соседние атаки, здоровье и уничтожение юнитов как временные правила прототипа",
+      "version": "0.1.0",
+      "status": "verified",
+      "kind": "game",
+      "evidence": [
+        "game/tests/core_test.gd"
+      ],
+      "source": "Делегированная рекомендация; не финальная система",
+      "requiredForBeta": true
+    },
+    {
+      "id": "CORE-04",
+      "text": "Пять стихий: огонь, вода, молния, воздух, земля; свободная мультивселенная и смешивание",
+      "version": "0.1.0",
+      "status": "verified",
+      "kind": "game",
+      "evidence": [
+        "game/src/match_core.gd"
+      ],
+      "source": "Прямой выбор владельца",
+      "requiredForBeta": true
+    },
+    {
+      "id": "CORE-05",
+      "text": "Два пропущенных хода завершают матч, фон не останавливает таймер, лимит 15 минут",
+      "version": "0.1.0",
+      "status": "verified",
+      "kind": "game",
+      "evidence": [
+        "game/tests/core_test.gd",
+        "game/tests/room_test.gd"
+      ],
+      "source": "Этапы 3,5,6",
+      "requiredForBeta": true
+    },
+    {
+      "id": "CORE-06",
+      "text": "Отдельная от движка детерминированная логика, команды, события и воспроизведение",
+      "version": "0.1.0",
+      "status": "verified",
+      "kind": "game",
+      "evidence": [
+        "game/tests/core_test.gd"
+      ],
+      "source": "Этапы 8–10",
+      "requiredForBeta": true
+    },
+    {
+      "id": "UX-01",
+      "text": "Android первым, портретная ориентация, управление пальцем, русский и английский",
+      "version": "0.1.0",
+      "status": "verified",
+      "kind": "ui",
+      "evidence": [
+        "game/tests/ui_test.gd",
+        "scripts/device-test.mjs"
+      ],
+      "source": "Этапы 2,5",
+      "requiredForBeta": true
+    },
+    {
+      "id": "UX-02",
+      "text": "Понятные подсветки, отказ без траты хода, объяснение причины результата",
+      "version": "0.2.0",
+      "status": "implemented",
+      "kind": "ui",
+      "evidence": [
+        "game/src/main.gd"
+      ],
+      "source": "Этап 5; новая версия требует device-приёмки",
+      "requiredForBeta": true
+    },
+    {
+      "id": "UX-03",
+      "text": "Настройки громкости по категориям и 1–3 музыкальных композиции",
+      "version": "0.9.0",
+      "status": "planned",
+      "kind": "game",
+      "evidence": [],
+      "source": "Этапы 5,6",
+      "requiredForBeta": true
+    },
+    {
+      "id": "UX-04",
+      "text": "Безопасная обучающая партия, короткое обучение",
+      "version": "0.9.0",
+      "status": "planned",
+      "kind": "game",
+      "evidence": [],
+      "source": "Этапы 2,5,6",
+      "requiredForBeta": true
+    },
+    {
+      "id": "NET-01",
+      "text": "LAN-комната, приватное приглашение и партия двух игроков без внешнего сервера",
+      "version": "0.2.0",
+      "status": "implemented",
+      "kind": "network",
+      "evidence": [
+        "game/tests/lan_test.gd",
+        "scripts/room-qualification.mjs"
+      ],
+      "source": "Этапы 1,2,9,10; device-кандидат ещё не проверен",
+      "requiredForBeta": true
+    },
+    {
+      "id": "NET-02",
+      "text": "Хост-авторитет, несовместимость до игры, скрытые карты, идемпотентность и переподключение",
+      "version": "0.2.0",
+      "status": "implemented",
+      "kind": "network",
+      "evidence": [
+        "game/tests/room_test.gd",
+        "game/tests/lan_test.gd"
+      ],
+      "source": "Этапы 9,10",
+      "requiredForBeta": true
+    },
+    {
+      "id": "NET-03",
+      "text": "Настоящая передача по Bluetooth без Wi-Fi",
+      "version": "0.1.1",
+      "status": "verified",
+      "kind": "network",
+      "evidence": [
+        "docs/production/evidence/production-v2-transports.json"
+      ],
+      "source": "Аппаратная лаборатория, не готовое PvP-лобби",
+      "requiredForBeta": true
+    },
+    {
+      "id": "NET-04",
+      "text": "Пользовательский Bluetooth PvP, выбор/сопряжение и разрешения",
+      "version": "0.3.0",
+      "status": "planned",
+      "kind": "network",
+      "evidence": [],
+      "source": "Этапы 1,2,9,10",
+      "requiredForBeta": true
+    },
+    {
+      "id": "NET-05",
+      "text": "Внешний сервер, аккаунт, синхронизация и рейтинг",
+      "version": "0.8.0",
+      "status": "planned",
+      "kind": "network",
+      "evidence": [],
+      "source": "Дополнительный режим, не обязательный интернет",
+      "requiredForBeta": false
+    },
+    {
+      "id": "META-01",
+      "text": "Коллекция и конструктор собственных колод",
+      "version": "0.4.0",
+      "status": "planned",
+      "kind": "game",
+      "evidence": [],
+      "source": "Этапы 1,4,6",
+      "requiredForBeta": true
+    },
+    {
+      "id": "META-02",
+      "text": "Магазин, пак по пять случайных карт, отдельная валюта лобби",
+      "version": "0.5.0",
+      "status": "planned",
+      "kind": "game",
+      "evidence": [],
+      "source": "Этапы 4,6",
+      "requiredForBeta": true
+    },
+    {
+      "id": "META-03",
+      "text": "Крафт карт из пыли, инвентарь и сохранность коллекции при поражении",
+      "version": "0.5.0",
+      "status": "planned",
+      "kind": "game",
+      "evidence": [],
+      "source": "Этапы 4,6",
+      "requiredForBeta": true
+    },
+    {
+      "id": "META-04",
+      "text": "Награды за победу/ежедневные задания, уровни без обязательного гринда",
+      "version": "0.5.0",
+      "status": "planned",
+      "kind": "game",
+      "evidence": [],
+      "source": "Этапы 1,3,4",
+      "requiredForBeta": true
+    },
+    {
+      "id": "META-05",
+      "text": "Атомарное сохранение после матча, пака, колоды и награды; миграции",
+      "version": "0.5.0",
+      "status": "planned",
+      "kind": "game",
+      "evidence": [],
+      "source": "Этап 5; текущий файл последнего матча не равен всей системе",
+      "requiredForBeta": true
+    },
+    {
+      "id": "CONTENT-01",
+      "text": "Основная особая система взаимодействий карт/стихий",
+      "version": "0.6.0",
+      "status": "manual",
+      "kind": "product",
+      "evidence": [],
+      "source": "Владелец явно отложил выбор; не придумывать вместо него",
+      "requiredForBeta": true
+    },
+    {
+      "id": "CONTENT-02",
+      "text": "Два дополнительных боевых ресурса",
+      "version": "0.6.0",
+      "status": "planned",
+      "kind": "game",
+      "evidence": [],
+      "source": "Этап 6: позже; прототип содержит один ресурс",
+      "requiredForBeta": false
+    },
+    {
+      "id": "PLATFORM-01",
+      "text": "Web/ПК и альбомный интерфейс с тем же ядром",
+      "version": "0.7.0",
+      "status": "planned",
+      "kind": "platform",
+      "evidence": [],
+      "source": "Этапы 2,5,8; один экспортный preset не доказывает релиз",
+      "requiredForBeta": false
+    },
+    {
+      "id": "AUTO-01",
+      "text": "Постоянный Git/gh worktree, scoped ops, одна команда цикла и реальное наблюдение CI",
+      "version": "0.1.1",
+      "status": "verified",
+      "kind": "automation",
+      "evidence": [
+        "skills/game-production/scripts/ops.mjs",
+        "docs/production/evidence/production-v2-cycle.json"
+      ],
+      "source": "Последние поручения",
+      "requiredForBeta": true
+    },
+    {
+      "id": "AUTO-02",
+      "text": "Автозакрытие, переустановка без очистки, постоянная dev-подпись и точная доставка",
+      "version": "0.1.2",
+      "status": "verified",
+      "kind": "automation",
+      "evidence": [
+        "scripts/install-device.mjs",
+        "scripts/deliver-commit.mjs"
+      ],
+      "source": "Последние поручения; физические данные не удалять",
+      "requiredForBeta": true
+    },
+    {
+      "id": "AUTO-03",
+      "text": "Два выделенных эмулятора, аппаратные тесты отдельно, запуск/сохранение/обновления",
+      "version": "0.1.1",
+      "status": "verified",
+      "kind": "automation",
+      "evidence": [
+        "scripts/qualification.mjs",
+        "docs/production/evidence/production-v2-cycle.json"
+      ],
+      "source": "Последние поручения",
+      "requiredForBeta": true
+    },
+    {
+      "id": "AUTO-04",
+      "text": "Русский changelog, заметки релизов, фиксированные инструменты и ревью инвариантов",
+      "version": "0.1.2",
+      "status": "verified",
+      "kind": "automation",
+      "evidence": [
+        "scripts/changelog.mjs",
+        "tools/review.mjs",
+        "CHANGELOG.ru.md"
+      ],
+      "source": "Поручение о русском changelog",
+      "requiredForBeta": true
+    },
+    {
+      "id": "AUTO-05",
+      "text": "Реестр исследований, источников, проверок и ограничений",
+      "version": "0.2.0",
+      "status": "implemented",
+      "kind": "automation",
+      "evidence": [
+        "scripts/research.mjs",
+        ".gameprod/research.json"
+      ],
+      "source": "Последнее поручение об этапе research",
+      "requiredForBeta": true
+    },
+    {
+      "id": "BETA-01",
+      "text": "Субъективная оценка интереса, читаемости и темпа партии",
+      "version": "0.9.0",
+      "status": "manual",
+      "kind": "subjective",
+      "evidence": [],
+      "source": "Только человек; автоматические тесты не подменяют приёмку",
+      "requiredForBeta": true
+    },
+    {
+      "id": "RELEASE-01",
+      "text": "Production-подпись, разрешение main/stable и публикация Google Play",
+      "version": "1.0.0",
+      "status": "manual",
+      "kind": "release_approval",
+      "evidence": [],
+      "source": "Отдельное решение владельца; не выводится из MAINTAIN или слова «разрешение»",
+      "requiredForBeta": false
+    }
+  ],
+  "principle": "manual означает только продуктовый выбор, физическое согласие или оценку человека. Не реализованный код нельзя переложить в ручную приёмку."
+}
