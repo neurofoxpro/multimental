@@ -16,7 +16,7 @@ function NextView {
 }
 function OpenConnection {
  $script:client=New-Object MultimentalBluetoothChannel($r.address,'81c6ade9-42f5-4e26-82de-c9c4a2e7ab91',$true)
- Send @{kind='hello';v=2;rules='terrain-sweep-v3';token=$r.token;identity=$identity}
+ Send @{kind='hello';v=2;rules='terrain-sweep-v3-balance1';token=$r.token;identity=$identity}
  return NextView
 }
 try {
