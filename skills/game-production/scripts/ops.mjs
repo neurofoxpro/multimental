@@ -611,6 +611,9 @@ try {
       console.log((r || 'Logs unavailable').slice(-5000));
       break;
     }
+    case 'profile-test':
+      run(process.execPath, ['tools/test-profile.mjs', ...args], { timeout: 240000 });
+      break;
     case 'device-status':
       run(process.execPath, [
         'scripts/device-status.mjs',

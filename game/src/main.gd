@@ -3,6 +3,10 @@ const Core = preload("res://src/match_core.gd")
 const Feedback = preload("res://src/combat_feedback.gd")
 const COLORS: Array[Color] = [Color("e76f51"), Color("4ea8de"), Color("f6ce55"), Color("9cdbd3"), Color("ab9366"), Color("fff0ad"), Color("ad8acc"), Color("9fafbb"), Color("a6cf64"), Color("d788c9")]
 var game = Core.new()
+var profile = preload("res://src/profile_controller.gd").new()
+var profile_directory: String = "user://profile"
+var profile_legacy_settings: String = "user://settings.cfg"
+var local_match_id: String = ""
 var audio = preload("res://src/audio_director.gd").new()
 var tutorial: bool = false
 var tutorial_step: int = 0
@@ -54,6 +58,12 @@ func _ready() -> void:
     var cfg := ConfigFile.new()
     if cfg.load("user://settings.cfg") == OK:
         language = str(cfg.get_value("ui", "language", "ru"))
+    if OS.is_debug_build() and FileAccess.file_exists("user://automation-request.json"):
+        profile.enabled = false
+    profile.storage = preload("res://src/profile_store.gd").new(profile_directory)
+    profile.legacy_settings = profile_legacy_settings
+    profile.open_profile()
+    language = profile.language(language)
     add_child(audio)
     add_child(lan)
     lan.view_changed.connect(_network_view)
@@ -113,6 +123,8 @@ func clear_screen() -> void:
     margin.add_child(root)
 
 func show_menu() -> void:
+    if battle:
+        _save_finished_match()
     if online:
         lan.leave()
     online = false
@@ -134,20 +146,30 @@ func show_menu() -> void:
     root.add_child(button(t("ОБУЧЕНИЕ", "TUTORIAL"), start_tutorial, 58))
     root.add_child(button(t("НАСТРОЙКИ ЗВУКА", "AUDIO SETTINGS"), show_audio_settings, 58))
     root.add_child(button(t("ЯЗЫК: РУССКИЙ", "LANGUAGE: ENGLISH"), toggle_language))
-    root.add_child(label(t("Коллекция, магазин и сложные свойства — в следующих версиях.", "Collection, shop and advanced abilities come in later builds."), 16))
+    var stats: Dictionary = profile.state().get("stats", {"matches": 0, "wins": 0, "losses": 0})
+    var status_text: String = t("Локальный профиль · партий %d · побед %d · поражений %d", "Local profile · matches %d · wins %d · losses %d") % [stats.matches, stats.wins, stats.losses]
+    if profile.error != "" and profile.enabled:
+        status_text += t("\nСохранение недоступно: ", "\nSaving unavailable: ") + profile.error
+    elif profile.recovered:
+        status_text += t("\nВосстановлена резервная копия", "\nRecovered from backup")
+    var profile_status := label(status_text, 16)
+    profile_status.name = "ProfileSummary"
+    root.add_child(profile_status)
     var bottom := Control.new()
     bottom.size_flags_vertical = Control.SIZE_EXPAND_FILL
     root.add_child(bottom)
     root.add_child(label(BuildInfo.VERSION + " · " + BuildInfo.COMMIT, 14))
 
 func toggle_language() -> void:
-    language = "en" if language == "ru" else "ru"
-    var cfg := ConfigFile.new()
-    cfg.set_value("ui", "language", language)
-    cfg.save("user://settings.cfg")
+    var chosen: String = "en" if language == "ru" else "ru"
+    if profile.commit({"kind": "language", "value": chosen}):
+        language = chosen
     show_menu()
 
 func start_match() -> void:
+    if not profile.flush():
+        show_menu()
+        return
     tutorial = false
     tutorial_step = 0
     last_second = -1
@@ -155,6 +177,7 @@ func start_match() -> void:
     online = false
     network_page = false
     result_saved = false
+    local_match_id = Crypto.new().generate_random_bytes(16).hex_encode()
     game.start(int(Time.get_unix_time_from_system()) % 2147483646 + 1)
     selected_direction = 0
     timed_turn = int(game.state.turn)
@@ -326,12 +349,22 @@ func after_action() -> void:
     _save_finished_match()
 
 func _save_finished_match() -> void:
-    if not online and game.state.winner != -1 and not result_saved:
+    if online or game.state.get("winner", -1) == -1 or result_saved:
+        return
+    if tutorial or not profile.enabled:
         result_saved = true
-        var file := FileAccess.open("user://last-match.json", FileAccess.WRITE)
-        if file != null:
-            file.store_string(JSON.stringify({"version": 2, "rules": Core.RULES_ID, "seed": game.initial_seed, "commands": game.commands, "result": game.state.reason}))
+        return
+    var saved_replay: Dictionary = profile.state().get("lastMatch", {}).get("replay", {})
+    if local_match_id != "" and saved_replay.get("session", "") == local_match_id:
+        result_saved = true
+        return
+    var outcome: String = "win" if game.state.winner == 0 else ("draw" if game.state.winner == 2 else "loss")
+    var replay: Dictionary = {"version": 2, "session": local_match_id, "rules": Core.RULES_ID, "seed": game.initial_seed, "commands": game.commands.duplicate(true), "result": game.state.reason}
+    result_saved = profile.commit({"kind": "record_match", "outcome": outcome, "replay": replay})
+    if result_saved:
         print("MULTIMENTAL_MATCH_FINISHED " + str(game.state.winner))
+    elif is_instance_valid(message):
+        message.text += t(" · не удалось сохранить результат", " · result could not be saved")
 
 func _process(_delta: float) -> void:
     if online:
@@ -590,6 +623,8 @@ func create_lan_room(address: String = "", port: int = 17844) -> Dictionary:
     online = true
     battle = false
     displayed_revision = -1
+    local_match_id = Crypto.new().generate_random_bytes(16).hex_encode()
+    result_saved = false
     var result: Dictionary = lan.host_room(address, port)
     if not result.ok:
         online = false
@@ -616,6 +651,8 @@ func join_lan_room(text: String) -> Dictionary:
     online = true
     battle = false
     displayed_revision = -1
+    local_match_id = Crypto.new().generate_random_bytes(16).hex_encode()
+    result_saved = false
     var result: Dictionary = lan.join_room(text)
     if not result.ok:
         online = false
@@ -655,6 +692,24 @@ func _network_view(view: Dictionary) -> void:
         selected_hand = -1
         selected_unit = -1
         refresh()
+        _save_network_result(view)
+
+func _save_network_result(view: Dictionary) -> void:
+    if not online or result_saved or int(view.get("winner", -1)) == -1 or not profile.enabled:
+        return
+    if local_match_id == "":
+        return
+    if profile.state().get("lastMatch", {}).get("replay", {}).get("session", "") == local_match_id:
+        result_saved = true
+        return
+    var winner: int = int(view.winner)
+    if winner not in [0, 1, 2]:
+        return
+    var outcome: String = "win" if winner == 0 else ("draw" if winner == 2 else "loss")
+    var summary: Dictionary = {"version": 2, "session": local_match_id, "rules": Core.RULES_ID, "scope": "public_result_only", "transport": "bluetooth" if bluetooth_mode else "lan", "commands": [], "result": str(view.get("reason", ""))}
+    result_saved = profile.commit({"kind": "record_match", "outcome": outcome, "replay": summary})
+    if not result_saved and is_instance_valid(message):
+        message.text += t(" · не удалось сохранить результат", " · result could not be saved")
 
 func _switch_transport(use_bluetooth: bool) -> void:
     if bluetooth_mode == use_bluetooth and is_instance_valid(lan):

@@ -368,6 +368,7 @@ export function commandFor(name, args, plan) {
     'cycle',
     'logs',
     'device-status',
+    'profile-test',
     'network',
     'qualify',
     'bluetooth-pairing',

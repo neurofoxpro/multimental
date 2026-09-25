@@ -9,6 +9,7 @@ func check(value: bool, message: String) -> void:
 func run_test() -> void:
     var packed := load("res://src/main.tscn") as PackedScene
     var ui = packed.instantiate()
+    ui.profile.enabled = false
     root.add_child(ui)
     await process_frame
     check(not ui.battle, "menu visible initially")
