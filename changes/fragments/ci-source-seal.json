@@ -1,0 +1,8 @@
+{
+  "id": "ci-source-seal",
+  "version": "0.6.0",
+  "kind": "added",
+  "scope": "automation",
+  "text": "После успешных PR-проверок CI отдельно подтверждает точные head/base и merge-checkout. Старый успешный запуск на другом основании не является допуском новой комбинации. Это read-only этап для дальнейшего автоматического dev-вливания, а не разрешение production.",
+  "breaking": false
+}
