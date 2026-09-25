@@ -52,3 +52,17 @@ The registered build workflow was actually dispatched from `dev` and passed in r
 Before finishing record actual commit/PR, CI runs, test counts and next unmet task in Issue #29 and the task Issue. Keep raw device logs private. Branch cleanup must prove merged ownership, exact tip and no active work before deletion; no cleanup happened merely because an inventory was generated.
 
 Respect current tool refusals; don't reproduce a rejected operation through another path/tool. Continue independent permitted work, record the precise gap. The last old archive, a new working tree and a published release are not interchangeable evidence.
+
+## Branch hygiene and source inspection
+
+`npm run game -- inspect PATH ...` returns exact source-byte hashes without printing content or touching files. Use these hashes as expectedCurrentSha256 when iterating an inspected uncommitted draft through apply.
+
+`npm run game -- branches plan` inventories refs, canonical merged dev PRs, active worktrees, running Actions and local ancestry. `branches apply` repeats the inventory and removes only proven candidates via atomic GraphQL updateRefs, beforeOid comparisons and force=false. A no-op dev guard prevents applying the package against a changed dev. No history rewriting, local-tree deletion or tag removal occurs.
+
+Unknown ancestry is an explicit kept/unproven item, not an implicit permission to delete. Record the complete outcome in #29; inspect readback after an uncertain response instead of repeating a mutation. See docs/production/BRANCH_HYGIENE.ru.md.
+
+## Automatic release memory
+
+The dev build workflow includes a separate post-publication memory job using tools/record-release.mjs. It reads the actual published release and matches the APK/manifest digests to the build's source and run. Then it adds or reuses one managed comment in #29. It does not claim installation or human acceptance.
+
+If recording fails after publication, retry only the failed memory job. Do not create a second release to repair documentation. This job needs only contents:read and issues:write; PR checks do not receive that write job. See docs/production/RELEASE_MEMORY.ru.md and confirm the real job result before claiming deployment.
