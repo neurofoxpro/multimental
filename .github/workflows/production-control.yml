@@ -28,15 +28,17 @@ jobs:
         run: |
           npm run game -- validate
           npm run game -- render --check
-      - name: Preserve explicit formatting changes for review
+      - name: Preserve generated changes for explicit review
         if: always()
         run: |
           mkdir -p .gameprod/evidence/control-review
+          npm run game -- render
+          node scripts/readiness.mjs render
+          node scripts/changelog.mjs render
           node scripts/format.mjs write
-          git diff --binary > .gameprod/evidence/control-review/format.patch
+          git diff --binary > .gameprod/evidence/control-review/generated.patch
           git rev-parse HEAD > .gameprod/evidence/control-review/source.txt
-          cp skills/game-production/scripts/control.mjs .gameprod/evidence/control-review/control.mjs
-          cp skills/game-production/tests/control.test.mjs .gameprod/evidence/control-review/control.test.mjs
+          git ls-files -z | tar --null -T - -czf .gameprod/evidence/control-review/reviewed-source.tar.gz
       - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
         if: always()
         with:
@@ -45,5 +47,5 @@ jobs:
           include-hidden-files: true
           if-no-files-found: error
           retention-days: 14
-      - name: Formatting must already be committed
+      - name: Generated and formatted source must already be committed
         run: git diff --exit-code
