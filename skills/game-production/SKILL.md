@@ -48,6 +48,8 @@ Use `profile-test model|storage|ui` through the common CLI, then full `check`. D
 A compacted sequence is rejected as stale, never reapplied. After an uncertain write first reopen/read back; retain the original sequence and payload. Do not delete the journal or profile to resolve a conflict.
 
 ## GitHub and publication
+
+Build Android now defines a read-only `Source seal BASE_SHA HEAD_SHA` job after successful production checks. `tools/ci-identity.mjs` verifies the real PR event, repository and ordered merge parents; artifacts bind the exact tested combination. Read docs/production/CI_SOURCE_SEAL.ru.md. Do not confuse this stage with an enabled autonomous merger. Before changing the flow guard, verify an actual passing source-seal job and complete a separate activation/test cycle.
 Fresh PR checks must match the head, and changes requested must not be bypassed. Source-seal policy additionally binds the tested base. Automated COMMENT reviews identify themselves as machine checks, never independent human approval. PR, merge, release, install and human acceptance are distinct.
 
 The registered build workflow was actually dispatched from `dev` and passed in run 36180893893 without modifying main. Do not repeat the earlier blanket claim that main must change first. This observation applies to that registered workflow; probe each new route and inspect readback.
