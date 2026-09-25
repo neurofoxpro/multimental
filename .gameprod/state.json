@@ -1,13 +1,13 @@
 {
   "schemaVersion": 1,
   "repository": "neurofoxpro/multimental",
-  "updatedAt": "2026-09-25T01:10:50.219Z",
-  "phase": "directional_combat_dev_released_and_installed",
-  "implementationCommit": "0969637cfcd31d399fe0a6bf48c4dc3d0bdda082",
+  "updatedAt": "2026-09-25T03:47:27.928Z",
+  "phase": "terrain_and_balance_dev_released_installed",
+  "implementationCommit": "017d811f5fefe27a006edc68b651d27ee705b940",
   "testedProductionToolingCommit": "23911f31b0ffc512aa9e3810a4061b4183623f2f",
   "skillEntryPoint": "skills/game-production/SKILL.md",
-  "report": "docs/production/DIRECTIONAL_RELEASE_COMPLETED.ru.md",
-  "next": "Owner can test 0.4.0-alpha.94.1 now. Do not reapply old ZIP or restart merged PR22. Collection/decks/shop/crafting and second physical Android tests remain separate backlog.",
+  "report": "docs/production/BALANCE_RELEASE_COMPLETED.ru.md",
+  "next": "Owner gameplay review; first-player advantage and broader deck balance remain exploratory. Collection/deck builder/shop/crafting remain future implementation. Do not repeat completed PR24/25 cycles.",
   "observed": {
     "authorizedExecutionHost": "VENEL-SENDRIK",
     "githubAccount": "venelsendrik",
@@ -33,10 +33,10 @@
       "candidateHead": "23911f31b0ffc512aa9e3810a4061b4183623f2f",
       "evidence": "docs/production/evidence/bluetooth-release-completed.json"
     },
-    "lastVerifiedInstalledRelease": "v0.4.0-alpha.94.1",
-    "lastVerifiedVersionCode": 19401,
-    "lastVerifiedInstallAt": "2026-09-25T01:05:31.116Z",
-    "ciRunForInstalledBuild": 36080332923,
+    "lastVerifiedInstalledRelease": "v0.5.1-alpha.105.1",
+    "lastVerifiedVersionCode": 20501,
+    "lastVerifiedInstallAt": "2026-09-25T03:35:40.930Z",
+    "ciRunForInstalledBuild": 36090853264,
     "ciConclusionForInstalledBuild": "success",
     "deviceEvidence": "docs/production/evidence/production-v2-latest.json",
     "transportEvidence": "docs/production/evidence/production-v2-transports.json",
@@ -72,9 +72,9 @@
       "receipt": "docs/production/evidence/lan-release-completed.json"
     },
     "activeEngineering": {
-      "pr": 22,
-      "state": "merged_dev_and_delivered",
-      "commit": "0969637cfcd31d399fe0a6bf48c4dc3d0bdda082"
+      "pr": 25,
+      "state": "merged_dev_delivered",
+      "commit": "017d811f5fefe27a006edc68b651d27ee705b940"
     },
     "tutorialAudioRelease": {
       "pr": 17,
@@ -267,6 +267,19 @@
       "manualAcceptance": "pending",
       "secondPhysicalAndroid": "not_tested",
       "mainStable": "not_changed"
+    },
+    "balanceRelease": {
+      "version": "0.5.1-alpha.105.1",
+      "commit": "017d811f5fefe27a006edc68b651d27ee705b940",
+      "qualifiedCases": 29,
+      "evidence": "docs/production/evidence/balance-release-completed.json",
+      "simulationGames": 7040,
+      "parityGames": 64,
+      "firstPlayerAdvantage": "remaining"
+    },
+    "terrainRelease": {
+      "version": "0.5.0-alpha.100.1",
+      "evidence": "docs/production/evidence/terrain-release-completed.json"
     }
   },
   "notClaimed": [
