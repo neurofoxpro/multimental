@@ -36,9 +36,11 @@ run(
   ['skills/game-production/scripts/control.mjs', 'validate'],
   ['WORKPLAN_PASS']
 );
-run(process.execPath, ['skills/game-production/scripts/control.mjs', 'render', '--check'], [
-  'WORKPLAN_PROJECTIONS_PASS'
-]);
+run(
+  process.execPath,
+  ['skills/game-production/scripts/control.mjs', 'render', '--check'],
+  ['WORKPLAN_PROJECTIONS_PASS']
+);
 if (process.platform === 'win32')
   run(
     'powershell.exe',
