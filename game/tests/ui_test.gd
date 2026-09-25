@@ -29,7 +29,7 @@ func run_test() -> void:
             played = true
             break
     check(played, "fixture contains an affordable playable card")
-    check(ui.game.state.turn > turn_before, "card selection and target execute action")
+    check(ui.game.state.turn == turn_before and int(ui.game.state.placed_cell) >= 0, "placement retains optional attack phase")
     check(ui.game.count_cells(0) == 1, "human unit appears")
 
     # A legitimate opening hand can have only cost-2 cards and one coin.

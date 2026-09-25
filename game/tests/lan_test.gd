@@ -53,9 +53,9 @@ func run_test() -> void:
     await wait_until(func(): return guest.connection_status == "connected" and host.authority.guest_connected, "automatic same-identity reconnect")
     check(host.authority.game.state.turn == turns, "reconnect does not replay a new turn")
     print("TLS_TEST_PHASE match_actions")
-    var previous: int = int(host.authority.game.state.turn)
+    var previous: int = int(host.authority.revision)
     var acted: int = 0
-    for step in range(30):
+    for step in range(100):
         if host.authority.game.state.winner != -1:
             break
         var active: int = int(host.authority.game.state.active)
@@ -68,9 +68,9 @@ func run_test() -> void:
             break
         var result: Dictionary = actor.submit(options[0])
         check(result.ok, "player command submitted")
-        if not await wait_until(func(): return host.authority.game.state.turn > previous or host.authority.game.state.winner != -1, "authoritative turn advances"):
+        if not await wait_until(func(): return host.authority.revision > previous or host.authority.game.state.winner != -1, "authoritative command advances"):
             break
-        previous = int(host.authority.game.state.turn)
+        previous = int(host.authority.revision)
         acted += 1
     check(host.authority.game.state.winner != -1 and acted >= 5, "real TLS match reaches a result")
     await wait_until(func(): return not guest.current_view.is_empty() and guest.current_view.winner != -1, "result delivered to both players")

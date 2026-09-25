@@ -70,10 +70,15 @@ func _process(_delta: float) -> void:
     var options: Array = view.legal
     if options.is_empty():
         return
-    var command: Dictionary = options[0]
+    var command: Dictionary = {"type": "pass"}
+    for option in options:
+        if option.type == "play" or (option.type == "attack" and int(view.board[int(option.target)].owner) != 0):
+            command = option
+            break
     if command.type == "play":
         ui.selected_hand = -1
         ui.on_hand(int(command.hand))
+        ui.selected_direction = int(command.direction)
         ui.on_cell(int(command.cell))
     elif command.type == "attack":
         ui.selected_hand = -1
