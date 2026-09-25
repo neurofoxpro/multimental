@@ -1,0 +1,245 @@
+{
+  "schemaVersion": 1,
+  "observedAt": "2026-09-25T03:47:27.928Z",
+  "repository": "neurofoxpro/multimental",
+  "pr": 25,
+  "featureHead": "18458e49a02c31ad9e69580cf357db576cdc763b",
+  "commit": "017d811f5fefe27a006edc68b651d27ee705b940",
+  "installedVersion": "0.5.1-alpha.105.1",
+  "versionCode": 20501,
+  "installedAt": "2026-09-25T03:35:40.930Z",
+  "originalSha256": "e0fa2b0459f6da43d8a7130cf1aaec847ddfbb438ebba3a00e98fcd4a3bb9514",
+  "installedSha256": "e7e4a55b9bc881f052c0014baf27ea3921056b13ee074c0936d20ccd26a7a9fb",
+  "ready": true,
+  "phoneData": "preserved_update_in_place",
+  "homeIcon": {
+    "label": "Multimental Dev",
+    "present": true,
+    "launchByTap": true,
+    "proof": "balance-icon-launched-final.local.png"
+  },
+  "candidateQualification": {
+    "candidateHead": "18458e49a02c31ad9e69580cf357db576cdc763b",
+    "apk": {
+      "version": "0.5.1-alpha.104.1",
+      "sha256": "192f56503f1c7ebb25b23c08fb708707d19a39c16960726dee3f63485e0383e0",
+      "commit": "d3f0fca4112633d79f5833e1d0be6b5762c5cb66"
+    },
+    "startedAt": "2026-09-25T03:26:58.540Z",
+    "finishedAt": "2026-09-25T03:33:29.420Z",
+    "status": "passed",
+    "sourceDigest": "a5536c1eb823c78e9e5efec7a69f39b9e292eff8828398fc2c95bac9357dd171",
+    "scenarios": [
+      {
+        "name": "emulator-A-clean-install",
+        "status": "passed",
+        "durationMs": 9600
+      },
+      {
+        "name": "emulator-A-install",
+        "status": "passed",
+        "durationMs": 526
+      },
+      {
+        "name": "emulator-A-ui",
+        "status": "passed",
+        "durationMs": 11327
+      },
+      {
+        "name": "emulator-A-tutorial",
+        "status": "passed",
+        "durationMs": 12398
+      },
+      {
+        "name": "emulator-A-jni",
+        "status": "passed",
+        "durationMs": 5797
+      },
+      {
+        "name": "emulator-A-reinstall",
+        "status": "passed",
+        "durationMs": 10349
+      },
+      {
+        "name": "emulator-A-close",
+        "status": "passed",
+        "durationMs": 389
+      },
+      {
+        "name": "emulator-A-launch",
+        "status": "passed",
+        "durationMs": 5380
+      },
+      {
+        "name": "emulator-B-install",
+        "status": "passed",
+        "durationMs": 550
+      },
+      {
+        "name": "emulator-B-ui",
+        "status": "passed",
+        "durationMs": 17120
+      },
+      {
+        "name": "emulator-B-tutorial",
+        "status": "passed",
+        "durationMs": 14189
+      },
+      {
+        "name": "emulator-B-jni",
+        "status": "passed",
+        "durationMs": 6260
+      },
+      {
+        "name": "emulator-B-reinstall",
+        "status": "passed",
+        "durationMs": 11454
+      },
+      {
+        "name": "emulator-B-close",
+        "status": "passed",
+        "durationMs": 500
+      },
+      {
+        "name": "emulator-B-launch",
+        "status": "passed",
+        "durationMs": 5710
+      },
+      {
+        "name": "emulator-pair",
+        "status": "passed",
+        "durationMs": 13407
+      },
+      {
+        "name": "pvp-emulators",
+        "status": "passed",
+        "durationMs": 36076
+      },
+      {
+        "name": "phone-install",
+        "status": "passed",
+        "durationMs": 14971
+      },
+      {
+        "name": "phone-ui",
+        "status": "passed",
+        "durationMs": 9683
+      },
+      {
+        "name": "phone-tutorial",
+        "status": "passed",
+        "durationMs": 11337
+      },
+      {
+        "name": "phone-tcp-usb",
+        "status": "passed",
+        "durationMs": 4337
+      },
+      {
+        "name": "phone-tcp-lan",
+        "status": "passed",
+        "durationMs": 4319
+      },
+      {
+        "name": "phone-tcp-peer",
+        "status": "passed",
+        "durationMs": 10064
+      },
+      {
+        "name": "phone-bluetooth",
+        "status": "passed",
+        "durationMs": 9226
+      },
+      {
+        "name": "bluetooth-player-room",
+        "status": "passed",
+        "durationMs": 53283
+      },
+      {
+        "name": "pvp-phone-lan",
+        "status": "passed",
+        "durationMs": 45593
+      },
+      {
+        "name": "phone-reinstall",
+        "status": "passed",
+        "durationMs": 13875
+      },
+      {
+        "name": "phone-close",
+        "status": "passed",
+        "durationMs": 338
+      },
+      {
+        "name": "phone-launch",
+        "status": "passed",
+        "durationMs": 3619
+      }
+    ],
+    "emulatorVisuals": {
+      "A": "rendered_ui_observed",
+      "B": "rendered_ui_observed",
+      "backend": "host"
+    }
+  },
+  "ci": {
+    "conclusion": "success",
+    "databaseId": 36090853264,
+    "headSha": "017d811f5fefe27a006edc68b651d27ee705b940",
+    "status": "completed",
+    "url": "https://github.com/neurofoxpro/multimental/actions/runs/36090853264",
+    "workflowName": "Build Android"
+  },
+  "balance": {
+    "games": 7040,
+    "parityGames": 64,
+    "report": "docs/production/evidence/balance-tuning.json",
+    "selectedVariant": "C",
+    "firstPlayerRate": 0.618,
+    "perfectBalanceClaimed": false
+  },
+  "physicalVisualChecks": [
+    {
+      "name": "center_locked_initially",
+      "proof": "balance-center-locked-second.local.png"
+    },
+    {
+      "name": "center_open_banner_on_turn_7",
+      "proof": "balance-center-unlocked.local.png"
+    },
+    {
+      "name": "matching_tile_health_bonus",
+      "proof": "balance-center-unlocked.local.png"
+    },
+    {
+      "name": "sweep_hits_two_enemies",
+      "proof": "balance-income-next-turn.local.png"
+    },
+    {
+      "name": "four_units_income_then_six_coins_on_turn_9",
+      "proof": "balance-income-next-turn.local.png"
+    },
+    {
+      "name": "six_units_unlock_plus_two_without_immediate_refund",
+      "proof": "balance-sixth-deployment.local.png"
+    },
+    {
+      "name": "eight_coins_on_turn_11_after_six_unit_threshold",
+      "proof": "balance-after-six-income.local.png"
+    },
+    {
+      "name": "ninety_degree_rotation",
+      "proof": "balance-final-down.local.png"
+    }
+  ],
+  "manualAcceptance": "pending_owner_gameplay",
+  "twoPhysicalAndroid": "not_tested",
+  "emulators": "stopped_after_verification",
+  "mainStable": "not_changed",
+  "resolvedProductionIssues": [
+    "sweep-aware automatic PvP move selection",
+    "bounded Bluetooth test-client heartbeat",
+    "dedicated emulator GPU rendering",
+    "ADB transport restart preserving identity; confirmed-dead test lock archived"
+  ]
+}
