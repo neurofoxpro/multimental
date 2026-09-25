@@ -7,6 +7,7 @@
     "node": ">=22"
   },
   "scripts": {
+    "game": "node skills/game-production/scripts/control.mjs",
     "production": "node skills/game-production/scripts/gameprod.mjs",
     "doctor": "node skills/game-production/scripts/gameprod.mjs doctor",
     "verify": "node skills/game-production/scripts/gameprod.mjs run verify",
