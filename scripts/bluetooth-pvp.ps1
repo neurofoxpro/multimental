@@ -21,6 +21,7 @@ function OpenConnection {
 }
 try {
  $view=OpenConnection
+ $nextPing=(Get-Date).AddSeconds(2)
  while((Get-Date)-lt $until -and $view.winner -eq -1){
   if($actions -ge 2 -and -not $reconnected){$client.Dispose();$client=$null;Start-Sleep -Seconds 2;$view=OpenConnection;$reconnected=$true;continue}
   if($view.active -eq 0 -and $view.legal.Count -gt 0){
@@ -28,7 +29,7 @@ try {
    Send @{kind='command';seq=$seq;command=$view.legal[0]}
    do{$view=NextView}while($view.next_sequence -le $seq -and $view.winner -eq -1)
    $actions++
-  }else{Send @{kind='ping'};$view=NextView}
+  }else{if((Get-Date)-ge $nextPing){Send @{kind='ping'};$nextPing=(Get-Date).AddSeconds(2)};$view=NextView}
  }
  if($view.winner -eq -1 -or $actions -lt 2 -or -not $reconnected){throw 'Bluetooth PvP did not finish with reconnect'}
  [pscustomobject]@{status='passed';role='windows_guest';actions=$actions;winner=$view.winner;turn=$view.turn;scores=$view.scores;reconnect=$reconnected;authenticatedRFCOMM=$true;encryptedRFCOMM=$true;tls=$false;privateView=$true} | ConvertTo-Json -Compress -Depth 8

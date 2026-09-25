@@ -78,7 +78,7 @@ try {
             '-no-audio',
             '-no-window',
             '-gpu',
-            'software',
+            'swangle',
             '-memory',
             '2048',
             '-cores',

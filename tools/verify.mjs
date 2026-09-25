@@ -61,7 +61,8 @@ for (const [file, marker] of [
   ['directional_test.gd', 'MULTIMENTAL_DIRECTIONAL_PASS'],
   ['directional_ui_test.gd', 'MULTIMENTAL_DIRECTIONAL_UI_PASS'],
   ['terrain_test.gd', 'MULTIMENTAL_TERRAIN_PASS'],
-  ['balance_test.gd', 'MULTIMENTAL_BALANCE_PARAMETERS_PASS']
+  ['balance_test.gd', 'MULTIMENTAL_BALANCE_PARAMETERS_PASS'],
+  ['room_automation_test.gd', 'MULTIMENTAL_ROOM_AUTOMATION_PASS']
 ])
   run(godot, ['--headless', '--path', 'game', '--script', 'res://tests/' + file], [marker]);
 const core = fs.readFileSync('game/src/match_core.gd', 'utf8');
