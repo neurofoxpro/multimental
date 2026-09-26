@@ -10,6 +10,8 @@ var wallet: Label
 var status: Label
 var craft_button: Button
 var recycle_button: Button
+var inspector: AcceptDialog
+var details_button: Button
 var confirm: ConfirmationDialog
 var requested: Dictionary = {}
 var pending: Dictionary = {}
@@ -38,6 +40,11 @@ func setup(owner_ui: Control) -> void:
     add_child(picker)
     detail = host.label("", 20)
     add_child(detail)
+    inspector = preload("res://src/card_inspector.gd").new()
+    add_child(inspector)
+    details_button = host.button(host.t("ПОДРОБНЕЕ О КАРТЕ", "CARD DETAILS"), show_details, 64)
+    details_button.name = "InspectCraftCard"
+    add_child(details_button)
     craft_button = host.button("", request_craft, 76)
     craft_button.name = "CraftCard"
     add_child(craft_button)
@@ -67,6 +74,9 @@ func setup(owner_ui: Control) -> void:
     confirm.canceled.connect(func(): requested.clear())
     add_child(confirm)
     refresh()
+func show_details() -> void:
+    inspector.open_card(Deck.card_id(selected_code()), host.language, details_button)
+
 func refresh() -> void:
     var p: Dictionary = host.profile.state()
     var code: String = selected_code()
