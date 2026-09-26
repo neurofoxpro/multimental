@@ -1,4 +1,14 @@
 const SPECS = {
+  rewards: {
+    test: 'real_rewards_quests',
+    stages: [
+      'waiting_rewards_open',
+      'waiting_rewards_one',
+      'waiting_rewards_three',
+      'waiting_rewards_back',
+      'waiting_rewards_reopen'
+    ]
+  },
   inspector: {
     test: 'real_card_inspector',
     stages: [

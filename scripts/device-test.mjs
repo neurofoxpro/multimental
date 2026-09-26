@@ -300,7 +300,8 @@ try {
     mode === 'collection' ||
     mode === 'shop' ||
     mode === 'crafting' ||
-    mode === 'inspector'
+    mode === 'inspector' ||
+    mode === 'rewards'
   ) {
     const personalBefore = profileHashes();
     if (target !== 'phone') {
