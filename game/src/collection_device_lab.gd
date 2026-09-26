@@ -40,10 +40,10 @@ func _tap(control: Control, stage: String, predicate: Callable) -> bool:
         return false
     if control is BaseButton and control.disabled:
         return false
-    if not ui.get_viewport_rect().encloses(control.get_global_rect()):
+    var geometry: Dictionary = preload("res://src/ui_tap_geometry.gd").target(control, ui.get_viewport())
+    if not geometry.ok:
         return false
-    var point: Vector2 = get_viewport().get_screen_transform() * control.get_global_transform_with_canvas() * (control.size * 0.5)
-    changed.emit({"stage": stage, "tap": [int(round(point.x)), int(round(point.y))]})
+    changed.emit({"stage": stage, "tap": geometry.tap, "tapGeometry": geometry})
     var until: int = Time.get_ticks_msec() + 20000
     while Time.get_ticks_msec() < until and not predicate.call():
         await get_tree().create_timer(0.05).timeout

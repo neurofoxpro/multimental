@@ -54,6 +54,15 @@ func setup(owner_ui: Control) -> void:
     add_child(back)
     confirm = ConfirmationDialog.new()
     confirm.name = "ConfirmRecycle"
+    confirm.title = host.t("ПОДТВЕРЖДЕНИЕ РАЗБОРА", "CONFIRM RECYCLING")
+    confirm.dialog_autowrap = true
+    confirm.add_theme_constant_override("buttons_min_width", 170)
+    confirm.add_theme_constant_override("buttons_min_height", 64)
+    confirm.get_label().add_theme_font_size_override("font_size", 20)
+    confirm.get_ok_button().text = host.t("РАЗОБРАТЬ", "RECYCLE")
+    confirm.get_cancel_button().text = host.t("ОТМЕНА", "CANCEL")
+    confirm.get_ok_button().add_theme_font_size_override("font_size", 20)
+    confirm.get_cancel_button().add_theme_font_size_override("font_size", 20)
     confirm.confirmed.connect(_confirmed)
     confirm.canceled.connect(func(): requested.clear())
     add_child(confirm)
@@ -88,7 +97,7 @@ func request_recycle() -> void:
         return
     requested = {"kind": "card_recycle", "card": code}
     confirm.dialog_text = host.t("Разобрать одну лишнюю копию «%s» за %d пыли? Колоды не изменятся.", "Recycle one spare copy of “%s” for %d dust? Saved decks will not change.") % [host.game.card(Deck.card_id(code))[host.language], Policy.RECYCLE]
-    confirm.popup_centered(Vector2i(540, 200))
+    confirm.popup_centered(Vector2i(580, 260))
 func _confirmed() -> void:
     if requested.is_empty():
         return
