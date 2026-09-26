@@ -6,6 +6,7 @@ const TARGETS = ['phone', 'emulator-A', 'emulator-B'];
 const MODES = [
   'close',
   'launch',
+  'restore',
   'install',
   'reinstall',
   'clean-install',
@@ -25,6 +26,7 @@ const MODES = [
 ];
 const SUITES = {
   ui: ['ui'],
+  tutorial: ['tutorial'],
   profile: ['profile'],
   collection: ['collection'],
   shop: ['shop'],
@@ -33,6 +35,7 @@ const SUITES = {
   rewards: ['rewards'],
   lifecycle: ['close', 'launch', 'ui'],
   smoke: ['close', 'launch', 'jni', 'tutorial', 'ui'],
+  handoff: ['close', 'launch', 'jni', 'tutorial', 'ui', 'inspector', 'collection', 'restore'],
   hardware: ['tcp-usb', 'tcp-lan', 'bluetooth'],
   usb: ['tcp-usb'],
   bluetooth: ['bluetooth']
@@ -59,7 +62,7 @@ export function suiteOptions(args) {
   for (let i = 0; i < args.length; i += 2) {
     const key = args[i];
     if (
-      !['--config', '--target', '--suite'].includes(key) ||
+      !['--config', '--target', '--suite', '--finish'].includes(key) ||
       Object.hasOwn(values, key) ||
       !args[i + 1] ||
       args[i + 1].startsWith('--')
@@ -74,7 +77,10 @@ export function suiteOptions(args) {
     throw Error('Explicit config and known target/suite required');
   if (['hardware', 'bluetooth'].includes(suite) && target !== 'phone')
     throw Error('Physical radio suite requires phone');
-  return { config, target, suite, modes: [...SUITES[suite]] };
+  if (values['--finish'] && values['--finish'] !== 'normal') throw Error('Unknown finish mode');
+  const modes = [...SUITES[suite]];
+  if (values['--finish'] === 'normal' && !modes.includes('restore')) modes.push('restore');
+  return { config, target, suite, modes };
 }
 export function receiptName(runId, target, mode) {
   if (!UUID.test(runId || '') || !TARGETS.includes(target) || !MODES.includes(mode))

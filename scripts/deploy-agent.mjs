@@ -28,7 +28,11 @@ const files = [
   'skills/game-production/scripts/device-coordination.mjs',
   'skills/game-production/scripts/http-read.mjs',
   'skills/game-production/scripts/resumable-download.mjs',
-  'skills/game-production/scripts/release-transfer.mjs'
+  'skills/game-production/scripts/release-transfer.mjs',
+  'skills/game-production/scripts/primary-transport.mjs',
+  'skills/game-production/scripts/lab-policy.mjs',
+  'skills/game-production/scripts/install-recovery-policy.mjs',
+  'skills/game-production/scripts/android-text.mjs'
 ];
 const inventory = files.map((file) => ({ file, sha256: sha(fs.readFileSync(file)) }));
 if (fs.existsSync(destination)) {

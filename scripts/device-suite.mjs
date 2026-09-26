@@ -1,3 +1,4 @@
+import { primaryTransport } from '../skills/game-production/scripts/primary-transport.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
@@ -27,7 +28,8 @@ const options = suiteOptions(process.argv.slice(2));
 const root = findRoot(),
   project = readJSON(path.join(root, '.gameprod/project.json'));
 context(root, project);
-const owner = validateConfig(readJSON(options.config));
+const savedOwner = validateConfig(readJSON(options.config));
+const owner = options.target === 'phone' ? primaryTransport(savedOwner) : savedOwner;
 if (owner.repository !== 'neurofoxpro/multimental' || owner.package !== PACKAGE)
   throw Error('Wrong suite project');
 const c = {

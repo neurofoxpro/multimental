@@ -1,3 +1,8 @@
+import {
+  installDisposition,
+  confirmInstallEffect
+} from '../skills/game-production/scripts/install-recovery-policy.mjs';
+import { adbLines } from '../skills/game-production/scripts/android-text.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 import os from 'node:os';
@@ -125,6 +130,45 @@ function signer(c, input, output) {
   }
   return cert;
 }
+function installedArtifact(c) {
+  const dump = exec(c.adb, ['-s', c.serial, 'shell', 'dumpsys', 'package', c.package]);
+  const version = Number(dump.match(/versionCode=(\d+)/)?.[1] || 0);
+  if (!version) return { version: 0, hash: null };
+  const paths = adbLines(exec(c.adb, ['-s', c.serial, 'shell', 'pm', 'path', c.package]));
+  if (paths.length !== 1 || !/^package:\/data\/app\/[A-Za-z0-9_./~+=-]+\/base\.apk$/.test(paths[0]))
+    throw Error('Unexpected installed APK layout');
+  const hash = exec(c.adb, ['-s', c.serial, 'shell', 'sha256sum', paths[0].slice(8)])
+    .trim()
+    .split(/\s+/)[0];
+  if (!/^[a-f0-9]{64}$/.test(hash)) throw Error('Missing actual APK hash');
+  return { version, hash };
+}
+function existingSigned(c, out, m) {
+  const identityFile = path.join(c.workDir, 'private-signing/identity.local.json');
+  if (!fs.existsSync(out) || !fs.existsSync(identityFile)) return null;
+  const identity = readJSON(identityFile);
+  if (!/^[a-f0-9]{64}$/.test(identity.certificate || ''))
+    throw Error('Persistent signing certificate is missing');
+  const output = exec(c.java, ['-jar', c.apksigner, 'verify', '--print-certs', out]);
+  const certificate = output
+    .match(/certificate SHA-256 digest:\s*([a-f0-9]+)/i)?.[1]
+    ?.toLowerCase();
+  const badge = exec(c.aapt, ['dump', 'badging', out]).match(
+    /package: name='([^']+)' versionCode='(\d+)'/
+  );
+  if (
+    certificate !== identity.certificate ||
+    !badge ||
+    badge[1] !== c.package ||
+    Number(badge[2]) !== m.versionCode
+  )
+    throw Error('Existing signed artifact identity changed');
+  return {
+    certificate,
+    expectedCertificate: identity.certificate,
+    signedHash: sha(fs.readFileSync(out))
+  };
+}
 export async function install(c, dir, m, { deferForeground = true, forceReinstall = false } = {}) {
   validateConfig(c);
   if (m.repository !== c.repository || m.package !== c.package)
@@ -154,28 +198,77 @@ export async function install(c, dir, m, { deferForeground = true, forceReinstal
     if (grants.some((x) => !allowed.includes(x))) throw Error('Unexpected Android permission');
     const stampFile = path.join(c.workDir, 'installed.local.json');
     const previous = fs.existsSync(stampFile) ? readJSON(stampFile) : null;
-    const installed = exec(c.adb, ['-s', c.serial, 'shell', 'dumpsys', 'package', c.package], {
-      allowFailure: true
+    const observed = installedArtifact(c);
+    const version = observed.version;
+    if (version > m.versionCode || previous?.versionCode > m.versionCode)
+      throw Error('Downgrade refused');
+    const out = path.join(dir, 'local-development.apk');
+    if (version > 0 && !fs.existsSync(path.join(c.workDir, 'private-signing/identity.local.json')))
+      throw Error('Installed app signing identity missing; never generate a replacement');
+    let cached = existingSigned(c, out, m);
+    if (forceReinstall && !cached) {
+      signer(c, original, out);
+      cached = existingSigned(c, out, m);
+    }
+    const disposition = installDisposition({
+      version,
+      versionCode: m.versionCode,
+      actualHash: observed.hash,
+      originalHash: m.sha256,
+      signedHash: cached?.signedHash,
+      certificate: cached?.certificate,
+      expectedCertificate: cached?.expectedCertificate,
+      previous,
+      force: forceReinstall
     });
-    const version = Number(installed.match(/versionCode=(\d+)/)?.[1] || 0);
-    if (!forceReinstall && previous?.originalSha256 === m.sha256 && version === m.versionCode) {
+    if (disposition === 'already_current') {
       console.log('DEVICE_UPDATE_ALREADY_CURRENT');
       return { status: 'already_current', versionCode: version };
     }
-    if (version > m.versionCode || previous?.versionCode > m.versionCode)
-      throw Error('Downgrade refused');
-    if (deferForeground && !c.autoCloseForUpdate && isForeground(c)) {
-      console.log('DEVICE_UPDATE_DEFERRED_FOREGROUND');
+    if (deferForeground && !c.autoCloseForUpdate && isForeground(c))
       return { status: 'deferred_foreground' };
-    }
-    const out = path.join(dir, 'local-development.apk');
-    const certificate = signer(c, original, out);
-    const signedHash = sha(fs.readFileSync(out));
-    if (c.autoCloseForUpdate || !deferForeground)
-      exec(c.adb, ['-s', c.serial, 'shell', 'am', 'force-stop', c.package]);
-    const result = exec(c.adb, ['-s', c.serial, 'install', '-r', out]);
-    if (!/Success/.test(result)) throw Error('Install did not confirm Success');
+    const certificate = cached?.certificate || signer(c, original, out);
+    const signedHash = cached?.signedHash || sha(fs.readFileSync(out));
+    const journalFile = path.join(dir, 'install-operation.local.json');
+    const operation = {
+      schemaVersion: 1,
+      repository: c.repository,
+      package: c.package,
+      sourceCommit: m.commit,
+      originalSha256: m.sha256,
+      installedSha256: signedHash,
+      certificateSha256: certificate,
+      versionCode: m.versionCode,
+      disposition,
+      phase: 'observed',
+      updatedAt: new Date().toISOString()
+    };
+    const saveOperation = (phase) => {
+      operation.phase = phase;
+      operation.updatedAt = new Date().toISOString();
+      writeJSON(journalFile, operation);
+    };
+    saveOperation('observed');
+    if (disposition !== 'resume_launch') {
+      if (c.autoCloseForUpdate || !deferForeground)
+        exec(c.adb, ['-s', c.serial, 'shell', 'am', 'force-stop', c.package]);
+      saveOperation('install_pending');
+      operation.install = await confirmInstallEffect({
+        perform: async () => exec(c.adb, ['-s', c.serial, 'install', '-r', out]),
+        observe: async () => installedArtifact(c),
+        expectedHash: signedHash,
+        expectedVersion: m.versionCode
+      });
+    } else
+      operation.install = {
+        acknowledged: false,
+        readback: true,
+        recoveredPriorCompletion: true,
+        installRepeated: false
+      };
+    saveOperation('installed_readback');
     exec(c.adb, ['-s', c.serial, 'shell', 'am', 'force-stop', c.package]);
+    saveOperation('launch_pending');
     const launcher = launchApplication(c);
     const started = performance.now();
     const ready = await waitReady({
@@ -212,10 +305,12 @@ export async function install(c, dir, m, { deferForeground = true, forceReinstal
       readyMarker: true,
       readinessWaitMs: Math.round(performance.now() - started),
       launcher,
+      installationReadback: operation.install,
       humanAcceptance: 'pending'
     };
     writeJSON(path.join(dir, 'device-receipt.json'), receipt);
     writeJSON(stampFile, receipt);
+    saveOperation('complete');
     console.log('DEVICE_INSTALL_PASS ' + m.version + ' ' + signedHash);
     return receipt;
   } finally {
