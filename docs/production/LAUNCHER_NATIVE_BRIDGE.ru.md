@@ -22,3 +22,9 @@ Model.native_flag принимает только TYPE_BOOL или TYPE_INT со
 - https://docs.godotengine.org/en/stable/classes/class_javaclasswrapper.html — Android JNI-wrapper и проверка исключений.
 
 Доказательства исходной ошибки и локальной регрессии: evidence/launcher-native-bridge-observed-20260926.json.
+
+## Дополнительная защита входа
+
+Mode, expectedVersion и nonce проверяются как строки до сравнений Variant. Отдельный launcher-request набор содержит 40 проверок, включая 24 подстановки неверного типа. Неверный приватный запрос не должен приводить к ошибке исполнения или Android-вызову.
+
+Первый PR-кандидат был отвергнут CI из-за отсутствия нового русского changelog fragment. Локальная проверка текста changelog и покрытие изменений в CI — разные проверки. Ошибка исправлена новой записью; результат старого CI не подменяется. В последовательностях команд проверять LASTEXITCODE после каждого .cmd, а не полагаться только на PowerShell ErrorActionPreference.

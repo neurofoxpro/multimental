@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
   "repository": "neurofoxpro/multimental",
-  "capturedAt": "2026-09-26T19:03:04.030Z",
-  "captureBaseCommit": "d109530ea03a5a9779264653c55778882dd83032",
+  "capturedAt": "2026-09-26T19:08:59.510Z",
+  "captureBaseCommit": "b19033e5358a41e5c8c75e1e0449c0964878d2a9",
   "captureWorktreeDirty": true,
   "sourceIdentity": "canonical-render-inputs-excluding-ci-build-stamp",
-  "inputKey": "5e8e8e75ac6ef2e2c3bdc71e25f26d2baada5a90c8415ee6519432a0416d35ce",
+  "inputKey": "cff49185640732f6fa2b18caa1f7a36bdb834531b7e55db6dd64b69ad1444e50",
   "inputs": [
     {
       "path": "game/icon.svg",
@@ -149,7 +149,7 @@
     },
     {
       "path": "game/src/platform/launcher_request.gd",
-      "sha256": "9ee5c3ec6c8a1eb99c4d487657a261c4c31a396e67c7bf470bc3b26d487abe88"
+      "sha256": "ce7bcc9a3db8feeab285cdc1fc83560bbe574b90163fd25f30a20be12b8753f1"
     },
     {
       "path": "game/src/platform/launcher_shortcut.gd",
@@ -228,7 +228,7 @@
       "sha256": "326f1ad07444fb00f06a3ad36556ffdea59a6c6243d6f3ea6d3b0322fe97c42d"
     }
   ],
-  "nonce": "058f938ef6d5560c261ad0aa7b99f7fd",
+  "nonce": "7c187aa044ce0946f21ef008ed0e2764",
   "capture": {
     "buildStamp": {
       "commit": "local",
@@ -280,7 +280,7 @@
         "locale": "ru",
         "page": "battle",
         "sampledColors": 206,
-        "sha256": "29b43b3eba9a1495289a0c251422deaa5b9dbcc41aba262cfa26691391bcccf6",
+        "sha256": "4cbd8d92f1f50ef2179d3cbc5716cb0e5bf99003d2eb785ce4e7c792e96c3ab8",
         "width": 720
       },
       {
@@ -360,7 +360,7 @@
         "locale": "ru",
         "page": "battle",
         "sampledColors": 175,
-        "sha256": "6f9fe5da3e7865725aca8a1978cb13e5d488bd5a7088c864a9883128b59d3e1e",
+        "sha256": "2b55510fea405e4a958c546d64c265d8130ced0b3649511b7ac78c1c5943dc74",
         "width": 1280
       },
       {
@@ -400,7 +400,7 @@
         "locale": "en",
         "page": "battle",
         "sampledColors": 197,
-        "sha256": "df4ae1b6556214782024f4a19fe867af1367a6742e38dbe5a62c7c8551aca58a",
+        "sha256": "030abb41579ce0d9546a59d631f82c1009e0d0589dd051969764affb5967f628",
         "width": 720
       },
       {
@@ -480,12 +480,12 @@
         "locale": "en",
         "page": "battle",
         "sampledColors": 172,
-        "sha256": "7f4f81c4377039bdc74fe514e238cf6f0a2544a906c26498ccebfba827ba70b3",
+        "sha256": "5658828b69495be331b7ee67fca43aad3e0dac4a666e720d480205b3b91c141e",
         "width": 1280
       }
     ],
     "installedApkCapture": false,
-    "nonce": "058f938ef6d5560c261ad0aa7b99f7fd",
+    "nonce": "7c187aa044ce0946f21ef008ed0e2764",
     "personalProfileUntouched": true,
     "renderer": "Windows",
     "schemaVersion": 1,
@@ -494,123 +494,123 @@
   "assets": [
     {
       "id": "ru-menu-720x1280",
-      "path": "docs/media/gallery/5e8e8e75ac6ef2e2c3bdc71e25f26d2baada5a90c8415ee6519432a0416d35ce/058f938ef6d5560c261ad0aa7b99f7fd/ru-menu-720x1280.png",
+      "path": "docs/media/gallery/cff49185640732f6fa2b18caa1f7a36bdb834531b7e55db6dd64b69ad1444e50/7c187aa044ce0946f21ef008ed0e2764/ru-menu-720x1280.png",
       "sha256": "ab8ee1e0fae2a4a264fa95e790225d2aec2987fee4a31864bc844df4c64e65f9"
     },
     {
       "id": "ru-collection-720x1280",
-      "path": "docs/media/gallery/5e8e8e75ac6ef2e2c3bdc71e25f26d2baada5a90c8415ee6519432a0416d35ce/058f938ef6d5560c261ad0aa7b99f7fd/ru-collection-720x1280.png",
+      "path": "docs/media/gallery/cff49185640732f6fa2b18caa1f7a36bdb834531b7e55db6dd64b69ad1444e50/7c187aa044ce0946f21ef008ed0e2764/ru-collection-720x1280.png",
       "sha256": "e1dbf9a2367d05c7a81242e19105f5f95561db16112ee4f3540c3572618403cc"
     },
     {
       "id": "ru-card-720x1280",
-      "path": "docs/media/gallery/5e8e8e75ac6ef2e2c3bdc71e25f26d2baada5a90c8415ee6519432a0416d35ce/058f938ef6d5560c261ad0aa7b99f7fd/ru-card-720x1280.png",
+      "path": "docs/media/gallery/cff49185640732f6fa2b18caa1f7a36bdb834531b7e55db6dd64b69ad1444e50/7c187aa044ce0946f21ef008ed0e2764/ru-card-720x1280.png",
       "sha256": "bef9b8e4f8dc04da0650af9506832042caafae5c3c547b3658037cdfaf4a3e7f"
     },
     {
       "id": "ru-battle-720x1280",
-      "path": "docs/media/gallery/5e8e8e75ac6ef2e2c3bdc71e25f26d2baada5a90c8415ee6519432a0416d35ce/058f938ef6d5560c261ad0aa7b99f7fd/ru-battle-720x1280.png",
-      "sha256": "29b43b3eba9a1495289a0c251422deaa5b9dbcc41aba262cfa26691391bcccf6"
+      "path": "docs/media/gallery/cff49185640732f6fa2b18caa1f7a36bdb834531b7e55db6dd64b69ad1444e50/7c187aa044ce0946f21ef008ed0e2764/ru-battle-720x1280.png",
+      "sha256": "4cbd8d92f1f50ef2179d3cbc5716cb0e5bf99003d2eb785ce4e7c792e96c3ab8"
     },
     {
       "id": "ru-shop-720x1280",
-      "path": "docs/media/gallery/5e8e8e75ac6ef2e2c3bdc71e25f26d2baada5a90c8415ee6519432a0416d35ce/058f938ef6d5560c261ad0aa7b99f7fd/ru-shop-720x1280.png",
+      "path": "docs/media/gallery/cff49185640732f6fa2b18caa1f7a36bdb834531b7e55db6dd64b69ad1444e50/7c187aa044ce0946f21ef008ed0e2764/ru-shop-720x1280.png",
       "sha256": "91e9aa0348eadb8b936018228cd2767b3ee5992673ea4e9f6701c029b5658dfe"
     },
     {
       "id": "ru-crafting-720x1280",
-      "path": "docs/media/gallery/5e8e8e75ac6ef2e2c3bdc71e25f26d2baada5a90c8415ee6519432a0416d35ce/058f938ef6d5560c261ad0aa7b99f7fd/ru-crafting-720x1280.png",
+      "path": "docs/media/gallery/cff49185640732f6fa2b18caa1f7a36bdb834531b7e55db6dd64b69ad1444e50/7c187aa044ce0946f21ef008ed0e2764/ru-crafting-720x1280.png",
       "sha256": "5e0519477f4c0407c3ac652f190aec80e863147aa6bfd16d613ba834ca3f2444"
     },
     {
       "id": "ru-rewards-720x1280",
-      "path": "docs/media/gallery/5e8e8e75ac6ef2e2c3bdc71e25f26d2baada5a90c8415ee6519432a0416d35ce/058f938ef6d5560c261ad0aa7b99f7fd/ru-rewards-720x1280.png",
+      "path": "docs/media/gallery/cff49185640732f6fa2b18caa1f7a36bdb834531b7e55db6dd64b69ad1444e50/7c187aa044ce0946f21ef008ed0e2764/ru-rewards-720x1280.png",
       "sha256": "8dbe7a88644a0a4ca4c687fc9c33a47b51cc64f182cb5235fe2cb3f697c58780"
     },
     {
       "id": "ru-connection-720x1280",
-      "path": "docs/media/gallery/5e8e8e75ac6ef2e2c3bdc71e25f26d2baada5a90c8415ee6519432a0416d35ce/058f938ef6d5560c261ad0aa7b99f7fd/ru-connection-720x1280.png",
+      "path": "docs/media/gallery/cff49185640732f6fa2b18caa1f7a36bdb834531b7e55db6dd64b69ad1444e50/7c187aa044ce0946f21ef008ed0e2764/ru-connection-720x1280.png",
       "sha256": "6c3eda9bec64bd07abdb5e260469b4ed5642d053511ad4ba3dd84976ef77d578"
     },
     {
       "id": "ru-rules-720x1280",
-      "path": "docs/media/gallery/5e8e8e75ac6ef2e2c3bdc71e25f26d2baada5a90c8415ee6519432a0416d35ce/058f938ef6d5560c261ad0aa7b99f7fd/ru-rules-720x1280.png",
+      "path": "docs/media/gallery/cff49185640732f6fa2b18caa1f7a36bdb834531b7e55db6dd64b69ad1444e50/7c187aa044ce0946f21ef008ed0e2764/ru-rules-720x1280.png",
       "sha256": "ff71caa302126872bf7160886f32369e0dcc6cdb59c8e60423814c06aebd41b6"
     },
     {
       "id": "ru-settings-720x1280",
-      "path": "docs/media/gallery/5e8e8e75ac6ef2e2c3bdc71e25f26d2baada5a90c8415ee6519432a0416d35ce/058f938ef6d5560c261ad0aa7b99f7fd/ru-settings-720x1280.png",
+      "path": "docs/media/gallery/cff49185640732f6fa2b18caa1f7a36bdb834531b7e55db6dd64b69ad1444e50/7c187aa044ce0946f21ef008ed0e2764/ru-settings-720x1280.png",
       "sha256": "5820dc453306b6e45e550fe44fc27d85b605193777e7f0971282d101755fe57f"
     },
     {
       "id": "ru-menu-1280x720",
-      "path": "docs/media/gallery/5e8e8e75ac6ef2e2c3bdc71e25f26d2baada5a90c8415ee6519432a0416d35ce/058f938ef6d5560c261ad0aa7b99f7fd/ru-menu-1280x720.png",
+      "path": "docs/media/gallery/cff49185640732f6fa2b18caa1f7a36bdb834531b7e55db6dd64b69ad1444e50/7c187aa044ce0946f21ef008ed0e2764/ru-menu-1280x720.png",
       "sha256": "3689ab805954bef72bdd95954cf71641b5b98137151a8c2c464688f65fa01a12"
     },
     {
       "id": "ru-battle-1280x720",
-      "path": "docs/media/gallery/5e8e8e75ac6ef2e2c3bdc71e25f26d2baada5a90c8415ee6519432a0416d35ce/058f938ef6d5560c261ad0aa7b99f7fd/ru-battle-1280x720.png",
-      "sha256": "6f9fe5da3e7865725aca8a1978cb13e5d488bd5a7088c864a9883128b59d3e1e"
+      "path": "docs/media/gallery/cff49185640732f6fa2b18caa1f7a36bdb834531b7e55db6dd64b69ad1444e50/7c187aa044ce0946f21ef008ed0e2764/ru-battle-1280x720.png",
+      "sha256": "2b55510fea405e4a958c546d64c265d8130ced0b3649511b7ac78c1c5943dc74"
     },
     {
       "id": "en-menu-720x1280",
-      "path": "docs/media/gallery/5e8e8e75ac6ef2e2c3bdc71e25f26d2baada5a90c8415ee6519432a0416d35ce/058f938ef6d5560c261ad0aa7b99f7fd/en-menu-720x1280.png",
+      "path": "docs/media/gallery/cff49185640732f6fa2b18caa1f7a36bdb834531b7e55db6dd64b69ad1444e50/7c187aa044ce0946f21ef008ed0e2764/en-menu-720x1280.png",
       "sha256": "02ccfa2d00d16b57c18f9f0c46a25ee874bfef0b004c5d913372ffb50dfec934"
     },
     {
       "id": "en-collection-720x1280",
-      "path": "docs/media/gallery/5e8e8e75ac6ef2e2c3bdc71e25f26d2baada5a90c8415ee6519432a0416d35ce/058f938ef6d5560c261ad0aa7b99f7fd/en-collection-720x1280.png",
+      "path": "docs/media/gallery/cff49185640732f6fa2b18caa1f7a36bdb834531b7e55db6dd64b69ad1444e50/7c187aa044ce0946f21ef008ed0e2764/en-collection-720x1280.png",
       "sha256": "0ec5c25238c4a8c4a3baf3592fb46bf44e1474b69f0e7059586f8097d4376f9e"
     },
     {
       "id": "en-card-720x1280",
-      "path": "docs/media/gallery/5e8e8e75ac6ef2e2c3bdc71e25f26d2baada5a90c8415ee6519432a0416d35ce/058f938ef6d5560c261ad0aa7b99f7fd/en-card-720x1280.png",
+      "path": "docs/media/gallery/cff49185640732f6fa2b18caa1f7a36bdb834531b7e55db6dd64b69ad1444e50/7c187aa044ce0946f21ef008ed0e2764/en-card-720x1280.png",
       "sha256": "3d2804d6f02d99c3ce174a0004e4fd762ad77080a84759b94f2aeb4893bca5a2"
     },
     {
       "id": "en-battle-720x1280",
-      "path": "docs/media/gallery/5e8e8e75ac6ef2e2c3bdc71e25f26d2baada5a90c8415ee6519432a0416d35ce/058f938ef6d5560c261ad0aa7b99f7fd/en-battle-720x1280.png",
-      "sha256": "df4ae1b6556214782024f4a19fe867af1367a6742e38dbe5a62c7c8551aca58a"
+      "path": "docs/media/gallery/cff49185640732f6fa2b18caa1f7a36bdb834531b7e55db6dd64b69ad1444e50/7c187aa044ce0946f21ef008ed0e2764/en-battle-720x1280.png",
+      "sha256": "030abb41579ce0d9546a59d631f82c1009e0d0589dd051969764affb5967f628"
     },
     {
       "id": "en-shop-720x1280",
-      "path": "docs/media/gallery/5e8e8e75ac6ef2e2c3bdc71e25f26d2baada5a90c8415ee6519432a0416d35ce/058f938ef6d5560c261ad0aa7b99f7fd/en-shop-720x1280.png",
+      "path": "docs/media/gallery/cff49185640732f6fa2b18caa1f7a36bdb834531b7e55db6dd64b69ad1444e50/7c187aa044ce0946f21ef008ed0e2764/en-shop-720x1280.png",
       "sha256": "ac31482bdce8e55ce119b41d4e1887d50d2743af9f224c6415e50e31d7dcd16c"
     },
     {
       "id": "en-crafting-720x1280",
-      "path": "docs/media/gallery/5e8e8e75ac6ef2e2c3bdc71e25f26d2baada5a90c8415ee6519432a0416d35ce/058f938ef6d5560c261ad0aa7b99f7fd/en-crafting-720x1280.png",
+      "path": "docs/media/gallery/cff49185640732f6fa2b18caa1f7a36bdb834531b7e55db6dd64b69ad1444e50/7c187aa044ce0946f21ef008ed0e2764/en-crafting-720x1280.png",
       "sha256": "41c31c7d5fa6702b9fd3788bb04714c942c325c21cd36a529d33e2084a11626b"
     },
     {
       "id": "en-rewards-720x1280",
-      "path": "docs/media/gallery/5e8e8e75ac6ef2e2c3bdc71e25f26d2baada5a90c8415ee6519432a0416d35ce/058f938ef6d5560c261ad0aa7b99f7fd/en-rewards-720x1280.png",
+      "path": "docs/media/gallery/cff49185640732f6fa2b18caa1f7a36bdb834531b7e55db6dd64b69ad1444e50/7c187aa044ce0946f21ef008ed0e2764/en-rewards-720x1280.png",
       "sha256": "27af0162364b7d7ad6953ff75ee28f67f862bcd4e09989e0bca318a856adfb2c"
     },
     {
       "id": "en-connection-720x1280",
-      "path": "docs/media/gallery/5e8e8e75ac6ef2e2c3bdc71e25f26d2baada5a90c8415ee6519432a0416d35ce/058f938ef6d5560c261ad0aa7b99f7fd/en-connection-720x1280.png",
+      "path": "docs/media/gallery/cff49185640732f6fa2b18caa1f7a36bdb834531b7e55db6dd64b69ad1444e50/7c187aa044ce0946f21ef008ed0e2764/en-connection-720x1280.png",
       "sha256": "1c0e2903b25f0355d1c199a7c8610fd4acc462ce8b8b6046ca6f3b2050b47210"
     },
     {
       "id": "en-rules-720x1280",
-      "path": "docs/media/gallery/5e8e8e75ac6ef2e2c3bdc71e25f26d2baada5a90c8415ee6519432a0416d35ce/058f938ef6d5560c261ad0aa7b99f7fd/en-rules-720x1280.png",
+      "path": "docs/media/gallery/cff49185640732f6fa2b18caa1f7a36bdb834531b7e55db6dd64b69ad1444e50/7c187aa044ce0946f21ef008ed0e2764/en-rules-720x1280.png",
       "sha256": "334bd199e33665412986a2c72e6c45e2ea5f8afe6017e977b44fda53e3228cc6"
     },
     {
       "id": "en-settings-720x1280",
-      "path": "docs/media/gallery/5e8e8e75ac6ef2e2c3bdc71e25f26d2baada5a90c8415ee6519432a0416d35ce/058f938ef6d5560c261ad0aa7b99f7fd/en-settings-720x1280.png",
+      "path": "docs/media/gallery/cff49185640732f6fa2b18caa1f7a36bdb834531b7e55db6dd64b69ad1444e50/7c187aa044ce0946f21ef008ed0e2764/en-settings-720x1280.png",
       "sha256": "2a950f33b2c35d283a0f4c0a8fbc8b62e446ca97e5bd62bfe57fd67e39662d9a"
     },
     {
       "id": "en-menu-1280x720",
-      "path": "docs/media/gallery/5e8e8e75ac6ef2e2c3bdc71e25f26d2baada5a90c8415ee6519432a0416d35ce/058f938ef6d5560c261ad0aa7b99f7fd/en-menu-1280x720.png",
+      "path": "docs/media/gallery/cff49185640732f6fa2b18caa1f7a36bdb834531b7e55db6dd64b69ad1444e50/7c187aa044ce0946f21ef008ed0e2764/en-menu-1280x720.png",
       "sha256": "ca6816735e8caf98d324b940abe725106da6506aa2ac9e2bdbf6c1d909e822c0"
     },
     {
       "id": "en-battle-1280x720",
-      "path": "docs/media/gallery/5e8e8e75ac6ef2e2c3bdc71e25f26d2baada5a90c8415ee6519432a0416d35ce/058f938ef6d5560c261ad0aa7b99f7fd/en-battle-1280x720.png",
-      "sha256": "7f4f81c4377039bdc74fe514e238cf6f0a2544a906c26498ccebfba827ba70b3"
+      "path": "docs/media/gallery/cff49185640732f6fa2b18caa1f7a36bdb834531b7e55db6dd64b69ad1444e50/7c187aa044ce0946f21ef008ed0e2764/en-battle-1280x720.png",
+      "sha256": "5658828b69495be331b7ee67fca43aad3e0dac4a666e720d480205b3b91c141e"
     }
   ]
 }

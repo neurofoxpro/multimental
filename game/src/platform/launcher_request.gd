@@ -5,6 +5,9 @@ const PACKAGE: String = "pro.neurofox.multimental.dev"
 static func valid(value: Variant, version: String) -> bool:
     if typeof(value) != TYPE_DICTIONARY or value.size() != 4:
         return false
+    for key in ["mode", "expectedVersion", "nonce"]:
+        if typeof(value.get(key)) != TYPE_STRING:
+            return false
     if typeof(value.get("schemaVersion")) != TYPE_FLOAT and typeof(value.get("schemaVersion")) != TYPE_INT:
         return false
     if value.schemaVersion != 1 or value.get("mode") != MODE or value.get("expectedVersion") != version:

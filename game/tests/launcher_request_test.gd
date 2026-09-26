@@ -17,6 +17,11 @@ func _initialize() -> void:
         var bad: Dictionary = request.duplicate(true)
         bad.merge(changed, true)
         check(not Model.valid(bad, "test-version"), "invalid packet " + str(changed.keys()))
+    for key in ["mode", "expectedVersion", "nonce"]:
+        for value in [null, true, false, 0, 1, 1.5, [], {}]:
+            var malformed: Dictionary = request.duplicate(true)
+            malformed[key] = value
+            check(not Model.valid(malformed, "test-version"), "non-string field rejected without Variant comparison: " + key)
     check(not Model.valid(request, "new-version"), "old request cannot silently apply to another installed APK")
     check(Model.ID == "multimental-manual-v1" and Model.PACKAGE == "pro.neurofox.multimental.dev", "single developer-owned stable shortcut identity")
     if failures == 0:
