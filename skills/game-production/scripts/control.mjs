@@ -457,6 +457,10 @@ export async function main(argv = process.argv.slice(2)) {
   const root = findRoot();
   const [entry, ...entryArgs] = argv;
   await (await import('./collaboration-guard.mjs')).guardWorktree(root, entry, entryArgs);
+  if (entry === 'lab') {
+    await (await import('./lab.mjs')).main(entryArgs);
+    return;
+  }
   if (entry === 'gallery') {
     await (await import('../../../tools/gallery.mjs')).main(entryArgs);
     return;

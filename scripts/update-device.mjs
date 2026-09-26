@@ -5,6 +5,7 @@ import {
 } from '../skills/game-production/scripts/release-transfer.mjs';
 import { readJSONHTTP } from '../skills/game-production/scripts/http-read.mjs';
 import { claimUpdateLock } from '../skills/game-production/scripts/device-coordination.mjs';
+import { primaryTransport } from '../skills/game-production/scripts/primary-transport.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -30,6 +31,7 @@ async function json(url) {
 }
 export async function update(c, { expectedCommit = null } = {}) {
   validateConfig(c);
+  c = primaryTransport(c);
   if (
     fs.existsSync(path.join(c.workDir, 'device-test.lock')) ||
     fs.existsSync(path.join(c.workDir, 'qualification.lock'))
@@ -107,16 +109,15 @@ export async function update(c, { expectedCommit = null } = {}) {
         allowFailure: true
       });
       const version = Number(pkg.match(/versionCode=(\d+)/)?.[1] || 0);
-      if (prev.originalSha256 === m.sha256 && version === m.versionCode) {
-        console.log('DEVICE_UPDATE_ALREADY_CURRENT');
-        return { status: 'already_current', version: m.version };
-      }
-      const disposition = updateDisposition({
-        currentCode: Math.max(version, prev.versionCode || 0),
-        candidateCode: m.versionCode,
-        currentHash: prev.originalSha256,
-        candidateHash: m.sha256
-      });
+      const disposition =
+        version === m.versionCode && prev.versionCode !== version
+          ? 'unreceipted_install_requires_readback'
+          : updateDisposition({
+              currentCode: Math.max(version, prev.versionCode || 0),
+              candidateCode: m.versionCode,
+              currentHash: prev.originalSha256,
+              candidateHash: m.sha256
+            });
       if (disposition === 'newer_candidate_installed')
         return { status: disposition, installedVersion: prev.version, releaseVersion: m.version };
       if (disposition === 'same_version_conflict') throw Error('Same-version artifact conflict');
