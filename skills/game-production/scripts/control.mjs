@@ -437,6 +437,10 @@ export async function main(argv = process.argv.slice(2)) {
   const { acquireOperation } = await import('./operation-lock.mjs');
   const root = findRoot();
   const [entry, ...entryArgs] = argv;
+  if (entry === 'device-recover') {
+    await (await import('./device-lock-recovery.mjs')).main(entryArgs);
+    return;
+  }
   if (entry === 'inspect') {
     (await import('../../../tools/source-inspect.mjs')).main(entryArgs);
     return;
