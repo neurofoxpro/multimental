@@ -107,7 +107,14 @@ export async function main(args = process.argv.slice(2)) {
           status: 'task_claimed',
           task,
           directory,
-          next: ['study packet ' + task, 'focus', 'apply BUNDLE.json', 'ship'],
+          next: [
+            'focus',
+            ...(fs.existsSync(inside(directory, '.gameprod/studies/' + task + '.json'))
+              ? ['study packet ' + task]
+              : []),
+            'apply BUNDLE.json',
+            'ship'
+          ],
           agentsStarted: false
         },
         null,

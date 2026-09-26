@@ -1566,7 +1566,7 @@
       ],
       "source": "Прямое поручение владельца 26.09.2026: частые действия, подключение, актуальные изображения и автономная разработка",
       "kind": "automation",
-      "status": "planned",
+      "status": "verified",
       "acceptance": [
         "Скриншоты сняты с реального отрисованного приложения в изолированном профиле, не заменены нарисованными макетами.",
         "Манифест связывает каждый снимок с точным исходником, локалью, viewport и хешем; личных данных нет.",
@@ -1577,7 +1577,13 @@
         "docs/production/WORK_QUEUE_RESEARCH.ru.md"
       ],
       "priority": 11,
-      "evidence": [],
+      "evidence": [
+        "docs/production/GALLERY_CAPTURE.ru.md",
+        "docs/SCREENSHOTS.ru.md",
+        "docs/media/gallery/current.json",
+        "docs/production/evidence/gallery-research-observed-20260926.json",
+        "docs/production/evidence/gallery-completed-20260926.json"
+      ],
       "requiredForBeta": true,
       "requiredForPlay": true
     },

@@ -838,14 +838,20 @@
   },
   {
     "id": "UX-09",
-    "status": "pending",
+    "status": "done",
     "action": "Воспроизводимая галерея актуальных экранов для дизайна и GitHub",
     "dependsOn": [
       "AUTO-05"
     ],
     "manual": false,
     "generatedFrom": ".gameprod/workplan.json",
-    "evidence": [],
+    "evidence": [
+      "docs/production/GALLERY_CAPTURE.ru.md",
+      "docs/SCREENSHOTS.ru.md",
+      "docs/media/gallery/current.json",
+      "docs/production/evidence/gallery-research-observed-20260926.json",
+      "docs/production/evidence/gallery-completed-20260926.json"
+    ],
     "nextCommand": "npm run game -- task UX-09"
   },
   {
