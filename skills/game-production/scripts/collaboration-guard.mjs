@@ -11,6 +11,7 @@ export function requiresOwnership(entry, args = []) {
       'resume',
       'next',
       'task',
+      'focus',
       'help',
       'inspect',
       'roadmap',

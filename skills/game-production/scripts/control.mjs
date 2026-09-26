@@ -242,11 +242,12 @@ export function taskPacket(plan, id) {
       'record evidence'
     ],
     commands: {
-      start: 'npm run game -- start ' + id,
+      start: 'npm run game -- collab start ' + id + ' UNIQUE_ALIAS',
+      focus: 'npm run game -- focus ' + id,
       experiment: 'npm run game -- experiment ' + id,
       check: 'npm run game -- check',
       ship: 'npm run game -- ship ' + id,
-      recover: 'npm run game -- resume-cycle'
+      recover: 'npm run game -- ship ' + id
     },
     boundaries: [
       'Do not change accepted game rules without owner approval.',
@@ -350,7 +351,7 @@ export function commandFor(name, args, plan) {
       throw Error('Human/external gate cannot be shipped as code');
     const blocked = nextTasks(plan).find((task) => task.id === args[0])?.blockedBy || [];
     if (blocked.length) throw Error('Unfinished prerequisites: ' + blocked.join(', '));
-    return [process.execPath, OPS, 'cycle', 'feat: ' + args[0], packet.task.title];
+    return [process.execPath, 'skills/game-production/scripts/short-workflow.mjs', 'ship', args[0]];
   }
   const legacy = new Set([
     'resume',
@@ -438,6 +439,10 @@ export async function main(argv = process.argv.slice(2)) {
   const root = findRoot();
   const [entry, ...entryArgs] = argv;
   await (await import('./collaboration-guard.mjs')).guardWorktree(root, entry, entryArgs);
+  if (['focus', 'ship', 'accept'].includes(entry)) {
+    await (await import('./short-workflow.mjs')).main([entry, ...entryArgs]);
+    return;
+  }
   if (entry === 'branch-recover') {
     await (await import('./branch-recovery.mjs')).main(entryArgs);
     return;

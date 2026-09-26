@@ -1,22 +1,18 @@
 # Multimental
 
-Дуэльная карточная игра: общее поле 3×3, пять стихий, офлайн и локальные матчи. **Рабочая ветка — dev**, Android первым.
+Тактическая карточная дуэль: поле3×3, 30карт/10стихий, свободные колоды, офлайн и локальные матчи. Android первым, рабочая интеграционная ветка **dev**.
 
-## Продолжение через чат
-Сначала прочитать **[NEXT_CHAT.ru.md](NEXT_CHAT.ru.md)** и **[актуальную точку продолжения](docs/production/CONTINUATION_2026-09-24.ru.md)**. Проверенный LAN-релиз: **0.2.0-alpha.65.1**, [квитанция](docs/production/evidence/lan-release-completed.json). Работа над Bluetooth-кандидатом ведётся отдельно в PR15; установленная версия всегда проверяется заново, а не выводится из текста README.
+## Продолжение
+AGENTS.md → skills/game-production/SKILL.md → `scripts/chat.cmd focus`. Основная память — Issue29 и задачи. Новый срез: `collab start TASK UNIQUE_ALIAS`, перейти в выданный каталог. Цикл: focus → apply → ship. Подробности: docs/production/SHORT_COMMANDS.ru.md.
 
-Единственный репозиторий: neurofoxpro/multimental. Исполнительный компьютер: VENEL-SENDRIK. Git/gh: venelsendrik. На станции есть основной worktree repo и изолированный следующий repo-beta в %USERPROFILE%/MultimentalWork. Не переключаться на другой компьютер/репозиторий, не удалять незакоммиченные изменения и не настраивать Git/ADB заново.
+Только neurofoxpro/multimental и VENEL-SENDRIK. Не перенастраивать Git/ADB, не трогать чужие деревья, телефонные данные и постоянную подпись. Main/stable/Play требуют отдельного согласия.
 
-Основной инструмент — scripts/chat.cmd. Команды: resume, audit, stage, candidate, qualify, integrate, wait-dev, deploy-agent, research, readiness, handoff. Полный допустимый цикл — cycle; после прерывания уже объединённой версии используется точная проверка delivery/resume-cycle. Source/HEAD/APK/квитанции должны совпадать; отсутствие ошибки команды не означает фактическую установку.
+## Системы
+Детерминированный бой, поворот/добровольная атака, первый удар и ответы выживших, клетки/доход; профиль, коллекция/редактор, выбранные сетевые колоды, магазин, крафт, локальные награды/добровольные задания/уровни. Открытая коллекция30×2 не требует гринда. Экономика — версионная тестовая политика, не окончательный рейтинг.
 
-## Документы
-- [Скилл производства](skills/game-production/SKILL.md)
-- [Восстановленные решения](docs/production/CHAT_RECOVERY.ru.md)
-- [31 группа требований и источники](.gameprod/requirements.json)
-- [Roadmap](docs/ROADMAP.ru.md)
-- [Русский changelog](CHANGELOG.ru.md)
-- [Ручная приёмка](docs/MANUAL_TESTS.ru.md)
-- [Текущие задачи и наблюдения](.gameprod)
+Это не утверждение о завершении всей игры. Особая авторская система, финальный баланс, два физических Android, Web/server/store gates проверяются по своим Issues.
 
-## Готовность
-Офлайн-игра и пользовательская LAN-комната проверены и выпущены. Bluetooth-режим и остальные beta-требования принимаются только после собственных проверок. Коллекция/экономика не считаются реализованными из-за наличия roadmap. Приватная dev-подпись остаётся на станции; оригинальный CI APK и установленный файл имеют отдельные хеши. Main, stable и Google Play требуют отдельного согласования.
+## Проверки
+check — полный прогон; profile-test list — целевые наборы; device-status — фактическая установка; device-suite — отдельный аппаратный результат. Код/CI/релиз/установка/человек — разные стадии.
+
+Документы: docs/ROADMAP.ru.md, CHANGELOG.ru.md, docs/MANUAL_TESTS.ru.md, docs/production/REWARDS_PROGRESS.ru.md, docs/production/evidence. Старый подробный skill сохранён в skills/game-production/REFERENCE.md; не требуется загружать его целиком перед каждой правкой.
