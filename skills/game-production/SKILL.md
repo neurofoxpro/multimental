@@ -35,6 +35,10 @@ Use `profile-test crafting` and `profile-test crafting-ui`, then normal check/pu
 
 Device tests reuse `ui-lab-spec.mjs`: collection/shop/crafting stages and report contracts are declared once. `device-suite --target phone --suite crafting` performs five real Android taps using the isolated profile fixture. Require every expected stage exactly once and all checks true, plus unchanged personal profile; a bare PASS is insufficient. Do not run this against personal data or infer a second phone from this result.
 
+## Embedded-dialog hardware taps
+
+Reuse UiTapGeometry for OS-input targets. Transform through the target Control's viewport, not the lab/root viewport: embedded Window buttons otherwise point outside the displayed dialog. Reject hidden/disabled/detached/offscreen targets. `profile-test taps` exercises viewport translation, but only a new physical suite confirms the exact APK. Keep failed receipts; a later fixed run does not retroactively pass the old one. Dialog minimum button sizes use AcceptDialog theme constants and explicit localized labels. See docs/production/MODAL_TOUCH_TESTS.ru.md.
+
 ## Scope and authority
 Only repository `neurofoxpro/multimental`. Only personal station `VENEL-SENDRIK`; GitHub-hosted CI and internal source-only work are allowed. Check the actual hostname, remote and branch. Do not use another computer or repository. Keep credentials, phone identifiers and raw logs private.
 
