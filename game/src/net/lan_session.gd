@@ -1,7 +1,7 @@
 class_name LanSession
 extends Node
 ## Local-room transport. Certificate pin and capability are shared in an invite.
-## No private deck/seed is sent. No unsafe TLS validation mode is used.
+## Guest composition goes only to the trusted host inside TLS; public views contain no deck/seed.
 signal view_changed(view: Dictionary)
 signal connection_changed(status: String)
 signal invitation_ready(invitation: String)
@@ -9,7 +9,9 @@ const Rules = preload("res://src/net/room_rules.gd")
 const Invite = preload("res://src/net/room_invite.gd")
 const Channel = preload("res://src/net/json_channel.gd")
 const View = preload("res://src/net/room_view.gd")
+const Deck = preload("res://src/deck_rules.gd")
 const PORT: int = 17844
+var session_deck: Array[int] = []
 var authority = Rules.new()
 var server: TCPServer
 var peers: Array[Dictionary] = []
@@ -48,8 +50,12 @@ static func addresses() -> PackedStringArray:
         found.append(str(item.address))
     return found
 
-func host_room(address: String = "", port: int = PORT, seed_value: int = 0) -> Dictionary:
+func host_room(address: String = "", port: int = PORT, seed_value: int = 0, chosen: Variant = null) -> Dictionary:
+    var parsed_deck: Dictionary = Deck.validate_ids(Deck.STARTER if chosen == null else chosen)
+    if not parsed_deck.ok:
+        return {"ok": false, "error": "invalid_deck"}
     stop()
+    session_deck.assign(parsed_deck.ids)
     if OS.has_feature("web"):
         return {"ok": false, "error": "web_transport_unavailable"}
     if address.is_empty():
@@ -78,7 +84,7 @@ func host_room(address: String = "", port: int = PORT, seed_value: int = 0) -> D
     if error != OK:
         server = null
         return {"ok": false, "error": "port_busy"}
-    authority.configure(seed_value, secret, _now())
+    authority.configure(seed_value, secret, _now(), session_deck)
     is_host = true
     running = true
     invitation = Invite.encode(address, port, certificate_pem.sha256_text(), secret)
@@ -88,13 +94,17 @@ func host_room(address: String = "", port: int = PORT, seed_value: int = 0) -> D
     invitation_ready.emit(invitation)
     return {"ok": true, "invitation": invitation}
 
-func join_room(text: String) -> Dictionary:
+func join_room(text: String, chosen: Variant = null) -> Dictionary:
+    var parsed_deck: Dictionary = Deck.validate_ids(Deck.STARTER if chosen == null else chosen)
+    if not parsed_deck.ok:
+        return {"ok": false, "error": "invalid_deck"}
     var parsed: Dictionary = Invite.decode(text)
     if not parsed.ok:
         return parsed
     stop()
     if OS.has_feature("web"):
         return {"ok": false, "error": "web_transport_unavailable"}
+    session_deck.assign(parsed_deck.ids)
     invite_data = parsed.invite
     invitation = text
     identity = Crypto.new().generate_random_bytes(32).hex_encode()
@@ -221,7 +231,7 @@ func _poll_peer(peer: Dictionary, hosting: bool) -> bool:
     if peer.phase == "tls":
         peer.phase = "messages"
         if not hosting:
-            peer.channel.queue({"kind": "hello", "v": Rules.VERSION, "rules": Rules.RULES, "token": invite_data.token, "identity": identity})
+            peer.channel.queue(_hello())
     peer.channel.poll(secure)
     if peer.channel.failed:
         return false
@@ -237,12 +247,17 @@ func _poll_peer(peer: Dictionary, hosting: bool) -> bool:
             return false
     return true
 
+func _hello() -> Dictionary:
+    return {"kind": "hello", "v": Rules.VERSION, "rules": Rules.RULES, "token": invite_data.token, "identity": identity, "deck_policy": Deck.POLICY, "deck": session_deck.duplicate()}
+
 func _host_message(peer: Dictionary, message: Dictionary) -> bool:
     var kind: Variant = message.get("kind")
     if not peer.authenticated:
         if kind != "hello" or message.get("v") != Rules.VERSION or message.get("rules") != Rules.RULES or not message.get("token") is String or not message.get("identity") is String:
             return false
-        var joined: Dictionary = authority.connect_guest(message.token, message.identity, _now())
+        if message.size() != 7 or message.get("deck_policy") != Deck.POLICY or typeof(message.get("deck")) != TYPE_ARRAY:
+            return false
+        var joined: Dictionary = authority.connect_guest(message.token, message.identity, _now(), message.deck)
         if not joined.ok:
             return false
         peer.authenticated = true

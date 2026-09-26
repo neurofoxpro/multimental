@@ -2,7 +2,8 @@ class_name RoomRules
 extends RefCounted
 ## Pure host authority. Time and randomness are injected; no nodes or transport.
 const Core = preload("res://src/match_core.gd")
-const VERSION: int = 2
+const Deck = preload("res://src/deck_rules.gd")
+const VERSION: int = 3
 const RULES: String = Core.RULES_ID
 const TURN_MS: int = 30000
 const MATCH_MS: int = 900000
@@ -20,6 +21,9 @@ var turn_deadline: int = 0
 var match_deadline: int = 0
 var reconnect_deadline: int = 0
 var paused_remaining: int = TURN_MS
+var host_deck: Array[int] = []
+var guest_deck: Array[int] = []
+var configured_seed: int = 1
 
 static func is_integer(value: Variant, low: int, high: int) -> bool:
     if typeof(value) not in [TYPE_INT, TYPE_FLOAT]:
@@ -30,8 +34,14 @@ static func is_integer(value: Variant, low: int, high: int) -> bool:
 static func normalize_command(value: Variant) -> Dictionary:
     return Core.normalize_command(value)
 
-func configure(seed_value: int, room_secret: String, now: int) -> void:
-    game.start(seed_value)
+func configure(seed_value: int, room_secret: String, now: int, chosen: Variant = null) -> Dictionary:
+    var parsed: Dictionary = Deck.validate_ids(Deck.STARTER if chosen == null else chosen)
+    if not parsed.ok:
+        return {"ok": false, "error": "invalid_deck"}
+    host_deck.assign(parsed.ids)
+    guest_deck.clear()
+    game.start_with_decks(seed_value, [host_deck, Deck.STARTER])
+    configured_seed = game.initial_seed
     secret = room_secret
     guest_identity = ""
     guest_connected = false
@@ -44,9 +54,12 @@ func configure(seed_value: int, room_secret: String, now: int) -> void:
     match_deadline = now + MATCH_MS
     reconnect_deadline = 0
     paused_remaining = TURN_MS
+    return {"ok": true}
 
-func connect_guest(room_secret: String, identity: String, now: int) -> Dictionary:
-    tick(now)
+func connect_guest(room_secret: String, identity: String, now: int, chosen: Variant = null) -> Dictionary:
+    var parsed: Dictionary = Deck.validate_ids(Deck.STARTER if chosen == null else chosen)
+    if not parsed.ok:
+        return {"ok": false, "error": "invalid_deck"}
     if secret.length() < 32 or identity.length() < 32 or identity.length() > 128:
         return {"ok": false, "error": "unauthorized"}
     if not Crypto.new().constant_time_compare(secret.to_utf8_buffer(), room_secret.to_utf8_buffer()):
@@ -55,9 +68,17 @@ func connect_guest(room_secret: String, identity: String, now: int) -> Dictionar
         return {"ok": false, "error": "room_full"}
     if not guest_identity.is_empty() and identity != guest_identity:
         return {"ok": false, "error": "different_player"}
+    if not guest_identity.is_empty() and parsed.ids != guest_deck:
+        return {"ok": false, "error": "deck_changed"}
+    tick(now)
     if phase == "finished":
         return {"ok": false, "error": "finished"}
     var first_join: bool = guest_identity.is_empty()
+    if first_join:
+        var started: Dictionary = game.start_with_decks(configured_seed, [host_deck, parsed.ids])
+        if not started.ok:
+            return {"ok": false, "error": "invalid_deck"}
+        guest_deck.assign(parsed.ids)
     guest_identity = identity
     guest_connected = true
     reconnect_deadline = 0

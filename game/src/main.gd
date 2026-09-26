@@ -646,6 +646,7 @@ func show_lan_menu() -> void:
     battle = false
     clear_screen()
     root.add_child(label(t("ЛОКАЛЬНАЯ СЕТЬ", "LOCAL NETWORK"), 30))
+    _network_deck_summary()
     root.add_child(label(t("Оба устройства должны быть в одной сети Wi-Fi. Внешний сервер не нужен.", "Connect both devices to the same Wi-Fi network. No external server is required."), 19))
     network_addresses = OptionButton.new()
     network_addresses.custom_minimum_size.y = 58
@@ -670,13 +671,32 @@ func show_lan_menu() -> void:
     root.add_child(lobby_status)
     root.add_child(button(t("В МЕНЮ", "MENU"), show_menu))
 
+func _network_deck_summary() -> void:
+    var state: Dictionary = profile.state()
+    var meta: Dictionary = state.get("collection", {})
+    var name: String = str(meta.get("names", {}).get(meta.get("selected", ""), t("не выбрана", "not selected")))
+    root.add_child(button(t("КОЛОДА: ", "DECK: ") + name, show_collection, 48))
+
+func _network_deck() -> Dictionary:
+    if not profile.enabled:
+        return {"ok": true, "ids": Core.STARTER.duplicate()}
+    if not ensure_collection():
+        return {"ok": false, "error": "invalid_deck"}
+    var selected: Dictionary = Collection.selected(profile.state())
+    return selected if selected.ok else {"ok": false, "error": "invalid_deck"}
+
 func create_lan_room(address: String = "", port: int = 17844) -> Dictionary:
+    var selected: Dictionary = _network_deck()
+    if not selected.ok:
+        if is_instance_valid(lobby_status):
+            lobby_status.text = network_error("invalid_deck")
+        return selected
     online = true
     battle = false
     displayed_revision = -1
     local_match_id = Crypto.new().generate_random_bytes(16).hex_encode()
     result_saved = false
-    var result: Dictionary = lan.host_room(address, port)
+    var result: Dictionary = lan.host_room(address, port, 0, selected.ids)
     if not result.ok:
         online = false
         if is_instance_valid(lobby_status):
@@ -699,12 +719,17 @@ func create_lan_room(address: String = "", port: int = 17844) -> Dictionary:
     return result
 
 func join_lan_room(text: String) -> Dictionary:
+    var selected: Dictionary = _network_deck()
+    if not selected.ok:
+        if is_instance_valid(lobby_status):
+            lobby_status.text = network_error("invalid_deck")
+        return selected
     online = true
     battle = false
     displayed_revision = -1
     local_match_id = Crypto.new().generate_random_bytes(16).hex_encode()
     result_saved = false
-    var result: Dictionary = lan.join_room(text)
+    var result: Dictionary = lan.join_room(text, selected.ids)
     if not result.ok:
         online = false
         if is_instance_valid(lobby_status):
@@ -718,7 +743,7 @@ func join_lan_room(text: String) -> Dictionary:
     return result
 
 func network_error(value: String) -> String:
-    var messages: Dictionary = {"no_local_address": ["Подключись к Wi-Fi и попробуй снова.", "Connect to Wi-Fi and try again."], "port_busy": ["Порт комнаты занят. Закрой другую комнату.", "Room port is busy. Close the other room."], "invalid_invite": ["Приглашение повреждено или неполное.", "Invitation is invalid or incomplete."], "incompatible_or_nonlocal_invite": ["Нужна совместимая версия и приглашение из локальной сети.", "A compatible version and local-network invitation are required."], "certificate_mismatch": ["Сертификат комнаты не совпал. Подключение остановлено.", "Room certificate mismatch. Connection stopped."], "connection_failed": ["Не удалось подключиться. Проверь сеть и приглашение.", "Connection failed. Check the network and invitation."], "connection_lost": ["Связь не восстановлена. Вернись в меню.", "Connection could not be restored. Return to the menu."], "reconnecting": ["Восстанавливаем соединение…", "Reconnecting…"], "waiting_reconnect": ["Ожидаем возвращения соперника…", "Waiting for the opponent to reconnect…"]}
+    var messages: Dictionary = {"invalid_deck": ["Выбери полную колоду в разделе коллекции.", "Select a complete deck in your collection."], "deck_changed": ["Колоду начатого матча менять нельзя.", "The deck cannot change after the match starts."], "no_local_address": ["Подключись к Wi-Fi и попробуй снова.", "Connect to Wi-Fi and try again."], "port_busy": ["Порт комнаты занят. Закрой другую комнату.", "Room port is busy. Close the other room."], "invalid_invite": ["Приглашение повреждено или неполное.", "Invitation is invalid or incomplete."], "incompatible_or_nonlocal_invite": ["Нужна совместимая версия и приглашение из локальной сети.", "A compatible version and local-network invitation are required."], "certificate_mismatch": ["Сертификат комнаты не совпал. Подключение остановлено.", "Room certificate mismatch. Connection stopped."], "connection_failed": ["Не удалось подключиться. Проверь сеть и приглашение.", "Connection failed. Check the network and invitation."], "connection_lost": ["Связь не восстановлена. Вернись в меню.", "Connection could not be restored. Return to the menu."], "reconnecting": ["Восстанавливаем соединение…", "Reconnecting…"], "waiting_reconnect": ["Ожидаем возвращения соперника…", "Waiting for the opponent to reconnect…"]}
     messages.merge({"android_bluetooth_required": ["Bluetooth доступен в Android-клиенте.", "Bluetooth is available in the Android client."], "bluetooth_permission_required": ["Разреши доступ к устройствам поблизости и обнови список.", "Allow nearby-device access and refresh the list."], "bluetooth_disabled": ["Включи Bluetooth в настройках Android.", "Enable Bluetooth in Android settings."], "select_paired_device": ["Выбери ранее сопряжённое устройство.", "Select an already paired device."], "pair_device_in_android_settings": ["Сначала сопряги устройства в настройках Android.", "Pair the devices in Android settings first."], "secure_connect_failed": ["Защищённое соединение не установлено. Проверь сопряжение и комнату.", "Secure connection failed. Check pairing and the room."]})
     return t(messages[value][0], messages[value][1]) if messages.has(value) else value
 
@@ -784,6 +809,7 @@ func show_bluetooth_menu() -> void:
     network_page = true
     clear_screen()
     root.add_child(label("BLUETOOTH", 30))
+    _network_deck_summary()
     root.add_child(label(t("Сначала сопряги два устройства в настройках Android. Интернет и Wi-Fi не нужны.", "Pair the devices in Android settings first. Internet and Wi-Fi are not required."), 19))
     var available: Dictionary = BluetoothChannel.available()
     lobby_status = label("" if available.ok else network_error(str(available.error)), 18)

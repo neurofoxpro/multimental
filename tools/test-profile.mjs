@@ -14,6 +14,7 @@ import {
 const [suite = 'model', ...extra] = process.argv.slice(2);
 const choices = {
   model: ['profile_test.gd', 'MULTIMENTAL_PROFILE_PASS'],
+  network: ['network_decks_test.gd', 'MULTIMENTAL_NETWORK_DECKS_PASS'],
   collection: ['collection_test.gd', 'MULTIMENTAL_COLLECTION_PASS'],
   editor: ['collection_ui_test.gd', 'MULTIMENTAL_COLLECTION_UI_PASS'],
   storage: ['profile_store_test.gd', 'MULTIMENTAL_PROFILE_STORAGE_PASS'],

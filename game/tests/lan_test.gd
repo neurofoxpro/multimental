@@ -24,7 +24,10 @@ func run_test() -> void:
     root.add_child(host)
     root.add_child(guest)
     print("TLS_TEST_PHASE host_create")
-    var made: Dictionary = host.host_room("127.0.0.1", 17844, 42)
+    var left: Array = range(0, 15)
+    var right: Array = range(15, 30)
+    var made: Dictionary = host.host_room("127.0.0.1", 17844, 42, left)
+    left[0] = 29
     check(made.ok, "host creates TLS room")
     if not made.ok:
         quit(1)
@@ -39,19 +42,22 @@ func run_test() -> void:
     bad.stop()
     bad.queue_free()
     print("TLS_TEST_PHASE join_correct")
-    check(guest.join_room(made.invitation).ok, "guest accepts invitation")
+    check(guest.join_room(made.invitation, right).ok, "guest accepts invitation")
+    right[0] = 0
     if not await wait_until(func(): return guest.connection_status == "connected", "TLS guest handshake"):
         host.stop()
         guest.stop()
         quit(1)
         return
     check(host.authority.guest_connected and not guest.current_view.has("players"), "authenticated role and private view")
+    check(host.authority.game.initial_decks == [range(0, 15), range(15, 30)], "distinct selected decks negotiated over real TLS")
     var turns: int = int(host.authority.game.state.turn)
     print("TLS_TEST_PHASE reconnect")
     guest.interrupt_for_test()
     await wait_until(func(): return not host.authority.guest_connected, "host detects disconnection")
     await wait_until(func(): return guest.connection_status == "connected" and host.authority.guest_connected, "automatic same-identity reconnect")
     check(host.authority.game.state.turn == turns, "reconnect does not replay a new turn")
+    check(host.authority.game.initial_decks == [range(0, 15), range(15, 30)], "TLS reconnect preserves both decks")
     print("TLS_TEST_PHASE match_actions")
     var previous: int = int(host.authority.revision)
     var acted: int = 0
