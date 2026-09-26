@@ -1,22 +1,8 @@
 {
   "schemaVersion": 1,
   "repository": "neurofoxpro/multimental",
-  "revision": 135,
-  "claims": {
-    "c6ac760d-faac-4d41-b74f-0d15c6926d4b": {
-      "token": "c6ac760d-faac-4d41-b74f-0d15c6926d4b",
-      "task": "CONTENT-03",
-      "owner": "content-factory-20260926-c74a",
-      "base": "ba379967f6c2231f33263fb2a91185ed13aefe5a",
-      "resources": [
-        "area:automation",
-        "task:CONTENT-03"
-      ],
-      "fence": 134,
-      "updatedAt": 1790431591166,
-      "expiresAt": 1790433391166
-    }
-  },
+  "revision": 136,
+  "claims": {},
   "events": [
     {
       "id": "7d454b24-9d2a-459f-87ee-7e81be94f96a",
@@ -2466,6 +2452,18 @@
         "task": "QA-02",
         "owner": "two-android-fleet-20260926-0910",
         "fence": 60
+      }
+    },
+    {
+      "id": "fd1875a3-6337-4e78-b908-4f2336ba7f8d",
+      "hash": "c2ccf9191ba10f36f0f2ab8b4c2c2d822ad4f26375c448dd0221fe5dcd750193",
+      "revision": 136,
+      "result": {
+        "status": "released",
+        "token": "c6ac760d-faac-4d41-b74f-0d15c6926d4b",
+        "task": "CONTENT-03",
+        "owner": "content-factory-20260926-c74a",
+        "fence": 134
       }
     }
   ]
