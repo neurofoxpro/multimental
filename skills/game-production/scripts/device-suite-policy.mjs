@@ -11,6 +11,7 @@ const MODES = [
   'clean-install',
   'jni',
   'profile',
+  'collection',
   'ui',
   'tutorial',
   'tcp-usb',
@@ -21,12 +22,30 @@ const MODES = [
 const SUITES = {
   ui: ['ui'],
   profile: ['profile'],
+  collection: ['collection'],
   lifecycle: ['close', 'launch', 'ui'],
   smoke: ['close', 'launch', 'jni', 'tutorial', 'ui'],
   hardware: ['tcp-usb', 'tcp-lan', 'bluetooth'],
   usb: ['tcp-usb'],
   bluetooth: ['bluetooth']
 };
+export function tapTarget(prompt, expected) {
+  if (
+    !/^[a-f0-9]{48}$/.test(expected?.nonce || '') ||
+    !/^waiting_[a-z_]{1,70}$/.test(expected?.stage || '')
+  )
+    throw Error('Invalid tap request identity');
+  if (
+    prompt?.nonce !== expected.nonce ||
+    prompt.stage !== expected.stage ||
+    prompt.status !== 'running' ||
+    !Array.isArray(prompt.tap) ||
+    prompt.tap.length !== 2 ||
+    prompt.tap.some((n) => !Number.isInteger(n) || n < 0 || n > 16384)
+  )
+    throw Error('Invalid, stale or completed tap target');
+  return [...prompt.tap];
+}
 export function suiteOptions(args) {
   const values = {};
   for (let i = 0; i < args.length; i += 2) {

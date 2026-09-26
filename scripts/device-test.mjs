@@ -1,6 +1,6 @@
 import { waitWifiAddress } from '../skills/game-production/scripts/network-readiness.mjs';
 import { waitForPathsGone } from '../skills/game-production/scripts/device-coordination.mjs';
-import { receiptName } from '../skills/game-production/scripts/device-suite-policy.mjs';
+import { receiptName, tapTarget } from '../skills/game-production/scripts/device-suite-policy.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
@@ -293,32 +293,57 @@ try {
       result.personalProfileUntouched = true;
     }
     result.status = 'passed';
-  } else if (mode === 'ui' || mode === 'tutorial') {
+  } else if (mode === 'ui' || mode === 'tutorial' || mode === 'collection') {
+    const personalBefore = profileHashes();
     if (target !== 'phone') {
       await launch();
       result.systemUi = dismissEmulatorTutorial(c);
     }
     const before = optional('shell', 'run-as', c.package, 'cat', 'files/settings.cfg');
     const nonce = await startLab(mode);
-    for (const stage of mode === 'tutorial'
-      ? ['waiting_volume_tap', 'waiting_card_tap', 'waiting_target_tap']
-      : ['waiting_card_tap', 'waiting_target_tap']) {
+    const stages =
+      mode === 'collection'
+        ? [
+            'waiting_collection_new',
+            'waiting_collection_add',
+            'waiting_collection_remove',
+            'waiting_collection_add_again',
+            'waiting_collection_complete',
+            'waiting_collection_save',
+            'waiting_collection_select',
+            'waiting_collection_play'
+          ]
+        : mode === 'tutorial'
+          ? ['waiting_volume_tap', 'waiting_card_tap', 'waiting_target_tap']
+          : ['waiting_card_tap', 'waiting_target_tap'];
+    for (const stage of stages) {
       const prompt = await awaitLab(nonce, stage);
-      if (
-        !Array.isArray(prompt.tap) ||
-        prompt.tap.length !== 2 ||
-        prompt.tap.some((n) => !Number.isInteger(n) || n < 0 || n > 16384)
-      )
-        throw Error('Invalid in-app tap target');
+      tapTarget(prompt, { stage, nonce });
       const frame = exec(c.adb, ['-s', c.serial, 'exec-out', 'screencap', '-p'], { binary: true });
-      const screenshot = path.join(out, mode + '-' + target + '-' + stage + '.local.png');
+      const screenshot = path.join(
+        out,
+        mode + '-' + target + '-' + stage + '-' + runId + '.local.png'
+      );
       fs.writeFileSync(screenshot, frame);
-      result.checks.push({ stage, tap: prompt.tap, screenshot: path.basename(screenshot) });
+      result.checks.push({
+        stage,
+        tap: prompt.tap,
+        screenshot: path.basename(screenshot),
+        screenshotSha256: sha(frame)
+      });
       adb('shell', 'input', 'tap', String(prompt.tap[0]), String(prompt.tap[1]));
     }
     result.lab = await awaitLab(nonce);
     const after = optional('shell', 'run-as', c.package, 'cat', 'files/settings.cfg');
     assert.equal(after, before);
+    if (mode === 'collection') {
+      assert.equal(result.lab.test, 'real_collection_editor');
+      assert.equal(result.lab.input_source, 'external_android_input_tap');
+      assert.equal(result.lab.personal_profile_untouched, true);
+      assert.deepEqual(profileHashes(), personalBefore);
+      assert.equal(result.checks.length, 8);
+      result.personalProfileUntouched = true;
+    }
     result.status = 'passed';
   } else if (mode === 'tcp-usb' || mode === 'tcp-lan') {
     const nonce = await startLab('tcp-server');

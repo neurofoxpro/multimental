@@ -36,6 +36,13 @@ func _ready() -> void:
             runner.completed.connect(_done)
             add_child(runner)
 
+        "collection":
+            var editor_lab = preload("res://src/collection_device_lab.gd").new()
+            editor_lab.ui = ui
+            editor_lab.nonce = str(data.nonce)
+            editor_lab.changed.connect(_stage)
+            editor_lab.completed.connect(_done)
+            add_child(editor_lab)
         "profile-store":
             _done(preload("res://src/profile_lab.gd").run(str(data.nonce)))
         "jni":
