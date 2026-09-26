@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "neurofoxpro/multimental",
-  "revision": 19,
+  "revision": 20,
   "claims": {
     "7d454b24-9d2a-459f-87ee-7e81be94f96a": {
       "token": "7d454b24-9d2a-459f-87ee-7e81be94f96a",
@@ -15,19 +15,6 @@
       "fence": 1,
       "updatedAt": 1790397868952,
       "expiresAt": 1790399668952
-    },
-    "3ffdf2b0-34e4-499d-8b66-27d96acb81f8": {
-      "token": "3ffdf2b0-34e4-499d-8b66-27d96acb81f8",
-      "task": "META-03",
-      "owner": "crafting-cards-20260926",
-      "base": "f22dd346c6187230e0f0f98dddfc5b4dbf9541ba",
-      "resources": [
-        "area:economy",
-        "task:META-03"
-      ],
-      "fence": 14,
-      "updatedAt": 1790401144709,
-      "expiresAt": 1790402944709
     },
     "35046cac-af66-4eaf-b483-e4d989d3a75c": {
       "token": "35046cac-af66-4eaf-b483-e4d989d3a75c",
@@ -388,6 +375,18 @@
         "fence": 17,
         "updatedAt": 1790401828523,
         "expiresAt": 1790403628523
+      }
+    },
+    {
+      "id": "ad1dbaf8-8315-4ff4-ab9f-5fe1daa095d2",
+      "hash": "2f6160e4b53ac30ae84352a5cb5328b9a5a34ff199789685907ae56651e0aabe",
+      "revision": 20,
+      "result": {
+        "status": "released",
+        "token": "3ffdf2b0-34e4-499d-8b66-27d96acb81f8",
+        "task": "META-03",
+        "owner": "crafting-cards-20260926",
+        "fence": 14
       }
     }
   ]
