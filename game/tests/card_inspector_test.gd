@@ -15,6 +15,7 @@ func _initialize() -> void:
 
 func run_test() -> void:
     root.gui_embed_subwindows = true
+    root.content_scale_size = Vector2i(720, 1280)
     root.size = Vector2i(720, 1280)
     for id in range(Core.CARD_COUNT):
         var card: Dictionary = Core.new().card(id)
@@ -56,8 +57,10 @@ func run_test() -> void:
     await process_frame
     check(not inspector.visible and source.has_focus(), "close returns focus to its source")
     for viewport_size in [Vector2i(720, 1280), Vector2i(720, 1440), Vector2i(1280, 720), Vector2i(360, 640)]:
+        root.content_scale_size = viewport_size
         root.size = viewport_size
         await process_frame
+        check(Vector2i(ui.get_viewport_rect().size) == viewport_size, "measured logical viewport equals requested size")
         for locale in ["ru", "en"]:
             check(inspector.open_card(28, locale, source), "open long card name")
             await process_frame
@@ -68,6 +71,7 @@ func run_test() -> void:
             check(inspector.content.text.begins_with(str(Core.new().card(28)[locale])), "selected identity and language stay exact")
             inspector.hide()
             await process_frame
+    root.content_scale_size = Vector2i(720, 1280)
     root.size = Vector2i(720, 1280)
     inspector.open_card(1, "en", source)
     await process_frame
