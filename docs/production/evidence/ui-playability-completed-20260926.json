@@ -1,0 +1,104 @@
+{
+    "sourceCommit":  "0f0eeb43298ea1af0a433cdba2c258189ff3f2ae",
+    "changes":  [
+                    "Selected-deck quick play, grouped menu and explicit invalid-deck fallback",
+                    "Portrait/landscape battle reflow with fixed end-turn/menu footer",
+                    "Disabled hand remains readable without allowing invalid input",
+                    "Native card-dialog minimum from preserved PR119 plus measured regression",
+                    "RAM-only invitation drafts, contextual editor return, bounded input, visible errors and deliberate cancellation"
+                ],
+    "evidence":  [
+                     "docs/production/UI_PLAYABILITY.ru.md",
+                     "docs/production/evidence/ui-playability-observed-20260926.json",
+                     "docs/production/evidence/ui-continuation-provenance-20260926.json",
+                     "docs/SCREENSHOTS.ru.md",
+                     "docs/media/gallery/current.json"
+                 ],
+    "implementation":  {
+                           "pr":  135,
+                           "head":  "cc6774c60b44659543a230fc70c6c2e0894a407f",
+                           "base":  "9a74818707dc0d5044affeb3d7c4f26f65f8d675"
+                       },
+    "installation":  {
+                         "orphanLockRecoveryRun":  "45def7ed-f180-4402-a0b9-0703a8b87498",
+                         "lastObservedAt":  "2026-09-26T13:17:13.495Z",
+                         "followup":  "AUTO-07 transfer resumption, then separate physical UI checks",
+                         "currentReleaseAttempt":  "timeout after partial APK download",
+                         "actualVersion":  "0.12.0-alpha.214.1",
+                         "status":  "pending"
+                     },
+    "productionAuthorized":  false,
+    "verification":  {
+                         "schemaVersion":  1,
+                         "step":  "verify",
+                         "status":  "passed",
+                         "exitCode":  0,
+                         "sourceDigest":  "cbc2b606f9c73a2769524c8e7ea3eff6df56feb2a94b2873156e6c0cacc40e06",
+                         "sourceDigestAfter":  "cbc2b606f9c73a2769524c8e7ea3eff6df56feb2a94b2873156e6c0cacc40e06",
+                         "sourceChanged":  false,
+                         "startedAt":  "2026-09-26T13:06:20.459Z",
+                         "finishedAt":  "2026-09-26T13:08:04.793Z",
+                         "host":  "VENEL-SENDRIK",
+                         "command":  [
+                                         "node",
+                                         "tools/verify.mjs"
+                                     ],
+                         "log":  ".gameprod/evidence/verify.log",
+                         "logHash":  "deba08e3a2c29c3c17c02aabfa8e531739b248d14469d7a2f08156b7d561a51d",
+                         "outputs":  [
+
+                                     ]
+                     },
+    "limitations":  [
+                        "This accepts the specified incremental UI engineering criteria, not final artwork, all accessibility or complete game beta.",
+                        "No physical Android dp, TalkBack or two-device radio acceptance inferred from logical viewport tests.",
+                        "New release publication is verified; phone installation and physical taps are still separate pending work.",
+                        "Prior PR119 is preserved and its native size fix reused; no old branch rewrite."
+                    ],
+    "observedAt":  "2026-09-26T13:20:39.8599574Z",
+    "gallery":  {
+                    "sourcePreview":  true,
+                    "captureBaseCommit":  "9a74818707dc0d5044affeb3d7c4f26f65f8d675",
+                    "personalProfileUntouched":  true,
+                    "inputKey":  "46d6618a7b0500ad4c3eb4bebff20b38c92add3921bddcd610cde4d38f420638",
+                    "installedApkCapture":  false
+                },
+    "verificationInputs":  [
+                               "game/src/home_screen.gd",
+                               "game/src/battle_layout.gd",
+                               "game/src/connection_screen.gd",
+                               "game/src/ui_theme.gd",
+                               "game/tests/usability_test.gd",
+                               "game/tests/connection_ui_test.gd"
+                           ],
+    "release":  {
+                    "status":  "published",
+                    "sourceCommit":  "0f0eeb43298ea1af0a433cdba2c258189ff3f2ae",
+                    "id":  397241151,
+                    "tag":  "v0.13.0-alpha.236.1",
+                    "apkSha256":  "1fe102a1354942a2c8aba663f185222f1688a6052cd7b9f3a26b70043d71da38",
+                    "manifestSha256":  "d256d931ae1ac5f2b2dbca78bb06fc1b3479efd60d5ee8446eab8b43d56cf2c3",
+                    "verification":  "successful_dev_build_and_github_asset_metadata",
+                    "installation":  "not_inferred"
+                },
+    "taskId":  "UX-07",
+    "schemaVersion":  1,
+    "tests":  {
+                  "renderedImages":  24,
+                  "connectionUI":  207,
+                  "node":  811,
+                  "networkDecks":  91,
+                  "inspector":  249,
+                  "fullGodotRegression":  "passed",
+                  "usabilityViewportLocaleCases":  10,
+                  "usability":  616,
+                  "connectionViewportLocaleCases":  8
+              },
+    "acceptance":  [
+                       "Внедрён проверяемый инкремент существующего экрана без изменения игровых правил.",
+                       "Проверены длинные RU/EN названия, мобильный/альбомный режим, фокус и недопустимые действия.",
+                       "Скриншоты, headless и физические касания отражаются отдельно; крупный художественный редизайн не объявляется завершённым."
+                   ],
+    "repository":  "neurofoxpro/multimental",
+    "manualAcceptance":  "not_inferred"
+}
