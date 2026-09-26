@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "neurofoxpro/multimental",
-  "revision": 131,
+  "revision": 132,
   "claims": {
     "8f4a1fb7-dc24-4113-9716-0fee17fcced7": {
       "token": "8f4a1fb7-dc24-4113-9716-0fee17fcced7",
@@ -13,8 +13,8 @@
         "task:QA-02"
       ],
       "fence": 60,
-      "updatedAt": 1790413843091,
-      "expiresAt": 1790415643091
+      "updatedAt": 1790431314783,
+      "expiresAt": 1790433114783
     },
     "6476701c-391d-422b-95a2-57e93398a18b": {
       "token": "6476701c-391d-422b-95a2-57e93398a18b",
@@ -2417,6 +2417,25 @@
         "task": "AUTO-07",
         "owner": "delivery-resume-20260926-1325",
         "fence": 117
+      }
+    },
+    {
+      "id": "5dd27a83-6ae3-42ce-9084-f623e61ba78a",
+      "hash": "3473c0466fba8a0b2d77f98fba82050dfd3d5976b858a0a8d9e08bab5450d83d",
+      "revision": 132,
+      "result": {
+        "status": "renewed",
+        "token": "8f4a1fb7-dc24-4113-9716-0fee17fcced7",
+        "task": "QA-02",
+        "owner": "two-android-fleet-20260926-0910",
+        "base": "a48df914602e693a012fe1ca974d8da0dedb75a8",
+        "resources": [
+          "area:devices",
+          "task:QA-02"
+        ],
+        "fence": 60,
+        "updatedAt": 1790431314783,
+        "expiresAt": 1790433114783
       }
     }
   ]
