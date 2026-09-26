@@ -1,3 +1,4 @@
+import { uiLabSpec, assertUiLab } from '../skills/game-production/scripts/ui-lab-spec.mjs';
 import { waitWifiAddress } from '../skills/game-production/scripts/network-readiness.mjs';
 import { waitForPathsGone } from '../skills/game-production/scripts/device-coordination.mjs';
 import { receiptName, tapTarget } from '../skills/game-production/scripts/device-suite-policy.mjs';
@@ -293,7 +294,13 @@ try {
       result.personalProfileUntouched = true;
     }
     result.status = 'passed';
-  } else if (mode === 'ui' || mode === 'tutorial' || mode === 'collection' || mode === 'shop') {
+  } else if (
+    mode === 'ui' ||
+    mode === 'tutorial' ||
+    mode === 'collection' ||
+    mode === 'shop' ||
+    mode === 'crafting'
+  ) {
     const personalBefore = profileHashes();
     if (target !== 'phone') {
       await launch();
@@ -301,23 +308,12 @@ try {
     }
     const before = optional('shell', 'run-as', c.package, 'cat', 'files/settings.cfg');
     const nonce = await startLab(mode);
+    const spec = uiLabSpec(mode);
     const stages =
-      mode === 'shop'
-        ? ['waiting_shop_open', 'waiting_shop_buy', 'waiting_shop_back', 'waiting_shop_reopen']
-        : mode === 'collection'
-          ? [
-              'waiting_collection_new',
-              'waiting_collection_add',
-              'waiting_collection_remove',
-              'waiting_collection_add_again',
-              'waiting_collection_complete',
-              'waiting_collection_save',
-              'waiting_collection_select',
-              'waiting_collection_play'
-            ]
-          : mode === 'tutorial'
-            ? ['waiting_volume_tap', 'waiting_card_tap', 'waiting_target_tap']
-            : ['waiting_card_tap', 'waiting_target_tap'];
+      spec?.stages ||
+      (mode === 'tutorial'
+        ? ['waiting_volume_tap', 'waiting_card_tap', 'waiting_target_tap']
+        : ['waiting_card_tap', 'waiting_target_tap']);
     for (const stage of stages) {
       const prompt = await awaitLab(nonce, stage);
       tapTarget(prompt, { stage, nonce });
@@ -338,15 +334,12 @@ try {
     result.lab = await awaitLab(nonce);
     const after = optional('shell', 'run-as', c.package, 'cat', 'files/settings.cfg');
     assert.equal(after, before);
-    if (mode === 'collection' || mode === 'shop') {
-      assert.equal(
-        result.lab.test,
-        mode === 'shop' ? 'real_shop_purchase' : 'real_collection_editor'
-      );
+    if (spec) {
+      assertUiLab(result.lab, mode);
       assert.equal(result.lab.input_source, 'external_android_input_tap');
       assert.equal(result.lab.personal_profile_untouched, true);
       assert.deepEqual(profileHashes(), personalBefore);
-      assert.equal(result.checks.length, mode === 'shop' ? 4 : 8);
+      assert.equal(result.checks.length, spec.stages.length);
       result.personalProfileUntouched = true;
     }
     result.status = 'passed';

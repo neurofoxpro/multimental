@@ -36,7 +36,7 @@ func setup(owner_ui: Control) -> void:
     content.size_flags_horizontal = Control.SIZE_EXPAND_FILL
     content.add_theme_constant_override("separation", 14)
     scroll.add_child(content)
-    content.add_child(host.label(host.t("Тестовый магазин без реальных платежей. При первом входе выдано 500 монет — на пять паков. Награды и крафт будут добавлены отдельно.", "Test shop, no real payments. First entry grants 500 coins for five packs. Rewards and crafting will be added separately."), 18))
+    content.add_child(host.label(host.t("Тестовый магазин без реальных платежей. При первом входе выдано 500 монет — на пять паков. Крафт доступен из меню; награды за матчи появятся отдельно.", "Test shop, no real payments. First entry grants 500 coins for five packs. Crafting is available from the menu; match rewards will be added separately."), 18))
     content.add_child(host.label(host.t("Пак: 5 случайных карт. Каждая из 30 карт имеет одинаковый шанс 1/30 на каждом месте; повторы внутри пака возможны. Лишняя копия сверх двух превращается в 10 пыли.", "Pack: 5 random cards. Each of 30 cards has the same 1/30 chance in each slot; duplicates are possible. A copy beyond two becomes 10 dust."), 18))
     content.add_child(host.label(host.t("В этой альфе коллекция 30×2 уже открыта: паки не отнимают карты и дают пыль за лишние копии.", "This alpha already unlocks the 30×2 collection: packs never remove cards and grant dust for excess copies."), 18))
     results = VBoxContainer.new()

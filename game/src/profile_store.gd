@@ -64,6 +64,8 @@ func _read_slot(name: String) -> Dictionary:
         return {"status": "unsupported", "slot": name}
     if typeof(value.get("economy")) == TYPE_DICTIONARY and value.economy.get("version") != 1:
         return {"status": "unsupported", "slot": name}
+    if typeof(value.get("crafting")) == TYPE_DICTIONARY and (value.crafting.get("version") != 1 or value.crafting.get("policy") != preload("res://src/crafting_policy.gd").POLICY):
+        return {"status": "unsupported", "slot": name}
     if not Journal.valid(value):
         return {"status": "corrupt", "slot": name}
     return {"status": "valid", "slot": name, "data": value, "digest": envelope.sha256}

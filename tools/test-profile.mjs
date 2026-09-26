@@ -16,6 +16,8 @@ import {
 const [suite = 'model', ...extra] = process.argv.slice(2);
 const choices = {
   model: ['profile_test.gd', 'MULTIMENTAL_PROFILE_PASS'],
+  crafting: ['crafting_test.gd', 'MULTIMENTAL_CRAFT_PASS'],
+  'crafting-ui': ['crafting_ui_test.gd', 'MULTIMENTAL_CRAFT_UI_PASS'],
   menu: ['menu_layout_test.gd', 'MULTIMENTAL_MENU_LAYOUT_PASS'],
   economy: ['economy_test.gd', 'MULTIMENTAL_ECONOMY_PASS'],
   shop: ['shop_ui_test.gd', 'MULTIMENTAL_SHOP_UI_PASS'],
