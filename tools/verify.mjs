@@ -77,7 +77,8 @@ for (const [file, marker] of [
   ['profile_store_test.gd', 'MULTIMENTAL_PROFILE_STORAGE_PASS'],
   ['profile_ui_test.gd', 'MULTIMENTAL_PROFILE_UI_PASS'],
   ['collection_test.gd', 'MULTIMENTAL_COLLECTION_PASS'],
-  ['collection_ui_test.gd', 'MULTIMENTAL_COLLECTION_UI_PASS']
+  ['collection_ui_test.gd', 'MULTIMENTAL_COLLECTION_UI_PASS'],
+  ['network_decks_test.gd', 'MULTIMENTAL_NETWORK_DECKS_PASS']
 ])
   run(godot, ['--headless', '--path', 'game', '--script', 'res://tests/' + file], [marker]);
 const core = fs.readFileSync('game/src/match_core.gd', 'utf8');

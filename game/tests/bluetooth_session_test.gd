@@ -61,14 +61,15 @@ func run_test() -> void:
     guest.channel_factory = factory
     root.add_child(host)
     root.add_child(guest)
-    var made: Dictionary = host.host_room("", 17844, 42)
+    var made: Dictionary = host.host_room("", 17844, 42, range(0, 15))
     check(made.ok, "fake secure adapter starts room")
-    guest.join_room(made.invitation)
+    guest.join_room(made.invitation, range(15, 30))
     if not await wait_until(func(): return guest.connection_status == "connected", "same protocol over Bluetooth adapter"):
         host.stop()
         guest.stop()
         quit(1)
         return
+    check(host.authority.game.initial_decks == [range(0, 15), range(15, 30)], "Bluetooth model uses different chosen decks")
     guest.interrupt_for_test()
     await wait_until(func(): return not host.authority.guest_connected, "host observes radio disconnect")
     await wait_until(func(): return guest.connection_status == "connected" and host.authority.guest_connected, "radio identity reconnect")

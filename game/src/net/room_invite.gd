@@ -18,7 +18,7 @@ static func hex(value: Variant, size: int) -> bool:
             return false
     return true
 static func encode(address: String, port: int, fingerprint: String, token: String) -> String:
-    var text: String = JSON.stringify({"v": 2, "address": address, "port": port, "fingerprint": fingerprint, "token": token})
+    var text: String = JSON.stringify({"v": RoomRules.VERSION, "address": address, "port": port, "fingerprint": fingerprint, "token": token})
     return PREFIX + Marshalls.raw_to_base64(text.to_utf8_buffer()).replace("+", "-").replace("/", "_").trim_suffix("=").trim_suffix("=")
 static func decode(text: String) -> Dictionary:
     text = text.strip_edges()
@@ -34,7 +34,7 @@ static func decode(text: String) -> Dictionary:
     var value: Variant = JSON.parse_string(Marshalls.base64_to_raw(raw).get_string_from_utf8())
     if not value is Dictionary or value.size() != 5:
         return {"ok": false, "error": "invalid_invite"}
-    if value.get("v") != 2 or not value.get("address") is String or not private_address(value.address):
+    if value.get("v") != RoomRules.VERSION or not value.get("address") is String or not private_address(value.address):
         return {"ok": false, "error": "incompatible_or_nonlocal_invite"}
     if not RoomRules.is_integer(value.get("port"), 1024, 65535) or not hex(value.get("fingerprint"), 64) or not hex(value.get("token"), 64):
         return {"ok": false, "error": "invalid_invite"}

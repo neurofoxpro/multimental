@@ -18,8 +18,12 @@ static func invitation_token(text: String) -> String:
 func _new_channel():
     return channel_factory.call() if OS.is_debug_build() and channel_factory.is_valid() else Radio.new()
 
-func host_room(_address: String = "", _port: int = PORT, seed_value: int = 0) -> Dictionary:
+func host_room(_address: String = "", _port: int = PORT, seed_value: int = 0, chosen: Variant = null) -> Dictionary:
+    var parsed_deck: Dictionary = Deck.validate_ids(Deck.STARTER if chosen == null else chosen)
+    if not parsed_deck.ok:
+        return {"ok": false, "error": "invalid_deck"}
     stop()
+    session_deck.assign(parsed_deck.ids)
     if not (OS.is_debug_build() and channel_factory.is_valid()):
         var allowed: Dictionary = Radio.available()
         if not allowed.ok:
@@ -28,7 +32,7 @@ func host_room(_address: String = "", _port: int = PORT, seed_value: int = 0) ->
     var token: String = crypto.generate_random_bytes(32).hex_encode()
     if seed_value <= 0:
         seed_value = int(crypto.generate_random_bytes(4).decode_u32(0) % 2147483646) + 1
-    authority.configure(seed_value, token, _now())
+    authority.configure(seed_value, token, _now(), session_deck)
     invitation = BT_PREFIX + token
     running = true
     is_host = true
@@ -51,13 +55,17 @@ func _listen() -> Dictionary:
     peers = [radio_peer]
     return {"ok": true}
 
-func join_room(text: String) -> Dictionary:
+func join_room(text: String, chosen: Variant = null) -> Dictionary:
+    var parsed_deck: Dictionary = Deck.validate_ids(Deck.STARTER if chosen == null else chosen)
+    if not parsed_deck.ok:
+        return {"ok": false, "error": "invalid_deck"}
     var token: String = invitation_token(text)
     if token.is_empty():
         return {"ok": false, "error": "invalid_invite"}
     if target_address.is_empty() and not (OS.is_debug_build() and channel_factory.is_valid()):
         return {"ok": false, "error": "select_paired_device"}
     stop()
+    session_deck.assign(parsed_deck.ids)
     invite_data = {"token": token}
     invitation = text
     identity = Crypto.new().generate_random_bytes(32).hex_encode()
@@ -124,7 +132,7 @@ func _poll_radio(peer: Dictionary, hosting: bool) -> bool:
         peer.last_seen = now
         peer.born = now
         if not hosting:
-            peer.channel.queue({"kind": "hello", "v": Rules.VERSION, "rules": Rules.RULES, "token": invite_data.token, "identity": identity})
+            peer.channel.queue(_hello())
     if now - int(peer.last_seen) > 10000:
         return false
     var messages: Array = peer.channel.take()
