@@ -8,11 +8,15 @@ class FakeNative extends "res://src/platform/launcher_shortcut.gd":
     var enabled: Variant = 1
     var pin_exists: bool = false
     var icon_value: Variant = 1
+    var constructors: Array[String] = ["ShortcutInfo$Builder"]
     var invoked: Array[String] = []
     var statuses: Array[Dictionary] = []
     func _call(_object: Variant, method: String, _args: Array = []) -> Variant:
+        if failed:
+            return null
         invoked.append(method)
         match method:
+            "has_java_method": return _args[0] in constructors
             "isRequestPinShortcutSupported": return support
             "requestPinShortcut": return accepted
             "isEnabled": return enabled
@@ -50,6 +54,7 @@ func run_test() -> void:
         check(bridge.invoked.count("requestPinShortcut") == 1, "single native request")
         check(bridge.invoked.has("getActivityInfo") and bridge.invoked.has("getIconResource") and not bridge.invoked.has("getApplicationInfo"), "icon metadata uses Java methods, not fake dictionary fields")
         check(bridge.statuses.back().status == "requested", "native submission is not yet a pinned icon")
+        check(bridge.constructor_name == "ShortcutInfo$Builder" and bridge.invoked.count("ShortcutInfo$Builder") == 1 and not bridge.invoked.has("Builder"), "observed nested constructor called exactly once")
         bridge.queue_free()
         await process_frame
     for bit in [false, 0]:
@@ -80,6 +85,16 @@ func run_test() -> void:
         check(missing.failed and missing.statuses.back().code == "missing_application_icon", "invalid native icon ID is explicit")
         check(not missing.invoked.has("requestPinShortcut"), "invalid icon never submits a pin")
         missing.queue_free()
+        await process_frame
+    for names in [[], ["Other"], ["Builder", "ShortcutInfo$Builder"]]:
+        var bridge := FakeNative.new()
+        root.add_child(bridge)
+        bridge.constructors.assign(names)
+        bridge._request_pin(bridge)
+        await process_frame
+        check(bridge.failed and bridge.statuses.back().code == "builder_constructor_missing_or_ambiguous", "missing or ambiguous constructor is explicit")
+        check(not bridge.invoked.has("requestPinShortcut"), "no pin call with an unknown constructor")
+        bridge.queue_free()
         await process_frame
     var exists := FakeNative.new()
     root.add_child(exists)

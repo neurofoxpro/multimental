@@ -1,0 +1,8 @@
+{
+  "id": "launcher-nested-constructor-20260926",
+  "version": "0.13.6",
+  "kind": "fixed",
+  "scope": "automation",
+  "text": "Имя конструктора вложенного Java-класса ShortcutInfo проверяется у фактического Android-wrapper перед единственным вызовом; неизвестный или неоднозначный метод не создаёт фиктивный успех.",
+  "breaking": false
+}

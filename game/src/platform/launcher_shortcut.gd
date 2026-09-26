@@ -10,6 +10,7 @@ var requested: bool = false
 var done: bool = false
 var deadline: int = 0
 var next_poll: int = 0
+var constructor_name: String = ""
 
 func _ready() -> void:
     set_process(false)
@@ -34,7 +35,7 @@ func _publish(status: String, code: String = "") -> void:
     if done:
         return
     var terminal: bool = status in ["pinned", "unsupported", "failed", "not_confirmed"]
-    var record: Dictionary = {"schemaVersion": 1, "mode": Model.MODE, "nonce": nonce, "package": Model.PACKAGE, "version": BuildInfo.VERSION, "sourceCommit": BuildInfo.COMMIT, "shortcutId": Model.ID, "status": status, "code": code, "requestAccepted": requested, "homePositionVerified": false}
+    var record: Dictionary = {"schemaVersion": 1, "mode": Model.MODE, "nonce": nonce, "package": Model.PACKAGE, "version": BuildInfo.VERSION, "sourceCommit": BuildInfo.COMMIT, "shortcutId": Model.ID, "status": status, "code": code, "requestAccepted": requested, "homePositionVerified": false, "constructor": constructor_name}
     var file := FileAccess.open(RESULT, FileAccess.WRITE)
     if file != null:
         file.store_string(JSON.stringify(record))
@@ -48,7 +49,7 @@ func _call(object: Variant, method: String, args: Array = []) -> Variant:
         return null
     if object == null:
         failed = true
-        call_deferred("_publish", "failed", "native_object_unavailable")
+        call_deferred("_publish", "failed", "native_object_unavailable_" + method)
         return null
     var value: Variant = object.callv(method, args)
     if JavaClassWrapper.get_exception() != null:
@@ -87,6 +88,24 @@ func _begin() -> void:
     var runnable: Variant = _call(runtime, "createRunnableFromGodotCallable", [_request_pin.bind(activity)])
     _call(activity, "runOnUiThread", [runnable])
 
+func _builder(activity: Variant) -> Variant:
+    var klass: Variant = _class("android.content.pm.ShortcutInfo$Builder")
+    if failed:
+        return null
+    var matches: Array[String] = []
+    # Ask the installed engine, without invoking guessed constructors or arbitrary methods.
+    for candidate in ["ShortcutInfo$Builder", "Builder", "<init>", "new"]:
+        if _flag(klass, "has_java_method", [candidate]):
+            matches.append(candidate)
+    if failed:
+        return null
+    if matches.size() != 1:
+        failed = true
+        call_deferred("_publish", "failed", "builder_constructor_missing_or_ambiguous")
+        return null
+    constructor_name = matches[0]
+    return _call(klass, constructor_name, [activity, Model.ID])
+
 func _request_pin(activity: Variant) -> void:
     manager = _call(activity, "getSystemService", ["shortcut"])
     var supported: bool = _flag(manager, "isRequestPinShortcutSupported")
@@ -119,7 +138,9 @@ func _request_pin(activity: Variant) -> void:
         return
     var icon_id: int = icon_value
     var icon: Variant = _call(_class("android.graphics.drawable.Icon"), "createWithResource", [activity, icon_id])
-    var builder: Variant = _call(_class("android.content.pm.ShortcutInfo$Builder"), "Builder", [activity, Model.ID])
+    var builder: Variant = _builder(activity)
+    if failed or builder == null:
+        return
     _call(builder, "setShortLabel", ["Multimental Dev"])
     _call(builder, "setLongLabel", ["Multimental Dev"])
     _call(builder, "setIcon", [icon])
