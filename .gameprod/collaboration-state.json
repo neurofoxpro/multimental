@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "neurofoxpro/multimental",
-  "revision": 31,
+  "revision": 32,
   "claims": {
     "4d555e19-c33e-4ec7-bf28-292c1d3de03b": {
       "token": "4d555e19-c33e-4ec7-bf28-292c1d3de03b",
@@ -28,19 +28,6 @@
       "fence": 25,
       "updatedAt": 1790405542361,
       "expiresAt": 1790407342361
-    },
-    "8fedc025-ae9c-4f3d-9d5a-2ab8c908e57d": {
-      "token": "8fedc025-ae9c-4f3d-9d5a-2ab8c908e57d",
-      "task": "META-04",
-      "owner": "rewards-continuation-20260926-0718",
-      "base": "8160555dd006bf4c889d0ee6993c7ddad946c3a5",
-      "resources": [
-        "area:economy",
-        "task:META-04"
-      ],
-      "fence": 29,
-      "updatedAt": 1790408246075,
-      "expiresAt": 1790410046075
     }
   },
   "events": [
@@ -575,6 +562,18 @@
         "fence": 29,
         "updatedAt": 1790408246075,
         "expiresAt": 1790410046075
+      }
+    },
+    {
+      "id": "7c1254b5-0a79-45f0-8351-20fa2815c02c",
+      "hash": "96cf9746f081ebcf6dae1afb6e86426fc6599c492892b538dcfccef995890ee6",
+      "revision": 32,
+      "result": {
+        "status": "released",
+        "token": "8fedc025-ae9c-4f3d-9d5a-2ab8c908e57d",
+        "task": "META-04",
+        "owner": "rewards-continuation-20260926-0718",
+        "fence": 29
       }
     }
   ]
