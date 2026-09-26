@@ -309,14 +309,19 @@
   },
   {
     "id": "META-03",
-    "status": "pending",
+    "status": "done",
     "action": "Пыль, дубликаты и целевой крафт карт",
     "dependsOn": [
       "META-02"
     ],
     "manual": false,
     "generatedFrom": ".gameprod/workplan.json",
-    "evidence": [],
+    "evidence": [
+      "docs/production/CARD_CRAFTING.ru.md",
+      "docs/production/MODAL_TOUCH_TESTS.ru.md",
+      "game/tests/crafting_test.gd",
+      "game/tests/crafting_ui_test.gd"
+    ],
     "nextCommand": "npm run game -- task META-03"
   },
   {

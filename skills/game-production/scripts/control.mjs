@@ -462,6 +462,10 @@ export async function main(argv = process.argv.slice(2)) {
     await (await import('../../../tools/ux-audit.mjs')).main(entryArgs);
     return;
   }
+  if (entry === 'fleet') {
+    await (await import('./phone-fleet.mjs')).main(entryArgs);
+    return;
+  }
   if (entry === 'inspect') {
     (await import('../../../tools/source-inspect.mjs')).main(entryArgs);
     return;

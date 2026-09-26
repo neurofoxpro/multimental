@@ -576,7 +576,7 @@
       "title": "Пыль, дубликаты и целевой крафт карт",
       "stage": "P2. Коллекция, профиль и экономика",
       "kind": "game",
-      "status": "planned",
+      "status": "verified",
       "dependsOn": [
         "META-02"
       ],
@@ -584,11 +584,18 @@
         "Цена и преобразование дублей вынесены в конфигурацию; крафт выбранной карты транзакционен.",
         "Не уничтожать нужные копии; никакого усиления статов карты через гринд."
       ],
-      "evidence": [],
-      "readset": [
-        "game/src/main.gd"
+      "evidence": [
+        "docs/production/CARD_CRAFTING.ru.md",
+        "docs/production/MODAL_TOUCH_TESTS.ru.md",
+        "game/tests/crafting_test.gd",
+        "game/tests/crafting_ui_test.gd"
       ],
-      "source": "Этапы 4,6; D06",
+      "readset": [
+        "game/src/main.gd",
+        "game/src/crafting_rules.gd",
+        "game/src/crafting_policy.gd"
+      ],
+      "source": "Этапы 4,6; D06; реализация и аппаратная проверка PR114/115",
       "requiredForBeta": true,
       "requiredForPlay": true,
       "priority": 13
