@@ -10,7 +10,8 @@ func _ready() -> void:
     name = "CardInspector"
     dialog_close_on_escape = true
     dialog_hide_on_ok = true
-    get_ok_button().custom_minimum_size = Vector2(180, 64)
+    # Preserve and complete the measured dialog fix from PR119 / 408b5edd.
+    preload("res://src/ui_theme.gd").decorate_dialog(self, 260, 96)
     get_ok_button().add_theme_font_size_override("font_size", 22)
     scroll = ScrollContainer.new()
     scroll.name = "DetailsScroll"
