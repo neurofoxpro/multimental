@@ -737,9 +737,15 @@
       "id": "UX-09",
       "text": "Воспроизводимая галерея актуальных экранов для дизайна и GitHub",
       "version": "P2. Коллекция, профиль и экономика",
-      "status": "planned",
+      "status": "verified",
       "kind": "automation",
-      "evidence": [],
+      "evidence": [
+        "docs/production/GALLERY_CAPTURE.ru.md",
+        "docs/SCREENSHOTS.ru.md",
+        "docs/media/gallery/current.json",
+        "docs/production/evidence/gallery-research-observed-20260926.json",
+        "docs/production/evidence/gallery-completed-20260926.json"
+      ],
       "source": "Прямое поручение владельца 26.09.2026: частые действия, подключение, актуальные изображения и автономная разработка",
       "requiredForBeta": true
     },

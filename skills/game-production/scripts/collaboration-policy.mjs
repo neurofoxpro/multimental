@@ -1,3 +1,4 @@
+import { continuationRequest } from './work-continuation-policy.mjs';
 import { createHash } from 'node:crypto';
 import { assertCompletedRelease } from './completed-recovery-policy.mjs';
 export const COORD_BRANCH = 'coordination-state';
@@ -71,7 +72,9 @@ export function transition(state, request, now) {
     !Number.isSafeInteger(now) ||
     !UUID.test(request?.id || '') ||
     !OWNER.test(request.owner || '') ||
-    !['claim', 'renew', 'release', 'release_completed'].includes(request.kind)
+    !['claim', 'renew', 'release', 'release_completed', 'continue_interrupted'].includes(
+      request.kind
+    )
   )
     throw Error('Invalid coordination command');
   const hash = digest(request),
@@ -116,6 +119,32 @@ export function transition(state, request, now) {
     };
     next.claims[claim.token] = claim;
     result = { status: 'claimed', ...claim };
+  } else if (request.kind === 'continue_interrupted') {
+    const { actor, target } = continuationRequest(state, request, now);
+    const claim = {
+      token: request.id,
+      task: target.task,
+      owner: request.nextOwner,
+      base: request.base,
+      resources: [...target.resources],
+      fence: state.revision + 1,
+      updatedAt: now,
+      expiresAt: now + 1800000
+    };
+    delete next.claims[actor.token];
+    delete next.claims[target.token];
+    next.claims[claim.token] = claim;
+    result = {
+      status: 'continuation_transferred',
+      ...claim,
+      previousToken: target.token,
+      previousOwner: target.owner,
+      previousHead: request.proof.head,
+      previousPr: request.proof.pr,
+      operatorReleased: actor.task,
+      sourceWrites: 0,
+      phoneChanges: 0
+    };
   } else if (request.kind === 'release_completed') {
     const target = assertCompletedRelease(state, request, now);
     delete next.claims[target.token];

@@ -3,7 +3,7 @@ name: game-production
 description: Strict task-focused development with compact live context, guarded edits and one resumable verified dev-release command.
 ---
 
-# Game Production v8
+# Game Production v8.1
 
 ## Permanent boundaries
 Only neurofoxpro/multimental; personal execution only VENEL-SENDRIK. Hosted CI and internal source-only checks are allowed. Verify hostname/origin. Never use another host/repository, mirror projects, force-push, delete phone data or rotate its persistent dev key. Dev integration after checks is delegated; main/stable/Play and accepted-concept changes require owner approval. Respect actual tool refusals, without alternate-path bypasses.
@@ -48,7 +48,7 @@ Research: `study packet TASK` → `study run TASK` → agent analysis → `study
 
 Use `gallery capture` after formatting/visual changes, then `gallery check` and `ship`. It stages24 actual SubViewport-rendered RU/EN screenshots plus source/size/hash metadata and docs/SCREENSHOTS.ru.md. Headless dummy images, duplicate frames, errors after PASS, stale inputs and changed personal profile are rejected. Source previews are not installed Android evidence; local BuildInfo is recorded separately from the visual input key. Images are immutable. Managed document regeneration requires exact journaled bytes; unknown edits remain protected. `gallery promote` resumes an already captured matching generation without rerendering. Study UX-09 supplies the bounded research packet. See docs/production/GALLERY_CAPTURE.ru.md; don't redraw mockups and call them application screenshots.
 ## Relevant detail only
-Full prior skill is preserved in REFERENCE.md as historical/detailed context; v7 controls routing. Read only applicable contracts under docs/production: SHORT_COMMANDS.ru.md and DEV_SETTLE.ru.md for workflow; PROFILE_STORAGE/COLLECTION_EDITOR/NETWORK_DECKS/REWARDS_PROGRESS for profile/economy; PARALLEL_CHATS/SLICE_REFRESH/ISSUE_PLAN_SYNC for coordination; UX_AUDIT/MODAL_TOUCH_TESTS for UI; DEVICE_SUITES/DEVICE_RECOVERY/SECOND_PHONE/USB_PHONE_DIAGNOSTICS for devices.
+Full prior skill is preserved in REFERENCE.md as historical/detailed context; the current short skill controls routing. Read only applicable contracts under docs/production: SHORT_COMMANDS.ru.md and DEV_SETTLE.ru.md for workflow; PROFILE_STORAGE/COLLECTION_EDITOR/NETWORK_DECKS/REWARDS_PROGRESS for profile/economy; PARALLEL_CHATS/SLICE_REFRESH/ISSUE_PLAN_SYNC for coordination; UX_AUDIT/MODAL_TOUCH_TESTS for UI; DEVICE_SUITES/DEVICE_RECOVERY/SECOND_PHONE/USB_PHONE_DIAGNOSTICS for devices.
 
 Keep ordered retry identity/payload; future profile versions block downgrade. Alpha retains all30x2 cards; optional rewards/levels do not alter combat stats. Runtime errors invalidate PASS. Measure actual viewport/laid-out controls; Godot units are not automatically Android dp. New adapters need bounded input/time, argv without shell, scope/ownership, exact receipts, refusal tests and a real verified run before being called deployed.
 
