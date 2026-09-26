@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "neurofoxpro/multimental",
-  "revision": 20,
+  "revision": 21,
   "claims": {
     "7d454b24-9d2a-459f-87ee-7e81be94f96a": {
       "token": "7d454b24-9d2a-459f-87ee-7e81be94f96a",
@@ -15,19 +15,6 @@
       "fence": 1,
       "updatedAt": 1790397868952,
       "expiresAt": 1790399668952
-    },
-    "35046cac-af66-4eaf-b483-e4d989d3a75c": {
-      "token": "35046cac-af66-4eaf-b483-e4d989d3a75c",
-      "task": "UX-07",
-      "owner": "adaptive-menu-20260926",
-      "base": "f22dd346c6187230e0f0f98dddfc5b4dbf9541ba",
-      "resources": [
-        "area:game-ui",
-        "task:UX-07"
-      ],
-      "fence": 15,
-      "updatedAt": 1790399055316,
-      "expiresAt": 1790400855316
     },
     "4d555e19-c33e-4ec7-bf28-292c1d3de03b": {
       "token": "4d555e19-c33e-4ec7-bf28-292c1d3de03b",
@@ -387,6 +374,18 @@
         "task": "META-03",
         "owner": "crafting-cards-20260926",
         "fence": 14
+      }
+    },
+    {
+      "id": "38032eb0-3086-4640-85a2-e37fa5f49606",
+      "hash": "8d05dd726b920ea6e3433c258467449f5bdd2102664e5d13cad4bdb85d0d61c6",
+      "revision": 21,
+      "result": {
+        "status": "released",
+        "token": "35046cac-af66-4eaf-b483-e4d989d3a75c",
+        "task": "UX-07",
+        "owner": "adaptive-menu-20260926",
+        "fence": 15
       }
     }
   ]
