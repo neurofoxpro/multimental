@@ -29,6 +29,12 @@ Reuse `game/src/scrollable_page.gd` for pages whose minimum content height can e
 
 `tools/runtime-diagnostics.mjs` rejects runtime ERROR even when a PASS marker was printed earlier. The targeted profile runner uses it; full verify keeps its existing strict error checks. A zero process exit alone is not success.
 
+## Card crafting and reusable UI-device contracts
+
+Use `profile-test crafting` and `profile-test crafting-ui`, then normal check/publish/settle. The new optional crafting extension preserves existing profiles; future extension versions remain unsupported, never silently replaced by an older generation. Prices are versioned in crafting_policy.gd. No card-stat upgrades and no automatic destruction: only a spare copy not required by any saved deck/draft may be explicitly recycled after confirmation.
+
+Device tests reuse `ui-lab-spec.mjs`: collection/shop/crafting stages and report contracts are declared once. `device-suite --target phone --suite crafting` performs five real Android taps using the isolated profile fixture. Require every expected stage exactly once and all checks true, plus unchanged personal profile; a bare PASS is insufficient. Do not run this against personal data or infer a second phone from this result.
+
 ## Scope and authority
 Only repository `neurofoxpro/multimental`. Only personal station `VENEL-SENDRIK`; GitHub-hosted CI and internal source-only work are allowed. Check the actual hostname, remote and branch. Do not use another computer or repository. Keep credentials, phone identifiers and raw logs private.
 

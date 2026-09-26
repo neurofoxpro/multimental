@@ -74,6 +74,8 @@ for (const [file, marker] of [
   ['balance_test.gd', 'MULTIMENTAL_BALANCE_PARAMETERS_PASS'],
   ['room_automation_test.gd', 'MULTIMENTAL_ROOM_AUTOMATION_PASS'],
   ['profile_test.gd', 'MULTIMENTAL_PROFILE_PASS'],
+  ['crafting_test.gd', 'MULTIMENTAL_CRAFT_PASS'],
+  ['crafting_ui_test.gd', 'MULTIMENTAL_CRAFT_UI_PASS'],
   ['menu_layout_test.gd', 'MULTIMENTAL_MENU_LAYOUT_PASS'],
   ['profile_store_test.gd', 'MULTIMENTAL_PROFILE_STORAGE_PASS'],
   ['profile_ui_test.gd', 'MULTIMENTAL_PROFILE_UI_PASS'],

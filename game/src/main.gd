@@ -157,6 +157,9 @@ func show_menu() -> void:
     var shop_button: Button = button(t("МАГАЗИН ПАКОВ", "CARD PACK SHOP"), show_shop, 62)
     shop_button.name = "OpenShop"
     root.add_child(shop_button)
+    var craft_button: Button = button(t("СОЗДАНИЕ КАРТ", "CARD CRAFTING"), show_crafting, 62)
+    craft_button.name = "OpenCrafting"
+    root.add_child(craft_button)
     root.add_child(button(t("ИГРА ПО ЛОКАЛЬНОЙ СЕТИ", "LOCAL NETWORK MATCH"), show_lan_menu, 70))
     if OS.has_feature("android"):
         root.add_child(button(t("ИГРА ПО BLUETOOTH", "BLUETOOTH MATCH"), show_bluetooth_menu, 64))
@@ -204,6 +207,21 @@ func ensure_collection() -> bool:
         collection_error = profile.error
         return false
     return Collection.valid(profile.state())
+
+func show_crafting() -> void:
+    if not ensure_collection():
+        show_menu()
+        return
+    lan.stop()
+    online = false
+    battle = false
+    tutorial = false
+    network_page = false
+    clear_screen()
+    var screen = preload("res://src/crafting_screen.gd").new()
+    root.add_child(screen)
+    screen.leave_requested.connect(show_menu)
+    screen.setup(self)
 
 func show_shop() -> void:
     if not ensure_collection():
