@@ -74,6 +74,10 @@ export class HubClient {
           body: body === undefined ? undefined : JSON.stringify(body)
         });
       } catch {
+        if (method === 'GET' && attempt < 2) {
+          await this.pause(500 * 2 ** attempt);
+          continue;
+        }
         // Never repeat an ambiguous write. Callers must read back by operation identity.
         throw Error(
           method === 'GET' ? 'HUB_READ_UNAVAILABLE' : 'HUB_WRITE_UNKNOWN_READBACK_REQUIRED'
@@ -86,7 +90,17 @@ export class HubClient {
       if (!response.ok)
         throw Error('HUB_HTTP_' + response.status + ' ' + method + ' ' + endpoint.split('?')[0]);
       if (response.status === 204) return {};
-      return response.json();
+      try {
+        return await response.json();
+      } catch {
+        if (method === 'GET' && attempt < 2) {
+          await this.pause(500 * 2 ** attempt);
+          continue;
+        }
+        throw Error(
+          method === 'GET' ? 'HUB_READ_UNAVAILABLE' : 'HUB_WRITE_UNKNOWN_READBACK_REQUIRED'
+        );
+      }
     }
   }
   async list(endpoint, key = null) {

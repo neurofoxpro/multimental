@@ -113,6 +113,13 @@
         "OPS-02",
         "FUTURE-01"
       ]
+    },
+    {
+      "id": "P0",
+      "title": "P0. ?????? ???????????????? ???????",
+      "tasks": [
+        "AUTO-11"
+      ]
     }
   ],
   "evidenceSemantics": "Verified means historically observed at linked evidence. No current RC, owner approval, Play publication or physical installation is inferred from metadata."

@@ -1,4 +1,5 @@
 import fs from 'node:fs';
+import { assertSourceWorkflow } from './workflow-guard.mjs';
 import path from 'node:path';
 import { spawnSync } from 'node:child_process';
 import { inside, readJSON } from './lib.mjs';
@@ -31,6 +32,11 @@ export function validateBinding(state, binding, branch) {
   return assertOwnership(state, binding);
 }
 export async function guardWorktree(root, entry, args) {
+  if (
+    requiresOwnership(entry, args) ||
+    (entry === 'collab' && ['branch', 'refresh', 'release'].includes(args?.[0]))
+  )
+    assertSourceWorkflow(root);
   const file = inside(root, '.gameprod/agent.local.json');
   if (!fs.existsSync(file) || !requiresOwnership(entry, args)) return;
   if (process.platform === 'win32')
