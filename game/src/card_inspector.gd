@@ -10,7 +10,9 @@ func _ready() -> void:
     name = "CardInspector"
     dialog_close_on_escape = true
     dialog_hide_on_ok = true
-    get_ok_button().custom_minimum_size = Vector2(180, 64)
+    # AcceptDialog recalculates built-in button minima from its theme.
+    add_theme_constant_override("buttons_min_width", 260)
+    add_theme_constant_override("buttons_min_height", 96)
     get_ok_button().add_theme_font_size_override("font_size", 22)
     scroll = ScrollContainer.new()
     scroll.name = "DetailsScroll"

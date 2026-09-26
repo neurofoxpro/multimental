@@ -133,6 +133,10 @@ The dev build workflow includes a separate post-publication memory job using too
 
 If recording fails after publication, retry only the failed memory job. Do not create a second release to repair documentation. This job needs only contents:read and issues:write; PR checks do not receive that write job. See docs/production/RELEASE_MEMORY.ru.md and confirm the real job result before claiming deployment.
 
+## Verify rendered size, not only assigned properties
+
+A passing OS tap proves routing, not an accessible target size. Inspect the actual captured UI and geometry. AcceptDialog may recalculate its built-in button minima; use its buttons_min_width/buttons_min_height theme constants and assert the final laid-out size. Tests must set and verify the actual logical content_scale_size together with Window.size. Godot units and screenshot pixels are not Android dp without a measured display scale and density. Preserve that distinction in evidence and do not close accessibility work based only on nonzero geometry.
+
 ## Card-inspector device regression
 
 Use `profile-test inspector-lab` for a signal-driven check of the six-stage diagnostic scenario. It reuses CollectionDeviceLab isolation, nonce validation, tap geometry and restoration; it does not prove actual touch input. `device-suite --target phone --suite inspector` performs the real six Android taps for collection entry/open/close and crafting entry/open/close. It verifies dirty draft and profile preservation, and no craft/recycle spending. Existing primary qualification leases remain mandatory. UI resource ownership is not permission to reconfigure the other phone or take QA-02. Record the exact installed APK before claiming this feature physically tested.
