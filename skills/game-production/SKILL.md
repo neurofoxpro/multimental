@@ -39,6 +39,10 @@ Device tests reuse `ui-lab-spec.mjs`: collection/shop/crafting stages and report
 
 Reuse UiTapGeometry for OS-input targets. Transform through the target Control's viewport, not the lab/root viewport: embedded Window buttons otherwise point outside the displayed dialog. Reject hidden/disabled/detached/offscreen targets. `profile-test taps` exercises viewport translation, but only a new physical suite confirms the exact APK. Keep failed receipts; a later fixed run does not retroactively pass the old one. Dialog minimum button sizes use AcceptDialog theme constants and explicit localized labels. See docs/production/MODAL_TOUCH_TESTS.ru.md.
 
+## Physical USB diagnostics without guessing
+
+Use `fleet probe` for actual authorized USB Android rows, and `fleet usb` for redacted read-only Windows PnP context. The second command groups interfaces by ContainerId but never equates multiple ADB/MTP nodes to multiple phones. It saves a timestamped source-bound observation. It never changes drivers, permissions, USB mode or the ADB server. A second container without a second authorized ADB row is a diagnostic lead, not permission to deploy. Secondary binding/signing remains an explicit separate implementation. See docs/production/USB_PHONE_DIAGNOSTICS.ru.md.
+
 ## Scope and authority
 Only repository `neurofoxpro/multimental`. Only personal station `VENEL-SENDRIK`; GitHub-hosted CI and internal source-only work are allowed. Check the actual hostname, remote and branch. Do not use another computer or repository. Keep credentials, phone identifiers and raw logs private.
 

@@ -299,10 +299,15 @@
       "id": "META-03",
       "text": "Пыль, дубликаты и целевой крафт карт",
       "version": "P2. Коллекция, профиль и экономика",
-      "status": "planned",
+      "status": "verified",
       "kind": "game",
-      "evidence": [],
-      "source": "Этапы 4,6; D06",
+      "evidence": [
+        "docs/production/CARD_CRAFTING.ru.md",
+        "docs/production/MODAL_TOUCH_TESTS.ru.md",
+        "game/tests/crafting_test.gd",
+        "game/tests/crafting_ui_test.gd"
+      ],
+      "source": "Этапы 4,6; D06; реализация и аппаратная проверка PR114/115",
       "requiredForBeta": true
     },
     {
