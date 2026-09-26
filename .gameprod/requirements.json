@@ -633,9 +633,13 @@
       "id": "AUTO-09",
       "text": "Параллельные чаты: атомарное владение задачами и ресурсами в GitHub",
       "version": "P0. Единый производственный процесс",
-      "status": "planned",
+      "status": "verified",
       "kind": "automation",
-      "evidence": [],
+      "evidence": [
+        "docs/production/evidence/parallel-slices-20260926.json",
+        "skills/game-production/tests/collaboration.test.mjs",
+        "skills/game-production/tests/collaboration-integration.test.mjs"
+      ],
       "source": "Поручение владельца 26.09.2026: несколько чатов, координация, автоматизация",
       "requiredForBeta": true
     },
@@ -643,9 +647,13 @@
       "id": "AUTO-10",
       "text": "Изолированные рабочие срезы и воспроизводимый вход нового чата",
       "version": "P0. Единый производственный процесс",
-      "status": "planned",
+      "status": "verified",
       "kind": "automation",
-      "evidence": [],
+      "evidence": [
+        "docs/production/evidence/parallel-slices-20260926.json",
+        "tools/godot-preflight.mjs",
+        "skills/game-production/tests/godot-preflight.test.mjs"
+      ],
       "source": "Поручение владельца 26.09.2026: переносимость и параллельные срезы",
       "requiredForBeta": true
     },
