@@ -436,10 +436,13 @@ export async function main(argv = process.argv.slice(2)) {
   if (mode === 'settle') {
     if (args.length !== 2) throw Error('settle PR HEAD');
     const { acquireOperation } = await import('./operation-lock.mjs');
-    const release = acquireOperation(inside(root, '.gameprod/evidence/flow.lock'), {
-      command: mode,
-      repository: REPO
-    });
+    const release = acquireOperation(
+      inside(path.dirname(root), 'collaboration-dev-integration.lock'),
+      {
+        command: mode,
+        repository: REPO
+      }
+    );
     try {
       const result = await settle(client, Number(args[0]), args[1]);
       writeJSON(inside(root, '.gameprod/evidence/flow-cycle.json'), result);

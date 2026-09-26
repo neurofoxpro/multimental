@@ -7,6 +7,18 @@ export function allowedEndpoint(method, endpoint) {
   if (typeof endpoint !== 'string' || !endpoint.startsWith('/') || /\.\.|[\\\0#]/.test(endpoint))
     return false;
   const p = endpoint.split('?')[0];
+  if (method === 'GET' && (p === '/labels' || /^\/issues\/\d+\/dependencies\/blocked_by$/.test(p)))
+    return true;
+  if (
+    method === 'POST' &&
+    (p === '/labels' || /^\/issues\/\d+\/(labels|dependencies\/blocked_by)$/.test(p))
+  )
+    return true;
+  if (
+    method === 'DELETE' &&
+    /^\/issues\/\d+\/labels\/gp%3A(status|priority|area)%3A[a-z0-9-]+$/.test(p)
+  )
+    return true;
   if (method === 'GET')
     return /^\/(issues(?:\/\d+(?:\/comments)?)?|pulls(?:\/\d+(?:\/files|\/reviews|\/commits)?)?|actions\/runs(?:\/\d+(?:\/jobs|\/artifacts)?)?|git\/ref\/heads\/[A-Za-z0-9._/-]+|commits\/[a-f0-9]{40}(?:\/check-runs)?|releases|collaborators\/[A-Za-z0-9_-]+\/permission)$/.test(
       p
