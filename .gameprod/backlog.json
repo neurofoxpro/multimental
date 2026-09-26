@@ -77,14 +77,19 @@
   },
   {
     "id": "AUTO-06",
-    "status": "pending",
+    "status": "done",
     "action": "Один вход для человека и агента; единый граф требований без дрейфа roadmap",
     "dependsOn": [
       "AUTH-01"
     ],
     "manual": false,
     "generatedFrom": ".gameprod/workplan.json",
-    "evidence": [],
+    "evidence": [
+      "docs/production/SHORT_COMMANDS.ru.md",
+      "docs/production/DEV_SETTLE.ru.md",
+      "docs/production/ISSUE_PLAN_SYNC.ru.md",
+      "docs/production/evidence/short-workflow-completed-20260926.json"
+    ],
     "nextCommand": "npm run game -- task AUTO-06"
   },
   {
@@ -326,7 +331,7 @@
   },
   {
     "id": "META-04",
-    "status": "pending",
+    "status": "done",
     "action": "Награды, ежедневные задания и уровни без обязательного гринда",
     "dependsOn": [
       "META-02",
@@ -334,7 +339,11 @@
     ],
     "manual": false,
     "generatedFrom": ".gameprod/workplan.json",
-    "evidence": [],
+    "evidence": [
+      "docs/production/REWARDS_PROGRESS.ru.md",
+      "docs/production/evidence/rewards-acquisition-20260926.json",
+      "docs/production/evidence/rewards-completed-20260926.json"
+    ],
     "nextCommand": "npm run game -- task META-04"
   },
   {
@@ -803,7 +812,7 @@
   {
     "id": "AUTO-11",
     "status": "pending",
-    "action": "??????????? ???????????? ??????????? ?????? ??? ??????? ????? ??????",
+    "action": "Проверяемое освобождение завершённых срезов без захвата живой работы",
     "dependsOn": [
       "AUTO-06"
     ],

@@ -1,4 +1,5 @@
 import { createHash } from 'node:crypto';
+import { assertCompletedRelease } from './completed-recovery-policy.mjs';
 export const COORD_BRANCH = 'coordination-state';
 export const COORD_FILE = '.gameprod/collaboration-state.json';
 export const COORD_REPO = 'neurofoxpro/multimental';
@@ -70,7 +71,7 @@ export function transition(state, request, now) {
     !Number.isSafeInteger(now) ||
     !UUID.test(request?.id || '') ||
     !OWNER.test(request.owner || '') ||
-    !['claim', 'renew', 'release'].includes(request.kind)
+    !['claim', 'renew', 'release', 'release_completed'].includes(request.kind)
   )
     throw Error('Invalid coordination command');
   const hash = digest(request),
@@ -115,6 +116,20 @@ export function transition(state, request, now) {
     };
     next.claims[claim.token] = claim;
     result = { status: 'claimed', ...claim };
+  } else if (request.kind === 'release_completed') {
+    const target = assertCompletedRelease(state, request, now);
+    delete next.claims[target.token];
+    result = {
+      status: 'released_completed',
+      token: target.token,
+      task: target.task,
+      owner: target.owner,
+      fence: target.fence,
+      operator: request.owner,
+      proofDigest: request.proofDigest,
+      head: request.proof.head,
+      pr: request.proof.pr
+    };
   } else {
     if (!UUID.test(request.token || '') || !Number.isSafeInteger(request.fence))
       throw Error('Exact token and fence required');
