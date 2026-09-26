@@ -1,4 +1,5 @@
 import fs from 'node:fs';
+import { prepareGodotProject } from './godot-preflight.mjs';
 import path from 'node:path';
 import { spawnSync } from 'node:child_process';
 import { verificationRuntime } from './godot-runtime.mjs';
@@ -40,6 +41,8 @@ if (!binary && process.platform === 'win32') {
 if (!binary) binary = 'godot';
 const exe = verificationRuntime(root, binary);
 const before = fingerprint(root, p);
+prepareGodotProject(root, exe);
+console.log('GODOT_PROJECT_CACHE_READY');
 const r = spawnSync(exe, ['--headless', '--path', 'game', '--script', 'res://tests/' + script], {
   cwd: root,
   encoding: 'utf8',

@@ -1,7 +1,14 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
-export function acquireOperation(file, details) {
+export function acquireOperation(file, details = {}) {
+  if (
+    !details ||
+    typeof details !== 'object' ||
+    Array.isArray(details) ||
+    ['pid', 'token', 'startedAt'].some((key) => Object.hasOwn(details, key))
+  )
+    throw Error('Reserved operation ownership fields cannot be overridden');
   fs.mkdirSync(path.dirname(file), { recursive: true });
   const token = crypto.randomBytes(16).toString('hex');
   let fd;

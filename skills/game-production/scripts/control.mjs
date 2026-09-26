@@ -438,6 +438,10 @@ export async function main(argv = process.argv.slice(2)) {
   const root = findRoot();
   const [entry, ...entryArgs] = argv;
   await (await import('./collaboration-guard.mjs')).guardWorktree(root, entry, entryArgs);
+  if (entry === 'branch-recover') {
+    await (await import('./branch-recovery.mjs')).main(entryArgs);
+    return;
+  }
   if (entry === 'enroll') {
     (await import('../../../tools/enroll-tasks.mjs')).main(entryArgs);
     return;
