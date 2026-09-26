@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "observedAt": "2026-09-25",
+  "observedAt": "2026-09-26",
   "repository": "neurofoxpro/multimental",
   "generatedFrom": ".gameprod/workplan.json",
   "evidenceSemantics": "Historical evidence only; not a fresh release gate or human approval.",
@@ -245,10 +245,14 @@
       "id": "META-05",
       "text": "Полный профиль, транзакции сохранения и миграции без потери коллекции",
       "version": "P2. Коллекция, профиль и экономика",
-      "status": "planned",
+      "status": "verified",
       "kind": "game",
-      "evidence": [],
-      "source": "Этапы 5,6,9,12; D05–D07",
+      "evidence": [
+        "docs/production/PROFILE_STORAGE.ru.md",
+        "game/tests/profile_store_test.gd",
+        "game/tests/profile_ui_test.gd"
+      ],
+      "source": "Этапы 5,6,9,12; D05–D07; PR90; фактическая Android-квитанция Issue30/comment5840413541",
       "requiredForBeta": true
     },
     {

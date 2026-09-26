@@ -298,6 +298,56 @@ export async function main(argv = process.argv.slice(2)) {
     });
     return;
   }
+  if (mode === 'snapshot-plan') {
+    if (args.length) throw Error('snapshot-plan takes no arguments');
+    const { synchronizePlan } = await import('./plan-snapshot.mjs');
+    const { applyBundle } = await import('./apply.mjs');
+    const { sha } = await import('./lib.mjs');
+    const original = fs.readFileSync(inside(root, '.gameprod/workplan.json'), 'utf8');
+    if (JSON.stringify(JSON.parse(original)) !== JSON.stringify(plan))
+      throw Error('Plan changed before snapshot');
+    const head = invoke(root, 'git', ['rev-parse', 'HEAD']).stdout.trim();
+    const snapshot = await memorySnapshot(client, plan);
+    const receipt = await synchronizePlan(plan, snapshot, {
+      validateReferences: async (candidate) => {
+        for (const task of candidate.tasks)
+          for (const ref of [...task.evidence, ...task.readset]) {
+            const file = inside(root, ref);
+            if (
+              !fs.existsSync(file) ||
+              fs.lstatSync(file).isSymbolicLink() ||
+              !fs.statSync(file).isFile()
+            )
+              throw Error('Missing or unsafe primary reference: ' + ref);
+          }
+      },
+      apply: async (candidate) =>
+        applyBundle(root, {
+          base: head,
+          files: [
+            {
+              path: '.gameprod/workplan.json',
+              expectedCurrentSha256: sha(original),
+              content: JSON.stringify(candidate, null, 2) + '\n'
+            }
+          ]
+        }),
+      render: async () => {
+        const r = invoke(root, process.execPath, [
+          'skills/game-production/scripts/control.mjs',
+          'render'
+        ]);
+        process.stdout.write(r.stdout);
+      },
+      record: async (result) =>
+        writeJSON(inside(root, '.gameprod/evidence/issue-snapshot-applied.json'), {
+          ...result,
+          sourceHead: head
+        })
+    });
+    out(receipt);
+    return;
+  }
   if (mode === 'record') {
     if (args.length !== 3 || !/^[1-9][0-9]*$/.test(args[0])) throw Error('record ISSUE KEY TEXT');
     out(await upsertComment(client, Number(args[0]), args[1], args[2]));

@@ -26,6 +26,12 @@ Start with `AGENTS.md`, this skill, `docs/production/AUTHORITY.md` and Issue #29
 
 The local `github settle PR EXACT_HEAD_SHA` route now uses the deployed source-seal adapter, waits for all required CI, comments a machine review, rereads CI and refs, then performs a head-bound dev merge and confirms readback. It does not require a phone. Repeat the same command after interruption; it recognizes an already merged PR. See docs/production/DEV_SETTLE.ru.md. Cloud merge is still denied. `github ship/cycle/release-dev` remain disabled because their dispatch orchestration is unfinished; the legacy cycle still requires station qualification. A locally executed command is not a permanently running cloud coordinator.
 
+## Refresh the planning snapshot
+
+Before selecting a new implementation task, run `npm run game -- github snapshot-plan` on the current reviewed feature branch. It reads complete live Issue definitions, checks every reference, preserves release scope, then uses apply's exact base/current-hash guard to update workplan and regenerates the derived roadmap/requirements/backlog. Missing tasks/evidence or concurrent edits stop the operation. Run check and publish normally afterward; this command never merges or publishes on its own.
+
+A repeated unchanged snapshot does not rewrite the plan or churn its date. Render always runs so a previous interruption after applying the snapshot can recover without replaying the source write. CI still verifies the committed snapshot offline rather than silently fetching moving Issue state. Primary Issues and this versioned evidence snapshot have separate purposes. The pure core first preserved in draft PR91 is reused with provenance, not discarded.
+
 ## Editing without needless commits
 Use `scripts/chat.cmd apply BUNDLE.json`. Bind the bundle to the actual HEAD. For an existing draft/dirty file, include `expectedCurrentSha256` computed from the exact inspected bytes. Without that explicit hash uncommitted files remain protected. A mismatch stops the entire preflight. Never set the hash from stale memory or overwrite concurrent work.
 
