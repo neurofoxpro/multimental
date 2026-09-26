@@ -1,21 +1,8 @@
 {
   "schemaVersion": 1,
   "repository": "neurofoxpro/multimental",
-  "revision": 21,
+  "revision": 22,
   "claims": {
-    "7d454b24-9d2a-459f-87ee-7e81be94f96a": {
-      "token": "7d454b24-9d2a-459f-87ee-7e81be94f96a",
-      "task": "AUTO-09",
-      "owner": "chat-coordination-20260926",
-      "base": "71ebc41df6504fd6752f9bbb38e7e06114a8bb9b",
-      "resources": [
-        "area:coordination",
-        "task:AUTO-09"
-      ],
-      "fence": 1,
-      "updatedAt": 1790397868952,
-      "expiresAt": 1790399668952
-    },
     "4d555e19-c33e-4ec7-bf28-292c1d3de03b": {
       "token": "4d555e19-c33e-4ec7-bf28-292c1d3de03b",
       "task": "QA-02",
@@ -386,6 +373,18 @@
         "task": "UX-07",
         "owner": "adaptive-menu-20260926",
         "fence": 15
+      }
+    },
+    {
+      "id": "8ab46f8b-a782-4426-823c-149f28e47a15",
+      "hash": "0ab7f1c09dbefd7cba3135fddd3c58ac6a9ca06a3ddee03135694e3928befb68",
+      "revision": 22,
+      "result": {
+        "status": "released",
+        "token": "7d454b24-9d2a-459f-87ee-7e81be94f96a",
+        "task": "AUTO-09",
+        "owner": "chat-coordination-20260926",
+        "fence": 1
       }
     }
   ]
