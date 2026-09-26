@@ -184,10 +184,9 @@ test('entry point delegates to existing guarded pipeline without shell interpola
   p.tasks[1].title = 'title; echo not-a-command';
   const cmd = commandFor('ship', ['NEXT-01'], p);
   assert.deepEqual(cmd.slice(1), [
-    'skills/game-production/scripts/ops.mjs',
-    'cycle',
-    'feat: NEXT-01',
-    p.tasks[1].title
+    'skills/game-production/scripts/short-workflow.mjs',
+    'ship',
+    'NEXT-01'
   ]);
   assert.throws(() => commandFor('ship', ['NEXT-01', '--skip-checks'], p));
   assert.throws(() => commandFor('ship', ['NEXT-01;evil'], p));
