@@ -1,5 +1,6 @@
 class_name MatchCore
 extends RefCounted
+const Deck = preload("res://src/deck_rules.gd")
 ## Directional prototype v2. No scenes, clocks, UI or transport dependencies.
 const ELEMENTS: Array[String] = ["fire", "water", "lightning", "air", "earth", "light", "dark", "mecha", "poison", "mystery"]
 const ELEMENTS_RU: Array[String] = ["Огонь", "Вода", "Молния", "Воздух", "Земля", "Свет", "Тьма", "Меха", "Яд", "Тайна"]
@@ -15,11 +16,12 @@ const RULES_ID: String = "terrain-sweep-v3-balance1"
 const TYPES: Array[String] = ["fighter", "guard", "lancer", "archer", "flanker"]
 const TYPES_RU: Array[String] = ["Боец", "Страж", "Копейщик", "Стрелок", "Фланкер"]
 const TYPES_EN: Array[String] = ["Fighter", "Guard", "Lancer", "Archer", "Flanker"]
-const STARTER: Array[int] = [0, 1, 2, 3, 4, 6, 8, 10, 12, 14, 16, 18, 21, 23, 24]
+const STARTER: Array[int] = Deck.STARTER
 var state: Dictionary = {}
 var commands: Array[Dictionary] = []
 var random_state: int = 1
 var initial_seed: int = 1
+var initial_decks: Array = []
 
 func card(id: int) -> Dictionary:
     if id < 0 or id >= CARD_COUNT:
@@ -38,6 +40,22 @@ func next_random(maximum: int) -> int:
     return random_state % maximum
 
 func start(seed_value: int) -> void:
+    _start_checked(seed_value, [STARTER.duplicate(), STARTER.duplicate()])
+
+func start_with_decks(seed_value: int, deck_lists: Variant) -> Dictionary:
+    if typeof(deck_lists) != TYPE_ARRAY or deck_lists.size() != 2:
+        return Deck.failure("TWO_DECKS_REQUIRED")
+    var checked: Array = []
+    for value in deck_lists:
+        var result: Dictionary = Deck.validate_ids(value)
+        if not result.ok:
+            return result
+        checked.append(result.ids)
+    _start_checked(seed_value, checked)
+    return {"ok": true}
+
+func _start_checked(seed_value: int, deck_lists: Array) -> void:
+    initial_decks = deck_lists.duplicate(true)
     initial_seed = maxi(1, seed_value % 2147483647)
     random_state = initial_seed
     commands.clear()
@@ -46,7 +64,7 @@ func start(seed_value: int) -> void:
     for i in range(9):
         state.board.append(null)
     for player in range(2):
-        var deck: Array[int] = STARTER.duplicate()
+        var deck: Array[int] = initial_decks[player].duplicate()
         for i in range(deck.size() - 1, 0, -1):
             var j: int = next_random(i + 1)
             var temp: int = deck[i]
@@ -359,8 +377,11 @@ func choose_ai() -> Dictionary:
             best = candidate
     return best
 
-func replay(seed_value: int, journal: Array[Dictionary]) -> void:
-    start(seed_value)
+func replay(seed_value: int, journal: Array[Dictionary], deck_lists: Array = []) -> void:
+    if deck_lists.is_empty():
+        start(seed_value)
+    elif not start_with_decks(seed_value, deck_lists).ok:
+        return
     for entry in journal:
         if entry.command.type == "timeout":
             timeout(int(entry.player))

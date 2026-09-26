@@ -14,10 +14,12 @@ import {
 const [suite = 'model', ...extra] = process.argv.slice(2);
 const choices = {
   model: ['profile_test.gd', 'MULTIMENTAL_PROFILE_PASS'],
+  collection: ['collection_test.gd', 'MULTIMENTAL_COLLECTION_PASS'],
   storage: ['profile_store_test.gd', 'MULTIMENTAL_PROFILE_STORAGE_PASS'],
   ui: ['profile_ui_test.gd', 'MULTIMENTAL_PROFILE_UI_PASS']
 };
-if (!Object.hasOwn(choices, suite) || extra.length) throw Error('profile-test model|storage|ui');
+if (!Object.hasOwn(choices, suite) || extra.length)
+  throw Error('profile-test model|storage|ui|collection');
 const [script, marker] = choices[suite];
 const root = findRoot();
 process.chdir(root);

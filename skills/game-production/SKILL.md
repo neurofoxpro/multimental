@@ -54,6 +54,12 @@ Fresh PR checks must match the head, and changes requested must not be bypassed.
 
 The registered build workflow was actually dispatched from `dev` and passed in run 36180893893 without modifying main. Do not repeat the earlier blanket claim that main must change first. This observation applies to that registered workflow; probe each new route and inspect readback.
 
+## Collection foundation
+
+The collection/deck data API and read-only catalog are in game/src/deck_rules.gd, collection_rules.gd and catalog_view.gd. Run `profile-test collection`; it is also required by verify. Alpha policy is 15 cards, two copies per card, all elements freely mixed. The bounded test grant is versioned, idempotent and does not overwrite unknown legacy inventory. UI bootstrap and the editor are not enabled in this increment; ordinary menus still use STARTER. Do not close META-01 on data tests alone.
+
+Custom core matches receive two validated copied decks; local AI replay stores the original decks. Never expose them in public network views. LAN/Bluetooth deck negotiation remains separate work. Android profile suite additionally exercises collection save/select/reopen in its isolated namespace; personal profile hashes must be preserved. See docs/production/COLLECTION_CORE.ru.md.
+
 ## Completion
 Before finishing record actual commit/PR, CI runs, test counts and next unmet task in Issue #29 and the task Issue. Keep raw device logs private. Branch cleanup must prove merged ownership, exact tip and no active work before deletion; no cleanup happened merely because an inventory was generated.
 
