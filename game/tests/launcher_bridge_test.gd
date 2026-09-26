@@ -7,6 +7,7 @@ class FakeNative extends "res://src/platform/launcher_shortcut.gd":
     var accepted: Variant = 1
     var enabled: Variant = 1
     var pin_exists: bool = false
+    var icon_value: Variant = 1
     var invoked: Array[String] = []
     var statuses: Array[Dictionary] = []
     func _call(_object: Variant, method: String, _args: Array = []) -> Variant:
@@ -17,7 +18,7 @@ class FakeNative extends "res://src/platform/launcher_shortcut.gd":
             "isEnabled": return enabled
             "size": return 1 if pin_exists else 0
             "getId": return Model.ID
-            "getApplicationInfo": return {"icon": 1}
+            "getIconResource": return icon_value
             _: return self
     func _class(_name: String) -> Variant:
         return self
@@ -47,6 +48,7 @@ func run_test() -> void:
         await process_frame
         check(not bridge.failed and bridge.requested, "both actual true representations request the pin")
         check(bridge.invoked.count("requestPinShortcut") == 1, "single native request")
+        check(bridge.invoked.has("getActivityInfo") and bridge.invoked.has("getIconResource") and not bridge.invoked.has("getApplicationInfo"), "icon metadata uses Java methods, not fake dictionary fields")
         check(bridge.statuses.back().status == "requested", "native submission is not yet a pinned icon")
         bridge.queue_free()
         await process_frame
@@ -69,6 +71,16 @@ func run_test() -> void:
     check(invalid.statuses.back().code == "invalid_native_boolean_isRequestPinShortcutSupported", "wrong native type fails immediately instead of waiting for timeout")
     invalid.queue_free()
     await process_frame
+    for value in [null, true, 0, -1, 1.0, "1", 2147483648]:
+        var missing := FakeNative.new()
+        root.add_child(missing)
+        missing.icon_value = value
+        missing._request_pin(missing)
+        await process_frame
+        check(missing.failed and missing.statuses.back().code == "missing_application_icon", "invalid native icon ID is explicit")
+        check(not missing.invoked.has("requestPinShortcut"), "invalid icon never submits a pin")
+        missing.queue_free()
+        await process_frame
     var exists := FakeNative.new()
     root.add_child(exists)
     exists.pin_exists = true
