@@ -1,0 +1,300 @@
+{
+  "schemaVersion": 1,
+  "repository": "neurofoxpro/multimental",
+  "updatedAt": "2026-09-25T03:47:27.928Z",
+  "phase": "terrain_and_balance_dev_released_installed",
+  "implementationCommit": "017d811f5fefe27a006edc68b651d27ee705b940",
+  "testedProductionToolingCommit": "23911f31b0ffc512aa9e3810a4061b4183623f2f",
+  "skillEntryPoint": "skills/game-production/SKILL.md",
+  "report": "docs/production/BALANCE_RELEASE_COMPLETED.ru.md",
+  "next": "Owner gameplay review; first-player advantage and broader deck balance remain exploratory. Collection/deck builder/shop/crafting remain future implementation. Do not repeat completed PR24/25 cycles.",
+  "observed": {
+    "authorizedExecutionHost": "VENEL-SENDRIK",
+    "githubAccount": "venelsendrik",
+    "repositoryPermission": "MAINTAIN",
+    "productionSkill": "v2_in_use",
+    "nodeTests": {
+      "passed": 37,
+      "failed": 0
+    },
+    "coreTests": {
+      "checks": 3002,
+      "simulations": 100,
+      "result": "passed"
+    },
+    "protocolTests": {
+      "checks": 16,
+      "result": "passed"
+    },
+    "qualification": {
+      "status": "passed",
+      "scenarios": 29,
+      "candidateVersion": "0.3.0-alpha.84.1",
+      "candidateHead": "23911f31b0ffc512aa9e3810a4061b4183623f2f",
+      "evidence": "docs/production/evidence/bluetooth-release-completed.json"
+    },
+    "lastVerifiedInstalledRelease": "v0.5.1-alpha.105.1",
+    "lastVerifiedVersionCode": 20501,
+    "lastVerifiedInstallAt": "2026-09-25T03:35:40.930Z",
+    "ciRunForInstalledBuild": 36090853264,
+    "ciConclusionForInstalledBuild": "success",
+    "deviceEvidence": "docs/production/evidence/production-v2-latest.json",
+    "transportEvidence": "docs/production/evidence/production-v2-transports.json",
+    "cycleEvidence": "docs/production/evidence/production-v2-cycle.json",
+    "scheduledUpdater": {
+      "task": "Multimental-Dev-APK-Updater",
+      "interval": "PT5M",
+      "runLevel": "Limited",
+      "autoCloseForUpdate": true,
+      "realPhoneInstallMode": "update_in_place_preserving_data"
+    },
+    "humanGameplayAcceptance": "pending",
+    "lanSource": {
+      "branch": "feature/lan-pvp-20260924",
+      "localAudit": "passed",
+      "nodeTests": 69,
+      "roomChecks": 2900,
+      "deviceQualification": "not_run_for_0.2.0",
+      "release": "not_published"
+    },
+    "toolGate": {
+      "observedAt": "2026-09-24T05:18:03.168Z",
+      "operation": "combined automatic production cycle",
+      "result": "blocked_by_tool_safety",
+      "integrationNotPerformed": true
+    },
+    "betaReadiness": "not_beta_ready",
+    "lanRelease": {
+      "commit": "e5714b2f56c85b7d32ded37e3cad51f6ca3aec3f",
+      "release": "0.2.0-alpha.65.1",
+      "qualifiedCases": 25,
+      "qualifiedCandidate": "0.2.0-alpha.62.1",
+      "receipt": "docs/production/evidence/lan-release-completed.json"
+    },
+    "activeEngineering": {
+      "pr": 25,
+      "state": "merged_dev_delivered",
+      "commit": "017d811f5fefe27a006edc68b651d27ee705b940"
+    },
+    "tutorialAudioRelease": {
+      "pr": 17,
+      "release": "v0.2.1-alpha.82.1",
+      "commit": "117a3c43e21258673c09151fe96c08984687c571",
+      "qualifiedCases": 28,
+      "evidence": "docs/production/evidence/tutorial-audio-release-82.json"
+    },
+    "bluetoothRelease": {
+      "pr": 15,
+      "release": "v0.3.0-alpha.88.1",
+      "commit": "ef990b2b899b237a344e02ab8ce38eb017dc3e3f",
+      "windowsGuestAndroidHost": "passed",
+      "reconnect": true,
+      "wifiRestored": true,
+      "twoPhysicalAndroid": "not_tested"
+    },
+    "directionalRelease": {
+      "schemaVersion": 1,
+      "observedAt": "2026-09-25T01:10:50.219Z",
+      "repository": "neurofoxpro/multimental",
+      "pr": 22,
+      "featureHead": "298d1c59759295d61fc62d916eeef41876039a83",
+      "commit": "0969637cfcd31d399fe0a6bf48c4dc3d0bdda082",
+      "installedVersion": "0.4.0-alpha.94.1",
+      "versionCode": 19401,
+      "installedAt": "2026-09-25T01:05:31.116Z",
+      "originalSha256": "1f6953d3dd762344eadbe3f5de2fa7411a2dbb0223300ed2cfa384de2de83b25",
+      "installedSha256": "1b1f06a20ace41a088863768dbbd8ce2251b098c27e4777efa13e2cefccd5d41",
+      "ready": true,
+      "phoneData": "preserved_update_in_place",
+      "homeIcon": {
+        "label": "Multimental Dev",
+        "present": true,
+        "observedFile": "directional-home-icon.local.png",
+        "launchByTap": true
+      },
+      "candidateQualification": {
+        "status": "passed",
+        "apk": {
+          "version": "0.4.0-alpha.93.1",
+          "sha256": "0039c050a543359836cd774d2f345b420956edbbfbb5162c43b6b5daa0132655",
+          "commit": "e66e81b24e0a6835a566ca2498a30b8b696812da"
+        },
+        "startedAt": "2026-09-25T00:55:43.035Z",
+        "finishedAt": "2026-09-25T01:03:18.303Z",
+        "scenarios": [
+          {
+            "name": "emulator-A-clean-install",
+            "status": "passed"
+          },
+          {
+            "name": "emulator-A-install",
+            "status": "passed"
+          },
+          {
+            "name": "emulator-A-ui",
+            "status": "passed"
+          },
+          {
+            "name": "emulator-A-tutorial",
+            "status": "passed"
+          },
+          {
+            "name": "emulator-A-jni",
+            "status": "passed"
+          },
+          {
+            "name": "emulator-A-reinstall",
+            "status": "passed"
+          },
+          {
+            "name": "emulator-A-close",
+            "status": "passed"
+          },
+          {
+            "name": "emulator-A-launch",
+            "status": "passed"
+          },
+          {
+            "name": "emulator-B-install",
+            "status": "passed"
+          },
+          {
+            "name": "emulator-B-ui",
+            "status": "passed"
+          },
+          {
+            "name": "emulator-B-tutorial",
+            "status": "passed"
+          },
+          {
+            "name": "emulator-B-jni",
+            "status": "passed"
+          },
+          {
+            "name": "emulator-B-reinstall",
+            "status": "passed"
+          },
+          {
+            "name": "emulator-B-close",
+            "status": "passed"
+          },
+          {
+            "name": "emulator-B-launch",
+            "status": "passed"
+          },
+          {
+            "name": "emulator-pair",
+            "status": "passed"
+          },
+          {
+            "name": "pvp-emulators",
+            "status": "passed"
+          },
+          {
+            "name": "phone-install",
+            "status": "passed"
+          },
+          {
+            "name": "phone-ui",
+            "status": "passed"
+          },
+          {
+            "name": "phone-tutorial",
+            "status": "passed"
+          },
+          {
+            "name": "phone-tcp-usb",
+            "status": "passed"
+          },
+          {
+            "name": "phone-tcp-lan",
+            "status": "passed"
+          },
+          {
+            "name": "phone-tcp-peer",
+            "status": "passed"
+          },
+          {
+            "name": "phone-bluetooth",
+            "status": "passed"
+          },
+          {
+            "name": "bluetooth-player-room",
+            "status": "passed"
+          },
+          {
+            "name": "pvp-phone-lan",
+            "status": "passed"
+          },
+          {
+            "name": "phone-reinstall",
+            "status": "passed"
+          },
+          {
+            "name": "phone-close",
+            "status": "passed"
+          },
+          {
+            "name": "phone-launch",
+            "status": "passed"
+          }
+        ]
+      },
+      "localTests": {
+        "node": 87,
+        "core": {
+          "checks": 6302,
+          "simulations": 100
+        },
+        "room": {
+          "checks": 6128,
+          "simulations": 50
+        },
+        "directional": {
+          "checks": 54927,
+          "simulations": 200
+        },
+        "directionalUi": 17
+      },
+      "devCi": {
+        "conclusion": "success",
+        "databaseId": 36080332923,
+        "headSha": "0969637cfcd31d399fe0a6bf48c4dc3d0bdda082",
+        "status": "completed",
+        "url": "https://github.com/neurofoxpro/multimental/actions/runs/36080332923",
+        "workflowName": "Build Android"
+      },
+      "manualAcceptance": "pending",
+      "secondPhysicalAndroid": "not_tested",
+      "mainStable": "not_changed"
+    },
+    "balanceRelease": {
+      "version": "0.5.1-alpha.105.1",
+      "commit": "017d811f5fefe27a006edc68b651d27ee705b940",
+      "qualifiedCases": 29,
+      "evidence": "docs/production/evidence/balance-release-completed.json",
+      "simulationGames": 7040,
+      "parityGames": 64,
+      "firstPlayerAdvantage": "remaining"
+    },
+    "terrainRelease": {
+      "version": "0.5.0-alpha.100.1",
+      "evidence": "docs/production/evidence/terrain-release-completed.json"
+    }
+  },
+  "notClaimed": [
+    "complete game",
+    "second physical Android Bluetooth guest",
+    "final balance",
+    "collection/shop/crafting",
+    "Web release",
+    "production signing/Google Play",
+    "stable release"
+  ],
+  "protected": {
+    "mainIntegration": "owner_approval_required",
+    "stableRelease": "owner_approval_required"
+  },
+  "evidenceSemantics": "Timestamped observed results. Full device matrix belongs to the stated PR candidate; the stamped dev release was separately built, verified, installed and started. Main/stable remain owner-protected. Recheck current Git/CI/device state on resume.",
+  "automationReport": "docs/production/evidence/production-v2-latest.json"
+}

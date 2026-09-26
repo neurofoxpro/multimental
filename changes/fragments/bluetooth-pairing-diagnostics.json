@@ -1,0 +1,8 @@
+{
+  "id": "bluetooth-pairing-diagnostics",
+  "version": "0.3.0",
+  "kind": "added",
+  "scope": "tests",
+  "text": "Проверка Windows↔Android различает наличие адаптера и подтверждённое сопряжение выбранного телефона. Диагностика не публикует MAC и не вызывает автоматическое подтверждение пользовательского pairing.",
+  "breaking": false
+}

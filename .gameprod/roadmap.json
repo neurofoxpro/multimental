@@ -1,0 +1,127 @@
+{
+  "schemaVersion": 1,
+  "repository": "neurofoxpro/multimental",
+  "updatedAt": "2026-09-26",
+  "generatedFrom": ".gameprod/workplan.json",
+  "milestones": [
+    {
+      "id": "P0",
+      "title": "P0. Единый производственный процесс",
+      "tasks": [
+        "AUTH-01",
+        "AUTO-01",
+        "AUTO-02",
+        "AUTO-03",
+        "AUTO-04",
+        "AUTO-05",
+        "AUTO-06",
+        "AUTO-07",
+        "AUTO-08",
+        "AUTO-09",
+        "AUTO-10",
+        "AUTO-11"
+      ]
+    },
+    {
+      "id": "P1",
+      "title": "P1. Сохранить уже работающую игру",
+      "tasks": [
+        "CORE-01",
+        "CORE-02",
+        "CORE-03",
+        "CORE-04",
+        "CORE-05",
+        "CORE-06",
+        "CORE-07",
+        "UX-01",
+        "UX-02",
+        "UX-03",
+        "UX-04"
+      ]
+    },
+    {
+      "id": "P2",
+      "title": "P2. Коллекция, профиль и экономика",
+      "tasks": [
+        "META-05",
+        "META-01",
+        "CONTENT-03",
+        "META-02",
+        "META-03",
+        "META-04",
+        "UX-05",
+        "UX-06",
+        "UX-07",
+        "UX-08",
+        "UX-09",
+        "UX-10",
+        "QA-03",
+        "UX-11",
+        "UX-12",
+        "UX-13"
+      ]
+    },
+    {
+      "id": "P3",
+      "title": "P3. Механики, баланс и реальные дуэли",
+      "tasks": [
+        "BALANCE-01",
+        "CONTENT-01",
+        "CONTENT-04",
+        "CONTENT-02",
+        "NET-01",
+        "NET-02",
+        "NET-03",
+        "NET-04",
+        "BETA-01",
+        "QA-02"
+      ]
+    },
+    {
+      "id": "P4",
+      "title": "P4. Web, онлайн и синхронизация",
+      "tasks": [
+        "PLATFORM-01",
+        "NET-06",
+        "NET-07",
+        "RATING-01",
+        "NET-05"
+      ]
+    },
+    {
+      "id": "P5",
+      "title": "P5. Релизная сборка и магазин",
+      "tasks": [
+        "STORE-01",
+        "STORE-02",
+        "RELEASE-02",
+        "RELEASE-03",
+        "STORE-03",
+        "STORE-04",
+        "STORE-05",
+        "RELEASE-04"
+      ]
+    },
+    {
+      "id": "P6",
+      "title": "P6. Проверка Play-кандидата и публичный выпуск",
+      "tasks": [
+        "QA-01",
+        "PLAY-01",
+        "PLAY-02",
+        "RELEASE-01",
+        "PLAY-03"
+      ]
+    },
+    {
+      "id": "P7",
+      "title": "P7. Поддержка и повторяемые обновления",
+      "tasks": [
+        "OPS-01",
+        "OPS-02",
+        "FUTURE-01"
+      ]
+    }
+  ],
+  "evidenceSemantics": "Verified means historically observed at linked evidence. No current RC, owner approval, Play publication or physical installation is inferred from metadata."
+}

@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "repository": "neurofoxpro/multimental",
+  "task": "AUTO-07",
+  "kind": "observed_regression_and_local_fix",
+  "observedAt": "2026-09-26T19:02:55.706Z",
+  "baseline": {
+    "release": "0.13.3-alpha.259.1",
+    "sourceCommit": "d109530ea03a5a9779264653c55778882dd83032",
+    "installedSha256": "45196a382d3571743d98dcc8edab460964ee95f01fd1700654cf9413671e3b56",
+    "emulator": "Multimental_Test_B",
+    "launcher": "com.android.launcher3",
+    "result": {
+      "status": "not_confirmed",
+      "requestAccepted": false,
+      "code": "launcher_confirmation_not_observed"
+    },
+    "error": "SCRIPT ERROR: Invalid operands 'int' and 'bool' in operator '!=' at _request_pin",
+    "logSha256": "ee038f2de5c0a595b97ed98b1a1ba22ac0884c4374ead1b34662e276275657f7"
+  },
+  "localVerification": {
+    "status": "passed",
+    "exitCode": 0,
+    "sourceDigest": "72e5004a5ce41304f414e3d5ff53c5fdbe40296f52c873fafe10b96943a7555b",
+    "sourceDigestAfter": "72e5004a5ce41304f414e3d5ff53c5fdbe40296f52c873fafe10b96943a7555b",
+    "log": ".gameprod/evidence/profile-launcher-bridge-tests.log",
+    "logHash": "7a64603cf085a0c7e80ebdd8404c94edefc039ba0d547486f9b8cd32a7f70953",
+    "scope": "launcher-bridge profile checks; no phone installation claimed",
+    "at": "2026-09-26T19:01:53.199Z"
+  },
+  "regressionChecks": 34,
+  "scope": "JNI native booleans only; game rules and personal data unchanged",
+  "newAndroidBuildTested": false,
+  "homeIconCreatedByThisFix": false
+}

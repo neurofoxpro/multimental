@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "status": "installed_and_launched",
+  "repository": "neurofoxpro/multimental",
+  "sourceCommit": "12fe5f15ff05586e9407b9c2021fa3abd3b8216d",
+  "version": "0.1.0-alpha.26.1",
+  "versionCode": 12601,
+  "package": "pro.neurofox.multimental.dev",
+  "originalSha256": "6c13ab9af25a3848eca6e5a0d471a09ba6a0f8d4340d644d2794828d2e077acf",
+  "installedSha256": "3328d7ecd51678136e055ae808f9b1eedec85421c76f7c0a9e67dd61cc713313",
+  "transformation": "re-signed with persistent private local development key; CI APK preserved",
+  "certificateSha256": "3c68effd1eaea4c082a7f54f399c90a36a24ea08ec881a6130412111338aff72",
+  "installedAt": "2026-09-24T01:02:42.174Z",
+  "readyMarker": true,
+  "readinessWaitMs": 4388,
+  "humanAcceptance": "pending",
+  "recheckedOnResume": {"versionCodeFromPhone": 12601, "adbAuthorized": true, "sameArtifactCheck": "already_current", "installationReceiptUnchanged": true, "foregroundNotInterrupted": true},
+  "privacy": "Redacted observation; serial, private key/password, screenshots and full phone logs stay on the authorized station."
+}

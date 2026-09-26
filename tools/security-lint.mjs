@@ -1,0 +1,19 @@
+import fs from 'node:fs';
+import { spawnSync } from 'node:child_process';
+const r = spawnSync('git', ['ls-files', '--cached', '--others', '--exclude-standard', '-z'], {
+  encoding: 'utf8',
+  timeout: 10000
+});
+if (r.status !== 0) throw Error('Git inventory unavailable');
+for (const file of r.stdout.split('\0').filter(Boolean)) {
+  if (/(?:^|\/)(?:node_modules|\.git)\//.test(file)) continue;
+  if (/\.local\.|\.(?:p12|jks|keystore)$|(?:^|\/)\.env(?:$|\.)/.test(file))
+    throw Error('Private file in publication set: ' + file);
+  if (!fs.existsSync(file) || !fs.statSync(file).isFile()) continue;
+  const text = fs.readFileSync(file, 'utf8');
+  if (/-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----|gh[pousr]_[A-Za-z0-9]{30,}/.test(text))
+    throw Error('Credential-like content in ' + file);
+  if (file.startsWith('.github/workflows/') && /pull_request_target/.test(text))
+    throw Error('Privileged PR execution not allowed');
+}
+console.log('PUBLICATION_SECURITY_PASS');

@@ -1,0 +1,59 @@
+name: Normalize production projections
+on:
+  push:
+    branches: [feature/production-control-20260925]
+permissions:
+  contents: read
+concurrency:
+  group: production-projections-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  prepare:
+    if: github.repository == 'neurofoxpro/multimental' && github.actor == '4erk'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    outputs:
+      changed: ${{ steps.bundle.outputs.changed }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020
+        with:
+          node-version-file: .nvmrc
+      - run: npm ci --ignore-scripts --no-fund
+      - name: Generate bounded projections and run regression tests
+        id: bundle
+        run: node scripts/reconcile-projections.mjs prepare
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          name: reviewed-projection-bundle
+          path: .gameprod/evidence/reconcile/
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 7
+  publish:
+    needs: prepare
+    if: needs.prepare.outputs.changed == 'true' && github.repository == 'neurofoxpro/multimental' && github.actor == '4erk' && github.event_name == 'push'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    permissions:
+      contents: write
+      actions: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020
+        with:
+          node-version-file: .nvmrc
+      - uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0
+        with:
+          name: reviewed-projection-bundle
+          path: .gameprod/evidence/reconcile/
+      - name: Commit only reviewed generated paths without force, merge or release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: node scripts/reconcile-projections.mjs publish

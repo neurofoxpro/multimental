@@ -1,0 +1,254 @@
+{
+  "schemaVersion": 1,
+  "observedAt": "2026-09-24T08:50:12.273Z",
+  "repository": "neurofoxpro/multimental",
+  "host": "VENEL-SENDRIK",
+  "pr": 17,
+  "release": "v0.2.1-alpha.82.1",
+  "releaseUrl": "https://github.com/neurofoxpro/multimental/releases/tag/v0.2.1-alpha.82.1",
+  "mergeCommit": "117a3c43e21258673c09151fe96c08984687c571",
+  "ci": {
+    "conclusion": "success",
+    "databaseId": 35976545594,
+    "headSha": "117a3c43e21258673c09151fe96c08984687c571",
+    "status": "completed",
+    "url": "https://github.com/neurofoxpro/multimental/actions/runs/35976545594",
+    "workflowName": "Build Android"
+  },
+  "qualification": {
+    "candidateHead": "d03f96e609e25b6118717fb1037a89cee68218c0",
+    "apk": {
+      "version": "0.2.1-alpha.80.1",
+      "sha256": "e7161ed1575da2625ee30ceb40278b204b0c4e946ccb76235b894acedbd0688e",
+      "commit": "a4d3e12eac656fea9dc426f0ab703d397cabeacb"
+    },
+    "status": "passed",
+    "startedAt": "2026-09-24T08:33:02.000Z",
+    "finishedAt": "2026-09-24T08:39:25.597Z",
+    "toolDigest": "8ae8b174bd7fe48f3f12749f9d66b3916d3d316a78b3da36458616068740797d",
+    "toolDigestAfter": "8ae8b174bd7fe48f3f12749f9d66b3916d3d316a78b3da36458616068740797d",
+    "results": [
+      {
+        "name": "emulator-A-clean-install",
+        "status": "passed",
+        "durationMs": 11542
+      },
+      {
+        "name": "emulator-A-install",
+        "status": "passed",
+        "durationMs": 1266
+      },
+      {
+        "name": "emulator-A-ui",
+        "status": "passed",
+        "durationMs": 18727
+      },
+      {
+        "name": "emulator-A-tutorial",
+        "status": "passed",
+        "durationMs": 20170
+      },
+      {
+        "name": "emulator-A-jni",
+        "status": "passed",
+        "durationMs": 7208
+      },
+      {
+        "name": "emulator-A-reinstall",
+        "status": "passed",
+        "durationMs": 13078
+      },
+      {
+        "name": "emulator-A-close",
+        "status": "passed",
+        "durationMs": 565
+      },
+      {
+        "name": "emulator-A-launch",
+        "status": "passed",
+        "durationMs": 6231
+      },
+      {
+        "name": "emulator-B-install",
+        "status": "passed",
+        "durationMs": 13745
+      },
+      {
+        "name": "emulator-B-ui",
+        "status": "passed",
+        "durationMs": 16448
+      },
+      {
+        "name": "emulator-B-tutorial",
+        "status": "passed",
+        "durationMs": 22881
+      },
+      {
+        "name": "emulator-B-jni",
+        "status": "passed",
+        "durationMs": 9603
+      },
+      {
+        "name": "emulator-B-reinstall",
+        "status": "passed",
+        "durationMs": 18850
+      },
+      {
+        "name": "emulator-B-close",
+        "status": "passed",
+        "durationMs": 882
+      },
+      {
+        "name": "emulator-B-launch",
+        "status": "passed",
+        "durationMs": 8537
+      },
+      {
+        "name": "emulator-pair",
+        "status": "passed",
+        "durationMs": 18908
+      },
+      {
+        "name": "pvp-emulators",
+        "status": "passed",
+        "durationMs": 31494
+      },
+      {
+        "name": "phone-install",
+        "status": "passed",
+        "durationMs": 16442
+      },
+      {
+        "name": "phone-ui",
+        "status": "passed",
+        "durationMs": 9283
+      },
+      {
+        "name": "phone-tutorial",
+        "status": "passed",
+        "durationMs": 10468
+      },
+      {
+        "name": "phone-tcp-usb",
+        "status": "passed",
+        "durationMs": 4337
+      },
+      {
+        "name": "phone-tcp-lan",
+        "status": "passed",
+        "durationMs": 4264
+      },
+      {
+        "name": "phone-tcp-peer",
+        "status": "passed",
+        "durationMs": 10657
+      },
+      {
+        "name": "phone-bluetooth",
+        "status": "passed",
+        "durationMs": 11150
+      },
+      {
+        "name": "pvp-phone-lan",
+        "status": "passed",
+        "durationMs": 29561
+      },
+      {
+        "name": "phone-reinstall",
+        "status": "passed",
+        "durationMs": 15592
+      },
+      {
+        "name": "phone-close",
+        "status": "passed",
+        "durationMs": 356
+      },
+      {
+        "name": "phone-launch",
+        "status": "passed",
+        "durationMs": 3686
+      }
+    ]
+  },
+  "installed": {
+    "status": "installed_and_launched",
+    "version": "0.2.1-alpha.82.1",
+    "versionCode": 18201,
+    "sourceCommit": "117a3c43e21258673c09151fe96c08984687c571",
+    "installedAt": "2026-09-24T08:42:17.584Z",
+    "originalSha256": "c19b711e73383379a7c59b7e08c47642827bd1946e001a9a8147ce9904eafbfd",
+    "installedSha256": "ce9d776b42f8295cde2c57942582f25c551bf627d931a5b03a005fbadc80bd08",
+    "certificateSha256": "3c68effd1eaea4c082a7f54f399c90a36a24ea08ec881a6130412111338aff72",
+    "readyMarker": true,
+    "humanAcceptance": "pending"
+  },
+  "cycle": {
+    "status": "passed",
+    "startedAt": "2026-09-24T08:27:15.571Z",
+    "finishedAt": "2026-09-24T08:42:19.186Z",
+    "phases": [
+      {
+        "name": "prepare_sources",
+        "status": "passed",
+        "finishedAt": "2026-09-24T08:27:16.922Z"
+      },
+      {
+        "name": "verify",
+        "status": "passed",
+        "finishedAt": "2026-09-24T08:27:37.724Z"
+      },
+      {
+        "name": "publish",
+        "status": "passed",
+        "finishedAt": "2026-09-24T08:27:42.021Z"
+      },
+      {
+        "name": "candidate",
+        "status": "passed",
+        "finishedAt": "2026-09-24T08:32:57.176Z"
+      },
+      {
+        "name": "reviewed_test_agent",
+        "status": "passed",
+        "finishedAt": "2026-09-24T08:32:59.764Z"
+      },
+      {
+        "name": "emulator_qualification",
+        "status": "passed",
+        "finishedAt": "2026-09-24T08:39:27.688Z"
+      },
+      {
+        "name": "integrate_dev",
+        "status": "passed",
+        "finishedAt": "2026-09-24T08:39:38.086Z"
+      },
+      {
+        "name": "dev_ci",
+        "status": "passed",
+        "finishedAt": "2026-09-24T08:40:49.808Z"
+      },
+      {
+        "name": "deploy_reviewed_agent",
+        "status": "passed",
+        "finishedAt": "2026-09-24T08:40:52.455Z"
+      },
+      {
+        "name": "device_delivery",
+        "status": "passed",
+        "finishedAt": "2026-09-24T08:42:17.821Z"
+      },
+      {
+        "name": "report",
+        "status": "passed",
+        "finishedAt": "2026-09-24T08:42:19.182Z"
+      }
+    ]
+  },
+  "limits": [
+    "User secure Bluetooth PvP remains in PR15",
+    "Two physical Android peers not yet tested",
+    "Collection, shop and crafting not yet implemented",
+    "Human play acceptance pending",
+    "Main/stable/Google Play not authorized"
+  ]
+}

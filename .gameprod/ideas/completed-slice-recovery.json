@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "IDEA-11",
+  "taskId": "AUTO-11",
+  "title": "Проверяемое освобождение завершённых срезов без захвата живой работы",
+  "status": "planned",
+  "source": [
+    "owner continuation 2026-09-26",
+    "completed PR116 with unreleased claim"
+  ],
+  "tasks": [
+    {
+      "id": "AUTO-11",
+      "title": "Проверяемое освобождение завершённых срезов без захвата живой работы",
+      "stage": "P0. Единый производственный процесс",
+      "kind": "automation",
+      "status": "planned",
+      "dependsOn": [
+        "AUTO-06"
+      ],
+      "acceptance": [
+        "Истечение heartbeat само по себе не освобождает claim: нужны чистый worktree, точный объединённый PR, отсутствие незавершённых PR/запусков и действующих писателей.",
+        "Операция использует GitHub CAS, точный token/fence и fingerprint claim; продление, изменение source или занятой lease прекращают передачу.",
+        "После потерянного ответа выполняется readback; исходники, настройки и данные телефонов не изменяются, старый claim не даёт новых прав записи.",
+        "Положительный сценарий и отказы проверяются тестами и одной явной командой; результат фиксируется в задаче и Issue29 без автоматической приёмки продукта."
+      ],
+      "evidence": [],
+      "readset": [
+        "skills/game-production/scripts/collaboration-policy.mjs",
+        "skills/game-production/scripts/collaboration-store.mjs",
+        "docs/production/PARALLEL_CHATS.ru.md"
+      ],
+      "source": "Поручение владельца26.09.2026 о продолжении и самоулучшении; наблюдение: PR116 объединён и дерево чистое, но claimQA02 не освобождён. Живой/незавершённый PR119 не является допустимым случаем этой операции.",
+      "requiredForBeta": true,
+      "requiredForPlay": true,
+      "priority": 6
+    }
+  ]
+}

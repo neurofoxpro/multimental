@@ -1,0 +1,616 @@
+{
+  "schemaVersion": 1,
+  "repository": "neurofoxpro/multimental",
+  "capturedAt": "2026-09-26T19:22:41.783Z",
+  "captureBaseCommit": "700247eea69b5d13c3463f0d0979f8feacd718cb",
+  "captureWorktreeDirty": true,
+  "sourceIdentity": "canonical-render-inputs-excluding-ci-build-stamp",
+  "inputKey": "486ce3106d120602bc59fd1aac54e810e62aac1b76fc9ad7ad2b2a6358178cbb",
+  "inputs": [
+    {
+      "path": "game/icon.svg",
+      "sha256": "c9ca2d86eb2e5738fa4cf0ed848cbb4cfc4dd34b53293c70924050ebaa891f9b"
+    },
+    {
+      "path": "game/project.godot",
+      "sha256": "a28af88dc6aafc0538af4cf54dc36867f202d766fbfc27b4859f17eab6d4dec9"
+    },
+    {
+      "path": "game/src/action_grid.gd",
+      "sha256": "29f6848f7965b51a19366908c904d141ecddfff4b656c28c17ca69d8f35f7851"
+    },
+    {
+      "path": "game/src/audio_director.gd",
+      "sha256": "e7a4803e094d2d6c18a538af8441d2dbf403cd299667c2cb4b27014c4e18267c"
+    },
+    {
+      "path": "game/src/battle_layout.gd",
+      "sha256": "bbab7f7de0997b592d05de952e172848ba344f86b406c7de7c65ef343b5ae69d"
+    },
+    {
+      "path": "game/src/card_description.gd",
+      "sha256": "f269f2d4891d3d5ca42a87d1cde4ebe592cb99d6983b68c105af2221c547380a"
+    },
+    {
+      "path": "game/src/card_inspector.gd",
+      "sha256": "3186a7f44b81414a49c820c3d1baef2e435a1c1364d93b5af4b89d13de8d8294"
+    },
+    {
+      "path": "game/src/catalog_view.gd",
+      "sha256": "cb052da568d2fd54c35339adfe57ffc8ea56e75cbf17c2cd25165202d10b951a"
+    },
+    {
+      "path": "game/src/collection_device_lab.gd",
+      "sha256": "2d50b3374b130ff97a10481e43f36fbc8594393305277a59207ae3072b3ac83d"
+    },
+    {
+      "path": "game/src/collection_rules.gd",
+      "sha256": "ba29a05f6cf91b9e7e8b7f6d2fd7443fbb497c4325c5d1a9a9590085432d9aa3"
+    },
+    {
+      "path": "game/src/collection_screen.gd",
+      "sha256": "20a9747aea795e954f601b1a1a78737f0d523f407b1a11f9bcb06538ff7016f0"
+    },
+    {
+      "path": "game/src/combat_feedback.gd",
+      "sha256": "4d30fec7c44350dc397d882cdaf9fdf071f18863ddc51c2c94cd61f7d2867d77"
+    },
+    {
+      "path": "game/src/connection_screen.gd",
+      "sha256": "23afd5c2ae67bc6edcc037837985e61bb2798529f85f5943fd44b146f40bbc7b"
+    },
+    {
+      "path": "game/src/crafting_device_lab.gd",
+      "sha256": "2f1c64694faca113020285d3697e676d17dda1b01195ba1f3a1971a403a0dba1"
+    },
+    {
+      "path": "game/src/crafting_policy.gd",
+      "sha256": "955d9d827b77282a3b37d92b308f27eb8142c641b892ceb765d4102bc2537e90"
+    },
+    {
+      "path": "game/src/crafting_rules.gd",
+      "sha256": "ef0ecba30531d13a8f5f22b1349ef3c67cbf1ff1f19a6f3dc19093fa80cd2961"
+    },
+    {
+      "path": "game/src/crafting_screen.gd",
+      "sha256": "4bfcdb45256eb5a8fd7f92b50ac402d0efa5924b2c2034cacc08eee905f9612c"
+    },
+    {
+      "path": "game/src/deck_rules.gd",
+      "sha256": "e6c996f479e1eb105cb05fd31a2da9f6eb3b7653ab59d6e08929e2d2d465d665"
+    },
+    {
+      "path": "game/src/device_lab.gd",
+      "sha256": "0a43959293ce876d9d4c97e52eafe2053d97fe622191d629734b4a75ff7b5da1"
+    },
+    {
+      "path": "game/src/economy_rules.gd",
+      "sha256": "405b3dcfe4dbb120407d6af0a7142e761a11044326f59515209aa54c0a351013"
+    },
+    {
+      "path": "game/src/home_screen.gd",
+      "sha256": "02202c1ed68ab8391fbce91ee1e285cdff146a67518d204363fddaafa939c9fa"
+    },
+    {
+      "path": "game/src/inspector_device_lab.gd",
+      "sha256": "dab2da6ee02b83fb78884fe7ec3e577d891124adda39e699977c4526bab241d6"
+    },
+    {
+      "path": "game/src/main.gd",
+      "sha256": "43dc6666aa91476e51a148a2c657eecc3f5bd0340c213beaaed704cf508aa74e"
+    },
+    {
+      "path": "game/src/main.tscn",
+      "sha256": "974f0c16c780553070a312e96c40fab81d495b4a714b228e0b9b23344fefe448"
+    },
+    {
+      "path": "game/src/match_core.gd",
+      "sha256": "2367b47b9a66b7491bb43e5eaa8d9728de4480b3cda6fc7ca63f801491741a5a"
+    },
+    {
+      "path": "game/src/match_view.gd",
+      "sha256": "d1c5261f282e63ddc07ca5658498c42dbef903ca7be1f75b84b73a9113df1049"
+    },
+    {
+      "path": "game/src/net/bluetooth_channel.gd",
+      "sha256": "0b9fb05ee43b0dde618499e69898810ea45a07d39ae5cb4b0747aeb1d4760685"
+    },
+    {
+      "path": "game/src/net/bluetooth_session.gd",
+      "sha256": "925a417629fbeceb354c0cbb3f181c0474fde374369cfbd90ffe5e92ad10b678"
+    },
+    {
+      "path": "game/src/net/json_channel.gd",
+      "sha256": "43533d36c86711b89ad95e9fa6c8386d19e0bba20d955422a8c32251174ad502"
+    },
+    {
+      "path": "game/src/net/lan_session.gd",
+      "sha256": "4fd5318ac5076d67fbc59db3ba5443adcc3d3534f8811f09410256b4aa8ed61e"
+    },
+    {
+      "path": "game/src/net/room_certificate.gd",
+      "sha256": "5c316c90d5a83ce6b506224c99b84905d67207a51a3833729efb656fd5a30b6f"
+    },
+    {
+      "path": "game/src/net/room_device_test.gd",
+      "sha256": "9e046ea0e86e1f049eae3415516540fdede89bf1694765db25f686548150c159"
+    },
+    {
+      "path": "game/src/net/room_invite.gd",
+      "sha256": "57c49b5a3aa3561134308053761b3e623c9f7ea38e6ecb65dc3e943a8a9000a5"
+    },
+    {
+      "path": "game/src/net/room_rules.gd",
+      "sha256": "8271bd2612ec36e8fd9ccbe27a5a1f8ca7f0c1cf0bd9a27c7a42000d410c2d29"
+    },
+    {
+      "path": "game/src/net/room_view.gd",
+      "sha256": "33940f3a099a5643513d6d1d5cfa17b2f2dcd66d8e30ccb6fdc725051261fdb2"
+    },
+    {
+      "path": "game/src/platform/launcher_request.gd",
+      "sha256": "ce7bcc9a3db8feeab285cdc1fc83560bbe574b90163fd25f30a20be12b8753f1"
+    },
+    {
+      "path": "game/src/platform/launcher_shortcut.gd",
+      "sha256": "64e5f149ef3bea6a43a94ad504a2130dfd23d085a8efdcd4a2fee7607c4b7b5d"
+    },
+    {
+      "path": "game/src/profile_controller.gd",
+      "sha256": "ec0b518ad19391b117ae2407e43cfe77de9dadc1c6e906aae9a5245d971f6e5b"
+    },
+    {
+      "path": "game/src/profile_journal.gd",
+      "sha256": "6ede704347e4399c65194ec03eec02d13ac832c40eb5ac052a125dc2e29af292"
+    },
+    {
+      "path": "game/src/profile_lab.gd",
+      "sha256": "3f664abc2fcb89e43249b4094f5a59ebabbad37924b15615b9cbe00bfd7d72ac"
+    },
+    {
+      "path": "game/src/profile_state.gd",
+      "sha256": "ab721d6cbbc3b3ca9f023f54326e4cba4bf9ddd54895b3518c1f221e0ee62583"
+    },
+    {
+      "path": "game/src/profile_store.gd",
+      "sha256": "598e47c9856ff77d48582f4c1e27b73e917958d6445195e5ef084529ea31620a"
+    },
+    {
+      "path": "game/src/rewards_device_lab.gd",
+      "sha256": "5f930ce84886152d6c3471bff66bab0ae1dd58d5d6f6ea1190c5317a2b9bfcbc"
+    },
+    {
+      "path": "game/src/rewards_policy.gd",
+      "sha256": "ff5e89ec6e73984f6d3a3115c232693892ec10c3d8fa0d2f6fdacac51ff83e00"
+    },
+    {
+      "path": "game/src/rewards_rules.gd",
+      "sha256": "0cde13739aa26b7873daa90d7771e344434d4056d8d46a223c6b8dc7157ff9d3"
+    },
+    {
+      "path": "game/src/rewards_screen.gd",
+      "sha256": "64c37337253d4ebea756d9b23842c84927d11ac3c93547ca00c9fec540671438"
+    },
+    {
+      "path": "game/src/scrollable_page.gd",
+      "sha256": "3bdf7634448bac1d868c8dc7e1a275c624df133358bbc532a98dcf2a82ca3595"
+    },
+    {
+      "path": "game/src/session_protocol.gd",
+      "sha256": "f2dcc53d45d94749724c9d581c920a3195f99d281d9f3747160a891e2259b3bc"
+    },
+    {
+      "path": "game/src/shop_device_lab.gd",
+      "sha256": "e6cbe217d5cdf75a5570dc81e3adf805ea2e86ab002cfc552ee741280c26f649"
+    },
+    {
+      "path": "game/src/shop_screen.gd",
+      "sha256": "d074601d0aa52211dfba26610d21d79495a31b16377e19423a7d1accca6a92d7"
+    },
+    {
+      "path": "game/src/ui_tap_geometry.gd",
+      "sha256": "f756a296bb6c420d8d10fdc8506613f343a08000295877774e421adc5abb88db"
+    },
+    {
+      "path": "game/src/ui_theme.gd",
+      "sha256": "8b39fd806a78c5da2a174b49770756f2f8e64813e000bbe91cc094e10d2372b4"
+    },
+    {
+      "path": "game/tests/gallery_capture.gd",
+      "sha256": "d05878a1c973f53b7cf7de658afb5656fc35e6585b1511c6ea2fffea6c5c7555"
+    },
+    {
+      "path": "skills/game-production/scripts/gallery-policy.mjs",
+      "sha256": "ecd58aa3a6a58d67bdcc28b113950313e24251556b50f38ed8f159f2daeada6c"
+    },
+    {
+      "path": "tools/gallery.mjs",
+      "sha256": "326f1ad07444fb00f06a3ad36556ffdea59a6c6243d6f3ea6d3b0322fe97c42d"
+    }
+  ],
+  "nonce": "b39132cbc865c76ec706181a2ca79bf0",
+  "capture": {
+    "buildStamp": {
+      "commit": "local",
+      "version": "0.0.1-alpha.1"
+    },
+    "engine": "4.7.2-stable (official)",
+    "fixtures": [
+      "isolated full alpha collection",
+      "one deterministic pack",
+      "three API match results, not played games",
+      "battle seed42 with12 API actions",
+      "LAN address replaced by documentation example192.0.2.1; no room joined"
+    ],
+    "images": [
+      {
+        "file": "ru-menu-720x1280.png",
+        "height": 1280,
+        "id": "ru-menu-720x1280",
+        "locale": "ru",
+        "page": "menu",
+        "sampledColors": 144,
+        "sha256": "ab8ee1e0fae2a4a264fa95e790225d2aec2987fee4a31864bc844df4c64e65f9",
+        "width": 720
+      },
+      {
+        "file": "ru-collection-720x1280.png",
+        "height": 1280,
+        "id": "ru-collection-720x1280",
+        "locale": "ru",
+        "page": "collection",
+        "sampledColors": 165,
+        "sha256": "e1dbf9a2367d05c7a81242e19105f5f95561db16112ee4f3540c3572618403cc",
+        "width": 720
+      },
+      {
+        "file": "ru-card-720x1280.png",
+        "height": 1280,
+        "id": "ru-card-720x1280",
+        "locale": "ru",
+        "page": "card",
+        "sampledColors": 210,
+        "sha256": "bef9b8e4f8dc04da0650af9506832042caafae5c3c547b3658037cdfaf4a3e7f",
+        "width": 720
+      },
+      {
+        "file": "ru-battle-720x1280.png",
+        "height": 1280,
+        "id": "ru-battle-720x1280",
+        "locale": "ru",
+        "page": "battle",
+        "sampledColors": 206,
+        "sha256": "62605f86a50ffc2df1a251cfd39312bdce245510649f2bcda57655f749aa618c",
+        "width": 720
+      },
+      {
+        "file": "ru-shop-720x1280.png",
+        "height": 1280,
+        "id": "ru-shop-720x1280",
+        "locale": "ru",
+        "page": "shop",
+        "sampledColors": 170,
+        "sha256": "91e9aa0348eadb8b936018228cd2767b3ee5992673ea4e9f6701c029b5658dfe",
+        "width": 720
+      },
+      {
+        "file": "ru-crafting-720x1280.png",
+        "height": 1280,
+        "id": "ru-crafting-720x1280",
+        "locale": "ru",
+        "page": "crafting",
+        "sampledColors": 176,
+        "sha256": "5e0519477f4c0407c3ac652f190aec80e863147aa6bfd16d613ba834ca3f2444",
+        "width": 720
+      },
+      {
+        "file": "ru-rewards-720x1280.png",
+        "height": 1280,
+        "id": "ru-rewards-720x1280",
+        "locale": "ru",
+        "page": "rewards",
+        "sampledColors": 163,
+        "sha256": "8dbe7a88644a0a4ca4c687fc9c33a47b51cc64f182cb5235fe2cb3f697c58780",
+        "width": 720
+      },
+      {
+        "file": "ru-connection-720x1280.png",
+        "height": 1280,
+        "id": "ru-connection-720x1280",
+        "locale": "ru",
+        "page": "connection",
+        "sampledColors": 149,
+        "sha256": "6c3eda9bec64bd07abdb5e260469b4ed5642d053511ad4ba3dd84976ef77d578",
+        "width": 720
+      },
+      {
+        "file": "ru-rules-720x1280.png",
+        "height": 1280,
+        "id": "ru-rules-720x1280",
+        "locale": "ru",
+        "page": "rules",
+        "sampledColors": 241,
+        "sha256": "ff71caa302126872bf7160886f32369e0dcc6cdb59c8e60423814c06aebd41b6",
+        "width": 720
+      },
+      {
+        "file": "ru-settings-720x1280.png",
+        "height": 1280,
+        "id": "ru-settings-720x1280",
+        "locale": "ru",
+        "page": "settings",
+        "sampledColors": 66,
+        "sha256": "5820dc453306b6e45e550fe44fc27d85b605193777e7f0971282d101755fe57f",
+        "width": 720
+      },
+      {
+        "file": "ru-menu-1280x720.png",
+        "height": 720,
+        "id": "ru-menu-1280x720",
+        "locale": "ru",
+        "page": "menu",
+        "sampledColors": 120,
+        "sha256": "3689ab805954bef72bdd95954cf71641b5b98137151a8c2c464688f65fa01a12",
+        "width": 1280
+      },
+      {
+        "file": "ru-battle-1280x720.png",
+        "height": 720,
+        "id": "ru-battle-1280x720",
+        "locale": "ru",
+        "page": "battle",
+        "sampledColors": 175,
+        "sha256": "3d90efb810314b0c6a86240db8ce32174440742697c09b514b24a68f4bbeb376",
+        "width": 1280
+      },
+      {
+        "file": "en-menu-720x1280.png",
+        "height": 1280,
+        "id": "en-menu-720x1280",
+        "locale": "en",
+        "page": "menu",
+        "sampledColors": 137,
+        "sha256": "02ccfa2d00d16b57c18f9f0c46a25ee874bfef0b004c5d913372ffb50dfec934",
+        "width": 720
+      },
+      {
+        "file": "en-collection-720x1280.png",
+        "height": 1280,
+        "id": "en-collection-720x1280",
+        "locale": "en",
+        "page": "collection",
+        "sampledColors": 163,
+        "sha256": "0ec5c25238c4a8c4a3baf3592fb46bf44e1474b69f0e7059586f8097d4376f9e",
+        "width": 720
+      },
+      {
+        "file": "en-card-720x1280.png",
+        "height": 1280,
+        "id": "en-card-720x1280",
+        "locale": "en",
+        "page": "card",
+        "sampledColors": 180,
+        "sha256": "3d2804d6f02d99c3ce174a0004e4fd762ad77080a84759b94f2aeb4893bca5a2",
+        "width": 720
+      },
+      {
+        "file": "en-battle-720x1280.png",
+        "height": 1280,
+        "id": "en-battle-720x1280",
+        "locale": "en",
+        "page": "battle",
+        "sampledColors": 197,
+        "sha256": "2fbffa0acff9e217df539b0d717bab8c43616c9e68fbea3517ccb27caf8f634b",
+        "width": 720
+      },
+      {
+        "file": "en-shop-720x1280.png",
+        "height": 1280,
+        "id": "en-shop-720x1280",
+        "locale": "en",
+        "page": "shop",
+        "sampledColors": 149,
+        "sha256": "ac31482bdce8e55ce119b41d4e1887d50d2743af9f224c6415e50e31d7dcd16c",
+        "width": 720
+      },
+      {
+        "file": "en-crafting-720x1280.png",
+        "height": 1280,
+        "id": "en-crafting-720x1280",
+        "locale": "en",
+        "page": "crafting",
+        "sampledColors": 156,
+        "sha256": "41c31c7d5fa6702b9fd3788bb04714c942c325c21cd36a529d33e2084a11626b",
+        "width": 720
+      },
+      {
+        "file": "en-rewards-720x1280.png",
+        "height": 1280,
+        "id": "en-rewards-720x1280",
+        "locale": "en",
+        "page": "rewards",
+        "sampledColors": 157,
+        "sha256": "27af0162364b7d7ad6953ff75ee28f67f862bcd4e09989e0bca318a856adfb2c",
+        "width": 720
+      },
+      {
+        "file": "en-connection-720x1280.png",
+        "height": 1280,
+        "id": "en-connection-720x1280",
+        "locale": "en",
+        "page": "connection",
+        "sampledColors": 133,
+        "sha256": "1c0e2903b25f0355d1c199a7c8610fd4acc462ce8b8b6046ca6f3b2050b47210",
+        "width": 720
+      },
+      {
+        "file": "en-rules-720x1280.png",
+        "height": 1280,
+        "id": "en-rules-720x1280",
+        "locale": "en",
+        "page": "rules",
+        "sampledColors": 233,
+        "sha256": "334bd199e33665412986a2c72e6c45e2ea5f8afe6017e977b44fda53e3228cc6",
+        "width": 720
+      },
+      {
+        "file": "en-settings-720x1280.png",
+        "height": 1280,
+        "id": "en-settings-720x1280",
+        "locale": "en",
+        "page": "settings",
+        "sampledColors": 73,
+        "sha256": "2a950f33b2c35d283a0f4c0a8fbc8b62e446ca97e5bd62bfe57fd67e39662d9a",
+        "width": 720
+      },
+      {
+        "file": "en-menu-1280x720.png",
+        "height": 720,
+        "id": "en-menu-1280x720",
+        "locale": "en",
+        "page": "menu",
+        "sampledColors": 101,
+        "sha256": "ca6816735e8caf98d324b940abe725106da6506aa2ac9e2bdbf6c1d909e822c0",
+        "width": 1280
+      },
+      {
+        "file": "en-battle-1280x720.png",
+        "height": 720,
+        "id": "en-battle-1280x720",
+        "locale": "en",
+        "page": "battle",
+        "sampledColors": 172,
+        "sha256": "9fe051189d55ab0ffa608bba3196de06d24f91d4f7ffeb553ae71c827da9e8ac",
+        "width": 1280
+      }
+    ],
+    "installedApkCapture": false,
+    "nonce": "b39132cbc865c76ec706181a2ca79bf0",
+    "personalProfileUntouched": true,
+    "renderer": "Windows",
+    "schemaVersion": 1,
+    "sourcePreview": true
+  },
+  "assets": [
+    {
+      "id": "ru-menu-720x1280",
+      "path": "docs/media/gallery/486ce3106d120602bc59fd1aac54e810e62aac1b76fc9ad7ad2b2a6358178cbb/b39132cbc865c76ec706181a2ca79bf0/ru-menu-720x1280.png",
+      "sha256": "ab8ee1e0fae2a4a264fa95e790225d2aec2987fee4a31864bc844df4c64e65f9"
+    },
+    {
+      "id": "ru-collection-720x1280",
+      "path": "docs/media/gallery/486ce3106d120602bc59fd1aac54e810e62aac1b76fc9ad7ad2b2a6358178cbb/b39132cbc865c76ec706181a2ca79bf0/ru-collection-720x1280.png",
+      "sha256": "e1dbf9a2367d05c7a81242e19105f5f95561db16112ee4f3540c3572618403cc"
+    },
+    {
+      "id": "ru-card-720x1280",
+      "path": "docs/media/gallery/486ce3106d120602bc59fd1aac54e810e62aac1b76fc9ad7ad2b2a6358178cbb/b39132cbc865c76ec706181a2ca79bf0/ru-card-720x1280.png",
+      "sha256": "bef9b8e4f8dc04da0650af9506832042caafae5c3c547b3658037cdfaf4a3e7f"
+    },
+    {
+      "id": "ru-battle-720x1280",
+      "path": "docs/media/gallery/486ce3106d120602bc59fd1aac54e810e62aac1b76fc9ad7ad2b2a6358178cbb/b39132cbc865c76ec706181a2ca79bf0/ru-battle-720x1280.png",
+      "sha256": "62605f86a50ffc2df1a251cfd39312bdce245510649f2bcda57655f749aa618c"
+    },
+    {
+      "id": "ru-shop-720x1280",
+      "path": "docs/media/gallery/486ce3106d120602bc59fd1aac54e810e62aac1b76fc9ad7ad2b2a6358178cbb/b39132cbc865c76ec706181a2ca79bf0/ru-shop-720x1280.png",
+      "sha256": "91e9aa0348eadb8b936018228cd2767b3ee5992673ea4e9f6701c029b5658dfe"
+    },
+    {
+      "id": "ru-crafting-720x1280",
+      "path": "docs/media/gallery/486ce3106d120602bc59fd1aac54e810e62aac1b76fc9ad7ad2b2a6358178cbb/b39132cbc865c76ec706181a2ca79bf0/ru-crafting-720x1280.png",
+      "sha256": "5e0519477f4c0407c3ac652f190aec80e863147aa6bfd16d613ba834ca3f2444"
+    },
+    {
+      "id": "ru-rewards-720x1280",
+      "path": "docs/media/gallery/486ce3106d120602bc59fd1aac54e810e62aac1b76fc9ad7ad2b2a6358178cbb/b39132cbc865c76ec706181a2ca79bf0/ru-rewards-720x1280.png",
+      "sha256": "8dbe7a88644a0a4ca4c687fc9c33a47b51cc64f182cb5235fe2cb3f697c58780"
+    },
+    {
+      "id": "ru-connection-720x1280",
+      "path": "docs/media/gallery/486ce3106d120602bc59fd1aac54e810e62aac1b76fc9ad7ad2b2a6358178cbb/b39132cbc865c76ec706181a2ca79bf0/ru-connection-720x1280.png",
+      "sha256": "6c3eda9bec64bd07abdb5e260469b4ed5642d053511ad4ba3dd84976ef77d578"
+    },
+    {
+      "id": "ru-rules-720x1280",
+      "path": "docs/media/gallery/486ce3106d120602bc59fd1aac54e810e62aac1b76fc9ad7ad2b2a6358178cbb/b39132cbc865c76ec706181a2ca79bf0/ru-rules-720x1280.png",
+      "sha256": "ff71caa302126872bf7160886f32369e0dcc6cdb59c8e60423814c06aebd41b6"
+    },
+    {
+      "id": "ru-settings-720x1280",
+      "path": "docs/media/gallery/486ce3106d120602bc59fd1aac54e810e62aac1b76fc9ad7ad2b2a6358178cbb/b39132cbc865c76ec706181a2ca79bf0/ru-settings-720x1280.png",
+      "sha256": "5820dc453306b6e45e550fe44fc27d85b605193777e7f0971282d101755fe57f"
+    },
+    {
+      "id": "ru-menu-1280x720",
+      "path": "docs/media/gallery/486ce3106d120602bc59fd1aac54e810e62aac1b76fc9ad7ad2b2a6358178cbb/b39132cbc865c76ec706181a2ca79bf0/ru-menu-1280x720.png",
+      "sha256": "3689ab805954bef72bdd95954cf71641b5b98137151a8c2c464688f65fa01a12"
+    },
+    {
+      "id": "ru-battle-1280x720",
+      "path": "docs/media/gallery/486ce3106d120602bc59fd1aac54e810e62aac1b76fc9ad7ad2b2a6358178cbb/b39132cbc865c76ec706181a2ca79bf0/ru-battle-1280x720.png",
+      "sha256": "3d90efb810314b0c6a86240db8ce32174440742697c09b514b24a68f4bbeb376"
+    },
+    {
+      "id": "en-menu-720x1280",
+      "path": "docs/media/gallery/486ce3106d120602bc59fd1aac54e810e62aac1b76fc9ad7ad2b2a6358178cbb/b39132cbc865c76ec706181a2ca79bf0/en-menu-720x1280.png",
+      "sha256": "02ccfa2d00d16b57c18f9f0c46a25ee874bfef0b004c5d913372ffb50dfec934"
+    },
+    {
+      "id": "en-collection-720x1280",
+      "path": "docs/media/gallery/486ce3106d120602bc59fd1aac54e810e62aac1b76fc9ad7ad2b2a6358178cbb/b39132cbc865c76ec706181a2ca79bf0/en-collection-720x1280.png",
+      "sha256": "0ec5c25238c4a8c4a3baf3592fb46bf44e1474b69f0e7059586f8097d4376f9e"
+    },
+    {
+      "id": "en-card-720x1280",
+      "path": "docs/media/gallery/486ce3106d120602bc59fd1aac54e810e62aac1b76fc9ad7ad2b2a6358178cbb/b39132cbc865c76ec706181a2ca79bf0/en-card-720x1280.png",
+      "sha256": "3d2804d6f02d99c3ce174a0004e4fd762ad77080a84759b94f2aeb4893bca5a2"
+    },
+    {
+      "id": "en-battle-720x1280",
+      "path": "docs/media/gallery/486ce3106d120602bc59fd1aac54e810e62aac1b76fc9ad7ad2b2a6358178cbb/b39132cbc865c76ec706181a2ca79bf0/en-battle-720x1280.png",
+      "sha256": "2fbffa0acff9e217df539b0d717bab8c43616c9e68fbea3517ccb27caf8f634b"
+    },
+    {
+      "id": "en-shop-720x1280",
+      "path": "docs/media/gallery/486ce3106d120602bc59fd1aac54e810e62aac1b76fc9ad7ad2b2a6358178cbb/b39132cbc865c76ec706181a2ca79bf0/en-shop-720x1280.png",
+      "sha256": "ac31482bdce8e55ce119b41d4e1887d50d2743af9f224c6415e50e31d7dcd16c"
+    },
+    {
+      "id": "en-crafting-720x1280",
+      "path": "docs/media/gallery/486ce3106d120602bc59fd1aac54e810e62aac1b76fc9ad7ad2b2a6358178cbb/b39132cbc865c76ec706181a2ca79bf0/en-crafting-720x1280.png",
+      "sha256": "41c31c7d5fa6702b9fd3788bb04714c942c325c21cd36a529d33e2084a11626b"
+    },
+    {
+      "id": "en-rewards-720x1280",
+      "path": "docs/media/gallery/486ce3106d120602bc59fd1aac54e810e62aac1b76fc9ad7ad2b2a6358178cbb/b39132cbc865c76ec706181a2ca79bf0/en-rewards-720x1280.png",
+      "sha256": "27af0162364b7d7ad6953ff75ee28f67f862bcd4e09989e0bca318a856adfb2c"
+    },
+    {
+      "id": "en-connection-720x1280",
+      "path": "docs/media/gallery/486ce3106d120602bc59fd1aac54e810e62aac1b76fc9ad7ad2b2a6358178cbb/b39132cbc865c76ec706181a2ca79bf0/en-connection-720x1280.png",
+      "sha256": "1c0e2903b25f0355d1c199a7c8610fd4acc462ce8b8b6046ca6f3b2050b47210"
+    },
+    {
+      "id": "en-rules-720x1280",
+      "path": "docs/media/gallery/486ce3106d120602bc59fd1aac54e810e62aac1b76fc9ad7ad2b2a6358178cbb/b39132cbc865c76ec706181a2ca79bf0/en-rules-720x1280.png",
+      "sha256": "334bd199e33665412986a2c72e6c45e2ea5f8afe6017e977b44fda53e3228cc6"
+    },
+    {
+      "id": "en-settings-720x1280",
+      "path": "docs/media/gallery/486ce3106d120602bc59fd1aac54e810e62aac1b76fc9ad7ad2b2a6358178cbb/b39132cbc865c76ec706181a2ca79bf0/en-settings-720x1280.png",
+      "sha256": "2a950f33b2c35d283a0f4c0a8fbc8b62e446ca97e5bd62bfe57fd67e39662d9a"
+    },
+    {
+      "id": "en-menu-1280x720",
+      "path": "docs/media/gallery/486ce3106d120602bc59fd1aac54e810e62aac1b76fc9ad7ad2b2a6358178cbb/b39132cbc865c76ec706181a2ca79bf0/en-menu-1280x720.png",
+      "sha256": "ca6816735e8caf98d324b940abe725106da6506aa2ac9e2bdbf6c1d909e822c0"
+    },
+    {
+      "id": "en-battle-1280x720",
+      "path": "docs/media/gallery/486ce3106d120602bc59fd1aac54e810e62aac1b76fc9ad7ad2b2a6358178cbb/b39132cbc865c76ec706181a2ca79bf0/en-battle-1280x720.png",
+      "sha256": "9fe051189d55ab0ffa608bba3196de06d24f91d4f7ffeb553ae71c827da9e8ac"
+    }
+  ]
+}

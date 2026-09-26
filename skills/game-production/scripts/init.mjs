@@ -1,0 +1,45 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { writeJSON, normalizeRepo } from './lib.mjs';
+const a = Object.fromEntries(
+  process.argv
+    .slice(2)
+    .reduce((out, x, i, s) => (x.startsWith('--') ? [...out, [x.slice(2), s[i + 1]]] : out), [])
+);
+if (!a.root || !a.repository || !a.host)
+  throw Error('Explicit --root --repository --host required');
+normalizeRepo('https://github.com/' + a.repository);
+const root = path.resolve(a.root),
+  dir = path.join(root, '.gameprod');
+if (!fs.existsSync(path.join(root, '.git'))) throw Error('Existing Git repository required');
+if (fs.existsSync(dir)) throw Error('Existing profile is never overwritten');
+writeJSON(path.join(dir, 'project.json'), {
+  schemaVersion: 1,
+  repository: a.repository,
+  name: a.name || path.basename(root),
+  authorizedHosts: [a.host],
+  inputs: ['skills/game-production'],
+  requiredFiles: ['AGENTS.md'],
+  steps: {},
+  gates: { verified: { steps: [] }, manual: { manual: true } }
+});
+writeJSON(path.join(dir, 'state.json'), {
+  repository: a.repository,
+  next: 'Configure real engine test and build commands; empty gates are blocked'
+});
+writeJSON(path.join(dir, 'decisions.json'), []);
+writeJSON(path.join(dir, 'backlog.json'), [
+  { id: 'configure', status: 'pending', action: 'Configure engine commands' }
+]);
+const template = path.resolve(
+  path.dirname(fileURLToPath(import.meta.url)),
+  '../templates/lifecycle.json'
+);
+fs.copyFileSync(template, path.join(dir, 'lifecycle.json'));
+if (!fs.existsSync(path.join(root, 'AGENTS.md')))
+  fs.writeFileSync(
+    path.join(root, 'AGENTS.md'),
+    'Read skills/game-production/SKILL.md and .gameprod files before work.\n'
+  );
+console.log('Initialized local profile only; build/test commands remain unconfigured.');

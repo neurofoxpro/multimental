@@ -1,13 +1,24 @@
 .godot/
+node_modules/
 dist/
-build/
-*.keystore
-*.jks
-.env
-.env.*
-.idea/
-.vscode/
-.DS_Store
-Thumbs.db
 artifacts/
 device-results/
+downloaded-build/
+*.keystore
+*.jks
+.gameprod/evidence/
+.gameprod/source.json
+*.local.json
+.env
+.env.*
+
+# Station-only tools, generated engine sidecars and verification runtime
+.gameprod/runtime/
+*.gd.uid
+*.import
+*.apply-tmp
+*.chat-tmp
+
+# Prepared source-edit temporary files, never published
+*.author-*
+*.source-tmp-*

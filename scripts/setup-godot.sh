@@ -30,7 +30,7 @@ if [[ ! -f "$TEMPLATE_DIR/version.txt" ]]; then
   echo "$GODOT_TEMPLATES_SHA256  /tmp/templates.tpz" | sha256sum --check -
   rm -rf /tmp/godot-templates
   mkdir -p /tmp/godot-templates
-  unzip -q /tmp/templates.tpz -d /tmp/godot-templates
+  unzip -q /tmp/templates.tpz "templates/version.txt" "templates/android_debug.apk" "templates/android_release.apk" "templates/web*" -d /tmp/godot-templates
   cp -a /tmp/godot-templates/templates/. "$TEMPLATE_DIR/"
 fi
 

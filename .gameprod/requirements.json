@@ -1,0 +1,811 @@
+{
+  "schemaVersion": 1,
+  "observedAt": "2026-09-26",
+  "repository": "neurofoxpro/multimental",
+  "generatedFrom": ".gameprod/workplan.json",
+  "evidenceSemantics": "Historical evidence only; not a fresh release gate or human approval.",
+  "requirements": [
+    {
+      "id": "AUTH-01",
+      "text": "Единственный репозиторий и разрешённая станция; бесплатные инструменты и защищённые действия",
+      "version": "P0. Единый производственный процесс",
+      "status": "verified",
+      "kind": "automation",
+      "evidence": [
+        "docs/production/AUTHORITY.md"
+      ],
+      "source": "D00–D01, D15–D18; полный чат",
+      "requiredForBeta": true
+    },
+    {
+      "id": "AUTO-01",
+      "text": "Существующий dev-цикл: проверка → PR → CI → испытания → dev → доставка",
+      "version": "P0. Единый производственный процесс",
+      "status": "verified",
+      "kind": "automation",
+      "evidence": [
+        "docs/production/evidence/production-v2-cycle.json"
+      ],
+      "source": "D15–D18; подтверждённый цикл",
+      "requiredForBeta": true
+    },
+    {
+      "id": "AUTO-02",
+      "text": "Обновление телефона без потери данных и с постоянной приватной dev-подписью",
+      "version": "P0. Единый производственный процесс",
+      "status": "verified",
+      "kind": "automation",
+      "evidence": [
+        "docs/production/evidence/balance-release-completed.json"
+      ],
+      "source": "D16 и установленная .105.1",
+      "requiredForBeta": true
+    },
+    {
+      "id": "AUTO-03",
+      "text": "Два выделенных эмулятора; аппаратные проверки отделены от виртуальных",
+      "version": "P0. Единый производственный процесс",
+      "status": "verified",
+      "kind": "automation",
+      "evidence": [
+        "docs/production/evidence/balance-release-completed.json"
+      ],
+      "source": "D15–D18; матрица кандидата .104.1",
+      "requiredForBeta": true
+    },
+    {
+      "id": "AUTO-04",
+      "text": "Русский changelog, фиксированные инструменты и автоматическое ревью инвариантов",
+      "version": "P0. Единый производственный процесс",
+      "status": "verified",
+      "kind": "automation",
+      "evidence": [
+        "scripts/changelog.mjs",
+        "tools/review.mjs"
+      ],
+      "source": "D17–D18",
+      "requiredForBeta": true
+    },
+    {
+      "id": "AUTO-05",
+      "text": "Реестр исследований и перенос контекста между агентами",
+      "version": "P0. Единый производственный процесс",
+      "status": "verified",
+      "kind": "automation",
+      "evidence": [
+        "scripts/research.mjs",
+        "scripts/handoff.mjs",
+        "docs/production/WORK_QUEUE_RESEARCH.ru.md",
+        "docs/production/evidence/research-loop-observed-20260926.json",
+        "docs/production/evidence/research-workflow-completed-20260926.json"
+      ],
+      "source": "D17–D18; поручение 25.09.2026",
+      "requiredForBeta": true
+    },
+    {
+      "id": "AUTO-06",
+      "text": "Один вход для человека и агента; единый граф требований без дрейфа roadmap",
+      "version": "P0. Единый производственный процесс",
+      "status": "verified",
+      "kind": "automation",
+      "evidence": [
+        "docs/production/SHORT_COMMANDS.ru.md",
+        "docs/production/DEV_SETTLE.ru.md",
+        "docs/production/ISSUE_PLAN_SYNC.ru.md",
+        "docs/production/evidence/short-workflow-completed-20260926.json"
+      ],
+      "source": "Последнее поручение: все цепочки одной командой, 25.09.2026",
+      "requiredForBeta": true
+    },
+    {
+      "id": "AUTO-07",
+      "text": "Безопасное восстановление всех цепочек и минимальный пакет следующему агенту",
+      "version": "P0. Единый производственный процесс",
+      "status": "planned",
+      "kind": "automation",
+      "evidence": [],
+      "source": "Полный чат; поручение 25.09.2026",
+      "requiredForBeta": true
+    },
+    {
+      "id": "AUTO-08",
+      "text": "Воспроизводимый offline toolchain и обновление зависимостей отдельным PR",
+      "version": "P0. Единый производственный процесс",
+      "status": "planned",
+      "kind": "automation",
+      "evidence": [],
+      "source": "Этапы 8,14; поручение 25.09.2026",
+      "requiredForBeta": true
+    },
+    {
+      "id": "CORE-01",
+      "text": "Дуэль 3×3; пять клеток или одновременно пустые рука и колода",
+      "version": "P1. Сохранить уже работающую игру",
+      "status": "verified",
+      "kind": "game",
+      "evidence": [
+        "game/tests/core_test.gd"
+      ],
+      "source": "D02; этапы 1,4",
+      "requiredForBeta": true
+    },
+    {
+      "id": "CORE-02",
+      "text": "Размещение и добровольная направленная атака; прежнее одно действие заменено D19",
+      "version": "P1. Сохранить уже работающую игру",
+      "status": "verified",
+      "kind": "game",
+      "evidence": [
+        "game/tests/directional_test.gd"
+      ],
+      "source": "D19 заменяет часть D04",
+      "requiredForBeta": true
+    },
+    {
+      "id": "CORE-03",
+      "text": "Поворот, первый удар по зоне, дружественный огонь, ответ только выживших",
+      "version": "P1. Сохранить уже работающую игру",
+      "status": "verified",
+      "kind": "game",
+      "evidence": [
+        "game/tests/directional_test.gd"
+      ],
+      "source": "D19–D20",
+      "requiredForBeta": true
+    },
+    {
+      "id": "CORE-04",
+      "text": "30 карт и 10 стихий; полная мультивселенная и свободное смешивание",
+      "version": "P1. Сохранить уже работающую игру",
+      "status": "verified",
+      "kind": "game",
+      "evidence": [
+        "docs/production/evidence/balance-release-completed.json"
+      ],
+      "source": "D10 расширен D19",
+      "requiredForBeta": true
+    },
+    {
+      "id": "CORE-05",
+      "text": "Таймер в фоне, два пропуска и ограничение затянутой сессии",
+      "version": "P1. Сохранить уже работающую игру",
+      "status": "verified",
+      "kind": "game",
+      "evidence": [
+        "game/tests/room_test.gd"
+      ],
+      "source": "D03–D04; этапы 3,5,6",
+      "requiredForBeta": true
+    },
+    {
+      "id": "CORE-06",
+      "text": "Чистое детерминированное ядро и воспроизведение; отдельные журналы",
+      "version": "P1. Сохранить уже работающую игру",
+      "status": "verified",
+      "kind": "game",
+      "evidence": [
+        "game/tests/core_test.gd"
+      ],
+      "source": "D08–D09; этапы 8–10",
+      "requiredForBeta": true
+    },
+    {
+      "id": "CORE-07",
+      "text": "Стихийные клетки, +1 HP, открытие центра и доход по порогам 4/6",
+      "version": "P1. Сохранить уже работающую игру",
+      "status": "verified",
+      "kind": "game",
+      "evidence": [
+        "game/tests/terrain_test.gd"
+      ],
+      "source": "D20–D21",
+      "requiredForBeta": true
+    },
+    {
+      "id": "UX-01",
+      "text": "Android портретный, Web альбомный; один палец/мышь, RU/EN",
+      "version": "P1. Сохранить уже работающую игру",
+      "status": "verified",
+      "kind": "ui",
+      "evidence": [
+        "game/tests/ui_test.gd"
+      ],
+      "source": "D04,D07",
+      "requiredForBeta": true
+    },
+    {
+      "id": "UX-02",
+      "text": "Подсветки, сообщения ошибок, урон и объяснение результата",
+      "version": "P1. Сохранить уже работающую игру",
+      "status": "verified",
+      "kind": "ui",
+      "evidence": [
+        "game/src/main.gd"
+      ],
+      "source": "Этап 5; поздние UI и directional изменения",
+      "requiredForBeta": true
+    },
+    {
+      "id": "UX-03",
+      "text": "Громкость по категориям и музыка",
+      "version": "P1. Сохранить уже работающую игру",
+      "status": "verified",
+      "kind": "ui",
+      "evidence": [
+        "docs/production/evidence/tutorial-audio-release-82.json"
+      ],
+      "source": "D07; PR17",
+      "requiredForBeta": true
+    },
+    {
+      "id": "UX-04",
+      "text": "Безопасный тренировочный бой без длинного обучения",
+      "version": "P1. Сохранить уже работающую игру",
+      "status": "verified",
+      "kind": "ui",
+      "evidence": [
+        "docs/production/evidence/tutorial-audio-release-82.json"
+      ],
+      "source": "D07; PR17",
+      "requiredForBeta": true
+    },
+    {
+      "id": "META-05",
+      "text": "Полный профиль, транзакции сохранения и миграции без потери коллекции",
+      "version": "P2. Коллекция, профиль и экономика",
+      "status": "verified",
+      "kind": "game",
+      "evidence": [
+        "docs/production/PROFILE_STORAGE.ru.md",
+        "game/tests/profile_store_test.gd",
+        "game/tests/profile_ui_test.gd"
+      ],
+      "source": "Этапы 5,6,9,12; D05–D07; PR90; фактическая Android-квитанция Issue30/comment5840413541",
+      "requiredForBeta": true
+    },
+    {
+      "id": "META-01",
+      "text": "Коллекция, экземпляры, конструктор и выбор собственной колоды",
+      "version": "P2. Коллекция, профиль и экономика",
+      "status": "verified",
+      "kind": "game",
+      "evidence": [
+        "game/tests/collection_test.gd",
+        "game/tests/collection_ui_test.gd",
+        "game/tests/network_decks_test.gd",
+        "docs/production/NETWORK_DECKS.ru.md",
+        "docs/production/COLLECTION_DEVICE_TEST.ru.md"
+      ],
+      "source": "Этапы 1,4,6; D05–D06; завершённые PR94/96/97/99/100 и аппаратные проверки 26.09.2026",
+      "requiredForBeta": true
+    },
+    {
+      "id": "CONTENT-03",
+      "text": "Фабрика карточного контента: данные → схема → семантика → симуляция → каталог",
+      "version": "P2. Коллекция, профиль и экономика",
+      "status": "planned",
+      "kind": "automation",
+      "evidence": [],
+      "source": "Этапы 4,9,11; генерация контента и последний запрос",
+      "requiredForBeta": true
+    },
+    {
+      "id": "META-02",
+      "text": "Магазин и паки по пять карт за отдельную валюту лобби",
+      "version": "P2. Коллекция, профиль и экономика",
+      "status": "verified",
+      "kind": "game",
+      "evidence": [
+        "docs/production/evidence/shop-completed-20260926.json",
+        "game/tests/economy_test.gd",
+        "game/tests/shop_ui_test.gd"
+      ],
+      "source": "Этапы 4,6; D06; проверено PR111/112",
+      "requiredForBeta": true
+    },
+    {
+      "id": "META-03",
+      "text": "Пыль, дубликаты и целевой крафт карт",
+      "version": "P2. Коллекция, профиль и экономика",
+      "status": "verified",
+      "kind": "game",
+      "evidence": [
+        "docs/production/CARD_CRAFTING.ru.md",
+        "docs/production/MODAL_TOUCH_TESTS.ru.md",
+        "game/tests/crafting_test.gd",
+        "game/tests/crafting_ui_test.gd"
+      ],
+      "source": "Этапы 4,6; D06; реализация и аппаратная проверка PR114/115",
+      "requiredForBeta": true
+    },
+    {
+      "id": "META-04",
+      "text": "Награды, ежедневные задания и уровни без обязательного гринда",
+      "version": "P2. Коллекция, профиль и экономика",
+      "status": "verified",
+      "kind": "game",
+      "evidence": [
+        "docs/production/REWARDS_PROGRESS.ru.md",
+        "docs/production/evidence/rewards-acquisition-20260926.json",
+        "docs/production/evidence/rewards-completed-20260926.json"
+      ],
+      "source": "Этапы 1,3,4; D05–D06,D14",
+      "requiredForBeta": true
+    },
+    {
+      "id": "UX-05",
+      "text": "Шесть полноценных экранов и пользовательский сквозной сценарий",
+      "version": "P2. Коллекция, профиль и экономика",
+      "status": "planned",
+      "kind": "ui",
+      "evidence": [],
+      "source": "Этапы 5,6; D07",
+      "requiredForBeta": true
+    },
+    {
+      "id": "BALANCE-01",
+      "text": "Преимущество первого хода, длительность и разнообразие колод",
+      "version": "P3. Механики, баланс и реальные дуэли",
+      "status": "planned",
+      "kind": "game",
+      "evidence": [],
+      "source": "D21; сохранённые эксперименты 7040/64",
+      "requiredForBeta": true
+    },
+    {
+      "id": "CONTENT-01",
+      "text": "Решение по ранее отложенной особой системе взаимодействий",
+      "version": "P3. Механики, баланс и реальные дуэли",
+      "status": "manual",
+      "kind": "product",
+      "evidence": [],
+      "source": "D12: владелец явно отложил основную идею",
+      "requiredForBeta": true
+    },
+    {
+      "id": "CONTENT-04",
+      "text": "Реализация и эксперименты принятой особой системы",
+      "version": "P3. Механики, баланс и реальные дуэли",
+      "status": "planned",
+      "kind": "game",
+      "evidence": [],
+      "source": "D12; полное закрытие идей перед Play",
+      "requiredForBeta": true
+    },
+    {
+      "id": "CONTENT-02",
+      "text": "Два дополнительных боевых ресурса",
+      "version": "P3. Механики, баланс и реальные дуэли",
+      "status": "planned",
+      "kind": "game",
+      "evidence": [],
+      "source": "D06; этап 6: добавить позже",
+      "requiredForBeta": false
+    },
+    {
+      "id": "NET-01",
+      "text": "LAN-комната и настоящая локальная партия",
+      "version": "P3. Механики, баланс и реальные дуэли",
+      "status": "verified",
+      "kind": "network",
+      "evidence": [
+        "docs/production/evidence/lan-release-completed.json"
+      ],
+      "source": "D09; PR14",
+      "requiredForBeta": true
+    },
+    {
+      "id": "NET-02",
+      "text": "Хост-авторитет, приватные проекции, совместимость и повторные команды",
+      "version": "P3. Механики, баланс и реальные дуэли",
+      "status": "verified",
+      "kind": "network",
+      "evidence": [
+        "game/tests/room_test.gd"
+      ],
+      "source": "D09; этапы 9–10",
+      "requiredForBeta": true
+    },
+    {
+      "id": "NET-03",
+      "text": "Bluetooth RFCOMM лаборатория без Wi-Fi",
+      "version": "P3. Механики, баланс и реальные дуэли",
+      "status": "verified",
+      "kind": "network",
+      "evidence": [
+        "docs/production/evidence/production-v2-transports.json"
+      ],
+      "source": "D15; аппаратные квитанции",
+      "requiredForBeta": true
+    },
+    {
+      "id": "NET-04",
+      "text": "Пользовательский Bluetooth на двух физических Android",
+      "version": "P3. Механики, баланс и реальные дуэли",
+      "status": "implemented",
+      "kind": "network",
+      "evidence": [
+        "docs/production/evidence/bluetooth-release-completed.json"
+      ],
+      "source": "D03,D09; второй физический телефон ещё не проверен",
+      "requiredForBeta": true
+    },
+    {
+      "id": "BETA-01",
+      "text": "Ручная оценка интереса, темпа и читаемости конкретной версии",
+      "version": "P3. Механики, баланс и реальные дуэли",
+      "status": "manual",
+      "kind": "subjective",
+      "evidence": [],
+      "source": "Ручная приёмка, согласованная во всём чате",
+      "requiredForBeta": true
+    },
+    {
+      "id": "PLATFORM-01",
+      "text": "Рабочая Web-сборка и альбомный интерфейс",
+      "version": "P4. Web, онлайн и синхронизация",
+      "status": "planned",
+      "kind": "platform",
+      "evidence": [],
+      "source": "D03,D04,D08; этапы 2,5,8",
+      "requiredForBeta": false
+    },
+    {
+      "id": "NET-06",
+      "text": "Онлайн-служба с тем же авторитетным ядром",
+      "version": "P4. Web, онлайн и синхронизация",
+      "status": "planned",
+      "kind": "network",
+      "evidence": [],
+      "source": "D03,D09; этап 10",
+      "requiredForBeta": false
+    },
+    {
+      "id": "NET-07",
+      "text": "Аккаунт, синхронизация профиля и удаление данных",
+      "version": "P4. Web, онлайн и синхронизация",
+      "status": "planned",
+      "kind": "network",
+      "evidence": [],
+      "source": "D07,D09; этапы 5,10",
+      "requiredForBeta": false
+    },
+    {
+      "id": "RATING-01",
+      "text": "Окончательный смысл рейтинга без потери очков",
+      "version": "P4. Web, онлайн и синхронизация",
+      "status": "manual",
+      "kind": "product",
+      "evidence": [],
+      "source": "D14; прямой ответ этапа 4",
+      "requiredForBeta": false
+    },
+    {
+      "id": "NET-05",
+      "text": "Рейтинг, подбор и серверная экономика",
+      "version": "P4. Web, онлайн и синхронизация",
+      "status": "planned",
+      "kind": "network",
+      "evidence": [],
+      "source": "D02,D09,D14; долгосрочная мотивация рейтинга",
+      "requiredForBeta": false
+    },
+    {
+      "id": "STORE-01",
+      "text": "Play Console: владелец, тип аккаунта, верификация и бюджет",
+      "version": "P5. Релизная сборка и магазин",
+      "status": "manual",
+      "kind": "release_approval",
+      "evidence": [],
+      "source": "Бюджет этапа 0 и требование Play; официальные правила повторно проверяются перед RC",
+      "requiredForBeta": false
+    },
+    {
+      "id": "STORE-02",
+      "text": "Создать приложение в Play Console и настроить ограниченный доступ публикации",
+      "version": "P5. Релизная сборка и магазин",
+      "status": "manual",
+      "kind": "release_approval",
+      "evidence": [],
+      "source": "Google Play Developer API lifecycle; бюджет и полномочия владельца",
+      "requiredForBeta": false
+    },
+    {
+      "id": "RELEASE-02",
+      "text": "Production upload key и сохранный переход dev → production",
+      "version": "P5. Релизная сборка и магазин",
+      "status": "planned",
+      "kind": "automation",
+      "evidence": [],
+      "source": "Приватная dev-подпись и первоначальное требование без потерь; Play App Signing",
+      "requiredForBeta": false
+    },
+    {
+      "id": "RELEASE-03",
+      "text": "Production AAB: target API36+, 64-bit и проверка 16KB",
+      "version": "P5. Релизная сборка и магазин",
+      "status": "planned",
+      "kind": "automation",
+      "evidence": [],
+      "source": "Android Developers target SDK и page-size; проверено 25.09.2026",
+      "requiredForBeta": false
+    },
+    {
+      "id": "STORE-03",
+      "text": "Инвентаризация данных, разрешений, SDK и лицензий",
+      "version": "P5. Релизная сборка и магазин",
+      "status": "planned",
+      "kind": "automation",
+      "evidence": [],
+      "source": "D01,D08,D11; Play store disclosures",
+      "requiredForBeta": false
+    },
+    {
+      "id": "STORE-04",
+      "text": "Подтверждение аудитории и правовых деклараций",
+      "version": "P5. Релизная сборка и магазин",
+      "status": "manual",
+      "kind": "product",
+      "evidence": [],
+      "source": "Этап 2: любой возраст; корректные декларации Play",
+      "requiredForBeta": false
+    },
+    {
+      "id": "STORE-05",
+      "text": "Карточка магазина RU/EN и подготовленные материалы",
+      "version": "P5. Релизная сборка и магазин",
+      "status": "planned",
+      "kind": "ui",
+      "evidence": [],
+      "source": "Этапы 11,21–22; весь цикл до Play",
+      "requiredForBeta": false
+    },
+    {
+      "id": "RELEASE-04",
+      "text": "Защищённый публикационный адаптер Play и цепочка отслеживания",
+      "version": "P5. Релизная сборка и магазин",
+      "status": "planned",
+      "kind": "automation",
+      "evidence": [],
+      "source": "Google Play Edits API; однокомандный production lifecycle",
+      "requiredForBeta": false
+    },
+    {
+      "id": "QA-01",
+      "text": "Свежая полная матрица итогового RC",
+      "version": "P6. Проверка Play-кандидата и публичный выпуск",
+      "status": "planned",
+      "kind": "tests",
+      "evidence": [],
+      "source": "Этапы 15–24; полный final acceptance",
+      "requiredForBeta": false
+    },
+    {
+      "id": "PLAY-01",
+      "text": "Internal testing и установка именно магазинной сборки",
+      "version": "P6. Проверка Play-кандидата и публичный выпуск",
+      "status": "planned",
+      "kind": "tests",
+      "evidence": [],
+      "source": "Play App Signing и установка через магазин",
+      "requiredForBeta": false
+    },
+    {
+      "id": "PLAY-02",
+      "text": "Реальный closed test и доступ к production по требованиям аккаунта",
+      "version": "P6. Проверка Play-кандидата и публичный выпуск",
+      "status": "manual",
+      "kind": "release_approval",
+      "evidence": [],
+      "source": "Тестовые ограничения конкретного аккаунта Play; внешняя проверка",
+      "requiredForBeta": false
+    },
+    {
+      "id": "RELEASE-01",
+      "text": "Отдельное разрешение владельца на main и публичный stable/Play",
+      "version": "P6. Проверка Play-кандидата и публичный выпуск",
+      "status": "manual",
+      "kind": "release_approval",
+      "evidence": [],
+      "source": "Защищённые решения этапа 0; D17–D18",
+      "requiredForBeta": false
+    },
+    {
+      "id": "PLAY-03",
+      "text": "Production rollout, наблюдение ревью и доступности",
+      "version": "P6. Проверка Play-кандидата и публичный выпуск",
+      "status": "planned",
+      "kind": "automation",
+      "evidence": [],
+      "source": "Этапы 21–24; последний запрос до Google Play",
+      "requiredForBeta": false
+    },
+    {
+      "id": "OPS-01",
+      "text": "Диагностика, остановка rollout и безопасный hotfix",
+      "version": "P7. Поддержка и повторяемые обновления",
+      "status": "planned",
+      "kind": "automation",
+      "evidence": [],
+      "source": "Этап 24; полное закрытие рабочих цепочек",
+      "requiredForBeta": false
+    },
+    {
+      "id": "OPS-02",
+      "text": "Закрытие цепочек, документация, отчёт и передача без потери контекста",
+      "version": "P7. Поддержка и повторяемые обновления",
+      "status": "planned",
+      "kind": "automation",
+      "evidence": [],
+      "source": "Последний запрос: остаются идеи, эмуляция и тесты",
+      "requiredForBeta": false
+    },
+    {
+      "id": "FUTURE-01",
+      "text": "Полное 3D-представление поверх неизменного ядра",
+      "version": "P7. Поддержка и повторяемые обновления",
+      "status": "manual",
+      "kind": "product",
+      "evidence": [],
+      "source": "Этап 8: возможность переноса 2D в 3D, а не обязательный 3D релиз",
+      "requiredForBeta": false
+    },
+    {
+      "id": "AUTO-09",
+      "text": "Параллельные чаты: атомарное владение задачами и ресурсами в GitHub",
+      "version": "P0. Единый производственный процесс",
+      "status": "verified",
+      "kind": "automation",
+      "evidence": [
+        "docs/production/evidence/parallel-slices-20260926.json",
+        "skills/game-production/tests/collaboration.test.mjs",
+        "skills/game-production/tests/collaboration-integration.test.mjs"
+      ],
+      "source": "Поручение владельца 26.09.2026: несколько чатов, координация, автоматизация",
+      "requiredForBeta": true
+    },
+    {
+      "id": "AUTO-10",
+      "text": "Изолированные рабочие срезы и воспроизводимый вход нового чата",
+      "version": "P0. Единый производственный процесс",
+      "status": "verified",
+      "kind": "automation",
+      "evidence": [
+        "docs/production/evidence/parallel-slices-20260926.json",
+        "tools/godot-preflight.mjs",
+        "skills/game-production/tests/godot-preflight.test.mjs"
+      ],
+      "source": "Поручение владельца 26.09.2026: переносимость и параллельные срезы",
+      "requiredForBeta": true
+    },
+    {
+      "id": "QA-02",
+      "text": "Два физических телефона: регистрация, общая подпись и раздельные очереди тестов",
+      "version": "P3. Механики, баланс и реальные дуэли",
+      "status": "planned",
+      "kind": "tests",
+      "evidence": [],
+      "source": "Владелец сообщил о втором телефоне и разрешил его проверку",
+      "requiredForBeta": true
+    },
+    {
+      "id": "UX-06",
+      "text": "Исследование эргономики поля 3×3, карточек, кнопок и доступности",
+      "version": "P2. Коллекция, профиль и экономика",
+      "status": "verified",
+      "kind": "ui",
+      "evidence": [
+        "docs/production/UX_AUDIT.ru.md",
+        "tools/ux-audit.mjs",
+        "game/tests/ux_audit.gd",
+        "skills/game-production/tests/ux-metrics.test.mjs"
+      ],
+      "source": "Поручение владельца 26.09.2026; исследование и измерения PR112",
+      "requiredForBeta": true
+    },
+    {
+      "id": "UX-07",
+      "text": "Полировка интерфейса: единые состояния, подробности карты, читаемость и фокус",
+      "version": "P2. Коллекция, профиль и экономика",
+      "status": "verified",
+      "kind": "ui",
+      "evidence": [
+        "docs/production/UI_PLAYABILITY.ru.md",
+        "docs/production/evidence/ui-playability-observed-20260926.json",
+        "docs/production/evidence/ui-continuation-provenance-20260926.json",
+        "docs/SCREENSHOTS.ru.md",
+        "docs/media/gallery/current.json",
+        "docs/production/evidence/ui-playability-completed-20260926.json"
+      ],
+      "source": "Поручение владельца 26.09.2026: визуал, UI и удобство",
+      "requiredForBeta": true
+    },
+    {
+      "id": "AUTO-11",
+      "text": "Проверяемое освобождение завершённых срезов без захвата живой работы",
+      "version": "P0. Единый производственный процесс",
+      "status": "planned",
+      "kind": "automation",
+      "evidence": [],
+      "source": "Поручение владельца26.09.2026 о продолжении и самоулучшении; наблюдение: PR116 объединён и дерево чистое, но claimQA02 не освобождён. Живой/незавершённый PR119 не является допустимым случаем этой операции.",
+      "requiredForBeta": true
+    },
+    {
+      "id": "UX-08",
+      "text": "Частые действия: быстрый старт выбранной колодой и понятный путь к локальной дуэли",
+      "version": "P2. Коллекция, профиль и экономика",
+      "status": "planned",
+      "kind": "ui",
+      "evidence": [],
+      "source": "Прямое поручение владельца 26.09.2026: частые действия, подключение, актуальные изображения и автономная разработка",
+      "requiredForBeta": true
+    },
+    {
+      "id": "UX-09",
+      "text": "Воспроизводимая галерея актуальных экранов для дизайна и GitHub",
+      "version": "P2. Коллекция, профиль и экономика",
+      "status": "verified",
+      "kind": "automation",
+      "evidence": [
+        "docs/production/GALLERY_CAPTURE.ru.md",
+        "docs/SCREENSHOTS.ru.md",
+        "docs/media/gallery/current.json",
+        "docs/production/evidence/gallery-research-observed-20260926.json",
+        "docs/production/evidence/gallery-completed-20260926.json"
+      ],
+      "source": "Прямое поручение владельца 26.09.2026: частые действия, подключение, актуальные изображения и автономная разработка",
+      "requiredForBeta": true
+    },
+    {
+      "id": "UX-10",
+      "text": "Иллюстрированная внутриигровая справка и последовательное обучение",
+      "version": "P2. Коллекция, профиль и экономика",
+      "status": "planned",
+      "kind": "ui",
+      "evidence": [],
+      "source": "Прямое поручение владельца 26.09.2026: частые действия, подключение, актуальные изображения и автономная разработка",
+      "requiredForBeta": true
+    },
+    {
+      "id": "QA-03",
+      "text": "Ярлык dev-приложения на домашнем экране после установки",
+      "version": "P2. Коллекция, профиль и экономика",
+      "status": "planned",
+      "kind": "platform",
+      "evidence": [],
+      "source": "Прямое поручение владельца 26.09.2026: частые действия, подключение, актуальные изображения и автономная разработка",
+      "requiredForBeta": true
+    },
+    {
+      "id": "UX-11",
+      "text": "Тактическое управление: разделить выбор, осмотр и подтверждённую атаку; сделать карты читаемыми",
+      "version": "P2. Коллекция, профиль и экономика",
+      "status": "planned",
+      "kind": "ui",
+      "evidence": [],
+      "source": "Прямое критическое замечание владельца26.09.2026 о неудобстве интерфейса и управления; анализ фактической реализации и первичных рекомендаций",
+      "requiredForBeta": true
+    },
+    {
+      "id": "UX-12",
+      "text": "Навигация коллекции и подготовки матча без списка одинаковых кнопок",
+      "version": "P2. Коллекция, профиль и экономика",
+      "status": "planned",
+      "kind": "ui",
+      "evidence": [],
+      "source": "Прямое критическое замечание владельца26.09.2026 о неудобстве интерфейса и управления; анализ фактической реализации и первичных рекомендаций",
+      "requiredForBeta": true
+    },
+    {
+      "id": "UX-13",
+      "text": "Пакет визуальных ассетов: происхождение, вариативность, импорт и проверка в реальном интерфейсе",
+      "version": "P2. Коллекция, профиль и экономика",
+      "status": "planned",
+      "kind": "automation",
+      "evidence": [],
+      "source": "Прямое критическое замечание владельца26.09.2026 о неудобстве интерфейса и управления; анализ фактической реализации и первичных рекомендаций",
+      "requiredForBeta": true
+    }
+  ],
+  "principle": "Absent implementation is engineering work, never a human acceptance checkbox."
+}

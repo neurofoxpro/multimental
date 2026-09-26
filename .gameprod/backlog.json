@@ -1,0 +1,925 @@
+[
+  {
+    "id": "AUTH-01",
+    "status": "done",
+    "action": "Единственный репозиторий и разрешённая станция; бесплатные инструменты и защищённые действия",
+    "dependsOn": [],
+    "manual": false,
+    "generatedFrom": ".gameprod/workplan.json",
+    "evidence": [
+      "docs/production/AUTHORITY.md"
+    ],
+    "nextCommand": "npm run game -- task AUTH-01"
+  },
+  {
+    "id": "AUTO-01",
+    "status": "done",
+    "action": "Существующий dev-цикл: проверка → PR → CI → испытания → dev → доставка",
+    "dependsOn": [],
+    "manual": false,
+    "generatedFrom": ".gameprod/workplan.json",
+    "evidence": [
+      "docs/production/evidence/production-v2-cycle.json"
+    ],
+    "nextCommand": "npm run game -- task AUTO-01"
+  },
+  {
+    "id": "AUTO-02",
+    "status": "done",
+    "action": "Обновление телефона без потери данных и с постоянной приватной dev-подписью",
+    "dependsOn": [],
+    "manual": false,
+    "generatedFrom": ".gameprod/workplan.json",
+    "evidence": [
+      "docs/production/evidence/balance-release-completed.json"
+    ],
+    "nextCommand": "npm run game -- task AUTO-02"
+  },
+  {
+    "id": "AUTO-03",
+    "status": "done",
+    "action": "Два выделенных эмулятора; аппаратные проверки отделены от виртуальных",
+    "dependsOn": [],
+    "manual": false,
+    "generatedFrom": ".gameprod/workplan.json",
+    "evidence": [
+      "docs/production/evidence/balance-release-completed.json"
+    ],
+    "nextCommand": "npm run game -- task AUTO-03"
+  },
+  {
+    "id": "AUTO-04",
+    "status": "done",
+    "action": "Русский changelog, фиксированные инструменты и автоматическое ревью инвариантов",
+    "dependsOn": [],
+    "manual": false,
+    "generatedFrom": ".gameprod/workplan.json",
+    "evidence": [
+      "scripts/changelog.mjs",
+      "tools/review.mjs"
+    ],
+    "nextCommand": "npm run game -- task AUTO-04"
+  },
+  {
+    "id": "AUTO-05",
+    "status": "done",
+    "action": "Реестр исследований и перенос контекста между агентами",
+    "dependsOn": [
+      "AUTO-01"
+    ],
+    "manual": false,
+    "generatedFrom": ".gameprod/workplan.json",
+    "evidence": [
+      "scripts/research.mjs",
+      "scripts/handoff.mjs",
+      "docs/production/WORK_QUEUE_RESEARCH.ru.md",
+      "docs/production/evidence/research-loop-observed-20260926.json",
+      "docs/production/evidence/research-workflow-completed-20260926.json"
+    ],
+    "nextCommand": "npm run game -- task AUTO-05"
+  },
+  {
+    "id": "AUTO-06",
+    "status": "done",
+    "action": "Один вход для человека и агента; единый граф требований без дрейфа roadmap",
+    "dependsOn": [
+      "AUTH-01"
+    ],
+    "manual": false,
+    "generatedFrom": ".gameprod/workplan.json",
+    "evidence": [
+      "docs/production/SHORT_COMMANDS.ru.md",
+      "docs/production/DEV_SETTLE.ru.md",
+      "docs/production/ISSUE_PLAN_SYNC.ru.md",
+      "docs/production/evidence/short-workflow-completed-20260926.json"
+    ],
+    "nextCommand": "npm run game -- task AUTO-06"
+  },
+  {
+    "id": "AUTO-07",
+    "status": "pending",
+    "action": "Безопасное восстановление всех цепочек и минимальный пакет следующему агенту",
+    "dependsOn": [
+      "AUTO-06"
+    ],
+    "manual": false,
+    "generatedFrom": ".gameprod/workplan.json",
+    "evidence": [],
+    "nextCommand": "npm run game -- task AUTO-07"
+  },
+  {
+    "id": "AUTO-08",
+    "status": "pending",
+    "action": "Воспроизводимый offline toolchain и обновление зависимостей отдельным PR",
+    "dependsOn": [
+      "AUTO-06"
+    ],
+    "manual": false,
+    "generatedFrom": ".gameprod/workplan.json",
+    "evidence": [],
+    "nextCommand": "npm run game -- task AUTO-08"
+  },
+  {
+    "id": "CORE-01",
+    "status": "done",
+    "action": "Дуэль 3×3; пять клеток или одновременно пустые рука и колода",
+    "dependsOn": [],
+    "manual": false,
+    "generatedFrom": ".gameprod/workplan.json",
+    "evidence": [
+      "game/tests/core_test.gd"
+    ],
+    "nextCommand": "npm run game -- task CORE-01"
+  },
+  {
+    "id": "CORE-02",
+    "status": "done",
+    "action": "Размещение и добровольная направленная атака; прежнее одно действие заменено D19",
+    "dependsOn": [],
+    "manual": false,
+    "generatedFrom": ".gameprod/workplan.json",
+    "evidence": [
+      "game/tests/directional_test.gd"
+    ],
+    "nextCommand": "npm run game -- task CORE-02"
+  },
+  {
+    "id": "CORE-03",
+    "status": "done",
+    "action": "Поворот, первый удар по зоне, дружественный огонь, ответ только выживших",
+    "dependsOn": [],
+    "manual": false,
+    "generatedFrom": ".gameprod/workplan.json",
+    "evidence": [
+      "game/tests/directional_test.gd"
+    ],
+    "nextCommand": "npm run game -- task CORE-03"
+  },
+  {
+    "id": "CORE-04",
+    "status": "done",
+    "action": "30 карт и 10 стихий; полная мультивселенная и свободное смешивание",
+    "dependsOn": [],
+    "manual": false,
+    "generatedFrom": ".gameprod/workplan.json",
+    "evidence": [
+      "docs/production/evidence/balance-release-completed.json"
+    ],
+    "nextCommand": "npm run game -- task CORE-04"
+  },
+  {
+    "id": "CORE-05",
+    "status": "done",
+    "action": "Таймер в фоне, два пропуска и ограничение затянутой сессии",
+    "dependsOn": [],
+    "manual": false,
+    "generatedFrom": ".gameprod/workplan.json",
+    "evidence": [
+      "game/tests/room_test.gd"
+    ],
+    "nextCommand": "npm run game -- task CORE-05"
+  },
+  {
+    "id": "CORE-06",
+    "status": "done",
+    "action": "Чистое детерминированное ядро и воспроизведение; отдельные журналы",
+    "dependsOn": [],
+    "manual": false,
+    "generatedFrom": ".gameprod/workplan.json",
+    "evidence": [
+      "game/tests/core_test.gd"
+    ],
+    "nextCommand": "npm run game -- task CORE-06"
+  },
+  {
+    "id": "CORE-07",
+    "status": "done",
+    "action": "Стихийные клетки, +1 HP, открытие центра и доход по порогам 4/6",
+    "dependsOn": [],
+    "manual": false,
+    "generatedFrom": ".gameprod/workplan.json",
+    "evidence": [
+      "game/tests/terrain_test.gd"
+    ],
+    "nextCommand": "npm run game -- task CORE-07"
+  },
+  {
+    "id": "UX-01",
+    "status": "done",
+    "action": "Android портретный, Web альбомный; один палец/мышь, RU/EN",
+    "dependsOn": [],
+    "manual": false,
+    "generatedFrom": ".gameprod/workplan.json",
+    "evidence": [
+      "game/tests/ui_test.gd"
+    ],
+    "nextCommand": "npm run game -- task UX-01"
+  },
+  {
+    "id": "UX-02",
+    "status": "done",
+    "action": "Подсветки, сообщения ошибок, урон и объяснение результата",
+    "dependsOn": [],
+    "manual": false,
+    "generatedFrom": ".gameprod/workplan.json",
+    "evidence": [
+      "game/src/main.gd"
+    ],
+    "nextCommand": "npm run game -- task UX-02"
+  },
+  {
+    "id": "UX-03",
+    "status": "done",
+    "action": "Громкость по категориям и музыка",
+    "dependsOn": [],
+    "manual": false,
+    "generatedFrom": ".gameprod/workplan.json",
+    "evidence": [
+      "docs/production/evidence/tutorial-audio-release-82.json"
+    ],
+    "nextCommand": "npm run game -- task UX-03"
+  },
+  {
+    "id": "UX-04",
+    "status": "done",
+    "action": "Безопасный тренировочный бой без длинного обучения",
+    "dependsOn": [],
+    "manual": false,
+    "generatedFrom": ".gameprod/workplan.json",
+    "evidence": [
+      "docs/production/evidence/tutorial-audio-release-82.json"
+    ],
+    "nextCommand": "npm run game -- task UX-04"
+  },
+  {
+    "id": "META-05",
+    "status": "done",
+    "action": "Полный профиль, транзакции сохранения и миграции без потери коллекции",
+    "dependsOn": [
+      "CORE-06"
+    ],
+    "manual": false,
+    "generatedFrom": ".gameprod/workplan.json",
+    "evidence": [
+      "docs/production/PROFILE_STORAGE.ru.md",
+      "game/tests/profile_store_test.gd",
+      "game/tests/profile_ui_test.gd"
+    ],
+    "nextCommand": "npm run game -- task META-05"
+  },
+  {
+    "id": "META-01",
+    "status": "done",
+    "action": "Коллекция, экземпляры, конструктор и выбор собственной колоды",
+    "dependsOn": [
+      "META-05"
+    ],
+    "manual": false,
+    "generatedFrom": ".gameprod/workplan.json",
+    "evidence": [
+      "game/tests/collection_test.gd",
+      "game/tests/collection_ui_test.gd",
+      "game/tests/network_decks_test.gd",
+      "docs/production/NETWORK_DECKS.ru.md",
+      "docs/production/COLLECTION_DEVICE_TEST.ru.md"
+    ],
+    "nextCommand": "npm run game -- task META-01"
+  },
+  {
+    "id": "CONTENT-03",
+    "status": "pending",
+    "action": "Фабрика карточного контента: данные → схема → семантика → симуляция → каталог",
+    "dependsOn": [
+      "CORE-06",
+      "META-01"
+    ],
+    "manual": false,
+    "generatedFrom": ".gameprod/workplan.json",
+    "evidence": [],
+    "nextCommand": "npm run game -- task CONTENT-03"
+  },
+  {
+    "id": "META-02",
+    "status": "done",
+    "action": "Магазин и паки по пять карт за отдельную валюту лобби",
+    "dependsOn": [
+      "META-05",
+      "META-01"
+    ],
+    "manual": false,
+    "generatedFrom": ".gameprod/workplan.json",
+    "evidence": [
+      "docs/production/evidence/shop-completed-20260926.json",
+      "game/tests/economy_test.gd",
+      "game/tests/shop_ui_test.gd"
+    ],
+    "nextCommand": "npm run game -- task META-02"
+  },
+  {
+    "id": "META-03",
+    "status": "done",
+    "action": "Пыль, дубликаты и целевой крафт карт",
+    "dependsOn": [
+      "META-02"
+    ],
+    "manual": false,
+    "generatedFrom": ".gameprod/workplan.json",
+    "evidence": [
+      "docs/production/CARD_CRAFTING.ru.md",
+      "docs/production/MODAL_TOUCH_TESTS.ru.md",
+      "game/tests/crafting_test.gd",
+      "game/tests/crafting_ui_test.gd"
+    ],
+    "nextCommand": "npm run game -- task META-03"
+  },
+  {
+    "id": "META-04",
+    "status": "done",
+    "action": "Награды, ежедневные задания и уровни без обязательного гринда",
+    "dependsOn": [
+      "META-02",
+      "META-03"
+    ],
+    "manual": false,
+    "generatedFrom": ".gameprod/workplan.json",
+    "evidence": [
+      "docs/production/REWARDS_PROGRESS.ru.md",
+      "docs/production/evidence/rewards-acquisition-20260926.json",
+      "docs/production/evidence/rewards-completed-20260926.json"
+    ],
+    "nextCommand": "npm run game -- task META-04"
+  },
+  {
+    "id": "UX-05",
+    "status": "pending",
+    "action": "Шесть полноценных экранов и пользовательский сквозной сценарий",
+    "dependsOn": [
+      "META-04"
+    ],
+    "manual": false,
+    "generatedFrom": ".gameprod/workplan.json",
+    "evidence": [],
+    "nextCommand": "npm run game -- task UX-05"
+  },
+  {
+    "id": "BALANCE-01",
+    "status": "pending",
+    "action": "Преимущество первого хода, длительность и разнообразие колод",
+    "dependsOn": [
+      "CORE-07",
+      "CONTENT-03"
+    ],
+    "manual": false,
+    "generatedFrom": ".gameprod/workplan.json",
+    "evidence": [],
+    "nextCommand": "npm run game -- task BALANCE-01"
+  },
+  {
+    "id": "CONTENT-01",
+    "status": "pending",
+    "action": "Решение по ранее отложенной особой системе взаимодействий",
+    "dependsOn": [],
+    "manual": true,
+    "generatedFrom": ".gameprod/workplan.json",
+    "evidence": [],
+    "nextCommand": "npm run game -- task CONTENT-01"
+  },
+  {
+    "id": "CONTENT-04",
+    "status": "pending",
+    "action": "Реализация и эксперименты принятой особой системы",
+    "dependsOn": [
+      "CONTENT-01",
+      "CONTENT-03"
+    ],
+    "manual": false,
+    "generatedFrom": ".gameprod/workplan.json",
+    "evidence": [],
+    "nextCommand": "npm run game -- task CONTENT-04"
+  },
+  {
+    "id": "CONTENT-02",
+    "status": "pending",
+    "action": "Два дополнительных боевых ресурса",
+    "dependsOn": [
+      "CONTENT-03",
+      "CONTENT-01"
+    ],
+    "manual": false,
+    "generatedFrom": ".gameprod/workplan.json",
+    "evidence": [],
+    "nextCommand": "npm run game -- task CONTENT-02"
+  },
+  {
+    "id": "NET-01",
+    "status": "done",
+    "action": "LAN-комната и настоящая локальная партия",
+    "dependsOn": [],
+    "manual": false,
+    "generatedFrom": ".gameprod/workplan.json",
+    "evidence": [
+      "docs/production/evidence/lan-release-completed.json"
+    ],
+    "nextCommand": "npm run game -- task NET-01"
+  },
+  {
+    "id": "NET-02",
+    "status": "done",
+    "action": "Хост-авторитет, приватные проекции, совместимость и повторные команды",
+    "dependsOn": [],
+    "manual": false,
+    "generatedFrom": ".gameprod/workplan.json",
+    "evidence": [
+      "game/tests/room_test.gd"
+    ],
+    "nextCommand": "npm run game -- task NET-02"
+  },
+  {
+    "id": "NET-03",
+    "status": "done",
+    "action": "Bluetooth RFCOMM лаборатория без Wi-Fi",
+    "dependsOn": [],
+    "manual": false,
+    "generatedFrom": ".gameprod/workplan.json",
+    "evidence": [
+      "docs/production/evidence/production-v2-transports.json"
+    ],
+    "nextCommand": "npm run game -- task NET-03"
+  },
+  {
+    "id": "NET-04",
+    "status": "pending",
+    "action": "Пользовательский Bluetooth на двух физических Android",
+    "dependsOn": [
+      "NET-03"
+    ],
+    "manual": false,
+    "generatedFrom": ".gameprod/workplan.json",
+    "evidence": [
+      "docs/production/evidence/bluetooth-release-completed.json"
+    ],
+    "nextCommand": "npm run game -- task NET-04"
+  },
+  {
+    "id": "BETA-01",
+    "status": "pending",
+    "action": "Ручная оценка интереса, темпа и читаемости конкретной версии",
+    "dependsOn": [
+      "UX-05",
+      "BALANCE-01"
+    ],
+    "manual": true,
+    "generatedFrom": ".gameprod/workplan.json",
+    "evidence": [],
+    "nextCommand": "npm run game -- task BETA-01"
+  },
+  {
+    "id": "PLATFORM-01",
+    "status": "pending",
+    "action": "Рабочая Web-сборка и альбомный интерфейс",
+    "dependsOn": [
+      "UX-05"
+    ],
+    "manual": false,
+    "generatedFrom": ".gameprod/workplan.json",
+    "evidence": [],
+    "nextCommand": "npm run game -- task PLATFORM-01"
+  },
+  {
+    "id": "NET-06",
+    "status": "pending",
+    "action": "Онлайн-служба с тем же авторитетным ядром",
+    "dependsOn": [
+      "NET-02"
+    ],
+    "manual": false,
+    "generatedFrom": ".gameprod/workplan.json",
+    "evidence": [],
+    "nextCommand": "npm run game -- task NET-06"
+  },
+  {
+    "id": "NET-07",
+    "status": "pending",
+    "action": "Аккаунт, синхронизация профиля и удаление данных",
+    "dependsOn": [
+      "META-05",
+      "NET-06"
+    ],
+    "manual": false,
+    "generatedFrom": ".gameprod/workplan.json",
+    "evidence": [],
+    "nextCommand": "npm run game -- task NET-07"
+  },
+  {
+    "id": "RATING-01",
+    "status": "pending",
+    "action": "Окончательный смысл рейтинга без потери очков",
+    "dependsOn": [],
+    "manual": true,
+    "generatedFrom": ".gameprod/workplan.json",
+    "evidence": [],
+    "nextCommand": "npm run game -- task RATING-01"
+  },
+  {
+    "id": "NET-05",
+    "status": "pending",
+    "action": "Рейтинг, подбор и серверная экономика",
+    "dependsOn": [
+      "NET-07",
+      "RATING-01",
+      "META-04"
+    ],
+    "manual": false,
+    "generatedFrom": ".gameprod/workplan.json",
+    "evidence": [],
+    "nextCommand": "npm run game -- task NET-05"
+  },
+  {
+    "id": "STORE-01",
+    "status": "pending",
+    "action": "Play Console: владелец, тип аккаунта, верификация и бюджет",
+    "dependsOn": [],
+    "manual": true,
+    "generatedFrom": ".gameprod/workplan.json",
+    "evidence": [],
+    "nextCommand": "npm run game -- task STORE-01"
+  },
+  {
+    "id": "STORE-02",
+    "status": "pending",
+    "action": "Создать приложение в Play Console и настроить ограниченный доступ публикации",
+    "dependsOn": [
+      "STORE-01"
+    ],
+    "manual": true,
+    "generatedFrom": ".gameprod/workplan.json",
+    "evidence": [],
+    "nextCommand": "npm run game -- task STORE-02"
+  },
+  {
+    "id": "RELEASE-02",
+    "status": "pending",
+    "action": "Production upload key и сохранный переход dev → production",
+    "dependsOn": [
+      "META-05"
+    ],
+    "manual": false,
+    "generatedFrom": ".gameprod/workplan.json",
+    "evidence": [],
+    "nextCommand": "npm run game -- task RELEASE-02"
+  },
+  {
+    "id": "RELEASE-03",
+    "status": "pending",
+    "action": "Production AAB: target API36+, 64-bit и проверка 16KB",
+    "dependsOn": [
+      "RELEASE-02"
+    ],
+    "manual": false,
+    "generatedFrom": ".gameprod/workplan.json",
+    "evidence": [],
+    "nextCommand": "npm run game -- task RELEASE-03"
+  },
+  {
+    "id": "STORE-03",
+    "status": "pending",
+    "action": "Инвентаризация данных, разрешений, SDK и лицензий",
+    "dependsOn": [
+      "NET-07",
+      "CONTENT-03"
+    ],
+    "manual": false,
+    "generatedFrom": ".gameprod/workplan.json",
+    "evidence": [],
+    "nextCommand": "npm run game -- task STORE-03"
+  },
+  {
+    "id": "STORE-04",
+    "status": "pending",
+    "action": "Подтверждение аудитории и правовых деклараций",
+    "dependsOn": [
+      "STORE-03"
+    ],
+    "manual": true,
+    "generatedFrom": ".gameprod/workplan.json",
+    "evidence": [],
+    "nextCommand": "npm run game -- task STORE-04"
+  },
+  {
+    "id": "STORE-05",
+    "status": "pending",
+    "action": "Карточка магазина RU/EN и подготовленные материалы",
+    "dependsOn": [
+      "UX-05"
+    ],
+    "manual": false,
+    "generatedFrom": ".gameprod/workplan.json",
+    "evidence": [],
+    "nextCommand": "npm run game -- task STORE-05"
+  },
+  {
+    "id": "RELEASE-04",
+    "status": "pending",
+    "action": "Защищённый публикационный адаптер Play и цепочка отслеживания",
+    "dependsOn": [
+      "RELEASE-03",
+      "STORE-02",
+      "AUTO-07"
+    ],
+    "manual": false,
+    "generatedFrom": ".gameprod/workplan.json",
+    "evidence": [],
+    "nextCommand": "npm run game -- task RELEASE-04"
+  },
+  {
+    "id": "QA-01",
+    "status": "pending",
+    "action": "Свежая полная матрица итогового RC",
+    "dependsOn": [
+      "BALANCE-01",
+      "NET-04",
+      "PLATFORM-01",
+      "NET-05",
+      "CONTENT-04",
+      "CONTENT-02",
+      "RELEASE-03",
+      "STORE-05"
+    ],
+    "manual": false,
+    "generatedFrom": ".gameprod/workplan.json",
+    "evidence": [],
+    "nextCommand": "npm run game -- task QA-01"
+  },
+  {
+    "id": "PLAY-01",
+    "status": "pending",
+    "action": "Internal testing и установка именно магазинной сборки",
+    "dependsOn": [
+      "RELEASE-04",
+      "STORE-04",
+      "QA-01"
+    ],
+    "manual": false,
+    "generatedFrom": ".gameprod/workplan.json",
+    "evidence": [],
+    "nextCommand": "npm run game -- task PLAY-01"
+  },
+  {
+    "id": "PLAY-02",
+    "status": "pending",
+    "action": "Реальный closed test и доступ к production по требованиям аккаунта",
+    "dependsOn": [
+      "PLAY-01"
+    ],
+    "manual": true,
+    "generatedFrom": ".gameprod/workplan.json",
+    "evidence": [],
+    "nextCommand": "npm run game -- task PLAY-02"
+  },
+  {
+    "id": "RELEASE-01",
+    "status": "pending",
+    "action": "Отдельное разрешение владельца на main и публичный stable/Play",
+    "dependsOn": [
+      "QA-01",
+      "PLAY-02",
+      "BETA-01"
+    ],
+    "manual": true,
+    "generatedFrom": ".gameprod/workplan.json",
+    "evidence": [],
+    "nextCommand": "npm run game -- task RELEASE-01"
+  },
+  {
+    "id": "PLAY-03",
+    "status": "pending",
+    "action": "Production rollout, наблюдение ревью и доступности",
+    "dependsOn": [
+      "RELEASE-01",
+      "RELEASE-04"
+    ],
+    "manual": false,
+    "generatedFrom": ".gameprod/workplan.json",
+    "evidence": [],
+    "nextCommand": "npm run game -- task PLAY-03"
+  },
+  {
+    "id": "OPS-01",
+    "status": "pending",
+    "action": "Диагностика, остановка rollout и безопасный hotfix",
+    "dependsOn": [
+      "RELEASE-04"
+    ],
+    "manual": false,
+    "generatedFrom": ".gameprod/workplan.json",
+    "evidence": [],
+    "nextCommand": "npm run game -- task OPS-01"
+  },
+  {
+    "id": "OPS-02",
+    "status": "pending",
+    "action": "Закрытие цепочек, документация, отчёт и передача без потери контекста",
+    "dependsOn": [
+      "PLAY-03",
+      "OPS-01"
+    ],
+    "manual": false,
+    "generatedFrom": ".gameprod/workplan.json",
+    "evidence": [],
+    "nextCommand": "npm run game -- task OPS-02"
+  },
+  {
+    "id": "FUTURE-01",
+    "status": "pending",
+    "action": "Полное 3D-представление поверх неизменного ядра",
+    "dependsOn": [],
+    "manual": true,
+    "generatedFrom": ".gameprod/workplan.json",
+    "evidence": [],
+    "nextCommand": "npm run game -- task FUTURE-01"
+  },
+  {
+    "id": "AUTO-09",
+    "status": "done",
+    "action": "Параллельные чаты: атомарное владение задачами и ресурсами в GitHub",
+    "dependsOn": [
+      "AUTH-01"
+    ],
+    "manual": false,
+    "generatedFrom": ".gameprod/workplan.json",
+    "evidence": [
+      "docs/production/evidence/parallel-slices-20260926.json",
+      "skills/game-production/tests/collaboration.test.mjs",
+      "skills/game-production/tests/collaboration-integration.test.mjs"
+    ],
+    "nextCommand": "npm run game -- task AUTO-09"
+  },
+  {
+    "id": "AUTO-10",
+    "status": "done",
+    "action": "Изолированные рабочие срезы и воспроизводимый вход нового чата",
+    "dependsOn": [
+      "AUTO-09"
+    ],
+    "manual": false,
+    "generatedFrom": ".gameprod/workplan.json",
+    "evidence": [
+      "docs/production/evidence/parallel-slices-20260926.json",
+      "tools/godot-preflight.mjs",
+      "skills/game-production/tests/godot-preflight.test.mjs"
+    ],
+    "nextCommand": "npm run game -- task AUTO-10"
+  },
+  {
+    "id": "QA-02",
+    "status": "pending",
+    "action": "Два физических телефона: регистрация, общая подпись и раздельные очереди тестов",
+    "dependsOn": [
+      "AUTO-09"
+    ],
+    "manual": false,
+    "generatedFrom": ".gameprod/workplan.json",
+    "evidence": [],
+    "nextCommand": "npm run game -- task QA-02"
+  },
+  {
+    "id": "UX-06",
+    "status": "done",
+    "action": "Исследование эргономики поля 3×3, карточек, кнопок и доступности",
+    "dependsOn": [
+      "UX-01"
+    ],
+    "manual": false,
+    "generatedFrom": ".gameprod/workplan.json",
+    "evidence": [
+      "docs/production/UX_AUDIT.ru.md",
+      "tools/ux-audit.mjs",
+      "game/tests/ux_audit.gd",
+      "skills/game-production/tests/ux-metrics.test.mjs"
+    ],
+    "nextCommand": "npm run game -- task UX-06"
+  },
+  {
+    "id": "UX-07",
+    "status": "done",
+    "action": "Полировка интерфейса: единые состояния, подробности карты, читаемость и фокус",
+    "dependsOn": [
+      "UX-06",
+      "META-01"
+    ],
+    "manual": false,
+    "generatedFrom": ".gameprod/workplan.json",
+    "evidence": [
+      "docs/production/UI_PLAYABILITY.ru.md",
+      "docs/production/evidence/ui-playability-observed-20260926.json",
+      "docs/production/evidence/ui-continuation-provenance-20260926.json",
+      "docs/SCREENSHOTS.ru.md",
+      "docs/media/gallery/current.json",
+      "docs/production/evidence/ui-playability-completed-20260926.json"
+    ],
+    "nextCommand": "npm run game -- task UX-07"
+  },
+  {
+    "id": "AUTO-11",
+    "status": "pending",
+    "action": "Проверяемое освобождение завершённых срезов без захвата живой работы",
+    "dependsOn": [
+      "AUTO-06"
+    ],
+    "manual": false,
+    "generatedFrom": ".gameprod/workplan.json",
+    "evidence": [],
+    "nextCommand": "npm run game -- task AUTO-11"
+  },
+  {
+    "id": "UX-08",
+    "status": "pending",
+    "action": "Частые действия: быстрый старт выбранной колодой и понятный путь к локальной дуэли",
+    "dependsOn": [
+      "UX-07"
+    ],
+    "manual": false,
+    "generatedFrom": ".gameprod/workplan.json",
+    "evidence": [],
+    "nextCommand": "npm run game -- task UX-08"
+  },
+  {
+    "id": "UX-09",
+    "status": "done",
+    "action": "Воспроизводимая галерея актуальных экранов для дизайна и GitHub",
+    "dependsOn": [
+      "AUTO-05"
+    ],
+    "manual": false,
+    "generatedFrom": ".gameprod/workplan.json",
+    "evidence": [
+      "docs/production/GALLERY_CAPTURE.ru.md",
+      "docs/SCREENSHOTS.ru.md",
+      "docs/media/gallery/current.json",
+      "docs/production/evidence/gallery-research-observed-20260926.json",
+      "docs/production/evidence/gallery-completed-20260926.json"
+    ],
+    "nextCommand": "npm run game -- task UX-09"
+  },
+  {
+    "id": "UX-10",
+    "status": "pending",
+    "action": "Иллюстрированная внутриигровая справка и последовательное обучение",
+    "dependsOn": [
+      "UX-08",
+      "UX-09"
+    ],
+    "manual": false,
+    "generatedFrom": ".gameprod/workplan.json",
+    "evidence": [],
+    "nextCommand": "npm run game -- task UX-10"
+  },
+  {
+    "id": "QA-03",
+    "status": "pending",
+    "action": "Ярлык dev-приложения на домашнем экране после установки",
+    "dependsOn": [
+      "QA-02"
+    ],
+    "manual": false,
+    "generatedFrom": ".gameprod/workplan.json",
+    "evidence": [],
+    "nextCommand": "npm run game -- task QA-03"
+  },
+  {
+    "id": "UX-11",
+    "status": "pending",
+    "action": "Тактическое управление: разделить выбор, осмотр и подтверждённую атаку; сделать карты читаемыми",
+    "dependsOn": [
+      "UX-07"
+    ],
+    "manual": false,
+    "generatedFrom": ".gameprod/workplan.json",
+    "evidence": [],
+    "nextCommand": "npm run game -- task UX-11"
+  },
+  {
+    "id": "UX-12",
+    "status": "pending",
+    "action": "Навигация коллекции и подготовки матча без списка одинаковых кнопок",
+    "dependsOn": [
+      "UX-11"
+    ],
+    "manual": false,
+    "generatedFrom": ".gameprod/workplan.json",
+    "evidence": [],
+    "nextCommand": "npm run game -- task UX-12"
+  },
+  {
+    "id": "UX-13",
+    "status": "pending",
+    "action": "Пакет визуальных ассетов: происхождение, вариативность, импорт и проверка в реальном интерфейсе",
+    "dependsOn": [
+      "UX-11"
+    ],
+    "manual": false,
+    "generatedFrom": ".gameprod/workplan.json",
+    "evidence": [],
+    "nextCommand": "npm run game -- task UX-13"
+  }
+]

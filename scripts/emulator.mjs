@@ -1,0 +1,122 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import { spawn, spawnSync } from 'node:child_process';
+import { readJSON, writeJSON, context } from '../skills/game-production/scripts/lib.mjs';
+const root = process.cwd(),
+  p = readJSON('.gameprod/project.json');
+context(root, p);
+const work = path.dirname(root),
+  sdk = path.join(work, 'tools/android-sdk'),
+  adb = path.join(work, 'tools/platform-tools/adb.exe'),
+  exe = path.join(sdk, 'emulator/emulator.exe');
+const [mode = 'status', slot = 'A'] = process.argv.slice(2);
+if (!['A', 'B'].includes(slot) || !['status', 'start', 'stop', 'clean'].includes(mode))
+  throw Error('Usage: emulator.mjs start|stop|status|clean A|B');
+const port = slot === 'A' ? 5554 : 5556,
+  serial = 'emulator-' + port,
+  name = 'Multimental_Test_' + slot;
+const env = {
+  ...process.env,
+  ANDROID_HOME: sdk,
+  ANDROID_SDK_ROOT: sdk,
+  ANDROID_USER_HOME: path.join(work, 'emulation/android-user'),
+  ANDROID_EMULATOR_HOME: path.join(work, 'emulation/android-user'),
+  ANDROID_AVD_HOME: path.join(work, 'emulation/avd')
+};
+function call(args, optional = false) {
+  const r = spawnSync(adb, ['-s', serial, ...args], { encoding: 'utf8', timeout: 8000, env });
+  if (!optional && (r.error || r.status !== 0)) throw Error('Dedicated emulator ADB failed');
+  return (r.stdout || '').trim();
+}
+function ours() {
+  if (
+    !call(['emu', 'avd', 'name'])
+      .split(/\r?\n/)
+      .some((x) => x.trim() === name) ||
+    call(['shell', 'getprop', 'ro.kernel.qemu']) !== '1'
+  )
+    throw Error('Serial is not the assigned AVD');
+}
+const report = { observedAt: new Date().toISOString(), slot, name, mode, status: 'running' };
+try {
+  if (mode === 'status') {
+    report.booted = call(['shell', 'getprop', 'sys.boot_completed'], true) === '1';
+    if (report.booted) ours();
+    report.status = 'passed';
+  } else if (mode === 'stop') {
+    ours();
+    call(['emu', 'kill']);
+    report.status = 'passed';
+  } else if (mode === 'clean') {
+    ours();
+    const r = spawnSync(adb, ['-s', serial, 'uninstall', p.developmentPackage], {
+      encoding: 'utf8',
+      timeout: 60000
+    });
+    if (r.status !== 0 && !String(r.stdout).includes('not installed'))
+      throw Error('Clean uninstall not confirmed');
+    report.status = 'passed';
+  } else {
+    if (!fs.existsSync(exe)) throw Error('Run bootstrap-emulator.ps1 first');
+    if (call(['shell', 'getprop', 'sys.boot_completed'], true) !== '1') {
+      const visible =
+        spawnSync(adb, ['devices'], { encoding: 'utf8', timeout: 10000 }).stdout || '';
+      if (!visible.split(/\r?\n/).some((x) => x.startsWith(serial + '\t'))) {
+        const logdir = path.join(work, 'emulation');
+        fs.mkdirSync(logdir, { recursive: true });
+        const out = fs.openSync(path.join(logdir, slot + '-out.log'), 'a'),
+          err = fs.openSync(path.join(logdir, slot + '-err.log'), 'a');
+        const child = spawn(
+          exe,
+          [
+            '-avd',
+            name,
+            '-port',
+            String(port),
+            '-no-snapshot',
+            '-no-boot-anim',
+            '-no-audio',
+            '-no-window',
+            '-gpu',
+            'host',
+            '-memory',
+            '2048',
+            '-cores',
+            '2'
+          ],
+          { cwd: work, env, detached: true, stdio: ['ignore', out, err], windowsHide: true }
+        );
+        await new Promise((res, rej) => {
+          child.once('spawn', res);
+          child.once('error', rej);
+        });
+        child.unref();
+        fs.closeSync(out);
+        fs.closeSync(err);
+        report.startedPid = child.pid;
+      }
+    }
+    const end = Date.now() + 240000;
+    while (Date.now() < end && call(['shell', 'getprop', 'sys.boot_completed'], true) !== '1')
+      await new Promise((r) => setTimeout(r, 2000));
+    if (call(['shell', 'getprop', 'sys.boot_completed'], true) !== '1') throw Error('Boot timeout');
+    ours();
+    const previous = call(['shell', 'settings', 'get', 'secure', 'immersive_mode_confirmations']);
+    call(['shell', 'settings', 'put', 'secure', 'immersive_mode_confirmations', 'confirmed']);
+    call(['shell', 'input', 'keyevent', 'KEYCODE_HOME']);
+    call(['shell', 'input', 'keyevent', '82']);
+    report.baseline = {
+      immersiveHelpAcknowledged: true,
+      previousValue: previous,
+      scope: 'dedicated_AVD_only'
+    };
+    report.status = 'passed';
+  }
+} catch (e) {
+  report.status = 'failed';
+  report.error = e.message;
+  process.exitCode = 1;
+} finally {
+  writeJSON('.gameprod/evidence/emulator-' + slot + '-' + mode + '.json', report);
+  console.log(JSON.stringify(report, null, 2));
+}
