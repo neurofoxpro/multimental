@@ -174,3 +174,27 @@ test('README preview changes only its managed block and is idempotent', () => {
   assert.throws(() => replaceReadmeGallery('no markers', block));
   assert.throws(() => replaceReadmeGallery('\u0007' + before, block));
 });
+
+test('CI version stamp is not a visual-source change; layout configuration still is', () => {
+  const a =
+    '[application]\nconfig/name="Multimental"\nconfig/version="0.12.1-alpha.1"\n[display]\nwindow/size/viewport_width=720\n';
+  const b = a.replace('0.12.1-alpha.1', '0.12.1-alpha.225.1');
+  assert.equal(
+    digest(canonical(Buffer.from(a), 'game/project.godot')),
+    digest(canonical(Buffer.from(b), 'game/project.godot'))
+  );
+  assert.notEqual(
+    digest(canonical(Buffer.from(a), 'game/project.godot')),
+    digest(canonical(Buffer.from(b.replace('720', '640')), 'game/project.godot'))
+  );
+  assert.notEqual(
+    digest(canonical(Buffer.from(a), 'other/project.godot')),
+    digest(canonical(Buffer.from(b), 'other/project.godot'))
+  );
+  assert.throws(() =>
+    canonical(Buffer.from(a.replace('config/version=', 'other/version=')), 'game/project.godot')
+  );
+  assert.throws(() =>
+    canonical(Buffer.from(a + 'config/version="duplicate"\n'), 'game/project.godot')
+  );
+});

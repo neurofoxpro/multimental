@@ -27,9 +27,15 @@ export function digest(bytes) {
   return createHash('sha256').update(bytes).digest('hex');
 }
 export function canonical(bytes, file) {
-  return /\.(?:gd|mjs|json|godot|tscn|svg|cfg)$/.test(file)
-    ? Buffer.from(bytes.toString('utf8').replace(/\r\n/g, '\n'))
-    : bytes;
+  if (!/\.(?:gd|mjs|json|godot|tscn|svg|cfg)$/.test(file)) return bytes;
+  let text = bytes.toString('utf8').replace(/\r\n/g, '\n');
+  if (file === 'game/project.godot') {
+    const version = /^config\/version="[A-Za-z0-9._+-]+"$/gm;
+    if ([...text.matchAll(version)].length !== 1)
+      throw Error('One explicit project build stamp required');
+    text = text.replace(version, 'config/version="<recorded-build-stamp>"');
+  }
+  return Buffer.from(text);
 }
 export function sourceInputs(root) {
   const rows = [];
