@@ -152,6 +152,24 @@ export function safeRelative(ref) {
 
 export function ideaIsClosed(idea, plan) {
   if (!ID.test(idea?.id || '')) throw Error('Invalid idea ID');
+  if (idea.type === 'task_enrollment') {
+    if (
+      idea.schemaVersion !== 1 ||
+      !Array.isArray(idea.tasks) ||
+      !idea.tasks.length ||
+      idea.tasks.length > 20 ||
+      new Set(idea.tasks.map((t) => t?.id)).size !== idea.tasks.length
+    )
+      throw Error('Invalid enrollment idea');
+    return idea.tasks
+      .map((item) => {
+        if (!ID.test(item?.id || '')) throw Error('Invalid enrolled task ID');
+        const task = plan.tasks.find((t) => t.id === item.id);
+        if (!task) throw Error('Enrollment references missing task');
+        return task.status === 'verified' || (!task.requiredForPlay && !!task.disposition);
+      })
+      .every(Boolean);
+  }
   if (idea.taskId) {
     const task = plan.tasks.find((item) => item.id === idea.taskId);
     if (!task) throw Error('Idea references missing task');
@@ -439,6 +457,14 @@ export async function main(argv = process.argv.slice(2)) {
   const root = findRoot();
   const [entry, ...entryArgs] = argv;
   await (await import('./collaboration-guard.mjs')).guardWorktree(root, entry, entryArgs);
+  if (entry === 'study') {
+    await (await import('../../../tools/study.mjs')).main(entryArgs);
+    return;
+  }
+  if (entry === 'work') {
+    await (await import('./dispatch.mjs')).main(entryArgs);
+    return;
+  }
   if (['focus', 'ship', 'accept'].includes(entry)) {
     await (await import('./short-workflow.mjs')).main([entry, ...entryArgs]);
     return;

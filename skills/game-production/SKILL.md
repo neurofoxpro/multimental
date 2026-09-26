@@ -3,7 +3,7 @@ name: game-production
 description: Strict task-focused development with compact live context, guarded edits and one resumable verified dev-release command.
 ---
 
-# Game Production v7
+# Game Production v8
 
 ## Permanent boundaries
 Only neurofoxpro/multimental; personal execution only VENEL-SENDRIK. Hosted CI and internal source-only checks are allowed. Verify hostname/origin. Never use another host/repository, mirror projects, force-push, delete phone data or rotate its persistent dev key. Dev integration after checks is delegated; main/stable/Play and accepted-concept changes require owner approval. Respect actual tool refusals, without alternate-path bypasses.
@@ -37,6 +37,13 @@ The owner authorized the second phone; two physical authorized Android were obse
 
 Closed Issue, historical verified, CI, release, installation and human acceptance are different facts. Report exact PR/head/merge, actual checks, installation result and first unmet task. Never declare future/missing software complete.
 
+## Queue and research loop
+
+Use `work plan --tag beta` for a compact live priority/resource graph. From a released/free slice use `work next UNIQUE_ALIAS --tag kind:automation` (or another literal tag), then change to the returned directory. It reuses the existing CAS claim/worktree route. Multiple tags are AND filters; expired claims and human gates are not available. A checkpoint preserves an interrupted selection. No independent LLM is spawned by creating a worktree.
+
+`work enroll .gameprod/ideas/PROPOSAL.json` groups guarded task enrollment and idempotent Issue creation. Define only concrete observed gaps with sources, scope, dependencies and measurable criteria; do not pre-verify or overwrite existing Issue authority. Existing dev-push projection synchronizes gp labels/dependencies. Review priorities rather than inventing automatic product decisions.
+
+Research: `study packet TASK` → `study run TASK` → agent analysis → `study record TASK RESULT.json`. Definitions live in .gameprod/studies; capture checks official origins/redirects/size/time, source checks run reviewed argv without shell, checkpoints retain the first unmet stage and exact inputs. Downloaded sources are not reviewed claims; UI measurements are not accessibility certification. Full verify runs study check. See docs/production/WORK_QUEUE_RESEARCH.ru.md. After implementation use ship, committed proof/accept, record and collab release before the next task. Do not change source while study or ship holds it.
 ## Relevant detail only
 Full prior skill is preserved in REFERENCE.md as historical/detailed context; v7 controls routing. Read only applicable contracts under docs/production: SHORT_COMMANDS.ru.md and DEV_SETTLE.ru.md for workflow; PROFILE_STORAGE/COLLECTION_EDITOR/NETWORK_DECKS/REWARDS_PROGRESS for profile/economy; PARALLEL_CHATS/SLICE_REFRESH/ISSUE_PLAN_SYNC for coordination; UX_AUDIT/MODAL_TOUCH_TESTS for UI; DEVICE_SUITES/DEVICE_RECOVERY/SECOND_PHONE/USB_PHONE_DIAGNOSTICS for devices.
 
