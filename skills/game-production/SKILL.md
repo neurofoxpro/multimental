@@ -98,3 +98,9 @@ Restore the normal application after radio labs and record the observed installa
 When delivery reports busy beyond its time limit, run `device-recover plan`, not rm/kill. `device-recover apply` only archives allowlisted locks whose owner is independently absent (ESRCH from signal 0); alive/unknown/reused PIDs and changed bytes are preserved. The process uses bounded JSON, archives and ownership guards. It never deletes phone data, changes signing keys or kills a process. Read docs/production/DEVICE_RECOVERY.ru.md.
 
 Then run delivery and read actual device-status before selecting tests. Recovered coordination is not installed software. If another real operation is active, wait for it; do not make recovery succeed by changing its checks. A partial recovery journal is evidence for the next attempt, not permission to overwrite new locks.
+
+## Second-phone boundary
+
+The owner explicitly authorized the second attached Android on 26 September 2026. Observe it first with the reviewed read-only adapter `node skills/game-production/scripts/phone-fleet.mjs probe`; serials remain local. Never infer ADB authorization from a cable or substitute an emulator/wireless serial. At the first observation only the primary physical phone was visible.
+
+Secondary registration/shared-signing activation was stopped by the tool and is not deployed. The adapter now rejects every mode except probe before doing any work. Do not run its archived draft or issue raw installs to route around that refusal. No secondary configuration, key, receipt or installation has been created. Recheck live availability; proceed with independent primary-phone tests and source tasks. See docs/production/SECOND_PHONE.ru.md. The pure future selection/signing policy is not an operative installer.
