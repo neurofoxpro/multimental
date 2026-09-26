@@ -261,14 +261,20 @@
   },
   {
     "id": "META-01",
-    "status": "pending",
+    "status": "done",
     "action": "Коллекция, экземпляры, конструктор и выбор собственной колоды",
     "dependsOn": [
       "META-05"
     ],
     "manual": false,
     "generatedFrom": ".gameprod/workplan.json",
-    "evidence": [],
+    "evidence": [
+      "game/tests/collection_test.gd",
+      "game/tests/collection_ui_test.gd",
+      "game/tests/network_decks_test.gd",
+      "docs/production/NETWORK_DECKS.ru.md",
+      "docs/production/COLLECTION_DEVICE_TEST.ru.md"
+    ],
     "nextCommand": "npm run game -- task META-01"
   },
   {

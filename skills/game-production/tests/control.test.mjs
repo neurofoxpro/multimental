@@ -372,7 +372,14 @@ test('real project plan preserves all original requirement IDs and latest decisi
     assert.ok(p.tasks.some((t) => t.id === id));
   assert.match(p.tasks.find((t) => t.id === 'CORE-04').title, /10 стихий/);
   assert.match(p.tasks.find((t) => t.id === 'CORE-02').title, /D19/);
-  assert.equal(p.tasks.find((t) => t.id === 'META-01').status, 'planned');
-  assert.equal(p.tasks.find((t) => t.id === 'NET-04').status, 'implemented');
+  for (const id of ['META-01', 'NET-04']) {
+    const task = p.tasks.find((t) => t.id === id);
+    assert.ok(['planned', 'implemented', 'verified'].includes(task.status));
+    assert.equal(task.requiredForPlay, true);
+    assert.ok(task.acceptance.length > 0);
+    if (task.status === 'verified') assert.ok(task.evidence.length > 0);
+  }
+  assert.equal(p.tasks.find((t) => t.id === 'META-01').kind, 'game');
+  assert.equal(p.tasks.find((t) => t.id === 'NET-04').kind, 'network');
   assert.equal(p.tasks.find((t) => t.id === 'RELEASE-01').kind, 'release_approval');
 });
