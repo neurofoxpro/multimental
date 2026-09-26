@@ -107,14 +107,17 @@ func _request_pin(activity: Variant) -> void:
     var pm: Variant = _call(activity, "getPackageManager")
     var intent: Variant = _call(pm, "getLaunchIntentForPackage", [Model.PACKAGE])
     _call(intent, "setAction", ["android.intent.action.MAIN"])
-    var app_info: Variant = _call(activity, "getApplicationInfo")
-    if failed or app_info == null:
+    # JavaObject exposes methods, not ApplicationInfo.icon as a GDScript property.
+    var component: Variant = _call(activity, "getComponentName")
+    var activity_info: Variant = _call(pm, "getActivityInfo", [component, 0])
+    var icon_value: Variant = _call(activity_info, "getIconResource")
+    if failed:
         return
-    var icon_id: int = int(app_info.icon)
-    if JavaClassWrapper.get_exception() != null or icon_id == 0:
+    if typeof(icon_value) != TYPE_INT or icon_value <= 0 or icon_value > 2147483647:
         failed = true
         call_deferred("_publish", "failed", "missing_application_icon")
         return
+    var icon_id: int = icon_value
     var icon: Variant = _call(_class("android.graphics.drawable.Icon"), "createWithResource", [activity, icon_id])
     var builder: Variant = _call(_class("android.content.pm.ShortcutInfo$Builder"), "Builder", [activity, Model.ID])
     _call(builder, "setShortLabel", ["Multimental Dev"])

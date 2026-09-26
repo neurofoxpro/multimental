@@ -28,3 +28,9 @@ Model.native_flag принимает только TYPE_BOOL или TYPE_INT со
 Mode, expectedVersion и nonce проверяются как строки до сравнений Variant. Отдельный launcher-request набор содержит 40 проверок, включая 24 подстановки неверного типа. Неверный приватный запрос не должен приводить к ошибке исполнения или Android-вызову.
 
 Первый PR-кандидат был отвергнут CI из-за отсутствия нового русского changelog fragment. Локальная проверка текста changelog и покрытие изменений в CI — разные проверки. Ошибка исправлена новой записью; результат старого CI не подменяется. В последовательностях команд проверять LASTEXITCODE после каждого .cmd, а не полагаться только на PowerShell ErrorActionPreference.
+
+## Второй фактический Android-дефект
+
+После исправления bool версия 0.13.4-alpha.263.1 прошла восемь handoff-этапов, но упала на ApplicationInfo.icon: JavaObject не предоставил его как GDScript property. Настоящий logcat сохранён отдельно. Исправление использует только Android-методы: getComponentName → PackageManager.getActivityInfo → ComponentInfo.getIconResource. ID проверяется как положительный int. Тестовая заглушка больше не возвращает удобный Dictionary с icon, который маскировал несовпадение настоящего интерфейса.
+
+Первичный API-контракт: https://developer.android.com/reference/android/content/pm/ComponentInfo#getIconResource() . Возвращается иконка компонента, а при её отсутствии — приложения. Повторное Android-испытание нового APK обязательно; новый код сам по себе не подтверждает создание значка.
