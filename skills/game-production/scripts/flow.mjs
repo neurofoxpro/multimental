@@ -101,7 +101,14 @@ export async function ensurePull(client, branch) {
 }
 export async function inspect(client, number, expectedHead) {
   const pr = await client.api('GET', '/pulls/' + number);
-  if (pr.head?.sha !== expectedHead || pr.base?.ref !== 'dev') throw Error('PR source moved');
+  if (
+    pr.head?.sha !== expectedHead ||
+    pr.base?.ref !== 'dev' ||
+    pr.head?.repo?.full_name !== REPO ||
+    pr.base?.repo?.full_name !== REPO ||
+    !allowedBranch(pr.head?.ref)
+  )
+    throw Error('PR source moved or outside scope');
   const base = (await client.api('GET', '/git/ref/heads/dev')).object.sha;
   const runs = await client.list('/actions/runs?head_sha=' + expectedHead, 'workflow_runs');
   const build = runs
@@ -130,8 +137,15 @@ export async function settle(client, number, head, { waitSeconds = 480 } = {}) {
   do {
     const { pr, report } = await inspect(client, number, head);
     last = report;
-    if (pr.merged)
-      return { status: 'already_merged', commit: pr.merge_commit_sha, device: 'pending' };
+    if (pr.merged) {
+      if (!SHA.test(pr.merge_commit_sha || '')) throw Error('Merged PR lacks confirmed commit');
+      return {
+        status: 'already_merged',
+        commit: pr.merge_commit_sha,
+        device: 'pending',
+        productionAuthorized: false
+      };
+    }
     if (report.ok) {
       const mark = '<!-- gameprod:auto-review:' + head + ':' + report.base + ' -->';
       const reviews = await client.list('/pulls/' + number + '/reviews');
@@ -144,8 +158,14 @@ export async function settle(client, number, head, { waitSeconds = 480 } = {}) {
             '\nМашинное ревью: автоматические проверки точных head/base прошли. Это не независимое человеческое одобрение. Телефон не блокирует dev; установка и радиоиспытания отдельно. Run: ' +
             report.run
         });
-      const fresh = await client.api('GET', '/pulls/' + number);
-      if (fresh.head.sha !== head || fresh.base.sha !== report.base || fresh.draft)
+      const checked = await inspect(client, number, head);
+      const fresh = checked.pr;
+      if (
+        !checked.report.ok ||
+        fresh.head.sha !== head ||
+        fresh.base.sha !== report.base ||
+        fresh.draft
+      )
         throw Error('Merge race; repeat checks');
       let result;
       try {
@@ -211,7 +231,9 @@ export async function main(argv = process.argv.slice(2)) {
       path.join(path.dirname(root), 'tools/mingit/cmd') + path.delimiter + process.env.PATH;
   const [mode = 'resume', ...args] = argv;
   const readonly = ['resume', 'task', 'doctor', 'offline'].includes(mode);
-  if (['ship', 'cycle', 'settle', 'release-dev'].includes(mode)) {
+  if (mode === 'settle' && process.env.GITHUB_ACTIONS === 'true')
+    throw Error('LOCAL_SETTLE_ONLY: cloud merge activation is not deployed');
+  if (['ship', 'cycle', 'release-dev'].includes(mode)) {
     throw Error(
       'AUTO_INTEGRATION_NOT_DEPLOYED: missing CI source-seal adapter; use reviewed PR checks, not a bypass'
     );
@@ -382,7 +404,13 @@ export async function main(argv = process.argv.slice(2)) {
         process.exitCode = 2;
         return;
       }
-      await main(['release-dev', result.commit]);
+      console.log(
+        JSON.stringify({
+          nextCommand: 'npm run game -- wait-dev ' + result.commit,
+          release: 'separate_dev_push_pipeline',
+          installation: 'independent_pending'
+        })
+      );
     } finally {
       release();
     }
