@@ -27,6 +27,16 @@ static func run(nonce: String) -> Dictionary:
     checks.append({"name": "restart_after_compaction", "ok": opened and final.data.stats.wins == 71 and final.data.ordered.receipts.size() == 64})
     checks.append({"name": "old_sequence_rejected", "ok": final.transact(1, command).get("code") == "STALE_SEQUENCE"})
     checks.append({"name": "locale_restored", "ok": opened and final.data.settings.language == "en"})
+    checks.append({"name": "collection_initialize", "ok": final.transact(73, {"kind": "collection_init"}).ok})
+    var cards: Array[String] = []
+    for id in range(15, 30):
+        cards.append("c%03d" % id)
+    checks.append({"name": "save_custom_deck", "ok": final.transact(74, {"kind": "deck_save", "id": "lab", "name": "Lab deck", "cards": cards}).ok})
+    checks.append({"name": "select_custom_deck", "ok": final.transact(75, {"kind": "deck_select", "id": "lab"}).ok})
+    var collection = Store.new(directory)
+    var reloaded_ok: bool = collection.open_store("").ok
+    checks.append({"name": "restore_custom_deck", "ok": reloaded_ok and collection.data.collection.selected == "lab" and collection.data.decks.lab == cards})
+    checks.append({"name": "selection_retry", "ok": bool(collection.transact(75, {"kind": "deck_select", "id": "lab"}).get("duplicate", false))})
     var after_a: String = FileAccess.get_sha256("user://profile/a.json") if FileAccess.file_exists("user://profile/a.json") else "missing"
     var after_b: String = FileAccess.get_sha256("user://profile/b.json") if FileAccess.file_exists("user://profile/b.json") else "missing"
     checks.append({"name": "personal_profile_untouched", "ok": personal_a == after_a and personal_b == after_b})
@@ -39,4 +49,4 @@ static func run(nonce: String) -> Dictionary:
                 passed = false
         if DirAccess.remove_absolute(directory) != OK:
             passed = false
-    return {"status": "passed" if passed else "failed", "test": "real_profile_storage", "checks": checks, "writes": 72, "personal_profile_untouched": personal_a == after_a and personal_b == after_b}
+    return {"status": "passed" if passed else "failed", "test": "real_profile_storage", "checks": checks, "writes": 75, "personal_profile_untouched": personal_a == after_a and personal_b == after_b}

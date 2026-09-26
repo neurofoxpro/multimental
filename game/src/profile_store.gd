@@ -60,6 +60,8 @@ func _read_slot(name: String) -> Dictionary:
     var value: Dictionary = parser.data
     if value.get("schemaVersion") != Model.SCHEMA:
         return {"status": "unsupported", "slot": name}
+    if typeof(value.get("collection")) == TYPE_DICTIONARY and value.collection.get("version") != 1:
+        return {"status": "unsupported", "slot": name}
     if not Journal.valid(value):
         return {"status": "corrupt", "slot": name}
     return {"status": "valid", "slot": name, "data": value, "digest": envelope.sha256}

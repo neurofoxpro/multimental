@@ -359,7 +359,7 @@ func _save_finished_match() -> void:
         result_saved = true
         return
     var outcome: String = "win" if game.state.winner == 0 else ("draw" if game.state.winner == 2 else "loss")
-    var replay: Dictionary = {"version": 2, "session": local_match_id, "rules": Core.RULES_ID, "seed": game.initial_seed, "commands": game.commands.duplicate(true), "result": game.state.reason}
+    var replay: Dictionary = {"version": 2, "session": local_match_id, "rules": Core.RULES_ID, "seed": game.initial_seed, "decks": game.initial_decks.duplicate(true), "commands": game.commands.duplicate(true), "result": game.state.reason}
     result_saved = profile.commit({"kind": "record_match", "outcome": outcome, "replay": replay})
     if result_saved:
         print("MULTIMENTAL_MATCH_FINISHED " + str(game.state.winner))

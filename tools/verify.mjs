@@ -75,7 +75,8 @@ for (const [file, marker] of [
   ['room_automation_test.gd', 'MULTIMENTAL_ROOM_AUTOMATION_PASS'],
   ['profile_test.gd', 'MULTIMENTAL_PROFILE_PASS'],
   ['profile_store_test.gd', 'MULTIMENTAL_PROFILE_STORAGE_PASS'],
-  ['profile_ui_test.gd', 'MULTIMENTAL_PROFILE_UI_PASS']
+  ['profile_ui_test.gd', 'MULTIMENTAL_PROFILE_UI_PASS'],
+  ['collection_test.gd', 'MULTIMENTAL_COLLECTION_PASS']
 ])
   run(godot, ['--headless', '--path', 'game', '--script', 'res://tests/' + file], [marker]);
 const core = fs.readFileSync('game/src/match_core.gd', 'utf8');
