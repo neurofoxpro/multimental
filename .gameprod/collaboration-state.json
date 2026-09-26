@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "neurofoxpro/multimental",
-  "revision": 8,
+  "revision": 9,
   "claims": {
     "7d454b24-9d2a-459f-87ee-7e81be94f96a": {
       "token": "7d454b24-9d2a-459f-87ee-7e81be94f96a",
@@ -26,8 +26,8 @@
         "task:META-02"
       ],
       "fence": 8,
-      "updatedAt": 1790395763334,
-      "expiresAt": 1790397563334
+      "updatedAt": 1790397808878,
+      "expiresAt": 1790399608878
     }
   },
   "events": [
@@ -167,6 +167,25 @@
         "fence": 8,
         "updatedAt": 1790395763334,
         "expiresAt": 1790397563334
+      }
+    },
+    {
+      "id": "1a256dc0-0281-41de-8c89-135efd86daad",
+      "hash": "c9d11e2f684d196256efa123bb520398fea378e901ce78e9a416e0b1d9ddfe89",
+      "revision": 9,
+      "result": {
+        "status": "renewed",
+        "token": "8c458394-079d-40ee-ab05-b31537adc696",
+        "task": "META-02",
+        "owner": "economy-shop-20260926",
+        "base": "d4797322eb196981cb6bf99fb61fd4d41f94d02e",
+        "resources": [
+          "area:economy",
+          "task:META-02"
+        ],
+        "fence": 8,
+        "updatedAt": 1790397808878,
+        "expiresAt": 1790399608878
       }
     }
   ]
