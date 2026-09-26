@@ -12,7 +12,7 @@ function report(mode) {
     checks: s.stages.map((name) => ({ name, ok: true }))
   };
 }
-for (const mode of ['collection', 'shop', 'crafting'])
+for (const mode of ['collection', 'shop', 'crafting', 'inspector'])
   test('strict physical contract ' + mode, () => {
     assert.equal(assertUiLab(report(mode), mode), true);
     const s = uiLabSpec(mode);

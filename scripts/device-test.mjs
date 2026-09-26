@@ -299,7 +299,8 @@ try {
     mode === 'tutorial' ||
     mode === 'collection' ||
     mode === 'shop' ||
-    mode === 'crafting'
+    mode === 'crafting' ||
+    mode === 'inspector'
   ) {
     const personalBefore = profileHashes();
     if (target !== 'phone') {

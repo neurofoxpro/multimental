@@ -133,6 +133,10 @@ The dev build workflow includes a separate post-publication memory job using too
 
 If recording fails after publication, retry only the failed memory job. Do not create a second release to repair documentation. This job needs only contents:read and issues:write; PR checks do not receive that write job. See docs/production/RELEASE_MEMORY.ru.md and confirm the real job result before claiming deployment.
 
+## Card-inspector device regression
+
+Use `profile-test inspector-lab` for a signal-driven check of the six-stage diagnostic scenario. It reuses CollectionDeviceLab isolation, nonce validation, tap geometry and restoration; it does not prove actual touch input. `device-suite --target phone --suite inspector` performs the real six Android taps for collection entry/open/close and crafting entry/open/close. It verifies dirty draft and profile preservation, and no craft/recycle spending. Existing primary qualification leases remain mandatory. UI resource ownership is not permission to reconfigure the other phone or take QA-02. Record the exact installed APK before claiming this feature physically tested.
+
 ## Physical-device continuation
 
 After the owner connects the phone, run device-status first: an existing updater may already have installed the release. Do not claim that your read installed it, or reinstall needlessly. `device-suite --target phone --suite smoke` runs close/launch/JNI/tutorial/UI without a network. Use explicit usb/bluetooth/hardware suites for transport. A missing Wi-Fi address is a failed LAN check, not a USB or Bluetooth failure.

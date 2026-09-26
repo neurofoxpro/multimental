@@ -17,6 +17,7 @@ const [suite = 'model', ...extra] = process.argv.slice(2);
 const choices = {
   model: ['profile_test.gd', 'MULTIMENTAL_PROFILE_PASS'],
   inspector: ['card_inspector_test.gd', 'MULTIMENTAL_CARD_INSPECTOR_PASS'],
+  'inspector-lab': ['inspector_lab_test.gd', 'MULTIMENTAL_INSPECTOR_LAB_PASS'],
   taps: ['ui_tap_geometry_test.gd', 'MULTIMENTAL_TAP_GEOMETRY_PASS'],
   crafting: ['crafting_test.gd', 'MULTIMENTAL_CRAFT_PASS'],
   'crafting-ui': ['crafting_ui_test.gd', 'MULTIMENTAL_CRAFT_UI_PASS'],
