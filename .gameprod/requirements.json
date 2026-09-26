@@ -70,11 +70,14 @@
       "id": "AUTO-05",
       "text": "Реестр исследований и перенос контекста между агентами",
       "version": "P0. Единый производственный процесс",
-      "status": "implemented",
+      "status": "verified",
       "kind": "automation",
       "evidence": [
         "scripts/research.mjs",
-        "scripts/handoff.mjs"
+        "scripts/handoff.mjs",
+        "docs/production/WORK_QUEUE_RESEARCH.ru.md",
+        "docs/production/evidence/research-loop-observed-20260926.json",
+        "docs/production/evidence/research-workflow-completed-20260926.json"
       ],
       "source": "D17–D18; поручение 25.09.2026",
       "requiredForBeta": true

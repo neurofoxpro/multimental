@@ -6,6 +6,7 @@ const HOSTS = new Set([
   'learn.microsoft.com'
 ]);
 export const CHECKS = Object.freeze({
+  gallery: { argv: ['tools/gallery.mjs', 'check'], marker: 'MULTIMENTAL_GALLERY_CHECK_PASS' },
   dispatch: {
     argv: [
       '--test',
@@ -23,7 +24,10 @@ export const CHECKS = Object.freeze({
     argv: ['tools/test-profile.mjs', 'inspector'],
     marker: 'MULTIMENTAL_CARD_INSPECTOR_PASS'
   },
-  'ux-matrix': { argv: ['tools/ux-audit.mjs'], marker: 'measured_not_accessibility_certified' }
+  'ux-matrix': {
+    argv: ['skills/game-production/scripts/control.mjs', 'ux-audit'],
+    marker: 'measured_not_accessibility_certified'
+  }
 });
 export const hash = (bytes) => createHash('sha256').update(bytes).digest('hex');
 export function sourceUrl(value) {
