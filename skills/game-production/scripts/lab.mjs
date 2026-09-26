@@ -1,3 +1,4 @@
+import { runLauncher } from './launcher.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 import { randomUUID } from 'node:crypto';
@@ -415,6 +416,16 @@ export async function main(args = process.argv.slice(2)) {
         save();
       }
     }
+    record.phase = 'launcher';
+    save();
+    console.log('LAB_STAGE home-shortcut ' + selected.target);
+    record.launcher = await runLauncher({
+      root,
+      config: suiteOwner,
+      target: selected.target,
+      mode: 'ensure'
+    });
+    save();
     if (
       record.sourceHash !== fingerprint(root, project) ||
       record.configHash !== sha(fs.readFileSync(configPath)) ||
@@ -438,7 +449,7 @@ export async function main(args = process.argv.slice(2)) {
       suite: record.suite ? { runId: record.suite.runId, status: record.suite.status } : null,
       normalStartupEvidence:
         settings.mode === 'test' ? 'passed_in_recorded_restore_step' : 'not_checked',
-      homeIcon: 'not_asserted_by_lab',
+      homeIcon: record.launcher,
       secondaryPhone: 'registration_and_radio_not_inferred',
       report: '.gameprod/evidence/lab/' + runId + '/result.json'
     };
