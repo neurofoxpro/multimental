@@ -8,7 +8,7 @@ Use one command entry: `npm run game -- ...`; on the authorized Windows station 
 
 The latest owner delegation permits dev integration after all relevant automatic checks even without a phone. Physical delivery, actual radio tests and human acceptance are separate pending gates. Main/stable/Google Play production still require explicit owner approval. Never delete phone data or replace its persistent signing key.
 
-New flow auto-integration routes remain explicitly disabled until the source-seal adapter is implemented and verified. Unit tests of policy do not prove a deployed autonomous merge service. Existing `publish` creates a PR; existing old `cycle` is station-qualified, not the new independent-phone pipeline.
+After existing publish creates a PR, use `npm run game -- github settle PR EXACT_HEAD_SHA` on the authorized station. It requires deployed source-seal and all fresh CI, rechecks after machine review, merges only dev and verifies the result. Phone availability is independent. Then use the returned wait-dev command and optional delivery. Cloud merge and the new ship/cycle/release-dev routes remain disabled; do not present local settle as a permanent autonomous service.
 
 Edit through the reviewed source helpers. Bind base HEAD and, for inspected uncommitted files, `expectedCurrentSha256`. Mismatches or active leases stop edits. Retain independent work and journals. Preparation may format/render; verification itself must not mutate source.
 

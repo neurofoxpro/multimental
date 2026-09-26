@@ -27,4 +27,4 @@ GitHub Issues are now the primary task/decision memory, with #29 as the index. R
 
 Merged-branch cleanup is requested, but only after checking exact tip, canonical merged PR, ancestry and absence of active work. Unmerged branches, main/dev and active working trees are not cleanup candidates. No force-push or phone data deletion is authorized.
 
-The currently deployed flow must report missing adapters instead of silently relaxing guards. The current increment has no enabled autonomous merge service because its source-seal adapter is not deployed. This is a technical implementation gap, not a request for the owner to repeat approvals already given for dev.
+The flow reports missing adapters instead of relaxing guards. PR92 deployed and exercised the exact PR source-seal. The next independently tested increment enables local settle on the authorized station, using the owner's existing dev delegation. Cloud execution of this merge command remains denied; a permanently running service and production approvals are not inferred from local command availability.

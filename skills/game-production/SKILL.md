@@ -24,7 +24,7 @@ Start with `AGENTS.md`, this skill, `docs/production/AUTHORITY.md` and Issue #29
 - `scripts/chat.cmd publish "commit message" "PR title"`: commit reviewed working tree, push feature branch and create/reuse PR. Read the exact returned head.
 - `scripts/chat.cmd device-status` / `delivery`: existing authorized device adapters, independent of dev source readiness.
 
-The new flow's `ship/cycle/settle/release-dev` CLI routes are explicitly disabled until the required CI source-seal adapter is deployed and tested. Do not remove the guard to make a green result. The older `ship/cycle` remains a station-qualified legacy path; it is NOT the new no-phone pipeline. Tested merge-policy functions are not proof of an enabled automerge service.
+The local `github settle PR EXACT_HEAD_SHA` route now uses the deployed source-seal adapter, waits for all required CI, comments a machine review, rereads CI and refs, then performs a head-bound dev merge and confirms readback. It does not require a phone. Repeat the same command after interruption; it recognizes an already merged PR. See docs/production/DEV_SETTLE.ru.md. Cloud merge is still denied. `github ship/cycle/release-dev` remain disabled because their dispatch orchestration is unfinished; the legacy cycle still requires station qualification. A locally executed command is not a permanently running cloud coordinator.
 
 ## Editing without needless commits
 Use `scripts/chat.cmd apply BUNDLE.json`. Bind the bundle to the actual HEAD. For an existing draft/dirty file, include `expectedCurrentSha256` computed from the exact inspected bytes. Without that explicit hash uncommitted files remain protected. A mismatch stops the entire preflight. Never set the hash from stale memory or overwrite concurrent work.
