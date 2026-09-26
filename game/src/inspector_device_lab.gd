@@ -37,6 +37,12 @@ func run_lab() -> void:
     if not await _tap(source, "waiting_inspector_open", func(): return editor.inspector.visible and editor.inspector.current_id == 0):
         _finish("details_open_failed")
         return
+    var close_size: Vector2 = editor.inspector.get_ok_button().size
+    var sized: bool = close_size.x >= 260 and close_size.y >= 96
+    checks.append({"name": "laid_out_close_target", "ok": sized})
+    if not sized:
+        _finish("close_target_shrunk")
+        return
     if not await _tap(editor.inspector.get_ok_button(), "waiting_inspector_close", func(): return not editor.inspector.visible):
         _finish("details_close_failed")
         return

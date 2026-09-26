@@ -67,6 +67,7 @@ func run_test() -> void:
             await process_frame
             check(inspector.size.x <= root.size.x and inspector.size.y <= root.size.y, "dialog stays inside viewport")
             check(inspector.scroll.horizontal_scroll_mode == ScrollContainer.SCROLL_MODE_DISABLED, "no horizontal reading scroll")
+            check(inspector.get_ok_button().size.x >= 260 and inspector.get_ok_button().size.y >= 96, "actual close target retains intended minimum after dialog layout")
             check(inspector.get_ok_button().get_global_rect().end.y <= inspector.size.y, "close remains in visible dialog")
             check(inspector.content.text.begins_with(str(Core.new().card(28)[locale])), "selected identity and language stay exact")
             inspector.hide()
