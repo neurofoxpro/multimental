@@ -202,8 +202,8 @@ func show_collection() -> void:
     screen.play_requested.connect(start_match)
     screen.setup(self)
 
-func start_match() -> void:
-    if not profile.flush():
+func start_match(use_starter: bool = false) -> void:
+    if not use_starter and not profile.flush():
         show_menu()
         return
     tutorial = false
@@ -215,7 +215,7 @@ func start_match() -> void:
     result_saved = false
     local_match_id = Crypto.new().generate_random_bytes(16).hex_encode()
     var seed_value: int = int(Time.get_unix_time_from_system()) % 2147483646 + 1
-    if profile.enabled:
+    if profile.enabled and not use_starter:
         if not ensure_collection():
             show_menu()
             return
@@ -813,7 +813,7 @@ func show_bluetooth_menu() -> void:
     root.add_child(button(t("В МЕНЮ", "MENU"), show_menu, 60))
 
 func start_tutorial() -> void:
-    start_match()
+    start_match(true)
     tutorial = true
     tutorial_step = 0
     game.start(42)
