@@ -27,6 +27,7 @@ for (const dir of ['scripts', 'tools', 'skills/game-production/scripts'])
 run(process.execPath, ['tools/security-lint.mjs']);
 run(process.execPath, ['tools/review.mjs'], ['AUTOMATED_REVIEW_PASS']);
 run(process.execPath, ['scripts/format.mjs', 'check'], ['FORMAT_PASS']);
+run(process.execPath, ['tools/test-format-integration.mjs'], ['FORMAT_INTEGRATION_PASS']);
 run(process.execPath, ['scripts/changelog.mjs', 'check'], ['RUSSIAN_CHANGELOG_PASS']);
 run(process.execPath, ['tools/audio.mjs', 'check'], ['AUDIO_ASSETS_PASS']);
 run(process.execPath, ['scripts/research.mjs', 'check'], ['RESEARCH_LEDGER_PASS']);

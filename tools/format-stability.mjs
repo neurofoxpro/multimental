@@ -1,10 +1,5 @@
-import * as prettier from 'prettier';
 /** Return a fixed point, not a first pass that a read-only check immediately rejects. */
-export async function stableFormat(
-  input,
-  options,
-  { format = prettier.format, maxPasses = 4 } = {}
-) {
+export async function stableFormat(input, options, { format, maxPasses = 4 } = {}) {
   if (
     typeof input !== 'string' ||
     !Number.isInteger(maxPasses) ||

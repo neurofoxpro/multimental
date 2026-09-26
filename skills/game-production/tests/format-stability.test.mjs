@@ -1,6 +1,5 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import * as prettier from 'prettier';
 import { stableFormat } from '../../../tools/format-stability.mjs';
 test('already formatted input needs only one confirmation', async () => {
   let calls = 0;
@@ -55,12 +54,4 @@ test('non-convergence is bounded', async () => {
 test('bad formatter output and unbounded options are rejected', async () => {
   await assert.rejects(stableFormat('a', {}, { format: async () => null }), /INVALID_OUTPUT/);
   await assert.rejects(stableFormat('a', {}, { maxPasses: 999 }), /STABILITY_INPUT/);
-});
-test('real chained map/object regression is stable after preparation', async () => {
-  const text =
-    "const history = comments.slice(-3).map(c => ({id:c.id,author:c.user?.login,updatedAt:c.updated_at,excerpt:String(c.body||'').slice(0,1200),truncated:String(c.body||'').length>1200}));";
-  const options = { parser: 'babel', singleQuote: true, printWidth: 90 };
-  const result = await stableFormat(text, options);
-  assert.equal(await prettier.format(result, options), result);
-  assert.equal(await stableFormat(result, options), result);
 });

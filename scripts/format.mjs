@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { stableFormat } from '../tools/format-stability.mjs';
+import * as prettier from 'prettier';
 import { readJSON, context, findRoot } from '../skills/game-production/scripts/lib.mjs';
 const root = findRoot(),
   mode = process.argv[2] || 'check';
@@ -23,7 +24,7 @@ let changed = 0;
 for (const file of files) {
   const full = path.join(root, file),
     before = fs.readFileSync(full, 'utf8'),
-    after = await stableFormat(before, { ...options, filepath: file });
+    after = await stableFormat(before, { ...options, filepath: file }, { format: prettier.format });
   if (before === after) continue;
   changed++;
   if (mode === 'write') fs.writeFileSync(full, after);

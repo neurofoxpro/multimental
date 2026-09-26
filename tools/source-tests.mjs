@@ -1,4 +1,5 @@
 import fs from 'node:fs';
+import { testFailureSummary } from './test-failure-summary.mjs';
 import path from 'node:path';
 import { spawnSync } from 'node:child_process';
 import {
@@ -52,6 +53,6 @@ writeJSON(inside(root, '.gameprod/evidence/source-tests.json'), {
 });
 console.log('SOURCE_TESTS_' + (ok ? 'PASS' : 'FAIL') + ' tests=' + count);
 if (!ok) {
-  process.stdout.write(text.slice(-12000));
+  process.stdout.write(testFailureSummary(text));
   process.exitCode = 1;
 }

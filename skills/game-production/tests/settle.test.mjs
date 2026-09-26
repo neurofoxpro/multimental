@@ -187,3 +187,44 @@ test('time budget and identities are bounded', async () => {
     await assert.rejects(settle(f, number, head, { waitSeconds }));
   assert.equal(f.writes.length, 0);
 });
+
+test('terminal CI failure returns without consuming the polling timeout', async () => {
+  const f = new Fake();
+  f.runs[2].conclusion = 'failure';
+  f.pause = async () => {
+    throw Error('must not poll known failed CI');
+  };
+  const result = await settle(f, 93, H, { waitSeconds: 480 });
+  assert.equal(result.status, 'blocked');
+  assert.deepEqual(result.terminalFailures, ['.github/workflows/source-quality.yml']);
+  assert.equal(f.writes.length, 0);
+});
+test('running CI is awaited, then terminal failure stops immediately', async () => {
+  const f = new Fake();
+  f.runs[2].status = 'in_progress';
+  f.runs[2].conclusion = null;
+  let calls = 0;
+  f.pause = async () => {
+    calls++;
+    f.runs[2].status = 'completed';
+    f.runs[2].conclusion = 'failure';
+  };
+  const result = await settle(f, 93, H, { waitSeconds: 480 });
+  assert.equal(result.status, 'blocked');
+  assert.equal(calls, 1);
+  assert.equal(f.writes.length, 0);
+});
+test('new pending rerun supersedes an older failed CI run', async () => {
+  const f = new Fake();
+  f.runs[2].conclusion = 'failure';
+  f.runs.push({ ...f.runs[2], id: 103, status: 'in_progress', conclusion: null });
+  let calls = 0;
+  f.pause = async () => {
+    calls++;
+    f.runs[3].status = 'completed';
+    f.runs[3].conclusion = 'success';
+  };
+  const result = await settle(f, 93, H, { waitSeconds: 480 });
+  assert.equal(result.status, 'merged');
+  assert.equal(calls, 1);
+});

@@ -61,6 +61,9 @@ export function mergePolicy(pr, runs, jobs, reviews, expected) {
     if (r.status !== 'completed' || r.conclusion !== 'success')
       blocks.push('CHECK_PENDING_OR_FAILED:' + r.path);
   return {
+    terminalFailures: [...latest.values()]
+      .filter((r) => r.status === 'completed' && r.conclusion !== 'success')
+      .map((r) => r.path),
     ok: blocks.length === 0,
     blocks,
     head: expected.head,
@@ -199,7 +202,10 @@ export async function settle(client, number, head, { waitSeconds = 480 } = {}) {
         productionAuthorized: false
       };
     }
-    if (report.blocks.some((x) => ['SCOPE', 'SOURCE_MOVED', 'CHANGES_REQUESTED'].includes(x)))
+    if (
+      report.terminalFailures.length ||
+      report.blocks.some((x) => ['SCOPE', 'SOURCE_MOVED', 'CHANGES_REQUESTED'].includes(x))
+    )
       break;
     if (Date.now() >= until) break;
     await client.pause(5000);
