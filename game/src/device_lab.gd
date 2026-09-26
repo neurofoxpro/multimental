@@ -43,6 +43,13 @@ func _ready() -> void:
             editor_lab.changed.connect(_stage)
             editor_lab.completed.connect(_done)
             add_child(editor_lab)
+        "shop":
+            var runner = preload("res://src/shop_device_lab.gd").new()
+            runner.ui = ui
+            runner.nonce = str(data.nonce)
+            runner.changed.connect(_stage)
+            runner.completed.connect(_done)
+            add_child(runner)
         "profile-store":
             _done(preload("res://src/profile_lab.gd").run(str(data.nonce)))
         "jni":

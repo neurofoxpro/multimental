@@ -719,26 +719,34 @@
   },
   {
     "id": "AUTO-09",
-    "status": "pending",
+    "status": "done",
     "action": "Параллельные чаты: атомарное владение задачами и ресурсами в GitHub",
     "dependsOn": [
       "AUTH-01"
     ],
     "manual": false,
     "generatedFrom": ".gameprod/workplan.json",
-    "evidence": [],
+    "evidence": [
+      "docs/production/evidence/parallel-slices-20260926.json",
+      "skills/game-production/tests/collaboration.test.mjs",
+      "skills/game-production/tests/collaboration-integration.test.mjs"
+    ],
     "nextCommand": "npm run game -- task AUTO-09"
   },
   {
     "id": "AUTO-10",
-    "status": "pending",
+    "status": "done",
     "action": "Изолированные рабочие срезы и воспроизводимый вход нового чата",
     "dependsOn": [
       "AUTO-09"
     ],
     "manual": false,
     "generatedFrom": ".gameprod/workplan.json",
-    "evidence": [],
+    "evidence": [
+      "docs/production/evidence/parallel-slices-20260926.json",
+      "tools/godot-preflight.mjs",
+      "skills/game-production/tests/godot-preflight.test.mjs"
+    ],
     "nextCommand": "npm run game -- task AUTO-10"
   },
   {

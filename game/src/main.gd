@@ -143,6 +143,9 @@ func show_menu() -> void:
     var collection_button: Button = button(t("КОЛЛЕКЦИЯ И КОЛОДЫ", "COLLECTION AND DECKS"), show_collection, 62)
     collection_button.name = "OpenCollection"
     root.add_child(collection_button)
+    var shop_button: Button = button(t("МАГАЗИН ПАКОВ", "CARD PACK SHOP"), show_shop, 62)
+    shop_button.name = "OpenShop"
+    root.add_child(shop_button)
     root.add_child(button(t("ИГРА ПО ЛОКАЛЬНОЙ СЕТИ", "LOCAL NETWORK MATCH"), show_lan_menu, 70))
     if OS.has_feature("android"):
         root.add_child(button(t("ИГРА ПО BLUETOOTH", "BLUETOOTH MATCH"), show_bluetooth_menu, 64))
@@ -185,6 +188,25 @@ func ensure_collection() -> bool:
         collection_error = profile.error
         return false
     return Collection.valid(profile.state())
+
+func show_shop() -> void:
+    if not ensure_collection():
+        show_menu()
+        return
+    if not profile.state().has("economy") and not profile.commit({"kind": "economy_init"}):
+        collection_error = profile.error
+        show_menu()
+        return
+    lan.stop()
+    online = false
+    battle = false
+    tutorial = false
+    network_page = false
+    clear_screen()
+    var screen = preload("res://src/shop_screen.gd").new()
+    root.add_child(screen)
+    screen.leave_requested.connect(show_menu)
+    screen.setup(self)
 
 func show_collection() -> void:
     if not ensure_collection():
