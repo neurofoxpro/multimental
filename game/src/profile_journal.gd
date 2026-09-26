@@ -41,7 +41,7 @@ static func apply_ordered(profile: Dictionary, sequence: int, command: Dictionar
         return Model.failure("SEQUENCE_GAP")
     if command.has("replay"):
         var replay: Variant = command.replay
-        if command.get("kind") != "record_match" or typeof(replay) != TYPE_DICTIONARY or typeof(replay.get("rules")) != TYPE_STRING or typeof(replay.get("commands")) != TYPE_ARRAY:
+        if command.get("kind") not in ["record_match", "reward_match"] or typeof(replay) != TYPE_DICTIONARY or typeof(replay.get("rules")) != TYPE_STRING or typeof(replay.get("commands")) != TYPE_ARRAY:
             return Model.failure("INVALID_REPLAY")
         if replay.commands.size() > 1000 or JSON.stringify(replay).to_utf8_buffer().size() > 262144:
             return Model.failure("REPLAY_TOO_LARGE")

@@ -9,6 +9,7 @@ var profile = preload("res://src/profile_controller.gd").new()
 var profile_directory: String = "user://profile"
 var profile_legacy_settings: String = "user://settings.cfg"
 var local_match_id: String = ""
+var local_result_command: Dictionary = {}
 var audio = preload("res://src/audio_director.gd").new()
 var tutorial: bool = false
 var tutorial_step: int = 0
@@ -160,6 +161,9 @@ func show_menu() -> void:
     var craft_button: Button = button(t("СОЗДАНИЕ КАРТ", "CARD CRAFTING"), show_crafting, 62)
     craft_button.name = "OpenCrafting"
     root.add_child(craft_button)
+    var rewards_button: Button = button(t("НАГРАДЫ И ЗАДАНИЯ", "REWARDS AND QUESTS"), show_rewards, 62)
+    rewards_button.name = "OpenRewards"
+    root.add_child(rewards_button)
     root.add_child(button(t("ИГРА ПО ЛОКАЛЬНОЙ СЕТИ", "LOCAL NETWORK MATCH"), show_lan_menu, 70))
     if OS.has_feature("android"):
         root.add_child(button(t("ИГРА ПО BLUETOOTH", "BLUETOOTH MATCH"), show_bluetooth_menu, 64))
@@ -176,6 +180,8 @@ func show_menu() -> void:
         status_text += t("\nВосстановлена резервная копия", "\nRecovered from backup")
     if collection_error != "":
         status_text += "\n" + collection_error
+    var xp: int = int(profile.state().get("rewards", {}).get("xp", 0))
+    status_text += t("\nУровень %d · Опыт %d · Монеты %d", "\nLevel %d · XP %d · Coins %d") % [preload("res://src/rewards_policy.gd").level(xp), xp, int(profile.state().get("wallet", {}).get("gold", 0))]
     var profile_status := label(status_text, 16)
     profile_status.name = "ProfileSummary"
     root.add_child(profile_status)
@@ -208,6 +214,34 @@ func ensure_collection() -> bool:
         return false
     return Collection.valid(profile.state())
 
+func rewards_day() -> int:
+    return int(floor(Time.get_unix_time_from_system() / 86400.0))
+
+func _commit_finished_result(outcome: String, replay: Dictionary) -> bool:
+    if local_result_command.is_empty() or local_result_command.get("replay", {}).get("session", "") != replay.get("session", ""):
+        if not profile.flush():
+            return false
+        local_result_command = {"kind": "reward_match", "policy": preload("res://src/rewards_policy.gd").POLICY, "matchNumber": int(profile.state().stats.matches) + 1, "day": rewards_day(), "outcome": outcome, "replay": replay.duplicate(true)}
+    var saved: bool = profile.commit(local_result_command)
+    if saved and is_instance_valid(message):
+        var reward: Dictionary = preload("res://src/rewards_policy.gd").match_reward(outcome)
+        message.text += t(" · +%d монет · +%d опыта", " · +%d coins · +%d XP") % [reward.gold, reward.xp]
+    return saved
+
+func show_rewards() -> void:
+    if not profile.enabled or not profile.flush():
+        show_menu()
+        return
+    lan.stop()
+    online = false
+    battle = false
+    tutorial = false
+    network_page = false
+    clear_screen()
+    var screen = preload("res://src/rewards_screen.gd").new()
+    root.add_child(screen)
+    screen.leave_requested.connect(show_menu)
+    screen.setup(self)
 func show_crafting() -> void:
     if not ensure_collection():
         show_menu()
@@ -467,7 +501,7 @@ func _save_finished_match() -> void:
         return
     var outcome: String = "win" if game.state.winner == 0 else ("draw" if game.state.winner == 2 else "loss")
     var replay: Dictionary = {"version": 2, "session": local_match_id, "rules": Core.RULES_ID, "seed": game.initial_seed, "decks": game.initial_decks.duplicate(true), "commands": game.commands.duplicate(true), "result": game.state.reason}
-    result_saved = profile.commit({"kind": "record_match", "outcome": outcome, "replay": replay})
+    result_saved = _commit_finished_result(outcome, replay)
     if result_saved:
         print("MULTIMENTAL_MATCH_FINISHED " + str(game.state.winner))
     elif is_instance_valid(message):
@@ -839,7 +873,7 @@ func _save_network_result(view: Dictionary) -> void:
         return
     var outcome: String = "win" if winner == 0 else ("draw" if winner == 2 else "loss")
     var summary: Dictionary = {"version": 2, "session": local_match_id, "rules": Core.RULES_ID, "scope": "public_result_only", "transport": "bluetooth" if bluetooth_mode else "lan", "commands": [], "result": str(view.get("reason", ""))}
-    result_saved = profile.commit({"kind": "record_match", "outcome": outcome, "replay": summary})
+    result_saved = _commit_finished_result(outcome, summary)
     if not result_saved and is_instance_valid(message):
         message.text += t(" · не удалось сохранить результат", " · result could not be saved")
 

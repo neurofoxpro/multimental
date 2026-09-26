@@ -16,6 +16,10 @@ import {
 const [suite = 'model', ...extra] = process.argv.slice(2);
 const choices = {
   model: ['profile_test.gd', 'MULTIMENTAL_PROFILE_PASS'],
+  rewards: ['rewards_test.gd', 'MULTIMENTAL_REWARDS_PASS'],
+  'rewards-ui': ['rewards_ui_test.gd', 'MULTIMENTAL_REWARDS_UI_PASS'],
+  'rewards-lab': ['rewards_lab_test.gd', 'MULTIMENTAL_REWARDS_LAB_PASS'],
+  'rewards-simulation': ['rewards_simulation_test.gd', 'MULTIMENTAL_REWARDS_SIMULATION_PASS'],
   inspector: ['card_inspector_test.gd', 'MULTIMENTAL_CARD_INSPECTOR_PASS'],
   'inspector-lab': ['inspector_lab_test.gd', 'MULTIMENTAL_INSPECTOR_LAB_PASS'],
   taps: ['ui_tap_geometry_test.gd', 'MULTIMENTAL_TAP_GEOMETRY_PASS'],

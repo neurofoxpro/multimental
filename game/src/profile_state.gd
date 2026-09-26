@@ -3,6 +3,7 @@ extends RefCounted
 const Collection = preload("res://src/collection_rules.gd")
 const Economy = preload("res://src/economy_rules.gd")
 const Crafting = preload("res://src/crafting_rules.gd")
+const Rewards = preload("res://src/rewards_rules.gd")
 const SCHEMA: int = 1
 const LIMIT: int = 1000000000
 const RECEIPT_LIMIT: int = 4096
@@ -53,7 +54,7 @@ static func valid(value: Variant) -> bool:
     for key in value.receipts:
         if not identifier(key) or typeof(value.receipts[key]) != TYPE_STRING or value.receipts[key].length() != 64:
             return false
-    return Collection.valid(value) and Economy.valid(value) and Crafting.valid(value)
+    return Collection.valid(value) and Economy.valid(value) and Crafting.valid(value) and Rewards.valid(value)
 
 static func failure(code: String) -> Dictionary:
     return {"ok": false, "code": code}
@@ -70,7 +71,12 @@ static func apply(profile: Dictionary, transaction_id: String, command: Dictiona
         return failure("JOURNAL_FULL")
     var next: Dictionary = profile.duplicate(true)
     match command.get("kind", ""):
-        "record_match":
+        "record_match", "reward_match":
+            if command.get("kind") == "reward_match":
+                var rewarded: Dictionary = Rewards.apply(next, command)
+                if not rewarded.ok:
+                    return rewarded
+                next = rewarded.profile
             var outcome: String = str(command.get("outcome", ""))
             if outcome not in ["win", "loss", "draw"]:
                 return failure("INVALID_OUTCOME")
@@ -78,6 +84,11 @@ static func apply(profile: Dictionary, transaction_id: String, command: Dictiona
             next.stats[field] = int(next.stats[field]) + 1
             next.stats.matches = int(next.stats.matches) + 1
             next.lastMatch = {"id": transaction_id, "outcome": outcome}
+        "rewards_day", "reward_claim":
+            var rewarded: Dictionary = Rewards.apply(next, command)
+            if not rewarded.ok:
+                return rewarded
+            next = rewarded.profile
         "language":
             if command.get("value") not in ["ru", "en"]:
                 return failure("INVALID_LANGUAGE")
