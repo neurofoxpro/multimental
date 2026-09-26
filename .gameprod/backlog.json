@@ -885,5 +885,41 @@
     "generatedFrom": ".gameprod/workplan.json",
     "evidence": [],
     "nextCommand": "npm run game -- task QA-03"
+  },
+  {
+    "id": "UX-11",
+    "status": "pending",
+    "action": "Тактическое управление: разделить выбор, осмотр и подтверждённую атаку; сделать карты читаемыми",
+    "dependsOn": [
+      "UX-07"
+    ],
+    "manual": false,
+    "generatedFrom": ".gameprod/workplan.json",
+    "evidence": [],
+    "nextCommand": "npm run game -- task UX-11"
+  },
+  {
+    "id": "UX-12",
+    "status": "pending",
+    "action": "Навигация коллекции и подготовки матча без списка одинаковых кнопок",
+    "dependsOn": [
+      "UX-11"
+    ],
+    "manual": false,
+    "generatedFrom": ".gameprod/workplan.json",
+    "evidence": [],
+    "nextCommand": "npm run game -- task UX-12"
+  },
+  {
+    "id": "UX-13",
+    "status": "pending",
+    "action": "Пакет визуальных ассетов: происхождение, вариативность, импорт и проверка в реальном интерфейсе",
+    "dependsOn": [
+      "UX-11"
+    ],
+    "manual": false,
+    "generatedFrom": ".gameprod/workplan.json",
+    "evidence": [],
+    "nextCommand": "npm run game -- task UX-13"
   }
 ]
