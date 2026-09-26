@@ -92,3 +92,9 @@ After the owner connects the phone, run device-status first: an existing updater
 Suites now bind unique run IDs, child process exit status, actual installed APK SHA-256 and source fingerprints before/after. They hold the existing qualification lease for the entire sequence. Unknown flags, stale or missing results, changed app bytes and changed test sources fail closed. Keep raw screenshots/logs and device IDs private; archive exact report and receipt hashes. See docs/production/DEVICE_SUITES.ru.md.
 
 Restore the normal application after radio labs and record the observed installation and actual checks in Issue #29. Windows-to-Android Bluetooth is not two-Android acceptance. Phone data must never be cleared; preserve the persistent signing identity.
+
+## Recovering a crashed device writer
+
+When delivery reports busy beyond its time limit, run `device-recover plan`, not rm/kill. `device-recover apply` only archives allowlisted locks whose owner is independently absent (ESRCH from signal 0); alive/unknown/reused PIDs and changed bytes are preserved. The process uses bounded JSON, archives and ownership guards. It never deletes phone data, changes signing keys or kills a process. Read docs/production/DEVICE_RECOVERY.ru.md.
+
+Then run delivery and read actual device-status before selecting tests. Recovered coordination is not installed software. If another real operation is active, wait for it; do not make recovery succeed by changing its checks. A partial recovery journal is evidence for the next attempt, not permission to overwrite new locks.
