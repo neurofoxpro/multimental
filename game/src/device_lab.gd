@@ -43,6 +43,13 @@ func _ready() -> void:
             editor_lab.changed.connect(_stage)
             editor_lab.completed.connect(_done)
             add_child(editor_lab)
+        "inspector":
+            var runner = preload("res://src/inspector_device_lab.gd").new()
+            runner.ui = ui
+            runner.nonce = str(data.nonce)
+            runner.changed.connect(_stage)
+            runner.completed.connect(_done)
+            add_child(runner)
         "crafting":
             var runner = preload("res://src/crafting_device_lab.gd").new()
             runner.ui = ui

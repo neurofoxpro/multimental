@@ -1,4 +1,15 @@
 const SPECS = {
+  inspector: {
+    test: 'real_card_inspector',
+    stages: [
+      'waiting_inspector_collection',
+      'waiting_inspector_open',
+      'waiting_inspector_close',
+      'waiting_inspector_crafting',
+      'waiting_inspector_craft_open',
+      'waiting_inspector_craft_close'
+    ]
+  },
   collection: {
     test: 'real_collection_editor',
     stages: [
