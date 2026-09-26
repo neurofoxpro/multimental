@@ -548,7 +548,7 @@
       "title": "Магазин и паки по пять карт за отдельную валюту лобби",
       "stage": "P2. Коллекция, профиль и экономика",
       "kind": "game",
-      "status": "planned",
+      "status": "verified",
       "dependsOn": [
         "META-05",
         "META-01"
@@ -557,11 +557,16 @@
         "Все пять карт добавляются один раз; деньги списываются один раз даже при аварии.",
         "Показываются содержимое/шансы/правила дублей; цены и вероятности тестируемы, без реальных покупок."
       ],
-      "evidence": [],
-      "readset": [
-        "game/src/main.gd"
+      "evidence": [
+        "docs/production/evidence/shop-completed-20260926.json",
+        "game/tests/economy_test.gd",
+        "game/tests/shop_ui_test.gd"
       ],
-      "source": "Этапы 4,6; D06",
+      "readset": [
+        "game/src/main.gd",
+        "game/src/economy_rules.gd"
+      ],
+      "source": "Этапы 4,6; D06; проверено PR111/112",
       "requiredForBeta": true,
       "requiredForPlay": true,
       "priority": 12
@@ -1425,7 +1430,7 @@
       "title": "Исследование эргономики поля 3×3, карточек, кнопок и доступности",
       "stage": "P2. Коллекция, профиль и экономика",
       "kind": "ui",
-      "status": "planned",
+      "status": "verified",
       "dependsOn": [
         "UX-01"
       ],
@@ -1434,12 +1439,18 @@
         "Определены измеряемые бюджеты контраста, hit-targets, safe area, клавиатуры, читаемости RU/EN.",
         "План улучшений отделяет подтверждённые дефекты, рекомендации и вопросы человеческой приёмки."
       ],
-      "evidence": [],
+      "evidence": [
+        "docs/production/UX_AUDIT.ru.md",
+        "tools/ux-audit.mjs",
+        "game/tests/ux_audit.gd",
+        "skills/game-production/tests/ux-metrics.test.mjs"
+      ],
       "readset": [
         "game/src/collection_screen.gd",
-        "docs/MANUAL_TESTS.ru.md"
+        "docs/MANUAL_TESTS.ru.md",
+        "docs/production/UX_AUDIT.ru.md"
       ],
-      "source": "Поручение владельца 26.09.2026: UX research и будущий редизайн",
+      "source": "Поручение владельца 26.09.2026; исследование и измерения PR112",
       "requiredForBeta": true,
       "requiredForPlay": true,
       "priority": 16

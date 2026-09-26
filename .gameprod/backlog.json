@@ -292,7 +292,7 @@
   },
   {
     "id": "META-02",
-    "status": "pending",
+    "status": "done",
     "action": "Магазин и паки по пять карт за отдельную валюту лобби",
     "dependsOn": [
       "META-05",
@@ -300,7 +300,11 @@
     ],
     "manual": false,
     "generatedFrom": ".gameprod/workplan.json",
-    "evidence": [],
+    "evidence": [
+      "docs/production/evidence/shop-completed-20260926.json",
+      "game/tests/economy_test.gd",
+      "game/tests/shop_ui_test.gd"
+    ],
     "nextCommand": "npm run game -- task META-02"
   },
   {
@@ -763,14 +767,19 @@
   },
   {
     "id": "UX-06",
-    "status": "pending",
+    "status": "done",
     "action": "Исследование эргономики поля 3×3, карточек, кнопок и доступности",
     "dependsOn": [
       "UX-01"
     ],
     "manual": false,
     "generatedFrom": ".gameprod/workplan.json",
-    "evidence": [],
+    "evidence": [
+      "docs/production/UX_AUDIT.ru.md",
+      "tools/ux-audit.mjs",
+      "game/tests/ux_audit.gd",
+      "skills/game-production/tests/ux-metrics.test.mjs"
+    ],
     "nextCommand": "npm run game -- task UX-06"
   },
   {

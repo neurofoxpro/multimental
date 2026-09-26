@@ -285,10 +285,14 @@
       "id": "META-02",
       "text": "Магазин и паки по пять карт за отдельную валюту лобби",
       "version": "P2. Коллекция, профиль и экономика",
-      "status": "planned",
+      "status": "verified",
       "kind": "game",
-      "evidence": [],
-      "source": "Этапы 4,6; D06",
+      "evidence": [
+        "docs/production/evidence/shop-completed-20260926.json",
+        "game/tests/economy_test.gd",
+        "game/tests/shop_ui_test.gd"
+      ],
+      "source": "Этапы 4,6; D06; проверено PR111/112",
       "requiredForBeta": true
     },
     {
@@ -671,10 +675,15 @@
       "id": "UX-06",
       "text": "Исследование эргономики поля 3×3, карточек, кнопок и доступности",
       "version": "P2. Коллекция, профиль и экономика",
-      "status": "planned",
+      "status": "verified",
       "kind": "ui",
-      "evidence": [],
-      "source": "Поручение владельца 26.09.2026: UX research и будущий редизайн",
+      "evidence": [
+        "docs/production/UX_AUDIT.ru.md",
+        "tools/ux-audit.mjs",
+        "game/tests/ux_audit.gd",
+        "skills/game-production/tests/ux-metrics.test.mjs"
+      ],
+      "source": "Поручение владельца 26.09.2026; исследование и измерения PR112",
       "requiredForBeta": true
     },
     {

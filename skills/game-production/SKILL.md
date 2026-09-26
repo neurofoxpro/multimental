@@ -23,6 +23,12 @@ Use an isolated slice for UX research and another for economy. The current sourc
 
 `collab refresh` safely fast-forwards a still-ancestral owned feature slice to the exact observed dev while preserving nonoverlapping drafts byte-for-byte. Divergence, incoming changes on a dirty path, unknown ownership or mismatched readback stop it. No reset, rebase, force, stash or new branch is used. After refresh, run fresh audit; earlier source receipts no longer qualify. This avoids throwing away parallel work merely because another task has merged. See docs/production/SLICE_REFRESH.ru.md.
 
+## Menu layout and runtime diagnostics
+
+Reuse `game/src/scrollable_page.gd` for pages whose minimum content height can exceed the viewport. Do not shrink targets/fonts to hide overflow. `profile-test menu` checks real viewport sizes, scrolling to every menu action and keyboard focus; `ux-audit` measures without claiming full accessibility. Deferred focus must use a WeakRef plus live-tree check so a removed screen cannot produce a false passing test.
+
+`tools/runtime-diagnostics.mjs` rejects runtime ERROR even when a PASS marker was printed earlier. The targeted profile runner uses it; full verify keeps its existing strict error checks. A zero process exit alone is not success.
+
 ## Scope and authority
 Only repository `neurofoxpro/multimental`. Only personal station `VENEL-SENDRIK`; GitHub-hosted CI and internal source-only work are allowed. Check the actual hostname, remote and branch. Do not use another computer or repository. Keep credentials, phone identifiers and raw logs private.
 
