@@ -40,3 +40,9 @@ Mode, expectedVersion и nonce проверяются как строки до �
 Версия 0.13.5-alpha.266.1 подтвердила исправление icon, затем фактический JavaClass отказал в Builder: Method not found. Перед вызовом теперь используется документированный JavaClass.has_java_method для закрытого набора имён конструктора. Выполняется ровно один найденный метод, отсутствие/неоднозначность блокирует запрос; никаких пробных вызовов конструкторов или исполнения произвольных имён из данных. Использованное имя записывается в результат для точного Android readback.
 
 Первичный контракт: https://docs.godotengine.org/en/stable/classes/class_javaclass.html . Десктопная заглушка знает доступные имена явно, а не имитирует успех любого конструктора.
+
+## Проверка точного кода установленного движка
+
+На 0.13.6-alpha.269.1 не было runtime exception, но проверка нескольких имён дала false ambiguity. Причина установлена по исходникам именно Godot 4.7.2-stable, platform/android/java_class_wrapper.cpp: JavaClass.callp и has_java_method заменяют java_constructor_name на `<init>`. Значит `<init>` и ShortcutInfo$Builder могут означать один метод. Теперь проверяется только канонический `<init>` и вызывается ровно один раз. Проверки специально содержат оба alias одновременно и не считают их конфликтом.
+
+Источник: https://github.com/godotengine/godot/blob/4.7.2-stable/platform/android/java_class_wrapper.cpp ; blob f1a9b689dfa9381b941b90b9f6ebd12b5b755a27, методы callp/has_java_method. Вывод из более новой ветки или предположение по имени Java-класса не заменяют этот контракт версии.

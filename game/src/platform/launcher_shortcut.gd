@@ -92,18 +92,14 @@ func _builder(activity: Variant) -> Variant:
     var klass: Variant = _class("android.content.pm.ShortcutInfo$Builder")
     if failed:
         return null
-    var matches: Array[String] = []
-    # Ask the installed engine, without invoking guessed constructors or arbitrary methods.
-    for candidate in ["ShortcutInfo$Builder", "Builder", "<init>", "new"]:
-        if _flag(klass, "has_java_method", [candidate]):
-            matches.append(candidate)
-    if failed:
+    # Godot 4.7.2 stores Java constructors under <init>. Its friendly class name is
+    # an alias to the SAME method, not a second ambiguous constructor.
+    if not _flag(klass, "has_java_method", ["<init>"]):
+        if not failed:
+            failed = true
+            call_deferred("_publish", "failed", "builder_constructor_unavailable")
         return null
-    if matches.size() != 1:
-        failed = true
-        call_deferred("_publish", "failed", "builder_constructor_missing_or_ambiguous")
-        return null
-    constructor_name = matches[0]
+    constructor_name = "<init>"
     return _call(klass, constructor_name, [activity, Model.ID])
 
 func _request_pin(activity: Variant) -> void:
