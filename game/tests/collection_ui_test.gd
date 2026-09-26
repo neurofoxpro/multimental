@@ -31,6 +31,9 @@ func run_test() -> void:
     var ui = make_ui(directory)
     await process_frame
     check(not ui.profile.state().has("collection"), "normal launch does not silently grant cards")
+    ui.start_tutorial()
+    check(ui.battle and ui.tutorial and not ui.profile.state().has("collection"), "tutorial starts before collection initialization")
+    ui.show_menu()
     ui.find_child("OpenCollection", true, false).pressed.emit()
     await process_frame
     var editor = ui.find_child("CollectionScreen", true, false)
@@ -106,6 +109,10 @@ func run_test() -> void:
     check(ui.profile.state().collection.selected == "" and editor.play_button.disabled, "incomplete saved draft cannot start")
     ui.start_match()
     check(not ui.battle and ui.find_child("CollectionScreen", true, false) != null, "no silent starter fallback for incomplete selection")
+    ui.start_tutorial()
+    check(ui.battle and ui.tutorial and ui.game.initial_decks[0] == Core.STARTER, "tutorial works with incomplete personal deck")
+    check(ui.profile.state().collection.selected == "", "tutorial does not change personal selection")
+    ui.show_collection()
     editor = ui.find_child("CollectionScreen", true, false)
     editor.load_deck(deck_id)
     editor.change_card("c015", 1)
