@@ -26,6 +26,7 @@ const choices = {
   crafting: ['crafting_test.gd', 'MULTIMENTAL_CRAFT_PASS'],
   'crafting-ui': ['crafting_ui_test.gd', 'MULTIMENTAL_CRAFT_UI_PASS'],
   menu: ['menu_layout_test.gd', 'MULTIMENTAL_MENU_LAYOUT_PASS'],
+  'launcher-request': ['launcher_request_test.gd', 'MULTIMENTAL_LAUNCHER_REQUEST_PASS'],
   usability: ['usability_test.gd', 'MULTIMENTAL_USABILITY_PASS'],
   'connection-ui': ['connection_ui_test.gd', 'MULTIMENTAL_CONNECTION_UI_PASS'],
   economy: ['economy_test.gd', 'MULTIMENTAL_ECONOMY_PASS'],

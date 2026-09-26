@@ -87,6 +87,7 @@ for (const [file, marker] of [
   ['card_inspector_test.gd', 'MULTIMENTAL_CARD_INSPECTOR_PASS'],
   ['inspector_lab_test.gd', 'MULTIMENTAL_INSPECTOR_LAB_PASS'],
   ['menu_layout_test.gd', 'MULTIMENTAL_MENU_LAYOUT_PASS'],
+  ['launcher_request_test.gd', 'MULTIMENTAL_LAUNCHER_REQUEST_PASS'],
   ['usability_test.gd', 'MULTIMENTAL_USABILITY_PASS'],
   ['connection_ui_test.gd', 'MULTIMENTAL_CONNECTION_UI_PASS'],
   ['profile_store_test.gd', 'MULTIMENTAL_PROFILE_STORAGE_PASS'],

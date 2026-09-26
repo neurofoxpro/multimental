@@ -22,5 +22,8 @@ renderer/rendering_method.mobile="gl_compatibility"
 textures/vram_compression/import_etc2_astc=true
 environment/defaults/default_clear_color=Color(0.025, 0.035, 0.07, 1)
 
+[autoload]
+LauncherSupport="*res://src/platform/launcher_shortcut.gd"
+
 [gui]
 theme/default_font_multichannel_signed_distance_field=true
