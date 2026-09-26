@@ -18,9 +18,17 @@ export function taskResources(task, config) {
 export async function main(args = process.argv.slice(2)) {
   const [mode = 'status', ...values] = args;
   if (
-    !['init', 'status', 'claim', 'renew', 'release', 'start', 'check-owner', 'branch'].includes(
-      mode
-    )
+    ![
+      'init',
+      'status',
+      'claim',
+      'renew',
+      'release',
+      'start',
+      'check-owner',
+      'branch',
+      'refresh'
+    ].includes(mode)
   )
     throw Error('collab init|status|claim TASK AGENT|start TASK AGENT|renew|release|check-owner');
   const root = findRoot(),
@@ -52,6 +60,11 @@ export async function main(args = process.argv.slice(2)) {
     store = new GitHubCoordination(token);
   const config = readJSON(inside(root, '.gameprod/collaboration.json'));
   const output = (result) => console.log(JSON.stringify(result, null, 2));
+  if (mode === 'refresh') {
+    if (values.length) throw Error('collab refresh uses the current owned slice');
+    output(await (await import('./slice-refresh.mjs')).refreshSlice(root, store, hub));
+    return;
+  }
   if (mode === 'branch') {
     if (values.length !== 1) throw Error('collab branch SHORT_SUFFIX');
     output(await (await import('./slice-branch.mjs')).continueBranch(root, store, values[0]));
