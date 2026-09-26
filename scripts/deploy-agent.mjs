@@ -26,7 +26,9 @@ const files = [
   'skills/game-production/scripts/lib.mjs',
   'skills/game-production/scripts/qualification-policy.mjs',
   'skills/game-production/scripts/device-coordination.mjs',
-  'skills/game-production/scripts/http-read.mjs'
+  'skills/game-production/scripts/http-read.mjs',
+  'skills/game-production/scripts/resumable-download.mjs',
+  'skills/game-production/scripts/release-transfer.mjs'
 ];
 const inventory = files.map((file) => ({ file, sha256: sha(fs.readFileSync(file)) }));
 if (fs.existsSync(destination)) {
@@ -64,7 +66,7 @@ config.reviewedSourceCommit = commit;
 writeJSON(configFile, config);
 const script = path.join(destination, 'scripts/update-device.mjs');
 const action = '"' + script + '" --config "' + configFile + '"';
-const ps = String.raw`$ErrorActionPreference='Stop';$task=Get-ScheduledTask -TaskName 'Multimental-Dev-APK-Updater';if($task.Actions.Execute -notlike '*node.exe' -or $task.Actions.Arguments -notlike '*MultimentalWork*update-device.mjs*'){throw 'Unexpected existing task'};$a=New-ScheduledTaskAction -Execute $env:MULTIMENTAL_NODE -Argument $env:MULTIMENTAL_ACTION -WorkingDirectory $env:MULTIMENTAL_CWD;Set-ScheduledTask -TaskName $task.TaskName -Action $a | Out-Null;Enable-ScheduledTask -TaskName $task.TaskName | Out-Null;Get-ScheduledTask -TaskName $task.TaskName | Select-Object TaskName,State`;
+const ps = String.raw`$ErrorActionPreference='Stop';$task=Get-ScheduledTask -TaskName 'Multimental-Dev-APK-Updater';if($task.Actions.Execute -notlike '*node.exe' -or $task.Actions.Arguments -notlike '*MultimentalWork*update-device.mjs*'){throw 'Unexpected existing task'};$a=New-ScheduledTaskAction -Execute $env:MULTIMENTAL_NODE -Argument $env:MULTIMENTAL_ACTION -WorkingDirectory $env:MULTIMENTAL_CWD;$s=$task.Settings;$s.ExecutionTimeLimit='PT15M';Set-ScheduledTask -TaskName $task.TaskName -Action $a -Settings $s | Out-Null;Enable-ScheduledTask -TaskName $task.TaskName | Out-Null;Get-ScheduledTask -TaskName $task.TaskName | Select-Object TaskName,State`;
 const applied = spawnSync('powershell.exe', ['-NoProfile', '-Command', ps], {
   encoding: 'utf8',
   timeout: 30000,

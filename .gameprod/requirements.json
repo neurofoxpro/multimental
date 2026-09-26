@@ -707,9 +707,16 @@
       "id": "UX-07",
       "text": "Полировка интерфейса: единые состояния, подробности карты, читаемость и фокус",
       "version": "P2. Коллекция, профиль и экономика",
-      "status": "planned",
+      "status": "verified",
       "kind": "ui",
-      "evidence": [],
+      "evidence": [
+        "docs/production/UI_PLAYABILITY.ru.md",
+        "docs/production/evidence/ui-playability-observed-20260926.json",
+        "docs/production/evidence/ui-continuation-provenance-20260926.json",
+        "docs/SCREENSHOTS.ru.md",
+        "docs/media/gallery/current.json",
+        "docs/production/evidence/ui-playability-completed-20260926.json"
+      ],
       "source": "Поручение владельца 26.09.2026: визуал, UI и удобство",
       "requiredForBeta": true
     },

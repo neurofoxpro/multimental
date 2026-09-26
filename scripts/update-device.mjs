@@ -1,3 +1,8 @@
+import {
+  downloadReleaseAsset,
+  releaseCandidate,
+  updateOptions
+} from '../skills/game-production/scripts/release-transfer.mjs';
 import { readJSONHTTP } from '../skills/game-production/scripts/http-read.mjs';
 import { claimUpdateLock } from '../skills/game-production/scripts/device-coordination.mjs';
 import fs from 'node:fs';
@@ -22,24 +27,6 @@ async function json(url) {
   return readJSONHTTP(url, {
     headers: { 'User-Agent': 'multimental-device-updater', Accept: 'application/vnd.github+json' }
   });
-}
-async function download(url, file, max) {
-  const r = await fetch(url, { signal: AbortSignal.timeout(120000) });
-  if (!r.ok) throw Error('Download returned ' + r.status);
-  if (Number(r.headers.get('content-length') || 0) > max) throw Error('Oversized asset');
-  const tmp = file + '.part';
-  const fd = fs.openSync(tmp, 'w');
-  let total = 0;
-  try {
-    for await (const chunk of r.body) {
-      total += chunk.length;
-      if (total > max) throw Error('Oversized stream');
-      fs.writeSync(fd, chunk);
-    }
-  } finally {
-    fs.closeSync(fd);
-  }
-  fs.renameSync(tmp, file);
 }
 export async function update(c, { expectedCommit = null } = {}) {
   validateConfig(c);
@@ -69,28 +56,24 @@ export async function update(c, { expectedCommit = null } = {}) {
       return { status: 'deferred_test' };
     const api = 'https://api.github.com/repos/' + c.repository;
     const releases = await json(api + '/releases?per_page=20');
-    const candidates = releases.filter(
-      (r) =>
-        r.prerelease &&
-        !r.draft &&
-        /^v\d+\.\d+\.\d+-(?:alpha|beta|rc)\./.test(r.tag_name) &&
-        r.assets.some((a) => a.name === 'build-manifest.json')
-    );
-    if (!candidates.length) {
-      console.log('NO_ELIGIBLE_PRERELEASE');
-      return { status: 'no_release' };
+    const latest = releaseCandidate(releases, expectedCommit);
+    if (!latest) {
+      return {
+        status: expectedCommit ? 'awaiting_expected_release' : 'no_release',
+        expectedCommit
+      };
     }
-    const latest = candidates.sort(
-      (a, b) => Date.parse(b.published_at) - Date.parse(a.published_at)
-    )[0];
     const manifestAsset = latest.assets.find((a) => a.name === 'build-manifest.json');
     const dir = path.join(c.workDir, 'releases', String(latest.id));
     fs.mkdirSync(dir, { recursive: true });
-    await download(
-      assetURL(manifestAsset.browser_download_url, c.repository),
-      path.join(dir, 'build-manifest.json'),
-      100000
-    );
+    const manifestTransfer = await downloadReleaseAsset({
+      asset: manifestAsset,
+      repository: c.repository,
+      releaseId: latest.id,
+      file: path.join(dir, 'build-manifest.json'),
+      leaseFile: lock,
+      maxBytes: 100000
+    });
     const m = readJSON(path.join(dir, 'build-manifest.json'));
     if (
       m.repository !== c.repository ||
@@ -138,11 +121,19 @@ export async function update(c, { expectedCommit = null } = {}) {
         return { status: disposition, installedVersion: prev.version, releaseVersion: m.version };
       if (disposition === 'same_version_conflict') throw Error('Same-version artifact conflict');
     }
-    await download(
-      assetURL(file[0].browser_download_url, c.repository),
-      path.join(dir, m.apk),
-      250 * 1024 * 1024
-    );
+    await downloadReleaseAsset({
+      asset: file[0],
+      repository: c.repository,
+      releaseId: latest.id,
+      file: path.join(dir, m.apk),
+      leaseFile: lock,
+      expectedHash: m.sha256,
+      maxBytes: 250 * 1024 * 1024,
+      legacyManifest: {
+        file: path.join(dir, 'build-manifest.json'),
+        sha256: manifestTransfer.sha256
+      }
+    });
     if (
       fs.existsSync(path.join(c.workDir, 'device-test.lock')) ||
       fs.existsSync(path.join(c.workDir, 'qualification.lock'))
@@ -156,10 +147,9 @@ export async function update(c, { expectedCommit = null } = {}) {
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   let c;
   try {
-    const a = process.argv.slice(2);
-    if (!a.includes('--config')) throw Error('Explicit --config required');
-    c = validateConfig(readJSON(a[a.indexOf('--config') + 1]));
-    const result = await update(c);
+    const options = updateOptions(process.argv.slice(2));
+    c = validateConfig(readJSON(options.config));
+    const result = await update(c, { expectedCommit: options.expectedCommit });
     writeJSON(path.join(c.workDir, 'last-update-check.local.json'), {
       checkedAt: new Date().toISOString(),
       ...result
