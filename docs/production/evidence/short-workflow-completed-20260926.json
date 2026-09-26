@@ -1,0 +1,91 @@
+{
+  "schemaVersion": 1,
+  "repository": "neurofoxpro/multimental",
+  "taskId": "AUTO-06",
+  "observedAt": "2026-09-26T08:39:31.538Z",
+  "sourceCommit": "be15a31c1fac0b79d25a726dea6b63f182e3b3ca",
+  "implementation": {
+    "pr": 121,
+    "head": "a26065671a68f04e8c1d238816bd92ac834e1925",
+    "base": "d53d8d55ee43ed4aacd4034193345c26124b7d7e",
+    "prBuild": 36229598560,
+    "controller": 36229598580,
+    "sourceQuality": 36229598583,
+    "devBuild": 36229730848
+  },
+  "verification": {
+    "schemaVersion": 1,
+    "step": "verify",
+    "status": "passed",
+    "exitCode": 0,
+    "sourceDigest": "e8178925f1cfaaa580dae4e0893fc810148b309ecfce7a133353c07eb3ca96c2",
+    "sourceDigestAfter": "e8178925f1cfaaa580dae4e0893fc810148b309ecfce7a133353c07eb3ca96c2",
+    "sourceChanged": false,
+    "startedAt": "2026-09-26T08:21:06.199Z",
+    "finishedAt": "2026-09-26T08:22:29.040Z",
+    "host": "VENEL-SENDRIK",
+    "command": [
+      "node",
+      "tools/verify.mjs"
+    ],
+    "log": ".gameprod/evidence/verify.log",
+    "logHash": "daf306522028633d9ba14231cbac9602c8ecee3ac32bf2b9b26be03d6ed2a236",
+    "outputs": []
+  },
+  "acceptance": [
+    "npm run game -- next/task/check/ship и scripts/chat.cmd используют один контроллер.",
+    "Реестр не допускает циклы, потерянные зависимости, пустые критерии и ручное закрытие отсутствующего кода.",
+    "requirements, backlog и roadmap генерируются из workplan; CI проверяет отсутствие дрейфа.",
+    "Исторический verified не даёт допуск новому RC; непринятые идеи блокируют полное закрытие."
+  ],
+  "evidence": [
+    "docs/production/SHORT_COMMANDS.ru.md",
+    "docs/production/DEV_SETTLE.ru.md",
+    "docs/production/ISSUE_PLAN_SYNC.ru.md"
+  ],
+  "tests": {
+    "node": 670,
+    "formatterIntegration": "passed",
+    "gameRegression": "passed",
+    "rewards": 149,
+    "rewardsUI": 76,
+    "rewardsSimulationTrials": 1280
+  },
+  "realCycle": {
+    "pr": 121,
+    "release": {
+      "status": "published",
+      "sourceCommit": "be15a31c1fac0b79d25a726dea6b63f182e3b3ca",
+      "id": 397155966,
+      "tag": "v0.12.0-alpha.208.1",
+      "apkSha256": "282c625e8e5d2998702513e738f79c9a78b4413dccf70c7459fe8ea5321cb859",
+      "manifestSha256": "8e97d1caf82521ddfa42eaee8f0e20b35025c35f651a5ca1de289261b48b3fdd",
+      "verification": "successful_dev_build_and_github_asset_metadata",
+      "installation": "not_inferred"
+    },
+    "repeatedCompletion": true,
+    "duplicatePublish": false,
+    "duplicateMerge": false,
+    "firstCandidate": {
+      "head": "3a4bdb5056ffb9e7577ee2bc4de3c7caebef38b6",
+      "sourceQuality": "failed",
+      "reason": "pure source test accidentally imported optional formatter dependency"
+    },
+    "revision": "ship --revise preserved old receipt and reran full checks",
+    "readInterruptions": "resumed by same command; following hardening adds bounded automatic GET retries"
+  },
+  "contextMeasurement": {
+    "fullCachedJsonBytes": 247237,
+    "compactJsonBytes": 10149,
+    "unit": "JSON bytes, not measured model tokens",
+    "completeHistoryRetained": true
+  },
+  "manualAcceptance": "not_inferred",
+  "installation": "separate",
+  "productionAuthorized": false,
+  "limitations": [
+    "Historical proof does not qualify a future RC",
+    "Hardening of read retries, canonical Git EOL and concurrent writer guard is a subsequent checked increment",
+    "Issue attestation is not independent human approval"
+  ]
+}

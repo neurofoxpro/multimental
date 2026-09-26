@@ -1,6 +1,8 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { acceptIssue } from './task-acceptance.mjs';
+import { canonicalEvidenceBytes } from './versioned-evidence.mjs';
+import { workflowChildEnvironment } from './workflow-guard.mjs';
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { findRoot, readJSON, writeJSON, inside, context, fingerprint, sha, gate } from './lib.mjs';
@@ -38,6 +40,10 @@ function resultObject(text) {
 }
 function execution(root) {
   let sequence = 0;
+  let childEnv = process.env;
+  const setWorkflowLease = (lock) => {
+    childEnv = workflowChildEnvironment(root, lock);
+  };
   const call = (exe, args, timeout = 15000) => {
     const r = spawnSync(exe, args, {
       cwd: root,
@@ -57,7 +63,8 @@ function execution(root) {
       shell: false,
       encoding: 'utf8',
       timeout,
-      maxBuffer: 32 * 1024 * 1024
+      maxBuffer: 32 * 1024 * 1024,
+      env: childEnv
     });
     const file = inside(root, '.gameprod/evidence/' + name);
     fs.mkdirSync(path.dirname(file), { recursive: true });
@@ -66,7 +73,7 @@ function execution(root) {
       throw Error('WORKFLOW_STAGE_FAILED:' + args[0] + '; log=.gameprod/evidence/' + name);
     return (r.stdout || '').trim();
   };
-  return { call, game };
+  return { call, game, setWorkflowLease };
 }
 export async function main(args = process.argv.slice(2)) {
   const { mode, rest, revise } = shortOptions(args);
@@ -80,7 +87,7 @@ export async function main(args = process.argv.slice(2)) {
   if (mode !== 'focus' && process.env.GITHUB_ACTIONS === 'true')
     throw Error('SHORT_WORKFLOW_STATION_ONLY');
   await guardWorktree(root, mode, rest);
-  const { call, game } = execution(root);
+  const { call, game, setWorkflowLease } = execution(root);
   const binding = optionalJSON(inside(root, '.gameprod/agent.local.json'));
   const token = process.env.GH_TOKEN || process.env.GITHUB_TOKEN || call('gh', ['auth', 'token']);
   const client = new HubClient(token);
@@ -117,6 +124,23 @@ export async function main(args = process.argv.slice(2)) {
     dirty: !!call('git', ['status', '--porcelain']),
     binding: optionalJSON(inside(root, '.gameprod/agent.local.json'))
   });
+  const versioned = (reference) => {
+    const local = fs.readFileSync(safePath(root, reference));
+    const r = spawnSync('git', ['show', 'HEAD:' + reference], {
+      cwd: root,
+      shell: false,
+      encoding: null,
+      timeout: 15000,
+      maxBuffer: 1048576
+    });
+    if (r.error || r.status !== 0 || !Buffer.isBuffer(r.stdout)) throw Error('EVIDENCE_GIT_READ');
+    return canonicalEvidenceBytes(
+      local,
+      r.stdout,
+      call('git', ['rev-parse', 'HEAD:' + reference]),
+      call('git', ['hash-object', '--path=' + reference, reference])
+    );
+  };
   if (mode === 'focus') {
     const comments = await client.list('/issues/' + row.issue + '/comments');
     const memory = await client.list('/issues/' + snapshot.index + '/comments');
@@ -207,6 +231,7 @@ export async function main(args = process.argv.slice(2)) {
       task: id
     });
     try {
+      setWorkflowLease(readJSON(inside(root, '.gameprod/evidence/short-workflow.lock')));
       if (revise) {
         const journal = optionalJSON(stateFile);
         if (!journal?.pr) throw Error('SHIP_REVISION_NEEDS_KNOWN_PR');
@@ -325,7 +350,8 @@ export async function main(args = process.argv.slice(2)) {
     const rel = rest[1];
     if (!/^docs\/production\/evidence\/[a-zA-Z0-9_.-]+\.json$/.test(rel))
       throw Error('VERSIONED_PUBLIC_PROOF_REQUIRED');
-    const bytes = fs.readFileSync(safePath(root, rel));
+    const verifiedProof = versioned(rel);
+    const bytes = verifiedProof.bytes;
     if (bytes.length > 1048576) throw Error('PROOF_TOO_LARGE');
     const proof = JSON.parse(bytes.toString('utf8'));
     assertProof(proof, task);
@@ -339,9 +365,7 @@ export async function main(args = process.argv.slice(2)) {
     if (!own.merged_at || own.merge_commit_sha !== publication.merge)
       throw Error('ACCEPT_SOURCE_NOT_MERGED');
     for (const reference of [...proof.evidence, rel]) {
-      const file = safePath(root, reference);
-      if (call('git', ['show', 'HEAD:' + reference]) !== fs.readFileSync(file, 'utf8').trim())
-        throw Error('ACCEPT_UNCOMMITTED_EVIDENCE');
+      versioned(reference);
     }
     const implemented = await client.api('GET', '/pulls/' + proof.implementation.pr);
     assertPull(implemented, implemented.head?.ref, proof.implementation.head);

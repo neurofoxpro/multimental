@@ -1,5 +1,6 @@
 import { replaceSource } from './source-edit.mjs';
 import fs from 'node:fs';
+import { assertSourceWorkflow } from './workflow-guard.mjs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { spawnSync } from 'node:child_process';
@@ -33,6 +34,7 @@ export function safePath(root, p) {
   return inside(root, p);
 }
 export function assertEditLease(root) {
+  assertSourceWorkflow(root);
   const file = inside(root, '.gameprod/evidence/ops.lock');
   if (fs.existsSync(file)) {
     const lock = readJSON(file);
