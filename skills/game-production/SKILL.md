@@ -17,6 +17,12 @@ For a bound worktree, the common CLI verifies current ownership before mutation.
 
 Use an isolated slice for UX research and another for economy. The current source is not a permanent external agent: starting worktrees does not spawn independent reasoning agents or promise work after this chat stops. Each new chat reads live Issues and claims a unique alias through the same commands.
 
+## Measured UX and refreshing a parallel slice
+
+`ux-audit` captures 24 real logical-layout combinations (RU/EN, menu/collection/battle/shop, three viewport shapes) in an isolated profile. It checks actual viewport against requested size and distinguishes clipped scroll content from the full hit target. Read docs/production/UX_AUDIT.ru.md before redesign. Logical units are not dp/CSS pixels; automated geometry is not human usability or screen-reader certification.
+
+`collab refresh` safely fast-forwards a still-ancestral owned feature slice to the exact observed dev while preserving nonoverlapping drafts byte-for-byte. Divergence, incoming changes on a dirty path, unknown ownership or mismatched readback stop it. No reset, rebase, force, stash or new branch is used. After refresh, run fresh audit; earlier source receipts no longer qualify. This avoids throwing away parallel work merely because another task has merged. See docs/production/SLICE_REFRESH.ru.md.
+
 ## Scope and authority
 Only repository `neurofoxpro/multimental`. Only personal station `VENEL-SENDRIK`; GitHub-hosted CI and internal source-only work are allowed. Check the actual hostname, remote and branch. Do not use another computer or repository. Keep credentials, phone identifiers and raw logs private.
 

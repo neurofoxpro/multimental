@@ -458,6 +458,10 @@ export async function main(argv = process.argv.slice(2)) {
     await (await import('./device-lock-recovery.mjs')).main(entryArgs);
     return;
   }
+  if (entry === 'ux-audit') {
+    await (await import('../../../tools/ux-audit.mjs')).main(entryArgs);
+    return;
+  }
   if (entry === 'inspect') {
     (await import('../../../tools/source-inspect.mjs')).main(entryArgs);
     return;
