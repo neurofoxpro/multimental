@@ -1,21 +1,8 @@
 {
   "schemaVersion": 1,
   "repository": "neurofoxpro/multimental",
-  "revision": 140,
+  "revision": 141,
   "claims": {
-    "d5a91cf9-304c-4962-b3fa-06d884f97efb": {
-      "token": "d5a91cf9-304c-4962-b3fa-06d884f97efb",
-      "task": "UX-05",
-      "owner": "journey-safearea-20260926-1410",
-      "base": "ba379967f6c2231f33263fb2a91185ed13aefe5a",
-      "resources": [
-        "area:game-ui",
-        "task:UX-05"
-      ],
-      "fence": 137,
-      "updatedAt": 1790431808726,
-      "expiresAt": 1790433608726
-    },
     "b3a65fb9-46a7-4678-8abe-f5a823e335f9": {
       "token": "b3a65fb9-46a7-4678-8abe-f5a823e335f9",
       "task": "AUTO-07",
@@ -2567,6 +2554,18 @@
         "fence": 138,
         "updatedAt": 1790432712223,
         "expiresAt": 1790434512223
+      }
+    },
+    {
+      "id": "c9fd0a26-707a-4e06-b612-1c6260939e5b",
+      "hash": "90a4b483d85d2fbe88661068977a2a25d8e00a1532db2495ed9c0a48b3ab7b55",
+      "revision": 141,
+      "result": {
+        "status": "released",
+        "token": "d5a91cf9-304c-4962-b3fa-06d884f97efb",
+        "task": "UX-05",
+        "owner": "journey-safearea-20260926-1410",
+        "fence": 137
       }
     }
   ]
