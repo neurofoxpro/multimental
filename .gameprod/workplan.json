@@ -1,67 +1,1340 @@
 {
   "schemaVersion": 1,
   "repository": "neurofoxpro/multimental",
-  "updatedAt": "2026-09-25",
+  "updatedAt": "2026-09-26",
   "baselineCommit": "cff25564c064c463b9bb742248110f3a0ff9328f",
   "evidenceSemantics": "Verified means historically observed at linked evidence. No current RC, owner approval, Play publication or physical installation is inferred from metadata.",
   "intent": "Close all accepted ideas before full Play launch; dev builds remain incremental. Explicit owner-deferred decisions stay blockers until resolved or explicitly scoped out.",
   "tasks": [
-    {"id":"AUTH-01","title":"Единственный репозиторий и разрешённая станция; бесплатные инструменты и защищённые действия","stage":"P0. Единый производственный процесс","kind":"automation","status":"verified","dependsOn":[],"acceptance":["Только neurofoxpro/multimental; личное выполнение только VENEL-SENDRIK; GitHub CI разрешён.","Не менять main/stable/production без отдельного согласия; не удалять данные телефона."],"evidence":["docs/production/AUTHORITY.md"],"readset":["AGENTS.md"],"source":"D00–D01, D15–D18; полный чат","requiredForBeta":true,"requiredForPlay":true,"priority":50},
-    {"id":"AUTO-01","title":"Существующий dev-цикл: проверка → PR → CI → испытания → dev → доставка","stage":"P0. Единый производственный процесс","kind":"automation","status":"verified","dependsOn":[],"acceptance":["Операции используют scoped ops; факты привязаны к конкретному SHA, не к текстовому обещанию."],"evidence":["docs/production/evidence/production-v2-cycle.json"],"readset":["skills/game-production/scripts/ops.mjs"],"source":"D15–D18; подтверждённый цикл","requiredForBeta":true,"requiredForPlay":true,"priority":50},
-    {"id":"AUTO-02","title":"Обновление телефона без потери данных и с постоянной приватной dev-подписью","stage":"P0. Единый производственный процесс","kind":"automation","status":"verified","dependsOn":[],"acceptance":["Повторная установка идемпотентна; нет uninstall/clear/downgrade телефона.","Исходный и переподписанный APK различаются и учитываются раздельно."],"evidence":["docs/production/evidence/balance-release-completed.json"],"readset":["scripts/install-device.mjs","scripts/deliver-commit.mjs"],"source":"D16 и установленная .105.1","requiredForBeta":true,"requiredForPlay":true,"priority":50},
-    {"id":"AUTO-03","title":"Два выделенных эмулятора; аппаратные проверки отделены от виртуальных","stage":"P0. Единый производственный процесс","kind":"automation","status":"verified","dependsOn":[],"acceptance":["Историческая матрица не выдаётся за испытание текущего артефакта."],"evidence":["docs/production/evidence/balance-release-completed.json"],"readset":["scripts/qualification.mjs"],"source":"D15–D18; матрица кандидата .104.1","requiredForBeta":true,"requiredForPlay":true,"priority":50},
-    {"id":"AUTO-04","title":"Русский changelog, фиксированные инструменты и автоматическое ревью инвариантов","stage":"P0. Единый производственный процесс","kind":"automation","status":"verified","dependsOn":[],"acceptance":["Описания берутся из change fragments; код и workflow проходят прежние проверки."],"evidence":["scripts/changelog.mjs","tools/review.mjs"],"readset":["tools/verify.mjs"],"source":"D17–D18","requiredForBeta":true,"requiredForPlay":true,"priority":50},
-    {"id":"AUTO-05","title":"Реестр исследований и перенос контекста между агентами","stage":"P0. Единый производственный процесс","kind":"automation","status":"implemented","dependsOn":["AUTO-01"],"acceptance":["Пакет задачи содержит точные readset, гипотезу, контроль, лимиты и критерии.","После прерывания агент продолжает с первой непроверенной стадии."],"evidence":["scripts/research.mjs","scripts/handoff.mjs"],"readset":[".gameprod/research.json"],"source":"D17–D18; поручение 25.09.2026","requiredForBeta":true,"requiredForPlay":true,"priority":20},
-    {"id":"AUTO-06","title":"Один вход для человека и агента; единый граф требований без дрейфа roadmap","stage":"P0. Единый производственный процесс","kind":"automation","status":"implemented","dependsOn":["AUTH-01"],"acceptance":["npm run game -- next/task/check/ship и scripts/chat.cmd используют один контроллер.","Реестр не допускает циклы, потерянные зависимости, пустые критерии и ручное закрытие отсутствующего кода.","requirements, backlog и roadmap генерируются из workplan; CI проверяет отсутствие дрейфа.","Исторический verified не даёт допуск новому RC; непринятые идеи блокируют полное закрытие."],"evidence":[],"readset":["skills/game-production/scripts/ops.mjs","scripts/readiness.mjs","tools/verify.mjs"],"source":"Последнее поручение: все цепочки одной командой, 25.09.2026","requiredForBeta":true,"requiredForPlay":true,"priority":1},
-    {"id":"AUTO-07","title":"Безопасное восстановление всех цепочек и минимальный пакет следующему агенту","stage":"P0. Единый производственный процесс","kind":"automation","status":"planned","dependsOn":["AUTO-06"],"acceptance":["Каждый шаг имеет ограничения времени, lock, fingerprint входов, журнал результата и команду возобновления.","После обрыва чтение состояния предшествует повтору записи; устаревшая квитанция отклоняется.","Тесты: сбой до/после commit, upload, merge, sign, install; не повторять побочные эффекты."],"evidence":[],"readset":["skills/game-production/scripts/ops.mjs","scripts/handoff.mjs"],"source":"Полный чат; поручение 25.09.2026","requiredForBeta":true,"requiredForPlay":true,"priority":25},
-    {"id":"AUTO-08","title":"Воспроизводимый offline toolchain и обновление зависимостей отдельным PR","stage":"P0. Единый производственный процесс","kind":"automation","status":"planned","dependsOn":["AUTO-06"],"acceptance":["Подготовленный образ/кэш содержит точные версии и хеши; verify работает без сети.","Node/Godot/SDK/export templates/versionCode согласованы; аудит лицензий и зависимостей.","Обновление движка не выполняется попутно с балансом."],"evidence":[],"readset":[".gameprod/toolchain.json",".github/workflows/build.yml"],"source":"Этапы 8,14; поручение 25.09.2026","requiredForBeta":true,"requiredForPlay":true,"priority":40},
-    {"id":"CORE-01","title":"Дуэль 3×3; пять клеток или одновременно пустые рука и колода","stage":"P1. Сохранить уже работающую игру","kind":"game","status":"verified","dependsOn":[],"acceptance":["Сохранить условия победы; выполнить regression на новом кандидате."],"evidence":["game/tests/core_test.gd"],"readset":[".gameprod/decisions.json","game/src/match_core.gd"],"source":"D02; этапы 1,4","requiredForBeta":true,"requiredForPlay":true,"priority":50},
-    {"id":"CORE-02","title":"Размещение и добровольная направленная атака; прежнее одно действие заменено D19","stage":"P1. Сохранить уже работающую игру","kind":"game","status":"verified","dependsOn":[],"acceptance":["Новый юнит атакует бесплатно, прежний за 1; бонус второй стороны сохраняется.","Не возвращать раннее ограничение одним действием без решения владельца."],"evidence":["game/tests/directional_test.gd"],"readset":[".gameprod/decisions.json","game/src/match_core.gd"],"source":"D19 заменяет часть D04","requiredForBeta":true,"requiredForPlay":true,"priority":50},
-    {"id":"CORE-03","title":"Поворот, первый удар по зоне, дружественный огонь, ответ только выживших","stage":"P1. Сохранить уже работающую игру","kind":"game","status":"verified","dependsOn":[],"acceptance":["Порядок D19–D20: все цели первого удара, затем ответ выживших по их геометрии, без каскада.","Дружественный огонь подтверждается игроком."],"evidence":["game/tests/directional_test.gd"],"readset":[".gameprod/decisions.json","game/src/match_core.gd"],"source":"D19–D20","requiredForBeta":true,"requiredForPlay":true,"priority":50},
-    {"id":"CORE-04","title":"30 карт и 10 стихий; полная мультивселенная и свободное смешивание","stage":"P1. Сохранить уже работающую игру","kind":"game","status":"verified","dependsOn":[],"acceptance":["Огонь, вода, молния, воздух, земля, свет, тьма, меха, яд, тайна; без встроенного круга контрстихий.","Происхождение существа не ограничивает фракцию; колоды свободно смешиваются."],"evidence":["docs/production/evidence/balance-release-completed.json"],"readset":[".gameprod/decisions.json","game/src/match_core.gd"],"source":"D10 расширен D19","requiredForBeta":true,"requiredForPlay":true,"priority":50},
-    {"id":"CORE-05","title":"Таймер в фоне, два пропуска и ограничение затянутой сессии","stage":"P1. Сохранить уже работающую игру","kind":"game","status":"verified","dependsOn":[],"acceptance":["Фон не сбрасывает таймер; пропуски и отсоединение обрабатываются по режиму.","Автоматическая длительность не заменяет измерения человеческой партии."],"evidence":["game/tests/room_test.gd"],"readset":[".gameprod/decisions.json","game/src/match_core.gd"],"source":"D03–D04; этапы 3,5,6","requiredForBeta":true,"requiredForPlay":true,"priority":50},
-    {"id":"CORE-06","title":"Чистое детерминированное ядро и воспроизведение; отдельные журналы","stage":"P1. Сохранить уже работающую игру","kind":"game","status":"verified","dependsOn":[],"acceptance":["Результат не зависит от FPS/анимаций/транспорта; команды и seed воспроизводят матч.","Не передавать полное скрытое состояние и seed чужому клиенту."],"evidence":["game/tests/core_test.gd"],"readset":[".gameprod/decisions.json","game/src/match_core.gd"],"source":"D08–D09; этапы 8–10","requiredForBeta":true,"requiredForPlay":true,"priority":50},
-    {"id":"CORE-07","title":"Стихийные клетки, +1 HP, открытие центра и доход по порогам 4/6","stage":"P1. Сохранить уже работающую игру","kind":"game","status":"verified","dependsOn":[],"acceptance":["Центр открывается при 5 юнитах или индивидуальном ходе 7; доход добавляется только в последующие начала ходов.","Пулы внешних/центральной клеток и максимум две клетки каждой стихии соответствуют D20."],"evidence":["game/tests/terrain_test.gd"],"readset":[".gameprod/decisions.json","game/src/match_core.gd"],"source":"D20–D21","requiredForBeta":true,"requiredForPlay":true,"priority":50},
-    {"id":"UX-01","title":"Android портретный, Web альбомный; один палец/мышь, RU/EN","stage":"P1. Сохранить уже работающую игру","kind":"ui","status":"verified","dependsOn":[],"acceptance":["Историческая Android-реализация сохранена; Web-релиз отдельно PLATFORM-01."],"evidence":["game/tests/ui_test.gd"],"readset":["game/src/main.gd"],"source":"D04,D07","requiredForBeta":true,"requiredForPlay":true,"priority":50},
-    {"id":"UX-02","title":"Подсветки, сообщения ошибок, урон и объяснение результата","stage":"P1. Сохранить уже работающую игру","kind":"ui","status":"verified","dependsOn":[],"acceptance":["Повторить реальные ввод/отображение на текущем RC; недопустимый ход не расходует ресурс."],"evidence":["game/src/main.gd"],"readset":["game/src/main.gd"],"source":"Этап 5; поздние UI и directional изменения","requiredForBeta":true,"requiredForPlay":true,"priority":50},
-    {"id":"UX-03","title":"Громкость по категориям и музыка","stage":"P1. Сохранить уже работающую игру","kind":"ui","status":"verified","dependsOn":[],"acceptance":["Сохранять настройки; тестировать выключение/возврат музыки и эффектов."],"evidence":["docs/production/evidence/tutorial-audio-release-82.json"],"readset":["game/src/main.gd"],"source":"D07; PR17","requiredForBeta":true,"requiredForPlay":true,"priority":50},
-    {"id":"UX-04","title":"Безопасный тренировочный бой без длинного обучения","stage":"P1. Сохранить уже работающую игру","kind":"ui","status":"verified","dependsOn":[],"acceptance":["Повторяемое безопасное обучение; субъективная понятность остаётся человеческой приёмкой."],"evidence":["docs/production/evidence/tutorial-audio-release-82.json"],"readset":["game/src/main.gd"],"source":"D07; PR17","requiredForBeta":true,"requiredForPlay":true,"priority":50},
-    {"id":"META-05","title":"Полный профиль, транзакции сохранения и миграции без потери коллекции","stage":"P2. Коллекция, профиль и экономика","kind":"game","status":"planned","dependsOn":["CORE-06"],"acceptance":["Разделены настройки, коллекция, колоды, валюты, журнал экономики и последний матч.","Атомарная фиксация логической операции, резервная копия, schemaVersion и миграция предыдущего формата.","Тесты обрыва записи, повреждения, дубля транзакции, обновления .dev и восстановления."],"evidence":[],"readset":["game/src/main.gd","game/src/match_core.gd"],"source":"Этапы 5,6,9,12; D05–D07","requiredForBeta":true,"requiredForPlay":true,"priority":10},
-    {"id":"META-01","title":"Коллекция, экземпляры, конструктор и выбор собственной колоды","stage":"P2. Коллекция, профиль и экономика","kind":"game","status":"planned","dependsOn":["META-05"],"acceptance":["Каталог/поиск/фильтры, количество копий, создание/правка/проверка/сохранение нескольких колод.","Колода может смешивать любые стихии; смена колоды используется реальным матчем и переживает обновление."],"evidence":[],"readset":["game/src/match_core.gd","game/src/main.gd"],"source":"Этапы 1,4,6; D05–D06","requiredForBeta":true,"requiredForPlay":true,"priority":11},
-    {"id":"CONTENT-03","title":"Фабрика карточного контента: данные → схема → семантика → симуляция → каталог","stage":"P2. Коллекция, профиль и экономика","kind":"automation","status":"planned","dependsOn":["CORE-06","META-01"],"acceptance":["Стабильный ID/версия; описание RU/EN не исполняемый код; неизвестный эффект отклоняется.","Кандидат отдельно от принятого набора; контроль seed, стоимости, комбинаций и происхождения иллюстраций.","Простая карта добавляется проверенными данными через команду; сложный эффект требует тестируемого обработчика."],"evidence":[],"readset":["tools/balance.mjs","game/src/match_core.gd"],"source":"Этапы 4,9,11; генерация контента и последний запрос","requiredForBeta":true,"requiredForPlay":true,"priority":15},
-    {"id":"META-02","title":"Магазин и паки по пять карт за отдельную валюту лобби","stage":"P2. Коллекция, профиль и экономика","kind":"game","status":"planned","dependsOn":["META-05","META-01"],"acceptance":["Все пять карт добавляются один раз; деньги списываются один раз даже при аварии.","Показываются содержимое/шансы/правила дублей; цены и вероятности тестируемы, без реальных покупок."],"evidence":[],"readset":["game/src/main.gd"],"source":"Этапы 4,6; D06","requiredForBeta":true,"requiredForPlay":true,"priority":12},
-    {"id":"META-03","title":"Пыль, дубликаты и целевой крафт карт","stage":"P2. Коллекция, профиль и экономика","kind":"game","status":"planned","dependsOn":["META-02"],"acceptance":["Цена и преобразование дублей вынесены в конфигурацию; крафт выбранной карты транзакционен.","Не уничтожать нужные копии; никакого усиления статов карты через гринд."],"evidence":[],"readset":["game/src/main.gd"],"source":"Этапы 4,6; D06","requiredForBeta":true,"requiredForPlay":true,"priority":13},
-    {"id":"META-04","title":"Награды, ежедневные задания и уровни без обязательного гринда","stage":"P2. Коллекция, профиль и экономика","kind":"game","status":"planned","dependsOn":["META-02","META-03"],"acceptance":["Награды победы/заданий идемпотентны; отрицательный результат не отнимает коллекцию.","Ежедневные задания не требуют вечного онлайна; локальные часы не являются доверенной рейтинговой экономикой.","Симуляция времени получения нужной колоды: распределение, не только среднее."],"evidence":[],"readset":[".gameprod/decisions.json"],"source":"Этапы 1,3,4; D05–D06,D14","requiredForBeta":true,"requiredForPlay":true,"priority":14},
-    {"id":"UX-05","title":"Шесть полноценных экранов и пользовательский сквозной сценарий","stage":"P2. Коллекция, профиль и экономика","kind":"ui","status":"planned","dependsOn":["META-04"],"acceptance":["Меню, настройки, магазин, коллекция/колоды, подготовка и бой работают без неактивных заглушек.","Обучение → награда → пак → крафт → своя колода → матч → перезапуск; RU/EN, 16:9/18:9 и реальные вырезы."],"evidence":[],"readset":["game/src/main.gd","docs/MANUAL_TESTS.ru.md"],"source":"Этапы 5,6; D07","requiredForBeta":true,"requiredForPlay":true,"priority":16},
-    {"id":"BALANCE-01","title":"Преимущество первого хода, длительность и разнообразие колод","stage":"P3. Механики, баланс и реальные дуэли","kind":"game","status":"planned","dependsOn":["CORE-07","CONTENT-03"],"acceptance":["Парные seed и перестановка сторон, несколько стратегий, воспроизводимость и поиск бесконечных циклов.","61,8% первого игрока в старой серии не финальный баланс; допуски заданы до новой серии.","Человеческие длительности отдельно: около 10 минут, затянутые не более 15."],"evidence":[],"readset":["tools/balance.mjs","docs/production/BALANCE_TUNING.ru.md"],"source":"D21; сохранённые эксперименты 7040/64","requiredForBeta":true,"requiredForPlay":true,"priority":20},
-    {"id":"CONTENT-01","title":"Решение по ранее отложенной особой системе взаимодействий","stage":"P3. Механики, баланс и реальные дуэли","kind":"product","status":"manual","dependsOn":[],"acceptance":["Владелец описывает свою идею либо явно подтверждает перенос за первую Play-версию.","Не подменять её автоматическим кругом сильных/слабых стихий; варианты и решение занесены в ADR."],"evidence":[],"readset":[".gameprod/decisions.json"],"source":"D12: владелец явно отложил основную идею","requiredForBeta":true,"requiredForPlay":true,"priority":70},
-    {"id":"CONTENT-04","title":"Реализация и эксперименты принятой особой системы","stage":"P3. Механики, баланс и реальные дуэли","kind":"game","status":"planned","dependsOn":["CONTENT-01","CONTENT-03"],"acceptance":["После продуктового решения реализовать либо явно убрать из first-Play scope через ADR, не выдавая за сделанное.","Прототип, regression, баланс, UI и повтор по seed; только затем в релизный набор."],"evidence":[],"readset":["game/src/match_core.gd"],"source":"D12; полное закрытие идей перед Play","requiredForBeta":true,"requiredForPlay":true,"priority":72},
-    {"id":"CONTENT-02","title":"Два дополнительных боевых ресурса","stage":"P3. Механики, баланс и реальные дуэли","kind":"game","status":"planned","dependsOn":["CONTENT-03","CONTENT-01"],"acceptance":["Определены источники/накопление/расход; цена карты содержит resource map.","Симуляции тупиков/темпа; интерфейс и AI поддерживают ресурсы; либо явное решение о переносе."],"evidence":[],"readset":["game/src/match_core.gd",".gameprod/decisions.json"],"source":"D06; этап 6: добавить позже","requiredForBeta":false,"requiredForPlay":true,"priority":73},
-    {"id":"NET-01","title":"LAN-комната и настоящая локальная партия","stage":"P3. Механики, баланс и реальные дуэли","kind":"network","status":"verified","dependsOn":[],"acceptance":["Не раскрывать чужую руку/seed; hash не доказывает честность хоста.","Повторить совместимость и reconnect на итоговом кандидате."],"evidence":["docs/production/evidence/lan-release-completed.json"],"readset":["game/tests/room_test.gd"],"source":"D09; PR14","requiredForBeta":true,"requiredForPlay":true,"priority":50},
-    {"id":"NET-02","title":"Хост-авторитет, приватные проекции, совместимость и повторные команды","stage":"P3. Механики, баланс и реальные дуэли","kind":"network","status":"verified","dependsOn":[],"acceptance":["Не раскрывать чужую руку/seed; hash не доказывает честность хоста.","Повторить совместимость, истечение таймера и reconnect на итоговом кандидате."],"evidence":["game/tests/room_test.gd"],"readset":["game/tests/room_test.gd"],"source":"D09; этапы 9–10","requiredForBeta":true,"requiredForPlay":true,"priority":50},
-    {"id":"NET-03","title":"Bluetooth RFCOMM лаборатория без Wi-Fi","stage":"P3. Механики, баланс и реальные дуэли","kind":"network","status":"verified","dependsOn":[],"acceptance":["Сохранить различие лаборатории и готового phone-to-phone режима."],"evidence":["docs/production/evidence/production-v2-transports.json"],"readset":["game/tests/room_test.gd"],"source":"D15; аппаратные квитанции","requiredForBeta":true,"requiredForPlay":true,"priority":50},
-    {"id":"NET-04","title":"Пользовательский Bluetooth на двух физических Android","stage":"P3. Механики, баланс и реальные дуэли","kind":"network","status":"implemented","dependsOn":["NET-03"],"acceptance":["Windows↔Android не заменяет Android↔Android: обе роли, сопряжение, отказ разрешения, фон и повторное соединение.","Журнал конкретных версий/артефактов и редактированная квитанция; сырые device ID не публикуются."],"evidence":["docs/production/evidence/bluetooth-release-completed.json"],"readset":["scripts/bluetooth-room-test.mjs"],"source":"D03,D09; второй физический телефон ещё не проверен","requiredForBeta":true,"requiredForPlay":true,"priority":22},
-    {"id":"BETA-01","title":"Ручная оценка интереса, темпа и читаемости конкретной версии","stage":"P3. Механики, баланс и реальные дуэли","kind":"subjective","status":"manual","dependsOn":["UX-05","BALANCE-01"],"acceptance":["Владелец проверяет обычный матч и весь цикл коллекции; отзыв привязан к версии и сценарию.","Автоботы и скриншот главного меню не заменяют субъективную приёмку."],"evidence":[],"readset":["docs/MANUAL_TESTS.ru.md"],"source":"Ручная приёмка, согласованная во всём чате","requiredForBeta":true,"requiredForPlay":true,"priority":80},
-    {"id":"PLATFORM-01","title":"Рабочая Web-сборка и альбомный интерфейс","stage":"P4. Web, онлайн и синхронизация","kind":"platform","status":"planned","dependsOn":["UX-05"],"acceptance":["Отдельная команда экспорта, браузерный smoke и реальная партия; mouse и storage ограничения проверены.","Совместимость правил/контента с Android, LAN/TLS браузера, offline-cache при заявленной поддержке."],"evidence":[],"readset":["game/export_presets.cfg","tools/project.mjs"],"source":"D03,D04,D08; этапы 2,5,8","requiredForBeta":false,"requiredForPlay":true,"priority":45},
-    {"id":"NET-06","title":"Онлайн-служба с тем же авторитетным ядром","stage":"P4. Web, онлайн и синхронизация","kind":"network","status":"planned","dependsOn":["NET-02"],"acceptance":["Предпочтительно headless Godot матчи; PHP/Swoole допустим вокруг, но не дублирует правила боя.","WSS, версии протокола, rooms, таймер/пропуски/reconnect/сбои/ресурсные лимиты.","Реально бесплатный или предоставленный владельцем хостинг; sleep/квоты учитываются, доступность не обещается."],"evidence":[],"readset":["game/tests/room_test.gd","game/src/match_core.gd"],"source":"D03,D09; этап 10","requiredForBeta":false,"requiredForPlay":true,"priority":46},
-    {"id":"NET-07","title":"Аккаунт, синхронизация профиля и удаление данных","stage":"P4. Web, онлайн и синхронизация","kind":"network","status":"planned","dependsOn":["META-05","NET-06"],"acceptance":["Игра offline/LAN/BT не требует аккаунта; авторизация минимально необходимая.","Конфликты валют/коллекции не решаются доверием клиенту; разделены локальные и серверные операции.","Удаление из игры и веб-страница запроса, logout/revoke, экспорт/удаление и политика хранения протестированы."],"evidence":[],"readset":[".gameprod/decisions.json"],"source":"D07,D09; этапы 5,10","requiredForBeta":false,"requiredForPlay":true,"priority":47},
-    {"id":"RATING-01","title":"Окончательный смысл рейтинга без потери очков","stage":"P4. Web, онлайн и синхронизация","kind":"product","status":"manual","dependsOn":[],"acceptance":["Отдельно решить видимый прогресс, скрытый навык, потери/несгораемые ступени.","Не переписывать обещание «рейтинг не уменьшается» без явного решения."],"evidence":[],"readset":[".gameprod/decisions.json"],"source":"D14; прямой ответ этапа 4","requiredForBeta":false,"requiredForPlay":true,"priority":75},
-    {"id":"NET-05","title":"Рейтинг, подбор и серверная экономика","stage":"P4. Web, онлайн и синхронизация","kind":"network","status":"planned","dependsOn":["NET-07","RATING-01","META-04"],"acceptance":["Результат учитывает авторитетный сервер; LAN/BT не изменяют глобальный рейтинг.","Повтор результата не выдаёт награду дважды; матчмейкинг и антиабуз проверены."],"evidence":[],"readset":["game/tests/room_test.gd"],"source":"D02,D09,D14; долгосрочная мотивация рейтинга","requiredForBeta":false,"requiredForPlay":true,"priority":48},
-    {"id":"STORE-01","title":"Play Console: владелец, тип аккаунта, верификация и бюджет","stage":"P5. Релизная сборка и магазин","kind":"external","status":"manual","dependsOn":[],"acceptance":["Уточнить существование аккаунта и статус в Play Console; не требовать повторную регистрацию.","Если аккаунта нет, регистрация/документы/сбор требуют действий и согласия владельца; токены не отправляются в чат.","Определить применимость обязательного closed-test к типу и дате аккаунта."],"evidence":[],"readset":["docs/production/PLAY_RELEASE.ru.md"],"source":"Бюджет этапа 0 и требование Play; официальные правила повторно проверяются перед RC","requiredForBeta":false,"requiredForPlay":true,"priority":30},
-    {"id":"STORE-02","title":"Создать приложение в Play Console и настроить ограниченный доступ публикации","stage":"P5. Релизная сборка и магазин","kind":"external","status":"manual","dependsOn":["STORE-01"],"acceptance":["Пакет pro.neurofox.multimental не меняется после регистрации; владелец принимает условия/Play App Signing.","Первичную настройку и загрузку, которую требует Console, выполняет владелец; API не создаёт app с нуля.","Сервисный доступ app-only; CI короткоживущие credentials; секреты только в защищённом хранилище."],"evidence":[],"readset":["docs/production/PLAY_RELEASE.ru.md"],"source":"Google Play Developer API lifecycle; бюджет и полномочия владельца","requiredForBeta":false,"requiredForPlay":true,"priority":31},
-    {"id":"RELEASE-02","title":"Production upload key и сохранный переход dev → production","stage":"P5. Релизная сборка и магазин","kind":"automation","status":"planned","dependsOn":["META-05"],"acceptance":["Постоянные отдельные dev и prod пакеты/ключи, резервирование закрытого ключа, неизменяемый отпечаток.","AAB upload-signature и распространяемые Play APK подписаны разными ролями ключей.","Экспорт/импорт dev-профиля в prod испытан; нельзя удалить .dev ради установки .prod."],"evidence":[],"readset":["scripts/install-device.mjs","game/export_presets.cfg"],"source":"Приватная dev-подпись и первоначальное требование без потерь; Play App Signing","requiredForBeta":false,"requiredForPlay":true,"priority":32},
-    {"id":"RELEASE-03","title":"Production AAB: target API36+, 64-bit и проверка 16KB","stage":"P5. Релизная сборка и магазин","kind":"automation","status":"planned","dependsOn":["RELEASE-02"],"acceptance":["Отдельный production preset и одна команда AAB; debug выключен, package без .dev.","Проверить актуальный target requirement в день RC; на 25.09.2026 минимальный target API36.","bundletool validate, ELF/zip alignment всех native .so и запуск на 16KB Android.","Монотонный versionCode относительно всех Play tracks, а не только локальной версии."],"evidence":[],"readset":[".github/workflows/build.yml","game/export_presets.cfg","tools/project.mjs"],"source":"Android Developers target SDK и page-size; проверено 25.09.2026","requiredForBeta":false,"requiredForPlay":true,"priority":33},
-    {"id":"STORE-03","title":"Инвентаризация данных, разрешений, SDK и лицензий","stage":"P5. Релизная сборка и магазин","kind":"automation","status":"planned","dependsOn":["NET-07","CONTENT-03"],"acceptance":["Код Apache-2.0, свои ассеты отдельно; происхождение каждого чужого ресурса и сгенерированного кандидата.","Нет закрытых плагинов/рекламы/платежей без нового решения; SBOM и разрешения проверяются сборкой.","Privacy/Data Safety отражают действительный код, включая online/BT/logs, не «ничего не собираем» по умолчанию."],"evidence":[],"readset":[".gameprod/decisions.json",".gameprod/play.json"],"source":"D01,D08,D11; Play store disclosures","requiredForBeta":false,"requiredForPlay":true,"priority":49},
-    {"id":"STORE-04","title":"Подтверждение аудитории и правовых деклараций","stage":"P5. Релизная сборка и магазин","kind":"product","status":"manual","dependsOn":["STORE-03"],"acceptance":["Возраст «любой» не автоматически равен store rating; определить реальные группы и Families applicability.","Владелец подтверждает privacy, data safety, content rating, app access, ads declaration и права на материалы."],"evidence":[],"readset":["docs/production/PLAY_RELEASE.ru.md"],"source":"Этап 2: любой возраст; корректные декларации Play","requiredForBeta":false,"requiredForPlay":true,"priority":81},
-    {"id":"STORE-05","title":"Карточка магазина RU/EN и подготовленные материалы","stage":"P5. Релизная сборка и магазин","kind":"ui","status":"planned","dependsOn":["UX-05"],"acceptance":["Multimental, краткое/полное описание, иконка, feature graphic и настоящие скриншоты нужных размеров.","Тексты не обещают недоступные функции; проверка лимитов, URL privacy/support/delete и локалей.","Материалы и метаданные версионируются, генерация и контроль выполняются командой."],"evidence":[],"readset":["docs/production/PLAY_RELEASE.ru.md"],"source":"Этапы 11,21–22; весь цикл до Play","requiredForBeta":false,"requiredForPlay":true,"priority":50},
-    {"id":"RELEASE-04","title":"Защищённый публикационный адаптер Play и цепочка отслеживания","stage":"P5. Релизная сборка и магазин","kind":"automation","status":"planned","dependsOn":["RELEASE-03","STORE-02","AUTO-07"],"acceptance":["Одна команда prepare/upload/validate/commit/readback ограничена разрешённым пакетом и треком.","Публикация только через защищённое окружение с живой проверкой одобрения и SHA/AAB, не по bool в JSON.","Timeout после commit сначала readback; новая сессия не дублирует versionCode и не смешивается с Console edits.","Internal/closed/production имеют отдельные права и approvals; upload не означает release."],"evidence":[],"readset":[".gameprod/play.json","docs/production/PLAY_RELEASE.ru.md"],"source":"Google Play Edits API; однокомандный production lifecycle","requiredForBeta":false,"requiredForPlay":true,"priority":55},
-    {"id":"QA-01","title":"Свежая полная матрица итогового RC","stage":"P6. Проверка Play-кандидата и публичный выпуск","kind":"tests","status":"planned","dependsOn":["BALANCE-01","NET-04","PLATFORM-01","NET-05","CONTENT-04","CONTENT-02","RELEASE-03","STORE-05"],"acceptance":["Все обязательные сценарии проходят на точном RC SHA/наборе/правилах, а не по старому .104.1.","Установка/обновление/миграции, offline/LAN/BT/online, старые/новые профили, RUEN, нагрев/память/ANR.","Критерии P0/P1, бюджеты размера/старта/кадра; нулевой список тестов не успех."],"evidence":[],"readset":["scripts/qualification.mjs","docs/MANUAL_TESTS.ru.md"],"source":"Этапы 15–24; полный final acceptance","requiredForBeta":false,"requiredForPlay":true,"priority":90},
-    {"id":"PLAY-01","title":"Internal testing и установка именно магазинной сборки","stage":"P6. Проверка Play-кандидата и публичный выпуск","kind":"tests","status":"planned","dependsOn":["RELEASE-04","STORE-04","QA-01"],"acceptance":["API/Console подтверждают трек/versionCode; tester invite принят реальным человеком.","Play устанавливает сгенерированные split APK, не исходный AAB; проверить store signing certificate и данные.","Автотесты после установки собирают квитанцию; начальное согласие на устройстве не имитируется."],"evidence":[],"readset":["docs/production/PLAY_RELEASE.ru.md","scripts/install-device.mjs"],"source":"Play App Signing и установка через магазин","requiredForBeta":false,"requiredForPlay":true,"priority":91},
-    {"id":"PLAY-02","title":"Реальный closed test и доступ к production по требованиям аккаунта","stage":"P6. Проверка Play-кандидата и публичный выпуск","kind":"external","status":"manual","dependsOn":["PLAY-01"],"acceptance":["Если применимо: нужное число реальных тестеров и непрерывный срок, определённые Console.","Не заменять людей/срок эмуляторами, ботами или поддельными журналами; собрать обратную связь и заявку.","Если не применимо, сохранить подтверждение, а не молча пропустить."],"evidence":[],"readset":["docs/production/PLAY_RELEASE.ru.md"],"source":"Тестовые ограничения конкретного аккаунта Play; внешняя проверка","requiredForBeta":false,"requiredForPlay":true,"priority":92},
-    {"id":"RELEASE-01","title":"Отдельное разрешение владельца на main и публичный stable/Play","stage":"P6. Проверка Play-кандидата и публичный выпуск","kind":"release_approval","status":"manual","dependsOn":["QA-01","PLAY-02","BETA-01"],"acceptance":["Одобрение относится к точному RC/SHA/AAB и store declarations.","Открытые идеи закрыты либо имеют явно одобренное исключение; нет generic auto-approval."],"evidence":[],"readset":["docs/production/AUTHORITY.md"],"source":"Защищённые решения этапа 0; D17–D18","requiredForBeta":false,"requiredForPlay":true,"priority":95},
-    {"id":"PLAY-03","title":"Production rollout, наблюдение ревью и доступности","stage":"P6. Проверка Play-кандидата и публичный выпуск","kind":"automation","status":"planned","dependsOn":["RELEASE-01","RELEASE-04"],"acceptance":["Workflow → validate → submit → review → published: статусы не смешиваются.","Google review не гарантирован по времени; readback/отклонения сохраняются; исправление отдельным кандидатом.","Реальный URL карточки и установка подтверждены; GitHub stable привязан к тому же источнику."],"evidence":[],"readset":["docs/production/PLAY_RELEASE.ru.md"],"source":"Этапы 21–24; последний запрос до Google Play","requiredForBeta":false,"requiredForPlay":true,"priority":96},
-    {"id":"OPS-01","title":"Диагностика, остановка rollout и безопасный hotfix","stage":"P7. Поддержка и повторяемые обновления","kind":"automation","status":"planned","dependsOn":["RELEASE-04"],"acceptance":["Crash/ANR без лишних персональных данных; ID версии/правил/контента и минимальный репродуктор.","Halt rollout не даёт downgrade уже установленным: fix-forward с большим versionCode, без сброса коллекции.","Учебный прогон до production: ошибка → задача → fix → RC → проверка → rollout."],"evidence":[],"readset":["docs/production/PLAY_RELEASE.ru.md","scripts/report-production.mjs"],"source":"Этап 24; полное закрытие рабочих цепочек","requiredForBeta":false,"requiredForPlay":true,"priority":85},
-    {"id":"OPS-02","title":"Закрытие цепочек, документация, отчёт и передача без потери контекста","stage":"P7. Поддержка и повторяемые обновления","kind":"automation","status":"planned","dependsOn":["PLAY-03","OPS-01"],"acceptance":["Каждая идея/задача выполнена либо имеет явное решение; нет потерянных PR/веток и ложных percent-ready.","Handoff даёт next команду, readset hashes, последнюю реальную публикацию/установку и открытые внешние блокеры.","Новая итерация начинается с идеи/эксперимента, а не с настройки Git/ADB/CI."],"evidence":[],"readset":["scripts/handoff.mjs","skills/game-production/scripts/control.mjs"],"source":"Последний запрос: остаются идеи, эмуляция и тесты","requiredForBeta":false,"requiredForPlay":true,"priority":99},
-    {"id":"FUTURE-01","title":"Полное 3D-представление поверх неизменного ядра","stage":"P7. Поддержка и повторяемые обновления","kind":"product","status":"manual","dependsOn":[],"acceptance":["Сейчас принято архитектурное отделение представления; полноценный 3D-выпуск не обещан."],"evidence":[],"readset":[".gameprod/decisions.json"],"source":"Этап 8: возможность переноса 2D в 3D, а не обязательный 3D релиз","requiredForBeta":false,"requiredForPlay":false,"priority":100,"disposition":"Будущее расширение: совместимость 2D→3D сохраняется; полное 3D требует отдельной идеи."}
+    {
+      "id": "AUTH-01",
+      "title": "Единственный репозиторий и разрешённая станция; бесплатные инструменты и защищённые действия",
+      "stage": "P0. Единый производственный процесс",
+      "kind": "automation",
+      "status": "verified",
+      "dependsOn": [],
+      "acceptance": [
+        "Только neurofoxpro/multimental; личное выполнение только VENEL-SENDRIK; GitHub CI разрешён.",
+        "Не менять main/stable/production без отдельного согласия; не удалять данные телефона."
+      ],
+      "evidence": [
+        "docs/production/AUTHORITY.md"
+      ],
+      "readset": [
+        "AGENTS.md"
+      ],
+      "source": "D00–D01, D15–D18; полный чат",
+      "requiredForBeta": true,
+      "requiredForPlay": true,
+      "priority": 50
+    },
+    {
+      "id": "AUTO-01",
+      "title": "Существующий dev-цикл: проверка → PR → CI → испытания → dev → доставка",
+      "stage": "P0. Единый производственный процесс",
+      "kind": "automation",
+      "status": "verified",
+      "dependsOn": [],
+      "acceptance": [
+        "Операции используют scoped ops; факты привязаны к конкретному SHA, не к текстовому обещанию."
+      ],
+      "evidence": [
+        "docs/production/evidence/production-v2-cycle.json"
+      ],
+      "readset": [
+        "skills/game-production/scripts/ops.mjs"
+      ],
+      "source": "D15–D18; подтверждённый цикл",
+      "requiredForBeta": true,
+      "requiredForPlay": true,
+      "priority": 50
+    },
+    {
+      "id": "AUTO-02",
+      "title": "Обновление телефона без потери данных и с постоянной приватной dev-подписью",
+      "stage": "P0. Единый производственный процесс",
+      "kind": "automation",
+      "status": "verified",
+      "dependsOn": [],
+      "acceptance": [
+        "Повторная установка идемпотентна; нет uninstall/clear/downgrade телефона.",
+        "Исходный и переподписанный APK различаются и учитываются раздельно."
+      ],
+      "evidence": [
+        "docs/production/evidence/balance-release-completed.json"
+      ],
+      "readset": [
+        "scripts/install-device.mjs",
+        "scripts/deliver-commit.mjs"
+      ],
+      "source": "D16 и установленная .105.1",
+      "requiredForBeta": true,
+      "requiredForPlay": true,
+      "priority": 50
+    },
+    {
+      "id": "AUTO-03",
+      "title": "Два выделенных эмулятора; аппаратные проверки отделены от виртуальных",
+      "stage": "P0. Единый производственный процесс",
+      "kind": "automation",
+      "status": "verified",
+      "dependsOn": [],
+      "acceptance": [
+        "Историческая матрица не выдаётся за испытание текущего артефакта."
+      ],
+      "evidence": [
+        "docs/production/evidence/balance-release-completed.json"
+      ],
+      "readset": [
+        "scripts/qualification.mjs"
+      ],
+      "source": "D15–D18; матрица кандидата .104.1",
+      "requiredForBeta": true,
+      "requiredForPlay": true,
+      "priority": 50
+    },
+    {
+      "id": "AUTO-04",
+      "title": "Русский changelog, фиксированные инструменты и автоматическое ревью инвариантов",
+      "stage": "P0. Единый производственный процесс",
+      "kind": "automation",
+      "status": "verified",
+      "dependsOn": [],
+      "acceptance": [
+        "Описания берутся из change fragments; код и workflow проходят прежние проверки."
+      ],
+      "evidence": [
+        "scripts/changelog.mjs",
+        "tools/review.mjs"
+      ],
+      "readset": [
+        "tools/verify.mjs"
+      ],
+      "source": "D17–D18",
+      "requiredForBeta": true,
+      "requiredForPlay": true,
+      "priority": 50
+    },
+    {
+      "id": "AUTO-05",
+      "title": "Реестр исследований и перенос контекста между агентами",
+      "stage": "P0. Единый производственный процесс",
+      "kind": "automation",
+      "status": "implemented",
+      "dependsOn": [
+        "AUTO-01"
+      ],
+      "acceptance": [
+        "Пакет задачи содержит точные readset, гипотезу, контроль, лимиты и критерии.",
+        "После прерывания агент продолжает с первой непроверенной стадии."
+      ],
+      "evidence": [
+        "scripts/research.mjs",
+        "scripts/handoff.mjs"
+      ],
+      "readset": [
+        ".gameprod/research.json"
+      ],
+      "source": "D17–D18; поручение 25.09.2026",
+      "requiredForBeta": true,
+      "requiredForPlay": true,
+      "priority": 20
+    },
+    {
+      "id": "AUTO-06",
+      "title": "Один вход для человека и агента; единый граф требований без дрейфа roadmap",
+      "stage": "P0. Единый производственный процесс",
+      "kind": "automation",
+      "status": "implemented",
+      "dependsOn": [
+        "AUTH-01"
+      ],
+      "acceptance": [
+        "npm run game -- next/task/check/ship и scripts/chat.cmd используют один контроллер.",
+        "Реестр не допускает циклы, потерянные зависимости, пустые критерии и ручное закрытие отсутствующего кода.",
+        "requirements, backlog и roadmap генерируются из workplan; CI проверяет отсутствие дрейфа.",
+        "Исторический verified не даёт допуск новому RC; непринятые идеи блокируют полное закрытие."
+      ],
+      "evidence": [],
+      "readset": [
+        "skills/game-production/scripts/ops.mjs",
+        "scripts/readiness.mjs",
+        "tools/verify.mjs"
+      ],
+      "source": "Последнее поручение: все цепочки одной командой, 25.09.2026",
+      "requiredForBeta": true,
+      "requiredForPlay": true,
+      "priority": 1
+    },
+    {
+      "id": "AUTO-07",
+      "title": "Безопасное восстановление всех цепочек и минимальный пакет следующему агенту",
+      "stage": "P0. Единый производственный процесс",
+      "kind": "automation",
+      "status": "planned",
+      "dependsOn": [
+        "AUTO-06"
+      ],
+      "acceptance": [
+        "Каждый шаг имеет ограничения времени, lock, fingerprint входов, журнал результата и команду возобновления.",
+        "После обрыва чтение состояния предшествует повтору записи; устаревшая квитанция отклоняется.",
+        "Тесты: сбой до/после commit, upload, merge, sign, install; не повторять побочные эффекты."
+      ],
+      "evidence": [],
+      "readset": [
+        "skills/game-production/scripts/ops.mjs",
+        "scripts/handoff.mjs"
+      ],
+      "source": "Полный чат; поручение 25.09.2026",
+      "requiredForBeta": true,
+      "requiredForPlay": true,
+      "priority": 25
+    },
+    {
+      "id": "AUTO-08",
+      "title": "Воспроизводимый offline toolchain и обновление зависимостей отдельным PR",
+      "stage": "P0. Единый производственный процесс",
+      "kind": "automation",
+      "status": "planned",
+      "dependsOn": [
+        "AUTO-06"
+      ],
+      "acceptance": [
+        "Подготовленный образ/кэш содержит точные версии и хеши; verify работает без сети.",
+        "Node/Godot/SDK/export templates/versionCode согласованы; аудит лицензий и зависимостей.",
+        "Обновление движка не выполняется попутно с балансом."
+      ],
+      "evidence": [],
+      "readset": [
+        ".gameprod/toolchain.json",
+        ".github/workflows/build.yml"
+      ],
+      "source": "Этапы 8,14; поручение 25.09.2026",
+      "requiredForBeta": true,
+      "requiredForPlay": true,
+      "priority": 40
+    },
+    {
+      "id": "CORE-01",
+      "title": "Дуэль 3×3; пять клеток или одновременно пустые рука и колода",
+      "stage": "P1. Сохранить уже работающую игру",
+      "kind": "game",
+      "status": "verified",
+      "dependsOn": [],
+      "acceptance": [
+        "Сохранить условия победы; выполнить regression на новом кандидате."
+      ],
+      "evidence": [
+        "game/tests/core_test.gd"
+      ],
+      "readset": [
+        ".gameprod/decisions.json",
+        "game/src/match_core.gd"
+      ],
+      "source": "D02; этапы 1,4",
+      "requiredForBeta": true,
+      "requiredForPlay": true,
+      "priority": 50
+    },
+    {
+      "id": "CORE-02",
+      "title": "Размещение и добровольная направленная атака; прежнее одно действие заменено D19",
+      "stage": "P1. Сохранить уже работающую игру",
+      "kind": "game",
+      "status": "verified",
+      "dependsOn": [],
+      "acceptance": [
+        "Новый юнит атакует бесплатно, прежний за 1; бонус второй стороны сохраняется.",
+        "Не возвращать раннее ограничение одним действием без решения владельца."
+      ],
+      "evidence": [
+        "game/tests/directional_test.gd"
+      ],
+      "readset": [
+        ".gameprod/decisions.json",
+        "game/src/match_core.gd"
+      ],
+      "source": "D19 заменяет часть D04",
+      "requiredForBeta": true,
+      "requiredForPlay": true,
+      "priority": 50
+    },
+    {
+      "id": "CORE-03",
+      "title": "Поворот, первый удар по зоне, дружественный огонь, ответ только выживших",
+      "stage": "P1. Сохранить уже работающую игру",
+      "kind": "game",
+      "status": "verified",
+      "dependsOn": [],
+      "acceptance": [
+        "Порядок D19–D20: все цели первого удара, затем ответ выживших по их геометрии, без каскада.",
+        "Дружественный огонь подтверждается игроком."
+      ],
+      "evidence": [
+        "game/tests/directional_test.gd"
+      ],
+      "readset": [
+        ".gameprod/decisions.json",
+        "game/src/match_core.gd"
+      ],
+      "source": "D19–D20",
+      "requiredForBeta": true,
+      "requiredForPlay": true,
+      "priority": 50
+    },
+    {
+      "id": "CORE-04",
+      "title": "30 карт и 10 стихий; полная мультивселенная и свободное смешивание",
+      "stage": "P1. Сохранить уже работающую игру",
+      "kind": "game",
+      "status": "verified",
+      "dependsOn": [],
+      "acceptance": [
+        "Огонь, вода, молния, воздух, земля, свет, тьма, меха, яд, тайна; без встроенного круга контрстихий.",
+        "Происхождение существа не ограничивает фракцию; колоды свободно смешиваются."
+      ],
+      "evidence": [
+        "docs/production/evidence/balance-release-completed.json"
+      ],
+      "readset": [
+        ".gameprod/decisions.json",
+        "game/src/match_core.gd"
+      ],
+      "source": "D10 расширен D19",
+      "requiredForBeta": true,
+      "requiredForPlay": true,
+      "priority": 50
+    },
+    {
+      "id": "CORE-05",
+      "title": "Таймер в фоне, два пропуска и ограничение затянутой сессии",
+      "stage": "P1. Сохранить уже работающую игру",
+      "kind": "game",
+      "status": "verified",
+      "dependsOn": [],
+      "acceptance": [
+        "Фон не сбрасывает таймер; пропуски и отсоединение обрабатываются по режиму.",
+        "Автоматическая длительность не заменяет измерения человеческой партии."
+      ],
+      "evidence": [
+        "game/tests/room_test.gd"
+      ],
+      "readset": [
+        ".gameprod/decisions.json",
+        "game/src/match_core.gd"
+      ],
+      "source": "D03–D04; этапы 3,5,6",
+      "requiredForBeta": true,
+      "requiredForPlay": true,
+      "priority": 50
+    },
+    {
+      "id": "CORE-06",
+      "title": "Чистое детерминированное ядро и воспроизведение; отдельные журналы",
+      "stage": "P1. Сохранить уже работающую игру",
+      "kind": "game",
+      "status": "verified",
+      "dependsOn": [],
+      "acceptance": [
+        "Результат не зависит от FPS/анимаций/транспорта; команды и seed воспроизводят матч.",
+        "Не передавать полное скрытое состояние и seed чужому клиенту."
+      ],
+      "evidence": [
+        "game/tests/core_test.gd"
+      ],
+      "readset": [
+        ".gameprod/decisions.json",
+        "game/src/match_core.gd"
+      ],
+      "source": "D08–D09; этапы 8–10",
+      "requiredForBeta": true,
+      "requiredForPlay": true,
+      "priority": 50
+    },
+    {
+      "id": "CORE-07",
+      "title": "Стихийные клетки, +1 HP, открытие центра и доход по порогам 4/6",
+      "stage": "P1. Сохранить уже работающую игру",
+      "kind": "game",
+      "status": "verified",
+      "dependsOn": [],
+      "acceptance": [
+        "Центр открывается при 5 юнитах или индивидуальном ходе 7; доход добавляется только в последующие начала ходов.",
+        "Пулы внешних/центральной клеток и максимум две клетки каждой стихии соответствуют D20."
+      ],
+      "evidence": [
+        "game/tests/terrain_test.gd"
+      ],
+      "readset": [
+        ".gameprod/decisions.json",
+        "game/src/match_core.gd"
+      ],
+      "source": "D20–D21",
+      "requiredForBeta": true,
+      "requiredForPlay": true,
+      "priority": 50
+    },
+    {
+      "id": "UX-01",
+      "title": "Android портретный, Web альбомный; один палец/мышь, RU/EN",
+      "stage": "P1. Сохранить уже работающую игру",
+      "kind": "ui",
+      "status": "verified",
+      "dependsOn": [],
+      "acceptance": [
+        "Историческая Android-реализация сохранена; Web-релиз отдельно PLATFORM-01."
+      ],
+      "evidence": [
+        "game/tests/ui_test.gd"
+      ],
+      "readset": [
+        "game/src/main.gd"
+      ],
+      "source": "D04,D07",
+      "requiredForBeta": true,
+      "requiredForPlay": true,
+      "priority": 50
+    },
+    {
+      "id": "UX-02",
+      "title": "Подсветки, сообщения ошибок, урон и объяснение результата",
+      "stage": "P1. Сохранить уже работающую игру",
+      "kind": "ui",
+      "status": "verified",
+      "dependsOn": [],
+      "acceptance": [
+        "Повторить реальные ввод/отображение на текущем RC; недопустимый ход не расходует ресурс."
+      ],
+      "evidence": [
+        "game/src/main.gd"
+      ],
+      "readset": [
+        "game/src/main.gd"
+      ],
+      "source": "Этап 5; поздние UI и directional изменения",
+      "requiredForBeta": true,
+      "requiredForPlay": true,
+      "priority": 50
+    },
+    {
+      "id": "UX-03",
+      "title": "Громкость по категориям и музыка",
+      "stage": "P1. Сохранить уже работающую игру",
+      "kind": "ui",
+      "status": "verified",
+      "dependsOn": [],
+      "acceptance": [
+        "Сохранять настройки; тестировать выключение/возврат музыки и эффектов."
+      ],
+      "evidence": [
+        "docs/production/evidence/tutorial-audio-release-82.json"
+      ],
+      "readset": [
+        "game/src/main.gd"
+      ],
+      "source": "D07; PR17",
+      "requiredForBeta": true,
+      "requiredForPlay": true,
+      "priority": 50
+    },
+    {
+      "id": "UX-04",
+      "title": "Безопасный тренировочный бой без длинного обучения",
+      "stage": "P1. Сохранить уже работающую игру",
+      "kind": "ui",
+      "status": "verified",
+      "dependsOn": [],
+      "acceptance": [
+        "Повторяемое безопасное обучение; субъективная понятность остаётся человеческой приёмкой."
+      ],
+      "evidence": [
+        "docs/production/evidence/tutorial-audio-release-82.json"
+      ],
+      "readset": [
+        "game/src/main.gd"
+      ],
+      "source": "D07; PR17",
+      "requiredForBeta": true,
+      "requiredForPlay": true,
+      "priority": 50
+    },
+    {
+      "id": "META-05",
+      "title": "Полный профиль, транзакции сохранения и миграции без потери коллекции",
+      "stage": "P2. Коллекция, профиль и экономика",
+      "kind": "game",
+      "status": "verified",
+      "dependsOn": [
+        "CORE-06"
+      ],
+      "acceptance": [
+        "Разделены настройки, коллекция, колоды, валюты, журнал экономики и последний матч.",
+        "Атомарная фиксация логической операции, резервная копия, schemaVersion и миграция предыдущего формата.",
+        "Тесты обрыва записи, повреждения, дубля транзакции, обновления .dev и восстановления."
+      ],
+      "evidence": [
+        "docs/production/PROFILE_STORAGE.ru.md",
+        "game/tests/profile_store_test.gd",
+        "game/tests/profile_ui_test.gd"
+      ],
+      "readset": [
+        "game/src/profile_state.gd",
+        "game/src/profile_journal.gd",
+        "game/src/profile_store.gd",
+        "game/src/profile_controller.gd",
+        "game/src/main.gd"
+      ],
+      "source": "Этапы 5,6,9,12; D05–D07; PR90; фактическая Android-квитанция Issue30/comment5840413541",
+      "requiredForBeta": true,
+      "requiredForPlay": true,
+      "priority": 10
+    },
+    {
+      "id": "META-01",
+      "title": "Коллекция, экземпляры, конструктор и выбор собственной колоды",
+      "stage": "P2. Коллекция, профиль и экономика",
+      "kind": "game",
+      "status": "planned",
+      "dependsOn": [
+        "META-05"
+      ],
+      "acceptance": [
+        "Каталог/поиск/фильтры, количество копий, создание/правка/проверка/сохранение нескольких колод.",
+        "Колода может смешивать любые стихии; смена колоды используется реальным матчем и переживает обновление."
+      ],
+      "evidence": [],
+      "readset": [
+        "game/src/match_core.gd",
+        "game/src/main.gd"
+      ],
+      "source": "Этапы 1,4,6; D05–D06",
+      "requiredForBeta": true,
+      "requiredForPlay": true,
+      "priority": 11
+    },
+    {
+      "id": "CONTENT-03",
+      "title": "Фабрика карточного контента: данные → схема → семантика → симуляция → каталог",
+      "stage": "P2. Коллекция, профиль и экономика",
+      "kind": "automation",
+      "status": "planned",
+      "dependsOn": [
+        "CORE-06",
+        "META-01"
+      ],
+      "acceptance": [
+        "Стабильный ID/версия; описание RU/EN не исполняемый код; неизвестный эффект отклоняется.",
+        "Кандидат отдельно от принятого набора; контроль seed, стоимости, комбинаций и происхождения иллюстраций.",
+        "Простая карта добавляется проверенными данными через команду; сложный эффект требует тестируемого обработчика."
+      ],
+      "evidence": [],
+      "readset": [
+        "tools/balance.mjs",
+        "game/src/match_core.gd"
+      ],
+      "source": "Этапы 4,9,11; генерация контента и последний запрос",
+      "requiredForBeta": true,
+      "requiredForPlay": true,
+      "priority": 15
+    },
+    {
+      "id": "META-02",
+      "title": "Магазин и паки по пять карт за отдельную валюту лобби",
+      "stage": "P2. Коллекция, профиль и экономика",
+      "kind": "game",
+      "status": "planned",
+      "dependsOn": [
+        "META-05",
+        "META-01"
+      ],
+      "acceptance": [
+        "Все пять карт добавляются один раз; деньги списываются один раз даже при аварии.",
+        "Показываются содержимое/шансы/правила дублей; цены и вероятности тестируемы, без реальных покупок."
+      ],
+      "evidence": [],
+      "readset": [
+        "game/src/main.gd"
+      ],
+      "source": "Этапы 4,6; D06",
+      "requiredForBeta": true,
+      "requiredForPlay": true,
+      "priority": 12
+    },
+    {
+      "id": "META-03",
+      "title": "Пыль, дубликаты и целевой крафт карт",
+      "stage": "P2. Коллекция, профиль и экономика",
+      "kind": "game",
+      "status": "planned",
+      "dependsOn": [
+        "META-02"
+      ],
+      "acceptance": [
+        "Цена и преобразование дублей вынесены в конфигурацию; крафт выбранной карты транзакционен.",
+        "Не уничтожать нужные копии; никакого усиления статов карты через гринд."
+      ],
+      "evidence": [],
+      "readset": [
+        "game/src/main.gd"
+      ],
+      "source": "Этапы 4,6; D06",
+      "requiredForBeta": true,
+      "requiredForPlay": true,
+      "priority": 13
+    },
+    {
+      "id": "META-04",
+      "title": "Награды, ежедневные задания и уровни без обязательного гринда",
+      "stage": "P2. Коллекция, профиль и экономика",
+      "kind": "game",
+      "status": "planned",
+      "dependsOn": [
+        "META-02",
+        "META-03"
+      ],
+      "acceptance": [
+        "Награды победы/заданий идемпотентны; отрицательный результат не отнимает коллекцию.",
+        "Ежедневные задания не требуют вечного онлайна; локальные часы не являются доверенной рейтинговой экономикой.",
+        "Симуляция времени получения нужной колоды: распределение, не только среднее."
+      ],
+      "evidence": [],
+      "readset": [
+        ".gameprod/decisions.json"
+      ],
+      "source": "Этапы 1,3,4; D05–D06,D14",
+      "requiredForBeta": true,
+      "requiredForPlay": true,
+      "priority": 14
+    },
+    {
+      "id": "UX-05",
+      "title": "Шесть полноценных экранов и пользовательский сквозной сценарий",
+      "stage": "P2. Коллекция, профиль и экономика",
+      "kind": "ui",
+      "status": "planned",
+      "dependsOn": [
+        "META-04"
+      ],
+      "acceptance": [
+        "Меню, настройки, магазин, коллекция/колоды, подготовка и бой работают без неактивных заглушек.",
+        "Обучение → награда → пак → крафт → своя колода → матч → перезапуск; RU/EN, 16:9/18:9 и реальные вырезы."
+      ],
+      "evidence": [],
+      "readset": [
+        "game/src/main.gd",
+        "docs/MANUAL_TESTS.ru.md"
+      ],
+      "source": "Этапы 5,6; D07",
+      "requiredForBeta": true,
+      "requiredForPlay": true,
+      "priority": 16
+    },
+    {
+      "id": "BALANCE-01",
+      "title": "Преимущество первого хода, длительность и разнообразие колод",
+      "stage": "P3. Механики, баланс и реальные дуэли",
+      "kind": "game",
+      "status": "planned",
+      "dependsOn": [
+        "CORE-07",
+        "CONTENT-03"
+      ],
+      "acceptance": [
+        "Парные seed и перестановка сторон, несколько стратегий, воспроизводимость и поиск бесконечных циклов.",
+        "61,8% первого игрока в старой серии не финальный баланс; допуски заданы до новой серии.",
+        "Человеческие длительности отдельно: около 10 минут, затянутые не более 15."
+      ],
+      "evidence": [],
+      "readset": [
+        "tools/balance.mjs",
+        "docs/production/BALANCE_TUNING.ru.md"
+      ],
+      "source": "D21; сохранённые эксперименты 7040/64",
+      "requiredForBeta": true,
+      "requiredForPlay": true,
+      "priority": 20
+    },
+    {
+      "id": "CONTENT-01",
+      "title": "Решение по ранее отложенной особой системе взаимодействий",
+      "stage": "P3. Механики, баланс и реальные дуэли",
+      "kind": "product",
+      "status": "manual",
+      "dependsOn": [],
+      "acceptance": [
+        "Владелец описывает свою идею либо явно подтверждает перенос за первую Play-версию.",
+        "Не подменять её автоматическим кругом сильных/слабых стихий; варианты и решение занесены в ADR."
+      ],
+      "evidence": [],
+      "readset": [
+        ".gameprod/decisions.json"
+      ],
+      "source": "D12: владелец явно отложил основную идею",
+      "requiredForBeta": true,
+      "requiredForPlay": true,
+      "priority": 70
+    },
+    {
+      "id": "CONTENT-04",
+      "title": "Реализация и эксперименты принятой особой системы",
+      "stage": "P3. Механики, баланс и реальные дуэли",
+      "kind": "game",
+      "status": "planned",
+      "dependsOn": [
+        "CONTENT-01",
+        "CONTENT-03"
+      ],
+      "acceptance": [
+        "После продуктового решения реализовать либо явно убрать из first-Play scope через ADR, не выдавая за сделанное.",
+        "Прототип, regression, баланс, UI и повтор по seed; только затем в релизный набор."
+      ],
+      "evidence": [],
+      "readset": [
+        "game/src/match_core.gd"
+      ],
+      "source": "D12; полное закрытие идей перед Play",
+      "requiredForBeta": true,
+      "requiredForPlay": true,
+      "priority": 72
+    },
+    {
+      "id": "CONTENT-02",
+      "title": "Два дополнительных боевых ресурса",
+      "stage": "P3. Механики, баланс и реальные дуэли",
+      "kind": "game",
+      "status": "planned",
+      "dependsOn": [
+        "CONTENT-03",
+        "CONTENT-01"
+      ],
+      "acceptance": [
+        "Определены источники/накопление/расход; цена карты содержит resource map.",
+        "Симуляции тупиков/темпа; интерфейс и AI поддерживают ресурсы; либо явное решение о переносе."
+      ],
+      "evidence": [],
+      "readset": [
+        "game/src/match_core.gd",
+        ".gameprod/decisions.json"
+      ],
+      "source": "D06; этап 6: добавить позже",
+      "requiredForBeta": false,
+      "requiredForPlay": true,
+      "priority": 73
+    },
+    {
+      "id": "NET-01",
+      "title": "LAN-комната и настоящая локальная партия",
+      "stage": "P3. Механики, баланс и реальные дуэли",
+      "kind": "network",
+      "status": "verified",
+      "dependsOn": [],
+      "acceptance": [
+        "Не раскрывать чужую руку/seed; hash не доказывает честность хоста.",
+        "Повторить совместимость и reconnect на итоговом кандидате."
+      ],
+      "evidence": [
+        "docs/production/evidence/lan-release-completed.json"
+      ],
+      "readset": [
+        "game/tests/room_test.gd"
+      ],
+      "source": "D09; PR14",
+      "requiredForBeta": true,
+      "requiredForPlay": true,
+      "priority": 50
+    },
+    {
+      "id": "NET-02",
+      "title": "Хост-авторитет, приватные проекции, совместимость и повторные команды",
+      "stage": "P3. Механики, баланс и реальные дуэли",
+      "kind": "network",
+      "status": "verified",
+      "dependsOn": [],
+      "acceptance": [
+        "Не раскрывать чужую руку/seed; hash не доказывает честность хоста.",
+        "Повторить совместимость, истечение таймера и reconnect на итоговом кандидате."
+      ],
+      "evidence": [
+        "game/tests/room_test.gd"
+      ],
+      "readset": [
+        "game/tests/room_test.gd"
+      ],
+      "source": "D09; этапы 9–10",
+      "requiredForBeta": true,
+      "requiredForPlay": true,
+      "priority": 50
+    },
+    {
+      "id": "NET-03",
+      "title": "Bluetooth RFCOMM лаборатория без Wi-Fi",
+      "stage": "P3. Механики, баланс и реальные дуэли",
+      "kind": "network",
+      "status": "verified",
+      "dependsOn": [],
+      "acceptance": [
+        "Сохранить различие лаборатории и готового phone-to-phone режима."
+      ],
+      "evidence": [
+        "docs/production/evidence/production-v2-transports.json"
+      ],
+      "readset": [
+        "game/tests/room_test.gd"
+      ],
+      "source": "D15; аппаратные квитанции",
+      "requiredForBeta": true,
+      "requiredForPlay": true,
+      "priority": 50
+    },
+    {
+      "id": "NET-04",
+      "title": "Пользовательский Bluetooth на двух физических Android",
+      "stage": "P3. Механики, баланс и реальные дуэли",
+      "kind": "network",
+      "status": "implemented",
+      "dependsOn": [
+        "NET-03"
+      ],
+      "acceptance": [
+        "Windows↔Android не заменяет Android↔Android: обе роли, сопряжение, отказ разрешения, фон и повторное соединение.",
+        "Журнал конкретных версий/артефактов и редактированная квитанция; сырые device ID не публикуются."
+      ],
+      "evidence": [
+        "docs/production/evidence/bluetooth-release-completed.json"
+      ],
+      "readset": [
+        "scripts/bluetooth-room-test.mjs"
+      ],
+      "source": "D03,D09; второй физический телефон ещё не проверен",
+      "requiredForBeta": true,
+      "requiredForPlay": true,
+      "priority": 22
+    },
+    {
+      "id": "BETA-01",
+      "title": "Ручная оценка интереса, темпа и читаемости конкретной версии",
+      "stage": "P3. Механики, баланс и реальные дуэли",
+      "kind": "subjective",
+      "status": "manual",
+      "dependsOn": [
+        "UX-05",
+        "BALANCE-01"
+      ],
+      "acceptance": [
+        "Владелец проверяет обычный матч и весь цикл коллекции; отзыв привязан к версии и сценарию.",
+        "Автоботы и скриншот главного меню не заменяют субъективную приёмку."
+      ],
+      "evidence": [],
+      "readset": [
+        "docs/MANUAL_TESTS.ru.md"
+      ],
+      "source": "Ручная приёмка, согласованная во всём чате",
+      "requiredForBeta": true,
+      "requiredForPlay": true,
+      "priority": 80
+    },
+    {
+      "id": "PLATFORM-01",
+      "title": "Рабочая Web-сборка и альбомный интерфейс",
+      "stage": "P4. Web, онлайн и синхронизация",
+      "kind": "platform",
+      "status": "planned",
+      "dependsOn": [
+        "UX-05"
+      ],
+      "acceptance": [
+        "Отдельная команда экспорта, браузерный smoke и реальная партия; mouse и storage ограничения проверены.",
+        "Совместимость правил/контента с Android, LAN/TLS браузера, offline-cache при заявленной поддержке."
+      ],
+      "evidence": [],
+      "readset": [
+        "game/export_presets.cfg",
+        "tools/project.mjs"
+      ],
+      "source": "D03,D04,D08; этапы 2,5,8",
+      "requiredForBeta": false,
+      "requiredForPlay": true,
+      "priority": 45
+    },
+    {
+      "id": "NET-06",
+      "title": "Онлайн-служба с тем же авторитетным ядром",
+      "stage": "P4. Web, онлайн и синхронизация",
+      "kind": "network",
+      "status": "planned",
+      "dependsOn": [
+        "NET-02"
+      ],
+      "acceptance": [
+        "Предпочтительно headless Godot матчи; PHP/Swoole допустим вокруг, но не дублирует правила боя.",
+        "WSS, версии протокола, rooms, таймер/пропуски/reconnect/сбои/ресурсные лимиты.",
+        "Реально бесплатный или предоставленный владельцем хостинг; sleep/квоты учитываются, доступность не обещается."
+      ],
+      "evidence": [],
+      "readset": [
+        "game/tests/room_test.gd",
+        "game/src/match_core.gd"
+      ],
+      "source": "D03,D09; этап 10",
+      "requiredForBeta": false,
+      "requiredForPlay": true,
+      "priority": 46
+    },
+    {
+      "id": "NET-07",
+      "title": "Аккаунт, синхронизация профиля и удаление данных",
+      "stage": "P4. Web, онлайн и синхронизация",
+      "kind": "network",
+      "status": "planned",
+      "dependsOn": [
+        "META-05",
+        "NET-06"
+      ],
+      "acceptance": [
+        "Игра offline/LAN/BT не требует аккаунта; авторизация минимально необходимая.",
+        "Конфликты валют/коллекции не решаются доверием клиенту; разделены локальные и серверные операции.",
+        "Удаление из игры и веб-страница запроса, logout/revoke, экспорт/удаление и политика хранения протестированы."
+      ],
+      "evidence": [],
+      "readset": [
+        ".gameprod/decisions.json"
+      ],
+      "source": "D07,D09; этапы 5,10",
+      "requiredForBeta": false,
+      "requiredForPlay": true,
+      "priority": 47
+    },
+    {
+      "id": "RATING-01",
+      "title": "Окончательный смысл рейтинга без потери очков",
+      "stage": "P4. Web, онлайн и синхронизация",
+      "kind": "product",
+      "status": "manual",
+      "dependsOn": [],
+      "acceptance": [
+        "Отдельно решить видимый прогресс, скрытый навык, потери/несгораемые ступени.",
+        "Не переписывать обещание «рейтинг не уменьшается» без явного решения."
+      ],
+      "evidence": [],
+      "readset": [
+        ".gameprod/decisions.json"
+      ],
+      "source": "D14; прямой ответ этапа 4",
+      "requiredForBeta": false,
+      "requiredForPlay": true,
+      "priority": 75
+    },
+    {
+      "id": "NET-05",
+      "title": "Рейтинг, подбор и серверная экономика",
+      "stage": "P4. Web, онлайн и синхронизация",
+      "kind": "network",
+      "status": "planned",
+      "dependsOn": [
+        "NET-07",
+        "RATING-01",
+        "META-04"
+      ],
+      "acceptance": [
+        "Результат учитывает авторитетный сервер; LAN/BT не изменяют глобальный рейтинг.",
+        "Повтор результата не выдаёт награду дважды; матчмейкинг и антиабуз проверены."
+      ],
+      "evidence": [],
+      "readset": [
+        "game/tests/room_test.gd"
+      ],
+      "source": "D02,D09,D14; долгосрочная мотивация рейтинга",
+      "requiredForBeta": false,
+      "requiredForPlay": true,
+      "priority": 48
+    },
+    {
+      "id": "STORE-01",
+      "title": "Play Console: владелец, тип аккаунта, верификация и бюджет",
+      "stage": "P5. Релизная сборка и магазин",
+      "kind": "external",
+      "status": "manual",
+      "dependsOn": [],
+      "acceptance": [
+        "Уточнить существование аккаунта и статус в Play Console; не требовать повторную регистрацию.",
+        "Если аккаунта нет, регистрация/документы/сбор требуют действий и согласия владельца; токены не отправляются в чат.",
+        "Определить применимость обязательного closed-test к типу и дате аккаунта."
+      ],
+      "evidence": [],
+      "readset": [
+        "docs/production/PLAY_RELEASE.ru.md"
+      ],
+      "source": "Бюджет этапа 0 и требование Play; официальные правила повторно проверяются перед RC",
+      "requiredForBeta": false,
+      "requiredForPlay": true,
+      "priority": 30
+    },
+    {
+      "id": "STORE-02",
+      "title": "Создать приложение в Play Console и настроить ограниченный доступ публикации",
+      "stage": "P5. Релизная сборка и магазин",
+      "kind": "external",
+      "status": "manual",
+      "dependsOn": [
+        "STORE-01"
+      ],
+      "acceptance": [
+        "Пакет pro.neurofox.multimental не меняется после регистрации; владелец принимает условия/Play App Signing.",
+        "Первичную настройку и загрузку, которую требует Console, выполняет владелец; API не создаёт app с нуля.",
+        "Сервисный доступ app-only; CI короткоживущие credentials; секреты только в защищённом хранилище."
+      ],
+      "evidence": [],
+      "readset": [
+        "docs/production/PLAY_RELEASE.ru.md"
+      ],
+      "source": "Google Play Developer API lifecycle; бюджет и полномочия владельца",
+      "requiredForBeta": false,
+      "requiredForPlay": true,
+      "priority": 31
+    },
+    {
+      "id": "RELEASE-02",
+      "title": "Production upload key и сохранный переход dev → production",
+      "stage": "P5. Релизная сборка и магазин",
+      "kind": "automation",
+      "status": "planned",
+      "dependsOn": [
+        "META-05"
+      ],
+      "acceptance": [
+        "Постоянные отдельные dev и prod пакеты/ключи, резервирование закрытого ключа, неизменяемый отпечаток.",
+        "AAB upload-signature и распространяемые Play APK подписаны разными ролями ключей.",
+        "Экспорт/импорт dev-профиля в prod испытан; нельзя удалить .dev ради установки .prod."
+      ],
+      "evidence": [],
+      "readset": [
+        "scripts/install-device.mjs",
+        "game/export_presets.cfg"
+      ],
+      "source": "Приватная dev-подпись и первоначальное требование без потерь; Play App Signing",
+      "requiredForBeta": false,
+      "requiredForPlay": true,
+      "priority": 32
+    },
+    {
+      "id": "RELEASE-03",
+      "title": "Production AAB: target API36+, 64-bit и проверка 16KB",
+      "stage": "P5. Релизная сборка и магазин",
+      "kind": "automation",
+      "status": "planned",
+      "dependsOn": [
+        "RELEASE-02"
+      ],
+      "acceptance": [
+        "Отдельный production preset и одна команда AAB; debug выключен, package без .dev.",
+        "Проверить актуальный target requirement в день RC; на 25.09.2026 минимальный target API36.",
+        "bundletool validate, ELF/zip alignment всех native .so и запуск на 16KB Android.",
+        "Монотонный versionCode относительно всех Play tracks, а не только локальной версии."
+      ],
+      "evidence": [],
+      "readset": [
+        ".github/workflows/build.yml",
+        "game/export_presets.cfg",
+        "tools/project.mjs"
+      ],
+      "source": "Android Developers target SDK и page-size; проверено 25.09.2026",
+      "requiredForBeta": false,
+      "requiredForPlay": true,
+      "priority": 33
+    },
+    {
+      "id": "STORE-03",
+      "title": "Инвентаризация данных, разрешений, SDK и лицензий",
+      "stage": "P5. Релизная сборка и магазин",
+      "kind": "automation",
+      "status": "planned",
+      "dependsOn": [
+        "NET-07",
+        "CONTENT-03"
+      ],
+      "acceptance": [
+        "Код Apache-2.0, свои ассеты отдельно; происхождение каждого чужого ресурса и сгенерированного кандидата.",
+        "Нет закрытых плагинов/рекламы/платежей без нового решения; SBOM и разрешения проверяются сборкой.",
+        "Privacy/Data Safety отражают действительный код, включая online/BT/logs, не «ничего не собираем» по умолчанию."
+      ],
+      "evidence": [],
+      "readset": [
+        ".gameprod/decisions.json",
+        ".gameprod/play.json"
+      ],
+      "source": "D01,D08,D11; Play store disclosures",
+      "requiredForBeta": false,
+      "requiredForPlay": true,
+      "priority": 49
+    },
+    {
+      "id": "STORE-04",
+      "title": "Подтверждение аудитории и правовых деклараций",
+      "stage": "P5. Релизная сборка и магазин",
+      "kind": "product",
+      "status": "manual",
+      "dependsOn": [
+        "STORE-03"
+      ],
+      "acceptance": [
+        "Возраст «любой» не автоматически равен store rating; определить реальные группы и Families applicability.",
+        "Владелец подтверждает privacy, data safety, content rating, app access, ads declaration и права на материалы."
+      ],
+      "evidence": [],
+      "readset": [
+        "docs/production/PLAY_RELEASE.ru.md"
+      ],
+      "source": "Этап 2: любой возраст; корректные декларации Play",
+      "requiredForBeta": false,
+      "requiredForPlay": true,
+      "priority": 81
+    },
+    {
+      "id": "STORE-05",
+      "title": "Карточка магазина RU/EN и подготовленные материалы",
+      "stage": "P5. Релизная сборка и магазин",
+      "kind": "ui",
+      "status": "planned",
+      "dependsOn": [
+        "UX-05"
+      ],
+      "acceptance": [
+        "Multimental, краткое/полное описание, иконка, feature graphic и настоящие скриншоты нужных размеров.",
+        "Тексты не обещают недоступные функции; проверка лимитов, URL privacy/support/delete и локалей.",
+        "Материалы и метаданные версионируются, генерация и контроль выполняются командой."
+      ],
+      "evidence": [],
+      "readset": [
+        "docs/production/PLAY_RELEASE.ru.md"
+      ],
+      "source": "Этапы 11,21–22; весь цикл до Play",
+      "requiredForBeta": false,
+      "requiredForPlay": true,
+      "priority": 50
+    },
+    {
+      "id": "RELEASE-04",
+      "title": "Защищённый публикационный адаптер Play и цепочка отслеживания",
+      "stage": "P5. Релизная сборка и магазин",
+      "kind": "automation",
+      "status": "planned",
+      "dependsOn": [
+        "RELEASE-03",
+        "STORE-02",
+        "AUTO-07"
+      ],
+      "acceptance": [
+        "Одна команда prepare/upload/validate/commit/readback ограничена разрешённым пакетом и треком.",
+        "Публикация только через защищённое окружение с живой проверкой одобрения и SHA/AAB, не по bool в JSON.",
+        "Timeout после commit сначала readback; новая сессия не дублирует versionCode и не смешивается с Console edits.",
+        "Internal/closed/production имеют отдельные права и approvals; upload не означает release."
+      ],
+      "evidence": [],
+      "readset": [
+        ".gameprod/play.json",
+        "docs/production/PLAY_RELEASE.ru.md"
+      ],
+      "source": "Google Play Edits API; однокомандный production lifecycle",
+      "requiredForBeta": false,
+      "requiredForPlay": true,
+      "priority": 55
+    },
+    {
+      "id": "QA-01",
+      "title": "Свежая полная матрица итогового RC",
+      "stage": "P6. Проверка Play-кандидата и публичный выпуск",
+      "kind": "tests",
+      "status": "planned",
+      "dependsOn": [
+        "BALANCE-01",
+        "NET-04",
+        "PLATFORM-01",
+        "NET-05",
+        "CONTENT-04",
+        "CONTENT-02",
+        "RELEASE-03",
+        "STORE-05"
+      ],
+      "acceptance": [
+        "Все обязательные сценарии проходят на точном RC SHA/наборе/правилах, а не по старому .104.1.",
+        "Установка/обновление/миграции, offline/LAN/BT/online, старые/новые профили, RUEN, нагрев/память/ANR.",
+        "Критерии P0/P1, бюджеты размера/старта/кадра; нулевой список тестов не успех."
+      ],
+      "evidence": [],
+      "readset": [
+        "scripts/qualification.mjs",
+        "docs/MANUAL_TESTS.ru.md"
+      ],
+      "source": "Этапы 15–24; полный final acceptance",
+      "requiredForBeta": false,
+      "requiredForPlay": true,
+      "priority": 90
+    },
+    {
+      "id": "PLAY-01",
+      "title": "Internal testing и установка именно магазинной сборки",
+      "stage": "P6. Проверка Play-кандидата и публичный выпуск",
+      "kind": "tests",
+      "status": "planned",
+      "dependsOn": [
+        "RELEASE-04",
+        "STORE-04",
+        "QA-01"
+      ],
+      "acceptance": [
+        "API/Console подтверждают трек/versionCode; tester invite принят реальным человеком.",
+        "Play устанавливает сгенерированные split APK, не исходный AAB; проверить store signing certificate и данные.",
+        "Автотесты после установки собирают квитанцию; начальное согласие на устройстве не имитируется."
+      ],
+      "evidence": [],
+      "readset": [
+        "docs/production/PLAY_RELEASE.ru.md",
+        "scripts/install-device.mjs"
+      ],
+      "source": "Play App Signing и установка через магазин",
+      "requiredForBeta": false,
+      "requiredForPlay": true,
+      "priority": 91
+    },
+    {
+      "id": "PLAY-02",
+      "title": "Реальный closed test и доступ к production по требованиям аккаунта",
+      "stage": "P6. Проверка Play-кандидата и публичный выпуск",
+      "kind": "external",
+      "status": "manual",
+      "dependsOn": [
+        "PLAY-01"
+      ],
+      "acceptance": [
+        "Если применимо: нужное число реальных тестеров и непрерывный срок, определённые Console.",
+        "Не заменять людей/срок эмуляторами, ботами или поддельными журналами; собрать обратную связь и заявку.",
+        "Если не применимо, сохранить подтверждение, а не молча пропустить."
+      ],
+      "evidence": [],
+      "readset": [
+        "docs/production/PLAY_RELEASE.ru.md"
+      ],
+      "source": "Тестовые ограничения конкретного аккаунта Play; внешняя проверка",
+      "requiredForBeta": false,
+      "requiredForPlay": true,
+      "priority": 92
+    },
+    {
+      "id": "RELEASE-01",
+      "title": "Отдельное разрешение владельца на main и публичный stable/Play",
+      "stage": "P6. Проверка Play-кандидата и публичный выпуск",
+      "kind": "release_approval",
+      "status": "manual",
+      "dependsOn": [
+        "QA-01",
+        "PLAY-02",
+        "BETA-01"
+      ],
+      "acceptance": [
+        "Одобрение относится к точному RC/SHA/AAB и store declarations.",
+        "Открытые идеи закрыты либо имеют явно одобренное исключение; нет generic auto-approval."
+      ],
+      "evidence": [],
+      "readset": [
+        "docs/production/AUTHORITY.md"
+      ],
+      "source": "Защищённые решения этапа 0; D17–D18",
+      "requiredForBeta": false,
+      "requiredForPlay": true,
+      "priority": 95
+    },
+    {
+      "id": "PLAY-03",
+      "title": "Production rollout, наблюдение ревью и доступности",
+      "stage": "P6. Проверка Play-кандидата и публичный выпуск",
+      "kind": "automation",
+      "status": "planned",
+      "dependsOn": [
+        "RELEASE-01",
+        "RELEASE-04"
+      ],
+      "acceptance": [
+        "Workflow → validate → submit → review → published: статусы не смешиваются.",
+        "Google review не гарантирован по времени; readback/отклонения сохраняются; исправление отдельным кандидатом.",
+        "Реальный URL карточки и установка подтверждены; GitHub stable привязан к тому же источнику."
+      ],
+      "evidence": [],
+      "readset": [
+        "docs/production/PLAY_RELEASE.ru.md"
+      ],
+      "source": "Этапы 21–24; последний запрос до Google Play",
+      "requiredForBeta": false,
+      "requiredForPlay": true,
+      "priority": 96
+    },
+    {
+      "id": "OPS-01",
+      "title": "Диагностика, остановка rollout и безопасный hotfix",
+      "stage": "P7. Поддержка и повторяемые обновления",
+      "kind": "automation",
+      "status": "planned",
+      "dependsOn": [
+        "RELEASE-04"
+      ],
+      "acceptance": [
+        "Crash/ANR без лишних персональных данных; ID версии/правил/контента и минимальный репродуктор.",
+        "Halt rollout не даёт downgrade уже установленным: fix-forward с большим versionCode, без сброса коллекции.",
+        "Учебный прогон до production: ошибка → задача → fix → RC → проверка → rollout."
+      ],
+      "evidence": [],
+      "readset": [
+        "docs/production/PLAY_RELEASE.ru.md",
+        "scripts/report-production.mjs"
+      ],
+      "source": "Этап 24; полное закрытие рабочих цепочек",
+      "requiredForBeta": false,
+      "requiredForPlay": true,
+      "priority": 85
+    },
+    {
+      "id": "OPS-02",
+      "title": "Закрытие цепочек, документация, отчёт и передача без потери контекста",
+      "stage": "P7. Поддержка и повторяемые обновления",
+      "kind": "automation",
+      "status": "planned",
+      "dependsOn": [
+        "PLAY-03",
+        "OPS-01"
+      ],
+      "acceptance": [
+        "Каждая идея/задача выполнена либо имеет явное решение; нет потерянных PR/веток и ложных percent-ready.",
+        "Handoff даёт next команду, readset hashes, последнюю реальную публикацию/установку и открытые внешние блокеры.",
+        "Новая итерация начинается с идеи/эксперимента, а не с настройки Git/ADB/CI."
+      ],
+      "evidence": [],
+      "readset": [
+        "scripts/handoff.mjs",
+        "skills/game-production/scripts/control.mjs"
+      ],
+      "source": "Последний запрос: остаются идеи, эмуляция и тесты",
+      "requiredForBeta": false,
+      "requiredForPlay": true,
+      "priority": 99
+    },
+    {
+      "id": "FUTURE-01",
+      "title": "Полное 3D-представление поверх неизменного ядра",
+      "stage": "P7. Поддержка и повторяемые обновления",
+      "kind": "product",
+      "status": "manual",
+      "dependsOn": [],
+      "acceptance": [
+        "Сейчас принято архитектурное отделение представления; полноценный 3D-выпуск не обещан."
+      ],
+      "evidence": [],
+      "readset": [
+        ".gameprod/decisions.json"
+      ],
+      "source": "Этап 8: возможность переноса 2D в 3D, а не обязательный 3D релиз",
+      "requiredForBeta": false,
+      "requiredForPlay": false,
+      "priority": 100,
+      "disposition": "Будущее расширение: совместимость 2D→3D сохраняется; полное 3D требует отдельной идеи."
+    }
   ]
 }
