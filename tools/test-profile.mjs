@@ -16,6 +16,7 @@ import {
 const [suite = 'model', ...extra] = process.argv.slice(2);
 const choices = {
   model: ['profile_test.gd', 'MULTIMENTAL_PROFILE_PASS'],
+  inspector: ['card_inspector_test.gd', 'MULTIMENTAL_CARD_INSPECTOR_PASS'],
   taps: ['ui_tap_geometry_test.gd', 'MULTIMENTAL_TAP_GEOMETRY_PASS'],
   crafting: ['crafting_test.gd', 'MULTIMENTAL_CRAFT_PASS'],
   'crafting-ui': ['crafting_ui_test.gd', 'MULTIMENTAL_CRAFT_UI_PASS'],
@@ -29,8 +30,26 @@ const choices = {
   storage: ['profile_store_test.gd', 'MULTIMENTAL_PROFILE_STORAGE_PASS'],
   ui: ['profile_ui_test.gd', 'MULTIMENTAL_PROFILE_UI_PASS']
 };
+if (suite === 'list' && extra.length === 0) {
+  console.log(
+    JSON.stringify(
+      {
+        suites: Object.entries(choices).map(([name, [file, marker]]) => ({
+          name,
+          file,
+          marker,
+          command: 'npm run game -- profile-test ' + name
+        })),
+        testsExecuted: false
+      },
+      null,
+      2
+    )
+  );
+  process.exit(0);
+}
 if (!Object.hasOwn(choices, suite) || extra.length)
-  throw Error('profile-test model|storage|ui|collection|editor');
+  throw Error('profile-test ' + Object.keys(choices).join('|') + '|list');
 const [script, marker] = choices[suite];
 const root = findRoot();
 process.chdir(root);

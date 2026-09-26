@@ -82,6 +82,10 @@ The edit helper retains path/secret/symlink/branch guards, operation leases, pre
 
 Serial resources: source mutation, branch integration, signing, a selected phone and economic journal writes. Parallel resources: isolated pure tests, platform jobs and read-only metadata. Do not parallelize competing writers or publish an artifact from a different source.
 
+## Discover targeted tests without inventing commands
+
+Use `profile-test list` for the generated suite names, scripts, markers and exact commands. It reports testsExecuted=false; listing is never a passing test. `profile-test inspector` covers read-only card details in collection/crafting, localized rules, keyboard close/focus return, removed opener, draft preservation and viewport bounds. The same suite is required by full verify. These UI-event tests are not Android taps; physical evidence stays separate.
+
 ## Preserve the accepted game
 D19–D21 remain: 30 cards/10 elements, rotation, optional directed attack, first strike and surviving replies, terrain and income rules. No faction-world binding or inherent elemental counterwheel. Do not invent the owner's deferred special mechanic or reinterpret rating without a decision.
 

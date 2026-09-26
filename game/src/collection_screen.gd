@@ -26,6 +26,7 @@ var choose_button: Button
 var delete_button: Button
 var play_button: Button
 var new_button: Button
+var inspector: AcceptDialog
 var confirmation: ConfirmationDialog
 var pending_action: Callable
 
@@ -115,6 +116,8 @@ func setup(owner_ui) -> void:
     confirmation.confirmed.connect(_confirmed)
     confirmation.canceled.connect(func(): pending_action = Callable())
     add_child(confirmation)
+    inspector = preload("res://src/card_inspector.gd").new()
+    add_child(inspector)
     var state: Dictionary = ui.profile.state()
     if state.has("collection") and not state.decks.is_empty():
         var selected: String = str(state.collection.selected)
@@ -267,6 +270,9 @@ func change_card(code: String, delta: int) -> void:
         return
     _refresh_rows()
 
+func _inspect_card(id: int) -> void:
+    inspector.open_card(id, ui.language, find_child("Details_" + Deck.code(id), true, false))
+
 func _refresh_rows() -> void:
     if not is_instance_valid(rows):
         return
@@ -292,7 +298,13 @@ func _refresh_rows() -> void:
         var text: Label = ui.label(description, 17)
         text.size_flags_horizontal = Control.SIZE_EXPAND_FILL
         text.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
-        line.add_child(text)
+        var description_column := VBoxContainer.new()
+        description_column.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+        line.add_child(description_column)
+        description_column.add_child(text)
+        var details: Button = ui.button(t("ПОДРОБНЕЕ О КАРТЕ", "CARD DETAILS"), _inspect_card.bind(int(card.id)), 56)
+        details.name = "Details_" + str(card.code)
+        description_column.add_child(details)
         var remove: Button = ui.button("−", change_card.bind(str(card.code), -1), 66)
         remove.name = "Remove_" + str(card.code)
         remove.custom_minimum_size.x = 60
