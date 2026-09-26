@@ -44,7 +44,9 @@ func _publish(status: String, code: String = "") -> void:
         set_process(false)
 
 func _call(object: Variant, method: String, args: Array = []) -> Variant:
-    if failed or object == null:
+    if failed:
+        return null
+    if object == null:
         failed = true
         call_deferred("_publish", "failed", "native_object_unavailable")
         return null
@@ -54,6 +56,17 @@ func _call(object: Variant, method: String, args: Array = []) -> Variant:
         call_deferred("_publish", "failed", "native_call_" + method)
         return null
     return value
+
+func _flag(object: Variant, method: String, args: Array = []) -> bool:
+    var raw: Variant = _call(object, method, args)
+    if failed:
+        return false
+    var result: Dictionary = Model.native_flag(raw)
+    if not result.ok:
+        failed = true
+        call_deferred("_publish", "failed", "invalid_native_boolean_" + method)
+        return false
+    return result.value
 
 func _class(name: String) -> Variant:
     if failed:
@@ -76,10 +89,10 @@ func _begin() -> void:
 
 func _request_pin(activity: Variant) -> void:
     manager = _call(activity, "getSystemService", ["shortcut"])
-    var supported: Variant = _call(manager, "isRequestPinShortcutSupported")
+    var supported: bool = _flag(manager, "isRequestPinShortcutSupported")
     if failed:
         return
-    if supported != true:
+    if not supported:
         call_deferred("_publish", "unsupported", "launcher_does_not_support_pin")
         return
     var current: Variant = _call(manager, "getPinnedShortcuts")
@@ -88,7 +101,7 @@ func _request_pin(activity: Variant) -> void:
         return
     for i in range(int(current_count)):
         var item: Variant = _call(current, "get", [i])
-        if _call(item, "getId") == Model.ID and _call(item, "isEnabled") == true:
+        if _call(item, "getId") == Model.ID and _flag(item, "isEnabled"):
             call_deferred("_publish", "pinned", "already_pinned")
             return
     var pm: Variant = _call(activity, "getPackageManager")
@@ -109,10 +122,10 @@ func _request_pin(activity: Variant) -> void:
     _call(builder, "setIcon", [icon])
     _call(builder, "setIntent", [intent])
     var shortcut: Variant = _call(builder, "build")
-    var accepted: Variant = _call(manager, "requestPinShortcut", [shortcut, null])
+    var accepted: bool = _flag(manager, "requestPinShortcut", [shortcut, null])
     if failed:
         return
-    requested = accepted == true
+    requested = accepted
     call_deferred("_publish", "requested" if requested else "unsupported", "" if requested else "pin_request_rejected")
 
 func _process(_delta: float) -> void:
@@ -131,6 +144,6 @@ func _process(_delta: float) -> void:
         return
     for i in range(int(count)):
         var item: Variant = _call(shortcuts, "get", [i])
-        if _call(item, "getId") == Model.ID and _call(item, "isEnabled") == true:
+        if _call(item, "getId") == Model.ID and _flag(item, "isEnabled"):
             _publish("pinned")
             return

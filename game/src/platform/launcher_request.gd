@@ -15,3 +15,11 @@ static func valid(value: Variant, version: String) -> bool:
         if not c in "0123456789abcdef":
             return false
     return true
+
+## Java primitive boolean may arrive as a JNI integer. Never coerce arbitrary truthy data.
+static func native_flag(value: Variant) -> Dictionary:
+    if typeof(value) == TYPE_BOOL:
+        return {"ok": true, "value": value}
+    if typeof(value) == TYPE_INT and (value == 0 or value == 1):
+        return {"ok": true, "value": value == 1}
+    return {"ok": false, "value": false}
