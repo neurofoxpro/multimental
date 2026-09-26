@@ -8,7 +8,7 @@ class FakeNative extends "res://src/platform/launcher_shortcut.gd":
     var enabled: Variant = 1
     var pin_exists: bool = false
     var icon_value: Variant = 1
-    var constructors: Array[String] = ["ShortcutInfo$Builder"]
+    var constructors: Array[String] = ["<init>", "ShortcutInfo$Builder"]
     var invoked: Array[String] = []
     var statuses: Array[Dictionary] = []
     func _call(_object: Variant, method: String, _args: Array = []) -> Variant:
@@ -54,7 +54,7 @@ func run_test() -> void:
         check(bridge.invoked.count("requestPinShortcut") == 1, "single native request")
         check(bridge.invoked.has("getActivityInfo") and bridge.invoked.has("getIconResource") and not bridge.invoked.has("getApplicationInfo"), "icon metadata uses Java methods, not fake dictionary fields")
         check(bridge.statuses.back().status == "requested", "native submission is not yet a pinned icon")
-        check(bridge.constructor_name == "ShortcutInfo$Builder" and bridge.invoked.count("ShortcutInfo$Builder") == 1 and not bridge.invoked.has("Builder"), "observed nested constructor called exactly once")
+        check(bridge.constructor_name == "<init>" and bridge.invoked.count("<init>") == 1 and not bridge.invoked.has("Builder") and not bridge.invoked.has("ShortcutInfo$Builder"), "observed nested constructor called exactly once")
         bridge.queue_free()
         await process_frame
     for bit in [false, 0]:
@@ -86,15 +86,25 @@ func run_test() -> void:
         check(not missing.invoked.has("requestPinShortcut"), "invalid icon never submits a pin")
         missing.queue_free()
         await process_frame
-    for names in [[], ["Other"], ["Builder", "ShortcutInfo$Builder"]]:
+    for names in [[], ["Other"], ["Builder"], ["ShortcutInfo$Builder"]]:
         var bridge := FakeNative.new()
         root.add_child(bridge)
         bridge.constructors.assign(names)
         bridge._request_pin(bridge)
         await process_frame
-        check(bridge.failed and bridge.statuses.back().code == "builder_constructor_missing_or_ambiguous", "missing or ambiguous constructor is explicit")
+        check(bridge.failed and bridge.statuses.back().code == "builder_constructor_unavailable", "missing canonical JNI constructor is explicit")
         check(not bridge.invoked.has("requestPinShortcut"), "no pin call with an unknown constructor")
         bridge.queue_free()
+        await process_frame
+    for names in [["<init>"], ["<init>", "ShortcutInfo$Builder"], ["<init>", "Builder", "new"]]:
+        var alias := FakeNative.new()
+        root.add_child(alias)
+        alias.constructors.assign(names)
+        alias._request_pin(alias)
+        await process_frame
+        check(not alias.failed and alias.requested, "constructor aliases do not create false ambiguity")
+        check(alias.invoked.count("<init>") == 1 and alias.invoked.count("requestPinShortcut") == 1, "one canonical constructor and one native pin call")
+        alias.queue_free()
         await process_frame
     var exists := FakeNative.new()
     root.add_child(exists)
