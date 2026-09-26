@@ -65,10 +65,7 @@
                    ],
     "evidence":  [
                      "docs/production/WORK_QUEUE_RESEARCH.ru.md",
-                     "docs/production/evidence/research-loop-observed-20260926.json",
-                     ".gameprod/studies/AUTO-05.json",
-                     "skills/game-production/tests/study-policy.test.mjs",
-                     "skills/game-production/tests/dispatch-policy.test.mjs"
+                     "docs/production/evidence/research-loop-observed-20260926.json"
                  ],
     "schemaVersion":  1,
     "research":  {
@@ -98,5 +95,10 @@
                                             },
                      "checkCount":  2,
                      "sourceCount":  2
-                 }
+                 },
+    "verificationInputs":  [
+                               ".gameprod/studies/AUTO-05.json",
+                               "skills/game-production/tests/study-policy.test.mjs",
+                               "skills/game-production/tests/dispatch-policy.test.mjs"
+                           ]
 }
