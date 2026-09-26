@@ -1,5 +1,7 @@
 extends Control
 const Core = preload("res://src/match_core.gd")
+const Collection = preload("res://src/collection_rules.gd")
+var collection_error: String = ""
 const Feedback = preload("res://src/combat_feedback.gd")
 const COLORS: Array[Color] = [Color("e76f51"), Color("4ea8de"), Color("f6ce55"), Color("9cdbd3"), Color("ab9366"), Color("fff0ad"), Color("ad8acc"), Color("9fafbb"), Color("a6cf64"), Color("d788c9")]
 var game = Core.new()
@@ -137,7 +139,10 @@ func show_menu() -> void:
     var space := Control.new()
     space.size_flags_vertical = Control.SIZE_EXPAND_FILL
     root.add_child(space)
-    root.add_child(button(t("ИГРАТЬ ПРОТИВ ИИ", "PLAY AGAINST AI"), start_match, 78))
+    root.add_child(button(t("ИГРАТЬ ПРОТИВ ИИ", "PLAY AGAINST AI"), show_collection, 78))
+    var collection_button: Button = button(t("КОЛЛЕКЦИЯ И КОЛОДЫ", "COLLECTION AND DECKS"), show_collection, 62)
+    collection_button.name = "OpenCollection"
+    root.add_child(collection_button)
     root.add_child(button(t("ИГРА ПО ЛОКАЛЬНОЙ СЕТИ", "LOCAL NETWORK MATCH"), show_lan_menu, 70))
     if OS.has_feature("android"):
         root.add_child(button(t("ИГРА ПО BLUETOOTH", "BLUETOOTH MATCH"), show_bluetooth_menu, 64))
@@ -152,6 +157,8 @@ func show_menu() -> void:
         status_text += t("\nСохранение недоступно: ", "\nSaving unavailable: ") + profile.error
     elif profile.recovered:
         status_text += t("\nВосстановлена резервная копия", "\nRecovered from backup")
+    if collection_error != "":
+        status_text += "\n" + collection_error
     var profile_status := label(status_text, 16)
     profile_status.name = "ProfileSummary"
     root.add_child(profile_status)
@@ -166,6 +173,35 @@ func toggle_language() -> void:
         language = chosen
     show_menu()
 
+func ensure_collection() -> bool:
+    collection_error = ""
+    if not profile.enabled:
+        collection_error = t("Личный профиль отключён в диагностике", "Personal profile is disabled in diagnostics")
+        return false
+    if not profile.flush():
+        collection_error = profile.error
+        return false
+    if not profile.state().has("collection") and not profile.commit({"kind": "collection_init"}):
+        collection_error = profile.error
+        return false
+    return Collection.valid(profile.state())
+
+func show_collection() -> void:
+    if not ensure_collection():
+        show_menu()
+        return
+    lan.stop()
+    online = false
+    battle = false
+    tutorial = false
+    network_page = false
+    clear_screen()
+    var screen = preload("res://src/collection_screen.gd").new()
+    root.add_child(screen)
+    screen.leave_requested.connect(show_menu)
+    screen.play_requested.connect(start_match)
+    screen.setup(self)
+
 func start_match() -> void:
     if not profile.flush():
         show_menu()
@@ -178,7 +214,22 @@ func start_match() -> void:
     network_page = false
     result_saved = false
     local_match_id = Crypto.new().generate_random_bytes(16).hex_encode()
-    game.start(int(Time.get_unix_time_from_system()) % 2147483646 + 1)
+    var seed_value: int = int(Time.get_unix_time_from_system()) % 2147483646 + 1
+    if profile.enabled:
+        if not ensure_collection():
+            show_menu()
+            return
+        var selected: Dictionary = Collection.selected(profile.state())
+        if not selected.ok:
+            show_collection()
+            return
+        var started: Dictionary = game.start_with_decks(seed_value, [selected.ids, Core.STARTER])
+        if not started.ok:
+            collection_error = str(started.get("code", "invalid_deck"))
+            show_menu()
+            return
+    else:
+        game.start(seed_value)
     selected_direction = 0
     timed_turn = int(game.state.turn)
     match_end = Time.get_unix_time_from_system() + 900.0
