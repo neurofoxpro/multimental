@@ -494,7 +494,7 @@
       "title": "Коллекция, экземпляры, конструктор и выбор собственной колоды",
       "stage": "P2. Коллекция, профиль и экономика",
       "kind": "game",
-      "status": "planned",
+      "status": "verified",
       "dependsOn": [
         "META-05"
       ],
@@ -502,12 +502,18 @@
         "Каталог/поиск/фильтры, количество копий, создание/правка/проверка/сохранение нескольких колод.",
         "Колода может смешивать любые стихии; смена колоды используется реальным матчем и переживает обновление."
       ],
-      "evidence": [],
+      "evidence": [
+        "game/tests/collection_test.gd",
+        "game/tests/collection_ui_test.gd",
+        "game/tests/network_decks_test.gd",
+        "docs/production/NETWORK_DECKS.ru.md",
+        "docs/production/COLLECTION_DEVICE_TEST.ru.md"
+      ],
       "readset": [
         "game/src/match_core.gd",
         "game/src/main.gd"
       ],
-      "source": "Этапы 1,4,6; D05–D06",
+      "source": "Этапы 1,4,6; D05–D06; завершённые PR94/96/97/99/100 и аппаратные проверки 26.09.2026",
       "requiredForBeta": true,
       "requiredForPlay": true,
       "priority": 11
