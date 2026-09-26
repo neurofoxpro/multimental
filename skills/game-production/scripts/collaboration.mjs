@@ -17,7 +17,11 @@ export function taskResources(task, config) {
 }
 export async function main(args = process.argv.slice(2)) {
   const [mode = 'status', ...values] = args;
-  if (!['init', 'status', 'claim', 'renew', 'release', 'start', 'check-owner'].includes(mode))
+  if (
+    !['init', 'status', 'claim', 'renew', 'release', 'start', 'check-owner', 'branch'].includes(
+      mode
+    )
+  )
     throw Error('collab init|status|claim TASK AGENT|start TASK AGENT|renew|release|check-owner');
   const root = findRoot(),
     workspace = path.dirname(root);
@@ -48,6 +52,11 @@ export async function main(args = process.argv.slice(2)) {
     store = new GitHubCoordination(token);
   const config = readJSON(inside(root, '.gameprod/collaboration.json'));
   const output = (result) => console.log(JSON.stringify(result, null, 2));
+  if (mode === 'branch') {
+    if (values.length !== 1) throw Error('collab branch SHORT_SUFFIX');
+    output(await (await import('./slice-branch.mjs')).continueBranch(root, store, values[0]));
+    return;
+  }
   if (mode === 'init') {
     if (values.length) throw Error('init takes no args');
     const head = (await hub.api('GET', '/git/ref/heads/dev')).object.sha;
@@ -129,6 +138,8 @@ export async function main(args = process.argv.slice(2)) {
       const binding = inside(existing, '.gameprod/agent.local.json');
       if (fs.existsSync(binding)) {
         const old = readJSON(binding);
+        if (old.released)
+          throw Error('Released slice is preserved as history; choose a new chat alias');
         if (!old.released && (old.owner !== owner || old.task !== taskId))
           throw Error('Existing slice binding differs');
       }
@@ -198,6 +209,15 @@ export async function main(args = process.argv.slice(2)) {
           target,
           180000
         );
+      }
+      if (process.platform === 'win32') {
+        const engineDir = inside(workspace, 'tools/godot');
+        const consoleName = fs.readdirSync(engineDir).find((name) => /console\.exe$/i.test(name));
+        if (!consoleName) throw Error('Pinned Godot not found; slice preserved');
+        const { verificationRuntime } = await import('../../../tools/godot-runtime.mjs');
+        const { prepareGodotProject } = await import('../../../tools/godot-preflight.mjs');
+        const engine = verificationRuntime(target, path.join(engineDir, consoleName));
+        prepareGodotProject(target, engine);
       }
     } finally {
       unlock();
