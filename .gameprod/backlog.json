@@ -62,7 +62,7 @@
   },
   {
     "id": "AUTO-05",
-    "status": "pending",
+    "status": "done",
     "action": "Реестр исследований и перенос контекста между агентами",
     "dependsOn": [
       "AUTO-01"
@@ -71,7 +71,10 @@
     "generatedFrom": ".gameprod/workplan.json",
     "evidence": [
       "scripts/research.mjs",
-      "scripts/handoff.mjs"
+      "scripts/handoff.mjs",
+      "docs/production/WORK_QUEUE_RESEARCH.ru.md",
+      "docs/production/evidence/research-loop-observed-20260926.json",
+      "docs/production/evidence/research-workflow-completed-20260926.json"
     ],
     "nextCommand": "npm run game -- task AUTO-05"
   },

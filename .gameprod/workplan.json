@@ -120,7 +120,7 @@
       "title": "Реестр исследований и перенос контекста между агентами",
       "stage": "P0. Единый производственный процесс",
       "kind": "automation",
-      "status": "implemented",
+      "status": "verified",
       "dependsOn": [
         "AUTO-01"
       ],
@@ -130,7 +130,10 @@
       ],
       "evidence": [
         "scripts/research.mjs",
-        "scripts/handoff.mjs"
+        "scripts/handoff.mjs",
+        "docs/production/WORK_QUEUE_RESEARCH.ru.md",
+        "docs/production/evidence/research-loop-observed-20260926.json",
+        "docs/production/evidence/research-workflow-completed-20260926.json"
       ],
       "readset": [
         ".gameprod/research.json"

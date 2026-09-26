@@ -32,6 +32,7 @@ run(process.execPath, ['scripts/changelog.mjs', 'check'], ['RUSSIAN_CHANGELOG_PA
 run(process.execPath, ['tools/audio.mjs', 'check'], ['AUDIO_ASSETS_PASS']);
 run(process.execPath, ['scripts/research.mjs', 'check'], ['RESEARCH_LEDGER_PASS']);
 run(process.execPath, ['tools/study.mjs', 'check'], ['STUDY_DEFINITIONS_PASS']);
+run(process.execPath, ['tools/gallery.mjs', 'check'], ['MULTIMENTAL_GALLERY_CHECK_PASS']);
 run(process.execPath, ['scripts/readiness.mjs', 'check'], ['REQUIREMENTS_SCHEMA_PASS']);
 run(
   process.execPath,
