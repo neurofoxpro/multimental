@@ -6,6 +6,14 @@ const HOSTS = new Set([
   'learn.microsoft.com'
 ]);
 export const CHECKS = Object.freeze({
+  usability: {
+    argv: ['tools/test-profile.mjs', 'usability'],
+    marker: 'MULTIMENTAL_USABILITY_PASS'
+  },
+  'connection-ui': {
+    argv: ['tools/test-profile.mjs', 'connection-ui'],
+    marker: 'MULTIMENTAL_CONNECTION_UI_PASS'
+  },
   gallery: { argv: ['tools/gallery.mjs', 'check'], marker: 'MULTIMENTAL_GALLERY_CHECK_PASS' },
   dispatch: {
     argv: [

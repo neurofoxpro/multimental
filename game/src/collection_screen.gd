@@ -26,6 +26,7 @@ var choose_button: Button
 var delete_button: Button
 var play_button: Button
 var new_button: Button
+var back_button: Button
 var inspector: AcceptDialog
 var confirmation: ConfirmationDialog
 var pending_action: Callable
@@ -52,6 +53,7 @@ func setup(owner_ui) -> void:
     new_button = ui.button(t("НОВАЯ", "NEW"), request_new, 54)
     new_button.size_flags_horizontal = Control.SIZE_SHRINK_END
     new_button.name = "NewDeck"
+    new_button.custom_minimum_size.x = 96
     top.add_child(new_button)
     name_input = LineEdit.new()
     name_input.name = "DeckName"
@@ -108,7 +110,9 @@ func setup(owner_ui) -> void:
     play_button = ui.button(t("ИГРАТЬ ВЫБРАННОЙ ПРОТИВ ИИ", "PLAY SELECTED DECK VS AI"), _play, 62)
     play_button.name = "PlaySelectedDeck"
     add_child(play_button)
-    add_child(ui.button(t("В МЕНЮ", "MENU"), request_leave, 54))
+    back_button = ui.button(t("В МЕНЮ", "MENU"), request_leave, 54)
+    back_button.name = "CollectionBack"
+    add_child(back_button)
     confirmation = ConfirmationDialog.new()
     confirmation.title = t("Подтверждение", "Confirmation")
     confirmation.get_ok_button().text = t("Продолжить", "Continue")
@@ -116,6 +120,7 @@ func setup(owner_ui) -> void:
     confirmation.confirmed.connect(_confirmed)
     confirmation.canceled.connect(func(): pending_action = Callable())
     add_child(confirmation)
+    preload("res://src/ui_theme.gd").decorate_dialog(confirmation)
     inspector = preload("res://src/card_inspector.gd").new()
     add_child(inspector)
     var state: Dictionary = ui.profile.state()

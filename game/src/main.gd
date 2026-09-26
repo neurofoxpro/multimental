@@ -1,5 +1,12 @@
 extends Control
 const Core = preload("res://src/match_core.gd")
+const UIStyle = preload("res://src/ui_theme.gd")
+var leave_confirm: ConfirmationDialog
+var invitation_drafts: Dictionary = {"lan": "", "bluetooth": ""}
+var connection_return_mode: String = ""
+var connection_join_button: Button
+var connection_create_button: Button
+var connection_retry_button: Button
 const Collection = preload("res://src/collection_rules.gd")
 var collection_error: String = ""
 const Feedback = preload("res://src/combat_feedback.gd")
@@ -57,7 +64,8 @@ func t(ru: String, en: String) -> String:
     return ru if language == "ru" else en
 
 func _ready() -> void:
-    RenderingServer.set_default_clear_color(Color("091322"))
+    theme = UIStyle.build()
+    RenderingServer.set_default_clear_color(UIStyle.BACKGROUND)
     var cfg := ConfigFile.new()
     if cfg.load("user://settings.cfg") == OK:
         language = str(cfg.get_value("ui", "language", "ru"))
@@ -92,22 +100,7 @@ func button(text: String, callback: Callable, height: int = 62) -> Button:
     node.custom_minimum_size.y = height
     node.size_flags_horizontal = Control.SIZE_EXPAND_FILL
     node.add_theme_font_size_override("font_size", 19)
-    var style := StyleBoxFlat.new()
-    style.bg_color = Color("203856")
-    style.set_corner_radius_all(10)
-    style.content_margin_left = 10
-    style.content_margin_right = 10
-    node.add_theme_stylebox_override("normal", style)
-    var hover := style.duplicate() as StyleBoxFlat
-    hover.bg_color = Color("345778")
-    node.add_theme_stylebox_override("hover", hover)
-    var focus := StyleBoxFlat.new()
-    focus.bg_color = Color(0, 0, 0, 0)
-    focus.border_color = Color("ffe39c")
-    focus.set_border_width_all(3)
-    focus.set_corner_radius_all(10)
-    node.add_theme_stylebox_override("focus", focus)
-    node.focus_mode = Control.FOCUS_ALL
+    UIStyle.decorate_button(node)
     node.pressed.connect(callback)
     return node
 
@@ -125,14 +118,16 @@ func clear_screen() -> void:
     margin.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
     margin.add_theme_constant_override("margin_left", 20)
     margin.add_theme_constant_override("margin_right", 20)
-    margin.add_theme_constant_override("margin_top", 30)
-    margin.add_theme_constant_override("margin_bottom", 25)
+    margin.add_theme_constant_override("margin_top", 24)
+    margin.add_theme_constant_override("margin_bottom", 20)
     add_child(margin)
     root = VBoxContainer.new()
     root.add_theme_constant_override("separation", 12)
     margin.add_child(root)
 
 func show_menu() -> void:
+    remember_invitation()
+    connection_return_mode = ""
     if battle:
         _save_finished_match()
     if online:
@@ -143,52 +138,7 @@ func show_menu() -> void:
     tutorial = false
     clear_screen()
     preload("res://src/scrollable_page.gd").wrap(root)
-    root.add_child(label("MULTIMENTAL", 36))
-    root.add_child(label(t("Тактическая альфа · 10 стихий · поле 3×3", "Tactical alpha · 10 elements · 3×3 board"), 18))
-    var space := Control.new()
-    space.size_flags_vertical = Control.SIZE_EXPAND_FILL
-    root.add_child(space)
-    var play: Button = button(t("ИГРАТЬ ПРОТИВ ИИ", "PLAY AGAINST AI"), show_collection, 78)
-    play.name = "PlayAI"
-    root.add_child(play)
-    call_deferred("_focus_control", weakref(play))
-    var collection_button: Button = button(t("КОЛЛЕКЦИЯ И КОЛОДЫ", "COLLECTION AND DECKS"), show_collection, 62)
-    collection_button.name = "OpenCollection"
-    root.add_child(collection_button)
-    var shop_button: Button = button(t("МАГАЗИН ПАКОВ", "CARD PACK SHOP"), show_shop, 62)
-    shop_button.name = "OpenShop"
-    root.add_child(shop_button)
-    var craft_button: Button = button(t("СОЗДАНИЕ КАРТ", "CARD CRAFTING"), show_crafting, 62)
-    craft_button.name = "OpenCrafting"
-    root.add_child(craft_button)
-    var rewards_button: Button = button(t("НАГРАДЫ И ЗАДАНИЯ", "REWARDS AND QUESTS"), show_rewards, 62)
-    rewards_button.name = "OpenRewards"
-    root.add_child(rewards_button)
-    root.add_child(button(t("ИГРА ПО ЛОКАЛЬНОЙ СЕТИ", "LOCAL NETWORK MATCH"), show_lan_menu, 70))
-    if OS.has_feature("android"):
-        root.add_child(button(t("ИГРА ПО BLUETOOTH", "BLUETOOTH MATCH"), show_bluetooth_menu, 64))
-    root.add_child(label(t("Выставь карту и по желанию атакуй.\nНовый юнит — бесплатно; прежний — за 1 монету.\nПоверни карту перед размещением. Займи 5 клеток.", "Place a card, then optionally attack.\nNew unit: free. Older unit: 1 coin.\nRotate before placing. Occupy five cells."), 20))
-    root.add_child(button(t("КАРТЫ И ПРАВИЛА", "CARDS AND RULES"), show_card_guide, 54))
-    root.add_child(button(t("ОБУЧЕНИЕ", "TUTORIAL"), start_tutorial, 58))
-    root.add_child(button(t("НАСТРОЙКИ ЗВУКА", "AUDIO SETTINGS"), show_audio_settings, 58))
-    root.add_child(button(t("ЯЗЫК: РУССКИЙ", "LANGUAGE: ENGLISH"), toggle_language))
-    var stats: Dictionary = profile.state().get("stats", {"matches": 0, "wins": 0, "losses": 0})
-    var status_text: String = t("Локальный профиль · партий %d · побед %d · поражений %d", "Local profile · matches %d · wins %d · losses %d") % [stats.matches, stats.wins, stats.losses]
-    if profile.error != "" and profile.enabled:
-        status_text += t("\nСохранение недоступно: ", "\nSaving unavailable: ") + profile.error
-    elif profile.recovered:
-        status_text += t("\nВосстановлена резервная копия", "\nRecovered from backup")
-    if collection_error != "":
-        status_text += "\n" + collection_error
-    var xp: int = int(profile.state().get("rewards", {}).get("xp", 0))
-    status_text += t("\nУровень %d · Опыт %d · Монеты %d", "\nLevel %d · XP %d · Coins %d") % [preload("res://src/rewards_policy.gd").level(xp), xp, int(profile.state().get("wallet", {}).get("gold", 0))]
-    var profile_status := label(status_text, 16)
-    profile_status.name = "ProfileSummary"
-    root.add_child(profile_status)
-    var bottom := Control.new()
-    bottom.size_flags_vertical = Control.SIZE_EXPAND_FILL
-    root.add_child(bottom)
-    root.add_child(label(BuildInfo.VERSION + " · " + BuildInfo.COMMIT, 14))
+    preload("res://src/home_screen.gd").build(self, root)
 
 func _focus_control(reference: WeakRef) -> void:
     var control: Variant = reference.get_ref()
@@ -288,9 +238,11 @@ func show_collection() -> void:
     clear_screen()
     var screen = preload("res://src/collection_screen.gd").new()
     root.add_child(screen)
-    screen.leave_requested.connect(show_menu)
+    screen.leave_requested.connect(return_from_collection)
     screen.play_requested.connect(start_match)
     screen.setup(self)
+    if connection_return_mode != "":
+        screen.back_button.text = t("К ПОДКЛЮЧЕНИЮ", "BACK TO CONNECTION")
 
 func start_match(use_starter: bool = false) -> void:
     if not use_starter and not profile.flush():
@@ -334,52 +286,64 @@ func start_match(use_starter: bool = false) -> void:
 
 func build_battle() -> void:
     clear_screen()
-    root.add_child(label("MULTIMENTAL", 27))
-    info = label("", 19)
-    root.add_child(info)
-    timer_text = label("", 18)
-    root.add_child(timer_text)
-    tutorial_hint = null
-    if tutorial:
-        tutorial_hint = label("", 17)
-        root.add_child(tutorial_hint)
-    var aspect := AspectRatioContainer.new()
-    aspect.ratio = 1.0
-    aspect.stretch_mode = AspectRatioContainer.STRETCH_FIT
-    aspect.size_flags_vertical = Control.SIZE_EXPAND_FILL
-    root.add_child(aspect)
+    root.add_theme_constant_override("separation", 8)
+    root.add_child(label("MULTIMENTAL", 24))
+    var layout = preload("res://src/battle_layout.gd").new()
+    root.add_child(layout)
+    layout.setup()
     var grid := GridContainer.new()
     grid.columns = 3
     grid.add_theme_constant_override("h_separation", 8)
     grid.add_theme_constant_override("v_separation", 8)
-    aspect.add_child(grid)
+    layout.board.add_child(grid)
     for cell in range(9):
-        var b: Button = button("·", on_cell.bind(cell), 112)
-        b.custom_minimum_size.x = 140
+        var b: Button = button("·", on_cell.bind(cell), 88)
+        b.name = "BoardCell" + str(cell)
+        b.custom_minimum_size.x = 88
+        b.autowrap_mode = TextServer.AUTOWRAP_OFF
         b.size_flags_vertical = Control.SIZE_EXPAND_FILL
+        for state in ["normal", "hover", "pressed", "disabled"]:
+            var style: StyleBoxFlat = b.get_theme_stylebox(state).duplicate()
+            style.content_margin_top = 3
+            style.content_margin_bottom = 3
+            style.content_margin_left = 4
+            style.content_margin_right = 4
+            b.add_theme_stylebox_override(state, style)
         grid.add_child(b)
         board_buttons.append(b)
+    info = label("", 19)
+    info.name = "BattleSummary"
+    layout.panel.add_child(info)
+    timer_text = label("", 18)
+    timer_text.name = "TurnTimer"
+    layout.panel.add_child(timer_text)
+    tutorial_hint = null
+    if tutorial:
+        tutorial_hint = label("", 17)
+        layout.panel.add_child(tutorial_hint)
     message = label("", 18)
-    root.add_child(message)
+    message.name = "BattleMessage"
+    layout.panel.add_child(message)
     var aim_row := HBoxContainer.new()
-    root.add_child(aim_row)
-    rotation_left = button("↶", rotate_card.bind(-1), 54)
+    layout.panel.add_child(aim_row)
+    rotation_left = button("↶", rotate_card.bind(-1), 58)
     rotation_left.name = "RotateLeft"
+    rotation_left.tooltip_text = t("Повернуть карту влево", "Rotate card left")
     rotation_left.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
     rotation_left.custom_minimum_size.x = 64
     aim_row.add_child(rotation_left)
     aim_label = label("", 17)
     aim_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
     aim_row.add_child(aim_label)
-    rotation_right = button("↷", rotate_card.bind(1), 54)
+    rotation_right = button("↷", rotate_card.bind(1), 58)
     rotation_right.name = "RotateRight"
+    rotation_right.tooltip_text = t("Повернуть карту вправо", "Rotate card right")
     rotation_right.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
     rotation_right.custom_minimum_size.x = 64
     aim_row.add_child(rotation_right)
-    sweep_button = button(t("АТАКОВАТЬ", "ATTACK"), attack_selected, 54)
+    sweep_button = button(t("АТАКОВАТЬ ПО СТРЕЛКАМ", "ATTACK ALONG THE ARROWS"), attack_selected, 58)
     sweep_button.name = "SweepAttack"
-    sweep_button.custom_minimum_size.x = 140
-    aim_row.add_child(sweep_button)
+    layout.panel.add_child(sweep_button)
     friendly_confirm = ConfirmationDialog.new()
     friendly_confirm.title = t("Удар по союзнику", "Friendly fire")
     friendly_confirm.ok_button_text = t("Атаковать", "Attack")
@@ -387,20 +351,42 @@ func build_battle() -> void:
     friendly_confirm.confirmed.connect(confirm_friendly_attack)
     friendly_confirm.canceled.connect(func(): friendly_pending = {})
     add_child(friendly_confirm)
-    var scroll := ScrollContainer.new()
-    scroll.custom_minimum_size.y = 156
-    scroll.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
-    root.add_child(scroll)
+    UIStyle.decorate_dialog(friendly_confirm)
+    var hand_scroll := ScrollContainer.new()
+    hand_scroll.name = "HandScroll"
+    hand_scroll.custom_minimum_size.y = 164
+    hand_scroll.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+    hand_scroll.follow_focus = true
+    layout.panel.add_child(hand_scroll)
     hand_row = HBoxContainer.new()
     hand_row.add_theme_constant_override("separation", 8)
-    scroll.add_child(hand_row)
+    hand_scroll.add_child(hand_row)
     var row := HBoxContainer.new()
+    row.name = "BattleFooter"
     root.add_child(row)
     end_turn_button = button(t("ЗАКОНЧИТЬ ХОД", "END TURN"), pass_turn)
     end_turn_button.name = "EndTurn"
     row.add_child(end_turn_button)
-    row.add_child(button(t("В МЕНЮ", "MENU"), show_menu))
+    var back: Button = button(t("В МЕНЮ", "MENU"), request_leave_match)
+    back.name = "BattleBack"
+    row.add_child(back)
+    leave_confirm = ConfirmationDialog.new()
+    leave_confirm.title = t("Выйти из партии?", "Leave the match?")
+    leave_confirm.dialog_text = t("Текущая партия будет прервана. Продолжить?", "The current match will be interrupted. Continue?")
+    leave_confirm.dialog_autowrap = true
+    leave_confirm.ok_button_text = t("Выйти", "Leave")
+    leave_confirm.cancel_button_text = t("Остаться", "Stay")
+    leave_confirm.confirmed.connect(show_menu)
+    add_child(leave_confirm)
+    UIStyle.decorate_dialog(leave_confirm)
     root.add_child(label(BuildInfo.VERSION + " · " + BuildInfo.COMMIT, 12))
+
+func request_leave_match() -> void:
+    var view: Dictionary = _view()
+    if not battle or view.is_empty() or int(view.get("winner", -1)) != -1:
+        show_menu()
+        return
+    leave_confirm.popup_centered_clamped(Vector2i(500, 220), 0.9)
 
 func on_hand(index: int) -> void:
     var view: Dictionary = _view()
@@ -602,10 +588,10 @@ func refresh() -> void:
                 b.text += "\n+1 HP"
         else:
             var def: Dictionary = game.card(int(unit.id))
-            b.text = (t("ТВОЙ", "YOURS") if unit.owner == 0 else t("ВРАГ", "ENEMY")) + "\n" + str(def[language]) + " " + Feedback.pattern(def, int(unit.direction)) + "\n⚔ %d   ♥ %d" % [unit.attack, unit.health]
-            b.text = terrain_name + "\n" + b.text
-            if int(unit.get("terrain_bonus", 0)) == 1:
-                b.text += t("  (+1 от поля)", "  (+1 terrain)")
+            b.text = (t("ТВОЙ", "YOURS") if unit.owner == 0 else t("ВРАГ", "ENEMY")) + " · " + terrain_name + "\n" + str(def[language])
+            b.text += "\n⚔ %d   ♥ %d" % [unit.attack, unit.health] + (" +1" if int(unit.get("terrain_bonus", 0)) == 1 else "")
+            b.text += "\n" + Feedback.pattern(def, int(unit.direction))
+            b.tooltip_text = str(def[language]) + " · " + terrain_name + t(" · здоровье учитывает бонус клетки", " · health includes terrain bonus")
             style.border_color = Color("70c5ff") if int(unit.owner) == 0 else Color("ff8b87")
         var highlight: bool = false
         for c in legal:
@@ -634,7 +620,8 @@ func refresh() -> void:
         b.add_theme_font_size_override("font_size", 17)
         b.custom_minimum_size.x = 170
         b.disabled = view.active != 0 or view.winner != -1 or int(view.get("placed_cell", -1)) >= 0 or int(def.cost) > int(view.coins) or (online and not lan.pending.is_empty())
-        b.modulate = COLORS[int(def.element)] if i != selected_hand else Color.WHITE
+        UIStyle.hand_card(b, COLORS[int(def.element)], i == selected_hand)
+        b.tooltip_text = str(def[language]) + " · " + t(Core.TYPES_RU[int(def.role)], Core.TYPES_EN[int(def.role)])
         hand_row.add_child(b)
     message.modulate = Color.WHITE
     if tutorial and is_instance_valid(tutorial_hint):
@@ -728,44 +715,109 @@ func reason_text(reason: String) -> String:
         return t(texts[reason][0], texts[reason][1])
     return reason
 
+func _focus_connection_start(reference: WeakRef) -> void:
+    # Text wrapping can settle over several container layouts. Focus only the live page.
+    await get_tree().process_frame
+    await get_tree().process_frame
+    var control: Variant = reference.get_ref()
+    if control == null or not network_page or online or not control.is_inside_tree() or control.is_queued_for_deletion() or not root.is_ancestor_of(control):
+        return
+    control.grab_focus()
+    var page: Node = root.get_parent()
+    if page is ScrollContainer:
+        page.set_deferred("scroll_vertical", 0)
+func remember_invitation() -> void:
+    if not is_instance_valid(invite_input) or not invite_input.is_inside_tree():
+        return
+    var text: String = invite_input.text
+    if text.length() <= 2048:
+        invitation_drafts["bluetooth" if bluetooth_mode else "lan"] = text
+    if is_instance_valid(connection_join_button) and connection_join_button.is_inside_tree():
+        connection_join_button.disabled = text.strip_edges().is_empty() or text.length() > 2048 or (bluetooth_mode and is_instance_valid(bluetooth_devices) and bluetooth_devices.item_count == 0)
+    if text.length() > 2048:
+        _show_network_status("invite_too_long", true)
+
+func paste_invitation() -> void:
+    var text: String = DisplayServer.clipboard_get()
+    if text.length() > 2048:
+        _show_network_status("invite_too_long", true)
+        return
+    invite_input.text = text
+    remember_invitation()
+
+func _show_network_status(code: String, error: bool = false) -> void:
+    if not is_instance_valid(lobby_status) or not lobby_status.is_inside_tree():
+        return
+    lobby_status.text = network_error(code)
+    lobby_status.modulate = Color("ffcbc2") if error else Color.WHITE
+    if error:
+        var parent: Node = root.get_parent()
+        if parent is ScrollContainer:
+            call_deferred("_reveal_network_status", weakref(lobby_status))
+
+func _reveal_network_status(reference: WeakRef) -> void:
+    var control: Variant = reference.get_ref()
+    if control == null or control != lobby_status or not control.is_inside_tree() or control.is_queued_for_deletion():
+        return
+    var parent: Node = root.get_parent()
+    if parent is ScrollContainer and parent.is_inside_tree() and not parent.is_queued_for_deletion():
+        parent.ensure_control_visible(control)
+func edit_network_deck() -> void:
+    remember_invitation()
+    connection_return_mode = "bluetooth" if bluetooth_mode else "lan"
+    show_collection()
+
+func return_from_collection() -> void:
+    var previous: String = connection_return_mode
+    connection_return_mode = ""
+    if previous == "bluetooth":
+        show_bluetooth_menu()
+    elif previous == "lan":
+        show_lan_menu()
+    else:
+        show_menu()
+
+func cancel_connection() -> void:
+    var use_bluetooth: bool = bluetooth_mode
+    if online:
+        lan.leave()
+    online = false
+    if use_bluetooth:
+        show_bluetooth_menu()
+    else:
+        show_lan_menu()
+
+func request_close_room() -> void:
+    var confirmation := ConfirmationDialog.new()
+    confirmation.name = "CloseRoomPrompt"
+    confirmation.title = t("Закрыть комнату?", "Close the room?")
+    confirmation.dialog_text = t("Приглашение перестанет работать. Другому игроку понадобится новое.", "This invitation will stop working. The other player will need a new one.")
+    confirmation.dialog_autowrap = true
+    confirmation.ok_button_text = t("Закрыть", "Close")
+    confirmation.cancel_button_text = t("Оставить", "Keep open")
+    confirmation.confirmed.connect(cancel_connection)
+    confirmation.canceled.connect(confirmation.queue_free)
+    add_child(confirmation)
+    UIStyle.decorate_dialog(confirmation)
+    confirmation.popup_centered_clamped(Vector2i(520,240),0.9)
 func show_lan_menu() -> void:
+    remember_invitation()
     _switch_transport(false)
     lan.stop()
     online = false
     network_page = true
     battle = false
+    tutorial = false
     clear_screen()
-    root.add_child(label(t("ЛОКАЛЬНАЯ СЕТЬ", "LOCAL NETWORK"), 30))
-    _network_deck_summary()
-    root.add_child(label(t("Оба устройства должны быть в одной сети Wi-Fi. Внешний сервер не нужен.", "Connect both devices to the same Wi-Fi network. No external server is required."), 19))
-    network_addresses = OptionButton.new()
-    network_addresses.custom_minimum_size.y = 58
-    for item in RoomInvite.address_options(IP.get_local_interfaces()):
-        network_addresses.add_item(str(item.name) + " · " + str(item.address))
-        network_addresses.set_item_metadata(network_addresses.item_count - 1, str(item.address))
-    root.add_child(network_addresses)
-    root.add_child(button(t("СОЗДАТЬ КОМНАТУ", "CREATE ROOM"), func():
-        var address: String = str(network_addresses.get_selected_metadata()) if network_addresses.item_count > 0 else ""
-        create_lan_room(address)
-    , 76))
-
-    root.add_child(label(t("Или вставь приглашение другого игрока:", "Or paste another player's invitation:"), 19))
-    invite_input = TextEdit.new()
-    invite_input.custom_minimum_size.y = 180
-    invite_input.wrap_mode = TextEdit.LINE_WRAPPING_BOUNDARY
-    invite_input.placeholder_text = "multimental://join/…"
-    root.add_child(invite_input)
-    root.add_child(button(t("ВСТАВИТЬ ПРИГЛАШЕНИЕ", "PASTE INVITATION"), func(): invite_input.text = DisplayServer.clipboard_get()))
-    root.add_child(button(t("ПОДКЛЮЧИТЬСЯ", "JOIN ROOM"), func(): join_lan_room(invite_input.text), 76))
-    lobby_status = label("", 18)
-    root.add_child(lobby_status)
-    root.add_child(button(t("В МЕНЮ", "MENU"), show_menu))
+    preload("res://src/connection_screen.gd").build(self, false)
 
 func _network_deck_summary() -> void:
     var state: Dictionary = profile.state()
     var meta: Dictionary = state.get("collection", {})
     var name: String = str(meta.get("names", {}).get(meta.get("selected", ""), t("не выбрана", "not selected")))
-    root.add_child(button(t("КОЛОДА: ", "DECK: ") + name, show_collection, 48))
+    var choose: Button = button(t("КОЛОДА: ", "DECK: ") + name, edit_network_deck, 58)
+    choose.name = "NetworkDeck"
+    root.add_child(choose)
 
 func _network_deck() -> Dictionary:
     if not profile.enabled:
@@ -779,7 +831,7 @@ func create_lan_room(address: String = "", port: int = 17844) -> Dictionary:
     var selected: Dictionary = _network_deck()
     if not selected.ok:
         if is_instance_valid(lobby_status):
-            lobby_status.text = network_error("invalid_deck")
+            _show_network_status("invalid_deck", true)
         return selected
     online = true
     battle = false
@@ -790,9 +842,10 @@ func create_lan_room(address: String = "", port: int = 17844) -> Dictionary:
     if not result.ok:
         online = false
         if is_instance_valid(lobby_status):
-            lobby_status.text = network_error(str(result.error))
+            _show_network_status(str(result.error), true)
         return result
     clear_screen()
+    preload("res://src/scrollable_page.gd").wrap(root)
     root.add_child(label(t("КОМНАТА СОЗДАНА", "ROOM CREATED"), 30))
     root.add_child(label(t("Передай приглашение второму игроку. Не публикуй его: оно даёт доступ к этой комнате.", "Share the invitation with the other player. Keep it private: it grants access to this room."), 19))
     var text := TextEdit.new()
@@ -805,14 +858,18 @@ func create_lan_room(address: String = "", port: int = 17844) -> Dictionary:
     lobby_status = label(t("Ожидаем второго игрока…", "Waiting for another player…"), 20)
     root.add_child(lobby_status)
     root.add_child(label(t("Защищённое Bluetooth-соединение требует сопряжения устройств в Android.", "Secure Bluetooth requires Android device pairing.") if bluetooth_mode else t("Соединение шифруется. Сертификат комнаты проверяется по приглашению.", "The connection is encrypted. The invitation pins the room certificate."), 17))
-    root.add_child(button(t("ЗАКРЫТЬ КОМНАТУ", "CLOSE ROOM"), show_menu))
+    root.add_child(button(t("ЗАКРЫТЬ КОМНАТУ", "CLOSE ROOM"), request_close_room))
     return result
 
 func join_lan_room(text: String) -> Dictionary:
+    if text.length() > 2048:
+        _show_network_status("invite_too_long", true)
+        return {"ok": false, "error": "invite_too_long"}
+    invitation_drafts["bluetooth" if bluetooth_mode else "lan"] = text
     var selected: Dictionary = _network_deck()
     if not selected.ok:
         if is_instance_valid(lobby_status):
-            lobby_status.text = network_error("invalid_deck")
+            _show_network_status("invalid_deck", true)
         return selected
     online = true
     battle = false
@@ -823,25 +880,37 @@ func join_lan_room(text: String) -> Dictionary:
     if not result.ok:
         online = false
         if is_instance_valid(lobby_status):
-            lobby_status.text = network_error(str(result.error))
+            _show_network_status(str(result.error), true)
         return result
     clear_screen()
+    preload("res://src/scrollable_page.gd").wrap(root)
     root.add_child(label(t("ПОДКЛЮЧЕНИЕ", "CONNECTING"), 30))
     lobby_status = label(t("Проверяем комнату и защищённое соединение…", "Checking the room and secure connection…"), 20)
+    lobby_status.name = "ConnectionStatus"
     root.add_child(lobby_status)
-    root.add_child(button(t("ОТМЕНА", "CANCEL"), show_menu))
+    connection_retry_button = button(t("ПРОВЕРИТЬ ПРИГЛАШЕНИЕ И ПОВТОРИТЬ", "REVIEW INVITATION AND RETRY"), cancel_connection)
+    connection_retry_button.name = "ConnectionRetry"
+    connection_retry_button.visible = false
+    root.add_child(connection_retry_button)
+    var cancel: Button = button(t("ОТМЕНА", "CANCEL"), cancel_connection)
+    cancel.name = "CancelConnection"
+    root.add_child(cancel)
+    _network_status(lan.connection_status)
     return result
 
 func network_error(value: String) -> String:
     var messages: Dictionary = {"invalid_deck": ["Выбери полную колоду в разделе коллекции.", "Select a complete deck in your collection."], "deck_changed": ["Колоду начатого матча менять нельзя.", "The deck cannot change after the match starts."], "no_local_address": ["Подключись к Wi-Fi и попробуй снова.", "Connect to Wi-Fi and try again."], "port_busy": ["Порт комнаты занят. Закрой другую комнату.", "Room port is busy. Close the other room."], "invalid_invite": ["Приглашение повреждено или неполное.", "Invitation is invalid or incomplete."], "incompatible_or_nonlocal_invite": ["Нужна совместимая версия и приглашение из локальной сети.", "A compatible version and local-network invitation are required."], "certificate_mismatch": ["Сертификат комнаты не совпал. Подключение остановлено.", "Room certificate mismatch. Connection stopped."], "connection_failed": ["Не удалось подключиться. Проверь сеть и приглашение.", "Connection failed. Check the network and invitation."], "connection_lost": ["Связь не восстановлена. Вернись в меню.", "Connection could not be restored. Return to the menu."], "reconnecting": ["Восстанавливаем соединение…", "Reconnecting…"], "waiting_reconnect": ["Ожидаем возвращения соперника…", "Waiting for the opponent to reconnect…"]}
     messages.merge({"android_bluetooth_required": ["Bluetooth доступен в Android-клиенте.", "Bluetooth is available in the Android client."], "bluetooth_permission_required": ["Разреши доступ к устройствам поблизости и обнови список.", "Allow nearby-device access and refresh the list."], "bluetooth_disabled": ["Включи Bluetooth в настройках Android.", "Enable Bluetooth in Android settings."], "select_paired_device": ["Выбери ранее сопряжённое устройство.", "Select an already paired device."], "pair_device_in_android_settings": ["Сначала сопряги устройства в настройках Android.", "Pair the devices in Android settings first."], "secure_connect_failed": ["Защищённое соединение не установлено. Проверь сопряжение и комнату.", "Secure connection failed. Check pairing and the room."]})
+    messages.merge({"invite_too_long": ["Приглашение слишком длинное. Вставьте только ссылку комнаты.", "Invitation is too long. Paste only the room link."], "connecting": ["Подключаемся к комнате…", "Connecting to the room…"], "connected": ["Соединение установлено", "Connected"], "waiting_guest": ["Ожидаем второго игрока…", "Waiting for the other player…"], "idle": ["Готово к подключению", "Ready to connect"]})
     return t(messages[value][0], messages[value][1]) if messages.has(value) else value
 
 func _network_status(status: String) -> void:
     if not online:
         return
-    if is_instance_valid(lobby_status):
-        lobby_status.text = network_error(status)
+    var error: bool = status not in ["connected", "waiting_guest", "idle", "connecting", "reconnecting", "waiting_reconnect"]
+    _show_network_status(status, error)
+    if is_instance_valid(connection_retry_button) and connection_retry_button.is_inside_tree():
+        connection_retry_button.visible = error
     if battle and is_instance_valid(message) and status not in ["connected", "waiting_guest", "idle"]:
         message.text = network_error(status)
 
@@ -893,40 +962,14 @@ func _switch_transport(use_bluetooth: bool) -> void:
     lan.connection_changed.connect(_network_status)
 
 func show_bluetooth_menu() -> void:
+    remember_invitation()
     _switch_transport(true)
     online = false
     battle = false
+    tutorial = false
     network_page = true
     clear_screen()
-    root.add_child(label("BLUETOOTH", 30))
-    _network_deck_summary()
-    root.add_child(label(t("Сначала сопряги два устройства в настройках Android. Интернет и Wi-Fi не нужны.", "Pair the devices in Android settings first. Internet and Wi-Fi are not required."), 19))
-    var available: Dictionary = BluetoothChannel.available()
-    lobby_status = label("" if available.ok else network_error(str(available.error)), 18)
-    root.add_child(lobby_status)
-    root.add_child(button(t("РАЗРЕШИТЬ УСТРОЙСТВА ПОБЛИЗОСТИ", "ALLOW NEARBY DEVICES"), func(): OS.request_permission("android.permission.BLUETOOTH_CONNECT"), 60))
-    root.add_child(button(t("ОБНОВИТЬ СПИСОК", "REFRESH DEVICES"), show_bluetooth_menu, 60))
-    root.add_child(button(t("СОЗДАТЬ КОМНАТУ", "CREATE ROOM"), func(): create_lan_room(), 68))
-    bluetooth_devices = OptionButton.new()
-    bluetooth_devices.custom_minimum_size.y = 58
-    for device in BluetoothChannel.bonded():
-        bluetooth_devices.add_item(str(device.name))
-        bluetooth_devices.set_item_metadata(bluetooth_devices.item_count - 1, str(device.address))
-    root.add_child(bluetooth_devices)
-    invite_input = TextEdit.new()
-    invite_input.custom_minimum_size.y = 135
-    invite_input.wrap_mode = TextEdit.LINE_WRAPPING_BOUNDARY
-    invite_input.placeholder_text = "multimental-bt://join/…"
-    root.add_child(invite_input)
-    root.add_child(button(t("ВСТАВИТЬ ПРИГЛАШЕНИЕ", "PASTE INVITATION"), func(): invite_input.text = DisplayServer.clipboard_get(), 60))
-    root.add_child(button(t("ПОДКЛЮЧИТЬСЯ", "JOIN ROOM"), func():
-        if bluetooth_devices.item_count == 0:
-            lobby_status.text = network_error("select_paired_device")
-            return
-        lan.target_address = str(bluetooth_devices.get_selected_metadata())
-        join_lan_room(invite_input.text)
-    , 68))
-    root.add_child(button(t("В МЕНЮ", "MENU"), show_menu, 60))
+    preload("res://src/connection_screen.gd").build(self, true)
 
 func start_tutorial() -> void:
     start_match(true)
