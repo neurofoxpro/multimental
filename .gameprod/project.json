@@ -10,7 +10,7 @@
     "tools", "scripts", "skills/game-production", ".gameprod/project.json",
     ".github/workflows", "package.json", ".nvmrc", "changes", ".prettierrc.json",
     "package-lock.json", ".gameprod/research.json", ".gameprod/requirements.json", "game/audio",
-    ".gameprod/workplan.json", ".gameprod/play.json", ".gameprod/ideas", ".gameprod/collaboration.json"
+    ".gameprod/workplan.json", ".gameprod/studies", ".gameprod/play.json", ".gameprod/ideas", ".gameprod/collaboration.json"
   ],
   "generatedSuffixes": [".gd.uid", ".import"],
   "requiredFiles": [

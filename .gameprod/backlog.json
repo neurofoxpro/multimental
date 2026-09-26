@@ -820,5 +820,54 @@
     "generatedFrom": ".gameprod/workplan.json",
     "evidence": [],
     "nextCommand": "npm run game -- task AUTO-11"
+  },
+  {
+    "id": "UX-08",
+    "status": "pending",
+    "action": "Частые действия: быстрый старт выбранной колодой и понятный путь к локальной дуэли",
+    "dependsOn": [
+      "UX-07"
+    ],
+    "manual": false,
+    "generatedFrom": ".gameprod/workplan.json",
+    "evidence": [],
+    "nextCommand": "npm run game -- task UX-08"
+  },
+  {
+    "id": "UX-09",
+    "status": "pending",
+    "action": "Воспроизводимая галерея актуальных экранов для дизайна и GitHub",
+    "dependsOn": [
+      "AUTO-05"
+    ],
+    "manual": false,
+    "generatedFrom": ".gameprod/workplan.json",
+    "evidence": [],
+    "nextCommand": "npm run game -- task UX-09"
+  },
+  {
+    "id": "UX-10",
+    "status": "pending",
+    "action": "Иллюстрированная внутриигровая справка и последовательное обучение",
+    "dependsOn": [
+      "UX-08",
+      "UX-09"
+    ],
+    "manual": false,
+    "generatedFrom": ".gameprod/workplan.json",
+    "evidence": [],
+    "nextCommand": "npm run game -- task UX-10"
+  },
+  {
+    "id": "QA-03",
+    "status": "pending",
+    "action": "Ярлык dev-приложения на домашнем экране после установки",
+    "dependsOn": [
+      "QA-02"
+    ],
+    "manual": false,
+    "generatedFrom": ".gameprod/workplan.json",
+    "evidence": [],
+    "nextCommand": "npm run game -- task QA-03"
   }
 ]
