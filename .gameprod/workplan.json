@@ -1347,7 +1347,7 @@
       "title": "Параллельные чаты: атомарное владение задачами и ресурсами в GitHub",
       "stage": "P0. Единый производственный процесс",
       "kind": "automation",
-      "status": "planned",
+      "status": "verified",
       "dependsOn": [
         "AUTH-01"
       ],
@@ -1356,7 +1356,11 @@
         "Повтор и потеря ответа не создают двойную запись; просроченный heartbeat не освобождает активный ресурс.",
         "Статус, комментарии и команды продолжения читаются из GitHub, без раскрытия секретов."
       ],
-      "evidence": [],
+      "evidence": [
+        "docs/production/evidence/parallel-slices-20260926.json",
+        "skills/game-production/tests/collaboration.test.mjs",
+        "skills/game-production/tests/collaboration-integration.test.mjs"
+      ],
       "readset": [
         "docs/production/PARALLEL_CHATS.ru.md"
       ],
@@ -1370,7 +1374,7 @@
       "title": "Изолированные рабочие срезы и воспроизводимый вход нового чата",
       "stage": "P0. Единый производственный процесс",
       "kind": "automation",
-      "status": "planned",
+      "status": "verified",
       "dependsOn": [
         "AUTO-09"
       ],
@@ -1379,7 +1383,11 @@
         "Два среза проходят тесты независимо; общий merge и физические устройства сериализованы.",
         "Повторный запуск сохраняет незавершённые файлы и возвращает точные дальнейшие команды."
       ],
-      "evidence": [],
+      "evidence": [
+        "docs/production/evidence/parallel-slices-20260926.json",
+        "tools/godot-preflight.mjs",
+        "skills/game-production/tests/godot-preflight.test.mjs"
+      ],
       "readset": [
         "docs/production/PARALLEL_CHATS.ru.md"
       ],
