@@ -1,21 +1,8 @@
 {
   "schemaVersion": 1,
   "repository": "neurofoxpro/multimental",
-  "revision": 57,
+  "revision": 58,
   "claims": {
-    "4d555e19-c33e-4ec7-bf28-292c1d3de03b": {
-      "token": "4d555e19-c33e-4ec7-bf28-292c1d3de03b",
-      "task": "QA-02",
-      "owner": "second-usb-diagnostics-20260926",
-      "base": "b43247d36786245093d592edb6ce1706d0e67634",
-      "resources": [
-        "area:devices",
-        "task:QA-02"
-      ],
-      "fence": 17,
-      "updatedAt": 1790401828523,
-      "expiresAt": 1790403628523
-    },
     "4e21f0ac-a47d-4c3d-9bc0-4d2ed972d409": {
       "token": "4e21f0ac-a47d-4c3d-9bc0-4d2ed972d409",
       "task": "UX-07",
@@ -1055,6 +1042,22 @@
         "fence": 52,
         "updatedAt": 1790413570659,
         "expiresAt": 1790415370659
+      }
+    },
+    {
+      "id": "bb678e5d-5e0d-40e9-a5f0-632428766590",
+      "hash": "4eacedf28127390f905dbf9ab8856ba42582645136a740ef01dae457e1926fe6",
+      "revision": 58,
+      "result": {
+        "status": "released_completed",
+        "token": "4d555e19-c33e-4ec7-bf28-292c1d3de03b",
+        "task": "QA-02",
+        "owner": "second-usb-diagnostics-20260926",
+        "fence": 17,
+        "operator": "completed-slice-recovery-20260926-0851",
+        "proofDigest": "90cc4ef6b7d7e7b80d30c32d38219089e47f9128af0d822430fa67b3098405a0",
+        "head": "93a73299e451e84b0672a3e1fc672f23195de206",
+        "pr": 116
       }
     }
   ]
