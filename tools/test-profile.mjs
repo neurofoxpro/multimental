@@ -1,3 +1,4 @@
+import { runtimeSucceeded } from './runtime-diagnostics.mjs';
 import fs from 'node:fs';
 import { prepareGodotProject } from './godot-preflight.mjs';
 import path from 'node:path';
@@ -15,6 +16,7 @@ import {
 const [suite = 'model', ...extra] = process.argv.slice(2);
 const choices = {
   model: ['profile_test.gd', 'MULTIMENTAL_PROFILE_PASS'],
+  menu: ['menu_layout_test.gd', 'MULTIMENTAL_MENU_LAYOUT_PASS'],
   economy: ['economy_test.gd', 'MULTIMENTAL_ECONOMY_PASS'],
   shop: ['shop_ui_test.gd', 'MULTIMENTAL_SHOP_UI_PASS'],
   'editor-lab': ['collection_lab_test.gd', 'MULTIMENTAL_COLLECTION_LAB_PASS'],
@@ -55,11 +57,7 @@ const r = spawnSync(exe, ['--headless', '--path', 'game', '--script', 'res://tes
 const output = (r.stdout || '') + (r.stderr || '');
 const after = fingerprint(root, p);
 const ok =
-  r.status === 0 &&
-  !r.error &&
-  before === after &&
-  output.includes(marker) &&
-  !/SCRIPT ERROR|Parse Error|PROFILE_FAIL/.test(output);
+  r.status === 0 && !r.error && before === after && runtimeSucceeded(r.status, output, marker);
 const logfile = '.gameprod/evidence/profile-' + suite + '-tests.log';
 fs.mkdirSync(inside(root, '.gameprod/evidence'), { recursive: true });
 fs.writeFileSync(inside(root, logfile), output);

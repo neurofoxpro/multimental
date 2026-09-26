@@ -100,6 +100,13 @@ func button(text: String, callback: Callable, height: int = 62) -> Button:
     var hover := style.duplicate() as StyleBoxFlat
     hover.bg_color = Color("345778")
     node.add_theme_stylebox_override("hover", hover)
+    var focus := StyleBoxFlat.new()
+    focus.bg_color = Color(0, 0, 0, 0)
+    focus.border_color = Color("ffe39c")
+    focus.set_border_width_all(3)
+    focus.set_corner_radius_all(10)
+    node.add_theme_stylebox_override("focus", focus)
+    node.focus_mode = Control.FOCUS_ALL
     node.pressed.connect(callback)
     return node
 
@@ -134,12 +141,16 @@ func show_menu() -> void:
     battle = false
     tutorial = false
     clear_screen()
+    preload("res://src/scrollable_page.gd").wrap(root)
     root.add_child(label("MULTIMENTAL", 36))
     root.add_child(label(t("Тактическая альфа · 10 стихий · поле 3×3", "Tactical alpha · 10 elements · 3×3 board"), 18))
     var space := Control.new()
     space.size_flags_vertical = Control.SIZE_EXPAND_FILL
     root.add_child(space)
-    root.add_child(button(t("ИГРАТЬ ПРОТИВ ИИ", "PLAY AGAINST AI"), show_collection, 78))
+    var play: Button = button(t("ИГРАТЬ ПРОТИВ ИИ", "PLAY AGAINST AI"), show_collection, 78)
+    play.name = "PlayAI"
+    root.add_child(play)
+    call_deferred("_focus_control", weakref(play))
     var collection_button: Button = button(t("КОЛЛЕКЦИЯ И КОЛОДЫ", "COLLECTION AND DECKS"), show_collection, 62)
     collection_button.name = "OpenCollection"
     root.add_child(collection_button)
@@ -169,6 +180,11 @@ func show_menu() -> void:
     bottom.size_flags_vertical = Control.SIZE_EXPAND_FILL
     root.add_child(bottom)
     root.add_child(label(BuildInfo.VERSION + " · " + BuildInfo.COMMIT, 14))
+
+func _focus_control(reference: WeakRef) -> void:
+    var control: Variant = reference.get_ref()
+    if control != null and control.is_inside_tree() and not control.is_queued_for_deletion():
+        control.grab_focus()
 
 func toggle_language() -> void:
     var chosen: String = "en" if language == "ru" else "ru"
