@@ -3,7 +3,19 @@ name: game-production
 description: Issue-first game production with one command entry, exact-source evidence, safe edits and separate development, device and production gates.
 ---
 
-# Game Production v5 — deployed increment, not an all-complete pipeline
+# Game Production v6 — coordinated parallel slices
+
+## Multiple chats: mandatory ownership before shared work
+
+Read `docs/production/PARALLEL_CHATS.ru.md`. One chat owns one task in its own sibling worktree. Use `collab init` once, `collab status`, then `collab start TASK-ID chat-unique-alias`. Do not switch the branch of another chat's checkout. Existing drafts, station tools and private phone settings are preserved. The command installs locked npm dependencies; it does not install an entire offline SDK image.
+
+`collab check-owner` and `collab renew` verify the current GitHub CAS claim; `collab release` ends ownership after a task comment records the result. Expired heartbeats do not steal live resources. Claims use a fixed coordination-state branch and expected-head commits; never merge that metadata branch into dev/main. Public claim tokens are operation identifiers, not credentials.
+
+For a bound worktree, the common CLI verifies current ownership before mutation. This is a cooperative command protocol, not protection against an administrator bypassing the CLI. Existing unbound bootstrap work remains compatible. After releasing a bound worktree, start the next slice with collab; do not reuse its stale write authorization. Dev integration also holds a shared station lock across all sibling worktrees. Device adapters retain their independent physical leases.
+
+`enroll .gameprod/ideas/PROPOSAL.json` adds explicit new planned task definitions without overwriting existing Issue authority; then `github sync` creates missing Issues. `issue-graph sync` projects gp:status/gp:priority/gp:area labels and native blocked_by relationships, preserving unrelated labels and manual dependencies. Labels are not mutexes. A dev-push workflow maintains these projections without write permissions in PR jobs. Concurrent source slices and GitHub CI can run independently; a pair-radio test must reserve both phones and the radio resource.
+
+Use an isolated slice for UX research and another for economy. The current source is not a permanent external agent: starting worktrees does not spawn independent reasoning agents or promise work after this chat stops. Each new chat reads live Issues and claims a unique alias through the same commands.
 
 ## Scope and authority
 Only repository `neurofoxpro/multimental`. Only personal station `VENEL-SENDRIK`; GitHub-hosted CI and internal source-only work are allowed. Check the actual hostname, remote and branch. Do not use another computer or repository. Keep credentials, phone identifiers and raw logs private.

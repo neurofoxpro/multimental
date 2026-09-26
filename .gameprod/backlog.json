@@ -716,5 +716,66 @@
     "generatedFrom": ".gameprod/workplan.json",
     "evidence": [],
     "nextCommand": "npm run game -- task FUTURE-01"
+  },
+  {
+    "id": "AUTO-09",
+    "status": "pending",
+    "action": "Параллельные чаты: атомарное владение задачами и ресурсами в GitHub",
+    "dependsOn": [
+      "AUTH-01"
+    ],
+    "manual": false,
+    "generatedFrom": ".gameprod/workplan.json",
+    "evidence": [],
+    "nextCommand": "npm run game -- task AUTO-09"
+  },
+  {
+    "id": "AUTO-10",
+    "status": "pending",
+    "action": "Изолированные рабочие срезы и воспроизводимый вход нового чата",
+    "dependsOn": [
+      "AUTO-09"
+    ],
+    "manual": false,
+    "generatedFrom": ".gameprod/workplan.json",
+    "evidence": [],
+    "nextCommand": "npm run game -- task AUTO-10"
+  },
+  {
+    "id": "QA-02",
+    "status": "pending",
+    "action": "Два физических телефона: регистрация, общая подпись и раздельные очереди тестов",
+    "dependsOn": [
+      "AUTO-09"
+    ],
+    "manual": false,
+    "generatedFrom": ".gameprod/workplan.json",
+    "evidence": [],
+    "nextCommand": "npm run game -- task QA-02"
+  },
+  {
+    "id": "UX-06",
+    "status": "pending",
+    "action": "Исследование эргономики поля 3×3, карточек, кнопок и доступности",
+    "dependsOn": [
+      "UX-01"
+    ],
+    "manual": false,
+    "generatedFrom": ".gameprod/workplan.json",
+    "evidence": [],
+    "nextCommand": "npm run game -- task UX-06"
+  },
+  {
+    "id": "UX-07",
+    "status": "pending",
+    "action": "Полировка интерфейса: единые состояния, подробности карты, читаемость и фокус",
+    "dependsOn": [
+      "UX-06",
+      "META-01"
+    ],
+    "manual": false,
+    "generatedFrom": ".gameprod/workplan.json",
+    "evidence": [],
+    "nextCommand": "npm run game -- task UX-07"
   }
 ]

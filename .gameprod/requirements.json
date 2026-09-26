@@ -628,6 +628,56 @@
       "evidence": [],
       "source": "Этап 8: возможность переноса 2D в 3D, а не обязательный 3D релиз",
       "requiredForBeta": false
+    },
+    {
+      "id": "AUTO-09",
+      "text": "Параллельные чаты: атомарное владение задачами и ресурсами в GitHub",
+      "version": "P0. Единый производственный процесс",
+      "status": "planned",
+      "kind": "automation",
+      "evidence": [],
+      "source": "Поручение владельца 26.09.2026: несколько чатов, координация, автоматизация",
+      "requiredForBeta": true
+    },
+    {
+      "id": "AUTO-10",
+      "text": "Изолированные рабочие срезы и воспроизводимый вход нового чата",
+      "version": "P0. Единый производственный процесс",
+      "status": "planned",
+      "kind": "automation",
+      "evidence": [],
+      "source": "Поручение владельца 26.09.2026: переносимость и параллельные срезы",
+      "requiredForBeta": true
+    },
+    {
+      "id": "QA-02",
+      "text": "Два физических телефона: регистрация, общая подпись и раздельные очереди тестов",
+      "version": "P3. Механики, баланс и реальные дуэли",
+      "status": "planned",
+      "kind": "tests",
+      "evidence": [],
+      "source": "Владелец сообщил о втором телефоне и разрешил его проверку",
+      "requiredForBeta": true
+    },
+    {
+      "id": "UX-06",
+      "text": "Исследование эргономики поля 3×3, карточек, кнопок и доступности",
+      "version": "P2. Коллекция, профиль и экономика",
+      "status": "planned",
+      "kind": "ui",
+      "evidence": [],
+      "source": "Поручение владельца 26.09.2026: UX research и будущий редизайн",
+      "requiredForBeta": true
+    },
+    {
+      "id": "UX-07",
+      "text": "Полировка интерфейса: единые состояния, подробности карты, читаемость и фокус",
+      "version": "P2. Коллекция, профиль и экономика",
+      "status": "planned",
+      "kind": "ui",
+      "evidence": [],
+      "source": "Поручение владельца 26.09.2026: визуал, UI и удобство",
+      "requiredForBeta": true
     }
   ],
   "principle": "Absent implementation is engineering work, never a human acceptance checkbox."

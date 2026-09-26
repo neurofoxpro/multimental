@@ -437,6 +437,19 @@ export async function main(argv = process.argv.slice(2)) {
   const { acquireOperation } = await import('./operation-lock.mjs');
   const root = findRoot();
   const [entry, ...entryArgs] = argv;
+  await (await import('./collaboration-guard.mjs')).guardWorktree(root, entry, entryArgs);
+  if (entry === 'enroll') {
+    (await import('../../../tools/enroll-tasks.mjs')).main(entryArgs);
+    return;
+  }
+  if (entry === 'issue-graph') {
+    await (await import('../../../tools/issue-graph.mjs')).main(entryArgs);
+    return;
+  }
+  if (entry === 'collab') {
+    await (await import('./collaboration.mjs')).main(entryArgs);
+    return;
+  }
   if (entry === 'device-recover') {
     await (await import('./device-lock-recovery.mjs')).main(entryArgs);
     return;
