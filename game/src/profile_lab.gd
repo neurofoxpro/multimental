@@ -37,6 +37,13 @@ static func run(nonce: String) -> Dictionary:
     var reloaded_ok: bool = collection.open_store("").ok
     checks.append({"name": "restore_custom_deck", "ok": reloaded_ok and collection.data.collection.selected == "lab" and collection.data.decks.lab == cards})
     checks.append({"name": "selection_retry", "ok": bool(collection.transact(75, {"kind": "deck_select", "id": "lab"}).get("duplicate", false))})
+    checks.append({"name": "initialize_test_economy", "ok": collection.transact(76, {"kind": "economy_init"}).ok})
+    var buy: Dictionary = {"kind": "pack_buy", "entropy": nonce.sha256_text()}
+    checks.append({"name": "pack_purchase_transaction", "ok": collection.transact(77, buy).ok})
+    var economy = Store.new(directory)
+    var pack_opened: bool = economy.open_store("").ok
+    checks.append({"name": "pack_and_wallet_reopened", "ok": pack_opened and economy.data.wallet.gold == 400 and economy.data.wallet.dust == 50 and economy.data.economy.lastPack.cards.size() == 5})
+    checks.append({"name": "pack_retry_not_double_debit", "ok": bool(economy.transact(77, buy).get("duplicate", false))})
     var after_a: String = FileAccess.get_sha256("user://profile/a.json") if FileAccess.file_exists("user://profile/a.json") else "missing"
     var after_b: String = FileAccess.get_sha256("user://profile/b.json") if FileAccess.file_exists("user://profile/b.json") else "missing"
     checks.append({"name": "personal_profile_untouched", "ok": personal_a == after_a and personal_b == after_b})
@@ -49,4 +56,4 @@ static func run(nonce: String) -> Dictionary:
                 passed = false
         if DirAccess.remove_absolute(directory) != OK:
             passed = false
-    return {"status": "passed" if passed else "failed", "test": "real_profile_storage", "checks": checks, "writes": 75, "personal_profile_untouched": personal_a == after_a and personal_b == after_b}
+    return {"status": "passed" if passed else "failed", "test": "real_profile_storage", "checks": checks, "writes": 77, "personal_profile_untouched": personal_a == after_a and personal_b == after_b}

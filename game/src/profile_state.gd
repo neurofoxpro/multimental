@@ -1,6 +1,7 @@
 extends RefCounted
 # Pure profile rules; no filesystem, clock, nodes or networking.
 const Collection = preload("res://src/collection_rules.gd")
+const Economy = preload("res://src/economy_rules.gd")
 const SCHEMA: int = 1
 const LIMIT: int = 1000000000
 const RECEIPT_LIMIT: int = 4096
@@ -51,7 +52,7 @@ static func valid(value: Variant) -> bool:
     for key in value.receipts:
         if not identifier(key) or typeof(value.receipts[key]) != TYPE_STRING or value.receipts[key].length() != 64:
             return false
-    return Collection.valid(value)
+    return Collection.valid(value) and Economy.valid(value)
 
 static func failure(code: String) -> Dictionary:
     return {"ok": false, "code": code}
@@ -80,6 +81,11 @@ static func apply(profile: Dictionary, transaction_id: String, command: Dictiona
             if command.get("value") not in ["ru", "en"]:
                 return failure("INVALID_LANGUAGE")
             next.settings.language = command.value
+        "economy_init", "pack_buy":
+            var purchased: Dictionary = Economy.apply(next, command)
+            if not purchased.ok:
+                return purchased
+            next = purchased.profile
         "collection_init", "deck_save", "deck_select", "deck_delete":
             var changed: Dictionary = Collection.apply(next, command)
             if not changed.ok:

@@ -11,6 +11,8 @@ var original_processing: bool = true
 var before: Array[String] = []
 var checks: Array[Dictionary] = []
 var done: bool = false
+var test_name: String = "real_collection_editor"
+var fixture_cards_added: int = 13
 func _ready() -> void:
     call_deferred("run_lab")
 func personal_hashes() -> Array[String]:
@@ -30,7 +32,7 @@ func _finish(reason: String = "") -> void:
         ui.show_menu()
         ui.set_process(original_processing)
     var preserved: bool = personal_hashes() == before
-    completed.emit({"status": "passed" if reason == "" and preserved else "failed", "error": reason, "test": "real_collection_editor", "checks": checks, "personal_profile_untouched": preserved, "input_source": "external_android_input_tap", "fixture_cards_added_by_api": 13, "version": BuildInfo.VERSION})
+    completed.emit({"status": "passed" if reason == "" and preserved else "failed", "error": reason, "test": test_name, "checks": checks, "personal_profile_untouched": preserved, "input_source": "external_android_input_tap", "fixture_cards_added_by_api": fixture_cards_added, "version": BuildInfo.VERSION})
 func _tap(control: Control, stage: String, predicate: Callable) -> bool:
     await get_tree().process_frame
     await get_tree().process_frame

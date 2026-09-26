@@ -78,6 +78,12 @@ The collection/deck data API and read-only catalog are in game/src/deck_rules.gd
 
 Custom core matches receive two validated copied decks; local AI replay stores the original decks. Never expose them in public network views. LAN/Bluetooth protocol v3 now accepts each selected deck before first play and rejects changed compositions on reconnect. The guest composition is sent only to the trusted local host over the protected transport, never in public views. Old room protocol v2 must be rejected, not silently downgraded. Run profile-test network and read docs/production/NETWORK_DECKS.ru.md; real-radio evidence is separate. Read docs/production/COLLECTION_EDITOR.ru.md. The new collection device lab is now present through the normal reviewed path. Run device-suite --target phone --suite collection for eight actual Android taps with exact stage/nonce, isolated saved deck, real selected-deck match and personal-profile hash preservation. Thirteen intermediate cards are API fixture setup, not physical taps. Read docs/production/COLLECTION_DEVICE_TEST.ru.md. Headless editor-lab tests only drive signals and never substitute physical input evidence. Android profile suite additionally exercises collection save/select/reopen in its isolated namespace; personal profile hashes must be preserved. See docs/production/COLLECTION_CORE.ru.md.
 
+## Local pack shop
+
+META-02 adds economy_rules.gd and shop_screen.gd over the existing profile/journal. Never reset the already granted alpha collection to sell it back. Pack policy is versioned:5 draws,100 local coins,10 dust for each excess copy; one-time500 test coins only on explicit shop entry. These are test values, not real-money purchases, not trusted server balances, and not completed crafting/rewards.
+
+Use `profile-test economy`, `profile-test shop`, then full check. UI retries keep the same entropy/sequence; do not generate a new pack to recover an uncertain response. Physical `device-suite --target phone --suite shop` reuses the existing safe fixture and requires4 real OS taps and unchanged personal profile hashes. The storage suite also tests77 writes including the pack. Publication alone is not a device result.
+
 ## Completion
 Before finishing record actual commit/PR, CI runs, test counts and next unmet task in Issue #29 and the task Issue. Keep raw device logs private. Branch cleanup must prove merged ownership, exact tip and no active work before deletion; no cleanup happened merely because an inventory was generated.
 
