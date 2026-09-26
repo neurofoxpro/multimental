@@ -1,25 +1,83 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import path from 'node:path';
-import { adbPhysicalRows, selectSecond, signingDirectory } from '../scripts/fleet-policy.mjs';
+import {
+  adbPhysicalRows,
+  adbTransportRows,
+  collapseFleetDevices,
+  selectSecond,
+  signingDirectory
+} from '../scripts/fleet-policy.mjs';
 import { probeOptions } from '../scripts/phone-fleet.mjs';
 const rows = () => [
   { serial: 'PHONE-A', state: 'device' },
   { serial: 'PHONE-B', state: 'device' }
 ];
-test('physical inventory excludes emulators and wireless addresses', () =>
-  assert.deepEqual(
-    adbPhysicalRows(
-      'List of devices attached\nPHONE-A device product:x model:y\nemulator-5554 device\n192.168.1.2:5555 device\nPHONE-B unauthorized\n'
-    ),
+test('transport inventory retains wireless addresses but physical USB inventory does not', () => {
+  const text =
+    'List of devices attached\nPHONE-A device product:x model:y\nemulator-5554 device\n192.168.1.2:5555 device\nPHONE-B unauthorized\n';
+  assert.deepEqual(adbTransportRows(text), [
+    { serial: 'PHONE-A', state: 'device', transport: 'usb' },
+    { serial: '192.168.1.2:5555', state: 'device', transport: 'wifi' },
+    { serial: 'PHONE-B', state: 'unauthorized', transport: 'usb' }
+  ]);
+  assert.deepEqual(adbPhysicalRows(text), [
+    { serial: 'PHONE-A', state: 'device' },
+    { serial: 'PHONE-B', state: 'unauthorized' }
+  ]);
+});
+test('duplicate ADB transport fails closed', () =>
+  assert.throws(() => adbTransportRows('PHONE-A device\nPHONE-A offline')));
+test('oversized inventory rejected', () =>
+  assert.throws(() => adbTransportRows('a'.repeat(65537))));
+test('same physical phone over USB and Wi-Fi collapses to one device', () => {
+  const result = collapseFleetDevices(
     [
-      { serial: 'PHONE-A', state: 'device' },
-      { serial: 'PHONE-B', state: 'unauthorized' }
+      {
+        state: 'device',
+        transport: 'wifi',
+        identity: 'PHONE-A',
+        model: 'A',
+        android: '15',
+        version: '1'
+      },
+      {
+        state: 'device',
+        transport: 'usb',
+        identity: 'PHONE-A',
+        model: 'A',
+        android: '15',
+        version: '1'
+      },
+      {
+        state: 'device',
+        transport: 'wifi',
+        identity: 'PHONE-B',
+        model: 'B',
+        android: '15',
+        version: null
+      }
+    ],
+    'PHONE-A'
+  );
+  assert.deepEqual(
+    result.map((x) => ({ identity: x.identity, transports: x.transports })),
+    [
+      { identity: 'PHONE-A', transports: ['usb', 'wifi'] },
+      { identity: 'PHONE-B', transports: ['wifi'] }
     ]
+  );
+});
+test('conflicting observations for one identity fail closed', () =>
+  assert.throws(() =>
+    collapseFleetDevices(
+      [
+        { state: 'device', transport: 'usb', identity: 'PHONE-A', model: 'A' },
+        { state: 'device', transport: 'wifi', identity: 'PHONE-A', model: 'B' }
+      ],
+      'PHONE-A'
+    )
   ));
-test('duplicate ADB identity fails closed', () =>
-  assert.throws(() => adbPhysicalRows('PHONE-A device\nPHONE-A offline')));
-test('oversized inventory rejected', () => assert.throws(() => adbPhysicalRows('a'.repeat(65537))));
 test('one explicitly additional device is selected', () =>
   assert.equal(selectSecond(rows(), 'PHONE-A'), 'PHONE-B'));
 test('enumeration order does not swap primary and secondary', () =>

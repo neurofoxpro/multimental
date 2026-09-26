@@ -3,7 +3,7 @@ import { spawnSync } from 'node:child_process';
 import { summarizeUsb } from './usb-inventory-policy.mjs';
 import { fileURLToPath } from 'node:url';
 import { findRoot, readJSON, inside, context, writeJSON, fingerprint } from './lib.mjs';
-import { adbPhysicalRows } from './fleet-policy.mjs';
+import { adbPhysicalRows, adbTransportRows, collapseFleetDevices } from './fleet-policy.mjs';
 import { exec, validateConfig } from '../../../scripts/install-device.mjs';
 export function probeOptions(args) {
   if (args.length > 1 || (args[0] && !['probe', 'usb'].includes(args[0])))
@@ -28,7 +28,8 @@ export async function main(args = process.argv.slice(2)) {
     c.package !== 'pro.neurofox.multimental.dev'
   )
     throw Error('Wrong inventory scope');
-  const rows = adbPhysicalRows(exec(c.adb, ['devices', '-l']));
+  const inventory = exec(c.adb, ['devices', '-l']);
+  const usbRows = adbPhysicalRows(inventory);
   if (mode === 'usb') {
     if (process.platform !== 'win32')
       throw Error('Windows PnP diagnostic requires authorized Windows station');
@@ -57,7 +58,7 @@ export async function main(args = process.argv.slice(2)) {
     const result = {
       ...summarizeUsb(
         raw,
-        rows.map((r) => r.state)
+        usbRows.map((r) => r.state)
       ),
       observedAt: new Date().toISOString(),
       repository: project.repository,
@@ -68,19 +69,33 @@ export async function main(args = process.argv.slice(2)) {
     console.log(JSON.stringify(result, null, 2));
     return result;
   }
-  const phones = rows.map((r, index) => {
-    const alias = r.serial === c.serial ? 'phone-A' : 'unbound-' + index;
-    if (r.state !== 'device') return { alias, state: r.state };
-    const cmd = (...a) => exec(c.adb, ['-s', r.serial, ...a]);
-    return {
-      alias,
-      state: r.state,
-      physical: cmd('shell', 'getprop', 'ro.kernel.qemu').trim() !== '1',
+  const observed = [];
+  for (const row of adbTransportRows(inventory)) {
+    if (row.state !== 'device') continue;
+    const cmd = (...a) => exec(c.adb, ['-s', row.serial, ...a]);
+    if (cmd('shell', 'getprop', 'ro.kernel.qemu').trim() === '1') continue;
+    const identity = cmd('shell', 'getprop', 'ro.serialno').trim();
+    observed.push({
+      state: row.state,
+      transport: row.transport,
+      identity,
       model: cmd('shell', 'getprop', 'ro.product.model').trim(),
       android: cmd('shell', 'getprop', 'ro.build.version.release').trim(),
       version: cmd('shell', 'dumpsys', 'package', c.package).match(/versionName=(\S+)/)?.[1] || null
-    };
-  });
+    });
+  }
+  const primaryIdentity = c.physicalSerial || c.serial;
+  const devices = collapseFleetDevices(observed, primaryIdentity);
+  let unbound = 0;
+  const phones = devices.map((r) => ({
+    alias: r.identity === primaryIdentity ? 'phone-A' : 'unbound-' + ++unbound,
+    state: 'device',
+    physical: true,
+    transports: r.transports,
+    model: r.model,
+    android: r.android,
+    version: r.version
+  }));
   const result = {
     status: 'observed',
     phones,
