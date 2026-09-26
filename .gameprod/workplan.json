@@ -1479,7 +1479,7 @@
       "title": "Полировка интерфейса: единые состояния, подробности карты, читаемость и фокус",
       "stage": "P2. Коллекция, профиль и экономика",
       "kind": "ui",
-      "status": "planned",
+      "status": "verified",
       "dependsOn": [
         "UX-06",
         "META-01"
@@ -1489,7 +1489,14 @@
         "Проверены длинные RU/EN названия, мобильный/альбомный режим, фокус и недопустимые действия.",
         "Скриншоты, headless и физические касания отражаются отдельно; крупный художественный редизайн не объявляется завершённым."
       ],
-      "evidence": [],
+      "evidence": [
+        "docs/production/UI_PLAYABILITY.ru.md",
+        "docs/production/evidence/ui-playability-observed-20260926.json",
+        "docs/production/evidence/ui-continuation-provenance-20260926.json",
+        "docs/SCREENSHOTS.ru.md",
+        "docs/media/gallery/current.json",
+        "docs/production/evidence/ui-playability-completed-20260926.json"
+      ],
       "readset": [
         "game/src/collection_screen.gd",
         "game/tests/collection_ui_test.gd"

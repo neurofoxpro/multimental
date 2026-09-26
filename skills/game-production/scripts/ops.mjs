@@ -688,8 +688,13 @@ try {
     case 'delivery':
       run(
         process.execPath,
-        ['scripts/update-device.mjs', '--config', path.join(workspace, 'station.local.json')],
-        { timeout: 300000 }
+        [
+          'scripts/update-device.mjs',
+          '--config',
+          path.join(workspace, 'station.local.json'),
+          ...args
+        ],
+        { timeout: 900000 }
       );
       break;
     case 'emulator':
