@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "neurofoxpro/multimental",
-  "revision": 7,
+  "revision": 8,
   "claims": {
     "7d454b24-9d2a-459f-87ee-7e81be94f96a": {
       "token": "7d454b24-9d2a-459f-87ee-7e81be94f96a",
@@ -15,6 +15,19 @@
       "fence": 1,
       "updatedAt": 1790395377937,
       "expiresAt": 1790397177937
+    },
+    "8c458394-079d-40ee-ab05-b31537adc696": {
+      "token": "8c458394-079d-40ee-ab05-b31537adc696",
+      "task": "META-02",
+      "owner": "economy-shop-20260926",
+      "base": "d4797322eb196981cb6bf99fb61fd4d41f94d02e",
+      "resources": [
+        "area:economy",
+        "task:META-02"
+      ],
+      "fence": 8,
+      "updatedAt": 1790395763334,
+      "expiresAt": 1790397563334
     }
   },
   "events": [
@@ -135,6 +148,25 @@
         "fence": 1,
         "updatedAt": 1790395377937,
         "expiresAt": 1790397177937
+      }
+    },
+    {
+      "id": "8c458394-079d-40ee-ab05-b31537adc696",
+      "hash": "ad75facfb18307f1d4d7cfc5818b8c16824c393cd2d715a1ac62b11b2b83c3cd",
+      "revision": 8,
+      "result": {
+        "status": "claimed",
+        "token": "8c458394-079d-40ee-ab05-b31537adc696",
+        "task": "META-02",
+        "owner": "economy-shop-20260926",
+        "base": "d4797322eb196981cb6bf99fb61fd4d41f94d02e",
+        "resources": [
+          "area:economy",
+          "task:META-02"
+        ],
+        "fence": 8,
+        "updatedAt": 1790395763334,
+        "expiresAt": 1790397563334
       }
     }
   ]
