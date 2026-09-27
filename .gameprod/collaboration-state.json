@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "neurofoxpro/multimental",
-  "revision": 239,
+  "revision": 240,
   "claims": {
     "b2c6c445-e3f4-4797-900f-8275ac9e18fd": {
       "token": "b2c6c445-e3f4-4797-900f-8275ac9e18fd",
@@ -15,19 +15,6 @@
       "fence": 149,
       "updatedAt": 1790433399977,
       "expiresAt": 1790435199977
-    },
-    "32038b01-6bde-437e-ac4f-260f8dcfaf6b": {
-      "token": "32038b01-6bde-437e-ac4f-260f8dcfaf6b",
-      "task": "QA-02",
-      "owner": "honor-install-20260927-f93d",
-      "base": "28f74ecca395131e6f6a78ff42046b800318c11e",
-      "resources": [
-        "area:devices",
-        "task:QA-02"
-      ],
-      "fence": 238,
-      "updatedAt": 1790530296949,
-      "expiresAt": 1790532096949
     }
   },
   "events": [
@@ -4399,6 +4386,18 @@
         "fence": 238,
         "updatedAt": 1790530296949,
         "expiresAt": 1790532096949
+      }
+    },
+    {
+      "id": "29cc9520-6ea0-4612-b60b-04a26fcb09d5",
+      "hash": "041a044af8742585b54aae05ec3aeea48fe8dac435a9d2abc1d7ae1d4fde45a5",
+      "revision": 240,
+      "result": {
+        "status": "released",
+        "token": "32038b01-6bde-437e-ac4f-260f8dcfaf6b",
+        "task": "QA-02",
+        "owner": "honor-install-20260927-f93d",
+        "fence": 238
       }
     }
   ]
