@@ -531,7 +531,7 @@
       "title": "Фабрика карточного контента: данные → схема → семантика → симуляция → каталог",
       "stage": "P2. Коллекция, профиль и экономика",
       "kind": "automation",
-      "status": "planned",
+      "status": "verified",
       "dependsOn": [
         "CORE-06",
         "META-01"
@@ -541,7 +541,12 @@
         "Кандидат отдельно от принятого набора; контроль seed, стоимости, комбинаций и происхождения иллюстраций.",
         "Простая карта добавляется проверенными данными через команду; сложный эффект требует тестируемого обработчика."
       ],
-      "evidence": [],
+      "evidence": [
+        "docs/production/CONTENT_FACTORY.ru.md",
+        "docs/production/CARD_CATALOG.ru.md",
+        "docs/SCREENSHOTS.ru.md",
+        "docs/production/evidence/content-factory-completed-20260927.json"
+      ],
       "readset": [
         "tools/balance.mjs",
         "game/src/match_core.gd"

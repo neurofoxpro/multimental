@@ -82,6 +82,7 @@ for (const [file, marker] of [
   ['directional_ui_test.gd', 'MULTIMENTAL_DIRECTIONAL_UI_PASS'],
   ['terrain_test.gd', 'MULTIMENTAL_TERRAIN_PASS'],
   ['balance_test.gd', 'MULTIMENTAL_BALANCE_PARAMETERS_PASS'],
+  ['balance_audit_test.gd', 'MULTIMENTAL_BALANCE_AUDIT_TEST_PASS'],
   ['room_automation_test.gd', 'MULTIMENTAL_ROOM_AUTOMATION_PASS'],
   ['profile_test.gd', 'MULTIMENTAL_PROFILE_PASS'],
   ['rewards_test.gd', 'MULTIMENTAL_REWARDS_PASS'],

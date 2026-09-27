@@ -17,19 +17,11 @@ func _initialize() -> void:
 func deck(name: String) -> Array[int]:
     return Scenarios.deck(name)
 func configure(g, seed_value: int, left: String, right: String) -> void:
-    g.start(seed_value)
-    for player in [0, 1]:
-        var cards: Array[int] = deck(left if player == 0 else right)
-        var rng := RandomNumberGenerator.new()
-        rng.seed = seed_value * 1031 + (0 if player == int(g.state.first) else 1)
-        for i in range(cards.size() - 1, 0, -1):
-            var j: int = rng.randi_range(0, i)
-            var saved: int = cards[i]
-            cards[i] = cards[j]
-            cards[j] = saved
-        g.state.players[player].hand = cards.slice(0, 4)
-        g.state.players[player].deck = cards.slice(4)
-    g.state.players[int(g.state.first)].hand.append(g.state.players[int(g.state.first)].deck.pop_back())
+    # Historical direct harness also uses the real opening; old reports are historical only.
+    if not g.start_with_decks(seed_value,[deck(left),deck(right)]).ok:
+        failures += 1
+        printerr("BALANCE_ILLEGAL_START")
+
 func choose(g, policy: String, rng: RandomNumberGenerator) -> Dictionary:
     return Scenarios.choose(g, policy, rng)
 func simulate(seed_value: int, left: String, right: String, policy: String) -> Dictionary:

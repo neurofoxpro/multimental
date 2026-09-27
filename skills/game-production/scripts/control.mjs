@@ -461,6 +461,10 @@ export async function main(argv = process.argv.slice(2)) {
     await (await import('./launcher.mjs')).main(entryArgs);
     return;
   }
+  if (entry === 'balance') {
+    await (await import('./balance-audit.mjs')).main(entryArgs);
+    return;
+  }
   if (entry === 'content') {
     await (await import('./content.mjs')).main(entryArgs);
     return;

@@ -283,9 +283,14 @@
       "id": "CONTENT-03",
       "text": "Фабрика карточного контента: данные → схема → семантика → симуляция → каталог",
       "version": "P2. Коллекция, профиль и экономика",
-      "status": "planned",
+      "status": "verified",
       "kind": "automation",
-      "evidence": [],
+      "evidence": [
+        "docs/production/CONTENT_FACTORY.ru.md",
+        "docs/production/CARD_CATALOG.ru.md",
+        "docs/SCREENSHOTS.ru.md",
+        "docs/production/evidence/content-factory-completed-20260927.json"
+      ],
       "source": "Этапы 4,9,11; генерация контента и последний запрос",
       "requiredForBeta": true
     },
