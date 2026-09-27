@@ -32,6 +32,11 @@ run(process.execPath, ['scripts/changelog.mjs', 'check'], ['RUSSIAN_CHANGELOG_PA
 run(process.execPath, ['tools/audio.mjs', 'check'], ['AUDIO_ASSETS_PASS']);
 run(process.execPath, ['scripts/research.mjs', 'check'], ['RESEARCH_LEDGER_PASS']);
 run(process.execPath, ['tools/study.mjs', 'check'], ['STUDY_DEFINITIONS_PASS']);
+run(
+  process.execPath,
+  ['skills/game-production/scripts/content.mjs', 'check'],
+  ['MULTIMENTAL_CONTENT_SCHEMA_PASS']
+);
 run(process.execPath, ['tools/gallery.mjs', 'check'], ['MULTIMENTAL_GALLERY_CHECK_PASS']);
 run(process.execPath, ['scripts/readiness.mjs', 'check'], ['REQUIREMENTS_SCHEMA_PASS']);
 run(
@@ -64,6 +69,8 @@ const godot = verificationRuntime(root, process.env.GODOT_BIN || 'godot');
 run(godot, ['--headless', '--editor', '--path', 'game', '--quit']);
 for (const [file, marker] of [
   ['core_test.gd', 'MULTIMENTAL_CORE_PASS'],
+  ['content_runtime_test.gd', 'MULTIMENTAL_CONTENT_RUNTIME_PASS'],
+  ['content_candidate_test.gd', 'MULTIMENTAL_CONTENT_CANDIDATE_PASS'],
   ['ui_test.gd', 'MULTIMENTAL_UI_PASS'],
   ['protocol_test.gd', 'MULTIMENTAL_PROTOCOL_PASS'],
   ['room_test.gd', 'MULTIMENTAL_ROOM_PASS'],

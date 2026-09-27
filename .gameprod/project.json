@@ -6,6 +6,7 @@
   "productionPackage": "pro.neurofox.multimental",
   "developmentPackage": "pro.neurofox.multimental.dev",
   "inputs": [
+    "content",
     "game/src", "game/tests", "game/project.godot", "game/export_presets.cfg",
     "tools", "scripts", "skills/game-production", ".gameprod/project.json",
     ".github/workflows", "package.json", ".nvmrc", "changes", ".prettierrc.json",

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "observedAt": "2026-09-26",
+  "observedAt": "2026-09-27",
   "repository": "neurofoxpro/multimental",
   "generatedFrom": ".gameprod/workplan.json",
   "evidenceSemantics": "Historical evidence only; not a fresh release gate or human approval.",
@@ -810,9 +810,14 @@
       "id": "AUTO-12",
       "text": "Ручная проверка dev-релиза без телефона: компьютерные тесты, совместимый APK, ссылки и отзыв",
       "version": "P0. Единый производственный процесс",
-      "status": "planned",
+      "status": "verified",
       "kind": "automation",
-      "evidence": [],
+      "evidence": [
+        "docs/production/MANUAL_REVIEW.ru.md",
+        "docs/production/PARALLEL_COORDINATION.ru.md",
+        "docs/production/evidence/manual-review-observed-20260927.json",
+        "docs/production/evidence/manual-review-completed-20260927.json"
+      ],
       "source": "Прямое поручение владельца27.09.2026: изучить параллельный чат Разработка мультиментал, координировать и выдавать проверенный релиз по ссылке когда телефон не подключён.",
       "requiredForBeta": true
     }

@@ -1,0 +1,849 @@
+{
+  "schemaVersion": 1,
+  "id": "multimental-alpha",
+  "version": 1,
+  "rules": "terrain-sweep-v3-balance1",
+  "compatibility": "alpha-open-30x2-v1",
+  "cards": [
+    {
+      "id": "c000",
+      "version": 1,
+      "slot": 0,
+      "element": "fire",
+      "role": "fighter",
+      "cost": 1,
+      "attack": 1,
+      "health": 2,
+      "effect": "directional-sweep-v1",
+      "text": {
+        "ru": {
+          "name": "Искра",
+          "description": "Одна соседняя клетка впереди."
+        },
+        "en": {
+          "name": "Spark",
+          "description": "One adjacent cell in front."
+        }
+      },
+      "art": {
+        "kind": "none"
+      },
+      "origin": {
+        "author": "Multimental",
+        "reference": "git:82cc8faecedd3b5d786c3ca0424f08be2ef14764:game/src/match_core.gd"
+      }
+    },
+    {
+      "id": "c001",
+      "version": 1,
+      "slot": 1,
+      "element": "fire",
+      "role": "guard",
+      "cost": 2,
+      "attack": 1,
+      "health": 4,
+      "effect": "directional-sweep-v1",
+      "text": {
+        "ru": {
+          "name": "Пламя",
+          "description": "Соседние клетки впереди, слева и справа."
+        },
+        "en": {
+          "name": "Flame",
+          "description": "Adjacent cells in front, left and right."
+        }
+      },
+      "art": {
+        "kind": "none"
+      },
+      "origin": {
+        "author": "Multimental",
+        "reference": "git:82cc8faecedd3b5d786c3ca0424f08be2ef14764:game/src/match_core.gd"
+      }
+    },
+    {
+      "id": "c002",
+      "version": 1,
+      "slot": 2,
+      "element": "water",
+      "role": "fighter",
+      "cost": 1,
+      "attack": 1,
+      "health": 2,
+      "effect": "directional-sweep-v1",
+      "text": {
+        "ru": {
+          "name": "Капля",
+          "description": "Одна соседняя клетка впереди."
+        },
+        "en": {
+          "name": "Drop",
+          "description": "One adjacent cell in front."
+        }
+      },
+      "art": {
+        "kind": "none"
+      },
+      "origin": {
+        "author": "Multimental",
+        "reference": "git:82cc8faecedd3b5d786c3ca0424f08be2ef14764:game/src/match_core.gd"
+      }
+    },
+    {
+      "id": "c003",
+      "version": 1,
+      "slot": 3,
+      "element": "water",
+      "role": "lancer",
+      "cost": 2,
+      "attack": 2,
+      "health": 3,
+      "effect": "directional-sweep-v1",
+      "text": {
+        "ru": {
+          "name": "Прилив",
+          "description": "Две клетки впереди; первый юнит перекрывает дальнейший удар."
+        },
+        "en": {
+          "name": "Tide",
+          "description": "Up to two cells in front; the first unit blocks the next."
+        }
+      },
+      "art": {
+        "kind": "none"
+      },
+      "origin": {
+        "author": "Multimental",
+        "reference": "git:82cc8faecedd3b5d786c3ca0424f08be2ef14764:game/src/match_core.gd"
+      }
+    },
+    {
+      "id": "c004",
+      "version": 1,
+      "slot": 4,
+      "element": "lightning",
+      "role": "fighter",
+      "cost": 1,
+      "attack": 1,
+      "health": 2,
+      "effect": "directional-sweep-v1",
+      "text": {
+        "ru": {
+          "name": "Разряд",
+          "description": "Одна соседняя клетка впереди."
+        },
+        "en": {
+          "name": "Bolt",
+          "description": "One adjacent cell in front."
+        }
+      },
+      "art": {
+        "kind": "none"
+      },
+      "origin": {
+        "author": "Multimental",
+        "reference": "git:82cc8faecedd3b5d786c3ca0424f08be2ef14764:game/src/match_core.gd"
+      }
+    },
+    {
+      "id": "c005",
+      "version": 1,
+      "slot": 5,
+      "element": "lightning",
+      "role": "archer",
+      "cost": 2,
+      "attack": 2,
+      "health": 2,
+      "effect": "directional-sweep-v1",
+      "text": {
+        "ru": {
+          "name": "Гроза",
+          "description": "Две клетки впереди, в том числе через промежуточного юнита."
+        },
+        "en": {
+          "name": "Storm",
+          "description": "Up to two cells in front, including past an intervening unit."
+        }
+      },
+      "art": {
+        "kind": "none"
+      },
+      "origin": {
+        "author": "Multimental",
+        "reference": "git:82cc8faecedd3b5d786c3ca0424f08be2ef14764:game/src/match_core.gd"
+      }
+    },
+    {
+      "id": "c006",
+      "version": 1,
+      "slot": 6,
+      "element": "air",
+      "role": "fighter",
+      "cost": 1,
+      "attack": 1,
+      "health": 2,
+      "effect": "directional-sweep-v1",
+      "text": {
+        "ru": {
+          "name": "Ветер",
+          "description": "Одна соседняя клетка впереди."
+        },
+        "en": {
+          "name": "Breeze",
+          "description": "One adjacent cell in front."
+        }
+      },
+      "art": {
+        "kind": "none"
+      },
+      "origin": {
+        "author": "Multimental",
+        "reference": "git:82cc8faecedd3b5d786c3ca0424f08be2ef14764:game/src/match_core.gd"
+      }
+    },
+    {
+      "id": "c007",
+      "version": 1,
+      "slot": 7,
+      "element": "air",
+      "role": "flanker",
+      "cost": 2,
+      "attack": 2,
+      "health": 2,
+      "effect": "directional-sweep-v1",
+      "text": {
+        "ru": {
+          "name": "Вихрь",
+          "description": "Две соседние диагонали впереди."
+        },
+        "en": {
+          "name": "Gust",
+          "description": "The two adjacent forward diagonals."
+        }
+      },
+      "art": {
+        "kind": "none"
+      },
+      "origin": {
+        "author": "Multimental",
+        "reference": "git:82cc8faecedd3b5d786c3ca0424f08be2ef14764:game/src/match_core.gd"
+      }
+    },
+    {
+      "id": "c008",
+      "version": 1,
+      "slot": 8,
+      "element": "earth",
+      "role": "fighter",
+      "cost": 1,
+      "attack": 1,
+      "health": 2,
+      "effect": "directional-sweep-v1",
+      "text": {
+        "ru": {
+          "name": "Камень",
+          "description": "Одна соседняя клетка впереди."
+        },
+        "en": {
+          "name": "Stone",
+          "description": "One adjacent cell in front."
+        }
+      },
+      "art": {
+        "kind": "none"
+      },
+      "origin": {
+        "author": "Multimental",
+        "reference": "git:82cc8faecedd3b5d786c3ca0424f08be2ef14764:game/src/match_core.gd"
+      }
+    },
+    {
+      "id": "c009",
+      "version": 1,
+      "slot": 9,
+      "element": "earth",
+      "role": "guard",
+      "cost": 2,
+      "attack": 1,
+      "health": 4,
+      "effect": "directional-sweep-v1",
+      "text": {
+        "ru": {
+          "name": "Скала",
+          "description": "Соседние клетки впереди, слева и справа."
+        },
+        "en": {
+          "name": "Rock",
+          "description": "Adjacent cells in front, left and right."
+        }
+      },
+      "art": {
+        "kind": "none"
+      },
+      "origin": {
+        "author": "Multimental",
+        "reference": "git:82cc8faecedd3b5d786c3ca0424f08be2ef14764:game/src/match_core.gd"
+      }
+    },
+    {
+      "id": "c010",
+      "version": 1,
+      "slot": 10,
+      "element": "light",
+      "role": "fighter",
+      "cost": 1,
+      "attack": 1,
+      "health": 2,
+      "effect": "directional-sweep-v1",
+      "text": {
+        "ru": {
+          "name": "Луч",
+          "description": "Одна соседняя клетка впереди."
+        },
+        "en": {
+          "name": "Ray",
+          "description": "One adjacent cell in front."
+        }
+      },
+      "art": {
+        "kind": "none"
+      },
+      "origin": {
+        "author": "Multimental",
+        "reference": "git:82cc8faecedd3b5d786c3ca0424f08be2ef14764:game/src/match_core.gd"
+      }
+    },
+    {
+      "id": "c011",
+      "version": 1,
+      "slot": 11,
+      "element": "light",
+      "role": "lancer",
+      "cost": 2,
+      "attack": 2,
+      "health": 3,
+      "effect": "directional-sweep-v1",
+      "text": {
+        "ru": {
+          "name": "Светоч",
+          "description": "Две клетки впереди; первый юнит перекрывает дальнейший удар."
+        },
+        "en": {
+          "name": "Beacon",
+          "description": "Up to two cells in front; the first unit blocks the next."
+        }
+      },
+      "art": {
+        "kind": "none"
+      },
+      "origin": {
+        "author": "Multimental",
+        "reference": "git:82cc8faecedd3b5d786c3ca0424f08be2ef14764:game/src/match_core.gd"
+      }
+    },
+    {
+      "id": "c012",
+      "version": 1,
+      "slot": 12,
+      "element": "dark",
+      "role": "fighter",
+      "cost": 1,
+      "attack": 1,
+      "health": 2,
+      "effect": "directional-sweep-v1",
+      "text": {
+        "ru": {
+          "name": "Тень",
+          "description": "Одна соседняя клетка впереди."
+        },
+        "en": {
+          "name": "Shade",
+          "description": "One adjacent cell in front."
+        }
+      },
+      "art": {
+        "kind": "none"
+      },
+      "origin": {
+        "author": "Multimental",
+        "reference": "git:82cc8faecedd3b5d786c3ca0424f08be2ef14764:game/src/match_core.gd"
+      }
+    },
+    {
+      "id": "c013",
+      "version": 1,
+      "slot": 13,
+      "element": "dark",
+      "role": "archer",
+      "cost": 2,
+      "attack": 2,
+      "health": 2,
+      "effect": "directional-sweep-v1",
+      "text": {
+        "ru": {
+          "name": "Мрак",
+          "description": "Две клетки впереди, в том числе через промежуточного юнита."
+        },
+        "en": {
+          "name": "Gloom",
+          "description": "Up to two cells in front, including past an intervening unit."
+        }
+      },
+      "art": {
+        "kind": "none"
+      },
+      "origin": {
+        "author": "Multimental",
+        "reference": "git:82cc8faecedd3b5d786c3ca0424f08be2ef14764:game/src/match_core.gd"
+      }
+    },
+    {
+      "id": "c014",
+      "version": 1,
+      "slot": 14,
+      "element": "mecha",
+      "role": "fighter",
+      "cost": 1,
+      "attack": 1,
+      "health": 2,
+      "effect": "directional-sweep-v1",
+      "text": {
+        "ru": {
+          "name": "Дрон",
+          "description": "Одна соседняя клетка впереди."
+        },
+        "en": {
+          "name": "Drone",
+          "description": "One adjacent cell in front."
+        }
+      },
+      "art": {
+        "kind": "none"
+      },
+      "origin": {
+        "author": "Multimental",
+        "reference": "git:82cc8faecedd3b5d786c3ca0424f08be2ef14764:game/src/match_core.gd"
+      }
+    },
+    {
+      "id": "c015",
+      "version": 1,
+      "slot": 15,
+      "element": "mecha",
+      "role": "flanker",
+      "cost": 2,
+      "attack": 2,
+      "health": 2,
+      "effect": "directional-sweep-v1",
+      "text": {
+        "ru": {
+          "name": "Титан",
+          "description": "Две соседние диагонали впереди."
+        },
+        "en": {
+          "name": "Titan",
+          "description": "The two adjacent forward diagonals."
+        }
+      },
+      "art": {
+        "kind": "none"
+      },
+      "origin": {
+        "author": "Multimental",
+        "reference": "git:82cc8faecedd3b5d786c3ca0424f08be2ef14764:game/src/match_core.gd"
+      }
+    },
+    {
+      "id": "c016",
+      "version": 1,
+      "slot": 16,
+      "element": "poison",
+      "role": "fighter",
+      "cost": 1,
+      "attack": 1,
+      "health": 2,
+      "effect": "directional-sweep-v1",
+      "text": {
+        "ru": {
+          "name": "Спора",
+          "description": "Одна соседняя клетка впереди."
+        },
+        "en": {
+          "name": "Spore",
+          "description": "One adjacent cell in front."
+        }
+      },
+      "art": {
+        "kind": "none"
+      },
+      "origin": {
+        "author": "Multimental",
+        "reference": "git:82cc8faecedd3b5d786c3ca0424f08be2ef14764:game/src/match_core.gd"
+      }
+    },
+    {
+      "id": "c017",
+      "version": 1,
+      "slot": 17,
+      "element": "poison",
+      "role": "guard",
+      "cost": 2,
+      "attack": 1,
+      "health": 4,
+      "effect": "directional-sweep-v1",
+      "text": {
+        "ru": {
+          "name": "Токсин",
+          "description": "Соседние клетки впереди, слева и справа."
+        },
+        "en": {
+          "name": "Toxin",
+          "description": "Adjacent cells in front, left and right."
+        }
+      },
+      "art": {
+        "kind": "none"
+      },
+      "origin": {
+        "author": "Multimental",
+        "reference": "git:82cc8faecedd3b5d786c3ca0424f08be2ef14764:game/src/match_core.gd"
+      }
+    },
+    {
+      "id": "c018",
+      "version": 1,
+      "slot": 18,
+      "element": "mystery",
+      "role": "fighter",
+      "cost": 1,
+      "attack": 1,
+      "health": 2,
+      "effect": "directional-sweep-v1",
+      "text": {
+        "ru": {
+          "name": "Шёпот",
+          "description": "Одна соседняя клетка впереди."
+        },
+        "en": {
+          "name": "Whisper",
+          "description": "One adjacent cell in front."
+        }
+      },
+      "art": {
+        "kind": "none"
+      },
+      "origin": {
+        "author": "Multimental",
+        "reference": "git:82cc8faecedd3b5d786c3ca0424f08be2ef14764:game/src/match_core.gd"
+      }
+    },
+    {
+      "id": "c019",
+      "version": 1,
+      "slot": 19,
+      "element": "mystery",
+      "role": "lancer",
+      "cost": 2,
+      "attack": 2,
+      "health": 3,
+      "effect": "directional-sweep-v1",
+      "text": {
+        "ru": {
+          "name": "Загадка",
+          "description": "Две клетки впереди; первый юнит перекрывает дальнейший удар."
+        },
+        "en": {
+          "name": "Enigma",
+          "description": "Up to two cells in front; the first unit blocks the next."
+        }
+      },
+      "art": {
+        "kind": "none"
+      },
+      "origin": {
+        "author": "Multimental",
+        "reference": "git:82cc8faecedd3b5d786c3ca0424f08be2ef14764:game/src/match_core.gd"
+      }
+    },
+    {
+      "id": "c020",
+      "version": 1,
+      "slot": 20,
+      "element": "fire",
+      "role": "fighter",
+      "cost": 4,
+      "attack": 4,
+      "health": 5,
+      "effect": "directional-sweep-v1",
+      "text": {
+        "ru": {
+          "name": "Ифрит",
+          "description": "Одна соседняя клетка впереди."
+        },
+        "en": {
+          "name": "Ifrit",
+          "description": "One adjacent cell in front."
+        }
+      },
+      "art": {
+        "kind": "none"
+      },
+      "origin": {
+        "author": "Multimental",
+        "reference": "git:82cc8faecedd3b5d786c3ca0424f08be2ef14764:game/src/match_core.gd"
+      }
+    },
+    {
+      "id": "c021",
+      "version": 1,
+      "slot": 21,
+      "element": "water",
+      "role": "guard",
+      "cost": 5,
+      "attack": 3,
+      "health": 8,
+      "effect": "directional-sweep-v1",
+      "text": {
+        "ru": {
+          "name": "Хранитель глубин",
+          "description": "Соседние клетки впереди, слева и справа."
+        },
+        "en": {
+          "name": "Deep Guardian",
+          "description": "Adjacent cells in front, left and right."
+        }
+      },
+      "art": {
+        "kind": "none"
+      },
+      "origin": {
+        "author": "Multimental",
+        "reference": "git:82cc8faecedd3b5d786c3ca0424f08be2ef14764:game/src/match_core.gd"
+      }
+    },
+    {
+      "id": "c022",
+      "version": 1,
+      "slot": 22,
+      "element": "lightning",
+      "role": "lancer",
+      "cost": 5,
+      "attack": 4,
+      "health": 5,
+      "effect": "directional-sweep-v1",
+      "text": {
+        "ru": {
+          "name": "Громовержец",
+          "description": "Две клетки впереди; первый юнит перекрывает дальнейший удар."
+        },
+        "en": {
+          "name": "Thunderlord",
+          "description": "Up to two cells in front; the first unit blocks the next."
+        }
+      },
+      "art": {
+        "kind": "none"
+      },
+      "origin": {
+        "author": "Multimental",
+        "reference": "git:82cc8faecedd3b5d786c3ca0424f08be2ef14764:game/src/match_core.gd"
+      }
+    },
+    {
+      "id": "c023",
+      "version": 1,
+      "slot": 23,
+      "element": "air",
+      "role": "archer",
+      "cost": 6,
+      "attack": 4,
+      "health": 4,
+      "effect": "directional-sweep-v1",
+      "text": {
+        "ru": {
+          "name": "Небесный охотник",
+          "description": "Две клетки впереди, в том числе через промежуточного юнита."
+        },
+        "en": {
+          "name": "Sky Hunter",
+          "description": "Up to two cells in front, including past an intervening unit."
+        }
+      },
+      "art": {
+        "kind": "none"
+      },
+      "origin": {
+        "author": "Multimental",
+        "reference": "git:82cc8faecedd3b5d786c3ca0424f08be2ef14764:game/src/match_core.gd"
+      }
+    },
+    {
+      "id": "c024",
+      "version": 1,
+      "slot": 24,
+      "element": "earth",
+      "role": "flanker",
+      "cost": 4,
+      "attack": 3,
+      "health": 5,
+      "effect": "directional-sweep-v1",
+      "text": {
+        "ru": {
+          "name": "Обсидиановый страж",
+          "description": "Две соседние диагонали впереди."
+        },
+        "en": {
+          "name": "Obsidian Warden",
+          "description": "The two adjacent forward diagonals."
+        }
+      },
+      "art": {
+        "kind": "none"
+      },
+      "origin": {
+        "author": "Multimental",
+        "reference": "git:82cc8faecedd3b5d786c3ca0424f08be2ef14764:game/src/match_core.gd"
+      }
+    },
+    {
+      "id": "c025",
+      "version": 1,
+      "slot": 25,
+      "element": "light",
+      "role": "fighter",
+      "cost": 4,
+      "attack": 4,
+      "health": 5,
+      "effect": "directional-sweep-v1",
+      "text": {
+        "ru": {
+          "name": "Архонт",
+          "description": "Одна соседняя клетка впереди."
+        },
+        "en": {
+          "name": "Archon",
+          "description": "One adjacent cell in front."
+        }
+      },
+      "art": {
+        "kind": "none"
+      },
+      "origin": {
+        "author": "Multimental",
+        "reference": "git:82cc8faecedd3b5d786c3ca0424f08be2ef14764:game/src/match_core.gd"
+      }
+    },
+    {
+      "id": "c026",
+      "version": 1,
+      "slot": 26,
+      "element": "dark",
+      "role": "guard",
+      "cost": 5,
+      "attack": 3,
+      "health": 8,
+      "effect": "directional-sweep-v1",
+      "text": {
+        "ru": {
+          "name": "Владыка теней",
+          "description": "Соседние клетки впереди, слева и справа."
+        },
+        "en": {
+          "name": "Shadow Lord",
+          "description": "Adjacent cells in front, left and right."
+        }
+      },
+      "art": {
+        "kind": "none"
+      },
+      "origin": {
+        "author": "Multimental",
+        "reference": "git:82cc8faecedd3b5d786c3ca0424f08be2ef14764:game/src/match_core.gd"
+      }
+    },
+    {
+      "id": "c027",
+      "version": 1,
+      "slot": 27,
+      "element": "mecha",
+      "role": "lancer",
+      "cost": 5,
+      "attack": 4,
+      "health": 5,
+      "effect": "directional-sweep-v1",
+      "text": {
+        "ru": {
+          "name": "Осадный титан",
+          "description": "Две клетки впереди; первый юнит перекрывает дальнейший удар."
+        },
+        "en": {
+          "name": "Siege Titan",
+          "description": "Up to two cells in front; the first unit blocks the next."
+        }
+      },
+      "art": {
+        "kind": "none"
+      },
+      "origin": {
+        "author": "Multimental",
+        "reference": "git:82cc8faecedd3b5d786c3ca0424f08be2ef14764:game/src/match_core.gd"
+      }
+    },
+    {
+      "id": "c028",
+      "version": 1,
+      "slot": 28,
+      "element": "poison",
+      "role": "archer",
+      "cost": 6,
+      "attack": 4,
+      "health": 4,
+      "effect": "directional-sweep-v1",
+      "text": {
+        "ru": {
+          "name": "Чумной колосс",
+          "description": "Две клетки впереди, в том числе через промежуточного юнита."
+        },
+        "en": {
+          "name": "Plague Colossus",
+          "description": "Up to two cells in front, including past an intervening unit."
+        }
+      },
+      "art": {
+        "kind": "none"
+      },
+      "origin": {
+        "author": "Multimental",
+        "reference": "git:82cc8faecedd3b5d786c3ca0424f08be2ef14764:game/src/match_core.gd"
+      }
+    },
+    {
+      "id": "c029",
+      "version": 1,
+      "slot": 29,
+      "element": "mystery",
+      "role": "flanker",
+      "cost": 4,
+      "attack": 3,
+      "health": 5,
+      "effect": "directional-sweep-v1",
+      "text": {
+        "ru": {
+          "name": "Сфинкс",
+          "description": "Две соседние диагонали впереди."
+        },
+        "en": {
+          "name": "Sphinx",
+          "description": "The two adjacent forward diagonals."
+        }
+      },
+      "art": {
+        "kind": "none"
+      },
+      "origin": {
+        "author": "Multimental",
+        "reference": "git:82cc8faecedd3b5d786c3ca0424f08be2ef14764:game/src/match_core.gd"
+      }
+    }
+  ]
+}

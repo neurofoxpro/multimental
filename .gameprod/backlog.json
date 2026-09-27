@@ -924,14 +924,19 @@
   },
   {
     "id": "AUTO-12",
-    "status": "pending",
+    "status": "done",
     "action": "Ручная проверка dev-релиза без телефона: компьютерные тесты, совместимый APK, ссылки и отзыв",
     "dependsOn": [
       "AUTO-06"
     ],
     "manual": false,
     "generatedFrom": ".gameprod/workplan.json",
-    "evidence": [],
+    "evidence": [
+      "docs/production/MANUAL_REVIEW.ru.md",
+      "docs/production/PARALLEL_COORDINATION.ru.md",
+      "docs/production/evidence/manual-review-observed-20260927.json",
+      "docs/production/evidence/manual-review-completed-20260927.json"
+    ],
     "nextCommand": "npm run game -- task AUTO-12"
   }
 ]
