@@ -287,7 +287,7 @@
   },
   {
     "id": "CONTENT-03",
-    "status": "pending",
+    "status": "done",
     "action": "Фабрика карточного контента: данные → схема → семантика → симуляция → каталог",
     "dependsOn": [
       "CORE-06",
@@ -295,7 +295,12 @@
     ],
     "manual": false,
     "generatedFrom": ".gameprod/workplan.json",
-    "evidence": [],
+    "evidence": [
+      "docs/production/CONTENT_FACTORY.ru.md",
+      "docs/production/CARD_CATALOG.ru.md",
+      "docs/SCREENSHOTS.ru.md",
+      "docs/production/evidence/content-factory-completed-20260927.json"
+    ],
     "nextCommand": "npm run game -- task CONTENT-03"
   },
   {

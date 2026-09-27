@@ -20,3 +20,7 @@
 Повторить: `npm run simulate:balance -- --count 40 --seed 9001 --profile before --name review-before-01`, затем `npm run simulate:balance -- --count 40 --seed 9001 --profile current --name review-current-01`. Нужен настроенный Godot проекта; результаты и хеши сохраняются в .gameprod/evidence. Полный отчёт: docs/production/evidence/balance-tuning.json. Поле, доход, добровольная атака и порядок урона сохранены. Идентификатор совместимости: terrain-sweep-v3-balance1.
 
 Предыдущее обновление поля уже установлено как 0.5.0-alpha.100.1; квитанция terrain-release-completed.json. Установка новой 0.5.1 отмечается отдельно только после успешного цикла.
+
+## Обновление методики28.09.2026
+
+Эта страница сохраняет исторические результаты. Прежняя серия подменяла руки/порядок добора после старта и не равна текущему пользовательскому start_with_decks. Новый повтор выполняется через balance run и BALANCE_STANDARD_START.ru.md с заранее заданными допусками; старые проценты не переносятся на новый релиз.
