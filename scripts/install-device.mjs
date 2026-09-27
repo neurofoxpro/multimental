@@ -334,3 +334,46 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
     process.exitCode = 1;
   }
 }
+
+/** Offline artifact preparation: requires the existing persistent identity, never creates a key. */
+export function signManualArtifact(c, input, output) {
+  validateConfig(c);
+  const dir = path.join(c.workDir, 'private-signing'),
+    info = path.join(dir, 'identity.local.json'),
+    key = path.join(dir, 'development.p12');
+  const relative = path.relative(path.join(c.workDir, 'manual-review'), output);
+  if (
+    c.repository !== 'neurofoxpro/multimental' ||
+    c.package !== 'pro.neurofox.multimental.dev' ||
+    relative.startsWith('..') ||
+    path.isAbsolute(relative) ||
+    !output.endsWith('.apk')
+  )
+    throw Error('Manual signing outside project scope');
+  for (const file of [info, key])
+    if (!fs.existsSync(file) || !fs.lstatSync(file).isFile() || fs.lstatSync(file).isSymbolicLink())
+      throw Error('Existing private signing identity required; no key generation');
+  const originalInfo = fs.readFileSync(info),
+    originalKey = sha(fs.readFileSync(key)),
+    identity = JSON.parse(originalInfo);
+  if (
+    !/^[a-f0-9]{64}$/.test(identity.certificate || '') ||
+    typeof identity.password !== 'string' ||
+    !identity.password
+  )
+    throw Error('Persistent certificate not established');
+  if (fs.existsSync(output))
+    throw Error('Manual signing output already exists; validate/reuse it instead');
+  const certificate = signer(c, input, output);
+  if (
+    certificate !== identity.certificate ||
+    !fs.readFileSync(info).equals(originalInfo) ||
+    sha(fs.readFileSync(key)) !== originalKey
+  )
+    throw Error('Private signing identity changed');
+  return {
+    certificateSha256: certificate,
+    sha256: sha(fs.readFileSync(output)),
+    generatedNewKey: false
+  };
+}

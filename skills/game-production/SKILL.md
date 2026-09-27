@@ -3,7 +3,7 @@ name: game-production
 description: Task-bound game development, research, real visual checks and resumable dev release/test commands.
 ---
 
-# Game Production v9
+# Game Production v9.1
 
 ## Authority
 Only `neurofoxpro/multimental`, personal station `VENEL-SENDRIK`, hosted GitHub CI. Verify hostname and origin. Dev integration after applicable checks is delegated. Main/stable/Play, paid services, incompatible saves, accepted-rule changes and other hosts/repositories need owner approval. Never force-push, delete phone data, rotate the existing dev key or bypass an actual tool refusal.
@@ -63,3 +63,11 @@ After a verified installation/suite lab automatically runs the bounded home-shor
 JNI boundary regression: launcher native booleans must be normalized from strict bool or integer 0/1 before comparisons. Never use general truthiness or assume a desktop mock has Android Variant types. Run launcher-bridge and the actual Android launcher step; requested/pinned metadata is not a verified home icon. See LAUNCHER_NATIVE_BRIDGE.ru.md.
 
 Command chaining: after EACH scripts/chat.cmd call check LASTEXITCODE and abort on nonzero. ErrorActionPreference=Stop alone does not stop after a failing nested .cmd. Changelog scope must be an allowed value; a failed add must prevent capture/ship.
+
+## Parallel coordination and manual release review
+
+Use `team status` for live worker/task/branch/dirty-source/PR/overlap facts, `team publish` for the shared Issue29 summary. It is repository coordination, not reading hidden chats or spawning an LLM. Preserve foreign uncommitted work even if its heartbeat expired. A new chat takes only its own worktree through work next. See PARALLEL_COORDINATION.ru.md.
+
+When a developer must test away from the station, run `review ready [--commit SHA]`: full computer Android handoff → exact release/source/assets → existing persistent dev signature → payload equivalence → immutable supplemental APK + MD/JSON on the same GitHub Release → copyable download/source/feedback links in output and Issues. No phone connection or change is required. `review resume` reads back the same run/assets before any repeated effect; `review status` is only cached status. Never hand out the ephemeral CI signature as a guaranteed update over the installed persistent signature. Keys never leave the station.
+
+`lab test --readiness software` is restricted to full handoff on AVD only; it records software readiness without requesting a launcher pin. It does not weaken physical-phone launcher acceptance or touch pending pin requests. Manual review remains pending until actual feedback; do not mark tasks human-accepted from CI or a download link. See MANUAL_REVIEW.ru.md.

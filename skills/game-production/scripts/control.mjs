@@ -461,6 +461,14 @@ export async function main(argv = process.argv.slice(2)) {
     await (await import('./launcher.mjs')).main(entryArgs);
     return;
   }
+  if (entry === 'team') {
+    await (await import('./team.mjs')).main(entryArgs);
+    return;
+  }
+  if (entry === 'review') {
+    await (await import('./manual-review.mjs')).main(entryArgs);
+    return;
+  }
   if (entry === 'lab') {
     await (await import('./lab.mjs')).main(entryArgs);
     return;

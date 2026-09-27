@@ -1740,6 +1740,39 @@
       "evidence": [],
       "requiredForBeta": true,
       "requiredForPlay": true
+    },
+    {
+      "id": "AUTO-12",
+      "title": "Ручная проверка dev-релиза без телефона: компьютерные тесты, совместимый APK, ссылки и отзыв",
+      "stage": "P0. Единый производственный процесс",
+      "kind": "automation",
+      "status": "planned",
+      "priority": 9,
+      "dependsOn": [
+        "AUTO-06"
+      ],
+      "acceptance": [
+        "Одна команда после полной компьютерной проверки выдаёт ссылки на закреплённый APK, GitHub-релиз, исходники и сценарий ручной проверки без обязательного телефона.",
+        "Manual APK сохраняет постоянную dev-подпись, проверенную полезную нагрузку и SHA-256; ключи/личные данные не публикуются, прежние файлы не перезаписываются.",
+        "Повтор сверяет фактические тесты/удалённые assets и не дублирует публикацию; ручная приёмка остаётся pending до отзыва.",
+        "Параллельные исполнители видят live задачи, владельцев, ветки, PR и конфликты файлов; чужие черновики и claims сохраняются."
+      ],
+      "evidence": [],
+      "readset": [
+        "docs/production/MANUAL_REVIEW.ru.md",
+        "docs/production/PARALLEL_COORDINATION.ru.md",
+        "skills/game-production/scripts/manual-review.mjs",
+        "skills/game-production/scripts/team.mjs"
+      ],
+      "source": "Прямое поручение владельца27.09.2026: изучить параллельный чат Разработка мультиментал, координировать и выдавать проверенный релиз по ссылке когда телефон не подключён.",
+      "requiredForBeta": true,
+      "requiredForPlay": true,
+      "tags": [
+        "manual-review",
+        "parallel",
+        "release",
+        "offline-phone"
+      ]
     }
   ]
 }

@@ -6,6 +6,8 @@ import { inside, readJSON } from './lib.mjs';
 import { assertOwnership } from './collaboration-policy.mjs';
 import { GitHubCoordination } from './collaboration-store.mjs';
 export function requiresOwnership(entry, args = []) {
+  if (entry === 'team' && (args[0] || 'status') === 'status') return false;
+  if (entry === 'review' && args[0] === 'status') return false;
   if (entry === 'lab' && (args[0] || 'probe') === 'probe') return false;
   if (entry === 'gallery' && (args[0] || 'check') === 'check') return false;
   if (entry === 'study' && ['check', 'packet'].includes(args[0] || 'check')) return false;
