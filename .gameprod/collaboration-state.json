@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "neurofoxpro/multimental",
-  "revision": 212,
+  "revision": 213,
   "claims": {
     "b2c6c445-e3f4-4797-900f-8275ac9e18fd": {
       "token": "b2c6c445-e3f4-4797-900f-8275ac9e18fd",
@@ -15,19 +15,6 @@
       "fence": 149,
       "updatedAt": 1790433399977,
       "expiresAt": 1790435199977
-    },
-    "3605c72c-121c-4458-ae23-343cb7678622": {
-      "token": "3605c72c-121c-4458-ae23-343cb7678622",
-      "task": "AUTO-07",
-      "owner": "lab-auto-20260926-a91e",
-      "base": "135b34d130c9ba1e70535ceb0c98d8a279feb42c",
-      "resources": [
-        "area:automation",
-        "task:AUTO-07"
-      ],
-      "fence": 150,
-      "updatedAt": 1790508062214,
-      "expiresAt": 1790509862214
     }
   },
   "events": [
@@ -3907,6 +3894,18 @@
         "fence": 150,
         "updatedAt": 1790508062214,
         "expiresAt": 1790509862214
+      }
+    },
+    {
+      "id": "45798f51-addd-4382-bcb8-8cd3bc766358",
+      "hash": "3e056e799d6463a4c1ea4084e74eb648dd568904c0aeee2fe02aab9465e5be4b",
+      "revision": 213,
+      "result": {
+        "status": "released",
+        "token": "3605c72c-121c-4458-ae23-343cb7678622",
+        "task": "AUTO-07",
+        "owner": "lab-auto-20260926-a91e",
+        "fence": 150
       }
     }
   ]
