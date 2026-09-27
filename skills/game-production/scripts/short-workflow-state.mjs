@@ -61,3 +61,52 @@ export function revisedCheckpoint(journal, current, task, pr, { sourceDigest, de
     productionAuthorized: false
   };
 }
+
+/** Explicit repair before any remote branch/PR exists; retain the failed checkpoint. */
+export function unpublishedRevision(
+  journal,
+  current,
+  task,
+  { sourceDigest, at, remoteAbsent, pulls }
+) {
+  assertTaskContext(current, task);
+  if (
+    !journal ||
+    journal.schemaVersion !== 1 ||
+    journal.repository !== REPO ||
+    !['checking', 'publish_pending'].includes(journal.phase) ||
+    journal.head ||
+    journal.pr ||
+    journal.merge ||
+    journal.branch !== current.branch ||
+    journal.task !== task.id ||
+    journal.owner !== current.binding.owner ||
+    journal.token !== current.binding.token
+  )
+    throw Error('SHIP_PREPUBLICATION_CONTEXT');
+  if (remoteAbsent !== true || !Array.isArray(pulls) || pulls.length !== 0)
+    throw Error('SHIP_REMOTE_EFFECT_NOT_ABSENT');
+  if (
+    !/^[a-f0-9]{64}$/.test(sourceDigest || '') ||
+    sourceDigest === journal.sourceDigest ||
+    !Number.isFinite(Date.parse(at))
+  )
+    throw Error('SHIP_PREPUBLICATION_NEW_SOURCE_REQUIRED');
+  return {
+    schemaVersion: 1,
+    repository: REPO,
+    task: task.id,
+    branch: current.branch,
+    owner: current.binding.owner,
+    token: current.binding.token,
+    phase: 'checking',
+    startedAt: at,
+    revises: {
+      phase: journal.phase,
+      sourceDigest: journal.sourceDigest || null,
+      remoteBranchAbsent: true,
+      remotePrCount: 0
+    },
+    productionAuthorized: false
+  };
+}

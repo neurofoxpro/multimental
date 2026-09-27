@@ -15,6 +15,8 @@ import {
 } from '../skills/game-production/scripts/lib.mjs';
 const [suite = 'model', ...extra] = process.argv.slice(2);
 const choices = {
+  content: ['content_runtime_test.gd', 'MULTIMENTAL_CONTENT_RUNTIME_PASS'],
+  'content-candidate': ['content_candidate_test.gd', 'MULTIMENTAL_CONTENT_CANDIDATE_PASS'],
   model: ['profile_test.gd', 'MULTIMENTAL_PROFILE_PASS'],
   rewards: ['rewards_test.gd', 'MULTIMENTAL_REWARDS_PASS'],
   'rewards-ui': ['rewards_ui_test.gd', 'MULTIMENTAL_REWARDS_UI_PASS'],

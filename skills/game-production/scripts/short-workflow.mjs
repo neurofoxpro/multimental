@@ -1,3 +1,4 @@
+import { unpublishedRevision } from './short-workflow-state.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 import { acceptIssue } from './task-acceptance.mjs';
@@ -234,20 +235,37 @@ export async function main(args = process.argv.slice(2)) {
       setWorkflowLease(readJSON(inside(root, '.gameprod/evidence/short-workflow.lock')));
       if (revise) {
         const journal = optionalJSON(stateFile);
-        if (!journal?.pr) throw Error('SHIP_REVISION_NEEDS_KNOWN_PR');
+        if (!journal) throw Error('SHIP_REVISION_NEEDS_CHECKPOINT');
         const observed = current();
-        call('git', ['merge-base', '--is-ancestor', journal.head, observed.head]);
-        const next = revisedCheckpoint(
-          journal,
-          observed,
-          task,
-          await client.api('GET', '/pulls/' + journal.pr),
-          {
-            sourceDigest: fingerprint(root, p),
-            descendant: true,
-            at: new Date().toISOString()
+        let next;
+        if (journal.pr) {
+          call('git', ['merge-base', '--is-ancestor', journal.head, observed.head]);
+          next = revisedCheckpoint(
+            journal,
+            observed,
+            task,
+            await client.api('GET', '/pulls/' + journal.pr),
+            { sourceDigest: fingerprint(root, p), descendant: true, at: new Date().toISOString() }
+          );
+        } else {
+          const pulls = await client.list(
+            '/pulls?state=all&base=dev&head=' + encodeURIComponent('neurofoxpro:' + observed.branch)
+          );
+          let remoteAbsent = false;
+          try {
+            await client.api('GET', '/git/ref/heads/' + observed.branch);
+          } catch (error) {
+            if (error.message === 'HUB_HTTP_404 GET /git/ref/heads/' + observed.branch)
+              remoteAbsent = true;
+            else throw error;
           }
-        );
+          next = unpublishedRevision(journal, observed, task, {
+            sourceDigest: fingerprint(root, p),
+            at: new Date().toISOString(),
+            remoteAbsent,
+            pulls
+          });
+        }
         const archive = inside(
           root,
           '.gameprod/evidence/ships/history/' + sha(JSON.stringify(journal)) + '.json'
@@ -256,7 +274,9 @@ export async function main(args = process.argv.slice(2)) {
         else if (JSON.stringify(readJSON(archive)) !== JSON.stringify(journal))
           throw Error('SHIP_REVISION_ARCHIVE_CONFLICT');
         saveState(next);
-        console.log('SHIP_REVISION_ARCHIVED ' + journal.head);
+        console.log(
+          'SHIP_REVISION_ARCHIVED ' + (journal.head || journal.sourceDigest || 'prepublication')
+        );
       }
       const result = await shipFlow(
         {

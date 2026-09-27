@@ -3,7 +3,7 @@ name: game-production
 description: Task-bound game development, research, real visual checks and resumable dev release/test commands.
 ---
 
-# Game Production v9.1
+# Game Production v9.2
 
 ## Authority
 Only `neurofoxpro/multimental`, personal station `VENEL-SENDRIK`, hosted GitHub CI. Verify hostname and origin. Dev integration after applicable checks is delegated. Main/stable/Play, paid services, incompatible saves, accepted-rule changes and other hosts/repositories need owner approval. Never force-push, delete phone data, rotate the existing dev key or bypass an actual tool refusal.
@@ -71,3 +71,10 @@ Use `team status` for live worker/task/branch/dirty-source/PR/overlap facts, `te
 When a developer must test away from the station, run `review ready [--commit SHA]`: full computer Android handoff → exact release/source/assets → existing persistent dev signature → payload equivalence → immutable supplemental APK + MD/JSON on the same GitHub Release → copyable download/source/feedback links in output and Issues. No phone connection or change is required. `review resume` reads back the same run/assets before any repeated effect; `review status` is only cached status. Never hand out the ephemeral CI signature as a guaranteed update over the installed persistent signature. Keys never leave the station.
 
 `lab test --readiness software` is restricted to full handoff on AVD only; it records software readiness without requesting a launcher pin. It does not weaken physical-phone launcher acceptance or touch pending pin requests. Manual review remains pending until actual feedback; do not mark tasks human-accepted from CI or a download link. See MANUAL_REVIEW.ru.md.
+
+
+## Card data and candidate research
+
+Use content check / content build for accepted content/accepted/catalog.json and its real runtime content_catalog.gd. Content add content/candidates/NAME.json stages a separate playable data-only candidate. Content trial FILE [--seed N --count N] runs paired control/candidate with both seats, seven archetypes and two shared policies; every replay is checked. Resume reuses only intact source/engine-bound output; incomplete pure experiments are archived before retry.
+
+A passing candidate is not auto-promoted. Preserve 30x2 cards, stable IDs, accepted rules and profile; new permanent IDs need a reviewed compatibility/migration decision. Complex effects require tested handlers, never executable descriptions. Art none is explicit; generated/third-party files need local hash/provenance/license, plus prompt/generator for generated art. Metadata is not a generated-image result. See CONTENT_FACTORY.ru.md and CARD_CATALOG.ru.md. Keep scenarios in test support, not a second combat engine. Check structured Godot version, not CLI/display strings. Repeat edits of own untracked/generated files need expectedCurrentSha256 too. When composing bundles, avoid nested Markdown backticks inside JavaScript template literals; serialize supplied text instead.
