@@ -1,0 +1,188 @@
+{
+  "schemaVersion": 1,
+  "repository": "neurofoxpro/multimental",
+  "taskId": "AUTO-11",
+  "observedAt": "2026-09-27T22:59:48.801Z",
+  "sourceCommit": "a48df914602e693a012fe1ca974d8da0dedb75a8",
+  "implementation": {
+    "pr": 124,
+    "head": "19f9be941972153fe1fe988041e3ba43216366a8"
+  },
+  "acceptance": [
+    "Истечение heartbeat само по себе не освобождает claim: нужны чистый worktree, точный объединённый PR, отсутствие незавершённых PR/запусков и действующих писателей.",
+    "Операция использует GitHub CAS, точный token/fence и fingerprint claim; продление, изменение source или занятой lease прекращают передачу.",
+    "После потерянного ответа выполняется readback; исходники, настройки и данные телефонов не изменяются, старый claim не даёт новых прав записи.",
+    "Положительный сценарий и отказы проверяются тестами и одной явной командой; результат фиксируется в задаче и Issue29 без автоматической приёмки продукта."
+  ],
+  "verification": {
+    "schemaVersion": 1,
+    "step": "verify",
+    "status": "passed",
+    "exitCode": 0,
+    "sourceDigest": "143af48f6948b307cbb3c71857f0aa8a3fca312430055ec795ff6d8ec13ebacc",
+    "sourceDigestAfter": "143af48f6948b307cbb3c71857f0aa8a3fca312430055ec795ff6d8ec13ebacc",
+    "sourceChanged": false,
+    "startedAt": "2026-09-26T09:07:49.201Z",
+    "finishedAt": "2026-09-26T09:09:14.803Z",
+    "host": "VENEL-SENDRIK",
+    "command": [
+      "node",
+      "tools/verify.mjs"
+    ],
+    "log": ".gameprod/evidence/verify.log",
+    "logHash": "9d81381d60bd016ccb6c53fb2e057011ad87b94be7c73f646eb3145245c9efbd",
+    "outputs": []
+  },
+  "evidence": [
+    "docs/production/COMPLETED_SLICE_RECOVERY.ru.md",
+    "docs/production/PARALLEL_CHATS.ru.md"
+  ],
+  "verificationInputs": [
+    "skills/game-production/scripts/completed-recovery-policy.mjs",
+    "skills/game-production/scripts/completed-recovery.mjs",
+    "skills/game-production/scripts/collaboration-policy.mjs",
+    "skills/game-production/scripts/collaboration-store.mjs",
+    "skills/game-production/tests/completed-recovery.test.mjs"
+  ],
+  "originalExecution": {
+    "proofObservedAt": "2026-09-26T09:09:26.558Z",
+    "task": "QA-02",
+    "exactPr": 116,
+    "commit": "ada6eb7a1a4e30400988616fea07318a8e0cc241",
+    "requestId": "bb678e5d-5e0d-40e9-a5f0-632428766590",
+    "sourceWrites": 0,
+    "phoneChanges": 0,
+    "result": {
+      "status": "released_completed",
+      "token": "4d555e19-c33e-4ec7-bf28-292c1d3de03b",
+      "task": "QA-02",
+      "owner": "second-usb-diagnostics-20260926",
+      "fence": 17,
+      "operator": "completed-slice-recovery-20260926-0851",
+      "proofDigest": "90cc4ef6b7d7e7b80d30c32d38219089e47f9128af0d822430fa67b3098405a0",
+      "head": "93a73299e451e84b0672a3e1fc672f23195de206",
+      "pr": 116
+    },
+    "record": "https://github.com/neurofoxpro/multimental/issues/122#issuecomment-5844871867",
+    "originalProjectNodeTests": 719
+  },
+  "currentRevalidation": {
+    "sourceCommit": "b03b780894c66574220a83c0c1c50976871c3ee6",
+    "historicalRemoteAudit": {
+      "schemaVersion": 1,
+      "repository": "neurofoxpro/multimental",
+      "observedAt": "2026-09-27T22:55:25.600Z",
+      "method": "read_immutable_remote_commit_and_replay_current_pure_policy_without_any_remote_write",
+      "historicalCommit": "ada6eb7a1a4e30400988616fea07318a8e0cc241",
+      "parentCommit": "28e5607e381ce7c06312e53ea771cd9f5724846e",
+      "coordinationFile": ".gameprod/collaboration-state.json",
+      "originalReceiptSha256": "6b6ffbd75a5921ec046240a7565e721d70437f621685501d68c87e5f12613af4",
+      "requestId": "bb678e5d-5e0d-40e9-a5f0-632428766590",
+      "proof": {
+        "schemaVersion": 1,
+        "repository": "neurofoxpro/multimental",
+        "task": "QA-02",
+        "claimDigest": "e34eb30262e4e4b87e5410bfefe6c6760d97e878a6538ed98380f60c33808b22",
+        "observedAt": 1790413766558,
+        "head": "93a73299e451e84b0672a3e1fc672f23195de206",
+        "branch": "feature/qa-02-second-usb-diagnostics-20260926",
+        "merge": "f3432f515a4e2e9383c729d4020e63cb955ef6ff",
+        "pr": 116,
+        "sourceDigest": "dbf68dcf54245ffe5ea6c8070e1c6470d93db604b6274e88ca639b15609cb8d0",
+        "bindingDigest": "4c5d4dd7717667d247e435ac17a3cd7abc7ddb9b288edfefc39cc4f0faa6f4b6",
+        "registeredWorktree": true,
+        "canonicalRemote": true,
+        "bindingMatches": true,
+        "cleanWorktree": true,
+        "mergedExactHead": true,
+        "canonicalDevMerge": true,
+        "mergeParentsMatch": true,
+        "sourceInsideDev": true,
+        "allRunsComplete": true,
+        "allWritersIdle": true,
+        "openPullRequests": 0,
+        "activeRuns": 0,
+        "pendingLocks": 0
+      },
+      "result": {
+        "status": "released_completed",
+        "token": "4d555e19-c33e-4ec7-bf28-292c1d3de03b",
+        "task": "QA-02",
+        "owner": "second-usb-diagnostics-20260926",
+        "fence": 17,
+        "operator": "completed-slice-recovery-20260926-0851",
+        "proofDigest": "90cc4ef6b7d7e7b80d30c32d38219089e47f9128af0d822430fa67b3098405a0",
+        "head": "93a73299e451e84b0672a3e1fc672f23195de206",
+        "pr": 116
+      },
+      "onlyTargetRemoved": true,
+      "otherClaimsPreserved": true,
+      "currentPolicyReproducesHistoricEffect": true,
+      "repeatChanged": false,
+      "remoteMutationsDuringAudit": 0,
+      "sourceOrPhoneMutationsDuringAudit": 0,
+      "originalExecutionWas": "2026-09-26; not rerun on current live claims"
+    },
+    "negativeOnUnfinishedUI": {
+      "schemaVersion": 1,
+      "status": "expected_refusal",
+      "observedAt": "2026-09-27T22:56:25.927Z",
+      "command": "collab recover-completed UX-11",
+      "applyRequested": false,
+      "reason": "RECOVERY_EXACT_MERGED_PR_REQUIRED",
+      "owner": "tactical-ui-20260926-f42b",
+      "task": "UX-11",
+      "claimPreserved": true,
+      "sourcePreserved": true,
+      "before": {
+        "filesHash": "9e332c48fe30a53e9603bd8cabae7c02657b0dff0e5759e7cd8a9ad34edd814b",
+        "bindingHash": "fe2366fd2eddbec7727ee91c86fdde1f014d71f600cd522b22941705e4c4b1b5"
+      },
+      "after": {
+        "filesHash": "9e332c48fe30a53e9603bd8cabae7c02657b0dff0e5759e7cd8a9ad34edd814b",
+        "bindingHash": "fe2366fd2eddbec7727ee91c86fdde1f014d71f600cd522b22941705e4c4b1b5"
+      },
+      "logHash": "2def57c61b42338f436d1ba065ae4c77dfee6d92b42bc5d5cbbb9e4c6210ea2b",
+      "remoteSourceOrPhoneWrites": 0,
+      "coordinatorBefore": "56c642a52ac1e0f6a0b4a8740b423a431dada6d6",
+      "coordinatorAfter": "56c642a52ac1e0f6a0b4a8740b423a431dada6d6"
+    },
+    "regression": {
+      "status": "passed",
+      "count": 28,
+      "sourceCommit": "b03b780894c66574220a83c0c1c50976871c3ee6",
+      "logHash": "464aa56ef534af21569bb3357dc310b69b44f692d58be6ed1f7bd1780b34c24b"
+    },
+    "sources": [
+      {
+        "path": "skills/game-production/scripts/completed-recovery-policy.mjs",
+        "sha256": "5fa53774f11b154ff51e86c17dec7032d46eca3425104094d69f7ee5b6e06f49"
+      },
+      {
+        "path": "skills/game-production/scripts/completed-recovery.mjs",
+        "sha256": "747042ccd1b0b9ac8c084f7d4c39ece3a83149643bd689e013bb0fc460c57f9d"
+      },
+      {
+        "path": "skills/game-production/scripts/collaboration-policy.mjs",
+        "sha256": "0bea2c52a2bc400a740737df8259d31b04dd07fcb1441b7282a1cde777628523"
+      },
+      {
+        "path": "skills/game-production/scripts/collaboration-store.mjs",
+        "sha256": "08000906eaddb07ebba3e8f31fe3bf6b5025e6d124892a9f8b06b7dc866fd27b"
+      },
+      {
+        "path": "skills/game-production/tests/completed-recovery.test.mjs",
+        "sha256": "d4301e09dd2576c8606d5f3f76ecd458497d855e1044b164c6a264e517a3fb74"
+      }
+    ]
+  },
+  "scope": "formal closure of existing implemented and exercised mechanism; no replacement architecture or live claim reclamation",
+  "productionAuthorized": false,
+  "humanAcceptance": "not_inferred",
+  "limitations": [
+    "Original real release happened on26September and is proven by its immutable Git commit; it was not applied a second time to live claims.",
+    "Current28-test regression and read-only unfinished-UI refusal are separate from the original719-test source verification.",
+    "The protocol coordinates cooperating agents; it is not an independent security boundary against an administrator bypassing it.",
+    "Finishing AUTO-11 does not accept QA-02, UX-11, personal device testing or subjective game quality."
+  ]
+}
