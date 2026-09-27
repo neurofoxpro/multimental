@@ -26,7 +26,7 @@ export function labOptions(args) {
   for (let i = 0; i < rest.length; i += 2) {
     const [k, v] = rest.slice(i, i + 2);
     if (
-      !['--target', '--suite', '--commit'].includes(k) ||
+      !['--target', '--suite', '--commit', '--readiness'].includes(k) ||
       Object.hasOwn(values, k) ||
       !v ||
       v.startsWith('--')
@@ -44,7 +44,15 @@ export function labOptions(args) {
     (mode === 'deliver' && (target !== 'phone' || values['--suite']))
   )
     throw Error('Unsupported lab target, suite or release identity');
-  return { mode, target, suite, commit };
+  if (
+    values['--readiness'] &&
+    (values['--readiness'] !== 'software' ||
+      mode !== 'test' ||
+      suite !== 'handoff' ||
+      !['auto', 'emulator-A', 'emulator-B'].includes(target))
+  )
+    throw Error('Software readiness requires a full computer handoff, never a phone');
+  return { mode, target, suite, commit, ...(values['--readiness'] ? { reviewOnly: true } : {}) };
 }
 export function adbRows(text) {
   if (typeof text !== 'string' || text.length > 65536)

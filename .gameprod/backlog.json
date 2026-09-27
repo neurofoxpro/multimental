@@ -921,5 +921,17 @@
     "generatedFrom": ".gameprod/workplan.json",
     "evidence": [],
     "nextCommand": "npm run game -- task UX-13"
+  },
+  {
+    "id": "AUTO-12",
+    "status": "pending",
+    "action": "Ручная проверка dev-релиза без телефона: компьютерные тесты, совместимый APK, ссылки и отзыв",
+    "dependsOn": [
+      "AUTO-06"
+    ],
+    "manual": false,
+    "generatedFrom": ".gameprod/workplan.json",
+    "evidence": [],
+    "nextCommand": "npm run game -- task AUTO-12"
   }
 ]

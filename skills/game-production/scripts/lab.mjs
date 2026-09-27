@@ -416,16 +416,31 @@ export async function main(args = process.argv.slice(2)) {
         save();
       }
     }
-    record.phase = 'launcher';
-    save();
-    console.log('LAB_STAGE home-shortcut ' + selected.target);
-    record.launcher = await runLauncher({
-      root,
-      config: suiteOwner,
-      target: selected.target,
-      mode: 'ensure'
-    });
-    save();
+    if (settings.reviewOnly) {
+      if (
+        settings.mode !== 'test' ||
+        settings.suite !== 'handoff' ||
+        !selected.target.startsWith('emulator-')
+      )
+        throw Error('Software-only review requires the full computer suite');
+      record.launcher = {
+        status: 'not_requested',
+        reason: 'computer_review_does_not_require_a_home_shortcut',
+        priorRequestsPreserved: true
+      };
+      save();
+    } else {
+      record.phase = 'launcher';
+      save();
+      console.log('LAB_STAGE home-shortcut ' + selected.target);
+      record.launcher = await runLauncher({
+        root,
+        config: suiteOwner,
+        target: selected.target,
+        mode: 'ensure'
+      });
+      save();
+    }
     if (
       record.sourceHash !== fingerprint(root, project) ||
       record.configHash !== sha(fs.readFileSync(configPath)) ||
@@ -440,6 +455,7 @@ export async function main(args = process.argv.slice(2)) {
       status: 'passed',
       runId,
       operation: settings.mode,
+      reviewOnly: settings.reviewOnly === true,
       target: selected.target,
       transport: selected.transport,
       sourceHead: record.sourceHead,

@@ -66,7 +66,19 @@ export function releaseEvidence(releases, merge, required) {
   const r = rows[0];
   const assets = r.assets || [];
   const manifests = assets.filter((a) => a.name === 'build-manifest.json');
-  const apks = assets.filter((a) => typeof a.name === 'string' && a.name.endsWith('.apk'));
+  const manualPrefix =
+    'multimental-' + String(r.tag_name || '').slice(1) + '-' + merge.slice(0, 7) + '-manual-';
+  const manualApks = assets.filter(
+    (a) =>
+      typeof a.name === 'string' &&
+      a.name.startsWith(manualPrefix) &&
+      /^[a-f0-9]{12}\.apk$/.test(a.name.slice(manualPrefix.length))
+  );
+  if (new Set(manualApks.map((a) => a.name)).size !== manualApks.length)
+    throw Error('SHIP_DUPLICATE_MANUAL_ASSET');
+  const apks = assets.filter(
+    (a) => typeof a.name === 'string' && a.name.endsWith('.apk') && !manualApks.includes(a)
+  );
   if (
     manifests.length !== 1 ||
     apks.length !== 1 ||
@@ -76,7 +88,7 @@ export function releaseEvidence(releases, merge, required) {
     !r.tag_name.startsWith('v')
   )
     throw Error('SHIP_RELEASE_ASSETS');
-  for (const asset of [manifests[0], apks[0]])
+  for (const asset of [manifests[0], apks[0], ...manualApks])
     if (
       asset.state !== 'uploaded' ||
       !Number.isSafeInteger(asset.size) ||
