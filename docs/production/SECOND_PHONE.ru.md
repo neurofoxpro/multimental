@@ -13,3 +13,7 @@
 Аппаратный Android↔Android тест пока не проведён. Windows↔Android, TLS loopback и fake Bluetooth не закрывают эту проверку. Условия до теста: оба ADB=device, точные версии/хеши, для Bluetooth — настоящее сопряжение, для LAN — достижимая локальная сеть. Использовать `adb -s` для каждого устройства, не глобальную случайную цель.
 
 Первоисточники проверены 26.09.2026: https://developer.android.com/tools/adb ; https://developer.android.com/develop/connectivity/bluetooth/connect-bluetooth-devices . Физическое подтверждение отладки/сопряжения не подменяется JSON-флагом разрешения.
+
+## Обновление28.09.2026
+
+Выше сохранена история прежнего read-only этапа. Новый узкий маршрут fleet known/ready описан в FLEET_READY.ru.md: первичный Redmi и явно разрешённый ранее Honor, одна опубликованная manual APK без копирования/создания ключей, раздельные квитанции. Офлайн Honor не выдаётся за прошедший тест. Исторический остановленный signingDirectory-пакет не возобновлялся.

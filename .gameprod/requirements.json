@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "observedAt": "2026-09-27",
+  "observedAt": "2026-09-28",
   "repository": "neurofoxpro/multimental",
   "generatedFrom": ".gameprod/workplan.json",
   "evidenceSemantics": "Historical evidence only; not a fresh release gate or human approval.",
@@ -729,9 +729,13 @@
       "id": "AUTO-11",
       "text": "Проверяемое освобождение завершённых срезов без захвата живой работы",
       "version": "P0. Единый производственный процесс",
-      "status": "planned",
+      "status": "verified",
       "kind": "automation",
-      "evidence": [],
+      "evidence": [
+        "docs/production/COMPLETED_SLICE_RECOVERY.ru.md",
+        "docs/production/PARALLEL_CHATS.ru.md",
+        "docs/production/evidence/completed-recovery-completed-20260928.json"
+      ],
       "source": "Поручение владельца26.09.2026 о продолжении и самоулучшении; наблюдение: PR116 объединён и дерево чистое, но claimQA02 не освобождён. Живой/незавершённый PR119 не является допустимым случаем этой операции.",
       "requiredForBeta": true
     },

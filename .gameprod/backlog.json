@@ -826,14 +826,18 @@
   },
   {
     "id": "AUTO-11",
-    "status": "pending",
+    "status": "done",
     "action": "Проверяемое освобождение завершённых срезов без захвата живой работы",
     "dependsOn": [
       "AUTO-06"
     ],
     "manual": false,
     "generatedFrom": ".gameprod/workplan.json",
-    "evidence": [],
+    "evidence": [
+      "docs/production/COMPLETED_SLICE_RECOVERY.ru.md",
+      "docs/production/PARALLEL_CHATS.ru.md",
+      "docs/production/evidence/completed-recovery-completed-20260928.json"
+    ],
     "nextCommand": "npm run game -- task AUTO-11"
   },
   {
