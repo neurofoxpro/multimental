@@ -529,6 +529,10 @@ export async function main(argv = process.argv.slice(2)) {
     await (await import('../../../tools/ux-audit.mjs')).main(entryArgs);
     return;
   }
+  if (entry === 'phone') {
+    await (await import('./phone-update.mjs')).main(entryArgs);
+    return;
+  }
   if (entry === 'fleet') {
     await (await import('./phone-fleet.mjs')).main(entryArgs);
     return;
