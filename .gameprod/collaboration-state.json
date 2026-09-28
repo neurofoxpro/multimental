@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "neurofoxpro/multimental",
-  "revision": 274,
+  "revision": 275,
   "claims": {
     "b2c6c445-e3f4-4797-900f-8275ac9e18fd": {
       "token": "b2c6c445-e3f4-4797-900f-8275ac9e18fd",
@@ -15,41 +15,9 @@
       "fence": 149,
       "updatedAt": 1790433399977,
       "expiresAt": 1790435199977
-    },
-    "33364576-8c8c-416a-809f-1d09b34b367b": {
-      "token": "33364576-8c8c-416a-809f-1d09b34b367b",
-      "task": "BALANCE-01",
-      "owner": "balance-holdout-20260928-e71c",
-      "base": "161324944d674706c125f8c42d587c98cfac688e",
-      "resources": [
-        "area:game-core",
-        "task:BALANCE-01"
-      ],
-      "fence": 268,
-      "updatedAt": 1790556781050,
-      "expiresAt": 1790558581050
     }
   },
   "events": [
-    {
-      "id": "59d2356a-0754-49b7-805e-da80c75252c7",
-      "hash": "5431ec1c9a429e45603690c63319212041b53de4825776d5fd768646150e7985",
-      "revision": 19,
-      "result": {
-        "status": "renewed",
-        "token": "4d555e19-c33e-4ec7-bf28-292c1d3de03b",
-        "task": "QA-02",
-        "owner": "second-usb-diagnostics-20260926",
-        "base": "b43247d36786245093d592edb6ce1706d0e67634",
-        "resources": [
-          "area:devices",
-          "task:QA-02"
-        ],
-        "fence": 17,
-        "updatedAt": 1790401828523,
-        "expiresAt": 1790403628523
-      }
-    },
     {
       "id": "ad1dbaf8-8315-4ff4-ab9f-5fe1daa095d2",
       "hash": "2f6160e4b53ac30ae84352a5cb5328b9a5a34ff199789685907ae56651e0aabe",
@@ -4715,6 +4683,18 @@
         "fence": 268,
         "updatedAt": 1790556781050,
         "expiresAt": 1790558581050
+      }
+    },
+    {
+      "id": "a1278c59-2743-404c-8e89-e5aaf1135fac",
+      "hash": "b3d26a2d547eefce4993c0cbbdc16f9a81b7cf15ac33f430b246bed2e052ab63",
+      "revision": 275,
+      "result": {
+        "status": "released",
+        "token": "33364576-8c8c-416a-809f-1d09b34b367b",
+        "task": "BALANCE-01",
+        "owner": "balance-holdout-20260928-e71c",
+        "fence": 268
       }
     }
   ]
