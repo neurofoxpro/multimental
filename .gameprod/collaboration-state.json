@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "neurofoxpro/multimental",
-  "revision": 266,
+  "revision": 267,
   "claims": {
     "b2c6c445-e3f4-4797-900f-8275ac9e18fd": {
       "token": "b2c6c445-e3f4-4797-900f-8275ac9e18fd",
@@ -15,41 +15,9 @@
       "fence": 149,
       "updatedAt": 1790433399977,
       "expiresAt": 1790435199977
-    },
-    "959c5ad2-0c24-4712-bfb9-72b5ea5a2717": {
-      "token": "959c5ad2-0c24-4712-bfb9-72b5ea5a2717",
-      "task": "QA-02",
-      "owner": "fleet-delivery-20260928-d82a",
-      "base": "fdcea113231a7e388c471e374b0feeb706450a96",
-      "resources": [
-        "area:devices",
-        "task:QA-02"
-      ],
-      "fence": 259,
-      "updatedAt": 1790555456278,
-      "expiresAt": 1790557256278
     }
   },
   "events": [
-    {
-      "id": "ebb271ad-dcf9-4d3f-8f30-8447c58cf64b",
-      "hash": "bf9ee7089b15e13ad5df8070696071b2b358602397d5a45b28e6dcc0dc5ca2ce",
-      "revision": 11,
-      "result": {
-        "status": "claimed",
-        "token": "ebb271ad-dcf9-4d3f-8f30-8447c58cf64b",
-        "task": "UX-06",
-        "owner": "ux-audit-next-20260926",
-        "base": "d4797322eb196981cb6bf99fb61fd4d41f94d02e",
-        "resources": [
-          "area:ux-research",
-          "task:UX-06"
-        ],
-        "fence": 11,
-        "updatedAt": 1790397941238,
-        "expiresAt": 1790399741238
-      }
-    },
     {
       "id": "186447a9-3ad6-4510-a5e2-321773f2c835",
       "hash": "716dbeb0ce6e4b3984b4a34979068fc24bd8e25c58400a5995738179a8436c8b",
@@ -4708,6 +4676,18 @@
         "fence": 259,
         "updatedAt": 1790555456278,
         "expiresAt": 1790557256278
+      }
+    },
+    {
+      "id": "75a41b56-8624-4582-89b9-e51f4daf2fa6",
+      "hash": "4c95bbb657d6a9f08cd1b301d1938ab568536c90553e303433ffe970772ebd20",
+      "revision": 267,
+      "result": {
+        "status": "released",
+        "token": "959c5ad2-0c24-4712-bfb9-72b5ea5a2717",
+        "task": "QA-02",
+        "owner": "fleet-delivery-20260928-d82a",
+        "fence": 259
       }
     }
   ]
