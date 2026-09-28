@@ -1,3 +1,4 @@
+import { assertKnownPhoneConfig, HONOR_REQUEST } from './known-phone-policy.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 import { randomBytes, randomUUID } from 'node:crypto';
@@ -42,12 +43,16 @@ export async function runLauncher({ root, config, target = 'phone', mode = 'veri
   if (owner.repository !== 'neurofoxpro/multimental' || owner.package !== PACKAGE)
     throw Error('Wrong launcher scope');
   const station = validateConfig(readJSON(inside(path.dirname(root), 'station.local.json')));
-  if (
-    path.resolve(owner.workDir) !== path.resolve(station.workDir) ||
-    (owner.physicalSerial || owner.serial) !== station.serial ||
-    ['adb', 'java', 'apksigner', 'aapt'].some((k) => owner[k] !== station[k])
-  )
-    throw Error('Launcher configuration is outside the saved project station');
+  let slot;
+  try {
+    slot = assertKnownPhoneConfig(owner, station, null);
+  } catch {
+    const requestFile = inside(path.dirname(root), HONOR_REQUEST);
+    const honor = fs.existsSync(requestFile) ? readJSON(requestFile) : null;
+    slot = assertKnownPhoneConfig(owner, station, honor);
+  }
+  if (target !== 'phone' && slot.alias !== 'phone-A')
+    throw Error('Emulator launcher belongs only to the primary station');
   const c =
     target === 'phone'
       ? primaryTransport(owner)

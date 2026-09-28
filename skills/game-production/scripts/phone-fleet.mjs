@@ -13,6 +13,7 @@ export function probeOptions(args) {
   return args[0] || 'probe';
 }
 export async function main(args = process.argv.slice(2)) {
+  if (['known', 'ready'].includes(args[0])) return (await import('./fleet-ready.mjs')).main(args);
   const mode = probeOptions(args);
   if (process.env.GITHUB_ACTIONS === 'true') throw Error('Physical inventory is station-only');
   const root = findRoot(),

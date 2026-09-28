@@ -4,6 +4,10 @@ import { waitForPathsGone } from '../skills/game-production/scripts/device-coord
 import { receiptName, tapTarget } from '../skills/game-production/scripts/device-suite-policy.mjs';
 import { restoreManual } from '../skills/game-production/scripts/lab-policy.mjs';
 import { primaryTransport } from '../skills/game-production/scripts/primary-transport.mjs';
+import {
+  bluetoothControlGuard,
+  tunnelPath
+} from '../skills/game-production/scripts/wireless-control-policy.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
@@ -375,7 +379,7 @@ try {
       } finally {
         optional('forward', '--remove', 'tcp:' + port);
       }
-      result.path = 'ADB_USB_TUNNEL_NOT_WIFI';
+      result.path = tunnelPath(c.serial);
     } else {
       address = optional('shell', 'ip', '-4', '-o', 'addr', 'show', 'wlan0').match(
         /inet (\d+\.\d+\.\d+\.\d+)\//
@@ -411,6 +415,7 @@ try {
     result.status = 'passed';
   } else if (mode === 'bluetooth') {
     if (target !== 'phone') throw Error('Physical Bluetooth test selects actual phone');
+    result.controlSafety = bluetoothControlGuard(c.serial);
     wifiRestore = optional('shell', 'settings', 'get', 'global', 'wifi_on').trim() === '1';
     if (wifiRestore) adb('shell', 'svc', 'wifi', 'disable');
     result.wifiDisabledDuringBluetooth =

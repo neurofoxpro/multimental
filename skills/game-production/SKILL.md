@@ -3,7 +3,7 @@ name: game-production
 description: Task-bound game development, research, real visual checks and resumable dev release/test commands.
 ---
 
-# Game Production v9.2
+# Game Production v9.3
 
 ## Authority
 Only `neurofoxpro/multimental`, personal station `VENEL-SENDRIK`, hosted GitHub CI. Verify hostname and origin. Dev integration after applicable checks is delegated. Main/stable/Play, paid services, incompatible saves, accepted-rule changes and other hosts/repositories need owner approval. Never force-push, delete phone data, rotate the existing dev key or bypass an actual tool refusal.
@@ -82,3 +82,9 @@ A passing candidate is not auto-promoted. Preserve 30x2 cards, stable IDs, accep
 ## Canonical balance evidence
 
 Use balance plan / balance run for BALANCE-01. Never replace hand/deck after start to measure the current game: standard start_with_decks plus replay equivalence is required. The registered standard-start-v1 plan has full ordered matchups, distinct seed blocks and separate diagnostic policy. Completed shards resume by exact source/engine/plan/byte identities; no unrelated game writes. Simulation checks passing and balance-screen concerns are distinct. Human10-15minute duration is not inferred from commands or runtime; do not close BALANCE-01 from automated statistics alone. See BALANCE_STANDARD_START.ru.md. Older61.8% reports are historical, not a newly measured result.
+
+## Known physical fleet and Wi-Fi control
+
+Use fleet known for read-only availability; fleet ready --target phone-A|phone-B|all --commit SHA for complete per-device manual readiness. Phone-A is unchanged station identity; phone-B is the previously owner-authorized Honor descriptor. Reconnect only matching advertised TLS; no arbitrary discoveries. Prepare review ready first: fleet installs the same published manual APK and verifies the actual old certificate/hash without copying private keys. Installation, suite, home icon and final profile/APK checks are separate recorded stages. Missing phone-B gives partially_ready/exit2, never a two-phone PASS; radio acceptance remains separate. Do not relax READY when logs are empty.
+
+Legacy no-Wi-Fi Bluetooth tests must have USB ADB before disabling Wi-Fi. ADB tunnels over Wi-Fi/emulator cannot be labelled physical USB or direct LAN. No ADB-server restart, forced pairing, profile deletion or signing identity change. See FLEET_READY.ru.md. Before apply, preflight each exact edit occurrence; source may already have different indentation even before formatting.

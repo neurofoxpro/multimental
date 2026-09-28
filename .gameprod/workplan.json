@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "neurofoxpro/multimental",
-  "updatedAt": "2026-09-27",
+  "updatedAt": "2026-09-28",
   "baselineCommit": "cff25564c064c463b9bb742248110f3a0ff9328f",
   "evidenceSemantics": "Verified means historically observed at linked evidence. No current RC, owner approval, Play publication or physical installation is inferred from metadata.",
   "intent": "Close all accepted ideas before full Play launch; dev builds remain incremental. Explicit owner-deferred decisions stay blockers until resolved or explicitly scoped out.",
@@ -1516,7 +1516,7 @@
       "title": "Проверяемое освобождение завершённых срезов без захвата живой работы",
       "stage": "P0. Единый производственный процесс",
       "kind": "automation",
-      "status": "planned",
+      "status": "verified",
       "dependsOn": [
         "AUTO-06"
       ],
@@ -1526,7 +1526,11 @@
         "После потерянного ответа выполняется readback; исходники, настройки и данные телефонов не изменяются, старый claim не даёт новых прав записи.",
         "Положительный сценарий и отказы проверяются тестами и одной явной командой; результат фиксируется в задаче и Issue29 без автоматической приёмки продукта."
       ],
-      "evidence": [],
+      "evidence": [
+        "docs/production/COMPLETED_SLICE_RECOVERY.ru.md",
+        "docs/production/PARALLEL_CHATS.ru.md",
+        "docs/production/evidence/completed-recovery-completed-20260928.json"
+      ],
       "readset": [
         "skills/game-production/scripts/collaboration-policy.mjs",
         "skills/game-production/scripts/collaboration-store.mjs",
