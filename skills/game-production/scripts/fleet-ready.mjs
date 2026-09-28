@@ -92,7 +92,13 @@ function badge(c, file) {
   if (!m || m[1] !== PACKAGE) throw Error('FLEET_APK_PACKAGE');
   return { versionCode: Number(m[2]), version: m[3] };
 }
-function artifact(root, station, commit) {
+export function resolveKnownPhone(station, honor, alias, reconnect) {
+  const target = targetConfig(station, honor, alias),
+    live = primaryTransport(target, { reconnect });
+  assertKnownPhoneConfig(live, station, honor);
+  return { c: live, identity: actualIdentity(live) };
+}
+export function reviewedPhoneArtifact(root, station, commit) {
   const list = JSON.parse(
     call('gh', ['api', 'repos/' + REPO + '/releases?per_page=100'], { cwd: root })
   );
@@ -179,12 +185,7 @@ export async function main(args = process.argv.slice(2)) {
     honorRaw = fs.existsSync(requestFile) ? bytes(requestFile, 1048576) : null,
     honor = honorRaw ? JSON.parse(honorRaw) : null;
   const known = knownPhones(station, honor);
-  function resolve(alias, reconnect) {
-    const target = targetConfig(station, honor, alias),
-      live = primaryTransport(target, { reconnect });
-    assertKnownPhoneConfig(live, station, honor);
-    return { c: live, identity: actualIdentity(live) };
-  }
+  const resolve = (alias, reconnect) => resolveKnownPhone(station, honor, alias, reconnect);
   if (opt.mode === 'known') {
     const phones = opt.targets.map((alias) => {
       try {
@@ -239,7 +240,7 @@ export async function main(args = process.argv.slice(2)) {
       phones: results
     });
   try {
-    const shared = artifact(root, station, opt.commit);
+    const shared = reviewedPhoneArtifact(root, station, opt.commit);
     for (const alias of opt.targets) {
       let selected;
       try {

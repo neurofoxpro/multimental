@@ -3,7 +3,7 @@ name: game-production
 description: Task-bound game development, research, real visual checks and resumable dev release/test commands.
 ---
 
-# Game Production v9.3
+# Game Production v9.4
 
 ## Authority
 Only `neurofoxpro/multimental`, personal station `VENEL-SENDRIK`, hosted GitHub CI. Verify hostname and origin. Dev integration after applicable checks is delegated. Main/stable/Play, paid services, incompatible saves, accepted-rule changes and other hosts/repositories need owner approval. Never force-push, delete phone data, rotate the existing dev key or bypass an actual tool refusal.
@@ -88,3 +88,11 @@ Use balance plan / balance run for BALANCE-01. Never replace hand/deck after sta
 Use fleet known for read-only availability; fleet ready --target phone-A|phone-B|all --commit SHA for complete per-device manual readiness. Phone-A is unchanged station identity; phone-B is the previously owner-authorized Honor descriptor. Reconnect only matching advertised TLS; no arbitrary discoveries. Prepare review ready first: fleet installs the same published manual APK and verifies the actual old certificate/hash without copying private keys. Installation, suite, home icon and final profile/APK checks are separate recorded stages. Missing phone-B gives partially_ready/exit2, never a two-phone PASS; radio acceptance remains separate. Do not relax READY when logs are empty.
 
 Legacy no-Wi-Fi Bluetooth tests must have USB ADB before disabling Wi-Fi. ADB tunnels over Wi-Fi/emulator cannot be labelled physical USB or direct LAN. No ADB-server restart, forced pairing, profile deletion or signing identity change. See FLEET_READY.ru.md. Before apply, preflight each exact edit occurrence; source may already have different indentation even before formatting.
+
+## Routine phone updates
+
+For an owner request to update Honor/Redmi, use `phone honor` / `phone redmi` / `phone all` from scripts\chat.cmd in your own verified worktree. The wrapper resolves the latest published dev APK commit, checks requested availability first, reuses exact verified source and compatible published manual artifact, and delegates installation, profile preservation, complete handoff and home-icon proof to fleet ready. A missing phone returns before expensive verification/review and is never replaced by the other phone or an emulator. Do not rebuild an already verified packet or reinstall identical bytes.
+
+`phone resume` pins the same owner/source/config/target/release ID and commit; it rechecks physical evidence through the existing fleet rather than calling an old phone receipt fresh. Configuration/source drift and corrupt APKs fail closed. Use help for a non-mutating command reference. For a later hardware-only request, reuse your clean previously verified worktree through the existing collab claim flow after its old binding is released; do not create and reverify a new slice for every device by habit. No copying of verification between source trees. Source edits still require full checks and normal ship.
+
+A shorter command is never an alternate route around a tool refusal. Honor unavailable, installed, tested and launchable from home are separate facts; report the actual first unmet stage. See PHONE_UPDATE.ru.md.
