@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "neurofoxpro/multimental",
-  "revision": 290,
+  "revision": 291,
   "claims": {
     "b2c6c445-e3f4-4797-900f-8275ac9e18fd": {
       "token": "b2c6c445-e3f4-4797-900f-8275ac9e18fd",
@@ -15,41 +15,9 @@
       "fence": 149,
       "updatedAt": 1790433399977,
       "expiresAt": 1790435199977
-    },
-    "193f2fe3-0347-4855-982b-cd12f3c94aad": {
-      "token": "193f2fe3-0347-4855-982b-cd12f3c94aad",
-      "task": "QA-02",
-      "owner": "honor-recheck-20260928-r2",
-      "base": "9d1b268cb210a3fec3bfd76ae9cc371531e7ba0f",
-      "resources": [
-        "area:devices",
-        "task:QA-02"
-      ],
-      "fence": 289,
-      "updatedAt": 1790587896480,
-      "expiresAt": 1790589696480
     }
   },
   "events": [
-    {
-      "id": "9a86494d-1e22-4865-b093-d5a981eb3d7c",
-      "hash": "88c78f63ab702a82cab88d3ca98f39b8a2ad30b439b241990285a06b0bee16ea",
-      "revision": 35,
-      "result": {
-        "status": "renewed",
-        "token": "8e9a7336-0c4f-4bbf-b3ae-a9c3061f2c2e",
-        "task": "AUTO-06",
-        "owner": "short-workflow-20260926-0745",
-        "base": "d53d8d55ee43ed4aacd4034193345c26124b7d7e",
-        "resources": [
-          "area:automation",
-          "task:AUTO-06"
-        ],
-        "fence": 33,
-        "updatedAt": 1790410082390,
-        "expiresAt": 1790411882390
-      }
-    },
     {
       "id": "5926223c-7aa8-4ea1-90ca-86add7823dce",
       "hash": "b730f5c801e6c57c0fd32cdf4570c7147ca7383d0aa16340bd2d023da002daa6",
@@ -4722,6 +4690,18 @@
         "fence": 289,
         "updatedAt": 1790587896480,
         "expiresAt": 1790589696480
+      }
+    },
+    {
+      "id": "4244c454-7cc7-4409-b6dd-799bb659cdf9",
+      "hash": "998a4258057e81768c423aa64d6b47f29be6c08ec9c6de5c58bc7f8e3f3cf057",
+      "revision": 291,
+      "result": {
+        "status": "released",
+        "token": "193f2fe3-0347-4855-982b-cd12f3c94aad",
+        "task": "QA-02",
+        "owner": "honor-recheck-20260928-r2",
+        "fence": 289
       }
     }
   ]
