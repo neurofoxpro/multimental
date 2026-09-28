@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "neurofoxpro/multimental",
-  "revision": 275,
+  "revision": 276,
   "claims": {
     "b2c6c445-e3f4-4797-900f-8275ac9e18fd": {
       "token": "b2c6c445-e3f4-4797-900f-8275ac9e18fd",
@@ -15,21 +15,22 @@
       "fence": 149,
       "updatedAt": 1790433399977,
       "expiresAt": 1790435199977
+    },
+    "fce2a53c-fd1e-4529-b2e3-1a7f85909425": {
+      "token": "fce2a53c-fd1e-4529-b2e3-1a7f85909425",
+      "task": "AUTO-08",
+      "owner": "offline-proof-20260928-c4f8",
+      "base": "bf9488d677b208f3fe57358a29b0024f5e245113",
+      "resources": [
+        "area:automation",
+        "task:AUTO-08"
+      ],
+      "fence": 276,
+      "updatedAt": 1790556836106,
+      "expiresAt": 1790558636106
     }
   },
   "events": [
-    {
-      "id": "ad1dbaf8-8315-4ff4-ab9f-5fe1daa095d2",
-      "hash": "2f6160e4b53ac30ae84352a5cb5328b9a5a34ff199789685907ae56651e0aabe",
-      "revision": 20,
-      "result": {
-        "status": "released",
-        "token": "3ffdf2b0-34e4-499d-8b66-27d96acb81f8",
-        "task": "META-03",
-        "owner": "crafting-cards-20260926",
-        "fence": 14
-      }
-    },
     {
       "id": "38032eb0-3086-4640-85a2-e37fa5f49606",
       "hash": "8d05dd726b920ea6e3433c258467449f5bdd2102664e5d13cad4bdb85d0d61c6",
@@ -4695,6 +4696,25 @@
         "task": "BALANCE-01",
         "owner": "balance-holdout-20260928-e71c",
         "fence": 268
+      }
+    },
+    {
+      "id": "fce2a53c-fd1e-4529-b2e3-1a7f85909425",
+      "hash": "9121a3ca44b6fedc244d963ec5502005c310f63dd70197c34ddf153e5d29502e",
+      "revision": 276,
+      "result": {
+        "status": "claimed",
+        "token": "fce2a53c-fd1e-4529-b2e3-1a7f85909425",
+        "task": "AUTO-08",
+        "owner": "offline-proof-20260928-c4f8",
+        "base": "bf9488d677b208f3fe57358a29b0024f5e245113",
+        "resources": [
+          "area:automation",
+          "task:AUTO-08"
+        ],
+        "fence": 276,
+        "updatedAt": 1790556836106,
+        "expiresAt": 1790558636106
       }
     }
   ]
