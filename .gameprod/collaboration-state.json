@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "neurofoxpro/multimental",
-  "revision": 271,
+  "revision": 272,
   "claims": {
     "b2c6c445-e3f4-4797-900f-8275ac9e18fd": {
       "token": "b2c6c445-e3f4-4797-900f-8275ac9e18fd",
@@ -26,30 +26,11 @@
         "task:BALANCE-01"
       ],
       "fence": 268,
-      "updatedAt": 1790556704139,
-      "expiresAt": 1790558504139
+      "updatedAt": 1790556722630,
+      "expiresAt": 1790558522630
     }
   },
   "events": [
-    {
-      "id": "cd095f6b-c5de-4304-a396-f6ffe52426a0",
-      "hash": "6f08d091a9413ae3b92c15a0b967727fc2e9fa7bfeaab09718ca6890fa48ba1d",
-      "revision": 16,
-      "result": {
-        "status": "renewed",
-        "token": "3ffdf2b0-34e4-499d-8b66-27d96acb81f8",
-        "task": "META-03",
-        "owner": "crafting-cards-20260926",
-        "base": "f22dd346c6187230e0f0f98dddfc5b4dbf9541ba",
-        "resources": [
-          "area:economy",
-          "task:META-03"
-        ],
-        "fence": 14,
-        "updatedAt": 1790400117063,
-        "expiresAt": 1790401917063
-      }
-    },
     {
       "id": "4d555e19-c33e-4ec7-bf28-292c1d3de03b",
       "hash": "5276d66f53d0dd948c5b0d07388f7ac1ff9401095436b2e1150939b36f09b9be",
@@ -4715,6 +4696,25 @@
         "fence": 268,
         "updatedAt": 1790556704139,
         "expiresAt": 1790558504139
+      }
+    },
+    {
+      "id": "1488be7c-dfa4-466b-8922-e4ca94a57783",
+      "hash": "543cc99dc2243cbfa39845aa21cac5ef3ece3417682e474d5ff99a6f59563be1",
+      "revision": 272,
+      "result": {
+        "status": "renewed",
+        "token": "33364576-8c8c-416a-809f-1d09b34b367b",
+        "task": "BALANCE-01",
+        "owner": "balance-holdout-20260928-e71c",
+        "base": "161324944d674706c125f8c42d587c98cfac688e",
+        "resources": [
+          "area:game-core",
+          "task:BALANCE-01"
+        ],
+        "fence": 268,
+        "updatedAt": 1790556722630,
+        "expiresAt": 1790558522630
       }
     }
   ]
