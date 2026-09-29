@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "neurofoxpro/multimental",
-  "revision": 308,
+  "revision": 309,
   "claims": {
     "b2c6c445-e3f4-4797-900f-8275ac9e18fd": {
       "token": "b2c6c445-e3f4-4797-900f-8275ac9e18fd",
@@ -15,28 +15,22 @@
       "fence": 149,
       "updatedAt": 1790433399977,
       "expiresAt": 1790435199977
+    },
+    "1a45e1de-ca20-4dd1-947d-35a7775a1749": {
+      "token": "1a45e1de-ca20-4dd1-947d-35a7775a1749",
+      "task": "AUTO-08",
+      "owner": "auto08-offline-20260930-z4m2",
+      "base": "052a1d5f8f4d20a38f4c2a8bedcd5bc999538842",
+      "resources": [
+        "area:automation",
+        "task:AUTO-08"
+      ],
+      "fence": 309,
+      "updatedAt": 1790721999651,
+      "expiresAt": 1790723799651
     }
   },
   "events": [
-    {
-      "id": "d5e6c5f8-090c-4152-a442-17a0d1afacc1",
-      "hash": "788b9dfba3bd2b1fe23a80c9a6e38147d0b2123cfb63cd09af660600f89bdb6f",
-      "revision": 53,
-      "result": {
-        "status": "renewed",
-        "token": "67282dd2-6346-4241-a56e-7a867b5e650c",
-        "task": "AUTO-11",
-        "owner": "completed-slice-recovery-20260926-0851",
-        "base": "28bf9661ee3df5ddec30f37b176e02c12fabe1c0",
-        "resources": [
-          "area:automation",
-          "task:AUTO-11"
-        ],
-        "fence": 52,
-        "updatedAt": 1790413189360,
-        "expiresAt": 1790414989360
-      }
-    },
     {
       "id": "a5cb8809-ef6d-44b4-87a2-b53e69f5166f",
       "hash": "05d8c172ce0f4cc774c884d1b3dfb1064059d9678c0be408bc323a3c3ed00d81",
@@ -4695,6 +4689,25 @@
         "task": "AUTO-07",
         "owner": "auto07-recovery-20260930-r7f3",
         "fence": 294
+      }
+    },
+    {
+      "id": "1a45e1de-ca20-4dd1-947d-35a7775a1749",
+      "hash": "0c62c513cda920b3c80e0f0a8e3d217cd736420bea6d667b7055794bb428d8eb",
+      "revision": 309,
+      "result": {
+        "status": "claimed",
+        "token": "1a45e1de-ca20-4dd1-947d-35a7775a1749",
+        "task": "AUTO-08",
+        "owner": "auto08-offline-20260930-z4m2",
+        "base": "052a1d5f8f4d20a38f4c2a8bedcd5bc999538842",
+        "resources": [
+          "area:automation",
+          "task:AUTO-08"
+        ],
+        "fence": 309,
+        "updatedAt": 1790721999651,
+        "expiresAt": 1790723799651
       }
     }
   ]
