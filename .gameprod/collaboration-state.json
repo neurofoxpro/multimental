@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "neurofoxpro/multimental",
-  "revision": 293,
+  "revision": 294,
   "claims": {
     "b2c6c445-e3f4-4797-900f-8275ac9e18fd": {
       "token": "b2c6c445-e3f4-4797-900f-8275ac9e18fd",
@@ -15,28 +15,22 @@
       "fence": 149,
       "updatedAt": 1790433399977,
       "expiresAt": 1790435199977
+    },
+    "e0e2e111-64f4-48e6-9463-8a4ffad7d7a9": {
+      "token": "e0e2e111-64f4-48e6-9463-8a4ffad7d7a9",
+      "task": "AUTO-07",
+      "owner": "auto07-recovery-20260930-r7f3",
+      "base": "9d1b268cb210a3fec3bfd76ae9cc371531e7ba0f",
+      "resources": [
+        "area:automation",
+        "task:AUTO-07"
+      ],
+      "fence": 294,
+      "updatedAt": 1790719855832,
+      "expiresAt": 1790721655832
     }
   },
   "events": [
-    {
-      "id": "2d88c05a-01c3-4379-9b6e-6aa8b7b3c782",
-      "hash": "528ee0003f80178eb4e0935e8ebff75dc4872787cecdf3dfd4adc84db67bde00",
-      "revision": 38,
-      "result": {
-        "status": "renewed",
-        "token": "8e9a7336-0c4f-4bbf-b3ae-a9c3061f2c2e",
-        "task": "AUTO-06",
-        "owner": "short-workflow-20260926-0745",
-        "base": "d53d8d55ee43ed4aacd4034193345c26124b7d7e",
-        "resources": [
-          "area:automation",
-          "task:AUTO-06"
-        ],
-        "fence": 33,
-        "updatedAt": 1790410355705,
-        "expiresAt": 1790412155705
-      }
-    },
     {
       "id": "a170fb95-9654-408d-9f4e-b3ee30b215af",
       "hash": "bd77519a1f62cffd78c85ff2a5991bc4f2ce5dfe303ea8f47fab096095b281e4",
@@ -4695,6 +4689,25 @@
         "task": "BALANCE-01",
         "owner": "balance-mixed-20260929-k8d4",
         "fence": 292
+      }
+    },
+    {
+      "id": "e0e2e111-64f4-48e6-9463-8a4ffad7d7a9",
+      "hash": "6490a6085735463fca036fbb9beae16a38c1c43fd4030edf4f27171bac357440",
+      "revision": 294,
+      "result": {
+        "status": "claimed",
+        "token": "e0e2e111-64f4-48e6-9463-8a4ffad7d7a9",
+        "task": "AUTO-07",
+        "owner": "auto07-recovery-20260930-r7f3",
+        "base": "9d1b268cb210a3fec3bfd76ae9cc371531e7ba0f",
+        "resources": [
+          "area:automation",
+          "task:AUTO-07"
+        ],
+        "fence": 294,
+        "updatedAt": 1790719855832,
+        "expiresAt": 1790721655832
       }
     }
   ]
