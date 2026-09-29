@@ -521,6 +521,10 @@ export async function main(argv = process.argv.slice(2)) {
     await (await import('./collaboration.mjs')).main(entryArgs);
     return;
   }
+  if (entry === 'source-recover') {
+    await (await import('./source-lock-recovery.mjs')).main(entryArgs);
+    return;
+  }
   if (entry === 'device-recover') {
     await (await import('./device-lock-recovery.mjs')).main(entryArgs);
     return;
