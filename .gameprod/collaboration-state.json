@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "neurofoxpro/multimental",
-  "revision": 307,
+  "revision": 308,
   "claims": {
     "b2c6c445-e3f4-4797-900f-8275ac9e18fd": {
       "token": "b2c6c445-e3f4-4797-900f-8275ac9e18fd",
@@ -15,41 +15,9 @@
       "fence": 149,
       "updatedAt": 1790433399977,
       "expiresAt": 1790435199977
-    },
-    "e0e2e111-64f4-48e6-9463-8a4ffad7d7a9": {
-      "token": "e0e2e111-64f4-48e6-9463-8a4ffad7d7a9",
-      "task": "AUTO-07",
-      "owner": "auto07-recovery-20260930-r7f3",
-      "base": "9d1b268cb210a3fec3bfd76ae9cc371531e7ba0f",
-      "resources": [
-        "area:automation",
-        "task:AUTO-07"
-      ],
-      "fence": 294,
-      "updatedAt": 1790721918656,
-      "expiresAt": 1790723718656
     }
   },
   "events": [
-    {
-      "id": "67282dd2-6346-4241-a56e-7a867b5e650c",
-      "hash": "2ec3951acd5b99b92833a134683fe5ed5380c21e482b3c4757f6faf3f5dbbe4a",
-      "revision": 52,
-      "result": {
-        "status": "claimed",
-        "token": "67282dd2-6346-4241-a56e-7a867b5e650c",
-        "task": "AUTO-11",
-        "owner": "completed-slice-recovery-20260926-0851",
-        "base": "28bf9661ee3df5ddec30f37b176e02c12fabe1c0",
-        "resources": [
-          "area:automation",
-          "task:AUTO-11"
-        ],
-        "fence": 52,
-        "updatedAt": 1790412655257,
-        "expiresAt": 1790414455257
-      }
-    },
     {
       "id": "d5e6c5f8-090c-4152-a442-17a0d1afacc1",
       "hash": "788b9dfba3bd2b1fe23a80c9a6e38147d0b2123cfb63cd09af660600f89bdb6f",
@@ -4715,6 +4683,18 @@
         "fence": 294,
         "updatedAt": 1790721918656,
         "expiresAt": 1790723718656
+      }
+    },
+    {
+      "id": "046f4538-c747-4119-8a74-316bb5308052",
+      "hash": "0584bd2e8ff3520391bc3294097f0bf6c1628f3552807fe1dea1d413d05d4e65",
+      "revision": 308,
+      "result": {
+        "status": "released",
+        "token": "e0e2e111-64f4-48e6-9463-8a4ffad7d7a9",
+        "task": "AUTO-07",
+        "owner": "auto07-recovery-20260930-r7f3",
+        "fence": 294
       }
     }
   ]
