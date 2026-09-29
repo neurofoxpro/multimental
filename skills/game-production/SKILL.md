@@ -3,7 +3,7 @@ name: game-production
 description: Task-bound game development, research, real visual checks and resumable dev release/test commands.
 ---
 
-# Game Production v9.4
+# Game Production v9.5
 
 ## Authority
 Only `neurofoxpro/multimental`, personal station `VENEL-SENDRIK`, hosted GitHub CI. Verify hostname and origin. Dev integration after applicable checks is delegated. Main/stable/Play, paid services, incompatible saves, accepted-rule changes and other hosts/repositories need owner approval. Never force-push, delete phone data, rotate the existing dev key or bypass an actual tool refusal.
@@ -41,6 +41,8 @@ Bundles bind HEAD; further edits of a draft require its inspected expectedCurren
 
 `ship` keeps source-seal, exact head/base CI, machine COMMENT review, dev-build/release checks and per-branch checkpoints. No source writers during ship, study or lab. Repeating a completed ship reads back; it does not republish/merge again. Transient GET may retry within its budget. Unknown writes are read back before another attempt. Old github ship/cycle/release-dev routes remain disabled. Formatter changes must converge before verification. A tooling or docs proof is not a phone test.
 
+After a crashed source/production process leaves a stale lock, use `source-recover plan` first and `source-recover apply` only from an authorized owned feature worktree. Recovery requires exact allowlisted path+command, proven absent PID, aged lock, unchanged raw bytes/stat identity and live coordinator ownership; live/unknown/malformed locks are preserved. It archives stale lock bytes and never marks the interrupted operation complete. Then rerun the ordinary `ship` / `review resume` / `lab resume` / `accept` so its checkpoint/source/task/claim is revalidated. Device install/update/test locks remain under `device-recover`. See `RECOVERY_EFFECTS.ru.md`.
+
 ## Tests and physical devices
 `lab test` prefers assigned AVDs because normal UI/game/profile tests do not need a phone. It detects connected USB/Wi-Fi devices, verifies boot and physical identity, deduplicates transports, uses only known `Multimental_Test_A/B`, pins one real published APK and runs the requested suite with final normal startup. It never substitutes an arbitrary discovered phone. Wi-Fi reconnect is only to a matching known-primary advertised private TLS endpoint; no forced pairing, insecure tcpip or ADB-server reset. Physical Bluetooth, cutouts and two-phone acceptance remain separate.
 
@@ -54,7 +56,7 @@ Measure player outcomes, not only number of PASS: selection/inspection must not 
 `study` binds question/hypothesis/control/readset/sources/reviewed test argv and checkpoints. Capture is downloaded evidence, not automatic source understanding; the active agent writes explicit analysis with limitations. Preserve prior evidence when inputs change. Generated art needs provenance, prompt, hash, usage/fallback; never bake rules/numbers into decoration or copy another game's assets.
 
 ## Targeted references
-Full previous v8.1 is preserved in `REFERENCE-v8.1.md`; earlier detail in `REFERENCE.md` is historical. Read only the relevant contract: `LAB_AUTOMATION.ru.md`, `SHORT_COMMANDS.ru.md`, `WORK_QUEUE_RESEARCH.ru.md`, `DEV_SETTLE.ru.md`, `DEVICE_SUITES.ru.md`, `RELEASE_TRANSFER.ru.md`, `INTERRUPTED_CONTINUATION.ru.md`, `COMPLETED_SLICE_RECOVERY.ru.md`, `INTERACTION_RESEARCH.ru.md`, `UI_PLAYABILITY.ru.md`, `GALLERY_CAPTURE.ru.md` under docs/production. Source-only progress must not wait for a disconnected phone. Report actual results and the first unmet step; never turn missing implementation into claimed human acceptance.
+Full previous v8.1 is preserved in `REFERENCE-v8.1.md`; earlier detail in `REFERENCE.md` is historical. Read only the relevant contract: `LAB_AUTOMATION.ru.md`, `SHORT_COMMANDS.ru.md`, `WORK_QUEUE_RESEARCH.ru.md`, `DEV_SETTLE.ru.md`, `DEVICE_SUITES.ru.md`, `RELEASE_TRANSFER.ru.md`, `INTERRUPTED_CONTINUATION.ru.md`, `COMPLETED_SLICE_RECOVERY.ru.md`, `RECOVERY_EFFECTS.ru.md`, `INTERACTION_RESEARCH.ru.md`, `UI_PLAYABILITY.ru.md`, `GALLERY_CAPTURE.ru.md` under docs/production. Source-only progress must not wait for a disconnected phone. Report actual results and the first unmet step; never turn missing implementation into claimed human acceptance.
 
 Recovery note: an installed APK plus a timed-out READY is not permission to reinstall blindly. Exact actual/signed APK hash and persistent certificate allow resuming launch only. The normal launcher wakes the selected display; Android credential locks remain enforced and cause an explicit blocker. The scheduled updater resolves the same physical primary over USB/Wi-Fi without changing saved station identity.
 

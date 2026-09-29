@@ -5,6 +5,7 @@ import crypto from 'node:crypto';
 import { spawnSync } from 'node:child_process';
 import { findRoot, readJSON, writeJSON, context, sha } from './lib.mjs';
 import { acquireOperation } from './operation-lock.mjs';
+import { acquireRecoverableBarrier } from './recovery-barrier.mjs';
 const NAMES = ['install.lock', 'device-test.lock', 'qualification.lock', 'update.lock'];
 export function processState(pid, probe = process.kill) {
   if (!Number.isSafeInteger(pid) || pid < 1) return 'unknown';
@@ -87,9 +88,13 @@ export function recoverOrphans(
       locks: publicRows,
       installation: 'not_inferred'
     };
-  const release = acquireOperation(path.join(directory, 'recovery.lock'), {
-    command: 'dead-device-owner-recovery'
-  });
+  const recovery = acquireRecoverableBarrier(path.join(directory, 'recovery.lock'), {
+      command: 'dead-device-owner-recovery',
+      archiveRoot: path.join(directory, 'lock-recovery', 'barriers'),
+      now,
+      state
+    }),
+    release = () => recovery.lease.release();
   const guards = [];
   let report, journal;
   try {

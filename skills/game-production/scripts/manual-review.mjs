@@ -20,6 +20,7 @@ import { upsertComment } from './issue-memory.mjs';
 import { releaseCandidate } from './release-transfer.mjs';
 import { validateConfig, exec, signManualArtifact } from '../../../scripts/install-device.mjs';
 import { apkPayload } from './apk-payload.mjs';
+import { ensureSignedCandidate } from './signed-candidate.mjs';
 import {
   REPO,
   PACKAGE,
@@ -333,19 +334,22 @@ export async function main(args = process.argv.slice(2)) {
     fs.mkdirSync(outputDir, { recursive: true });
     const output = path.join(outputDir, names.apk);
     console.log('REVIEW_STAGE signed-candidate');
-    if (!fs.existsSync(output)) {
-      const temporary = path.join(outputDir, names.apk + '.staging.apk');
-      if (!fs.existsSync(temporary)) signManualArtifact(c, original, temporary);
-      const certificate = exec(c.java, ['-jar', c.apksigner, 'verify', '--print-certs', temporary])
-        .match(/certificate SHA-256 digest:\s*([a-f0-9]+)/i)?.[1]
-        ?.toLowerCase();
-      if (
-        certificate !== identity.certificate ||
-        apkPayload(bytes(temporary)).sha256 !== payload.sha256
-      )
-        throw Error('Manual signature/payload verification failed');
-      fs.copyFileSync(temporary, output, fs.constants.COPYFILE_EXCL);
-    }
+    const temporary = path.join(outputDir, names.apk + '.staging.apk');
+    const validSignedCandidate = (file) => {
+      const data = bytes(file),
+        candidateCertificate = exec(c.java, ['-jar', c.apksigner, 'verify', '--print-certs', file])
+          .match(/certificate SHA-256 digest:\s*([a-f0-9]+)/i)?.[1]
+          ?.toLowerCase();
+      return (
+        candidateCertificate === identity.certificate && apkPayload(data).sha256 === payload.sha256
+      );
+    };
+    ensureSignedCandidate({
+      finalFile: output,
+      stagingFile: temporary,
+      verify: validSignedCandidate,
+      sign: (file) => signManualArtifact(c, original, file)
+    });
     const manualBytes = bytes(output),
       certificate = exec(c.java, ['-jar', c.apksigner, 'verify', '--print-certs', output])
         .match(/certificate SHA-256 digest:\s*([a-f0-9]+)/i)?.[1]

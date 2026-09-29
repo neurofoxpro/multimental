@@ -1,4 +1,5 @@
 import { executeWithReadRetry, confirmMerge } from './command-retry.mjs';
+import { ensurePublicationCommit, clearPublicationCommit } from './publication-commit.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 import os from 'node:os';
@@ -135,13 +136,16 @@ function publish(message, title) {
   if (!message || !title) throw Error('publish MESSAGE TITLE required');
   if (!gate(root, p, 'verified').ok) throw Error('Run ops verify first');
   invoke(['tools/security-lint.mjs']);
-  if (git('status', '--porcelain')) {
-    git('add', '--all', '--', '.');
-    git('diff', '--cached', '--check');
-    git('commit', '-m', message);
-  }
-  const head = git('rev-parse', 'HEAD'),
-    branch = ownBranch();
+  const branch = ownBranch(),
+    commitJournal = path.join(dir, 'publication-commit.json'),
+    committed = ensurePublicationCommit({
+      file: commitJournal,
+      branch,
+      message,
+      sourceDigest: fingerprint(root, p),
+      runGit: (argv) => git(...argv)
+    }),
+    head = committed.head;
   git('push', '--set-upstream', 'origin', branch);
   let pr = run(
     'gh',
@@ -186,6 +190,7 @@ function publish(message, title) {
     readbackPending: JSON.parse(pr).headRefOid !== head
   };
   writeJSON(path.join(dir, 'publication.json'), publication);
+  if (!publication.readbackPending) clearPublicationCommit(commitJournal, head);
   console.log(JSON.stringify(publication));
   return publication;
 }
