@@ -75,6 +75,8 @@ for (const [file, marker] of [
   ['protocol_test.gd', 'MULTIMENTAL_PROTOCOL_PASS'],
   ['room_test.gd', 'MULTIMENTAL_ROOM_PASS'],
   ['lan_test.gd', 'MULTIMENTAL_LAN_PASS'],
+  ['online_service_test.gd', 'MULTIMENTAL_ONLINE_SERVICE_PASS'],
+  ['online_wss_test.gd', 'MULTIMENTAL_ONLINE_WSS_PASS'],
   ['address_test.gd', 'MULTIMENTAL_ADDRESSES_PASS'],
   ['bluetooth_session_test.gd', 'MULTIMENTAL_BLUETOOTH_MODEL_PASS'],
   ['presentation_test.gd', 'MULTIMENTAL_PRESENTATION_PASS'],
