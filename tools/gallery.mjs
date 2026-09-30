@@ -328,7 +328,7 @@ export async function main(args = process.argv.slice(2)) {
           '--',
           nonce
         ],
-        { cwd: root, shell: false, encoding: 'utf8', timeout: 120000, maxBuffer: 8000000 }
+        { cwd: root, shell: false, encoding: 'utf8', timeout: 240000, maxBuffer: 8000000 }
       );
       const text = (run.stdout || '') + (run.stderr || '');
       fs.writeFileSync(path.join(folder, 'capture.local.log'), text);
