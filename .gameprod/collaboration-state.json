@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "neurofoxpro/multimental",
-  "revision": 313,
+  "revision": 314,
   "claims": {
     "b2c6c445-e3f4-4797-900f-8275ac9e18fd": {
       "token": "b2c6c445-e3f4-4797-900f-8275ac9e18fd",
@@ -39,27 +39,11 @@
         "task:BALANCE-01"
       ],
       "fence": 310,
-      "updatedAt": 1790727515244,
-      "expiresAt": 1790729315244
+      "updatedAt": 1790727689662,
+      "expiresAt": 1790729489662
     }
   },
   "events": [
-    {
-      "id": "bb678e5d-5e0d-40e9-a5f0-632428766590",
-      "hash": "4eacedf28127390f905dbf9ab8856ba42582645136a740ef01dae457e1926fe6",
-      "revision": 58,
-      "result": {
-        "status": "released_completed",
-        "token": "4d555e19-c33e-4ec7-bf28-292c1d3de03b",
-        "task": "QA-02",
-        "owner": "second-usb-diagnostics-20260926",
-        "fence": 17,
-        "operator": "completed-slice-recovery-20260926-0851",
-        "proofDigest": "90cc4ef6b7d7e7b80d30c32d38219089e47f9128af0d822430fa67b3098405a0",
-        "head": "93a73299e451e84b0672a3e1fc672f23195de206",
-        "pr": 116
-      }
-    },
     {
       "id": "016d4d23-a553-4984-b807-2c51d167fd38",
       "hash": "ea42ad789c6ad1da8f80f71a77ebd3a4043d6ea41b9accd35658a1f386fc21be",
@@ -4721,6 +4705,25 @@
         "fence": 310,
         "updatedAt": 1790727515244,
         "expiresAt": 1790729315244
+      }
+    },
+    {
+      "id": "aa31c291-6627-42b1-ab9b-ca0151e06619",
+      "hash": "169bc49c3726eb4ac8ee4854b7a9b2d8e25a1f488ad61de6f222c70d071418f0",
+      "revision": 314,
+      "result": {
+        "status": "renewed",
+        "token": "ba06d9bd-51bc-44f3-ae16-2dffb40a38e1",
+        "task": "BALANCE-01",
+        "owner": "balance-mixed-20260930-m2q7",
+        "base": "052a1d5f8f4d20a38f4c2a8bedcd5bc999538842",
+        "resources": [
+          "area:game-core",
+          "task:BALANCE-01"
+        ],
+        "fence": 310,
+        "updatedAt": 1790727689662,
+        "expiresAt": 1790729489662
       }
     }
   ]
