@@ -1379,14 +1379,15 @@
       "title": "Параллельные чаты: атомарное владение задачами и ресурсами в GitHub",
       "stage": "P0. Единый производственный процесс",
       "kind": "automation",
-      "status": "verified",
+      "status": "planned",
       "dependsOn": [
         "AUTH-01"
       ],
       "acceptance": [
         "Одновременная заявка на одну задачу/область имеет ровно одного владельца; разные области работают параллельно.",
         "Повтор и потеря ответа не создают двойную запись; просроченный heartbeat не освобождает активный ресурс.",
-        "Статус, комментарии и команды продолжения читаются из GitHub, без раскрытия секретов."
+        "Статус, комментарии и команды продолжения читаются из GitHub, без раскрытия секретов.",
+        "Expired zero-work claim освобождается только по bounded proof: base/local/remote HEAD совпадают, дерево чистое, PR/active runs/live locks отсутствуют, claim неизменен; один CAS release не меняет source/device state и не затрагивает replacement claim."
       ],
       "evidence": [
         "docs/production/evidence/parallel-slices-20260926.json",
@@ -1394,9 +1395,11 @@
         "skills/game-production/tests/collaboration-integration.test.mjs"
       ],
       "readset": [
-        "docs/production/PARALLEL_CHATS.ru.md"
+        "docs/production/PARALLEL_CHATS.ru.md",
+        "docs/production/COMPLETED_SLICE_RECOVERY.ru.md",
+        "skills/game-production/scripts/collaboration-policy.mjs"
       ],
-      "source": "Поручение владельца 26.09.2026: несколько чатов, координация, автоматизация",
+      "source": "Поручение владельца 26.09.2026: несколько чатов, координация, автоматизация; regression 30.09.2026: Issue #167 expired zero-work claim recovery gap",
       "requiredForBeta": true,
       "requiredForPlay": true,
       "priority": 2
