@@ -5,6 +5,12 @@
 
 Порядок разделов основан на Keep a Changelog; совместимость — по согласованному SemVer.
 
+## 0.15.0 — предыдущая серия alpha
+
+### Добавлено
+
+- NET-06 получил первую headless-friendly online-границу: versioned bounded protocol, независимые authoritative rooms поверх RoomRules/MatchCore, resource/rate/TTL limits и реальный WSS/TLS loopback. Публичный hosting и симметричная reconnect grace ещё не объявляются готовыми.
+
 ## 0.14.4 — предыдущая серия alpha
 
 ### Добавлено
