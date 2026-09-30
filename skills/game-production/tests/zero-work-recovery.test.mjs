@@ -1,5 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import fs from 'node:fs';
 import {
   transition,
   emptyCoordination,
@@ -347,4 +348,9 @@ test('record failure retains completed side effect for idempotent replay', async
   await recoverZeroWork(adapter, { task: 'AUTO-08', apply: true });
   assert.equal(state.releases, 1);
   assert.equal(state.records, 2);
+});
+
+test('temporary root apply bundles are ignored by source publication', () => {
+  const ignore = fs.readFileSync('.gitignore', 'utf8');
+  assert.match(ignore, /^\/\*BUNDLE\*\.json$/m);
 });
