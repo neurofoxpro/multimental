@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "neurofoxpro/multimental",
-  "revision": 353,
+  "revision": 354,
   "claims": {
     "b2c6c445-e3f4-4797-900f-8275ac9e18fd": {
       "token": "b2c6c445-e3f4-4797-900f-8275ac9e18fd",
@@ -13,8 +13,8 @@
         "task:UX-11"
       ],
       "fence": 149,
-      "updatedAt": 1790780386499,
-      "expiresAt": 1790782186499
+      "updatedAt": 1790780397868,
+      "expiresAt": 1790782197868
     },
     "1a45e1de-ca20-4dd1-947d-35a7775a1749": {
       "token": "1a45e1de-ca20-4dd1-947d-35a7775a1749",
@@ -57,25 +57,6 @@
     }
   },
   "events": [
-    {
-      "id": "45f02b53-1bda-43b4-84c6-d034664fd880",
-      "hash": "b98c0795b3f9ac5f40e57df171e95592b9b393de31a15794e14bab6c22d4d629",
-      "revision": 98,
-      "result": {
-        "status": "renewed",
-        "token": "0b639cca-054f-4dd6-b3e5-28d77f897c22",
-        "task": "AUTO-07",
-        "owner": "continue-ui-20260926-1230",
-        "base": "ba3c20d8d1feff53d3cdef87dd08155ea0c42eed",
-        "resources": [
-          "area:automation",
-          "task:AUTO-07"
-        ],
-        "fence": 97,
-        "updatedAt": 1790425880780,
-        "expiresAt": 1790427680780
-      }
-    },
     {
       "id": "a03519cc-d6ff-4df6-bd78-7cf410e2e44b",
       "hash": "8bd37c41208aa20020169a2a4dfc5be48c9475e38bbc5f2a920d6994f2cafdb2",
@@ -4730,6 +4711,25 @@
         "fence": 149,
         "updatedAt": 1790780386499,
         "expiresAt": 1790782186499
+      }
+    },
+    {
+      "id": "23bc363a-2c68-4997-a414-a3367ee06075",
+      "hash": "03265ed76a354d700ab892f59ad8815b651d0a21540c485dc45c4ac4077d6924",
+      "revision": 354,
+      "result": {
+        "status": "renewed",
+        "token": "b2c6c445-e3f4-4797-900f-8275ac9e18fd",
+        "task": "UX-11",
+        "owner": "tactical-ui-20260926-f42b",
+        "base": "135b34d130c9ba1e70535ceb0c98d8a279feb42c",
+        "resources": [
+          "area:game-ui",
+          "task:UX-11"
+        ],
+        "fence": 149,
+        "updatedAt": 1790780397868,
+        "expiresAt": 1790782197868
       }
     }
   ]
