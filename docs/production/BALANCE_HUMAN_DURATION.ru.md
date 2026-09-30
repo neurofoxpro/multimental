@@ -99,3 +99,14 @@ Duration отдельно руками не вводится: она вычис�
 - docs/production/BALANCE_HELDOUT_RESULTS.ru.md
 - docs/production/BALANCE_MIXED_COMPETITION.ru.md
 - docs/production/evidence/balance-mixed-competition-20260930.json
+
+## Команда проверки журнала
+
+После ручной серии положите JSON в .gameprod/evidence/ или docs/production/evidence/ и используйте:
+
+~~~text
+scripts\chat.cmd balance human check .gameprod/evidence/human-duration-series.json
+scripts\chat.cmd balance human summary .gameprod/evidence/human-duration-series.json
+~~~
+
+Команда ничего не считает human acceptance и не меняет баланс. Она только проверяет exact release/source, вычисляет duration из timestamp и отделяет interrupted rows.
