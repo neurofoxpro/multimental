@@ -29,6 +29,7 @@ import { verificationRuntime } from '../../../tools/godot-runtime.mjs';
 import { prepareGodotProject } from '../../../tools/godot-preflight.mjs';
 import { runtimeSucceeded } from '../../../tools/runtime-diagnostics.mjs';
 export async function main(args = process.argv.slice(2)) {
+  if (args[0] === 'human') return (await import('./balance-human.mjs')).main(args.slice(1));
   if (args[0] === 'mixed') return (await import('./balance-competition.mjs')).main(args.slice(1));
   const opt = argsFor(args),
     root = findRoot(),
