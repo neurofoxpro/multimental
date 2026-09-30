@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "neurofoxpro/multimental",
-  "revision": 339,
+  "revision": 340,
   "claims": {
     "b2c6c445-e3f4-4797-900f-8275ac9e18fd": {
       "token": "b2c6c445-e3f4-4797-900f-8275ac9e18fd",
@@ -41,28 +41,22 @@
       "fence": 324,
       "updatedAt": 1790731521871,
       "expiresAt": 1790733321871
+    },
+    "7db2fbac-50f7-4fc6-b699-50677f626f15": {
+      "token": "7db2fbac-50f7-4fc6-b699-50677f626f15",
+      "task": "BALANCE-01",
+      "owner": "balance-human-recorder-20260930-r8k5",
+      "base": "096e6dd78a9b88cfa7f00b17b278663bbb7a10ca",
+      "resources": [
+        "area:game-core",
+        "task:BALANCE-01"
+      ],
+      "fence": 340,
+      "updatedAt": 1790769699035,
+      "expiresAt": 1790771499035
     }
   },
   "events": [
-    {
-      "id": "3625b367-dda1-44e2-87f7-a1e0a141eee3",
-      "hash": "e81b064b98ca0b2dcc9d1b1430bbf798a209b97160bd35a4e3e4e0342daa4372",
-      "revision": 84,
-      "result": {
-        "status": "renewed",
-        "token": "3566bdd3-eec1-4371-94a7-72297e94eeb3",
-        "task": "UX-09",
-        "owner": "screenshots-20260926-1100",
-        "base": "45398c0fe59e4804e74527f259fc56ba01e88f1f",
-        "resources": [
-          "area:automation",
-          "task:UX-09"
-        ],
-        "fence": 79,
-        "updatedAt": 1790422658680,
-        "expiresAt": 1790424458680
-      }
-    },
     {
       "id": "209e9912-69eb-4a55-a44f-218d8ad35d0e",
       "hash": "d69d6cc15161df2b0eac7b4392cae90bf7075ac41e9aa5ee33795b4abe7bef13",
@@ -4717,6 +4711,25 @@
         "task": "BALANCE-01",
         "owner": "balance-human-protocol-20260930-h9v2",
         "fence": 332
+      }
+    },
+    {
+      "id": "7db2fbac-50f7-4fc6-b699-50677f626f15",
+      "hash": "059fa8db5ce7d92d2314484fa7c2833e75adcfbe6ed55ee860ba3e3e29cc238a",
+      "revision": 340,
+      "result": {
+        "status": "claimed",
+        "token": "7db2fbac-50f7-4fc6-b699-50677f626f15",
+        "task": "BALANCE-01",
+        "owner": "balance-human-recorder-20260930-r8k5",
+        "base": "096e6dd78a9b88cfa7f00b17b278663bbb7a10ca",
+        "resources": [
+          "area:game-core",
+          "task:BALANCE-01"
+        ],
+        "fence": 340,
+        "updatedAt": 1790769699035,
+        "expiresAt": 1790771499035
       }
     }
   ]
