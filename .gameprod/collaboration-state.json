@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "neurofoxpro/multimental",
-  "revision": 363,
+  "revision": 364,
   "claims": {
     "b2c6c445-e3f4-4797-900f-8275ac9e18fd": {
       "token": "b2c6c445-e3f4-4797-900f-8275ac9e18fd",
@@ -54,41 +54,9 @@
       "fence": 348,
       "updatedAt": 1790770893693,
       "expiresAt": 1790772693693
-    },
-    "5ec71795-1036-4cc9-83ce-f15b7f974442": {
-      "token": "5ec71795-1036-4cc9-83ce-f15b7f974442",
-      "task": "QA-02",
-      "owner": "qa02-deep-20260930-g5c1",
-      "base": "6540cf34a4e499f01c55203d54f74b2c29014f15",
-      "resources": [
-        "area:devices",
-        "task:QA-02"
-      ],
-      "fence": 363,
-      "updatedAt": 1790786950095,
-      "expiresAt": 1790788750095
     }
   },
   "events": [
-    {
-      "id": "ac3bd003-e69a-42c5-b889-c71969a8e6a7",
-      "hash": "b3d668d0f22bcc89c26ee778a026820bdce0a1ba3cf3ce277ab4494e3a55a74f",
-      "revision": 108,
-      "result": {
-        "status": "renewed",
-        "token": "c3b65f04-a578-4862-9583-c42b1c120521",
-        "task": "UX-07",
-        "owner": "ui-playability-20260926-1240",
-        "base": "9a74818707dc0d5044affeb3d7c4f26f65f8d675",
-        "resources": [
-          "area:game-ui",
-          "task:UX-07"
-        ],
-        "fence": 103,
-        "updatedAt": 1790428115452,
-        "expiresAt": 1790429915452
-      }
-    },
     {
       "id": "693d97dd-ca26-4d82-b19e-78ea13595f39",
       "hash": "05c4e8fa62602ed1bd5d6218b43680d732a13a6060025fbac523650fc1de09ce",
@@ -4722,6 +4690,18 @@
         "fence": 363,
         "updatedAt": 1790786950095,
         "expiresAt": 1790788750095
+      }
+    },
+    {
+      "id": "914d407c-678e-40cf-bbaa-8d8330dc2d63",
+      "hash": "165af399ded119fda47c9b63f30b96d6f63a164f9e0545f94a7c8d2d22107015",
+      "revision": 364,
+      "result": {
+        "status": "released",
+        "token": "5ec71795-1036-4cc9-83ce-f15b7f974442",
+        "task": "QA-02",
+        "owner": "qa02-deep-20260930-g5c1",
+        "fence": 363
       }
     }
   ]
