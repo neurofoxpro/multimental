@@ -97,14 +97,17 @@
   },
   {
     "id": "AUTO-07",
-    "status": "pending",
+    "status": "done",
     "action": "Безопасное восстановление всех цепочек и минимальный пакет следующему агенту",
     "dependsOn": [
       "AUTO-06"
     ],
     "manual": false,
     "generatedFrom": ".gameprod/workplan.json",
-    "evidence": [],
+    "evidence": [
+      "docs/production/RECOVERY_EFFECTS.ru.md",
+      "docs/production/evidence/auto07-safe-recovery-20260930.json"
+    ],
     "nextCommand": "npm run game -- task AUTO-07"
   },
   {
