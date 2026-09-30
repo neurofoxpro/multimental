@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "neurofoxpro/multimental",
-  "revision": 320,
+  "revision": 321,
   "claims": {
     "b2c6c445-e3f4-4797-900f-8275ac9e18fd": {
       "token": "b2c6c445-e3f4-4797-900f-8275ac9e18fd",
@@ -28,41 +28,9 @@
       "fence": 309,
       "updatedAt": 1790721999651,
       "expiresAt": 1790723799651
-    },
-    "ba06d9bd-51bc-44f3-ae16-2dffb40a38e1": {
-      "token": "ba06d9bd-51bc-44f3-ae16-2dffb40a38e1",
-      "task": "BALANCE-01",
-      "owner": "balance-mixed-20260930-m2q7",
-      "base": "052a1d5f8f4d20a38f4c2a8bedcd5bc999538842",
-      "resources": [
-        "area:game-core",
-        "task:BALANCE-01"
-      ],
-      "fence": 310,
-      "updatedAt": 1790728458336,
-      "expiresAt": 1790730258336
     }
   },
   "events": [
-    {
-      "id": "02681986-bb8d-48b8-8c1d-e541882e8987",
-      "hash": "84b225b20ec7b7f346d25e2173d0e0b727ccc74eea32d56599d414367b65d75a",
-      "revision": 65,
-      "result": {
-        "status": "renewed",
-        "token": "573fbec6-b423-4943-ae05-e79b8747aedb",
-        "task": "AUTO-05",
-        "owner": "research-queue-20260926-1035",
-        "base": "a48df914602e693a012fe1ca974d8da0dedb75a8",
-        "resources": [
-          "area:automation",
-          "task:AUTO-05"
-        ],
-        "fence": 61,
-        "updatedAt": 1790419866261,
-        "expiresAt": 1790421666261
-      }
-    },
     {
       "id": "e7c2957c-eb27-40ff-8398-825c8659a125",
       "hash": "80c62144a2f2c347252cb233ea2c6c5130066bd07dda75cb0526b6270a552b5b",
@@ -4731,6 +4699,18 @@
         "fence": 310,
         "updatedAt": 1790728458336,
         "expiresAt": 1790730258336
+      }
+    },
+    {
+      "id": "e1770ad0-323d-424b-bd30-7339163b8040",
+      "hash": "2f0da3f581df1bf90cd7a62aea7d35c7c50c4d61a9245b27eb000b10e75c5a29",
+      "revision": 321,
+      "result": {
+        "status": "released",
+        "token": "ba06d9bd-51bc-44f3-ae16-2dffb40a38e1",
+        "task": "BALANCE-01",
+        "owner": "balance-mixed-20260930-m2q7",
+        "fence": 310
       }
     }
   ]
