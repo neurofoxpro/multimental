@@ -87,7 +87,7 @@ func take(page: String, locale: String, size: Vector2i) -> bool:
         await process_frame
         if not ui.get_viewport_rect().encloses(play.get_global_rect()):
             return false
-    await create_timer(0.8 if page == "battle" else 0.12).timeout
+    await create_timer(2.0 if page == "battle" else 0.12).timeout
     await RenderingServer.frame_post_draw
     if ui.get_viewport_rect().size != Vector2(size):
         return false

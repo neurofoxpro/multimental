@@ -100,6 +100,7 @@ for (const [file, marker] of [
   ['launcher_request_test.gd', 'MULTIMENTAL_LAUNCHER_REQUEST_PASS'],
   ['launcher_bridge_test.gd', 'MULTIMENTAL_LAUNCHER_BRIDGE_PASS'],
   ['usability_test.gd', 'MULTIMENTAL_USABILITY_PASS'],
+  ['battle_interaction_test.gd', 'MULTIMENTAL_INTERACTION_PASS'],
   ['connection_ui_test.gd', 'MULTIMENTAL_CONNECTION_UI_PASS'],
   ['profile_store_test.gd', 'MULTIMENTAL_PROFILE_STORAGE_PASS'],
   ['profile_ui_test.gd', 'MULTIMENTAL_PROFILE_UI_PASS'],

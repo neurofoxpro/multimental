@@ -2,6 +2,7 @@ extends Control
 const Core = preload("res://src/match_core.gd")
 const UIStyle = preload("res://src/ui_theme.gd")
 var leave_confirm: ConfirmationDialog
+var battle_inspector: AcceptDialog
 var invitation_drafts: Dictionary = {"lan": "", "bluetooth": ""}
 var connection_return_mode: String = ""
 var connection_join_button: Button
@@ -285,101 +286,7 @@ func start_match(use_starter: bool = false) -> void:
     print("MULTIMENTAL_MATCH_STARTED")
 
 func build_battle() -> void:
-    clear_screen()
-    root.add_theme_constant_override("separation", 8)
-    root.add_child(label("MULTIMENTAL", 24))
-    var layout = preload("res://src/battle_layout.gd").new()
-    root.add_child(layout)
-    layout.setup()
-    var grid := GridContainer.new()
-    grid.columns = 3
-    grid.add_theme_constant_override("h_separation", 8)
-    grid.add_theme_constant_override("v_separation", 8)
-    layout.board.add_child(grid)
-    for cell in range(9):
-        var b: Button = button("·", on_cell.bind(cell), 88)
-        b.name = "BoardCell" + str(cell)
-        b.custom_minimum_size.x = 88
-        b.autowrap_mode = TextServer.AUTOWRAP_OFF
-        b.size_flags_vertical = Control.SIZE_EXPAND_FILL
-        for state in ["normal", "hover", "pressed", "disabled"]:
-            var style: StyleBoxFlat = b.get_theme_stylebox(state).duplicate()
-            style.content_margin_top = 3
-            style.content_margin_bottom = 3
-            style.content_margin_left = 4
-            style.content_margin_right = 4
-            b.add_theme_stylebox_override(state, style)
-        grid.add_child(b)
-        board_buttons.append(b)
-    info = label("", 19)
-    info.name = "BattleSummary"
-    layout.panel.add_child(info)
-    timer_text = label("", 18)
-    timer_text.name = "TurnTimer"
-    layout.panel.add_child(timer_text)
-    tutorial_hint = null
-    if tutorial:
-        tutorial_hint = label("", 17)
-        layout.panel.add_child(tutorial_hint)
-    message = label("", 18)
-    message.name = "BattleMessage"
-    layout.panel.add_child(message)
-    var aim_row := HBoxContainer.new()
-    layout.panel.add_child(aim_row)
-    rotation_left = button("↶", rotate_card.bind(-1), 58)
-    rotation_left.name = "RotateLeft"
-    rotation_left.tooltip_text = t("Повернуть карту влево", "Rotate card left")
-    rotation_left.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
-    rotation_left.custom_minimum_size.x = 64
-    aim_row.add_child(rotation_left)
-    aim_label = label("", 17)
-    aim_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-    aim_row.add_child(aim_label)
-    rotation_right = button("↷", rotate_card.bind(1), 58)
-    rotation_right.name = "RotateRight"
-    rotation_right.tooltip_text = t("Повернуть карту вправо", "Rotate card right")
-    rotation_right.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
-    rotation_right.custom_minimum_size.x = 64
-    aim_row.add_child(rotation_right)
-    sweep_button = button(t("АТАКОВАТЬ ПО СТРЕЛКАМ", "ATTACK ALONG THE ARROWS"), attack_selected, 58)
-    sweep_button.name = "SweepAttack"
-    layout.panel.add_child(sweep_button)
-    friendly_confirm = ConfirmationDialog.new()
-    friendly_confirm.title = t("Удар по союзнику", "Friendly fire")
-    friendly_confirm.ok_button_text = t("Атаковать", "Attack")
-    friendly_confirm.cancel_button_text = t("Отмена", "Cancel")
-    friendly_confirm.confirmed.connect(confirm_friendly_attack)
-    friendly_confirm.canceled.connect(func(): friendly_pending = {})
-    add_child(friendly_confirm)
-    UIStyle.decorate_dialog(friendly_confirm)
-    var hand_scroll := ScrollContainer.new()
-    hand_scroll.name = "HandScroll"
-    hand_scroll.custom_minimum_size.y = 164
-    hand_scroll.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
-    hand_scroll.follow_focus = true
-    layout.panel.add_child(hand_scroll)
-    hand_row = HBoxContainer.new()
-    hand_row.add_theme_constant_override("separation", 8)
-    hand_scroll.add_child(hand_row)
-    var row := HBoxContainer.new()
-    row.name = "BattleFooter"
-    root.add_child(row)
-    end_turn_button = button(t("ЗАКОНЧИТЬ ХОД", "END TURN"), pass_turn)
-    end_turn_button.name = "EndTurn"
-    row.add_child(end_turn_button)
-    var back: Button = button(t("В МЕНЮ", "MENU"), request_leave_match)
-    back.name = "BattleBack"
-    row.add_child(back)
-    leave_confirm = ConfirmationDialog.new()
-    leave_confirm.title = t("Выйти из партии?", "Leave the match?")
-    leave_confirm.dialog_text = t("Текущая партия будет прервана. Продолжить?", "The current match will be interrupted. Continue?")
-    leave_confirm.dialog_autowrap = true
-    leave_confirm.ok_button_text = t("Выйти", "Leave")
-    leave_confirm.cancel_button_text = t("Остаться", "Stay")
-    leave_confirm.confirmed.connect(show_menu)
-    add_child(leave_confirm)
-    UIStyle.decorate_dialog(leave_confirm)
-    root.add_child(label(BuildInfo.VERSION + " · " + BuildInfo.COMMIT, 12))
+    preload("res://src/battle_screen.gd").build(self)
 
 func request_leave_match() -> void:
     var view: Dictionary = _view()
@@ -394,6 +301,9 @@ func on_hand(index: int) -> void:
         return
     if int(view.active) != 0 or int(view.winner) != -1 or int(view.get("placed_cell", -1)) >= 0:
         return
+    if preload("res://src/battle_interaction.gd").reason(view,index,online and not lan.pending.is_empty()) != "ready":
+        open_battle_card(int(view.hand[index]))
+        return
     selected_hand = -1 if selected_hand == index else index
     selected_direction = 0
     selected_unit = -1
@@ -403,25 +313,55 @@ func on_hand(index: int) -> void:
 
 func on_cell(index: int) -> void:
     var view: Dictionary = _view()
-    if view.is_empty() or view.winner != -1 or view.active != 0 or index < 0 or index >= 9:
+    var pending: bool = online and not lan.pending.is_empty()
+    var intent: Dictionary = preload("res://src/battle_interaction.gd").cell(view,index,selected_hand,selected_unit,selected_direction,pending)
+    match intent.kind:
+        "play":
+            act(intent.command)
+        "select":
+            selected_unit = int(intent.index)
+            selected_hand = -1
+            refresh()
+        "inspect":
+            open_battle_card(int(intent.id),board_buttons[index])
+        "invalid_placement":
+            message.text = t("Эта клетка недоступна. Выберите подсвеченную клетку или отмените выбор.", "This cell is unavailable. Choose a highlighted cell or cancel selection.")
+        "empty":
+            message.text = t("Сначала выберите карту в руке.", "First select a card in your hand.")
+
+func cancel_battle_selection() -> void:
+    selected_hand = -1
+    selected_unit = -1
+    selected_direction = 0
+    refresh()
+
+func open_battle_card(id: int, source: Control = null) -> void:
+    if not battle or not is_instance_valid(battle_inspector):
         return
-    if index == 4 and not bool(view.get("center_unlocked", false)):
-        message.text = t("Центр закрыт: нужно 5 юнитов на поле или начало 7-го хода.", "Center locked: five units on the board or turn seven required.")
+    if not battle_inspector.open_card(id,language,source):
         return
-    if selected_hand >= 0:
-        act({"type": "play", "hand": selected_hand, "cell": index, "direction": selected_direction})
-    elif selected_unit == index:
-        selected_unit = -1
-        refresh()
-    elif selected_unit >= 0 and view.board[index] != null:
-        var command: Dictionary = {"type": "attack", "source": selected_unit, "target": index}
-        request_sweep(command)
-    elif view.board[index] != null and int(view.board[index].owner) == 0:
-        selected_unit = index
-        selected_hand = -1
-        refresh()
+    var view: Dictionary = _view()
+    if int(view.get("active",0)) != 0:
+        battle_inspector.content.text += "\n\n" + t("Сейчас ход соперника. Осмотр не расходует ход и не останавливает таймер.", "It is the opponent's turn. Inspection spends no turn and does not pause the timer.")
+    elif source != null and source.get_parent().has_method("present") and source.get_parent().has_method("arrange") and source.name.begins_with("InspectHand"):
+        var slot: int = int(source.get_parent().slot)
+        var reason: String = preload("res://src/battle_interaction.gd").reason(view,slot,online and not lan.pending.is_empty())
+        var messages: Dictionary = {"coins":["Недостаточно монет для размещения.","Not enough coins to deploy."],"placed":["В этом ходу карта уже размещена. Можно атаковать или закончить ход.","A card was already deployed this turn. Attack or end the turn."],"pending":["Ожидается подтверждение предыдущего действия.","Waiting for the previous action acknowledgement."],"space":["Нет доступной клетки для размещения.","No available cell to deploy."]}
+        if messages.has(reason):
+            battle_inspector.content.text += "\n\n" + t(messages[reason][0],messages[reason][1])
+    elif source != null and source.has_meta("cell_index"):
+        var index: int = int(source.get_meta("cell_index"))
+        if index >= 0 and index < view.get("board",[]).size() and view.board[index] != null:
+            battle_inspector.content.text += "\n\n" + t("На поле сейчас: атака %d · здоровье %d.", "On the board now: attack %d · health %d.") % [view.board[index].attack,view.board[index].health]
+
+func _unhandled_input(event: InputEvent) -> void:
+    if not battle or not event.is_action_pressed("ui_cancel"):
+        return
+    if selected_hand >= 0 or selected_unit >= 0:
+        cancel_battle_selection()
     else:
-        message.text = t("Выбери карту в руке или своего юнита.", "Select a card or your unit first.")
+        request_leave_match()
+    get_viewport().set_input_as_handled()
 
 func attack_selected() -> void:
     var view: Dictionary = _view()
@@ -442,7 +382,7 @@ func request_sweep(command: Dictionary) -> void:
     if allies > 0:
         friendly_pending = command.duplicate()
         friendly_confirm.dialog_text = t("Удар во все направления заденет союзников: %d. Продолжить?", "This sweep will hit %d allies. Continue?") % allies
-        friendly_confirm.popup_centered(Vector2i(520, 180))
+        friendly_confirm.popup_centered_clamped(Vector2i(520, 230),0.9)
     else:
         act(command)
 
@@ -542,107 +482,11 @@ func refresh() -> void:
     var view: Dictionary = _view()
     if view.is_empty():
         return
-    var opponent: String = t("Соперник", "Opponent") if online else t("ИИ", "AI")
-    info.text = t("Ты: %d/5 · %s: %d/5\nМонеты: %d · Колода: %d · Рука соперника: %d", "You: %d/5 · %s: %d/5\nCoins: %d · Deck: %d · Opponent hand: %d") % [view.scores[0], opponent, view.scores[1], view.coins, view.deck_count, view.opponent_hand_count]
-    info.text += t(" · Доход поля: +%d", " · Board income: +%d") % int(view.get("income_bonus", 0))
-    sweep_button.visible = selected_unit >= 0
-    sweep_button.disabled = true
-    for action in view.legal:
-        if action.type == "attack" and int(action.source) == selected_unit:
-            sweep_button.disabled = false
-    rotation_left.disabled = selected_hand < 0 or int(view.active) != 0 or int(view.winner) != -1 or int(view.get("placed_cell", -1)) >= 0
-    rotation_right.disabled = rotation_left.disabled
-    end_turn_button.disabled = int(view.active) != 0 or int(view.winner) != -1 or (online and not lan.pending.is_empty())
-    aim_label.text = t("Поворот перед размещением", "Rotate before placement")
-    if selected_hand >= 0 and selected_hand < view.hand.size():
-        var selected: Dictionary = game.card(int(view.hand[selected_hand]))
-        aim_label.text = t(Core.TYPES_RU[int(selected.role)], Core.TYPES_EN[int(selected.role)]) + " · " + Feedback.pattern(selected, selected_direction)
-    elif selected_unit >= 0 and view.board[selected_unit] != null:
-        var selected: Dictionary = game.card(int(view.board[selected_unit].id))
-        aim_label.text = Feedback.pattern(selected, int(view.board[selected_unit].direction)) + t(" · атака: %d мон.", " · attack: %d coin") % (0 if selected_unit == int(view.placed_cell) else 1)
-    var legal: Array = view.legal
-    for i in range(9):
-        var unit: Variant = view.board[i]
-        var b: Button = board_buttons[i]
-        b.modulate = Color.WHITE
-        var element: int = int(view.terrain[i])
-        var terrain_name: String = t(Core.ELEMENTS_RU[element], Core.ELEMENTS_EN[element])
-        var style: StyleBoxFlat = b.get_theme_stylebox("normal").duplicate() as StyleBoxFlat
-        style.bg_color = COLORS[element].darkened(0.78)
-        style.border_color = COLORS[element].darkened(0.15)
-        style.set_border_width_all(2)
-        b.add_theme_font_size_override("font_size", 16)
-        b.disabled = i == 4 and not bool(view.center_unlocked)
-        if unit == null:
-            b.text = terrain_name + "\n" + t("Свободно", "Empty")
-            if i == 4:
-                if b.disabled:
-                    b.text = t("ЗАКРЫТО", "LOCKED") + " · " + terrain_name + t("\n5 юнитов ИЛИ ход 7\nСейчас: %d/5 · ход %d/7", "\n5 units OR turn 7\nNow: %d/5 · turn %d/7") % [int(view.scores[0]) + int(view.scores[1]), mini(int(view.turn), 7)]
-                    style.bg_color = Color("252733")
-                    style.border_color = Color("636778")
-                else:
-                    b.text = terrain_name + t("\nЦЕНТР ОТКРЫТ", "\nCENTER OPEN")
-                    style.border_color = Color("a2ffe0")
-                    style.set_border_width_all(4)
-            if selected_hand >= 0 and selected_hand < view.hand.size() and int(game.card(int(view.hand[selected_hand])).element) == element and not b.disabled:
-                b.text += "\n+1 HP"
-        else:
-            var def: Dictionary = game.card(int(unit.id))
-            b.text = (t("ТВОЙ", "YOURS") if unit.owner == 0 else t("ВРАГ", "ENEMY")) + " · " + terrain_name + "\n" + str(def[language])
-            b.text += "\n⚔ %d   ♥ %d" % [unit.attack, unit.health] + (" +1" if int(unit.get("terrain_bonus", 0)) == 1 else "")
-            b.text += "\n" + Feedback.pattern(def, int(unit.direction))
-            b.tooltip_text = str(def[language]) + " · " + terrain_name + t(" · здоровье учитывает бонус клетки", " · health includes terrain bonus")
-            style.border_color = Color("70c5ff") if int(unit.owner) == 0 else Color("ff8b87")
-        var highlight: bool = false
-        for c in legal:
-            if (c.type == "play" and selected_hand >= 0 and c.hand == selected_hand and c.cell == i) or (c.type == "attack" and selected_unit >= 0 and c.source == selected_unit and c.target == i):
-                highlight = true
-        if highlight:
-            style.border_color = Color("ffb38f") if selected_unit >= 0 and unit != null and int(unit.owner) == 0 else Color("a4ffc3")
-            style.set_border_width_all(5)
-        elif i == selected_unit:
-            style.border_color = Color.WHITE
-            style.set_border_width_all(5)
-        for theme_state in ["normal", "hover", "pressed", "disabled"]:
-            b.add_theme_stylebox_override(theme_state, style)
-        b.add_theme_color_override("font_disabled_color", Color("c8c8d0"))
+    preload("res://src/battle_screen.gd").render(self,view)
     if bool(view.center_unlocked) and not last_center_open:
-        Feedback.show_unlock(board_buttons[4], t("ЦЕНТР ОТКРЫТ", "CENTER OPEN"))
+        Feedback.show_unlock(board_buttons[4],t("ЦЕНТР ОТКРЫТ","CENTER OPEN"))
         center_unlock_effects += 1
     last_center_open = bool(view.center_unlocked)
-    for child in hand_row.get_children():
-        hand_row.remove_child(child)
-        child.queue_free()
-    for i in range(view.hand.size()):
-        var def: Dictionary = game.card(int(view.hand[i]))
-        var orientation: int = selected_direction if i == selected_hand else 0
-        var b: Button = button(str(def[language]) + "\n" + t(Core.ELEMENTS_RU[int(def.element)], Core.ELEMENTS_EN[int(def.element)]) + " · " + t(Core.TYPES_RU[int(def.role)], Core.TYPES_EN[int(def.role)]) + "\n◉ %d  ⚔ %d  ♥ %d\n" % [def.cost, def.attack, def.health] + Feedback.pattern(def, orientation), on_hand.bind(i), 146)
-        b.add_theme_font_size_override("font_size", 17)
-        b.custom_minimum_size.x = 170
-        b.disabled = view.active != 0 or view.winner != -1 or int(view.get("placed_cell", -1)) >= 0 or int(def.cost) > int(view.coins) or (online and not lan.pending.is_empty())
-        UIStyle.hand_card(b, COLORS[int(def.element)], i == selected_hand)
-        b.tooltip_text = str(def[language]) + " · " + t(Core.TYPES_RU[int(def.role)], Core.TYPES_EN[int(def.role)])
-        hand_row.add_child(b)
-    message.modulate = Color.WHITE
-    if tutorial and is_instance_valid(tutorial_hint):
-        var hints: Array = [["Выбери доступную карту в руке. Число ◉ — её стоимость.", "Choose an affordable card in your hand. ◉ shows its cost."], ["Поверни карту кнопками ↶ ↷, затем коснись свободной подсвеченной клетки.", "Rotate the card with ↶ ↷, then tap a highlighted empty cell."], ["После размещения выбери атакующего или закончи ход. Новый юнит атакует бесплатно; прежний — за 1 монету. Союзникам тоже можно нанести урон.", "After placement, choose an attacker or end the turn. New unit attacks free; an older unit costs 1 coin. Allies can be damaged."]]
-        tutorial_hint.text = t(hints[mini(tutorial_step,2)][0],hints[mini(tutorial_step,2)][1])
-    if view.winner != -1:
-        message.text = t("ПОБЕДА", "VICTORY") if view.winner == 0 else (t("НИЧЬЯ", "DRAW") if view.winner == 2 else t("ПОРАЖЕНИЕ", "DEFEAT"))
-        message.text += " · " + reason_text(str(view.reason))
-    elif online and view.get("phase") == "reconnecting":
-        message.text = t("Соперник отключился. Ожидаем возвращения…", "Opponent disconnected. Waiting to reconnect…")
-    elif view.active == 1:
-        message.text = t("Ход соперника…", "Opponent turn…") if online else t("Ход ИИ…", "AI turn…")
-    elif selected_hand >= 0:
-        message.text = t("Выбери свободную подсвеченную клетку", "Choose a highlighted empty cell")
-    elif selected_unit >= 0:
-        message.text = t("Ударит ВСЕ подсвеченные цели. Оранжевые — союзники! Нажми АТАКОВАТЬ или любую цель.", "Hits ALL highlighted targets. Orange means ally! Press ATTACK or tap any target.")
-    elif int(view.get("placed_cell", -1)) >= 0:
-        message.text = t("Карта выставлена. Выбери нового юнита (бесплатно), прежнего (1 монета) или закончи ход.", "Card placed. Attack with the new unit (free), an older unit (1 coin), or end the turn.")
-    else:
-        message.text = t("Выбери карту или своего юнита", "Choose a card or your unit")
-
     animate_damage(view)
 
 func rotate_card(step: int) -> void:

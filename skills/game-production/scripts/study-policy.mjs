@@ -6,6 +6,10 @@ const HOSTS = new Set([
   'learn.microsoft.com'
 ]);
 export const CHECKS = Object.freeze({
+  interaction: {
+    argv: ['tools/test-profile.mjs', 'interaction'],
+    marker: 'MULTIMENTAL_INTERACTION_PASS'
+  },
   usability: {
     argv: ['tools/test-profile.mjs', 'usability'],
     marker: 'MULTIMENTAL_USABILITY_PASS'

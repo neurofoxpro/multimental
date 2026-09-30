@@ -32,6 +32,7 @@ const choices = {
   'launcher-request': ['launcher_request_test.gd', 'MULTIMENTAL_LAUNCHER_REQUEST_PASS'],
   'launcher-bridge': ['launcher_bridge_test.gd', 'MULTIMENTAL_LAUNCHER_BRIDGE_PASS'],
   usability: ['usability_test.gd', 'MULTIMENTAL_USABILITY_PASS'],
+  interaction: ['battle_interaction_test.gd', 'MULTIMENTAL_INTERACTION_PASS'],
   'connection-ui': ['connection_ui_test.gd', 'MULTIMENTAL_CONNECTION_UI_PASS'],
   economy: ['economy_test.gd', 'MULTIMENTAL_ECONOMY_PASS'],
   shop: ['shop_ui_test.gd', 'MULTIMENTAL_SHOP_UI_PASS'],
