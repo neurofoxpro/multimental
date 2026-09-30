@@ -15,6 +15,9 @@ import {
 } from '../skills/game-production/scripts/lib.mjs';
 const [suite = 'model', ...extra] = process.argv.slice(2);
 const choices = {
+  'balance-audit': ['balance_audit_test.gd', 'MULTIMENTAL_BALANCE_AUDIT_TEST_PASS'],
+  content: ['content_runtime_test.gd', 'MULTIMENTAL_CONTENT_RUNTIME_PASS'],
+  'content-candidate': ['content_candidate_test.gd', 'MULTIMENTAL_CONTENT_CANDIDATE_PASS'],
   model: ['profile_test.gd', 'MULTIMENTAL_PROFILE_PASS'],
   rewards: ['rewards_test.gd', 'MULTIMENTAL_REWARDS_PASS'],
   'rewards-ui': ['rewards_ui_test.gd', 'MULTIMENTAL_REWARDS_UI_PASS'],
@@ -26,6 +29,8 @@ const choices = {
   crafting: ['crafting_test.gd', 'MULTIMENTAL_CRAFT_PASS'],
   'crafting-ui': ['crafting_ui_test.gd', 'MULTIMENTAL_CRAFT_UI_PASS'],
   menu: ['menu_layout_test.gd', 'MULTIMENTAL_MENU_LAYOUT_PASS'],
+  'launcher-request': ['launcher_request_test.gd', 'MULTIMENTAL_LAUNCHER_REQUEST_PASS'],
+  'launcher-bridge': ['launcher_bridge_test.gd', 'MULTIMENTAL_LAUNCHER_BRIDGE_PASS'],
   usability: ['usability_test.gd', 'MULTIMENTAL_USABILITY_PASS'],
   'connection-ui': ['connection_ui_test.gd', 'MULTIMENTAL_CONNECTION_UI_PASS'],
   economy: ['economy_test.gd', 'MULTIMENTAL_ECONOMY_PASS'],

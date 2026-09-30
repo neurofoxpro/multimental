@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "neurofoxpro/multimental",
-  "updatedAt": "2026-09-26",
+  "updatedAt": "2026-09-30",
   "baselineCommit": "cff25564c064c463b9bb742248110f3a0ff9328f",
   "evidenceSemantics": "Verified means historically observed at linked evidence. No current RC, owner approval, Play publication or physical installation is inferred from metadata.",
   "intent": "Close all accepted ideas before full Play launch; dev builds remain incremental. Explicit owner-deferred decisions stay blockers until resolved or explicitly scoped out.",
@@ -179,7 +179,7 @@
       "title": "Безопасное восстановление всех цепочек и минимальный пакет следующему агенту",
       "stage": "P0. Единый производственный процесс",
       "kind": "automation",
-      "status": "planned",
+      "status": "verified",
       "dependsOn": [
         "AUTO-06"
       ],
@@ -188,7 +188,10 @@
         "После обрыва чтение состояния предшествует повтору записи; устаревшая квитанция отклоняется.",
         "Тесты: сбой до/после commit, upload, merge, sign, install; не повторять побочные эффекты."
       ],
-      "evidence": [],
+      "evidence": [
+        "docs/production/RECOVERY_EFFECTS.ru.md",
+        "docs/production/evidence/auto07-safe-recovery-20260930.json"
+      ],
       "readset": [
         "skills/game-production/scripts/ops.mjs",
         "scripts/handoff.mjs"
@@ -531,7 +534,7 @@
       "title": "Фабрика карточного контента: данные → схема → семантика → симуляция → каталог",
       "stage": "P2. Коллекция, профиль и экономика",
       "kind": "automation",
-      "status": "planned",
+      "status": "verified",
       "dependsOn": [
         "CORE-06",
         "META-01"
@@ -541,7 +544,12 @@
         "Кандидат отдельно от принятого набора; контроль seed, стоимости, комбинаций и происхождения иллюстраций.",
         "Простая карта добавляется проверенными данными через команду; сложный эффект требует тестируемого обработчика."
       ],
-      "evidence": [],
+      "evidence": [
+        "docs/production/CONTENT_FACTORY.ru.md",
+        "docs/production/CARD_CATALOG.ru.md",
+        "docs/SCREENSHOTS.ru.md",
+        "docs/production/evidence/content-factory-completed-20260927.json"
+      ],
       "readset": [
         "tools/balance.mjs",
         "game/src/match_core.gd"
@@ -1511,7 +1519,7 @@
       "title": "Проверяемое освобождение завершённых срезов без захвата живой работы",
       "stage": "P0. Единый производственный процесс",
       "kind": "automation",
-      "status": "planned",
+      "status": "verified",
       "dependsOn": [
         "AUTO-06"
       ],
@@ -1521,7 +1529,11 @@
         "После потерянного ответа выполняется readback; исходники, настройки и данные телефонов не изменяются, старый claim не даёт новых прав записи.",
         "Положительный сценарий и отказы проверяются тестами и одной явной командой; результат фиксируется в задаче и Issue29 без автоматической приёмки продукта."
       ],
-      "evidence": [],
+      "evidence": [
+        "docs/production/COMPLETED_SLICE_RECOVERY.ru.md",
+        "docs/production/PARALLEL_CHATS.ru.md",
+        "docs/production/evidence/completed-recovery-completed-20260928.json"
+      ],
       "readset": [
         "skills/game-production/scripts/collaboration-policy.mjs",
         "skills/game-production/scripts/collaboration-store.mjs",
@@ -1740,6 +1752,44 @@
       "evidence": [],
       "requiredForBeta": true,
       "requiredForPlay": true
+    },
+    {
+      "id": "AUTO-12",
+      "title": "Ручная проверка dev-релиза без телефона: компьютерные тесты, совместимый APK, ссылки и отзыв",
+      "stage": "P0. Единый производственный процесс",
+      "kind": "automation",
+      "status": "verified",
+      "priority": 9,
+      "dependsOn": [
+        "AUTO-06"
+      ],
+      "acceptance": [
+        "Одна команда после полной компьютерной проверки выдаёт ссылки на закреплённый APK, GitHub-релиз, исходники и сценарий ручной проверки без обязательного телефона.",
+        "Manual APK сохраняет постоянную dev-подпись, проверенную полезную нагрузку и SHA-256; ключи/личные данные не публикуются, прежние файлы не перезаписываются.",
+        "Повтор сверяет фактические тесты/удалённые assets и не дублирует публикацию; ручная приёмка остаётся pending до отзыва.",
+        "Параллельные исполнители видят live задачи, владельцев, ветки, PR и конфликты файлов; чужие черновики и claims сохраняются."
+      ],
+      "evidence": [
+        "docs/production/MANUAL_REVIEW.ru.md",
+        "docs/production/PARALLEL_COORDINATION.ru.md",
+        "docs/production/evidence/manual-review-observed-20260927.json",
+        "docs/production/evidence/manual-review-completed-20260927.json"
+      ],
+      "readset": [
+        "docs/production/MANUAL_REVIEW.ru.md",
+        "docs/production/PARALLEL_COORDINATION.ru.md",
+        "skills/game-production/scripts/manual-review.mjs",
+        "skills/game-production/scripts/team.mjs"
+      ],
+      "source": "Прямое поручение владельца27.09.2026: изучить параллельный чат Разработка мультиментал, координировать и выдавать проверенный релиз по ссылке когда телефон не подключён.",
+      "requiredForBeta": true,
+      "requiredForPlay": true,
+      "tags": [
+        "manual-review",
+        "parallel",
+        "release",
+        "offline-phone"
+      ]
     }
   ]
 }

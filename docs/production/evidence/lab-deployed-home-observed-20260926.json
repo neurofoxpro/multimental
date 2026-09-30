@@ -1,0 +1,172 @@
+{
+  "schemaVersion": 1,
+  "repository": "neurofoxpro/multimental",
+  "observedAt": "2026-09-26T15:56:32.270Z",
+  "implementation": {
+    "pr": 143,
+    "head": "d499184c6086f2795197716620374bcbd4f1ae5b",
+    "merge": "c5810fd7416efb61b8e636182c621bfe3867f446"
+  },
+  "deployment": {
+    "status": "passed",
+    "commit": "d499184c6086f2795197716620374bcbd4f1ae5b",
+    "files": [
+      {
+        "file": "scripts/update-device.mjs",
+        "sha256": "dfb3c22afbf875053476b626ae9406be78581c02530463f55bfccc09bc3a6ac0"
+      },
+      {
+        "file": "scripts/install-device.mjs",
+        "sha256": "5ef5f16a0d71dd6498193d0e019d097ef5cedfd4aadd64bbf449f78452046427"
+      },
+      {
+        "file": "scripts/device-readiness.mjs",
+        "sha256": "7a7da48337d29f40146ca40f520d410d0c18bf595bd467a70a0337e6d26b4dcf"
+      },
+      {
+        "file": "scripts/device-launch.mjs",
+        "sha256": "ee90bb70048a6817f49f44bc911826c1e76d0fb7068c4ce33909fc314844c024"
+      },
+      {
+        "file": "scripts/register-updater.ps1",
+        "sha256": "9278b8b72a67941cd5d773c5158ea8b88fa3f347d5d882bd58e07685173e53f9"
+      },
+      {
+        "file": "skills/game-production/scripts/lib.mjs",
+        "sha256": "93f511eda1a681ba29956978a49e3e2d527407975207a8ffd74251b3d4b598b7"
+      },
+      {
+        "file": "skills/game-production/scripts/qualification-policy.mjs",
+        "sha256": "c6277445b8d673f76bf69bed4b48308901f1d45a30a8bab033fa9b26870830e2"
+      },
+      {
+        "file": "skills/game-production/scripts/device-coordination.mjs",
+        "sha256": "c8b35ba85b4b5877860b466b2704b9548f857e4e4ad99220d904bfee966e3657"
+      },
+      {
+        "file": "skills/game-production/scripts/http-read.mjs",
+        "sha256": "5c44e049ef583f6b7c39efead5d84c12b0f2d6e263b1cafdb07e1009664be387"
+      },
+      {
+        "file": "skills/game-production/scripts/resumable-download.mjs",
+        "sha256": "7cba34c86b50de6e0cf3eef9881e6af36d66d822724df0f235369c7267f77dab"
+      },
+      {
+        "file": "skills/game-production/scripts/release-transfer.mjs",
+        "sha256": "efb29f5510c00e5022f6abbeac787c802c5b7d235847e254c1c03058c9df84f6"
+      },
+      {
+        "file": "skills/game-production/scripts/primary-transport.mjs",
+        "sha256": "03a358cb1e3edc0b5e6846cb5ef6e4e0fe20b50795ae995552d4959e37d703ba"
+      },
+      {
+        "file": "skills/game-production/scripts/lab-policy.mjs",
+        "sha256": "5a1c7e982a4db901f9287a8bc8059f8d01afd3bfc7228ae0bb1fedc617637921"
+      },
+      {
+        "file": "skills/game-production/scripts/install-recovery-policy.mjs",
+        "sha256": "beb7c1d10cfdebdd99c9a4c9a736700a05e39cc4b996592bd7b17794f02d36bc"
+      },
+      {
+        "file": "skills/game-production/scripts/android-text.mjs",
+        "sha256": "09c343625bb54d92e557332f54cc3492beb77cceb93d911897c0616a3d5e654b"
+      }
+    ],
+    "autoCloseForUpdate": true
+  },
+  "delivery": {
+    "status": "passed",
+    "runId": "782eb39e-5a03-49a8-9a89-744cbf97d259",
+    "operation": "deliver",
+    "target": "phone",
+    "transport": "wifi",
+    "sourceHead": "d499184c6086f2795197716620374bcbd4f1ae5b",
+    "testerSourceHash": "7f823e032187b9b459e3e6c5ccfce8cd176c881de276246cb3b31dd7b132ed52",
+    "release": "v0.13.2-alpha.252.1",
+    "installation": {
+      "package": "pro.neurofox.multimental.dev",
+      "sourceCommit": "c5810fd7416efb61b8e636182c621bfe3867f446",
+      "version": "0.13.2-alpha.252.1",
+      "versionCode": 35201,
+      "originalSha256": "d092b5908a61d3b952970a70279c8067fa7df7a9fb099b5359b91e40b6c1122c",
+      "installedSha256": "d86cb8159e2d64994143e9852282c82e83ec8b726bcb09a67e03eae7c58ba675",
+      "certificateSha256": "3c68effd1eaea4c082a7f54f399c90a36a24ea08ec881a6130412111338aff72"
+    },
+    "suite": null,
+    "normalStartupEvidence": "not_checked",
+    "homeIcon": "not_asserted_by_lab",
+    "secondaryPhone": "registration_and_radio_not_inferred",
+    "report": ".gameprod/evidence/lab/782eb39e-5a03-49a8-9a89-744cbf97d259/result.json"
+  },
+  "homeExistingIcon": {
+    "schemaVersion": 1,
+    "runId": "c1113073-f3bb-433a-b00e-8aee828c0122",
+    "repository": "neurofoxpro/multimental",
+    "target": "phone",
+    "operation": "verify",
+    "status": "passed",
+    "startedAt": "2026-09-26T15:53:17.071Z",
+    "pages": [
+      {
+        "direction": "left",
+        "page": 0,
+        "signature": "1c698416c8364426545fa7b588e4d1edc426a0048668e4357fcec108417a32cb",
+        "iconFound": false
+      },
+      {
+        "direction": "left",
+        "page": 1,
+        "signature": "8d63ba5abae1e9c14bfcd986af42daaffb00be332344c770e4b56cc9cc763b28",
+        "iconFound": false
+      },
+      {
+        "direction": "left",
+        "page": 2,
+        "signature": "b44e8f27e7971ab8b876e5bf92a7d3c17501679cfeae0a80e9fff4000fdb5fe3",
+        "iconFound": true
+      }
+    ],
+    "pinCreated": false,
+    "unrelatedHomeItemsModified": false,
+    "sourceHash": "d80ce2810294c11403c07062983337818ac703945c03060f7d288c0dc48a91aa",
+    "installation": {
+      "package": "pro.neurofox.multimental.dev",
+      "sourceCommit": "c5810fd7416efb61b8e636182c621bfe3867f446",
+      "version": "0.13.2-alpha.252.1",
+      "versionCode": 35201,
+      "originalSha256": "d092b5908a61d3b952970a70279c8067fa7df7a9fb099b5359b91e40b6c1122c",
+      "installedSha256": "d86cb8159e2d64994143e9852282c82e83ec8b726bcb09a67e03eae7c58ba675",
+      "certificateSha256": "3c68effd1eaea4c082a7f54f399c90a36a24ea08ec881a6130412111338aff72"
+    },
+    "updatedAt": "2026-09-26T15:53:37.557Z",
+    "display": {
+      "wakeRequested": false,
+      "dismissRequested": false,
+      "credentialBypass": false
+    },
+    "launcherPackage": "com.gogo.launcher",
+    "home": {
+      "page": 2,
+      "direction": "left",
+      "label": "Multimental Dev",
+      "launchConfirmed": true
+    },
+    "profilePreserved": true,
+    "installationAfter": {
+      "package": "pro.neurofox.multimental.dev",
+      "sourceCommit": "c5810fd7416efb61b8e636182c621bfe3867f446",
+      "version": "0.13.2-alpha.252.1",
+      "versionCode": 35201,
+      "originalSha256": "d092b5908a61d3b952970a70279c8067fa7df7a9fb099b5359b91e40b6c1122c",
+      "installedSha256": "d86cb8159e2d64994143e9852282c82e83ec8b726bcb09a67e03eae7c58ba675",
+      "certificateSha256": "3c68effd1eaea4c082a7f54f399c90a36a24ea08ec881a6130412111338aff72"
+    },
+    "sourceHashAfter": "d80ce2810294c11403c07062983337818ac703945c03060f7d288c0dc48a91aa",
+    "finishedAt": "2026-09-26T15:53:37.557Z"
+  },
+  "newNativePin": "not_yet_executed",
+  "limitations": [
+    "Existing primary home icon was found and launched; it was not created by this observation.",
+    "Current native helper still requires its own APK/AVD check, and QA-03 on both phones is not closed."
+  ]
+}

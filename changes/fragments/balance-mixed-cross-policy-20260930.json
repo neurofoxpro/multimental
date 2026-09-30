@@ -1,0 +1,8 @@
+{
+  "id": "balance-mixed-cross-policy-20260930",
+  "version": "0.14.4",
+  "kind": "added",
+  "scope": "automation",
+  "text": "BALANCE-01 получил отдельный воспроизводимый эксперимент смешанных колод: равное покрытие 30 принятых карт, перекрёстные greedy/positional, полная ordered-матрица, replay каждого матча, seed-block bootstrap и возобновляемые shard-квитанции. Эксперимент не меняет карты и не заменяет человеческую проверку длительности.",
+  "breaking": false
+}

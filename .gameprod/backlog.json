@@ -97,14 +97,17 @@
   },
   {
     "id": "AUTO-07",
-    "status": "pending",
+    "status": "done",
     "action": "Безопасное восстановление всех цепочек и минимальный пакет следующему агенту",
     "dependsOn": [
       "AUTO-06"
     ],
     "manual": false,
     "generatedFrom": ".gameprod/workplan.json",
-    "evidence": [],
+    "evidence": [
+      "docs/production/RECOVERY_EFFECTS.ru.md",
+      "docs/production/evidence/auto07-safe-recovery-20260930.json"
+    ],
     "nextCommand": "npm run game -- task AUTO-07"
   },
   {
@@ -287,7 +290,7 @@
   },
   {
     "id": "CONTENT-03",
-    "status": "pending",
+    "status": "done",
     "action": "Фабрика карточного контента: данные → схема → семантика → симуляция → каталог",
     "dependsOn": [
       "CORE-06",
@@ -295,7 +298,12 @@
     ],
     "manual": false,
     "generatedFrom": ".gameprod/workplan.json",
-    "evidence": [],
+    "evidence": [
+      "docs/production/CONTENT_FACTORY.ru.md",
+      "docs/production/CARD_CATALOG.ru.md",
+      "docs/SCREENSHOTS.ru.md",
+      "docs/production/evidence/content-factory-completed-20260927.json"
+    ],
     "nextCommand": "npm run game -- task CONTENT-03"
   },
   {
@@ -821,14 +829,18 @@
   },
   {
     "id": "AUTO-11",
-    "status": "pending",
+    "status": "done",
     "action": "Проверяемое освобождение завершённых срезов без захвата живой работы",
     "dependsOn": [
       "AUTO-06"
     ],
     "manual": false,
     "generatedFrom": ".gameprod/workplan.json",
-    "evidence": [],
+    "evidence": [
+      "docs/production/COMPLETED_SLICE_RECOVERY.ru.md",
+      "docs/production/PARALLEL_CHATS.ru.md",
+      "docs/production/evidence/completed-recovery-completed-20260928.json"
+    ],
     "nextCommand": "npm run game -- task AUTO-11"
   },
   {
@@ -921,5 +933,22 @@
     "generatedFrom": ".gameprod/workplan.json",
     "evidence": [],
     "nextCommand": "npm run game -- task UX-13"
+  },
+  {
+    "id": "AUTO-12",
+    "status": "done",
+    "action": "Ручная проверка dev-релиза без телефона: компьютерные тесты, совместимый APK, ссылки и отзыв",
+    "dependsOn": [
+      "AUTO-06"
+    ],
+    "manual": false,
+    "generatedFrom": ".gameprod/workplan.json",
+    "evidence": [
+      "docs/production/MANUAL_REVIEW.ru.md",
+      "docs/production/PARALLEL_COORDINATION.ru.md",
+      "docs/production/evidence/manual-review-observed-20260927.json",
+      "docs/production/evidence/manual-review-completed-20260927.json"
+    ],
+    "nextCommand": "npm run game -- task AUTO-12"
   }
 ]

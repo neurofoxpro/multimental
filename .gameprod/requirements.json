@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "observedAt": "2026-09-26",
+  "observedAt": "2026-09-30",
   "repository": "neurofoxpro/multimental",
   "generatedFrom": ".gameprod/workplan.json",
   "evidenceSemantics": "Historical evidence only; not a fresh release gate or human approval.",
@@ -101,9 +101,12 @@
       "id": "AUTO-07",
       "text": "Безопасное восстановление всех цепочек и минимальный пакет следующему агенту",
       "version": "P0. Единый производственный процесс",
-      "status": "planned",
+      "status": "verified",
       "kind": "automation",
-      "evidence": [],
+      "evidence": [
+        "docs/production/RECOVERY_EFFECTS.ru.md",
+        "docs/production/evidence/auto07-safe-recovery-20260930.json"
+      ],
       "source": "Полный чат; поручение 25.09.2026",
       "requiredForBeta": true
     },
@@ -283,9 +286,14 @@
       "id": "CONTENT-03",
       "text": "Фабрика карточного контента: данные → схема → семантика → симуляция → каталог",
       "version": "P2. Коллекция, профиль и экономика",
-      "status": "planned",
+      "status": "verified",
       "kind": "automation",
-      "evidence": [],
+      "evidence": [
+        "docs/production/CONTENT_FACTORY.ru.md",
+        "docs/production/CARD_CATALOG.ru.md",
+        "docs/SCREENSHOTS.ru.md",
+        "docs/production/evidence/content-factory-completed-20260927.json"
+      ],
       "source": "Этапы 4,9,11; генерация контента и последний запрос",
       "requiredForBeta": true
     },
@@ -724,9 +732,13 @@
       "id": "AUTO-11",
       "text": "Проверяемое освобождение завершённых срезов без захвата живой работы",
       "version": "P0. Единый производственный процесс",
-      "status": "planned",
+      "status": "verified",
       "kind": "automation",
-      "evidence": [],
+      "evidence": [
+        "docs/production/COMPLETED_SLICE_RECOVERY.ru.md",
+        "docs/production/PARALLEL_CHATS.ru.md",
+        "docs/production/evidence/completed-recovery-completed-20260928.json"
+      ],
       "source": "Поручение владельца26.09.2026 о продолжении и самоулучшении; наблюдение: PR116 объединён и дерево чистое, но claimQA02 не освобождён. Живой/незавершённый PR119 не является допустимым случаем этой операции.",
       "requiredForBeta": true
     },
@@ -804,6 +816,21 @@
       "kind": "automation",
       "evidence": [],
       "source": "Прямое критическое замечание владельца26.09.2026 о неудобстве интерфейса и управления; анализ фактической реализации и первичных рекомендаций",
+      "requiredForBeta": true
+    },
+    {
+      "id": "AUTO-12",
+      "text": "Ручная проверка dev-релиза без телефона: компьютерные тесты, совместимый APK, ссылки и отзыв",
+      "version": "P0. Единый производственный процесс",
+      "status": "verified",
+      "kind": "automation",
+      "evidence": [
+        "docs/production/MANUAL_REVIEW.ru.md",
+        "docs/production/PARALLEL_COORDINATION.ru.md",
+        "docs/production/evidence/manual-review-observed-20260927.json",
+        "docs/production/evidence/manual-review-completed-20260927.json"
+      ],
+      "source": "Прямое поручение владельца27.09.2026: изучить параллельный чат Разработка мультиментал, координировать и выдавать проверенный релиз по ссылке когда телефон не подключён.",
       "requiredForBeta": true
     }
   ],

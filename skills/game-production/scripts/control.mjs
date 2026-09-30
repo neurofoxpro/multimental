@@ -457,6 +457,30 @@ export async function main(argv = process.argv.slice(2)) {
   const root = findRoot();
   const [entry, ...entryArgs] = argv;
   await (await import('./collaboration-guard.mjs')).guardWorktree(root, entry, entryArgs);
+  if (entry === 'launcher') {
+    await (await import('./launcher.mjs')).main(entryArgs);
+    return;
+  }
+  if (entry === 'balance') {
+    await (await import('./balance-audit.mjs')).main(entryArgs);
+    return;
+  }
+  if (entry === 'content') {
+    await (await import('./content.mjs')).main(entryArgs);
+    return;
+  }
+  if (entry === 'team') {
+    await (await import('./team.mjs')).main(entryArgs);
+    return;
+  }
+  if (entry === 'review') {
+    await (await import('./manual-review.mjs')).main(entryArgs);
+    return;
+  }
+  if (entry === 'lab') {
+    await (await import('./lab.mjs')).main(entryArgs);
+    return;
+  }
   if (entry === 'gallery') {
     await (await import('../../../tools/gallery.mjs')).main(entryArgs);
     return;
@@ -497,12 +521,20 @@ export async function main(argv = process.argv.slice(2)) {
     await (await import('./collaboration.mjs')).main(entryArgs);
     return;
   }
+  if (entry === 'source-recover') {
+    await (await import('./source-lock-recovery.mjs')).main(entryArgs);
+    return;
+  }
   if (entry === 'device-recover') {
     await (await import('./device-lock-recovery.mjs')).main(entryArgs);
     return;
   }
   if (entry === 'ux-audit') {
     await (await import('../../../tools/ux-audit.mjs')).main(entryArgs);
+    return;
+  }
+  if (entry === 'phone') {
+    await (await import('./phone-update.mjs')).main(entryArgs);
     return;
   }
   if (entry === 'fleet') {

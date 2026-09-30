@@ -2,6 +2,12 @@ import { uiLabSpec, assertUiLab } from '../skills/game-production/scripts/ui-lab
 import { waitWifiAddress } from '../skills/game-production/scripts/network-readiness.mjs';
 import { waitForPathsGone } from '../skills/game-production/scripts/device-coordination.mjs';
 import { receiptName, tapTarget } from '../skills/game-production/scripts/device-suite-policy.mjs';
+import { restoreManual } from '../skills/game-production/scripts/lab-policy.mjs';
+import { primaryTransport } from '../skills/game-production/scripts/primary-transport.mjs';
+import {
+  bluetoothControlGuard,
+  tunnelPath
+} from '../skills/game-production/scripts/wireless-control-policy.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
@@ -9,7 +15,7 @@ import net from 'node:net';
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
 import { readJSON, writeJSON, sha, chooseDevice } from '../skills/game-production/scripts/lib.mjs';
-import { exec, validateConfig, install } from './install-device.mjs';
+import { exec, validateConfig, install, isForeground } from './install-device.mjs';
 import { waitReady } from './device-readiness.mjs';
 import { launchApplication } from './device-launch.mjs';
 import { dismissEmulatorTutorial } from './emulator-onboarding.mjs';
@@ -22,6 +28,7 @@ if (!args.includes('--config')) throw Error('Explicit --config required');
 const original = validateConfig(readJSON(opt('config')));
 let c = { ...original };
 const target = opt('target', 'phone');
+if (target === 'phone') c = primaryTransport(c);
 const runId = opt('run-id', crypto.randomUUID());
 const uniqueReceipt = receiptName(runId, target, opt('mode', 'ui'));
 if (fs.existsSync(path.resolve('.gameprod/evidence', uniqueReceipt)))
@@ -208,6 +215,19 @@ try {
     forceStop();
     assert.equal(optional('shell', 'pidof', c.package).trim(), '');
     result.status = 'passed';
+  } else if (mode === 'restore') {
+    result.handoff = await restoreManual({
+      requestExists: async () =>
+        adb('shell', 'run-as', c.package, 'ls', '-a', 'files')
+          .split(/\r?\n/)
+          .map((s) => s.trim())
+          .includes('automation-request.json'),
+      snapshot: async () => profileHashes(),
+      stop: async () => forceStop(),
+      launch,
+      foreground: async () => isForeground(c)
+    });
+    result.status = 'passed';
   } else if (mode === 'launch') {
     await launch();
     result.status = 'passed';
@@ -359,7 +379,7 @@ try {
       } finally {
         optional('forward', '--remove', 'tcp:' + port);
       }
-      result.path = 'ADB_USB_TUNNEL_NOT_WIFI';
+      result.path = tunnelPath(c.serial);
     } else {
       address = optional('shell', 'ip', '-4', '-o', 'addr', 'show', 'wlan0').match(
         /inet (\d+\.\d+\.\d+\.\d+)\//
@@ -395,6 +415,7 @@ try {
     result.status = 'passed';
   } else if (mode === 'bluetooth') {
     if (target !== 'phone') throw Error('Physical Bluetooth test selects actual phone');
+    result.controlSafety = bluetoothControlGuard(c.serial);
     wifiRestore = optional('shell', 'settings', 'get', 'global', 'wifi_on').trim() === '1';
     if (wifiRestore) adb('shell', 'svc', 'wifi', 'disable');
     result.wifiDisabledDuringBluetooth =

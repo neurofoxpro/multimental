@@ -32,6 +32,11 @@ run(process.execPath, ['scripts/changelog.mjs', 'check'], ['RUSSIAN_CHANGELOG_PA
 run(process.execPath, ['tools/audio.mjs', 'check'], ['AUDIO_ASSETS_PASS']);
 run(process.execPath, ['scripts/research.mjs', 'check'], ['RESEARCH_LEDGER_PASS']);
 run(process.execPath, ['tools/study.mjs', 'check'], ['STUDY_DEFINITIONS_PASS']);
+run(
+  process.execPath,
+  ['skills/game-production/scripts/content.mjs', 'check'],
+  ['MULTIMENTAL_CONTENT_SCHEMA_PASS']
+);
 run(process.execPath, ['tools/gallery.mjs', 'check'], ['MULTIMENTAL_GALLERY_CHECK_PASS']);
 run(process.execPath, ['scripts/readiness.mjs', 'check'], ['REQUIREMENTS_SCHEMA_PASS']);
 run(
@@ -64,10 +69,14 @@ const godot = verificationRuntime(root, process.env.GODOT_BIN || 'godot');
 run(godot, ['--headless', '--editor', '--path', 'game', '--quit']);
 for (const [file, marker] of [
   ['core_test.gd', 'MULTIMENTAL_CORE_PASS'],
+  ['content_runtime_test.gd', 'MULTIMENTAL_CONTENT_RUNTIME_PASS'],
+  ['content_candidate_test.gd', 'MULTIMENTAL_CONTENT_CANDIDATE_PASS'],
   ['ui_test.gd', 'MULTIMENTAL_UI_PASS'],
   ['protocol_test.gd', 'MULTIMENTAL_PROTOCOL_PASS'],
   ['room_test.gd', 'MULTIMENTAL_ROOM_PASS'],
   ['lan_test.gd', 'MULTIMENTAL_LAN_PASS'],
+  ['online_service_test.gd', 'MULTIMENTAL_ONLINE_SERVICE_PASS'],
+  ['online_wss_test.gd', 'MULTIMENTAL_ONLINE_WSS_PASS'],
   ['address_test.gd', 'MULTIMENTAL_ADDRESSES_PASS'],
   ['bluetooth_session_test.gd', 'MULTIMENTAL_BLUETOOTH_MODEL_PASS'],
   ['presentation_test.gd', 'MULTIMENTAL_PRESENTATION_PASS'],
@@ -75,6 +84,7 @@ for (const [file, marker] of [
   ['directional_ui_test.gd', 'MULTIMENTAL_DIRECTIONAL_UI_PASS'],
   ['terrain_test.gd', 'MULTIMENTAL_TERRAIN_PASS'],
   ['balance_test.gd', 'MULTIMENTAL_BALANCE_PARAMETERS_PASS'],
+  ['balance_audit_test.gd', 'MULTIMENTAL_BALANCE_AUDIT_TEST_PASS'],
   ['room_automation_test.gd', 'MULTIMENTAL_ROOM_AUTOMATION_PASS'],
   ['profile_test.gd', 'MULTIMENTAL_PROFILE_PASS'],
   ['rewards_test.gd', 'MULTIMENTAL_REWARDS_PASS'],
@@ -87,6 +97,8 @@ for (const [file, marker] of [
   ['card_inspector_test.gd', 'MULTIMENTAL_CARD_INSPECTOR_PASS'],
   ['inspector_lab_test.gd', 'MULTIMENTAL_INSPECTOR_LAB_PASS'],
   ['menu_layout_test.gd', 'MULTIMENTAL_MENU_LAYOUT_PASS'],
+  ['launcher_request_test.gd', 'MULTIMENTAL_LAUNCHER_REQUEST_PASS'],
+  ['launcher_bridge_test.gd', 'MULTIMENTAL_LAUNCHER_BRIDGE_PASS'],
   ['usability_test.gd', 'MULTIMENTAL_USABILITY_PASS'],
   ['connection_ui_test.gd', 'MULTIMENTAL_CONNECTION_UI_PASS'],
   ['profile_store_test.gd', 'MULTIMENTAL_PROFILE_STORAGE_PASS'],

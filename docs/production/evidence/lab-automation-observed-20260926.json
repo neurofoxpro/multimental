@@ -1,0 +1,349 @@
+{
+  "schemaVersion": 1,
+  "repository": "neurofoxpro/multimental",
+  "taskId": "AUTO-07",
+  "kind": "verified_increment_not_complete_task_acceptance",
+  "observedAt": "2026-09-26T15:34:16.229Z",
+  "sourceBase": "135b34d130c9ba1e70535ceb0c98d8a279feb42c",
+  "sourceVerification": {
+    "schemaVersion": 1,
+    "step": "verify",
+    "status": "passed",
+    "exitCode": 0,
+    "sourceDigest": "7f823e032187b9b459e3e6c5ccfce8cd176c881de276246cb3b31dd7b132ed52",
+    "sourceDigestAfter": "7f823e032187b9b459e3e6c5ccfce8cd176c881de276246cb3b31dd7b132ed52",
+    "sourceChanged": false,
+    "startedAt": "2026-09-26T15:28:56.714Z",
+    "finishedAt": "2026-09-26T15:30:43.834Z",
+    "host": "VENEL-SENDRIK",
+    "command": [
+      "node",
+      "tools/verify.mjs"
+    ],
+    "log": ".gameprod/evidence/verify.log",
+    "logHash": "9aa64b09ade16cfe895bbea6c3d25605763eccfee544b4cc556c4a3f32b1015b",
+    "outputs": [],
+    "nodeTests": 878
+  },
+  "runs": [
+    {
+      "status": "passed",
+      "runId": "3e157d0f-9f1c-46c4-b61d-d3f8c4fcea63",
+      "operation": "test",
+      "target": "emulator-B",
+      "transport": "emulator",
+      "sourceHead": "135b34d130c9ba1e70535ceb0c98d8a279feb42c",
+      "testerSourceHash": "9b848601365e98a71bae593124d0a8667241f4e23ff43ca462c16034916205fc",
+      "release": "v0.13.1-alpha.249.1",
+      "installation": {
+        "package": "pro.neurofox.multimental.dev",
+        "sourceCommit": "135b34d130c9ba1e70535ceb0c98d8a279feb42c",
+        "version": "0.13.1-alpha.249.1",
+        "versionCode": 34901,
+        "originalSha256": "2ad7b8cc333b53864e2bb0540174660db11c5de4805e03c8ca1ad9d780510ad6",
+        "installedSha256": "5f1a45d1c341bb27b7bedbdd61b6064c732b22053c0843ceae0f3f0539682d11",
+        "certificateSha256": "5ae1339dd4d012874eab9c324ac8f68a9fb5a962fffe7100e3e4c4d9438d7488"
+      },
+      "suite": {
+        "runId": "1c30547d-89a8-4be3-b208-ec7621021a4b",
+        "status": "passed"
+      },
+      "normalStartupEvidence": "passed_in_recorded_restore_step",
+      "homeIcon": "not_asserted_by_lab",
+      "secondaryPhone": "registration_and_radio_not_inferred",
+      "report": ".gameprod/evidence/lab/3e157d0f-9f1c-46c4-b61d-d3f8c4fcea63/result.json"
+    },
+    {
+      "status": "passed",
+      "runId": "7d3c2631-47d9-4c6a-8c1e-b11016ee14fc",
+      "operation": "deliver",
+      "target": "phone",
+      "transport": "wifi",
+      "sourceHead": "135b34d130c9ba1e70535ceb0c98d8a279feb42c",
+      "testerSourceHash": "799c75d81038dc30946e4d8b12f067f5b77327f850a01d9b4c0e22d52e6e5b09",
+      "release": "v0.13.1-alpha.249.1",
+      "installation": {
+        "package": "pro.neurofox.multimental.dev",
+        "sourceCommit": "135b34d130c9ba1e70535ceb0c98d8a279feb42c",
+        "version": "0.13.1-alpha.249.1",
+        "versionCode": 34901,
+        "originalSha256": "2ad7b8cc333b53864e2bb0540174660db11c5de4805e03c8ca1ad9d780510ad6",
+        "installedSha256": "5e31864bee87eb8cd6254fbbad1cd702fcd368e302077de2efcd2a9b3fc080b0",
+        "certificateSha256": "3c68effd1eaea4c082a7f54f399c90a36a24ea08ec881a6130412111338aff72"
+      },
+      "suite": null,
+      "normalStartupEvidence": "not_checked",
+      "homeIcon": "not_asserted_by_lab",
+      "secondaryPhone": "registration_and_radio_not_inferred",
+      "report": ".gameprod/evidence/lab/7d3c2631-47d9-4c6a-8c1e-b11016ee14fc/result.json"
+    },
+    {
+      "status": "passed",
+      "runId": "b63b97e2-09e8-418d-a392-346de435066f",
+      "operation": "test",
+      "target": "phone",
+      "transport": "wifi",
+      "sourceHead": "135b34d130c9ba1e70535ceb0c98d8a279feb42c",
+      "testerSourceHash": "799c75d81038dc30946e4d8b12f067f5b77327f850a01d9b4c0e22d52e6e5b09",
+      "release": "v0.13.1-alpha.249.1",
+      "installation": {
+        "package": "pro.neurofox.multimental.dev",
+        "sourceCommit": "135b34d130c9ba1e70535ceb0c98d8a279feb42c",
+        "version": "0.13.1-alpha.249.1",
+        "versionCode": 34901,
+        "originalSha256": "2ad7b8cc333b53864e2bb0540174660db11c5de4805e03c8ca1ad9d780510ad6",
+        "installedSha256": "5e31864bee87eb8cd6254fbbad1cd702fcd368e302077de2efcd2a9b3fc080b0",
+        "certificateSha256": "3c68effd1eaea4c082a7f54f399c90a36a24ea08ec881a6130412111338aff72"
+      },
+      "suite": {
+        "runId": "ae70f41f-fbb3-4e85-941f-2490855d17ab",
+        "status": "passed"
+      },
+      "normalStartupEvidence": "passed_in_recorded_restore_step",
+      "homeIcon": "not_asserted_by_lab",
+      "secondaryPhone": "registration_and_radio_not_inferred",
+      "report": ".gameprod/evidence/lab/b63b97e2-09e8-418d-a392-346de435066f/result.json"
+    },
+    {
+      "status": "passed",
+      "runId": "731253cd-5468-4ed3-9069-cd4ba157cd33",
+      "operation": "test",
+      "target": "emulator-B",
+      "transport": "emulator",
+      "sourceHead": "135b34d130c9ba1e70535ceb0c98d8a279feb42c",
+      "testerSourceHash": "7f823e032187b9b459e3e6c5ccfce8cd176c881de276246cb3b31dd7b132ed52",
+      "release": "v0.13.1-alpha.249.1",
+      "installation": {
+        "package": "pro.neurofox.multimental.dev",
+        "sourceCommit": "135b34d130c9ba1e70535ceb0c98d8a279feb42c",
+        "version": "0.13.1-alpha.249.1",
+        "versionCode": 34901,
+        "originalSha256": "2ad7b8cc333b53864e2bb0540174660db11c5de4805e03c8ca1ad9d780510ad6",
+        "installedSha256": "5f1a45d1c341bb27b7bedbdd61b6064c732b22053c0843ceae0f3f0539682d11",
+        "certificateSha256": "5ae1339dd4d012874eab9c324ac8f68a9fb5a962fffe7100e3e4c4d9438d7488"
+      },
+      "suite": {
+        "runId": "139b4b98-adac-47d1-9528-ef26ef4385be",
+        "status": "passed"
+      },
+      "normalStartupEvidence": "passed_in_recorded_restore_step",
+      "homeIcon": "not_asserted_by_lab",
+      "secondaryPhone": "registration_and_radio_not_inferred",
+      "report": ".gameprod/evidence/lab/731253cd-5468-4ed3-9069-cd4ba157cd33/result.json"
+    }
+  ],
+  "suites": [
+    {
+      "runId": "1c30547d-89a8-4be3-b208-ec7621021a4b",
+      "target": "emulator-B",
+      "suite": "ui",
+      "installation": {
+        "package": "pro.neurofox.multimental.dev",
+        "sourceCommit": "135b34d130c9ba1e70535ceb0c98d8a279feb42c",
+        "version": "0.13.1-alpha.249.1",
+        "versionCode": 34901,
+        "originalSha256": "2ad7b8cc333b53864e2bb0540174660db11c5de4805e03c8ca1ad9d780510ad6",
+        "installedSha256": "5f1a45d1c341bb27b7bedbdd61b6064c732b22053c0843ceae0f3f0539682d11",
+        "certificateSha256": "5ae1339dd4d012874eab9c324ac8f68a9fb5a962fffe7100e3e4c4d9438d7488"
+      },
+      "sourceHash": "9b848601365e98a71bae593124d0a8667241f4e23ff43ca462c16034916205fc",
+      "reportSha256": "907acda20c389cb4032b121226f4da05991c2d9911406a4b1e3cd7995ce13607",
+      "steps": [
+        {
+          "mode": "ui",
+          "status": "passed",
+          "exitCode": 0,
+          "receiptSha256": "1a1c76c3cf5da1037af0490c75f726209841fa18fccd449ef01e0bc003e58c11",
+          "logSha256": "1a1c76c3cf5da1037af0490c75f726209841fa18fccd449ef01e0bc003e58c11"
+        },
+        {
+          "mode": "restore",
+          "status": "passed",
+          "exitCode": 0,
+          "receiptSha256": "c291858333d843eef3698c4c5e6fb5bc281703b4862d5b427d23f55f08811060",
+          "logSha256": "c291858333d843eef3698c4c5e6fb5bc281703b4862d5b427d23f55f08811060"
+        }
+      ],
+      "restore": true
+    },
+    {
+      "runId": "ae70f41f-fbb3-4e85-941f-2490855d17ab",
+      "target": "phone",
+      "suite": "handoff",
+      "installation": {
+        "package": "pro.neurofox.multimental.dev",
+        "sourceCommit": "135b34d130c9ba1e70535ceb0c98d8a279feb42c",
+        "version": "0.13.1-alpha.249.1",
+        "versionCode": 34901,
+        "originalSha256": "2ad7b8cc333b53864e2bb0540174660db11c5de4805e03c8ca1ad9d780510ad6",
+        "installedSha256": "5e31864bee87eb8cd6254fbbad1cd702fcd368e302077de2efcd2a9b3fc080b0",
+        "certificateSha256": "3c68effd1eaea4c082a7f54f399c90a36a24ea08ec881a6130412111338aff72"
+      },
+      "sourceHash": "799c75d81038dc30946e4d8b12f067f5b77327f850a01d9b4c0e22d52e6e5b09",
+      "reportSha256": "7abce3ab662c0d48e103d0b094bb74e708e3a30fac94b81d27d86748658f2931",
+      "steps": [
+        {
+          "mode": "close",
+          "status": "passed",
+          "exitCode": 0,
+          "receiptSha256": "806a093214bdb966f20422a25b5cb153adbbf91e61c9912aee0c3875efe5b485",
+          "logSha256": "806a093214bdb966f20422a25b5cb153adbbf91e61c9912aee0c3875efe5b485"
+        },
+        {
+          "mode": "launch",
+          "status": "passed",
+          "exitCode": 0,
+          "receiptSha256": "9c90b23e949899f6aba7c7a0b597d9adaf1530881a0b244dbb5a1f3103c2e42f",
+          "logSha256": "9c90b23e949899f6aba7c7a0b597d9adaf1530881a0b244dbb5a1f3103c2e42f"
+        },
+        {
+          "mode": "jni",
+          "status": "passed",
+          "exitCode": 0,
+          "receiptSha256": "75d0e48c8f11bc4d970338ec8c4e040362caf3777a19cd67877c703c0282292c",
+          "logSha256": "75d0e48c8f11bc4d970338ec8c4e040362caf3777a19cd67877c703c0282292c"
+        },
+        {
+          "mode": "tutorial",
+          "status": "passed",
+          "exitCode": 0,
+          "receiptSha256": "18b8876a95bbe85a2043e6fb0a64ef7c8bd1cef5e3a1483c0500d03d5e3c1226",
+          "logSha256": "18b8876a95bbe85a2043e6fb0a64ef7c8bd1cef5e3a1483c0500d03d5e3c1226"
+        },
+        {
+          "mode": "ui",
+          "status": "passed",
+          "exitCode": 0,
+          "receiptSha256": "cfeb0c3d4839078da2a98ffd1d9ff2821e4ef53af1c0fef671ed714d12d6ceca",
+          "logSha256": "cfeb0c3d4839078da2a98ffd1d9ff2821e4ef53af1c0fef671ed714d12d6ceca"
+        },
+        {
+          "mode": "inspector",
+          "status": "passed",
+          "exitCode": 0,
+          "receiptSha256": "859c515da05bc486f6a1a0310bb578171e67c19c8a8a5c213e4014559e5bb1ef",
+          "logSha256": "859c515da05bc486f6a1a0310bb578171e67c19c8a8a5c213e4014559e5bb1ef"
+        },
+        {
+          "mode": "collection",
+          "status": "passed",
+          "exitCode": 0,
+          "receiptSha256": "a2891040a1b17c4a0eb0aec0ad58405a9a26339fe739cb137aa29d1ad8d7fb0e",
+          "logSha256": "a2891040a1b17c4a0eb0aec0ad58405a9a26339fe739cb137aa29d1ad8d7fb0e"
+        },
+        {
+          "mode": "restore",
+          "status": "passed",
+          "exitCode": 0,
+          "receiptSha256": "8b98d9952ed0bf0a0f1c52c2c0855a39b58663117aa891a44d465518cb601ccc",
+          "logSha256": "8b98d9952ed0bf0a0f1c52c2c0855a39b58663117aa891a44d465518cb601ccc"
+        }
+      ],
+      "restore": true
+    },
+    {
+      "runId": "139b4b98-adac-47d1-9528-ef26ef4385be",
+      "target": "emulator-B",
+      "suite": "handoff",
+      "installation": {
+        "package": "pro.neurofox.multimental.dev",
+        "sourceCommit": "135b34d130c9ba1e70535ceb0c98d8a279feb42c",
+        "version": "0.13.1-alpha.249.1",
+        "versionCode": 34901,
+        "originalSha256": "2ad7b8cc333b53864e2bb0540174660db11c5de4805e03c8ca1ad9d780510ad6",
+        "installedSha256": "5f1a45d1c341bb27b7bedbdd61b6064c732b22053c0843ceae0f3f0539682d11",
+        "certificateSha256": "5ae1339dd4d012874eab9c324ac8f68a9fb5a962fffe7100e3e4c4d9438d7488"
+      },
+      "sourceHash": "7f823e032187b9b459e3e6c5ccfce8cd176c881de276246cb3b31dd7b132ed52",
+      "reportSha256": "6d994ffb6c7d4488fc1b5e4725e7d4831512969038fd67181f4f9c426cab2947",
+      "steps": [
+        {
+          "mode": "close",
+          "status": "passed",
+          "exitCode": 0,
+          "receiptSha256": "94b7247a6e4cd4b6c675d9e13d44e5b792bb3e4b245b50f4ffac8e20f70c1ef1",
+          "logSha256": "94b7247a6e4cd4b6c675d9e13d44e5b792bb3e4b245b50f4ffac8e20f70c1ef1"
+        },
+        {
+          "mode": "launch",
+          "status": "passed",
+          "exitCode": 0,
+          "receiptSha256": "10d305be8be76516c13163577c0b1eb8c956262f217006f9d5c63683043b4dd0",
+          "logSha256": "10d305be8be76516c13163577c0b1eb8c956262f217006f9d5c63683043b4dd0"
+        },
+        {
+          "mode": "jni",
+          "status": "passed",
+          "exitCode": 0,
+          "receiptSha256": "a4b8691590d3d521bd692473b37358c142213ca19bf7758af9f731c15540f393",
+          "logSha256": "a4b8691590d3d521bd692473b37358c142213ca19bf7758af9f731c15540f393"
+        },
+        {
+          "mode": "tutorial",
+          "status": "passed",
+          "exitCode": 0,
+          "receiptSha256": "70f5bba6a841f14cbef150fd9c7114f832911aee022de0861bb1676d5f307b20",
+          "logSha256": "70f5bba6a841f14cbef150fd9c7114f832911aee022de0861bb1676d5f307b20"
+        },
+        {
+          "mode": "ui",
+          "status": "passed",
+          "exitCode": 0,
+          "receiptSha256": "7b4a603d4de28d95c29e24234dc7723e8073fb0098755cd989ff061fdb75b1d3",
+          "logSha256": "7b4a603d4de28d95c29e24234dc7723e8073fb0098755cd989ff061fdb75b1d3"
+        },
+        {
+          "mode": "inspector",
+          "status": "passed",
+          "exitCode": 0,
+          "receiptSha256": "0cae490f55360159bb9a218cf8e972b48fcee29dd6f3f5c41a772987540cdf17",
+          "logSha256": "0cae490f55360159bb9a218cf8e972b48fcee29dd6f3f5c41a772987540cdf17"
+        },
+        {
+          "mode": "collection",
+          "status": "passed",
+          "exitCode": 0,
+          "receiptSha256": "321a4548b20deb7e82ca0d8d47ac460ea230343d19555630e610fb544209b87c",
+          "logSha256": "321a4548b20deb7e82ca0d8d47ac460ea230343d19555630e610fb544209b87c"
+        },
+        {
+          "mode": "restore",
+          "status": "passed",
+          "exitCode": 0,
+          "receiptSha256": "ccbe3b7f00ec5d997a4e42c3bd2e3777db85667fb39fe51f7ef1c03237decf2f",
+          "logSha256": "ccbe3b7f00ec5d997a4e42c3bd2e3777db85667fb39fe51f7ef1c03237decf2f"
+        }
+      ],
+      "restore": true
+    }
+  ],
+  "phoneInstallRecovery": {
+    "sourceCommit": "135b34d130c9ba1e70535ceb0c98d8a279feb42c",
+    "versionCode": 34901,
+    "installedSha256": "5e31864bee87eb8cd6254fbbad1cd702fcd368e302077de2efcd2a9b3fc080b0",
+    "certificateSha256": "3c68effd1eaea4c082a7f54f399c90a36a24ea08ec881a6130412111338aff72",
+    "disposition": "resume_launch",
+    "phase": "complete",
+    "install": {
+      "acknowledged": false,
+      "readback": true,
+      "recoveredPriorCompletion": true,
+      "installRepeated": false
+    }
+  },
+  "resumeProof": {
+    "emulatorUiRun": "3e157d0f-9f1c-46c4-b61d-d3f8c4fcea63",
+    "emulatorUiSuite": "1c30547d-89a8-4be3-b208-ec7621021a4b",
+    "emulatorFullRun": "731253cd-5468-4ed3-9069-cd4ba157cd33",
+    "emulatorFullSuite": "139b4b98-adac-47d1-9528-ef26ef4385be",
+    "repeatKeptSameRunAndSuite": true
+  },
+  "limitations": [
+    "Current physical proof is for the known primary over Wi-Fi, not two phones.",
+    "All Android radio, physical cutout and subjective user acceptance remain separately qualified.",
+    "Home-screen icon is not asserted by this lab increment.",
+    "Scheduled updater deployment must be observed after committing this implementation.",
+    "Before this code revision the primary installed successfully but slept; exact signed APK/certificate readback resumed launch without repeating install.",
+    "AUTO-07 includes further interruption cases and is not closed by this increment."
+  ]
+}

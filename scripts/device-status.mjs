@@ -1,32 +1,42 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import { readJSON, writeJSON, chooseDevice } from '../skills/game-production/scripts/lib.mjs';
+import { readJSON, writeJSON } from '../skills/game-production/scripts/lib.mjs';
 import { exec, validateConfig, isForeground } from './install-device.mjs';
-const a = process.argv.slice(2),
-  file = a[a.indexOf('--config') + 1];
-if (!a.includes('--config')) throw Error('Explicit station config required');
-const c = validateConfig(readJSON(file));
-const rows = exec(c.adb, ['devices', '-l']);
-let state = 'unavailable';
+import { primaryTransport } from '../skills/game-production/scripts/primary-transport.mjs';
+const a = process.argv.slice(2);
+if (a.length !== 2 || a[0] !== '--config') throw Error('Explicit station config required');
+const saved = validateConfig(readJSON(a[1]));
+let c = saved,
+  state = 'unavailable';
 try {
-  chooseDevice(rows, c.serial);
+  c = primaryTransport(saved, { reconnect: false });
   state = 'device';
-} catch (e) {
-  state = e.message;
+} catch (error) {
+  state = error.message;
 }
-const get = (n) => {
-  const p = path.join(c.workDir, n);
-  return fs.existsSync(p) ? readJSON(p) : null;
+const get = (name) => {
+  const file = path.join(saved.workDir, name);
+  return fs.existsSync(file) ? readJSON(file) : null;
 };
 const installed = get('installed.local.json');
-const pkg = exec(c.adb, ['-s', c.serial, 'shell', 'dumpsys', 'package', c.package], {
-  allowFailure: true
-});
+const pkg =
+  state === 'device'
+    ? exec(c.adb, ['-s', c.serial, 'shell', 'dumpsys', 'package', c.package], {
+        allowFailure: true
+      })
+    : '';
+const last = get('last-update-check.local.json');
+if (last?.error) {
+  for (const value of [saved.serial, c.serial, saved.physicalSerial, c.physicalSerial])
+    if (value) last.error = String(last.error).replaceAll(value, '[device]');
+}
 const result = {
   observedAt: new Date().toISOString(),
-  host: c.allowedHost,
-  repository: c.repository,
+  host: saved.allowedHost,
+  repository: saved.repository,
   adb: state,
+  transport: state === 'device' ? (c.serial === saved.serial ? 'usb' : 'wifi') : null,
+  physicalIdentityVerified: state === 'device',
   installed: installed
     ? {
         version: installed.version,
@@ -36,9 +46,13 @@ const result = {
       }
     : null,
   actualVersion: pkg.match(/versionName=(\S+)/)?.[1] || null,
-  foreground: isForeground(c),
-  lastCheck: get('last-update-check.local.json'),
-  policy: { autoClose: !!c.autoCloseForUpdate, preserveData: true }
+  foreground: state === 'device' && isForeground(c),
+  lastCheck: last,
+  policy: {
+    autoClose: !!saved.autoCloseForUpdate,
+    preserveData: true,
+    configurationRewritten: false
+  }
 };
 writeJSON('.gameprod/evidence/device-status.json', result);
 console.log(JSON.stringify(result, null, 2));

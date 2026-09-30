@@ -131,8 +131,39 @@ test('directory masquerading as lock is preserved', (t) => {
 test('existing recovery lease is not removed', (t) => {
   const dir = fixture(t);
   fs.writeFileSync(path.join(dir, 'recovery.lock'), 'another recovery');
-  assert.throws(() => recoverOrphans(dir, options()), /already active/);
+  assert.throws(() => recoverOrphans(dir, options()), /MALFORMED|active/);
   assert.equal(fs.readFileSync(path.join(dir, 'recovery.lock'), 'utf8'), 'another recovery');
+});
+test('proven stale recovery lease self-heals without touching application data', (t) => {
+  const dir = fixture(t);
+  const stale = {
+    pid: 777,
+    token: 'a'.repeat(32),
+    startedAt: new Date(NOW - 60000).toISOString(),
+    command: 'dead-device-owner-recovery'
+  };
+  fs.writeFileSync(path.join(dir, 'recovery.lock'), JSON.stringify(stale));
+  const result = recoverOrphans(dir, {
+    ...options(),
+    state: (pid) => (pid === 777 ? 'absent' : 'absent')
+  });
+  assert.equal(result.status, 'recovered');
+  assert.equal(fs.existsSync(path.join(dir, 'recovery.lock')), false);
+});
+test('live recovery owner is preserved', (t) => {
+  const dir = fixture(t);
+  const live = {
+    pid: 777,
+    token: 'a'.repeat(32),
+    startedAt: new Date(NOW - 60000).toISOString(),
+    command: 'dead-device-owner-recovery'
+  };
+  fs.writeFileSync(path.join(dir, 'recovery.lock'), JSON.stringify(live));
+  assert.throws(
+    () => recoverOrphans(dir, { ...options(), state: (pid) => (pid === 777 ? 'alive' : 'absent') }),
+    /LIVE_OR_UNKNOWN/
+  );
+  assert.deepEqual(JSON.parse(fs.readFileSync(path.join(dir, 'recovery.lock'), 'utf8')), live);
 });
 test('changed bytes before move halt without erasing concurrent work', (t) => {
   const dir = fixture(t);
