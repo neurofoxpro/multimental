@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "neurofoxpro/multimental",
-  "revision": 362,
+  "revision": 363,
   "claims": {
     "b2c6c445-e3f4-4797-900f-8275ac9e18fd": {
       "token": "b2c6c445-e3f4-4797-900f-8275ac9e18fd",
@@ -54,28 +54,22 @@
       "fence": 348,
       "updatedAt": 1790770893693,
       "expiresAt": 1790772693693
+    },
+    "5ec71795-1036-4cc9-83ce-f15b7f974442": {
+      "token": "5ec71795-1036-4cc9-83ce-f15b7f974442",
+      "task": "QA-02",
+      "owner": "qa02-deep-20260930-g5c1",
+      "base": "6540cf34a4e499f01c55203d54f74b2c29014f15",
+      "resources": [
+        "area:devices",
+        "task:QA-02"
+      ],
+      "fence": 363,
+      "updatedAt": 1790786950095,
+      "expiresAt": 1790788750095
     }
   },
   "events": [
-    {
-      "id": "692caf2d-2bed-452b-866f-5d3f3725045f",
-      "hash": "cddc7295e84ba283cb0133a83a9e545a38aa0fa5b2b6a7ae86aac3d93a26b3d3",
-      "revision": 107,
-      "result": {
-        "status": "renewed",
-        "token": "c3b65f04-a578-4862-9583-c42b1c120521",
-        "task": "UX-07",
-        "owner": "ui-playability-20260926-1240",
-        "base": "9a74818707dc0d5044affeb3d7c4f26f65f8d675",
-        "resources": [
-          "area:game-ui",
-          "task:UX-07"
-        ],
-        "fence": 103,
-        "updatedAt": 1790428091157,
-        "expiresAt": 1790429891157
-      }
-    },
     {
       "id": "ac3bd003-e69a-42c5-b889-c71969a8e6a7",
       "hash": "b3d668d0f22bcc89c26ee778a026820bdce0a1ba3cf3ce277ab4494e3a55a74f",
@@ -4709,6 +4703,25 @@
         "task": "QA-02",
         "owner": "queue-recovery-20260930-q166",
         "fence": 361
+      }
+    },
+    {
+      "id": "5ec71795-1036-4cc9-83ce-f15b7f974442",
+      "hash": "a2640b41f2ceea0618cfe23a920d64a160f12459797f82823cba4b57651318c9",
+      "revision": 363,
+      "result": {
+        "status": "claimed",
+        "token": "5ec71795-1036-4cc9-83ce-f15b7f974442",
+        "task": "QA-02",
+        "owner": "qa02-deep-20260930-g5c1",
+        "base": "6540cf34a4e499f01c55203d54f74b2c29014f15",
+        "resources": [
+          "area:devices",
+          "task:QA-02"
+        ],
+        "fence": 363,
+        "updatedAt": 1790786950095,
+        "expiresAt": 1790788750095
       }
     }
   ]
