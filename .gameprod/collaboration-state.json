@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "neurofoxpro/multimental",
-  "revision": 365,
+  "revision": 366,
   "claims": {
     "b2c6c445-e3f4-4797-900f-8275ac9e18fd": {
       "token": "b2c6c445-e3f4-4797-900f-8275ac9e18fd",
@@ -54,41 +54,9 @@
       "fence": 348,
       "updatedAt": 1790770893693,
       "expiresAt": 1790772693693
-    },
-    "452204cb-0758-4955-a27e-cfbecb3535ec": {
-      "token": "452204cb-0758-4955-a27e-cfbecb3535ec",
-      "task": "QA-02",
-      "owner": "qa02-reprobe-20260930-v2c7",
-      "base": "6540cf34a4e499f01c55203d54f74b2c29014f15",
-      "resources": [
-        "area:devices",
-        "task:QA-02"
-      ],
-      "fence": 365,
-      "updatedAt": 1790789633221,
-      "expiresAt": 1790791433221
     }
   },
   "events": [
-    {
-      "id": "39aece37-b6e0-4123-9e5b-930f58c9538e",
-      "hash": "bae18c6dab90765597949474751f324db49945bd5195bcbe00511904f112c70b",
-      "revision": 110,
-      "result": {
-        "status": "renewed",
-        "token": "c3b65f04-a578-4862-9583-c42b1c120521",
-        "task": "UX-07",
-        "owner": "ui-playability-20260926-1240",
-        "base": "9a74818707dc0d5044affeb3d7c4f26f65f8d675",
-        "resources": [
-          "area:game-ui",
-          "task:UX-07"
-        ],
-        "fence": 103,
-        "updatedAt": 1790428409611,
-        "expiresAt": 1790430209611
-      }
-    },
     {
       "id": "0e3b9091-56df-4c9e-8b82-b8a0a16355d8",
       "hash": "32261798e41aca18ba6dee0608fa460ab530a8a8f2757001e8825a86d0ec3450",
@@ -4715,6 +4683,18 @@
         "fence": 365,
         "updatedAt": 1790789633221,
         "expiresAt": 1790791433221
+      }
+    },
+    {
+      "id": "a11a5a63-6418-4597-b7bf-9295187ace16",
+      "hash": "3fa96a36dc70263052008d0efd703fc8fd1f4b02f79816f4a613d327fe09d305",
+      "revision": 366,
+      "result": {
+        "status": "released",
+        "token": "452204cb-0758-4955-a27e-cfbecb3535ec",
+        "task": "QA-02",
+        "owner": "qa02-reprobe-20260930-v2c7",
+        "fence": 365
       }
     }
   ]
