@@ -38,9 +38,13 @@ func open_card(id: int, language: String, source: Control = null) -> bool:
     content.text = str(description.title) + "\n\n" + str(description.body)
     scroll.scroll_vertical = 0
     popup_centered_clamped(Vector2i(600, 780), 0.88)
-    get_ok_button().grab_focus.call_deferred()
+    call_deferred("_focus_close",weakref(get_ok_button()))
     return true
 
+func _focus_close(reference: WeakRef) -> void:
+    var control: Variant = reference.get_ref()
+    if visible and is_inside_tree() and control != null and control.is_inside_tree() and not control.is_queued_for_deletion():
+        control.grab_focus()
 func _visibility_changed() -> void:
     if not visible:
         call_deferred("_restore_focus")
