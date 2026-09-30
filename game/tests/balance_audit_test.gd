@@ -1,5 +1,6 @@
 extends SceneTree
 const Audit=preload("res://tests/support/balance_audit.gd")
+const Competition=preload("res://tests/support/balance_competition.gd")
 const Core=preload("res://src/match_core.gd")
 const Scenarios=preload("res://tests/support/balance_scenarios.gd")
 var checks:int=0
@@ -27,5 +28,25 @@ func _initialize()->void:
     check(not Audit.one(42,"starter","starter","pass-only",240).ok,"diagnostic policy cannot enter the primary matrix")
     check(not Audit.one(42,"unknown","starter","greedy",240).ok,"unknown deck rejected")
     check(not Audit.shard({"schemaVersion":1,"plan":"standard-start-v1","policy":"greedy","profile":"current","seeds":[true],"maxCommands":240}).ok,"bool seed cannot become integer")
+    var coverage:Dictionary={}
+    for name in Competition.DECKS:
+        var cards:Array[int]=Competition.deck(name)
+        var unique:Dictionary={}
+        for id in cards:
+            unique[id]=true
+            coverage[id]=int(coverage.get(id,0))+1
+        check(cards.size()==15 and unique.size()==15,"mixed deck legal unique size")
+    var equal_coverage:bool=coverage.size()==30
+    for count in coverage.values():
+        if int(count)!=5:equal_coverage=false
+    check(equal_coverage,"mixed decks cover every accepted card five times")
+    for pair_id in Competition.POLICY_PAIRS:
+        var mixed_a:Dictionary=Competition.one(42,"mix0","mix1",pair_id,240)
+        var mixed_b:Dictionary=Competition.one(42,"mix0","mix1",pair_id,240)
+        check(mixed_a.get("ok",false) and mixed_a==mixed_b,"mixed exact seeded match deterministic")
+        check(mixed_a.replayVerified and mixed_a.canonicalStart,"mixed replay and production start")
+    var mixed_shard:Dictionary=Competition.shard({"schemaVersion":1,"plan":"mixed-competition-v1","policyPair":"greedy-positional","seeds":[42],"maxCommands":240})
+    check(mixed_shard.ok and mixed_shard.rows.size()==100,"mixed shard covers ordered 10x10")
+    check(not Competition.shard({"schemaVersion":1,"plan":"mixed-competition-v1","policyPair":"greedy-greedy","seeds":[true],"maxCommands":240}).ok,"mixed bool seed rejected")
     if failures==0:print("MULTIMENTAL_BALANCE_AUDIT_TEST_PASS checks="+str(checks))
     quit(0 if failures==0 else 1)

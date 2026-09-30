@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "observedAt": "2026-09-28",
+  "observedAt": "2026-09-30",
   "repository": "neurofoxpro/multimental",
   "generatedFrom": ".gameprod/workplan.json",
   "evidenceSemantics": "Historical evidence only; not a fresh release gate or human approval.",
@@ -101,9 +101,12 @@
       "id": "AUTO-07",
       "text": "Безопасное восстановление всех цепочек и минимальный пакет следующему агенту",
       "version": "P0. Единый производственный процесс",
-      "status": "planned",
+      "status": "verified",
       "kind": "automation",
-      "evidence": [],
+      "evidence": [
+        "docs/production/RECOVERY_EFFECTS.ru.md",
+        "docs/production/evidence/auto07-safe-recovery-20260930.json"
+      ],
       "source": "Полный чат; поручение 25.09.2026",
       "requiredForBeta": true
     },
