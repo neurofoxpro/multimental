@@ -517,6 +517,10 @@ export async function main(argv = process.argv.slice(2)) {
     await (await import('./completed-recovery.mjs')).main(entryArgs.slice(1));
     return;
   }
+  if (entry === 'collab' && entryArgs[0] === 'recover-zero-work') {
+    await (await import('./zero-work-recovery.mjs')).main(entryArgs.slice(1));
+    return;
+  }
   if (entry === 'collab') {
     await (await import('./collaboration.mjs')).main(entryArgs);
     return;

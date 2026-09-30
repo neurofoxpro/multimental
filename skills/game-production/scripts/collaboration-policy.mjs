@@ -1,6 +1,7 @@
 import { continuationRequest } from './work-continuation-policy.mjs';
 import { createHash } from 'node:crypto';
 import { assertCompletedRelease } from './completed-recovery-policy.mjs';
+import { assertZeroWorkRelease } from './zero-work-recovery-policy.mjs';
 export const COORD_BRANCH = 'coordination-state';
 export const COORD_FILE = '.gameprod/collaboration-state.json';
 export const COORD_REPO = 'neurofoxpro/multimental';
@@ -72,9 +73,14 @@ export function transition(state, request, now) {
     !Number.isSafeInteger(now) ||
     !UUID.test(request?.id || '') ||
     !OWNER.test(request.owner || '') ||
-    !['claim', 'renew', 'release', 'release_completed', 'continue_interrupted'].includes(
-      request.kind
-    )
+    ![
+      'claim',
+      'renew',
+      'release',
+      'release_completed',
+      'release_zero_work',
+      'continue_interrupted'
+    ].includes(request.kind)
   )
     throw Error('Invalid coordination command');
   const hash = digest(request),
@@ -158,6 +164,21 @@ export function transition(state, request, now) {
       proofDigest: request.proofDigest,
       head: request.proof.head,
       pr: request.proof.pr
+    };
+  } else if (request.kind === 'release_zero_work') {
+    const target = assertZeroWorkRelease(state, request, now);
+    delete next.claims[target.token];
+    result = {
+      status: 'released_zero_work',
+      token: target.token,
+      task: target.task,
+      owner: target.owner,
+      fence: target.fence,
+      operator: request.owner,
+      proofDigest: request.proofDigest,
+      base: request.proof.base,
+      head: request.proof.head,
+      remoteBranchState: request.proof.remoteBranchState
     };
   } else {
     if (!UUID.test(request.token || '') || !Number.isSafeInteger(request.fence))

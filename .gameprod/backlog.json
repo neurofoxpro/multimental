@@ -748,7 +748,7 @@
   },
   {
     "id": "AUTO-09",
-    "status": "done",
+    "status": "pending",
     "action": "Параллельные чаты: атомарное владение задачами и ресурсами в GitHub",
     "dependsOn": [
       "AUTH-01"

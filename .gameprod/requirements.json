@@ -662,14 +662,14 @@
       "id": "AUTO-09",
       "text": "Параллельные чаты: атомарное владение задачами и ресурсами в GitHub",
       "version": "P0. Единый производственный процесс",
-      "status": "verified",
+      "status": "planned",
       "kind": "automation",
       "evidence": [
         "docs/production/evidence/parallel-slices-20260926.json",
         "skills/game-production/tests/collaboration.test.mjs",
         "skills/game-production/tests/collaboration-integration.test.mjs"
       ],
-      "source": "Поручение владельца 26.09.2026: несколько чатов, координация, автоматизация",
+      "source": "Поручение владельца 26.09.2026: несколько чатов, координация, автоматизация; regression 30.09.2026: Issue #167 expired zero-work claim recovery gap",
       "requiredForBeta": true
     },
     {

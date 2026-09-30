@@ -31,6 +31,7 @@ Read AGENTS and this file once, then `focus`. Read initial/changed decisions and
 | Require this physical primary, no substitution | `lab test --target phone` |
 | Install latest verified release on known primary | `lab deliver` |
 | Resume the same source/device/release checkpoint | `lab resume` |
+| Release proven expired zero-work claim | `collab recover-zero-work TASK` / `collab recover-zero-work TASK --apply` |
 
 One active chat/task/worktree. Use only the returned directory; renew the claim. `work next` does not launch a separate LLM and tags are not locks. Preserve live/unknown/expired foreign claims; deliberate recovery needs its documented proof. After a closed PR use `collab branch SUFFIX`. `collab refresh` is safe fast-forward only. Do not reset/stash/rebase somebody's work.
 
@@ -56,7 +57,7 @@ Measure player outcomes, not only number of PASS: selection/inspection must not 
 `study` binds question/hypothesis/control/readset/sources/reviewed test argv and checkpoints. Capture is downloaded evidence, not automatic source understanding; the active agent writes explicit analysis with limitations. Preserve prior evidence when inputs change. Generated art needs provenance, prompt, hash, usage/fallback; never bake rules/numbers into decoration or copy another game's assets.
 
 ## Targeted references
-Full previous v8.1 is preserved in `REFERENCE-v8.1.md`; earlier detail in `REFERENCE.md` is historical. Read only the relevant contract: `LAB_AUTOMATION.ru.md`, `SHORT_COMMANDS.ru.md`, `WORK_QUEUE_RESEARCH.ru.md`, `DEV_SETTLE.ru.md`, `DEVICE_SUITES.ru.md`, `RELEASE_TRANSFER.ru.md`, `INTERRUPTED_CONTINUATION.ru.md`, `COMPLETED_SLICE_RECOVERY.ru.md`, `RECOVERY_EFFECTS.ru.md`, `INTERACTION_RESEARCH.ru.md`, `UI_PLAYABILITY.ru.md`, `GALLERY_CAPTURE.ru.md` under docs/production. Source-only progress must not wait for a disconnected phone. Report actual results and the first unmet step; never turn missing implementation into claimed human acceptance.
+Full previous v8.1 is preserved in `REFERENCE-v8.1.md`; earlier detail in `REFERENCE.md` is historical. Read only the relevant contract: `LAB_AUTOMATION.ru.md`, `SHORT_COMMANDS.ru.md`, `WORK_QUEUE_RESEARCH.ru.md`, `DEV_SETTLE.ru.md`, `DEVICE_SUITES.ru.md`, `RELEASE_TRANSFER.ru.md`, `INTERRUPTED_CONTINUATION.ru.md`, `COMPLETED_SLICE_RECOVERY.ru.md`, `ZERO_WORK_CLAIM_RECOVERY.ru.md`, `RECOVERY_EFFECTS.ru.md`, `INTERACTION_RESEARCH.ru.md`, `UI_PLAYABILITY.ru.md`, `GALLERY_CAPTURE.ru.md` under docs/production. Source-only progress must not wait for a disconnected phone. Report actual results and the first unmet step; never turn missing implementation into claimed human acceptance.
 
 Recovery note: an installed APK plus a timed-out READY is not permission to reinstall blindly. Exact actual/signed APK hash and persistent certificate allow resuming launch only. The normal launcher wakes the selected display; Android credential locks remain enforced and cause an explicit blocker. The scheduled updater resolves the same physical primary over USB/Wi-Fi without changing saved station identity.
 

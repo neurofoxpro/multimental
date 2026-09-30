@@ -35,3 +35,7 @@
 ## Завершённый, но не освобождённый срез
 
 Штатный маршрут collab recover-completed TASK проверяет доказанно завершённый срез. Применение --apply не является автозахватом по TTL: требует точного merged PR, чистого дерева, отсутствия иных писателей и CAS по неизменённому claim под блокировками. Подробности — COMPLETED_SLICE_RECOVERY.ru.md. Открытый PR или новый heartbeat останавливают передачу.
+
+## Просроченный срез без начатой работы
+
+Если claim истёк, но branch осталась ровно на claim base, дерево clean и PR не создавался, completed/interrupted recovery намеренно не подходят. Для этого случая используется collab recover-zero-work TASK, затем только после свежего proof — тот же вызов с --apply. Remote branch может отсутствовать; если она существует, обязана указывать на тот же HEAD. Ноль commits, PR, активных Actions и live/unknown locks проверяются отдельно. Новый heartbeat или любое изменение source/binding прекращают операцию. Подробности — ZERO_WORK_CLAIM_RECOVERY.ru.md.
