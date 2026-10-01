@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "neurofoxpro/multimental",
-  "revision": 376,
+  "revision": 377,
   "claims": {
     "b2c6c445-e3f4-4797-900f-8275ac9e18fd": {
       "token": "b2c6c445-e3f4-4797-900f-8275ac9e18fd",
@@ -15,19 +15,6 @@
       "fence": 149,
       "updatedAt": 1790780934110,
       "expiresAt": 1790782734110
-    },
-    "1a45e1de-ca20-4dd1-947d-35a7775a1749": {
-      "token": "1a45e1de-ca20-4dd1-947d-35a7775a1749",
-      "task": "AUTO-08",
-      "owner": "auto08-offline-20260930-z4m2",
-      "base": "052a1d5f8f4d20a38f4c2a8bedcd5bc999538842",
-      "resources": [
-        "area:automation",
-        "task:AUTO-08"
-      ],
-      "fence": 309,
-      "updatedAt": 1790721999651,
-      "expiresAt": 1790723799651
     },
     "2a859b83-5e8f-4890-b7a5-04c2b3ad3f36": {
       "token": "2a859b83-5e8f-4890-b7a5-04c2b3ad3f36",
@@ -70,25 +57,6 @@
     }
   },
   "events": [
-    {
-      "id": "61677357-2329-4fe1-83b1-0b572b311570",
-      "hash": "2d9e1d75cfbcc76de514224779a76371719fd93ca13b4af1a71cd7b428e3a168",
-      "revision": 121,
-      "result": {
-        "status": "renewed",
-        "token": "d5185b4c-0104-4055-a640-9bf9433a1daf",
-        "task": "AUTO-07",
-        "owner": "delivery-resume-20260926-1325",
-        "base": "ce0f8393acdb754904c52079489ec8ca2c50a92b",
-        "resources": [
-          "area:automation",
-          "task:AUTO-07"
-        ],
-        "fence": 117,
-        "updatedAt": 1790429942774,
-        "expiresAt": 1790431742774
-      }
-    },
     {
       "id": "e2971020-d445-4edf-b5c8-fe6acfe2acba",
       "hash": "cc3060c4a8741fc7fe41cdbf633cdfb028d880d11bf167152d1250231254882d",
@@ -4715,6 +4683,23 @@
         "fence": 367,
         "updatedAt": 1790895327873,
         "expiresAt": 1790897127873
+      }
+    },
+    {
+      "id": "94c05923-3f88-4287-826b-9751ae1cf2ea",
+      "hash": "4f56a4f6b2e77e159a61d5390051a063fe27c33c88931900b52c0a53805947ee",
+      "revision": 377,
+      "result": {
+        "status": "released_zero_work",
+        "token": "1a45e1de-ca20-4dd1-947d-35a7775a1749",
+        "task": "AUTO-08",
+        "owner": "auto08-offline-20260930-z4m2",
+        "fence": 309,
+        "operator": "auto09-zero-work-20260930-z9r4",
+        "proofDigest": "15449efb48b3aea0c67ce64dc8f56b1cc372af86d48fcd10a625b694d872b431",
+        "base": "052a1d5f8f4d20a38f4c2a8bedcd5bc999538842",
+        "head": "052a1d5f8f4d20a38f4c2a8bedcd5bc999538842",
+        "remoteBranchState": "absent"
       }
     }
   ]
