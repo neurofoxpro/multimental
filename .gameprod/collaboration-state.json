@@ -1,21 +1,8 @@
 {
   "schemaVersion": 1,
   "repository": "neurofoxpro/multimental",
-  "revision": 378,
+  "revision": 379,
   "claims": {
-    "b2c6c445-e3f4-4797-900f-8275ac9e18fd": {
-      "token": "b2c6c445-e3f4-4797-900f-8275ac9e18fd",
-      "task": "UX-11",
-      "owner": "tactical-ui-20260926-f42b",
-      "base": "135b34d130c9ba1e70535ceb0c98d8a279feb42c",
-      "resources": [
-        "area:game-ui",
-        "task:UX-11"
-      ],
-      "fence": 149,
-      "updatedAt": 1790780934110,
-      "expiresAt": 1790782734110
-    },
     "2a859b83-5e8f-4890-b7a5-04c2b3ad3f36": {
       "token": "2a859b83-5e8f-4890-b7a5-04c2b3ad3f36",
       "task": "NET-06",
@@ -44,25 +31,6 @@
     }
   },
   "events": [
-    {
-      "id": "68aff00c-cc59-441c-adbd-05cd9ebcb653",
-      "hash": "2ea7c48b5ef3d57f814d47721d2f7d10365fbe329f41f886f0c389d03ab4ee98",
-      "revision": 123,
-      "result": {
-        "status": "renewed",
-        "token": "d5185b4c-0104-4055-a640-9bf9433a1daf",
-        "task": "AUTO-07",
-        "owner": "delivery-resume-20260926-1325",
-        "base": "ce0f8393acdb754904c52079489ec8ca2c50a92b",
-        "resources": [
-          "area:automation",
-          "task:AUTO-07"
-        ],
-        "fence": 117,
-        "updatedAt": 1790430286944,
-        "expiresAt": 1790432086944
-      }
-    },
     {
       "id": "ab524617-82f1-4136-9b60-0742679d0065",
       "hash": "c65ce9208457c71e1f5e6bce91274d433a2c36a76356d703e66597afd8a3bd7d",
@@ -4685,6 +4653,22 @@
         "base": "a6c086d1dc087879ab5e8f8bc738257bf2d9c49c",
         "head": "a6c086d1dc087879ab5e8f8bc738257bf2d9c49c",
         "remoteBranchState": "absent"
+      }
+    },
+    {
+      "id": "b7709e16-4efd-47c7-800e-801fe293c984",
+      "hash": "d671dd5602c15aa0a7feaa55dc9b753ecbd40f1bbc5e26c08c5826b983f4f8fe",
+      "revision": 379,
+      "result": {
+        "status": "released_completed",
+        "token": "b2c6c445-e3f4-4797-900f-8275ac9e18fd",
+        "task": "UX-11",
+        "owner": "tactical-ui-20260926-f42b",
+        "fence": 149,
+        "operator": "auto09-zero-work-20260930-z9r4",
+        "proofDigest": "58ad345c4267ec6ce00aaeef4f40f295355756b0a5d32a9811fde0e99a209b15",
+        "head": "416ad0239cba96d659e2308f5f446a8be98c7a98",
+        "pr": 166
       }
     }
   ]
