@@ -16,6 +16,7 @@ import {
 } from './lib.mjs';
 import { HubClient } from './hub-client.mjs';
 import { guardWorktree } from './collaboration-guard.mjs';
+import { ensureRecoveryCommit, recoveryAncestor } from './recovery-git.mjs';
 import { GitHubCoordination, coordinate } from './collaboration-store.mjs';
 import { assertOwnership, digest } from './collaboration-policy.mjs';
 import { acquireOperation } from './operation-lock.mjs';
@@ -79,10 +80,11 @@ export async function main(args = process.argv.slice(2)) {
     throw Error('ZERO_WORK_PRIMARY_MEMORY');
   const actorHead = cmd(root, ['rev-parse', 'HEAD']);
   const liveDev = (await client.api('GET', '/git/ref/heads/dev')).object.sha;
+  ensureRecoveryCommit(cmd, root, liveDev);
   if (apply) {
     if (cmd(root, ['status', '--porcelain']) || !gate(root, project, 'verified').ok)
       throw Error('ZERO_WORK_REQUIRES_CLEAN_VERIFIED_ADAPTER');
-    if (cmd(root, ['merge-base', '--is-ancestor', actorHead, liveDev], true).status !== 0)
+    if (!recoveryAncestor(cmd, root, actorHead, liveDev))
       throw Error('ZERO_WORK_ADAPTER_NOT_IN_DEV');
   }
   const config = boundedJSON(path.join(workspace, 'station.local.json'));
@@ -255,8 +257,7 @@ export async function main(args = process.argv.slice(2)) {
             !state.binding.released,
           cleanWorktree: state.clean,
           baseEqualsHead: claim.base === state.head,
-          baseInsideDev:
-            cmd(root, ['merge-base', '--is-ancestor', claim.base, liveDev], true).status === 0,
+          baseInsideDev: recoveryAncestor(cmd, root, claim.base, liveDev),
           remoteBranchSafe:
             remoteBranchState === 'absent' ||
             (remoteBranchState === 'exact_head' && remoteHead === state.head),
