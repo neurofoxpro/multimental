@@ -1,6 +1,6 @@
 # Multimental — от идеи до Google Play
 
-Источник: `.gameprod/workplan.json`. Обновлено: 2026-09-30.
+Источник: `.gameprod/workplan.json`. Обновлено: 2026-10-01.
 
 **Исторически проверено не означает допуск текущего RC.** Невыполненный код не является ручной задачей.
 
@@ -129,7 +129,7 @@ Dev APK продолжаются небольшими итерациями. Play
 - Одновременная заявка на одну задачу/область имеет ровно одного владельца; разные области работают параллельно.
 - Повтор и потеря ответа не создают двойную запись; просроченный heartbeat не освобождает активный ресурс.
 - Статус, комментарии и команды продолжения читаются из GitHub, без раскрытия секретов.
-- Expired zero-work claim освобождается только по bounded proof: base/local/remote HEAD совпадают, дерево чистое, PR/active runs/live locks отсутствуют, claim неизменен; один CAS release не меняет source/device state и не затрагивает replacement claim.
+- Expired zero-work claim освобождается только по bounded proof: base/local HEAD совпадают, а удалённая ветка либо доказанно отсутствует, либо указывает на тот же HEAD, дерево чистое, PR/active runs/live locks отсутствуют, claim неизменен; один CAS release не меняет source/device state и не затрагивает replacement claim.
 
 Пакет работ: `npm run game -- task AUTO-09`.
 

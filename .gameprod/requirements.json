@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "observedAt": "2026-09-30",
+  "observedAt": "2026-10-01",
   "repository": "neurofoxpro/multimental",
   "generatedFrom": ".gameprod/workplan.json",
   "evidenceSemantics": "Historical evidence only; not a fresh release gate or human approval.",
