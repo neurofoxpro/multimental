@@ -1,28 +1,23 @@
 {
   "schemaVersion": 1,
   "repository": "neurofoxpro/multimental",
-  "revision": 397,
-  "claims": {},
+  "revision": 398,
+  "claims": {
+    "aff20404-246b-469b-912c-eaaa8be9662b": {
+      "token": "aff20404-246b-469b-912c-eaaa8be9662b",
+      "task": "QA-02",
+      "owner": "redmi-fix-20261002-r330",
+      "base": "89b4d1a5dc45aa9a411b1045ece0755d353444e6",
+      "resources": [
+        "area:devices",
+        "task:QA-02"
+      ],
+      "fence": 398,
+      "updatedAt": 1790929125094,
+      "expiresAt": 1790930925094
+    }
+  },
   "events": [
-    {
-      "id": "e520bc45-5245-43f4-9aa1-ccc50899ef8a",
-      "hash": "13f30098cc7b8372a13e3b66c580a3cb00f4f910db3d1b6472857fe4ce07acaf",
-      "revision": 142,
-      "result": {
-        "status": "renewed",
-        "token": "b3a65fb9-46a7-4678-8abe-f5a823e335f9",
-        "task": "AUTO-07",
-        "owner": "auto-environment-20260926-f42b",
-        "base": "ba379967f6c2231f33263fb2a91185ed13aefe5a",
-        "resources": [
-          "area:automation",
-          "task:AUTO-07"
-        ],
-        "fence": 138,
-        "updatedAt": 1790432732171,
-        "expiresAt": 1790434532171
-      }
-    },
     {
       "id": "168a1284-1633-4798-bb9f-ae998f3d2d44",
       "hash": "3e3acd2bf194952642e3cba57a0722c8fc25607fa172c3f751252e717699d3ed",
@@ -4646,6 +4641,25 @@
         "task": "UX-11",
         "owner": "ux11-acceptance-20261002-u7r3",
         "fence": 391
+      }
+    },
+    {
+      "id": "aff20404-246b-469b-912c-eaaa8be9662b",
+      "hash": "38d62d06448d668d26a443af4751e35461b819e08fdeb4b7cc8a353176d61fac",
+      "revision": 398,
+      "result": {
+        "status": "claimed",
+        "token": "aff20404-246b-469b-912c-eaaa8be9662b",
+        "task": "QA-02",
+        "owner": "redmi-fix-20261002-r330",
+        "base": "89b4d1a5dc45aa9a411b1045ece0755d353444e6",
+        "resources": [
+          "area:devices",
+          "task:QA-02"
+        ],
+        "fence": 398,
+        "updatedAt": 1790929125094,
+        "expiresAt": 1790930925094
       }
     }
   ]
