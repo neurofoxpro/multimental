@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "id": "copper-watch",
+  "revision": 1,
+  "baseHash": "4d2f62a1870387678981ed6135e3816f2bce43f535dea0f912c7af961b27059b",
+  "operation": "add",
+  "fromVersion": 0,
+  "card": {
+    "id": "c030",
+    "version": 1,
+    "slot": 30,
+    "element": "mecha",
+    "role": "fighter",
+    "cost": 3,
+    "attack": 3,
+    "health": 4,
+    "effect": "directional-sweep-v1",
+    "text": {
+      "ru": {
+        "name": "Медный дозорный",
+        "description": "Одна соседняя клетка впереди. Пример кандидата, не новая принятая карта."
+      },
+      "en": {
+        "name": "Copper Watch",
+        "description": "One adjacent cell in front. An experimental candidate, not a newly accepted card."
+      }
+    },
+    "art": {
+      "kind": "none"
+    },
+    "origin": {
+      "author": "Multimental research",
+      "reference": "CONTENT-03: example of a stat-only candidate using an existing tested handler"
+    }
+  },
+  "trial": {
+    "replace": "c014",
+    "copies": 2
+  }
+}

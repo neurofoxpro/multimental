@@ -1,0 +1,73 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
+import { assetURL } from '../../../scripts/update-device.mjs';
+import { waitReady } from '../../../scripts/device-readiness.mjs';
+import { fingerprint } from '../scripts/lib.mjs';
+test('release URLs restricted to configured repository', () => {
+  const repo = 'example/game';
+  assert.equal(
+    assetURL('https://github.com/example/game/releases/download/v0.1.0-alpha.1/game.apk', repo),
+    'https://github.com/example/game/releases/download/v0.1.0-alpha.1/game.apk'
+  );
+  assert.throws(() => assetURL('https://github.com/other/game/releases/download/x/game.apk', repo));
+  assert.throws(() =>
+    assetURL('http://github.com/example/game/releases/download/x/game.apk', repo)
+  );
+  assert.throws(() =>
+    assetURL('https://evil.invalid/example/game/releases/download/x/game.apk', repo)
+  );
+});
+test('generated UID sidecars do not invalidate source but code does', () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'gameprod-generated-'));
+  try {
+    fs.mkdirSync(path.join(root, 'src'));
+    fs.writeFileSync(path.join(root, 'src/a.gd'), 'a');
+    const p = { inputs: ['src'], generatedSuffixes: ['.gd.uid'] };
+    const before = fingerprint(root, p);
+    fs.writeFileSync(path.join(root, 'src/a.gd.uid'), 'generated');
+    assert.equal(fingerprint(root, p), before);
+    fs.writeFileSync(path.join(root, 'src/a.gd'), 'b');
+    assert.notEqual(fingerprint(root, p), before);
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+test('cold launch waits for real readiness beyond 2.5s', async () => {
+  let time = 0;
+  const r = await waitReady({
+    pid: () => 123,
+    log: () => (time >= 5000 ? 'MULTIMENTAL_READY' : 'loading'),
+    now: () => time,
+    delay: async (ms) => {
+      time += ms;
+    },
+    timeoutMs: 10000
+  });
+  assert.equal(r.pid, '123');
+  assert.equal(time, 5000);
+});
+test('missing readiness cannot pass', async () => {
+  let time = 0;
+  await assert.rejects(
+    () =>
+      waitReady({
+        pid: () => 123,
+        log: () => '',
+        now: () => time,
+        delay: async (ms) => {
+          time += ms;
+        },
+        timeoutMs: 3000
+      }),
+    /timeout/
+  );
+});
+test('runtime error is not accepted as launch', async () => {
+  await assert.rejects(
+    () => waitReady({ pid: () => 123, log: () => 'FATAL EXCEPTION', timeoutMs: 3000 }),
+    /Application error/
+  );
+});

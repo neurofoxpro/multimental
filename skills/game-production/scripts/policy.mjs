@@ -1,0 +1,39 @@
+export function featureBranch(name) {
+  return (
+    /^(?:feature|fix|docs|test)\/[a-zA-Z0-9][a-zA-Z0-9._/-]*$/.test(name) && !name.includes('..')
+  );
+}
+export function classify(paths) {
+  const docs = (p) =>
+    p.endsWith('.md') ||
+    /^docs\//.test(p) ||
+    /^\.gameprod\/(?:state|backlog|roadmap|capabilities|decisions|lifecycle)\.json$/.test(p);
+  return {
+    needsApk: paths.length === 0 || paths.some((p) => !docs(p)),
+    metadata: true,
+    reason: paths.length && paths.every(docs) ? 'documentation_only' : 'runtime_or_unknown',
+    files: paths
+  };
+}
+export function readyTasks(tasks) {
+  const ids = new Set(tasks.filter((t) => t.status === 'done').map((t) => t.id));
+  return tasks.filter(
+    (t) =>
+      ['pending', 'in_progress'].includes(t.status) &&
+      !t.manual &&
+      (t.dependsOn || []).every((id) => ids.has(id))
+  );
+}
+export function assertMerge(pr, sha, checks) {
+  if (
+    pr.baseRefName !== 'dev' ||
+    !featureBranch(pr.headRefName) ||
+    pr.headRefOid !== sha ||
+    pr.state !== 'OPEN' ||
+    pr.isDraft
+  )
+    throw Error('Merge scope/head/state mismatch');
+  if (!checks.length || checks.some((x) => x.state !== 'SUCCESS'))
+    throw Error('Required checks not successful');
+  return true;
+}

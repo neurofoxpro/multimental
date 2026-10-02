@@ -1,0 +1,163 @@
+{
+  "schemaVersion": 1,
+  "observedAt": "2026-09-24T05:17:25.940Z",
+  "repository": "neurofoxpro/multimental",
+  "executionHost": "VENEL-SENDRIK",
+  "branch": "feature/lan-pvp-20260924",
+  "scope": "local_verified_source_and_review_branch_no_new_release",
+  "installedObservation": {
+    "observedAt": "2026-09-24T05:13:59.204Z",
+    "version": "0.1.2-alpha.56.1",
+    "sourceCommit": "71080cdf53ae26a7039346e66956df4dbf4460fd",
+    "adb": "device",
+    "ready": true,
+    "lastUpdaterStatus": "blocked",
+    "lastUpdaterError": "fetch failed"
+  },
+  "verification": {
+    "finishedAt": "2026-09-24T05:16:30.458Z",
+    "sourceDigest": "1d73ce8a0c74ab97609ead2a59495e9d9da94cd4de233df2fe0e0d41d195b036",
+    "sourceStable": true,
+    "nodeTests": 69,
+    "nodePassed": 69,
+    "coreChecks": 3002,
+    "coreSimulations": 100,
+    "roomChecks": 2900,
+    "roomSimulations": 50,
+    "protocolChecks": 16,
+    "tlsFullMatch": true,
+    "addressSelection": true
+  },
+  "newDeviceQualification": "not_run_for_0.2.0",
+  "newRelease": "not_published",
+  "integration": "not_performed",
+  "toolGate": "Combined automatic production cycle was blocked by the tool safety check; not rerouted to bypass it",
+  "betaReadiness": {
+    "schemaVersion": 1,
+    "status": "not_beta_ready",
+    "total": 31,
+    "automaticallyVerified": 13,
+    "remaining": [
+      {
+        "id": "UX-02",
+        "text": "Понятные подсветки, отказ без траты хода, объяснение причины результата",
+        "status": "implemented",
+        "version": "0.2.0"
+      },
+      {
+        "id": "UX-03",
+        "text": "Настройки громкости по категориям и 1–3 музыкальных композиции",
+        "status": "planned",
+        "version": "0.9.0"
+      },
+      {
+        "id": "UX-04",
+        "text": "Безопасная обучающая партия, короткое обучение",
+        "status": "planned",
+        "version": "0.9.0"
+      },
+      {
+        "id": "NET-01",
+        "text": "LAN-комната, приватное приглашение и партия двух игроков без внешнего сервера",
+        "status": "implemented",
+        "version": "0.2.0"
+      },
+      {
+        "id": "NET-02",
+        "text": "Хост-авторитет, несовместимость до игры, скрытые карты, идемпотентность и переподключение",
+        "status": "implemented",
+        "version": "0.2.0"
+      },
+      {
+        "id": "NET-04",
+        "text": "Пользовательский Bluetooth PvP, выбор/сопряжение и разрешения",
+        "status": "planned",
+        "version": "0.3.0"
+      },
+      {
+        "id": "META-01",
+        "text": "Коллекция и конструктор собственных колод",
+        "status": "planned",
+        "version": "0.4.0"
+      },
+      {
+        "id": "META-02",
+        "text": "Магазин, пак по пять случайных карт, отдельная валюта лобби",
+        "status": "planned",
+        "version": "0.5.0"
+      },
+      {
+        "id": "META-03",
+        "text": "Крафт карт из пыли, инвентарь и сохранность коллекции при поражении",
+        "status": "planned",
+        "version": "0.5.0"
+      },
+      {
+        "id": "META-04",
+        "text": "Награды за победу/ежедневные задания, уровни без обязательного гринда",
+        "status": "planned",
+        "version": "0.5.0"
+      },
+      {
+        "id": "META-05",
+        "text": "Атомарное сохранение после матча, пака, колоды и награды; миграции",
+        "status": "planned",
+        "version": "0.5.0"
+      },
+      {
+        "id": "AUTO-05",
+        "text": "Реестр исследований, источников, проверок и ограничений",
+        "status": "implemented",
+        "version": "0.2.0"
+      }
+    ],
+    "manual": [
+      {
+        "id": "CONTENT-01",
+        "text": "Основная особая система взаимодействий карт/стихий",
+        "kind": "product"
+      },
+      {
+        "id": "BETA-01",
+        "text": "Субъективная оценка интереса, читаемости и темпа партии",
+        "kind": "subjective"
+      }
+    ]
+  },
+  "manualChecks": "docs/MANUAL_TESTS.ru.md",
+  "research": {
+    "schemaVersion": 1,
+    "observations": [
+      {
+        "url": "https://docs.godotengine.org/en/stable/classes/class_streampeertls.html",
+        "observedAt": "2026-09-24T05:13:14.055Z",
+        "sha256": "1f3e8d8f7b6728177c7feffcbd10fd1936f9a1189a7f45d1d292bb847e058aff",
+        "etag": null
+      },
+      {
+        "url": "https://docs.godotengine.org/en/stable/classes/class_tlsoptions.html",
+        "observedAt": "2026-09-24T05:13:14.403Z",
+        "sha256": "cc37536aedab8aa4ec506953314c5a4204379b673781d5b359e95c2747e9af61",
+        "etag": null
+      },
+      {
+        "url": "https://github.com/godotengine/godot/blob/master/modules/mbedtls/crypto_mbedtls.cpp",
+        "observedAt": "2026-09-24T05:13:15.337Z",
+        "sha256": "9a6ba6da3b1ae18b8606306bc78e56cfd63a9dfc9de32bd61e9ac7d0846559fe",
+        "etag": "W/\"61d90ae8d37ec7a65408322b0e02124f\""
+      },
+      {
+        "url": "https://docs.godotengine.org/en/stable/classes/class_x509certificate.html",
+        "observedAt": "2026-09-24T05:13:15.659Z",
+        "sha256": "a7ab88bc4d8cf63a8626a6328f90ae41c96f4823d7e7acd3ed4b3a708878a1ba",
+        "etag": null
+      },
+      {
+        "url": "https://docs.github.com/en/rest/using-the-rest-api/best-practices-for-using-the-rest-api",
+        "observedAt": "2026-09-24T05:13:16.168Z",
+        "sha256": "92b74ec9c36dbc0cc48039b36de195473119cc01af8c3be823f62cb634246311",
+        "etag": null
+      }
+    ]
+  }
+}

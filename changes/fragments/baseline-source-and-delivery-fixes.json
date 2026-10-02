@@ -1,0 +1,8 @@
+{
+  "id": "baseline-source-and-delivery-fixes",
+  "version": "0.1.1",
+  "kind": "fixed",
+  "scope": "automation",
+  "text": "Устранены изменение исходников при тесте, случайная UI-фикстура, конфликт установщика с испытаниями и преждевременное принятие доставки.",
+  "breaking": false
+}

@@ -1,0 +1,112 @@
+# BALANCE-01 — протокол человеческой длительности
+
+Этот документ закрывает только способ воспроизводимо измерить последний ручной критерий BALANCE-01. Он не меняет карты, правила, таймеры или принятый баланс и сам по себе не является human acceptance.
+
+## Что уже известно
+
+Инженерные серии standard-start/held-out/mixed проверили воспроизводимость, первый ход, составы колод, replay и циклы. Последняя mixed-серия: 12 800 матчей, общий first-mover score 51,5%, 0 forced limits и 0 deterministic cycles.
+
+Текущий код также уже ограничивает wall-clock партии сверху: локальная игра использует 900 секунд, authoritative RoomRules — 900000 мс. Это доказывает наличие технического потолка 15 минут, но не доказывает, что обычная человеческая партия ощущается как ~10 минут.
+
+## Что измеряем
+
+Учитывается только реально завершённая партия, в которой есть хотя бы один человек. Bot-only/headless матчи сюда не входят.
+
+Старт измерения — первый обычный actionable battle-state после создания/входа в матч. Финиш — появление итогового состояния победы/поражения/ничьей/лимита.
+
+Обычные действия игрока входят во время: чтение карты, поворот, выбор, осмотр поля, подтверждение friendly fire и принятие решения. Это часть UX, а не «пауза секундомера».
+Сворачивание приложения, разговор вне игры, ручная остановка теста или иной внешний перерыв не удаляются из журнала. Такая строка сохраняется с причиной interruption и не смешивается с основным timing-summary.
+
+## Привязка к сборке
+
+Все строки одной серии должны относиться к одному точному опубликованному dev release. Для серии записываются:
+
+- release tag;
+- source commit;
+- фактически установленная версия;
+- APK SHA-256, если игра проверяется Android APK;
+- дата/время серии.
+
+Если между матчами меняется source/release/APK, начинается новая серия. Результаты разных сборок не объединяются как одна выборка.
+
+## Запись одной партии
+
+Минимальные поля:
+
+~~~json
+{
+  "id": "human-001",
+  "releaseTag": "vX.Y.Z-alpha.N",
+  "sourceCommit": "40-hex-sha",
+  "startedAt": "ISO-8601",
+  "finishedAt": "ISO-8601",
+  "humanControlledPlayers": 2,
+  "mode": "local|lan|bluetooth|online|other",
+  "firstPlayer": 0,
+  "resultReason": "five|empty|timeout|limit|resigned|disconnect|other",
+  "interrupted": false,
+  "notes": ""
+}
+~~~
+Duration отдельно руками не вводится: она вычисляется как finishedAt - startedAt. Это исключает расхождение секундомера и записанных timestamps.
+
+Запись считается основной timing-observation, если:
+- id уникален;
+- timestamps валидны и finish > start;
+- матч действительно завершён;
+- humanControlledPlayers равен 1 или 2;
+- interruption = false;
+- release/source соответствуют серии.
+
+Необычные матчи не стираются. Interrupted/reconnect/problem rows сохраняются отдельно как диагностические наблюдения.
+
+## Summary
+
+Для одной exact-release серии считаются как описательные величины:
+
+- число usable human matches;
+- minimum / median / p90 / maximum / mean;
+- сколько завершилось за <=10 минут;
+- сколько заняло >10 и <15 минут;
+- сколько дошло до 15-минутного hard limit;
+- причины завершения;
+- раздельно 1-human и 2-human матчи, если присутствуют оба режима.
+
+Количество команд симулятора, headless runtime и AI-only партии не преобразуются в минуты.
+
+## Как читать результат
+
+Цель владельца остаётся прежней: обычная партия около 10 минут, затянутая — не более 15. Этот документ не добавляет новый численный порог выборки и не превращает median/p90 в автоматический PASS.
+
+15-минутный hard cap уже присутствует в коде. Ручная серия отвечает на другой вопрос: не слишком ли часто реальные игроки подходят к этому пределу и не создают ли чтение/управление/ожидание ощущение затянутой партии.
+Если большинство наблюдений заметно короче/длиннее ожидаемого или несколько нормальных матчей регулярно упираются в limit, это повод отдельно исследовать темп. Параметры карт/правил после просмотра timing-данных не меняются автоматически.
+
+## Что приложить к Issue57
+
+После реальной серии публикуется компактный отчёт без персональных данных:
+
+- exact release/source/APK identity;
+- список durations и resultReason;
+- summary выше;
+- число interrupted rows отдельно;
+- короткие наблюдения игроков о темпе;
+- явная строка humanAcceptance: pending|owner-reviewed.
+
+До owner review BALANCE-01 остаётся открытой.
+
+Связанные инженерные доказательства:
+- docs/production/BALANCE_STANDARD_START.ru.md
+- docs/production/BALANCE_HELDOUT_RESULTS.ru.md
+- docs/production/BALANCE_MIXED_COMPETITION.ru.md
+- docs/production/evidence/balance-mixed-competition-20260930.json
+
+## Команда проверки журнала
+
+После ручной серии положите JSON в .gameprod/evidence/ или docs/production/evidence/ и используйте:
+
+~~~text
+scripts\chat.cmd balance human check .gameprod/evidence/human-duration-series.json
+scripts\chat.cmd balance human summary .gameprod/evidence/human-duration-series.json
+~~~
+
+Команда ничего не считает human acceptance и не меняет баланс. Она только проверяет exact release/source, вычисляет duration из timestamp и отделяет interrupted rows.

@@ -1,0 +1,217 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Multimental versioned card data",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "version",
+    "slot",
+    "element",
+    "role",
+    "cost",
+    "attack",
+    "health",
+    "effect",
+    "text",
+    "art",
+    "origin"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^c[0-9]{3}$"
+    },
+    "version": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 1000000
+    },
+    "slot": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 255
+    },
+    "element": {
+      "enum": [
+        "fire",
+        "water",
+        "lightning",
+        "air",
+        "earth",
+        "light",
+        "dark",
+        "mecha",
+        "poison",
+        "mystery"
+      ]
+    },
+    "role": {
+      "enum": [
+        "fighter",
+        "guard",
+        "lancer",
+        "archer",
+        "flanker"
+      ]
+    },
+    "cost": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 8
+    },
+    "attack": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 12
+    },
+    "health": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 30
+    },
+    "effect": {
+      "const": "directional-sweep-v1"
+    },
+    "text": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "ru",
+        "en"
+      ],
+      "properties": {
+        "ru": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "name",
+            "description"
+          ],
+          "properties": {
+            "name": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 48
+            },
+            "description": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 280
+            }
+          }
+        },
+        "en": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "name",
+            "description"
+          ],
+          "properties": {
+            "name": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 48
+            },
+            "description": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 280
+            }
+          }
+        }
+      }
+    },
+    "origin": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "author",
+        "reference"
+      ],
+      "properties": {
+        "author": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "reference": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 240
+        }
+      }
+    },
+    "art": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind"
+          ],
+          "properties": {
+            "kind": {
+              "const": "none"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "path",
+            "sha256",
+            "source",
+            "license",
+            "author",
+            "prompt",
+            "generator"
+          ],
+          "properties": {
+            "kind": {
+              "enum": [
+                "owned",
+                "generated",
+                "third-party"
+              ]
+            },
+            "path": {
+              "type": "string",
+              "pattern": "^game/assets/cards/[a-z0-9_-]+[.](png|webp)$"
+            },
+            "sha256": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{64}$"
+            },
+            "source": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 240
+            },
+            "license": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 100
+            },
+            "author": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 120
+            },
+            "prompt": {
+              "type": "string",
+              "maxLength": 4000
+            },
+            "generator": {
+              "type": "string",
+              "maxLength": 120
+            }
+          }
+        }
+      ]
+    }
+  }
+}

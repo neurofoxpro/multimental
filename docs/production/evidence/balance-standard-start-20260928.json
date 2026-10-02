@@ -1,0 +1,815 @@
+{
+  "schemaVersion": 1,
+  "repository": "neurofoxpro/multimental",
+  "taskId": "BALANCE-01",
+  "kind": "completed_engineering_increment_not_final_balance_acceptance",
+  "observedAt": "2026-09-27T22:33:41.346Z",
+  "sourceBase": "28f74ecca395131e6f6a78ff42046b800318c11e",
+  "preregisteredAt": "2026-09-27T22:21:52Z",
+  "preregistration": "https://github.com/neurofoxpro/multimental/issues/57#issuecomment-5860377401",
+  "verification": {
+    "schemaVersion": 1,
+    "step": "verify",
+    "status": "passed",
+    "exitCode": 0,
+    "sourceDigest": "3c4d65bc217af8118c369fd7b70857b323485cf39d885008f2e5d305697aee3b",
+    "sourceDigestAfter": "3c4d65bc217af8118c369fd7b70857b323485cf39d885008f2e5d305697aee3b",
+    "sourceChanged": false,
+    "startedAt": "2026-09-27T22:25:32.670Z",
+    "finishedAt": "2026-09-27T22:27:29.899Z",
+    "host": "VENEL-SENDRIK",
+    "command": [
+      "node",
+      "tools/verify.mjs"
+    ],
+    "log": ".gameprod/evidence/verify.log",
+    "logHash": "25d179cdf0e24dff41577dce26862cdfd6bdb58c95bf00c9248f13f22ebd785c",
+    "outputs": []
+  },
+  "tests": {
+    "node": 1004,
+    "nativeBalanceRegression": 35,
+    "policyRegressions": 34
+  },
+  "experiment": {
+    "schemaVersion": 1,
+    "repository": "neurofoxpro/multimental",
+    "status": "passed",
+    "kind": "engineering_experiment_not_balance_acceptance",
+    "key": "0be3a22fd62cc8958ee72be8a49b05c499d2573ec04af5013ef8dbb7f6a8c529",
+    "sourceDigest": "3c4d65bc217af8118c369fd7b70857b323485cf39d885008f2e5d305697aee3b",
+    "sourceDigestAfter": "3c4d65bc217af8118c369fd7b70857b323485cf39d885008f2e5d305697aee3b",
+    "sourceBase": "28f74ecca395131e6f6a78ff42046b800318c11e",
+    "observedHead": "28f74ecca395131e6f6a78ff42046b800318c11e",
+    "engineHash": "c8f0a6bc45a19b33541501e57f6f7cd972ab18453743266339d495cbbe846643",
+    "planHash": "5b1d83e2c85fcbee7dfd43404d62459cb997c9cd58f434ae51f1075bab477c45",
+    "seedBase": 9001,
+    "seeds": [
+      1447759374,
+      1711686965,
+      897154262,
+      1912099649,
+      2088830749,
+      1092766465,
+      1891398946,
+      1292955649,
+      1149801169,
+      1274866837,
+      1296171810,
+      983684252,
+      540385236,
+      340011652,
+      882951910,
+      355514335,
+      544525798,
+      897337071,
+      1794444222,
+      567916706,
+      2109388963,
+      1747043972,
+      1060207712,
+      1391142025,
+      1279007038,
+      1967664147,
+      1466062303,
+      499340476,
+      23957870,
+      420892128,
+      1331384847,
+      1036093543
+    ],
+    "profile": "current",
+    "games": 4704,
+    "shards": [
+      {
+        "index": 0,
+        "request": {
+          "schemaVersion": 1,
+          "plan": "standard-start-v1",
+          "seeds": [
+            1447759374,
+            1711686965,
+            897154262,
+            1912099649
+          ],
+          "policy": "greedy",
+          "profile": "current",
+          "maxCommands": 240
+        },
+        "identity": "402648d4e8164232d39aafe6b418cfe4676a548f68c6a409250ea7d8c7a2fa98",
+        "resultHash": "3e0967041f0651c07d35b30ce677cd28596e2c9f4ccafe374448e271d83b275f",
+        "logHash": "22b5ddc4b071c3b7b90af2f5666d612d1b925a0d587bb7012055f95acb57978b"
+      },
+      {
+        "index": 1,
+        "request": {
+          "schemaVersion": 1,
+          "plan": "standard-start-v1",
+          "seeds": [
+            2088830749,
+            1092766465,
+            1891398946,
+            1292955649
+          ],
+          "policy": "greedy",
+          "profile": "current",
+          "maxCommands": 240
+        },
+        "identity": "dd07a411f599f9bab94f4a264daef16ef67e0b5061cd31bcad7a7c365b9d8638",
+        "resultHash": "d165b0b5dc11fad0e291d7d5c6678467bb5b3fd410a9e55d909016efccf826b2",
+        "logHash": "22b5ddc4b071c3b7b90af2f5666d612d1b925a0d587bb7012055f95acb57978b"
+      },
+      {
+        "index": 2,
+        "request": {
+          "schemaVersion": 1,
+          "plan": "standard-start-v1",
+          "seeds": [
+            1149801169,
+            1274866837,
+            1296171810,
+            983684252
+          ],
+          "policy": "greedy",
+          "profile": "current",
+          "maxCommands": 240
+        },
+        "identity": "fa7500df5233f1830676c5577e1c1fbfcfe55c58d8c8b0dcf7e33a6889652351",
+        "resultHash": "1faa4d36b2439b6f9eeaf92b49dfd203240d91f06c5c9ef28bf97462cba3ad79",
+        "logHash": "22b5ddc4b071c3b7b90af2f5666d612d1b925a0d587bb7012055f95acb57978b"
+      },
+      {
+        "index": 3,
+        "request": {
+          "schemaVersion": 1,
+          "plan": "standard-start-v1",
+          "seeds": [
+            540385236,
+            340011652,
+            882951910,
+            355514335
+          ],
+          "policy": "greedy",
+          "profile": "current",
+          "maxCommands": 240
+        },
+        "identity": "1de82c6c2f11d45c35d77af4c8fcce48b6a3273ef49c26b3a5de0769923ce8e1",
+        "resultHash": "d6e3dfe9cd86e19ad45ac441945e630e6c3d297a79567d8e8202b4e25b406b6b",
+        "logHash": "22b5ddc4b071c3b7b90af2f5666d612d1b925a0d587bb7012055f95acb57978b"
+      },
+      {
+        "index": 4,
+        "request": {
+          "schemaVersion": 1,
+          "plan": "standard-start-v1",
+          "seeds": [
+            544525798,
+            897337071,
+            1794444222,
+            567916706
+          ],
+          "policy": "greedy",
+          "profile": "current",
+          "maxCommands": 240
+        },
+        "identity": "ae1c07dda47fe8fa27575c35734e4db1f0756e2cdd997b400b276215fa4f1ecf",
+        "resultHash": "0fc1b66440c3e03c40bd039d082fd9fd2cfbe8bba2ed15cd37ac1cc0f96ce944",
+        "logHash": "22b5ddc4b071c3b7b90af2f5666d612d1b925a0d587bb7012055f95acb57978b"
+      },
+      {
+        "index": 5,
+        "request": {
+          "schemaVersion": 1,
+          "plan": "standard-start-v1",
+          "seeds": [
+            2109388963,
+            1747043972,
+            1060207712,
+            1391142025
+          ],
+          "policy": "greedy",
+          "profile": "current",
+          "maxCommands": 240
+        },
+        "identity": "d5b29d37c0e2e15ca75b2ff2960af6fa4b7500ad420ef20f44837326b8f78562",
+        "resultHash": "d812053520aae9fd387f6cf104f948dd4b46cc811c5a2e74bd164003950a8ea2",
+        "logHash": "22b5ddc4b071c3b7b90af2f5666d612d1b925a0d587bb7012055f95acb57978b"
+      },
+      {
+        "index": 6,
+        "request": {
+          "schemaVersion": 1,
+          "plan": "standard-start-v1",
+          "seeds": [
+            1279007038,
+            1967664147,
+            1466062303,
+            499340476
+          ],
+          "policy": "greedy",
+          "profile": "current",
+          "maxCommands": 240
+        },
+        "identity": "ed0d8126b2d5a4c31ff234f1abd2eaa1abda0b0dbd5c3f776b19bb22d6b45702",
+        "resultHash": "18a947dce7e1e4a402f601ffc0150f3487b0638f5270826af4f0274167170abe",
+        "logHash": "22b5ddc4b071c3b7b90af2f5666d612d1b925a0d587bb7012055f95acb57978b"
+      },
+      {
+        "index": 7,
+        "request": {
+          "schemaVersion": 1,
+          "plan": "standard-start-v1",
+          "seeds": [
+            23957870,
+            420892128,
+            1331384847,
+            1036093543
+          ],
+          "policy": "greedy",
+          "profile": "current",
+          "maxCommands": 240
+        },
+        "identity": "a161f7ef97ff08796029bc32682e1d47d15e007b5782c873cc5fb1a0aaae0a25",
+        "resultHash": "23e3b6986218ed1d03546613297ab28237453542bed7c0aca3c8a32f568c207a",
+        "logHash": "22b5ddc4b071c3b7b90af2f5666d612d1b925a0d587bb7012055f95acb57978b"
+      },
+      {
+        "index": 8,
+        "request": {
+          "schemaVersion": 1,
+          "plan": "standard-start-v1",
+          "seeds": [
+            1447759374,
+            1711686965,
+            897154262,
+            1912099649
+          ],
+          "policy": "positional",
+          "profile": "current",
+          "maxCommands": 240
+        },
+        "identity": "33ae94bb8dd6e5386eea4dc07e5738d521485084387cbe64d03d63c578fe3975",
+        "resultHash": "16809e73449f633431ca3a9cc24c8a62b5c2855965f25fe7b5abd4b8a0035958",
+        "logHash": "22b5ddc4b071c3b7b90af2f5666d612d1b925a0d587bb7012055f95acb57978b"
+      },
+      {
+        "index": 9,
+        "request": {
+          "schemaVersion": 1,
+          "plan": "standard-start-v1",
+          "seeds": [
+            2088830749,
+            1092766465,
+            1891398946,
+            1292955649
+          ],
+          "policy": "positional",
+          "profile": "current",
+          "maxCommands": 240
+        },
+        "identity": "0e0ba386800cba85ec6c19498f3f826810acf52826184655a1ac578b85340ff7",
+        "resultHash": "acd071241ed0be47193de01905a8011dda04e03fa202e40355e868ebd8fbe0d6",
+        "logHash": "22b5ddc4b071c3b7b90af2f5666d612d1b925a0d587bb7012055f95acb57978b"
+      },
+      {
+        "index": 10,
+        "request": {
+          "schemaVersion": 1,
+          "plan": "standard-start-v1",
+          "seeds": [
+            1149801169,
+            1274866837,
+            1296171810,
+            983684252
+          ],
+          "policy": "positional",
+          "profile": "current",
+          "maxCommands": 240
+        },
+        "identity": "7032f0ab0636153fa34a06eb102ded03959b68e3e5e0a5cbcc3a7505552b97f5",
+        "resultHash": "6b57d97e712699519486c41def78c279045172c168efba427b556e7e9fc9ce16",
+        "logHash": "22b5ddc4b071c3b7b90af2f5666d612d1b925a0d587bb7012055f95acb57978b"
+      },
+      {
+        "index": 11,
+        "request": {
+          "schemaVersion": 1,
+          "plan": "standard-start-v1",
+          "seeds": [
+            540385236,
+            340011652,
+            882951910,
+            355514335
+          ],
+          "policy": "positional",
+          "profile": "current",
+          "maxCommands": 240
+        },
+        "identity": "ee4dce23fda4b86d46a564e76012e5195257b60e9244be875b5a9addea7b4744",
+        "resultHash": "15894da55aec7a6e7b936dfd8f321dc398381afdb455b26c36be48aa22833ff3",
+        "logHash": "22b5ddc4b071c3b7b90af2f5666d612d1b925a0d587bb7012055f95acb57978b"
+      },
+      {
+        "index": 12,
+        "request": {
+          "schemaVersion": 1,
+          "plan": "standard-start-v1",
+          "seeds": [
+            544525798,
+            897337071,
+            1794444222,
+            567916706
+          ],
+          "policy": "positional",
+          "profile": "current",
+          "maxCommands": 240
+        },
+        "identity": "62d11612530557803e9deb754cccf77484d2790c001399abedaac4b7a6bbe26c",
+        "resultHash": "eb0f7e023a271f2e3e7ed986d456d60b4b130f0121209e7970896b2fc9f076ac",
+        "logHash": "22b5ddc4b071c3b7b90af2f5666d612d1b925a0d587bb7012055f95acb57978b"
+      },
+      {
+        "index": 13,
+        "request": {
+          "schemaVersion": 1,
+          "plan": "standard-start-v1",
+          "seeds": [
+            2109388963,
+            1747043972,
+            1060207712,
+            1391142025
+          ],
+          "policy": "positional",
+          "profile": "current",
+          "maxCommands": 240
+        },
+        "identity": "d4f4e712b3d95612975dbdcc7c30b36d542d6c45181d4d7363268b880ec61811",
+        "resultHash": "c7c17fb5fa64ac2610063458db86fda9d77ead2dab3920f2a613cfed49671d14",
+        "logHash": "22b5ddc4b071c3b7b90af2f5666d612d1b925a0d587bb7012055f95acb57978b"
+      },
+      {
+        "index": 14,
+        "request": {
+          "schemaVersion": 1,
+          "plan": "standard-start-v1",
+          "seeds": [
+            1279007038,
+            1967664147,
+            1466062303,
+            499340476
+          ],
+          "policy": "positional",
+          "profile": "current",
+          "maxCommands": 240
+        },
+        "identity": "6623c3110b965e21a5b37846a1e31af56fa76e59e5e12bb56536dc1fc8701dce",
+        "resultHash": "e9621a7abe7a4a5ccbc622d9b54b5c2f5eeac2e1f4d7323e5a0ae19455f01ffd",
+        "logHash": "22b5ddc4b071c3b7b90af2f5666d612d1b925a0d587bb7012055f95acb57978b"
+      },
+      {
+        "index": 15,
+        "request": {
+          "schemaVersion": 1,
+          "plan": "standard-start-v1",
+          "seeds": [
+            23957870,
+            420892128,
+            1331384847,
+            1036093543
+          ],
+          "policy": "positional",
+          "profile": "current",
+          "maxCommands": 240
+        },
+        "identity": "8815aa04ff4ef95f04740e382bb80203b458791855ae1bc6bba3cf6ab8d49161",
+        "resultHash": "02e17a8054500fb7755c9b91869a26480d3337c4f057cd0b0b380c99781f7133",
+        "logHash": "22b5ddc4b071c3b7b90af2f5666d612d1b925a0d587bb7012055f95acb57978b"
+      },
+      {
+        "index": 16,
+        "request": {
+          "schemaVersion": 1,
+          "plan": "standard-start-v1",
+          "seeds": [
+            1447759374,
+            1711686965,
+            897154262,
+            1912099649
+          ],
+          "policy": "random",
+          "profile": "current",
+          "maxCommands": 240
+        },
+        "identity": "21f4e439c1ccb5ea5d6e021a3f0a46467b6ce4369f89dedc0d98249e18b0721c",
+        "resultHash": "99bbd4a10a73789eae4128018adaf525cfeaffbd124f13cb99556d49bffbf997",
+        "logHash": "22b5ddc4b071c3b7b90af2f5666d612d1b925a0d587bb7012055f95acb57978b"
+      },
+      {
+        "index": 17,
+        "request": {
+          "schemaVersion": 1,
+          "plan": "standard-start-v1",
+          "seeds": [
+            2088830749,
+            1092766465,
+            1891398946,
+            1292955649
+          ],
+          "policy": "random",
+          "profile": "current",
+          "maxCommands": 240
+        },
+        "identity": "5303df5628409fc414addab3e5b02565a4d61a3a5d1f51dac1981a6d3821ce3f",
+        "resultHash": "51536798b6fe4d02dde5c6466637d1ea34bd0ad980d75b79af6388273e487a57",
+        "logHash": "22b5ddc4b071c3b7b90af2f5666d612d1b925a0d587bb7012055f95acb57978b"
+      },
+      {
+        "index": 18,
+        "request": {
+          "schemaVersion": 1,
+          "plan": "standard-start-v1",
+          "seeds": [
+            1149801169,
+            1274866837,
+            1296171810,
+            983684252
+          ],
+          "policy": "random",
+          "profile": "current",
+          "maxCommands": 240
+        },
+        "identity": "54f3f277330bfd035f27ff78b0a3fd2fe36b1903967f1e85a53e6c062fa4f7fc",
+        "resultHash": "3abbefe326459cf6814e148248f90c6ca825e551549b6d30905e80872cc7983d",
+        "logHash": "22b5ddc4b071c3b7b90af2f5666d612d1b925a0d587bb7012055f95acb57978b"
+      },
+      {
+        "index": 19,
+        "request": {
+          "schemaVersion": 1,
+          "plan": "standard-start-v1",
+          "seeds": [
+            540385236,
+            340011652,
+            882951910,
+            355514335
+          ],
+          "policy": "random",
+          "profile": "current",
+          "maxCommands": 240
+        },
+        "identity": "2ff26fe293f65650cdea7b8b0399517ad72a116b8714cc9601641cbddaf332ed",
+        "resultHash": "1ca29223dc4a918390e86779ac539dc950b523cc5b8398e2e464f593eabc3aa4",
+        "logHash": "22b5ddc4b071c3b7b90af2f5666d612d1b925a0d587bb7012055f95acb57978b"
+      },
+      {
+        "index": 20,
+        "request": {
+          "schemaVersion": 1,
+          "plan": "standard-start-v1",
+          "seeds": [
+            544525798,
+            897337071,
+            1794444222,
+            567916706
+          ],
+          "policy": "random",
+          "profile": "current",
+          "maxCommands": 240
+        },
+        "identity": "b74cefa41ff0de8a219213838ca02aad770bc5796ac03497835dbf2d58964ffc",
+        "resultHash": "772fbf46ef2890cf2ea2cc45c0c7a7291641bceee64253215fd362c86986fc4b",
+        "logHash": "22b5ddc4b071c3b7b90af2f5666d612d1b925a0d587bb7012055f95acb57978b"
+      },
+      {
+        "index": 21,
+        "request": {
+          "schemaVersion": 1,
+          "plan": "standard-start-v1",
+          "seeds": [
+            2109388963,
+            1747043972,
+            1060207712,
+            1391142025
+          ],
+          "policy": "random",
+          "profile": "current",
+          "maxCommands": 240
+        },
+        "identity": "22208d6c9b3430fdc99900efe1e299db60ec9a2221f3b4ea7d2906a6fa2a140f",
+        "resultHash": "7ea78ce4adc8aeb211a09c1ce8e748a86077eb96b81f5e793b0a2996511fcd81",
+        "logHash": "22b5ddc4b071c3b7b90af2f5666d612d1b925a0d587bb7012055f95acb57978b"
+      },
+      {
+        "index": 22,
+        "request": {
+          "schemaVersion": 1,
+          "plan": "standard-start-v1",
+          "seeds": [
+            1279007038,
+            1967664147,
+            1466062303,
+            499340476
+          ],
+          "policy": "random",
+          "profile": "current",
+          "maxCommands": 240
+        },
+        "identity": "23527b3d90675321cf3db900ff8b4bddcd37aa2d299deafd856b018752e45a97",
+        "resultHash": "c67fdd86cbe3264a49a0f107ca1a1129b90168c7e5604990eba3701d44d86d07",
+        "logHash": "22b5ddc4b071c3b7b90af2f5666d612d1b925a0d587bb7012055f95acb57978b"
+      },
+      {
+        "index": 23,
+        "request": {
+          "schemaVersion": 1,
+          "plan": "standard-start-v1",
+          "seeds": [
+            23957870,
+            420892128,
+            1331384847,
+            1036093543
+          ],
+          "policy": "random",
+          "profile": "current",
+          "maxCommands": 240
+        },
+        "identity": "41c902369e81e2610bbc71a2bc442c2def186514e4a28af0b51372bf129411f5",
+        "resultHash": "e3ff0883a02c1e4b0385138b6b5895458b97551c40ff0f45d19f16633bb8104d",
+        "logHash": "22b5ddc4b071c3b7b90af2f5666d612d1b925a0d587bb7012055f95acb57978b"
+      }
+    ],
+    "summary": ".gameprod/evidence/balance-standard/0be3a22fd62cc8958ee72be8a49b05c499d2573ec04af5013ef8dbb7f6a8c529/summary.json",
+    "summaryHash": "1371c8960d18ecefbb2e33bf4b78f478d8b6cbdd3e50997ceab64b8bb0100445",
+    "report": ".gameprod/evidence/balance-standard/0be3a22fd62cc8958ee72be8a49b05c499d2573ec04af5013ef8dbb7f6a8c529/REPORT.ru.md",
+    "reportHash": "f75ffb6a17bccf942330558be49640e72d80ea02d0dc3251e4a5a1439de74751",
+    "reusedShards": 24,
+    "observedAt": "2026-09-27T22:32:47.939Z",
+    "humanAcceptance": "pending",
+    "coreGameplayChanged": false
+  },
+  "findings": {
+    "schemaVersion": 1,
+    "kind": "software_balance_audit_not_human_acceptance",
+    "plan": "standard-start-v1",
+    "games": 4704,
+    "seedBlocks": 32,
+    "firstSeatCounts": [
+      15,
+      17
+    ],
+    "policies": [
+      {
+        "policy": "greedy",
+        "screened": true,
+        "games": 1568,
+        "firstWins": 817,
+        "draws": 0,
+        "firstMoverScore": {
+          "method": "seed-block percentile bootstrap, descriptive only",
+          "blocks": 32,
+          "mean": 0.5210459183673469,
+          "lower": 0.5025510204081632,
+          "upper": 0.5401785714285714
+        },
+        "firstMoverScreen": "within_screen",
+        "mirrorScore": 0.5625,
+        "turns": {
+          "median": 24,
+          "p90": 41,
+          "maximum": 52
+        },
+        "forcedLimits": 0,
+        "forcedRate": 0,
+        "deterministicCycles": 0,
+        "archetypes": [
+          {
+            "deck": "starter",
+            "games": 384,
+            "score": 0.9036458333333334,
+            "aboveScreen": true
+          },
+          {
+            "deck": "guard",
+            "games": 384,
+            "score": 0.4895833333333333,
+            "aboveScreen": false
+          },
+          {
+            "deck": "lancer",
+            "games": 384,
+            "score": 0.4401041666666667,
+            "aboveScreen": false
+          },
+          {
+            "deck": "archer",
+            "games": 384,
+            "score": 0.3776041666666667,
+            "aboveScreen": false
+          },
+          {
+            "deck": "flanker",
+            "games": 384,
+            "score": 0.3046875,
+            "aboveScreen": false
+          },
+          {
+            "deck": "rush",
+            "games": 384,
+            "score": 0.057291666666666664,
+            "aboveScreen": false
+          },
+          {
+            "deck": "elite",
+            "games": 384,
+            "score": 0.9270833333333334,
+            "aboveScreen": true
+          }
+        ],
+        "screenConcerns": [
+          "dominance:starter",
+          "dominance:elite"
+        ]
+      },
+      {
+        "policy": "positional",
+        "screened": true,
+        "games": 1568,
+        "firstWins": 888,
+        "draws": 0,
+        "firstMoverScore": {
+          "method": "seed-block percentile bootstrap, descriptive only",
+          "blocks": 32,
+          "mean": 0.5663265306122448,
+          "lower": 0.5274234693877552,
+          "upper": 0.6033163265306123
+        },
+        "firstMoverScreen": "inconclusive",
+        "mirrorScore": 0.6116071428571429,
+        "turns": {
+          "median": 13,
+          "p90": 21,
+          "maximum": 37
+        },
+        "forcedLimits": 0,
+        "forcedRate": 0,
+        "deterministicCycles": 0,
+        "archetypes": [
+          {
+            "deck": "starter",
+            "games": 384,
+            "score": 0.8880208333333334,
+            "aboveScreen": true
+          },
+          {
+            "deck": "guard",
+            "games": 384,
+            "score": 0.4036458333333333,
+            "aboveScreen": false
+          },
+          {
+            "deck": "lancer",
+            "games": 384,
+            "score": 0.5208333333333334,
+            "aboveScreen": false
+          },
+          {
+            "deck": "archer",
+            "games": 384,
+            "score": 0.3984375,
+            "aboveScreen": false
+          },
+          {
+            "deck": "flanker",
+            "games": 384,
+            "score": 0.3645833333333333,
+            "aboveScreen": false
+          },
+          {
+            "deck": "rush",
+            "games": 384,
+            "score": 0.049479166666666664,
+            "aboveScreen": false
+          },
+          {
+            "deck": "elite",
+            "games": 384,
+            "score": 0.875,
+            "aboveScreen": true
+          }
+        ],
+        "screenConcerns": [
+          "dominance:starter",
+          "dominance:elite"
+        ]
+      },
+      {
+        "policy": "random",
+        "screened": false,
+        "games": 1568,
+        "firstWins": 990,
+        "draws": 0,
+        "firstMoverScore": {
+          "method": "seed-block percentile bootstrap, descriptive only",
+          "blocks": 32,
+          "mean": 0.631377551020408,
+          "lower": 0.5510204081632654,
+          "upper": 0.712372448979592
+        },
+        "firstMoverScreen": "diagnostic_only",
+        "mirrorScore": 0.5982142857142857,
+        "turns": {
+          "median": 10,
+          "p90": 14,
+          "maximum": 27
+        },
+        "forcedLimits": 0,
+        "forcedRate": 0,
+        "deterministicCycles": 0,
+        "archetypes": [
+          {
+            "deck": "starter",
+            "games": 384,
+            "score": 0.5260416666666666,
+            "aboveScreen": false
+          },
+          {
+            "deck": "guard",
+            "games": 384,
+            "score": 0.5104166666666666,
+            "aboveScreen": false
+          },
+          {
+            "deck": "lancer",
+            "games": 384,
+            "score": 0.5364583333333334,
+            "aboveScreen": false
+          },
+          {
+            "deck": "archer",
+            "games": 384,
+            "score": 0.5078125,
+            "aboveScreen": false
+          },
+          {
+            "deck": "flanker",
+            "games": 384,
+            "score": 0.4609375,
+            "aboveScreen": false
+          },
+          {
+            "deck": "rush",
+            "games": 384,
+            "score": 0.4583333333333333,
+            "aboveScreen": false
+          },
+          {
+            "deck": "elite",
+            "games": 384,
+            "score": 0.5,
+            "aboveScreen": false
+          }
+        ],
+        "screenConcerns": []
+      }
+    ],
+    "allReplaysVerified": true,
+    "acceptedRulesChanged": false,
+    "humanDuration": {
+      "status": "not_measured",
+      "targetMinutes": 10,
+      "maximumMinutes": 15
+    },
+    "overall": "concerns_observed",
+    "limits": [
+      "Heuristic policies are not optimal or human play",
+      "Random policy is exploratory and excluded from balance pass/fail",
+      "All ordered deck pairs; identical-deck mirrors counted once, not twice",
+      "Whole seed blocks preserve dependence between reversed pairings",
+      "Command cap is simulator budget, not the game clock",
+      "No gameplay rules, cards, profile, layout or network changed"
+    ]
+  },
+  "repeat": {
+    "sameKey": "0be3a22fd62cc8958ee72be8a49b05c499d2573ec04af5013ef8dbb7f6a8c529",
+    "completedShardsReused": 24,
+    "additionalGames": 0,
+    "sourceUnchanged": true
+  },
+  "interpretation": [
+    "No current gameplay parameter was changed. The change corrects measurement and reproducibility.",
+    "Greedy first-mover score falls inside the predeclared band; positional interval crosses its upper edge, so that estimate is inconclusive.",
+    "Starter and elite archetypes exceed the exploratory dominance threshold against the sampled other decks. This is not proof that every legal deck needs 50% win rate.",
+    "No illegal command, replay discrepancy, simulator cap or decision-state cycle occurred in the primary 4704-match matrix. The deliberate pass-only test independently verifies the cycle detector.",
+    "The previous 61.8% report used a different opening procedure and is not a directly comparable before/after baseline."
+  ],
+  "nextWork": [
+    "Independent held-out seed blocks with the same protocol; preserve all primary findings",
+    "Improve or diversify adversarial deck sampling before changing accepted card parameters",
+    "Record human match duration and interface feedback on a concrete release"
+  ],
+  "humanAcceptance": "pending",
+  "humanDurationMeasured": false,
+  "acceptedRulesChanged": false,
+  "designLabChanged": false,
+  "mainOrStableAuthorized": false
+}

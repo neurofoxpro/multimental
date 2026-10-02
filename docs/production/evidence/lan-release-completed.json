@@ -1,0 +1,259 @@
+{
+  "schemaVersion": 1,
+  "observedAt": "2026-09-24T06:28:39.022Z",
+  "repository": "neurofoxpro/multimental",
+  "pr": 14,
+  "featureHead": "a44934175549db4518f1525de39f299a91e026aa",
+  "mergeCommit": "e5714b2f56c85b7d32ded37e3cad51f6ca3aec3f",
+  "installed": {
+    "version": "0.2.0-alpha.65.1",
+    "versionCode": 16501,
+    "sourceCommit": "e5714b2f56c85b7d32ded37e3cad51f6ca3aec3f",
+    "installedAt": "2026-09-24T06:25:52.412Z",
+    "readyMarker": true,
+    "originalSha256": "5787519e9508330bbbf1a868b4f5871b7ca7cc401a741e6bf26b8708295094c6",
+    "installedSha256": "1750f935aff50b2af55f09739a9c79e337c95e1b51049b6faafb8448d30cedc8"
+  },
+  "ci": {
+    "conclusion": "success",
+    "databaseId": 35964127919,
+    "headSha": "e5714b2f56c85b7d32ded37e3cad51f6ca3aec3f",
+    "status": "completed",
+    "url": "https://github.com/neurofoxpro/multimental/actions/runs/35964127919",
+    "workflowName": "Build Android"
+  },
+  "qualification": {
+    "status": "passed",
+    "version": "0.2.0-alpha.62.1",
+    "sourceStable": true,
+    "cases": [
+      {
+        "name": "emulator-A-clean-install",
+        "status": "passed",
+        "durationMs": 10124
+      },
+      {
+        "name": "emulator-A-install",
+        "status": "passed",
+        "durationMs": 605
+      },
+      {
+        "name": "emulator-A-ui",
+        "status": "passed",
+        "durationMs": 12139
+      },
+      {
+        "name": "emulator-A-jni",
+        "status": "passed",
+        "durationMs": 6368
+      },
+      {
+        "name": "emulator-A-reinstall",
+        "status": "passed",
+        "durationMs": 11538
+      },
+      {
+        "name": "emulator-A-close",
+        "status": "passed",
+        "durationMs": 432
+      },
+      {
+        "name": "emulator-A-launch",
+        "status": "passed",
+        "durationMs": 4650
+      },
+      {
+        "name": "emulator-B-install",
+        "status": "passed",
+        "durationMs": 11628
+      },
+      {
+        "name": "emulator-B-ui",
+        "status": "passed",
+        "durationMs": 14816
+      },
+      {
+        "name": "emulator-B-jni",
+        "status": "passed",
+        "durationMs": 7362
+      },
+      {
+        "name": "emulator-B-reinstall",
+        "status": "passed",
+        "durationMs": 14249
+      },
+      {
+        "name": "emulator-B-close",
+        "status": "passed",
+        "durationMs": 689
+      },
+      {
+        "name": "emulator-B-launch",
+        "status": "passed",
+        "durationMs": 6453
+      },
+      {
+        "name": "emulator-pair",
+        "status": "passed",
+        "durationMs": 15996
+      },
+      {
+        "name": "pvp-emulators",
+        "status": "passed",
+        "durationMs": 26595
+      },
+      {
+        "name": "phone-install",
+        "status": "passed",
+        "durationMs": 12244
+      },
+      {
+        "name": "phone-ui",
+        "status": "passed",
+        "durationMs": 8737
+      },
+      {
+        "name": "phone-tcp-usb",
+        "status": "passed",
+        "durationMs": 4349
+      },
+      {
+        "name": "phone-tcp-lan",
+        "status": "passed",
+        "durationMs": 4431
+      },
+      {
+        "name": "phone-tcp-peer",
+        "status": "passed",
+        "durationMs": 10399
+      },
+      {
+        "name": "phone-bluetooth",
+        "status": "passed",
+        "durationMs": 12090
+      },
+      {
+        "name": "pvp-phone-lan",
+        "status": "passed",
+        "durationMs": 24244
+      },
+      {
+        "name": "phone-reinstall",
+        "status": "passed",
+        "durationMs": 12886
+      },
+      {
+        "name": "phone-close",
+        "status": "passed",
+        "durationMs": 360
+      },
+      {
+        "name": "phone-launch",
+        "status": "passed",
+        "durationMs": 3653
+      }
+    ]
+  },
+  "lan": {
+    "schemaVersion": 1,
+    "observedAt": "2026-09-24T06:20:11.540Z",
+    "status": "passed",
+    "scope": "player_room_complete_match",
+    "path": "ANDROID_EMULATOR_TO_REAL_PHONE_TLS_LAN",
+    "physicalRadio": true,
+    "host": {
+      "status": "passed",
+      "role": "host",
+      "version": "0.2.0-alpha.62.1",
+      "winner": 1,
+      "reason": "five",
+      "actions": 4,
+      "turn": 9,
+      "scores": [
+        4,
+        5
+      ],
+      "reconnect": true,
+      "tls": true,
+      "privateView": true,
+      "durationMs": 19601,
+      "input": "player_ui_handlers_over_real_network"
+    },
+    "guest": {
+      "status": "passed",
+      "role": "guest",
+      "version": "0.2.0-alpha.62.1",
+      "winner": 0,
+      "reason": "five",
+      "actions": 5,
+      "turn": 9,
+      "scores": [
+        5,
+        4
+      ],
+      "reconnect": true,
+      "tls": true,
+      "privateView": true,
+      "durationMs": 13261,
+      "input": "player_ui_handlers_over_real_network"
+    },
+    "finishedAt": "2026-09-24T06:20:35.695Z"
+  },
+  "emulators": {
+    "schemaVersion": 1,
+    "observedAt": "2026-09-24T06:18:41.221Z",
+    "status": "passed",
+    "scope": "player_room_complete_match",
+    "path": "TWO_ANDROID_EMULATORS_TLS_VIA_LOOPBACK_BRIDGE",
+    "physicalRadio": false,
+    "host": {
+      "status": "passed",
+      "role": "host",
+      "version": "0.2.0-alpha.62.1",
+      "winner": 1,
+      "reason": "five",
+      "actions": 4,
+      "turn": 9,
+      "scores": [
+        4,
+        5
+      ],
+      "reconnect": true,
+      "tls": true,
+      "privateView": true,
+      "durationMs": 18794,
+      "input": "player_ui_handlers_over_real_network"
+    },
+    "guest": {
+      "status": "passed",
+      "role": "guest",
+      "version": "0.2.0-alpha.62.1",
+      "winner": 0,
+      "reason": "five",
+      "actions": 5,
+      "turn": 9,
+      "scores": [
+        5,
+        4
+      ],
+      "reconnect": true,
+      "tls": true,
+      "privateView": true,
+      "durationMs": 11586,
+      "input": "player_ui_handlers_over_real_network"
+    },
+    "finishedAt": "2026-09-24T06:19:07.693Z"
+  },
+  "delivery": {
+    "status": "passed",
+    "installedVersion": "0.2.0-alpha.65.1",
+    "installedCommit": "e5714b2f56c85b7d32ded37e3cad51f6ca3aec3f",
+    "readyMarker": true
+  },
+  "limits": [
+    "Полная матрица относится к кандидату alpha.62.1; dev release alpha.65.1 отдельно собран и установлен",
+    "LAN протестирован на Android-эмуляторе и физическом телефоне; двух реальных Android-телефонов нет",
+    "Bluetooth-пользовательский режим находится в отдельном PR15, не включён в LAN-релиз",
+    "Beta не готова: коллекция/экономика и другие автоматизируемые требования остаются незавершёнными"
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "id": "bounded-metadata-retry",
+  "version": "0.2.0",
+  "kind": "fixed",
+  "scope": "automation",
+  "text": "Для временного fetch failed и HTTP 502/503/504 при чтении метаданных добавлен ограниченный повтор. Ошибки доступа, rate limit, неверный JSON и превышение размера не обходятся.",
+  "breaking": false
+}

@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "repository": "neurofoxpro/multimental",
+  "observedDate": "2026-09-26",
+  "sourceCommit": "ace77fba9f4e52b4a395ef5b4642223d5176dccc",
+  "implementationPR": 108,
+  "devBuildRun": 36215321226,
+  "issueGraphRun": 36215321409,
+  "issueGraphStatus": "success",
+  "registeredTasks": 62,
+  "firstGraphMutations": 152,
+  "sharedSourceDigest": "9f4b4769f0dd6928903d60b91a158c31fdb3b5c2737502ae7f25c6ed44257b6d",
+  "slices": [
+    {"task":"UX-06","owner":"chat-ux-20260926","fence":3,"nodeTests":493,"nodeStatus":"passed","godotSuite":"editor","godotChecks":47,"godotStatus":"passed","logHash":"5bd53cc4d20d86a5e59d53426fe733b84a630d580acd028b165e22ae2b53c5cf"},
+    {"task":"META-02","owner":"chat-economy-20260926","fence":4,"nodeTests":493,"nodeStatus":"passed","godotSuite":"storage","godotChecks":406,"godotStatus":"passed","logHash":"cec342bbdeb43f4ef6468b712a6c80d546fb2b933129757add79b6d782d73eda"}
+  ],
+  "sourceUnchangedDuringEachTest": true,
+  "separateWorktreesAndCaches": true,
+  "independentReasoningAgentsSpawned": false,
+  "coldStartFailureFound": "Missing Godot script-class cache in a freshly created worktree; initialization preflight added and repeated tests passed.",
+  "branchCleanupFailureFound": "Claim token accidentally overrode operation token. Completed transition and absent process were verified, lock archived by a tested recovery adapter; reserved-field rejection added.",
+  "phoneCountObserved": 1,
+  "secondPhoneAcceptance": "not_performed",
+  "economyFeatureCompleted": false,
+  "uxRedesignCompleted": false,
+  "note": "Historical proof of coordination and isolated testing. This is not proof of completed economy/UX tasks, a new APK installation, or production approval."
+}

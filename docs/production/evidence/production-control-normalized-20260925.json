@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "observedDate": "2026-09-25",
+  "repository": "neurofoxpro/multimental",
+  "pullRequest": 28,
+  "baselineCommit": "cff25564c064c463b9bb742248110f3a0ff9328f",
+  "normalizedSource": "93058ba400855f6f52d4eec88888f1bad53dbf97",
+  "projectionCommit": "249bbb082616bf90c930b9244e8726bfa0101733",
+  "lastNormalizationChange": "Formatter-only expansion in tools/verify.mjs; no gameplay change.",
+  "previousEvidence": "docs/production/evidence/production-control-initial-20260925.json",
+  "currentCandidateChecks": "Must be read from CI on the commit containing this record; earlier runs are not reused.",
+  "stationQualification": "pending",
+  "devIntegration": "not_performed",
+  "mainIntegration": "not_authorized",
+  "googlePlayPublication": "not_performed",
+  "phoneInstallation": "not_performed_in_this_iteration",
+  "nextTaskAfterQualification": "META-05",
+  "note": "A checkpoint, not an approval or a passing build receipt. It preserves the exact unfinished chain for the next agent."
+}

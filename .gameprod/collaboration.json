@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "repository": "neurofoxpro/multimental",
+  "stateBranch": "coordination-state",
+  "stateFile": ".gameprod/collaboration-state.json",
+  "heartbeatSeconds": 1800,
+  "automaticTakeover": false,
+  "taskResources": {
+    "AUTO-09": ["area:coordination"],
+    "AUTO-10": ["area:workspaces"],
+    "UX-06": ["area:ux-research"],
+    "UX-07": ["area:game-ui"],
+    "QA-02": ["area:devices"],
+    "META-02": ["area:economy"],
+    "META-03": ["area:economy"],
+    "META-04": ["area:economy"],
+    "NET-04": ["area:network","station:phone-A","station:phone-B","station:bluetooth-radio"]
+  },
+  "kindResources": {
+    "automation": ["area:automation"], "game": ["area:game-core"],
+    "ui": ["area:game-ui"], "network": ["area:network"],
+    "platform": ["area:platform"], "tests": ["area:qa"],
+    "product": ["area:product-research"], "external": ["area:external"],
+    "subjective": ["area:human-acceptance"], "release_approval": ["integration:dev"]
+  },
+  "note": "GitHub CAS claims coordinate cooperative agents. No timer steals live resources. Production approval is never granted by a claim. Shared physical-device adapters keep their existing qualification leases."
+}

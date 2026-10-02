@@ -1,0 +1,112 @@
+{
+    "sourceBase":  "9a74818707dc0d5044affeb3d7c4f26f65f8d675",
+    "runtimeGameRulesChanged":  false,
+    "installation":  "not_inferred",
+    "repository":  "neurofoxpro/multimental",
+    "completeProjectVerification":  "required_by_ship",
+    "gallery":  {
+                    "inputKey":  "46d6618a7b0500ad4c3eb4bebff20b38c92add3921bddcd610cde4d38f420638",
+                    "renderer":  "Windows",
+                    "personalProfileUntouched":  true,
+                    "captureBaseCommit":  "9a74818707dc0d5044affeb3d7c4f26f65f8d675",
+                    "images":  24,
+                    "captureWorktreeDirty":  true
+                },
+    "physicalPhoneTests":  "not_executed_by_this_observation",
+    "observedAt":  "2026-09-26T13:05:49.9639275Z",
+    "kind":  "source_ui_research_not_release_acceptance",
+    "taskId":  "UX-07",
+    "studyInputKey":  "58867c2650e757b25aae9576529d485d2d126d1c64196a54c125b6cd61380c52",
+    "assessment":  {
+                       "inputKey":  "58867c2650e757b25aae9576529d485d2d126d1c64196a54c125b6cd61380c52",
+                       "verdict":  "supported",
+                       "limitations":  [
+                                           "Проверены Godot viewport и контраст цветовых токенов; не измерены физические Android dp, safe-area и TalkBack.",
+                                           "207проверок подключения используют NoSocketSession для асинхронных ошибок, не реальные радиосоединения.",
+                                           "Галерея снята из исходного Windows-рендера, не установленного Android APK.",
+                                           "Полный художественный редизайн, иллюстрированная справка и аппаратная пара телефонов учитываются отдельными задачами."
+                                       ],
+                       "sourceHashes":  [
+                                            "c7e036b72e0fe104665dfb1e87a41ac96bc522c4a407161a05bc1ee789a1ad5a",
+                                            "b8a0bd2ebd5f64c5d5a03f706a6deddaaf973dbc5aa07bf9ba717851cdc52b2e",
+                                            "f85185f51190cfc6f1ee8b4a8afd06d344500e7278c8d5f74a3771def703b653",
+                                            "0b7c283b60e5d366a2c19bd5c939e54dbdda78f118bed35f88e09dea5615b70d"
+                                        ],
+                       "schemaVersion":  1,
+                       "conclusion":  "Сохранены правила и недопустимость действий, но убран обязательный переход в редактор перед стартом полной выбранной колодой. В проверенной матрице RU/EN поле и закреплённые нижние действия теперь видимы, рука достижима и читается даже отключённой. Соединение разделяет создание/вход, сохраняет ограниченный черновик приглашения в памяти при выборе колоды, показывает ошибки и отменяет без скрытого повтора. Отдельные регрессии выявили и исправили сжатие NewDeck и уход длинного названия колоды за верх окна при раннем focus до завершения переноса текста. Реально сняты24PNG новой реализации; инспектор использует перенесённые native theme minima из PR119."
+                   },
+    "sources":  [
+                    {
+                        "url":  "https://developer.android.com/guide/topics/ui/accessibility/apps",
+                        "finalUrl":  "https://developer.android.com/guide/topics/ui/accessibility/apps",
+                        "observedAt":  "2026-09-26T13:04:07.286Z",
+                        "sha256":  "c7e036b72e0fe104665dfb1e87a41ac96bc522c4a407161a05bc1ee789a1ad5a",
+                        "bytes":  280737,
+                        "contentType":  "text/html; charset=utf-8",
+                        "downloadedNotReviewed":  true
+                    },
+                    {
+                        "url":  "https://docs.godotengine.org/en/stable/classes/class_acceptdialog.html",
+                        "finalUrl":  "https://docs.godotengine.org/en/stable/classes/class_acceptdialog.html",
+                        "observedAt":  "2026-09-26T13:04:07.287Z",
+                        "sha256":  "b8a0bd2ebd5f64c5d5a03f706a6deddaaf973dbc5aa07bf9ba717851cdc52b2e",
+                        "bytes":  1317263,
+                        "contentType":  "text/html; charset=utf-8",
+                        "downloadedNotReviewed":  true
+                    },
+                    {
+                        "url":  "https://docs.godotengine.org/en/stable/tutorials/ui/gui_navigation.html",
+                        "finalUrl":  "https://docs.godotengine.org/en/stable/tutorials/ui/gui_navigation.html",
+                        "observedAt":  "2026-09-26T13:04:08.227Z",
+                        "sha256":  "f85185f51190cfc6f1ee8b4a8afd06d344500e7278c8d5f74a3771def703b653",
+                        "bytes":  1361535,
+                        "contentType":  "text/html; charset=utf-8",
+                        "downloadedNotReviewed":  true
+                    },
+                    {
+                        "url":  "https://docs.godotengine.org/en/stable/classes/class_button.html",
+                        "finalUrl":  "https://docs.godotengine.org/en/stable/classes/class_button.html",
+                        "observedAt":  "2026-09-26T13:04:08.228Z",
+                        "sha256":  "0b7c283b60e5d366a2c19bd5c939e54dbdda78f118bed35f88e09dea5615b70d",
+                        "bytes":  1352314,
+                        "contentType":  "text/html; charset=utf-8",
+                        "downloadedNotReviewed":  true
+                    }
+                ],
+    "schemaVersion":  1,
+    "oldProof":  "docs/production/evidence/ui-continuation-provenance-20260926.json",
+    "checks":  [
+                   {
+                       "sourceDigest":  "3c549a2dd2a5f4759bc0783d866a120dfd734f0de3eedac0e9f2e247960bd34e",
+                       "suite":  "usability",
+                       "logHash":  "2fed923967251bd6594c01a804ddc7f315d4b802ed3d2c223f0f23b3529d4272",
+                       "markers":  [
+                                       "MULTIMENTAL_USABILITY_PASS checks=614 layouts=10 actual_android_dp=false"
+                                   ]
+                   },
+                   {
+                       "sourceDigest":  "3c549a2dd2a5f4759bc0783d866a120dfd734f0de3eedac0e9f2e247960bd34e",
+                       "suite":  "connection-ui",
+                       "logHash":  "2e3dfb1dd705e842a71f9a0921462bafd316560fc1902971d1ec5f33fcbe761f",
+                       "markers":  [
+                                       "MULTIMENTAL_CONNECTION_UI_PASS checks=207 layouts=8 actual_sockets=0"
+                                   ]
+                   },
+                   {
+                       "sourceDigest":  "3c549a2dd2a5f4759bc0783d866a120dfd734f0de3eedac0e9f2e247960bd34e",
+                       "suite":  "inspector",
+                       "logHash":  "a6148ddf6b2f38c6523a1cb9a5a9561a60f35c33620cb2990460495e2e0d36bb",
+                       "markers":  [
+                                       "MULTIMENTAL_CARD_INSPECTOR_PASS checks=249"
+                                   ]
+                   },
+                   {
+                       "sourceDigest":  "3c549a2dd2a5f4759bc0783d866a120dfd734f0de3eedac0e9f2e247960bd34e",
+                       "suite":  "gallery",
+                       "logHash":  "3a4e35a8bb746aa74a10c5f84d6f5ae69b9b32a2b16fdd4ad5f17c4d324f8081",
+                       "markers":  [
+                                       "MULTIMENTAL_GALLERY_CHECK_PASS images=24 renderKey=46d6618a7b0500ad4c3eb4bebff20b38c92add3921bddcd610cde4d38f420638"
+                                   ]
+                   }
+               ]
+}

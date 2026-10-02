@@ -1,0 +1,33 @@
+{
+    "acceptance":  [
+                       "Получены24реально отрисованных кадра и проверены точные viewport/PNG/исходники.",
+                       "Галерея не содержит личного профиля и не объявляется аппаратной приёмкой.",
+                       "Повтор не затирает посторонние правки и не подменяет отсутствующие кадры."
+                   ],
+    "checks":  [
+                   "gallery",
+                   "menu",
+                   "inspector"
+               ],
+    "hypothesis":  "Изолированный SubViewport, ожидание конца отрисовки, полная матрица состояний и хеши входов дают воспроизводимую галерею и выявляют визуальные недочёты.",
+    "readset":  [
+                    "game/tests/gallery_capture.gd",
+                    "tools/gallery.mjs",
+                    "skills/game-production/scripts/gallery-policy.mjs",
+                    "docs/production/GALLERY_CAPTURE.ru.md"
+                ],
+    "question":  "Можно ли получать актуальные полезные для дизайна скриншоты настоящего интерфейса без личных данных и без подмены аппаратных доказательств?",
+    "control":  "Отрицательные случаи: headless/пустое изображение, повтор кадра под другим ID, неправильные размеры/хеши, изменённый код, незнакомая правка документа и неполная публикация. Отдельно сверяются существующие меню/инспектор.",
+    "task":  "UX-09",
+    "limits":  [
+                   "Source previews не являются скриншотами конкретно установленного APK.",
+                   "Логические единицы и пиксели PNG не равны измеренным Android dp.",
+                   "Сохранены видимые недостатки; публикация галереи не означает редизайн и полноценную доступность."
+               ],
+    "schemaVersion":  1,
+    "sources":  [
+                    "https://docs.godotengine.org/en/stable/classes/class_viewport.html",
+                    "https://docs.godotengine.org/en/stable/classes/class_subviewport.html",
+                    "https://developer.android.com/guide/topics/ui/accessibility/apps"
+                ]
+}

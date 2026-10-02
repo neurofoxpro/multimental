@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "repository": "neurofoxpro/multimental",
+  "task": "META-03",
+  "observedAt": "2026-09-26T05:52:40Z",
+  "sourceCommit": "2858c6fe7eb178ca5a057cc1af721ab20e8c777d",
+  "pullRequests": [114, 115],
+  "release": "0.10.1-alpha.190.1",
+  "workflowRun": 36221922401,
+  "nodeTests": 585,
+  "craftingChecks": 118,
+  "craftingUiChecks": 39,
+  "menuLayoutChecks": 257,
+  "tapGeometryChecks": 10,
+  "originalApkSha256": "c6c650e9c6dcb00d43398cddd90abe44ae0c66577644851beede2e0e6ac1b20e",
+  "installedApkSha256": "6f42239c2ddd2efdf20d41f2ba506da62407ccf2aa2107a98bbc72f660f87642",
+  "physicalCrafting": {"status": "passed", "runId": "7c7899e3-9212-4104-8efe-9d5ec68827a4", "actualAndroidTaps": 5, "checks": 8, "receiptSha256": "81f21f5731bf81b17c366c1e596398c4bcb9cd8e81fa41ef093949691f77c209", "personalProfileUntouched": true},
+  "physicalShop": {"status": "passed", "runId": "71a0796e-f57c-44dc-b508-fac5ce565b3a"},
+  "physicalStorage": {"status": "passed", "runId": "fd550e4d-22d7-4380-96a2-230eb23f8fcd", "writes": 77, "checks": 17, "personalProfileUntouched": true},
+  "failedEarlierRun": {"release": "0.10.0-alpha.187.1", "runId": "3d992fd2-099d-4397-9cef-9386ff098728", "reason": "wrong root-only coordinate transform for an embedded confirmation window", "status": "failed_not_reclassified"},
+  "humanAcceptance": "not_inferred",
+  "limits": ["Local alpha prices, no real-money purchase", "Original 30x2 cards preserved", "Match/daily rewards remain META-04", "One authorized Android, not two-phone acceptance"]
+}

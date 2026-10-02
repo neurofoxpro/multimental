@@ -1,0 +1,38 @@
+{
+    "acceptance":  [
+                       "Поле, рука и постоянные действия достижимы в проверенных размерах RU/EN.",
+                       "Неактивная рука читается, но не допускает недействительного хода.",
+                       "Возврат из редактора и отмена сохраняют контекст подключения без лишнего запроса."
+                   ],
+    "checks":  [
+                   "usability",
+                   "connection-ui",
+                   "inspector",
+                   "gallery"
+               ],
+    "hypothesis":  "Адаптивное расположение поля/панели с постоянным footer, контрастная неактивная рука и явный возврат из редактора уменьшают потери доступа к действиям и контексту.",
+    "readset":  [
+                    "game/src/ui_theme.gd",
+                    "game/src/home_screen.gd",
+                    "game/src/battle_layout.gd",
+                    "game/src/connection_screen.gd",
+                    "game/src/main.gd",
+                    "game/tests/usability_test.gd",
+                    "game/tests/connection_ui_test.gd"
+                ],
+    "question":  "Как устранить наблюдаемые обрезания и лишние переходы в частых игровых действиях без изменения правил?",
+    "control":  "До изменения: настоящий альбомный кадр обрезает руку и footer; неактивная рука затемнена; PlayAI открывает редактор. После: реальные viewport, недопустимые действия и сохранность состояния, повторная галерея.",
+    "task":  "UX-07",
+    "limits":  [
+                   "Godot viewport units не равны измеренным Android dp.",
+                   "NoSocketSession проверяет UI-состояния, не физический Wi-Fi/Bluetooth.",
+                   "Нет обещания финального арта или полного ассистивного покрытия."
+               ],
+    "schemaVersion":  1,
+    "sources":  [
+                    "https://developer.android.com/guide/topics/ui/accessibility/apps",
+                    "https://docs.godotengine.org/en/stable/classes/class_acceptdialog.html",
+                    "https://docs.godotengine.org/en/stable/tutorials/ui/gui_navigation.html",
+                    "https://docs.godotengine.org/en/stable/classes/class_button.html"
+                ]
+}

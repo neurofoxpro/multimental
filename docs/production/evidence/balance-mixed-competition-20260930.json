@@ -1,0 +1,287 @@
+{
+  "schemaVersion": 1,
+  "repository": "neurofoxpro/multimental",
+  "taskId": "BALANCE-01",
+  "kind": "mixed_deck_cross_policy_engineering_experiment",
+  "protocol": "mixed-competition-v1",
+  "observedAt": "2026-09-30T00:15:56.495Z",
+  "implementationBase": "052a1d5f8f4d20a38f4c2a8bedcd5bc999538842",
+  "experimentObservedHead": "052a1d5f8f4d20a38f4c2a8bedcd5bc999538842",
+  "experimentSourceDigest": "e4bf26db0fd366e8320c18aa6cb8de94c1756c4d2c659fbcf7a46d2b611b56a4",
+  "experimentSourceDigestAfter": "e4bf26db0fd366e8320c18aa6cb8de94c1756c4d2c659fbcf7a46d2b611b56a4",
+  "sourceUnchangedDuringExperiment": true,
+  "engineHash": "c8f0a6bc45a19b33541501e57f6f7cd972ab18453743266339d495cbbe846643",
+  "planHash": "a25a1132f2130f11b54bd88efcd5a7bd16032d26cd4cfcb9e5ff7ffaf14e97df",
+  "seedBase": 20260929,
+  "seedBlocks": 32,
+  "games": 12800,
+  "shards": 64,
+  "allReplaysVerified": true,
+  "forcedLimits": 0,
+  "deterministicCycles": 0,
+  "acceptedRulesChanged": false,
+  "firstSeatCounts": [
+    16,
+    16
+  ],
+  "firstMoverScore": {
+    "method": "seed-block percentile bootstrap, descriptive only",
+    "blocks": 32,
+    "mean": 0.514765625,
+    "lower": 0.49796875,
+    "upper": 0.5309375
+  },
+  "firstMoverScreen": "within_screen",
+  "policyPairs": [
+    {
+      "id": "greedy-greedy",
+      "left": "greedy",
+      "right": "greedy",
+      "games": 3200,
+      "firstMoverScore": {
+        "method": "seed-block percentile bootstrap, descriptive only",
+        "blocks": 32,
+        "mean": 0.483125,
+        "lower": 0.4659374999999999,
+        "upper": 0.49937500000000007
+      },
+      "firstMoverScreen": "within_screen",
+      "turns": {
+        "median": 38,
+        "p90": 43,
+        "maximum": 51
+      },
+      "forcedLimits": 0,
+      "deterministicCycles": 0
+    },
+    {
+      "id": "positional-positional",
+      "left": "positional",
+      "right": "positional",
+      "games": 3200,
+      "firstMoverScore": {
+        "method": "seed-block percentile bootstrap, descriptive only",
+        "blocks": 32,
+        "mean": 0.5618750000000001,
+        "lower": 0.5265625,
+        "upper": 0.5993749999999999
+      },
+      "firstMoverScreen": "inconclusive",
+      "turns": {
+        "median": 23,
+        "p90": 31,
+        "maximum": 37
+      },
+      "forcedLimits": 0,
+      "deterministicCycles": 0
+    },
+    {
+      "id": "greedy-positional",
+      "left": "greedy",
+      "right": "positional",
+      "games": 3200,
+      "firstMoverScore": {
+        "method": "seed-block percentile bootstrap, descriptive only",
+        "blocks": 32,
+        "mean": 0.50875,
+        "lower": 0.4475,
+        "upper": 0.5706249999999999
+      },
+      "firstMoverScreen": "inconclusive",
+      "turns": {
+        "median": 27,
+        "p90": 33,
+        "maximum": 43
+      },
+      "forcedLimits": 0,
+      "deterministicCycles": 0
+    },
+    {
+      "id": "positional-greedy",
+      "left": "positional",
+      "right": "greedy",
+      "games": 3200,
+      "firstMoverScore": {
+        "method": "seed-block percentile bootstrap, descriptive only",
+        "blocks": 32,
+        "mean": 0.5053124999999998,
+        "lower": 0.44093749999999987,
+        "upper": 0.57125
+      },
+      "firstMoverScreen": "inconclusive",
+      "turns": {
+        "median": 26,
+        "p90": 33,
+        "maximum": 41
+      },
+      "forcedLimits": 0,
+      "deterministicCycles": 0
+    }
+  ],
+  "crossPolicy": {
+    "games": 6400,
+    "positionalScore": {
+      "method": "seed-block percentile bootstrap, descriptive only",
+      "blocks": 32,
+      "mean": 0.6739062499999998,
+      "lower": 0.6612499999999999,
+      "upper": 0.6862500000000001
+    },
+    "positionalWhenFirst": {
+      "method": "seed-block percentile bootstrap, descriptive only",
+      "blocks": 32,
+      "mean": 0.6809374999999999,
+      "lower": 0.6568750000000001,
+      "upper": 0.7034374999999999
+    },
+    "positionalWhenSecond": {
+      "method": "seed-block percentile bootstrap, descriptive only",
+      "blocks": 32,
+      "mean": 0.666875,
+      "lower": 0.6484375,
+      "upper": 0.6840624999999999
+    },
+    "threshold": "descriptive_only"
+  },
+  "decks": [
+    {
+      "deck": "mix0",
+      "games": 2304,
+      "score": {
+        "method": "seed-block percentile bootstrap, descriptive only",
+        "blocks": 32,
+        "mean": 0.5000000000000001,
+        "lower": 0.47656250000000006,
+        "upper": 0.5225694444444443
+      },
+      "screen": "within_screen"
+    },
+    {
+      "deck": "mix1",
+      "games": 2304,
+      "score": {
+        "method": "seed-block percentile bootstrap, descriptive only",
+        "blocks": 32,
+        "mean": 0.5269097222222222,
+        "lower": 0.5078125,
+        "upper": 0.5451388888888891
+      },
+      "screen": "within_screen"
+    },
+    {
+      "deck": "mix2",
+      "games": 2304,
+      "score": {
+        "method": "seed-block percentile bootstrap, descriptive only",
+        "blocks": 32,
+        "mean": 0.5303819444444444,
+        "lower": 0.5030381944444444,
+        "upper": 0.5559895833333334
+      },
+      "screen": "within_screen"
+    },
+    {
+      "deck": "mix3",
+      "games": 2304,
+      "score": {
+        "method": "seed-block percentile bootstrap, descriptive only",
+        "blocks": 32,
+        "mean": 0.4735243055555555,
+        "lower": 0.44965277777777773,
+        "upper": 0.49869791666666674
+      },
+      "screen": "within_screen"
+    },
+    {
+      "deck": "mix4",
+      "games": 2304,
+      "score": {
+        "method": "seed-block percentile bootstrap, descriptive only",
+        "blocks": 32,
+        "mean": 0.46875000000000006,
+        "lower": 0.4431423611111111,
+        "upper": 0.4947916666666666
+      },
+      "screen": "within_screen"
+    },
+    {
+      "deck": "mix5",
+      "games": 2304,
+      "score": {
+        "method": "seed-block percentile bootstrap, descriptive only",
+        "blocks": 32,
+        "mean": 0.5013020833333334,
+        "lower": 0.47699652777777785,
+        "upper": 0.5247395833333334
+      },
+      "screen": "within_screen"
+    },
+    {
+      "deck": "mix6",
+      "games": 2304,
+      "score": {
+        "method": "seed-block percentile bootstrap, descriptive only",
+        "blocks": 32,
+        "mean": 0.46006944444444453,
+        "lower": 0.4370659722222222,
+        "upper": 0.48263888888888884
+      },
+      "screen": "within_screen"
+    },
+    {
+      "deck": "mix7",
+      "games": 2304,
+      "score": {
+        "method": "seed-block percentile bootstrap, descriptive only",
+        "blocks": 32,
+        "mean": 0.49479166666666663,
+        "lower": 0.46918402777777773,
+        "upper": 0.5182291666666665
+      },
+      "screen": "within_screen"
+    },
+    {
+      "deck": "mix8",
+      "games": 2304,
+      "score": {
+        "method": "seed-block percentile bootstrap, descriptive only",
+        "blocks": 32,
+        "mean": 0.5190972222222223,
+        "lower": 0.4952256944444445,
+        "upper": 0.5434027777777777
+      },
+      "screen": "within_screen"
+    },
+    {
+      "deck": "mix9",
+      "games": 2304,
+      "score": {
+        "method": "seed-block percentile bootstrap, descriptive only",
+        "blocks": 32,
+        "mean": 0.5251736111111109,
+        "lower": 0.5004340277777777,
+        "upper": 0.5512152777777778
+      },
+      "screen": "within_screen"
+    }
+  ],
+  "humanDuration": {
+    "status": "not_measured",
+    "targetMinutes": 10,
+    "maximumMinutes": 15
+  },
+  "overall": "requires_human_validation",
+  "concerns": [],
+  "limits": [
+    "Ten systematic mixed decks give equal accepted-card representation, not all legal deck combinations",
+    "Heuristic policies are not optimal or human play",
+    "Cross-policy results describe these two policies, not player skill",
+    "Command cap is simulator budget, not the game clock",
+    "No gameplay rules, accepted cards, profile, layout or network changed"
+  ],
+  "localRunKey": "8caa06e6e814ccc0a866efdeccdc995f77a1824d6db5e113b7b0c76f95a5c233",
+  "localReceiptHash": "48e138c0c225f3f7e63af94eae06101d51fd21a183947a96e14a692a96ff3c5a",
+  "localSummaryHash": "a18e4dc812d0ece63eb3ed20e15e2230fdddb281c1125d0e69b8eb05e36f8f19",
+  "localReportHash": "07c2c2347012680a48182a7f86a57738bc7d3b9e71fae322482694b742d273c7",
+  "interpretation": "Engineering evidence only. No card/rule tuning and no human-duration acceptance inferred."
+}

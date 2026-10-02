@@ -1,0 +1,40 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import crypto from 'node:crypto';
+export function acquireOperation(file, details = {}) {
+  if (
+    !details ||
+    typeof details !== 'object' ||
+    Array.isArray(details) ||
+    ['pid', 'token', 'startedAt'].some((key) => Object.hasOwn(details, key))
+  )
+    throw Error('Reserved operation ownership fields cannot be overridden');
+  fs.mkdirSync(path.dirname(file), { recursive: true });
+  const token = crypto.randomBytes(16).toString('hex');
+  let fd;
+  try {
+    fd = fs.openSync(file, 'wx');
+  } catch (e) {
+    if (e.code === 'EEXIST')
+      throw Error(
+        'Production operation already active; use resume to inspect, never run competing cycles'
+      );
+    throw e;
+  }
+  fs.writeFileSync(
+    fd,
+    JSON.stringify({ pid: process.pid, token, startedAt: new Date().toISOString(), ...details })
+  );
+  fs.closeSync(fd);
+  return () => {
+    const actual = JSON.parse(fs.readFileSync(file, 'utf8'));
+    if (actual.token !== token || actual.pid !== process.pid)
+      throw Error('Operation lock ownership changed');
+    fs.unlinkSync(file);
+  };
+}
+export function headFreshness(expected, observed, remote, elapsedMs) {
+  if (remote !== expected) return 'conflict';
+  if (observed === expected) return 'current';
+  return elapsedMs < 60000 ? 'wait' : 'timeout';
+}

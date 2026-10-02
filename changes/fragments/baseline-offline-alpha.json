@@ -1,0 +1,8 @@
+{
+  "id": "baseline-offline-alpha",
+  "version": "0.1.0",
+  "kind": "added",
+  "scope": "game",
+  "text": "Первая офлайн-альфа: поле 3×3, пять стихий, случайная рука, соседние атаки, ИИ и интерфейс RU/EN.",
+  "breaking": false
+}

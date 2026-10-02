@@ -1,0 +1,176 @@
+{
+  "schemaVersion": 1,
+  "observedAt": "2026-09-25T01:10:50.219Z",
+  "repository": "neurofoxpro/multimental",
+  "pr": 22,
+  "featureHead": "298d1c59759295d61fc62d916eeef41876039a83",
+  "commit": "0969637cfcd31d399fe0a6bf48c4dc3d0bdda082",
+  "installedVersion": "0.4.0-alpha.94.1",
+  "versionCode": 19401,
+  "installedAt": "2026-09-25T01:05:31.116Z",
+  "originalSha256": "1f6953d3dd762344eadbe3f5de2fa7411a2dbb0223300ed2cfa384de2de83b25",
+  "installedSha256": "1b1f06a20ace41a088863768dbbd8ce2251b098c27e4777efa13e2cefccd5d41",
+  "ready": true,
+  "phoneData": "preserved_update_in_place",
+  "homeIcon": {
+    "label": "Multimental Dev",
+    "present": true,
+    "observedFile": "directional-home-icon.local.png",
+    "launchByTap": true
+  },
+  "candidateQualification": {
+    "status": "passed",
+    "apk": {
+      "version": "0.4.0-alpha.93.1",
+      "sha256": "0039c050a543359836cd774d2f345b420956edbbfbb5162c43b6b5daa0132655",
+      "commit": "e66e81b24e0a6835a566ca2498a30b8b696812da"
+    },
+    "startedAt": "2026-09-25T00:55:43.035Z",
+    "finishedAt": "2026-09-25T01:03:18.303Z",
+    "scenarios": [
+      {
+        "name": "emulator-A-clean-install",
+        "status": "passed"
+      },
+      {
+        "name": "emulator-A-install",
+        "status": "passed"
+      },
+      {
+        "name": "emulator-A-ui",
+        "status": "passed"
+      },
+      {
+        "name": "emulator-A-tutorial",
+        "status": "passed"
+      },
+      {
+        "name": "emulator-A-jni",
+        "status": "passed"
+      },
+      {
+        "name": "emulator-A-reinstall",
+        "status": "passed"
+      },
+      {
+        "name": "emulator-A-close",
+        "status": "passed"
+      },
+      {
+        "name": "emulator-A-launch",
+        "status": "passed"
+      },
+      {
+        "name": "emulator-B-install",
+        "status": "passed"
+      },
+      {
+        "name": "emulator-B-ui",
+        "status": "passed"
+      },
+      {
+        "name": "emulator-B-tutorial",
+        "status": "passed"
+      },
+      {
+        "name": "emulator-B-jni",
+        "status": "passed"
+      },
+      {
+        "name": "emulator-B-reinstall",
+        "status": "passed"
+      },
+      {
+        "name": "emulator-B-close",
+        "status": "passed"
+      },
+      {
+        "name": "emulator-B-launch",
+        "status": "passed"
+      },
+      {
+        "name": "emulator-pair",
+        "status": "passed"
+      },
+      {
+        "name": "pvp-emulators",
+        "status": "passed"
+      },
+      {
+        "name": "phone-install",
+        "status": "passed"
+      },
+      {
+        "name": "phone-ui",
+        "status": "passed"
+      },
+      {
+        "name": "phone-tutorial",
+        "status": "passed"
+      },
+      {
+        "name": "phone-tcp-usb",
+        "status": "passed"
+      },
+      {
+        "name": "phone-tcp-lan",
+        "status": "passed"
+      },
+      {
+        "name": "phone-tcp-peer",
+        "status": "passed"
+      },
+      {
+        "name": "phone-bluetooth",
+        "status": "passed"
+      },
+      {
+        "name": "bluetooth-player-room",
+        "status": "passed"
+      },
+      {
+        "name": "pvp-phone-lan",
+        "status": "passed"
+      },
+      {
+        "name": "phone-reinstall",
+        "status": "passed"
+      },
+      {
+        "name": "phone-close",
+        "status": "passed"
+      },
+      {
+        "name": "phone-launch",
+        "status": "passed"
+      }
+    ]
+  },
+  "localTests": {
+    "node": 87,
+    "core": {
+      "checks": 6302,
+      "simulations": 100
+    },
+    "room": {
+      "checks": 6128,
+      "simulations": 50
+    },
+    "directional": {
+      "checks": 54927,
+      "simulations": 200
+    },
+    "directionalUi": 17
+  },
+  "devCi": {
+    "conclusion": "success",
+    "databaseId": 36080332923,
+    "headSha": "0969637cfcd31d399fe0a6bf48c4dc3d0bdda082",
+    "status": "completed",
+    "url": "https://github.com/neurofoxpro/multimental/actions/runs/36080332923",
+    "workflowName": "Build Android"
+  },
+  "manualAcceptance": "pending",
+  "secondPhysicalAndroid": "not_tested",
+  "mainStable": "not_changed"
+}

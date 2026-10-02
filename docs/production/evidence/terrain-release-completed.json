@@ -1,0 +1,138 @@
+{
+  "observedAt": "2026-09-25T02:16:35.185Z",
+  "repository": "neurofoxpro/multimental",
+  "pr": 24,
+  "commit": "fb273133a8f113d1a4ff4416d0768bdaf8e50aaf",
+  "version": "0.5.0-alpha.100.1",
+  "versionCode": 20001,
+  "installedSha256": "6621c60d03f546900bffec892694c3bf9abb05994c5e37bdd02497b08bd20072",
+  "originalSha256": "adad08d76952162a47bf1524aea5846dbe263f321e9abfc3b34aa42d6088286f",
+  "installedAt": "2026-09-25T02:15:13.716Z",
+  "ready": true,
+  "candidateHead": "9c350b8c35a8d5a3848cabac3db91e990754e286",
+  "candidateApk": {
+    "version": "0.5.0-alpha.99.1",
+    "sha256": "b547ea8808bd691559c24fbd3784b8d2645301e77e8bb9b0d7cf760670af4563",
+    "commit": "81bd2b03614b8e98179e78d0caf053b7130fc306"
+  },
+  "checks": [
+    {
+      "name": "emulator-A-clean-install",
+      "status": "passed"
+    },
+    {
+      "name": "emulator-A-install",
+      "status": "passed"
+    },
+    {
+      "name": "emulator-A-ui",
+      "status": "passed"
+    },
+    {
+      "name": "emulator-A-tutorial",
+      "status": "passed"
+    },
+    {
+      "name": "emulator-A-jni",
+      "status": "passed"
+    },
+    {
+      "name": "emulator-A-reinstall",
+      "status": "passed"
+    },
+    {
+      "name": "emulator-A-close",
+      "status": "passed"
+    },
+    {
+      "name": "emulator-A-launch",
+      "status": "passed"
+    },
+    {
+      "name": "emulator-B-install",
+      "status": "passed"
+    },
+    {
+      "name": "emulator-B-ui",
+      "status": "passed"
+    },
+    {
+      "name": "emulator-B-tutorial",
+      "status": "passed"
+    },
+    {
+      "name": "emulator-B-jni",
+      "status": "passed"
+    },
+    {
+      "name": "emulator-B-reinstall",
+      "status": "passed"
+    },
+    {
+      "name": "emulator-B-close",
+      "status": "passed"
+    },
+    {
+      "name": "emulator-B-launch",
+      "status": "passed"
+    },
+    {
+      "name": "emulator-pair",
+      "status": "passed"
+    },
+    {
+      "name": "pvp-emulators",
+      "status": "passed"
+    },
+    {
+      "name": "phone-install",
+      "status": "passed"
+    },
+    {
+      "name": "phone-ui",
+      "status": "passed"
+    },
+    {
+      "name": "phone-tutorial",
+      "status": "passed"
+    },
+    {
+      "name": "phone-tcp-usb",
+      "status": "passed"
+    },
+    {
+      "name": "phone-tcp-lan",
+      "status": "passed"
+    },
+    {
+      "name": "phone-tcp-peer",
+      "status": "passed"
+    },
+    {
+      "name": "phone-bluetooth",
+      "status": "passed"
+    },
+    {
+      "name": "bluetooth-player-room",
+      "status": "passed"
+    },
+    {
+      "name": "pvp-phone-lan",
+      "status": "passed"
+    },
+    {
+      "name": "phone-reinstall",
+      "status": "passed"
+    },
+    {
+      "name": "phone-close",
+      "status": "passed"
+    },
+    {
+      "name": "phone-launch",
+      "status": "passed"
+    }
+  ],
+  "data": "preserved",
+  "manualAcceptance": "pending"
+}

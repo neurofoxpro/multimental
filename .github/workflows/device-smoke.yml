@@ -1,0 +1,10 @@
+name: Device automation policy
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  policy:
+    runs-on: ubuntu-24.04
+    steps:
+      - run: echo 'Device deployment is performed by the reviewed bounded updater on VENEL-SENDRIK. No generic public-PR runner executes on the personal computer. See docs/production/DEVICE.md.'
