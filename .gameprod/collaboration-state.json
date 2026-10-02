@@ -1,42 +1,9 @@
 {
   "schemaVersion": 1,
   "repository": "neurofoxpro/multimental",
-  "revision": 389,
-  "claims": {
-    "f484b800-5b8c-488d-bae9-2d392a995342": {
-      "token": "f484b800-5b8c-488d-bae9-2d392a995342",
-      "task": "QA-02",
-      "owner": "redmi-wifi-20261002-w8k2",
-      "base": "668cd6b6302a6b6e0fb55a5c61f157204556bc8e",
-      "resources": [
-        "area:devices",
-        "task:QA-02"
-      ],
-      "fence": 389,
-      "updatedAt": 1790927807453,
-      "expiresAt": 1790929607453
-    }
-  },
+  "revision": 390,
+  "claims": {},
   "events": [
-    {
-      "id": "c6ac760d-faac-4d41-b74f-0d15c6926d4b",
-      "hash": "00a0307183feff22917e3aa40b2653089b6ea14ef34af4a14d62368adf69e7d5",
-      "revision": 134,
-      "result": {
-        "status": "claimed",
-        "token": "c6ac760d-faac-4d41-b74f-0d15c6926d4b",
-        "task": "CONTENT-03",
-        "owner": "content-factory-20260926-c74a",
-        "base": "ba379967f6c2231f33263fb2a91185ed13aefe5a",
-        "resources": [
-          "area:automation",
-          "task:CONTENT-03"
-        ],
-        "fence": 134,
-        "updatedAt": 1790431591166,
-        "expiresAt": 1790433391166
-      }
-    },
     {
       "id": "e3add1de-4592-455a-964d-9303c3771432",
       "hash": "ee2c71e703ccabaa98a45d3878ccd111cf159401746f69fe8cc83ce2dd967a3c",
@@ -4653,6 +4620,18 @@
         "fence": 389,
         "updatedAt": 1790927807453,
         "expiresAt": 1790929607453
+      }
+    },
+    {
+      "id": "452c5500-3faf-4105-9525-83553c893553",
+      "hash": "9c712aa34b6fc889398846a0f068170a66c8788e1dbc7d7426397c8333eaf3aa",
+      "revision": 390,
+      "result": {
+        "status": "released",
+        "token": "f484b800-5b8c-488d-bae9-2d392a995342",
+        "task": "QA-02",
+        "owner": "redmi-wifi-20261002-w8k2",
+        "fence": 389
       }
     }
   ]
