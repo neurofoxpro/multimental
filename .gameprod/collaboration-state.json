@@ -1,21 +1,23 @@
 {
   "schemaVersion": 1,
   "repository": "neurofoxpro/multimental",
-  "revision": 388,
-  "claims": {},
+  "revision": 389,
+  "claims": {
+    "f484b800-5b8c-488d-bae9-2d392a995342": {
+      "token": "f484b800-5b8c-488d-bae9-2d392a995342",
+      "task": "QA-02",
+      "owner": "redmi-wifi-20261002-w8k2",
+      "base": "668cd6b6302a6b6e0fb55a5c61f157204556bc8e",
+      "resources": [
+        "area:devices",
+        "task:QA-02"
+      ],
+      "fence": 389,
+      "updatedAt": 1790927807453,
+      "expiresAt": 1790929607453
+    }
+  },
   "events": [
-    {
-      "id": "7411bcef-3cd4-4823-95ac-07d7d8bb8778",
-      "hash": "6a0fc6db8b615fbe803c67cab960f68efbd8bceff4585b065593b25eac44fcc8",
-      "revision": 133,
-      "result": {
-        "status": "released",
-        "token": "6476701c-391d-422b-95a2-57e93398a18b",
-        "task": "UX-08",
-        "owner": "quickflow-20260926-b8d3",
-        "fence": 130
-      }
-    },
     {
       "id": "c6ac760d-faac-4d41-b74f-0d15c6926d4b",
       "hash": "00a0307183feff22917e3aa40b2653089b6ea14ef34af4a14d62368adf69e7d5",
@@ -4632,6 +4634,25 @@
         "task": "QA-02",
         "owner": "redmi-latest-20261002-r327",
         "fence": 387
+      }
+    },
+    {
+      "id": "f484b800-5b8c-488d-bae9-2d392a995342",
+      "hash": "a28c4ee970b9411e18b769edd8a97bd33fe4c9bec5ccfa0f2f81bb9cddd56e28",
+      "revision": 389,
+      "result": {
+        "status": "claimed",
+        "token": "f484b800-5b8c-488d-bae9-2d392a995342",
+        "task": "QA-02",
+        "owner": "redmi-wifi-20261002-w8k2",
+        "base": "668cd6b6302a6b6e0fb55a5c61f157204556bc8e",
+        "resources": [
+          "area:devices",
+          "task:QA-02"
+        ],
+        "fence": 389,
+        "updatedAt": 1790927807453,
+        "expiresAt": 1790929607453
       }
     }
   ]
