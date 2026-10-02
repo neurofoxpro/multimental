@@ -1,0 +1,81 @@
+{
+  "schemaVersion": 1,
+  "repository": "neurofoxpro/multimental",
+  "taskId": "UX-11",
+  "observedAt": "2026-10-02T08:08:33.120Z",
+  "sourceBase": "668cd6b6302a6b6e0fb55a5c61f157204556bc8e",
+  "sourceWorktreeDirty": true,
+  "sourceFiles": [
+    {
+      "path": "game/src/main.gd",
+      "sha256": "b8976ad834d9ccf64ef5147ee7921cf3463113aef21766f5e7d94f20d1f2ba92"
+    },
+    {
+      "path": "game/src/battle_screen.gd",
+      "sha256": "618c8da0cbc66bd3e49ca68b61fb660ee94af79bd638317e60a9dfe0980ba300"
+    },
+    {
+      "path": "game/tests/battle_interaction_test.gd",
+      "sha256": "514e074313fc939e2bb48d66023284ec82a3161651440b724e748fed5cd9ce92"
+    }
+  ],
+  "regression": {
+    "beforeFailures": 6,
+    "locales": [
+      "ru",
+      "en"
+    ],
+    "beforeLogSha256": "c74b41a2f62dfe9a8c603d95691f0ad53f8c2ffa78bcef5a9e02557c13491d20",
+    "cases": [
+      "turn change dismisses prompt",
+      "obsolete callback on later turn has no effect",
+      "confirmation revalidates before render",
+      "unchanged refresh preserves prompt",
+      "board mutation",
+      "coin mutation",
+      "network revision mutation",
+      "pending network acknowledgement",
+      "reconnecting phase"
+    ]
+  },
+  "tests": [
+    {
+      "test": "game/tests/battle_interaction_test.gd",
+      "status": "passed",
+      "marker": "MULTIMENTAL_INTERACTION_PASS checks=126",
+      "logSha256": "74a514fb22612ca5eb10ef8ff5db8d9c5812e725f3424ce6f2e64c177a1bc9eb"
+    },
+    {
+      "test": "game/tests/directional_ui_test.gd",
+      "status": "passed",
+      "marker": "MULTIMENTAL_DIRECTIONAL_UI_PASS checks=19",
+      "logSha256": "0f9f9d5a1eb40b3d7b07cdd86046d1459eccc4d2c5b6fce3fcb4de076d54911e"
+    },
+    {
+      "test": "game/tests/terrain_test.gd",
+      "status": "passed",
+      "marker": "MULTIMENTAL_TERRAIN_PASS checks=14510",
+      "logSha256": "a29310abf208869af1041919e72d9819262c8bd31ba0772bdea0409a92963432"
+    }
+  ],
+  "gallery": {
+    "manifest": "docs/media/gallery/current.json",
+    "inputKey": "b2c9ee31cd70eec5c33772634942abd659929b481b0190f216199ebd0261a69d",
+    "capturedAt": "2026-10-02T08:06:17.173Z",
+    "images": 24,
+    "visuallyReviewed": [
+      "ru-battle-720x1280",
+      "en-battle-720x1280",
+      "ru-battle-1280x720",
+      "en-battle-1280x720"
+    ],
+    "installedApkCapture": false
+  },
+  "limitations": [
+    "This increment does not accept UX-11 as a whole.",
+    "Gallery is source rendering, not physical screen or user acceptance.",
+    "The 24-screen gallery does not yet capture all interactive modal states.",
+    "Long Russian unit name is clipped in the landscape tile; full tactical readability remains open.",
+    "Domain rules, catalog, balance, replay and personal profiles were not changed."
+  ]
+}

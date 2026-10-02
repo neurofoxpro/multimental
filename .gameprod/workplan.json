@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "neurofoxpro/multimental",
-  "updatedAt": "2026-10-01",
+  "updatedAt": "2026-10-02",
   "baselineCommit": "cff25564c064c463b9bb742248110f3a0ff9328f",
   "evidenceSemantics": "Verified means historically observed at linked evidence. No current RC, owner approval, Play publication or physical installation is inferred from metadata.",
   "intent": "Close all accepted ideas before full Play launch; dev builds remain incremental. Explicit owner-deferred decisions stay blockers until resolved or explicitly scoped out.",
@@ -1379,7 +1379,7 @@
       "title": "Параллельные чаты: атомарное владение задачами и ресурсами в GitHub",
       "stage": "P0. Единый производственный процесс",
       "kind": "automation",
-      "status": "planned",
+      "status": "verified",
       "dependsOn": [
         "AUTH-01"
       ],
@@ -1392,7 +1392,11 @@
       "evidence": [
         "docs/production/evidence/parallel-slices-20260926.json",
         "skills/game-production/tests/collaboration.test.mjs",
-        "skills/game-production/tests/collaboration-integration.test.mjs"
+        "skills/game-production/tests/collaboration-integration.test.mjs",
+        "docs/production/PARALLEL_CHATS.ru.md",
+        "docs/production/ZERO_WORK_CLAIM_RECOVERY.ru.md",
+        "docs/production/COMPLETED_SLICE_RECOVERY.ru.md",
+        "docs/production/evidence/auto09-zero-work-completed-20261002.json"
       ],
       "readset": [
         "docs/production/PARALLEL_CHATS.ru.md",

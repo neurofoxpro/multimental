@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "observedAt": "2026-10-01",
+  "observedAt": "2026-10-02",
   "repository": "neurofoxpro/multimental",
   "generatedFrom": ".gameprod/workplan.json",
   "evidenceSemantics": "Historical evidence only; not a fresh release gate or human approval.",
@@ -662,12 +662,16 @@
       "id": "AUTO-09",
       "text": "Параллельные чаты: атомарное владение задачами и ресурсами в GitHub",
       "version": "P0. Единый производственный процесс",
-      "status": "planned",
+      "status": "verified",
       "kind": "automation",
       "evidence": [
         "docs/production/evidence/parallel-slices-20260926.json",
         "skills/game-production/tests/collaboration.test.mjs",
-        "skills/game-production/tests/collaboration-integration.test.mjs"
+        "skills/game-production/tests/collaboration-integration.test.mjs",
+        "docs/production/PARALLEL_CHATS.ru.md",
+        "docs/production/ZERO_WORK_CLAIM_RECOVERY.ru.md",
+        "docs/production/COMPLETED_SLICE_RECOVERY.ru.md",
+        "docs/production/evidence/auto09-zero-work-completed-20261002.json"
       ],
       "source": "Поручение владельца 26.09.2026: несколько чатов, координация, автоматизация; regression 30.09.2026: Issue #167 expired zero-work claim recovery gap",
       "requiredForBeta": true

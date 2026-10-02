@@ -2,7 +2,7 @@
 
 Это настоящая отрисовка исходного приложения в изолированном тестовом профиле, не нарисованные макеты и не фотографии установленного Android APK.
 
-Снято: 2026-09-30T14:54:23.320Z. Базовый commit: 0795d80067da27971b44e42d5603a05a53d629cb. Ключ точных входов отрисовки: 2d2b8239fe46b6ae3058e059cd254d569c7e02a09198079aa08e329902fa9488. Изменения в рабочем дереве при съёмке: были; их точные хеши перечислены в манифесте.
+Снято: 2026-10-02T08:06:17.173Z. Базовый commit: 668cd6b6302a6b6e0fb55a5c61f157204556bc8e. Ключ точных входов отрисовки: b2c9ee31cd70eec5c33772634942abd659929b481b0190f216199ebd0261a69d. Изменения в рабочем дереве при съёмке: были; их точные хеши перечислены в манифесте.
 
 Проверка: `scripts/chat.cmd gallery check`. Обновление: `scripts/chat.cmd gallery capture`, затем обычный `ship`. Манифест: [current.json](media/gallery/current.json).
 
@@ -14,70 +14,70 @@
 
 | Русский · 720×1280 | English · 720×1280 |
 |---|---|
-| <img src="media/gallery/2d2b8239fe46b6ae3058e059cd254d569c7e02a09198079aa08e329902fa9488/0f558371289147b9f9cc9973ca74c429/ru-menu-720x1280.png" width="320" alt="Главное меню — ru"> | <img src="media/gallery/2d2b8239fe46b6ae3058e059cd254d569c7e02a09198079aa08e329902fa9488/0f558371289147b9f9cc9973ca74c429/en-menu-720x1280.png" width="320" alt="Главное меню — en"> |
+| <img src="media/gallery/b2c9ee31cd70eec5c33772634942abd659929b481b0190f216199ebd0261a69d/75b428e219a2d9fd59c0d342f6bdb910/ru-menu-720x1280.png" width="320" alt="Главное меню — ru"> | <img src="media/gallery/b2c9ee31cd70eec5c33772634942abd659929b481b0190f216199ebd0261a69d/75b428e219a2d9fd59c0d342f6bdb910/en-menu-720x1280.png" width="320" alt="Главное меню — en"> |
 
 ## Коллекция и колоды
 
 | Русский · 720×1280 | English · 720×1280 |
 |---|---|
-| <img src="media/gallery/2d2b8239fe46b6ae3058e059cd254d569c7e02a09198079aa08e329902fa9488/0f558371289147b9f9cc9973ca74c429/ru-collection-720x1280.png" width="320" alt="Коллекция и колоды — ru"> | <img src="media/gallery/2d2b8239fe46b6ae3058e059cd254d569c7e02a09198079aa08e329902fa9488/0f558371289147b9f9cc9973ca74c429/en-collection-720x1280.png" width="320" alt="Коллекция и колоды — en"> |
+| <img src="media/gallery/b2c9ee31cd70eec5c33772634942abd659929b481b0190f216199ebd0261a69d/75b428e219a2d9fd59c0d342f6bdb910/ru-collection-720x1280.png" width="320" alt="Коллекция и колоды — ru"> | <img src="media/gallery/b2c9ee31cd70eec5c33772634942abd659929b481b0190f216199ebd0261a69d/75b428e219a2d9fd59c0d342f6bdb910/en-collection-720x1280.png" width="320" alt="Коллекция и колоды — en"> |
 
 ## Подробности карты
 
 | Русский · 720×1280 | English · 720×1280 |
 |---|---|
-| <img src="media/gallery/2d2b8239fe46b6ae3058e059cd254d569c7e02a09198079aa08e329902fa9488/0f558371289147b9f9cc9973ca74c429/ru-card-720x1280.png" width="320" alt="Подробности карты — ru"> | <img src="media/gallery/2d2b8239fe46b6ae3058e059cd254d569c7e02a09198079aa08e329902fa9488/0f558371289147b9f9cc9973ca74c429/en-card-720x1280.png" width="320" alt="Подробности карты — en"> |
+| <img src="media/gallery/b2c9ee31cd70eec5c33772634942abd659929b481b0190f216199ebd0261a69d/75b428e219a2d9fd59c0d342f6bdb910/ru-card-720x1280.png" width="320" alt="Подробности карты — ru"> | <img src="media/gallery/b2c9ee31cd70eec5c33772634942abd659929b481b0190f216199ebd0261a69d/75b428e219a2d9fd59c0d342f6bdb910/en-card-720x1280.png" width="320" alt="Подробности карты — en"> |
 
 ## Тактический бой
 
 | Русский · 720×1280 | English · 720×1280 |
 |---|---|
-| <img src="media/gallery/2d2b8239fe46b6ae3058e059cd254d569c7e02a09198079aa08e329902fa9488/0f558371289147b9f9cc9973ca74c429/ru-battle-720x1280.png" width="320" alt="Тактический бой — ru"> | <img src="media/gallery/2d2b8239fe46b6ae3058e059cd254d569c7e02a09198079aa08e329902fa9488/0f558371289147b9f9cc9973ca74c429/en-battle-720x1280.png" width="320" alt="Тактический бой — en"> |
+| <img src="media/gallery/b2c9ee31cd70eec5c33772634942abd659929b481b0190f216199ebd0261a69d/75b428e219a2d9fd59c0d342f6bdb910/ru-battle-720x1280.png" width="320" alt="Тактический бой — ru"> | <img src="media/gallery/b2c9ee31cd70eec5c33772634942abd659929b481b0190f216199ebd0261a69d/75b428e219a2d9fd59c0d342f6bdb910/en-battle-720x1280.png" width="320" alt="Тактический бой — en"> |
 
 ## Магазин паков
 
 | Русский · 720×1280 | English · 720×1280 |
 |---|---|
-| <img src="media/gallery/2d2b8239fe46b6ae3058e059cd254d569c7e02a09198079aa08e329902fa9488/0f558371289147b9f9cc9973ca74c429/ru-shop-720x1280.png" width="320" alt="Магазин паков — ru"> | <img src="media/gallery/2d2b8239fe46b6ae3058e059cd254d569c7e02a09198079aa08e329902fa9488/0f558371289147b9f9cc9973ca74c429/en-shop-720x1280.png" width="320" alt="Магазин паков — en"> |
+| <img src="media/gallery/b2c9ee31cd70eec5c33772634942abd659929b481b0190f216199ebd0261a69d/75b428e219a2d9fd59c0d342f6bdb910/ru-shop-720x1280.png" width="320" alt="Магазин паков — ru"> | <img src="media/gallery/b2c9ee31cd70eec5c33772634942abd659929b481b0190f216199ebd0261a69d/75b428e219a2d9fd59c0d342f6bdb910/en-shop-720x1280.png" width="320" alt="Магазин паков — en"> |
 
 ## Создание карт
 
 | Русский · 720×1280 | English · 720×1280 |
 |---|---|
-| <img src="media/gallery/2d2b8239fe46b6ae3058e059cd254d569c7e02a09198079aa08e329902fa9488/0f558371289147b9f9cc9973ca74c429/ru-crafting-720x1280.png" width="320" alt="Создание карт — ru"> | <img src="media/gallery/2d2b8239fe46b6ae3058e059cd254d569c7e02a09198079aa08e329902fa9488/0f558371289147b9f9cc9973ca74c429/en-crafting-720x1280.png" width="320" alt="Создание карт — en"> |
+| <img src="media/gallery/b2c9ee31cd70eec5c33772634942abd659929b481b0190f216199ebd0261a69d/75b428e219a2d9fd59c0d342f6bdb910/ru-crafting-720x1280.png" width="320" alt="Создание карт — ru"> | <img src="media/gallery/b2c9ee31cd70eec5c33772634942abd659929b481b0190f216199ebd0261a69d/75b428e219a2d9fd59c0d342f6bdb910/en-crafting-720x1280.png" width="320" alt="Создание карт — en"> |
 
 ## Награды и задания
 
 | Русский · 720×1280 | English · 720×1280 |
 |---|---|
-| <img src="media/gallery/2d2b8239fe46b6ae3058e059cd254d569c7e02a09198079aa08e329902fa9488/0f558371289147b9f9cc9973ca74c429/ru-rewards-720x1280.png" width="320" alt="Награды и задания — ru"> | <img src="media/gallery/2d2b8239fe46b6ae3058e059cd254d569c7e02a09198079aa08e329902fa9488/0f558371289147b9f9cc9973ca74c429/en-rewards-720x1280.png" width="320" alt="Награды и задания — en"> |
+| <img src="media/gallery/b2c9ee31cd70eec5c33772634942abd659929b481b0190f216199ebd0261a69d/75b428e219a2d9fd59c0d342f6bdb910/ru-rewards-720x1280.png" width="320" alt="Награды и задания — ru"> | <img src="media/gallery/b2c9ee31cd70eec5c33772634942abd659929b481b0190f216199ebd0261a69d/75b428e219a2d9fd59c0d342f6bdb910/en-rewards-720x1280.png" width="320" alt="Награды и задания — en"> |
 
 ## Подключение по LAN
 
 | Русский · 720×1280 | English · 720×1280 |
 |---|---|
-| <img src="media/gallery/2d2b8239fe46b6ae3058e059cd254d569c7e02a09198079aa08e329902fa9488/0f558371289147b9f9cc9973ca74c429/ru-connection-720x1280.png" width="320" alt="Подключение по LAN — ru"> | <img src="media/gallery/2d2b8239fe46b6ae3058e059cd254d569c7e02a09198079aa08e329902fa9488/0f558371289147b9f9cc9973ca74c429/en-connection-720x1280.png" width="320" alt="Подключение по LAN — en"> |
+| <img src="media/gallery/b2c9ee31cd70eec5c33772634942abd659929b481b0190f216199ebd0261a69d/75b428e219a2d9fd59c0d342f6bdb910/ru-connection-720x1280.png" width="320" alt="Подключение по LAN — ru"> | <img src="media/gallery/b2c9ee31cd70eec5c33772634942abd659929b481b0190f216199ebd0261a69d/75b428e219a2d9fd59c0d342f6bdb910/en-connection-720x1280.png" width="320" alt="Подключение по LAN — en"> |
 
 ## Карты и правила
 
 | Русский · 720×1280 | English · 720×1280 |
 |---|---|
-| <img src="media/gallery/2d2b8239fe46b6ae3058e059cd254d569c7e02a09198079aa08e329902fa9488/0f558371289147b9f9cc9973ca74c429/ru-rules-720x1280.png" width="320" alt="Карты и правила — ru"> | <img src="media/gallery/2d2b8239fe46b6ae3058e059cd254d569c7e02a09198079aa08e329902fa9488/0f558371289147b9f9cc9973ca74c429/en-rules-720x1280.png" width="320" alt="Карты и правила — en"> |
+| <img src="media/gallery/b2c9ee31cd70eec5c33772634942abd659929b481b0190f216199ebd0261a69d/75b428e219a2d9fd59c0d342f6bdb910/ru-rules-720x1280.png" width="320" alt="Карты и правила — ru"> | <img src="media/gallery/b2c9ee31cd70eec5c33772634942abd659929b481b0190f216199ebd0261a69d/75b428e219a2d9fd59c0d342f6bdb910/en-rules-720x1280.png" width="320" alt="Карты и правила — en"> |
 
 ## Звук
 
 | Русский · 720×1280 | English · 720×1280 |
 |---|---|
-| <img src="media/gallery/2d2b8239fe46b6ae3058e059cd254d569c7e02a09198079aa08e329902fa9488/0f558371289147b9f9cc9973ca74c429/ru-settings-720x1280.png" width="320" alt="Звук — ru"> | <img src="media/gallery/2d2b8239fe46b6ae3058e059cd254d569c7e02a09198079aa08e329902fa9488/0f558371289147b9f9cc9973ca74c429/en-settings-720x1280.png" width="320" alt="Звук — en"> |
+| <img src="media/gallery/b2c9ee31cd70eec5c33772634942abd659929b481b0190f216199ebd0261a69d/75b428e219a2d9fd59c0d342f6bdb910/ru-settings-720x1280.png" width="320" alt="Звук — ru"> | <img src="media/gallery/b2c9ee31cd70eec5c33772634942abd659929b481b0190f216199ebd0261a69d/75b428e219a2d9fd59c0d342f6bdb910/en-settings-720x1280.png" width="320" alt="Звук — en"> |
 
 ## Альбомные контрольные виды · 1280×720
 
-<img src="media/gallery/2d2b8239fe46b6ae3058e059cd254d569c7e02a09198079aa08e329902fa9488/0f558371289147b9f9cc9973ca74c429/ru-menu-1280x720.png" width="640" alt="ru-menu-1280x720">
+<img src="media/gallery/b2c9ee31cd70eec5c33772634942abd659929b481b0190f216199ebd0261a69d/75b428e219a2d9fd59c0d342f6bdb910/ru-menu-1280x720.png" width="640" alt="ru-menu-1280x720">
 
-<img src="media/gallery/2d2b8239fe46b6ae3058e059cd254d569c7e02a09198079aa08e329902fa9488/0f558371289147b9f9cc9973ca74c429/ru-battle-1280x720.png" width="640" alt="ru-battle-1280x720">
+<img src="media/gallery/b2c9ee31cd70eec5c33772634942abd659929b481b0190f216199ebd0261a69d/75b428e219a2d9fd59c0d342f6bdb910/ru-battle-1280x720.png" width="640" alt="ru-battle-1280x720">
 
-<img src="media/gallery/2d2b8239fe46b6ae3058e059cd254d569c7e02a09198079aa08e329902fa9488/0f558371289147b9f9cc9973ca74c429/en-menu-1280x720.png" width="640" alt="en-menu-1280x720">
+<img src="media/gallery/b2c9ee31cd70eec5c33772634942abd659929b481b0190f216199ebd0261a69d/75b428e219a2d9fd59c0d342f6bdb910/en-menu-1280x720.png" width="640" alt="en-menu-1280x720">
 
-<img src="media/gallery/2d2b8239fe46b6ae3058e059cd254d569c7e02a09198079aa08e329902fa9488/0f558371289147b9f9cc9973ca74c429/en-battle-1280x720.png" width="640" alt="en-battle-1280x720">
+<img src="media/gallery/b2c9ee31cd70eec5c33772634942abd659929b481b0190f216199ebd0261a69d/75b428e219a2d9fd59c0d342f6bdb910/en-battle-1280x720.png" width="640" alt="en-battle-1280x720">
 
 Галерея фиксирует и недостатки текущей версии. Наличие картинки не означает удобство, доступность для скринридера, исправленную навигацию или аппаратную приёмку.

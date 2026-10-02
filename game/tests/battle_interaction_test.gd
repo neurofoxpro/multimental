@@ -92,6 +92,59 @@ func run_test() -> void:
         check(ui.game.state.players[0].coins == 9 and ui.game.state.active == 1, "domain cost and turn progression are preserved")
         ui.attack_selected()
         check(ui.game.commands.size() == 1, "second activation has no stale selected source")
+        fixture(ui)
+        ui.on_cell(0)
+        ui.attack_selected()
+        check(ui.friendly_confirm.visible, "stale warning fixture starts with explicit intent")
+        check(ui.game.apply(0,{"type":"pass"}).ok, "fixture advances the first turn")
+        ui.after_action()
+        check(not ui.friendly_confirm.visible and ui.friendly_pending.is_empty(), "a turn change dismisses the obsolete ally warning")
+        check(ui.game.apply(1,{"type":"pass"}).ok, "fixture returns control to the player")
+        ui.after_action()
+        before = ui.game.digest()
+        var recorded: int = ui.game.commands.size()
+        ui.confirm_friendly_attack()
+        check(ui.game.digest() == before and ui.game.commands.size() == recorded, "obsolete confirmation cannot attack during a later turn")
+        fixture(ui)
+        ui.on_cell(0)
+        ui.attack_selected()
+        check(ui.game.apply(0,{"type":"pass"}).ok and ui.game.apply(1,{"type":"pass"}).ok, "fixture changes state before the next render")
+        before = ui.game.digest()
+        ui.confirm_friendly_attack()
+        check(ui.game.digest() == before, "confirmation revalidates state even before a render")
+        for changed in ["board","coins","revision","pending","phase"]:
+            fixture(ui)
+            ui.online = changed in ["revision","pending","phase"]
+            if ui.online:
+                ui.lan.current_view = MatchView.for_player(ui.game,0)
+                ui.lan.current_view["phase"] = "playing"
+                ui.lan.current_view["revision"] = 1
+                ui.lan.current_view["turn_remaining_ms"] = 30000
+                ui.lan.view_received_at = Time.get_ticks_msec()
+                ui.lan.pending = {}
+            ui.on_cell(0)
+            ui.attack_selected()
+            ui.refresh()
+            check(ui.friendly_confirm.visible and ui._friendly_confirmation_current(ui._view()), "unchanged refresh keeps current consent: " + changed)
+            match changed:
+                "board":
+                    ui.game.state.board[1].health -= 1
+                "coins":
+                    ui.game.state.players[0].coins -= 1
+                "revision":
+                    ui.lan.current_view.revision += 1
+                "pending":
+                    ui.lan.pending = {"fixture":"unacknowledged"}
+                "phase":
+                    ui.lan.current_view.phase = "reconnecting"
+            check(not ui._friendly_confirmation_current(ui._view()), "changed public context invalidates consent: " + changed)
+            before = ui.game.digest()
+            var pending_before: Dictionary = ui.lan.pending.duplicate(true)
+            ui.confirm_friendly_attack()
+            check(ui.game.digest() == before and ui.lan.pending == pending_before and ui.friendly_pending.is_empty(), "obsolete consent cannot submit: " + changed)
+            ui.online = false
+            ui.lan.pending = {}
+            ui.lan.current_view = {}
         fixture(ui,false)
         await settle()
         var hand_scroll: ScrollContainer = ui.find_child("HandScroll",true,false)

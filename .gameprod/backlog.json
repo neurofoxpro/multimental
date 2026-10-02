@@ -748,7 +748,7 @@
   },
   {
     "id": "AUTO-09",
-    "status": "pending",
+    "status": "done",
     "action": "Параллельные чаты: атомарное владение задачами и ресурсами в GitHub",
     "dependsOn": [
       "AUTH-01"
@@ -758,7 +758,11 @@
     "evidence": [
       "docs/production/evidence/parallel-slices-20260926.json",
       "skills/game-production/tests/collaboration.test.mjs",
-      "skills/game-production/tests/collaboration-integration.test.mjs"
+      "skills/game-production/tests/collaboration-integration.test.mjs",
+      "docs/production/PARALLEL_CHATS.ru.md",
+      "docs/production/ZERO_WORK_CLAIM_RECOVERY.ru.md",
+      "docs/production/COMPLETED_SLICE_RECOVERY.ru.md",
+      "docs/production/evidence/auto09-zero-work-completed-20261002.json"
     ],
     "nextCommand": "npm run game -- task AUTO-09"
   },
