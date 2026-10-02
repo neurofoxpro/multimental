@@ -6,6 +6,8 @@ var output: String = ""
 var viewport: SubViewport
 var ui
 var personal_before: Array[String] = []
+const BattleFixture = preload("res://tests/support/battle_gallery_fixture.gd")
+const BATTLE_SIZES: Array[Vector2i] = [Vector2i(720,1280),Vector2i(1280,720),Vector2i(960,540)]
 const PAGES: Array[String] = ["menu", "collection", "card", "battle", "shop", "crafting", "rewards", "connection", "rules", "settings"]
 func _initialize() -> void:
     call_deferred("run_capture")
@@ -32,6 +34,8 @@ func fixture() -> bool:
 func show_page(page: String) -> bool:
     ui.battle = false
     ui.online = false
+    if page in BattleFixture.STATES:
+        return BattleFixture.show(ui,page)
     match page:
         "menu": ui.show_menu()
         "collection": ui.show_collection()
@@ -69,13 +73,21 @@ func show_page(page: String) -> bool:
         "settings": ui.show_audio_settings()
         _: return false
     return true
+func progress(page: String, locale: String, size: Vector2i, stage: String) -> void:
+    var file := FileAccess.open(output.path_join("progress.json"),FileAccess.WRITE)
+    if file != null:
+        file.store_string(JSON.stringify({"page":page,"locale":locale,"size":str(size),"stage":stage,"frames":Engine.get_process_frames(),"paused":paused,"windowMode":root.mode}))
+
 func take(page: String, locale: String, size: Vector2i) -> bool:
+    progress(page,locale,size,"preparing")
     viewport.size = size
     ui.language = locale
     if not await show_page(page):
         return false
+    progress(page,locale,size,"prepared")
     await process_frame
     await process_frame
+    progress(page,locale,size,"laid_out")
     if page == "menu":
         var play: Button = ui.find_child("PlayAI", true, false)
         var menu_scroll: ScrollContainer = ui.root.get_parent()
@@ -87,9 +99,13 @@ func take(page: String, locale: String, size: Vector2i) -> bool:
         await process_frame
         if not ui.get_viewport_rect().encloses(play.get_global_rect()):
             return false
-    await create_timer(2.0 if page == "battle" else 0.12).timeout
+    await create_timer(2.0 if page == "battle" or page in BattleFixture.STATES else 0.12).timeout
+    progress(page,locale,size,"timer_complete")
     await RenderingServer.frame_post_draw
+    progress(page,locale,size,"frame_drawn")
     if ui.get_viewport_rect().size != Vector2(size):
+        return false
+    if page in BattleFixture.STATES and not BattleFixture.matches(ui,page):
         return false
     var image: Image = viewport.get_texture().get_image()
     if image == null or image.is_empty() or image.get_size() != size:
@@ -102,9 +118,10 @@ func take(page: String, locale: String, size: Vector2i) -> bool:
         return false
     var id: String = locale + "-" + page + "-" + str(size.x) + "x" + str(size.y)
     var filename: String = output.path_join(id + ".png")
+    progress(page,locale,size,"encoding")
     if FileAccess.file_exists(filename) or image.save_png(filename) != OK:
         return false
-    captured.append({"id": id, "page": page, "locale": locale, "width": size.x, "height": size.y, "file": id + ".png", "sha256": FileAccess.get_sha256(filename), "sampledColors": colors.size()})
+    captured.append({"id": id, "page": page, "locale": locale, "width": size.x, "height": size.y, "file": id + ".png", "sha256": FileAccess.get_sha256(filename), "sampledColors": colors.size(),"interactiveStateVerified":page in BattleFixture.STATES})
     return true
 func run_capture() -> void:
     var args: PackedStringArray = OS.get_cmdline_user_args()
@@ -147,7 +164,13 @@ func run_capture() -> void:
             if not await take(page, locale, Vector2i(1280, 720)):
                 fail("landscape_failed_" + locale + "_" + page)
                 return
+        for page in BattleFixture.STATES:
+            for size in BATTLE_SIZES:
+                if not await take(page,locale,size):
+                    fail("interactive_failed_"+locale+"_"+page+"_"+str(size))
+                    return
     ui.battle = false
+    ui.online = false
     ui.queue_free()
     await process_frame
     viewport.queue_free()
@@ -159,6 +182,6 @@ func run_capture() -> void:
         if FileAccess.file_exists(folder.path_join(name)):
             DirAccess.remove_absolute(folder.path_join(name))
     DirAccess.remove_absolute(folder)
-    print("MULTIMENTAL_GALLERY_JSON " + JSON.stringify({"schemaVersion": 1, "nonce": nonce, "renderer": DisplayServer.get_name(), "engine": Engine.get_version_info().string, "sourcePreview": true, "installedApkCapture": false, "personalProfileUntouched": true, "buildStamp": {"version": BuildInfo.VERSION, "commit": BuildInfo.COMMIT}, "fixtures": ["isolated full alpha collection", "one deterministic pack", "three API match results, not played games", "battle seed42 with12 API actions", "LAN address replaced by documentation example192.0.2.1; no room joined"], "images": captured}))
+    print("MULTIMENTAL_GALLERY_JSON " + JSON.stringify({"schemaVersion": 1, "nonce": nonce, "renderer": DisplayServer.get_name(), "engine": Engine.get_version_info().string, "sourcePreview": true, "installedApkCapture": false, "personalProfileUntouched": true, "buildStamp": {"version": BuildInfo.VERSION, "commit": BuildInfo.COMMIT}, "fixtures": ["isolated full alpha collection", "one deterministic pack", "three API match results, not played games", "battle seed42 with12 API actions", "six explicit public-state UI fixtures; reconnect uses the real transport status signal without a radio connection; result is synthetic", "LAN address replaced by documentation example192.0.2.1; no room joined"], "images": captured}))
     print("MULTIMENTAL_GALLERY_PASS images=" + str(captured.size()))
-    quit(0 if captured.size() == 24 else 1)
+    quit(0 if captured.size() == PAGES.size()*2 + 4 + BattleFixture.STATES.size()*BATTLE_SIZES.size()*2 else 1)

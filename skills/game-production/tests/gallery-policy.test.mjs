@@ -66,9 +66,42 @@ function fixture() {
     read: (p) => bytes.get(assets.find((a) => a.path === p)?.id)
   };
 }
-test('expected matrix contains twenty portrait and four landscape real views', () => {
-  assert.equal(expectedCases().length, 24);
-  assert.equal(new Set(expectedCases().map((c) => c.id)).size, 24);
+test('matrix retains 24 baseline frames plus 36 interactive battle states', () => {
+  const cases = expectedCases();
+  assert.equal(cases.length, 60);
+  assert.equal(new Set(cases.map((c) => c.id)).size, 60);
+  assert.equal(cases.filter((c) => c.interactiveStateVerified).length, 36);
+  for (const locale of ['ru', 'en'])
+    for (const page of [
+      'battle-card',
+      'battle-unit',
+      'battle-allies',
+      'battle-opponent',
+      'battle-reconnecting',
+      'battle-result'
+    ])
+      for (const [width, height] of [
+        [720, 1280],
+        [1280, 720],
+        [960, 540]
+      ])
+        assert.ok(
+          cases.some(
+            (c) =>
+              c.locale === locale &&
+              c.page === page &&
+              c.width === width &&
+              c.height === height &&
+              c.interactiveStateVerified
+          )
+        );
+});
+test('interactive state verification cannot be omitted or asserted false', () => {
+  for (const value of [undefined, false]) {
+    const f = fixture();
+    f.capture.images.find((i) => i.page === 'battle-allies').interactiveStateVerified = value;
+    assert.throws(() => assertCapture(f.capture, nonce));
+  }
 });
 test('Windows line endings are canonical, real contents remain different', () => {
   assert.equal(

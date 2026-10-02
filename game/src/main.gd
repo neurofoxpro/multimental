@@ -295,13 +295,17 @@ func request_leave_match() -> void:
         return
     leave_confirm.popup_centered_clamped(Vector2i(500, 220), 0.9)
 
+func battle_input_blocked() -> bool:
+    # Cached legal moves are for inspection only until the transport is ready again.
+    return online and (not lan.pending.is_empty() or lan.connection_status != "connected" or str(lan.current_view.get("phase","playing")) != "playing")
+
 func on_hand(index: int) -> void:
     var view: Dictionary = _view()
     if view.is_empty() or index < 0 or index >= view.hand.size():
         return
     if int(view.active) != 0 or int(view.winner) != -1 or int(view.get("placed_cell", -1)) >= 0:
         return
-    if preload("res://src/battle_interaction.gd").reason(view,index,online and not lan.pending.is_empty()) != "ready":
+    if preload("res://src/battle_interaction.gd").reason(view,index,battle_input_blocked()) != "ready":
         open_battle_card(int(view.hand[index]))
         return
     selected_hand = -1 if selected_hand == index else index
@@ -313,7 +317,7 @@ func on_hand(index: int) -> void:
 
 func on_cell(index: int) -> void:
     var view: Dictionary = _view()
-    var pending: bool = online and not lan.pending.is_empty()
+    var pending: bool = battle_input_blocked()
     var intent: Dictionary = preload("res://src/battle_interaction.gd").cell(view,index,selected_hand,selected_unit,selected_direction,pending)
     match intent.kind:
         "play":
@@ -346,7 +350,7 @@ func open_battle_card(id: int, source: Control = null) -> void:
         battle_inspector.content.text += "\n\n" + t("Сейчас ход соперника. Осмотр не расходует ход и не останавливает таймер.", "It is the opponent's turn. Inspection spends no turn and does not pause the timer.")
     elif source != null and source.get_parent().has_method("present") and source.get_parent().has_method("arrange") and source.name.begins_with("InspectHand"):
         var slot: int = int(source.get_parent().slot)
-        var reason: String = preload("res://src/battle_interaction.gd").reason(view,slot,online and not lan.pending.is_empty())
+        var reason: String = preload("res://src/battle_interaction.gd").reason(view,slot,battle_input_blocked())
         var messages: Dictionary = {"coins":["Недостаточно монет для размещения.","Not enough coins to deploy."],"placed":["В этом ходу карта уже размещена. Можно атаковать или закончить ход.","A card was already deployed this turn. Attack or end the turn."],"pending":["Ожидается подтверждение предыдущего действия.","Waiting for the previous action acknowledgement."],"space":["Нет доступной клетки для размещения.","No available cell to deploy."]}
         if messages.has(reason):
             battle_inspector.content.text += "\n\n" + t(messages[reason][0],messages[reason][1])
@@ -365,6 +369,8 @@ func _unhandled_input(event: InputEvent) -> void:
     get_viewport().set_input_as_handled()
 
 func attack_selected() -> void:
+    if battle_input_blocked():
+        return
     var view: Dictionary = _view()
     for command in view.get("legal", []):
         if command.type == "attack" and int(command.source) == selected_unit:
@@ -372,6 +378,8 @@ func attack_selected() -> void:
             return
 
 func request_sweep(command: Dictionary) -> void:
+    if battle_input_blocked():
+        return
     var view: Dictionary = _view()
     if command not in view.get("legal", []):
         act(command)
@@ -388,6 +396,8 @@ func request_sweep(command: Dictionary) -> void:
         act(command)
 
 func act(command: Dictionary) -> void:
+    if battle_input_blocked():
+        return
     var result: Dictionary = lan.submit(command) if online else game.apply(0, command)
     if not result.ok:
         message.text = t("Недопустимая цель, недостаточно монет или ожидание соперника.", "Invalid target, insufficient coins or waiting for the opponent.")
@@ -509,7 +519,7 @@ func _friendly_confirmation_context(view: Dictionary) -> Dictionary:
 
 func _friendly_confirmation_current(view: Dictionary) -> bool:
     var command: Dictionary = friendly_pending.get("command",{})
-    var pending: bool = online and not lan.pending.is_empty()
+    var pending: bool = battle_input_blocked()
     return not friendly_pending.is_empty() and not command.is_empty() and preload("res://src/battle_interaction.gd").available(view,pending) and friendly_pending.get("context",{}) == _friendly_confirmation_context(view) and command in view.get("legal",[])
 
 func cancel_friendly_attack() -> void:
@@ -776,8 +786,9 @@ func _network_status(status: String) -> void:
     _show_network_status(status, error)
     if is_instance_valid(connection_retry_button) and connection_retry_button.is_inside_tree():
         connection_retry_button.visible = error
-    if battle and is_instance_valid(message) and status not in ["connected", "waiting_guest", "idle"]:
-        message.text = network_error(status)
+    if battle and not lan.current_view.is_empty():
+        # A disconnect need not change the last received match revision.
+        refresh()
 
 func _network_view(view: Dictionary) -> void:
     if not online or view.is_empty() or view.phase == "waiting":

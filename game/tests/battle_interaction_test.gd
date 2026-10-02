@@ -116,6 +116,7 @@ func run_test() -> void:
             fixture(ui)
             ui.online = changed in ["revision","pending","phase"]
             if ui.online:
+                ui.lan.connection_status = "connected"
                 ui.lan.current_view = MatchView.for_player(ui.game,0)
                 ui.lan.current_view["phase"] = "playing"
                 ui.lan.current_view["revision"] = 1

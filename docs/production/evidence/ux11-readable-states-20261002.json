@@ -1,0 +1,195 @@
+{
+  "schemaVersion": 1,
+  "repository": "neurofoxpro/multimental",
+  "taskId": "UX-11",
+  "observedAt": "2026-10-02T09:54:39.613Z",
+  "sourceBase": "89b4d1a5dc45aa9a411b1045ece0755d353444e6",
+  "sourceWorktreeDirty": true,
+  "sourceFiles": [
+    {
+      "path": "game/src/main.gd",
+      "sha256": "3dadfbdd13935d62643083e17c6781f194d5b998589a55950838ccf842da3d18"
+    },
+    {
+      "path": "game/src/battle_screen.gd",
+      "sha256": "94ba78ecaeb30be7f694df9cdb299855d48ee376783624b11c404d10585d7d64"
+    },
+    {
+      "path": "game/src/battle_tile.gd",
+      "sha256": "774815d0aa8f7b973264ac1e6e4072a2758d3cb90a258ae620b5791b6edc5f9e"
+    },
+    {
+      "path": "game/tests/support/battle_gallery_fixture.gd",
+      "sha256": "f6c7fc7f940d426ff5d45ff6b49411f292d5ab1d3877b21e4ae86ac47da9a45b"
+    },
+    {
+      "path": "game/tests/gallery_capture.gd",
+      "sha256": "c6567346c2adfc15b34c37ecf9415c20b3f319f95a7af5f3222df1e646c20315"
+    },
+    {
+      "path": "tools/gallery.mjs",
+      "sha256": "b922608694546e34d5d5cf894bd376391476e5c1dcda84dbfe8375b1c972f9f3"
+    },
+    {
+      "path": "skills/game-production/scripts/gallery-policy.mjs",
+      "sha256": "a9fdd1a48b2091d62330d85dd021387f83795d01d35aeffe366c719e8a2a7667"
+    }
+  ],
+  "regressions": [
+    {
+      "log": "readability-before.local.log",
+      "sha256": "0f42b5ccc01650b6b913538d95ea17d5879e44bdaabcc879cb1ca4b42b44f7b7",
+      "summary": [
+        "MULTIMENTAL_READABILITY_RESULT checks=1500 failures=375"
+      ],
+      "failures": 375
+    },
+    {
+      "log": "reconnect-before.local.log",
+      "sha256": "231490ad3f34fb00f15170bb65149f102c2bad3f8d347abaf41e71de54aa85d4",
+      "summary": [
+        "MULTIMENTAL_RECONNECT_UI_RESULT checks=20 failures=14"
+      ],
+      "failures": 14
+    },
+    {
+      "log": "visual-layout-exact-before.local.log",
+      "sha256": "8d367347481a914601ac15e6cfb0797eec5b27d7dc6d2e1cd278cfb8bcc44132",
+      "summary": [
+        "MULTIMENTAL_BATTLE_VISUAL_LAYOUT_RESULT checks=75 failures=16"
+      ],
+      "failures": 16
+    }
+  ],
+  "tests": [
+    {
+      "test": "game/tests/battle_readability_test.gd",
+      "logSha256": "027711b1edc1f3c8493a86dad4c09af893f796d9c8fdfdbffea28601a2d104f6",
+      "markers": [
+        "MULTIMENTAL_READABILITY_RESULT checks=1500 failures=0",
+        "MULTIMENTAL_READABILITY_PASS locales=2 catalog=30 tile_sizes=5"
+      ],
+      "status": "passed"
+    },
+    {
+      "test": "game/tests/battle_visual_layout_test.gd",
+      "logSha256": "1bc0e2cfa091adc340b47a20ae7a0f20ca014487c23d69880a03451eccf8307c",
+      "markers": [
+        "MULTIMENTAL_BATTLE_VISUAL_LAYOUT_RESULT checks=78 failures=0",
+        "MULTIMENTAL_BATTLE_VISUAL_LAYOUT_PASS locales=2 viewports=3"
+      ],
+      "status": "passed"
+    },
+    {
+      "test": "game/tests/battle_reconnect_test.gd",
+      "logSha256": "f3592b9e3d03fd7ca1bb5a668c715cdd240db47e672baeb8abbd8e0c166fe479",
+      "markers": [
+        "MULTIMENTAL_RECONNECT_UI_RESULT checks=20 failures=0",
+        "MULTIMENTAL_RECONNECT_UI_PASS physical_radio=false"
+      ],
+      "status": "passed"
+    },
+    {
+      "test": "game/tests/battle_interaction_test.gd",
+      "logSha256": "74a514fb22612ca5eb10ef8ff5db8d9c5812e725f3424ce6f2e64c177a1bc9eb",
+      "markers": [
+        "MULTIMENTAL_INTERACTION_PASS checks=126 actual_pointer_events=true physical_device=false"
+      ],
+      "status": "passed"
+    }
+  ],
+  "gallery": {
+    "manifest": "docs/media/gallery/current.json",
+    "inputKey": "3cf92edf8df4f617f7d588d904152c5d499289cf6682a331ad7a9f60d7407462",
+    "nonce": "bd3380c7f6a7250590788f1ad2db2caf",
+    "capturedAt": "2026-10-02T09:49:19.871Z",
+    "images": 60,
+    "interactiveStates": 36,
+    "visuallyReviewed": [
+      {
+        "id": "ru-battle-card-720x1280",
+        "path": "docs/media/gallery/3cf92edf8df4f617f7d588d904152c5d499289cf6682a331ad7a9f60d7407462/bd3380c7f6a7250590788f1ad2db2caf/ru-battle-card-720x1280.png",
+        "sha256": "1c444d063f93ac4c30943277a0c589ce2819527390d443e5d86d64131fcb3b49"
+      },
+      {
+        "id": "ru-battle-unit-1280x720",
+        "path": "docs/media/gallery/3cf92edf8df4f617f7d588d904152c5d499289cf6682a331ad7a9f60d7407462/bd3380c7f6a7250590788f1ad2db2caf/ru-battle-unit-1280x720.png",
+        "sha256": "ecf057c38806049a91ccd5041776ca6fbbb7db87a54c38c611ce28b79a579286"
+      },
+      {
+        "id": "ru-battle-allies-960x540",
+        "path": "docs/media/gallery/3cf92edf8df4f617f7d588d904152c5d499289cf6682a331ad7a9f60d7407462/bd3380c7f6a7250590788f1ad2db2caf/ru-battle-allies-960x540.png",
+        "sha256": "cc35c7884f646f2be219db4aa09e955f880edc1e2fcd391f76062136726935be"
+      },
+      {
+        "id": "ru-battle-opponent-1280x720",
+        "path": "docs/media/gallery/3cf92edf8df4f617f7d588d904152c5d499289cf6682a331ad7a9f60d7407462/bd3380c7f6a7250590788f1ad2db2caf/ru-battle-opponent-1280x720.png",
+        "sha256": "6008b29a02ef279744ce7c6b39bf9d5f93b9b57fc61bbf3f0f56802b044adeb5"
+      },
+      {
+        "id": "ru-battle-reconnecting-960x540",
+        "path": "docs/media/gallery/3cf92edf8df4f617f7d588d904152c5d499289cf6682a331ad7a9f60d7407462/bd3380c7f6a7250590788f1ad2db2caf/ru-battle-reconnecting-960x540.png",
+        "sha256": "f84f7ace29a80f1f70d40f4f7b8087b8d8279f263f9ac64f494bdb8506a092ac"
+      },
+      {
+        "id": "ru-battle-result-720x1280",
+        "path": "docs/media/gallery/3cf92edf8df4f617f7d588d904152c5d499289cf6682a331ad7a9f60d7407462/bd3380c7f6a7250590788f1ad2db2caf/ru-battle-result-720x1280.png",
+        "sha256": "cd4093706f281537573285823792e84e6d096cfd2cb21fb0085e3cd91ed010d0"
+      },
+      {
+        "id": "en-battle-card-720x1280",
+        "path": "docs/media/gallery/3cf92edf8df4f617f7d588d904152c5d499289cf6682a331ad7a9f60d7407462/bd3380c7f6a7250590788f1ad2db2caf/en-battle-card-720x1280.png",
+        "sha256": "f1c60ccc5b3ae910a4937e736dedec07a0a5bfca3406dc9c07143a5f109a12b4"
+      },
+      {
+        "id": "en-battle-unit-1280x720",
+        "path": "docs/media/gallery/3cf92edf8df4f617f7d588d904152c5d499289cf6682a331ad7a9f60d7407462/bd3380c7f6a7250590788f1ad2db2caf/en-battle-unit-1280x720.png",
+        "sha256": "b7f2f8ab6d6f9b6efb87561dfd33841ab3d10efc0d82dbbc24eab4e0392e95d1"
+      },
+      {
+        "id": "en-battle-allies-960x540",
+        "path": "docs/media/gallery/3cf92edf8df4f617f7d588d904152c5d499289cf6682a331ad7a9f60d7407462/bd3380c7f6a7250590788f1ad2db2caf/en-battle-allies-960x540.png",
+        "sha256": "4f88723f1d0c519f4442f3fd6df75eef95d7e864304f62404eb6e7e571798a8b"
+      },
+      {
+        "id": "en-battle-opponent-1280x720",
+        "path": "docs/media/gallery/3cf92edf8df4f617f7d588d904152c5d499289cf6682a331ad7a9f60d7407462/bd3380c7f6a7250590788f1ad2db2caf/en-battle-opponent-1280x720.png",
+        "sha256": "9c66545c2664d912d4a7aa693bc84da2df0d76677b9255736d59e77a8bd4b817"
+      },
+      {
+        "id": "en-battle-reconnecting-960x540",
+        "path": "docs/media/gallery/3cf92edf8df4f617f7d588d904152c5d499289cf6682a331ad7a9f60d7407462/bd3380c7f6a7250590788f1ad2db2caf/en-battle-reconnecting-960x540.png",
+        "sha256": "9496e3e5be6fb6499f72c9c02331e91863b3c0edf463df48f3f159c3cdef8368"
+      },
+      {
+        "id": "en-battle-result-720x1280",
+        "path": "docs/media/gallery/3cf92edf8df4f617f7d588d904152c5d499289cf6682a331ad7a9f60d7407462/bd3380c7f6a7250590788f1ad2db2caf/en-battle-result-720x1280.png",
+        "sha256": "712f3c834c210185b5e6d187e0d302729054f9c5f85ab4ed924a7061163ffd95"
+      }
+    ],
+    "installedApkCapture": false,
+    "personalProfileUntouched": true
+  },
+  "rendererLimitation": {
+    "priorCapture": "0703d503978790414a30da56551f6dec",
+    "outcome": "timeout; four frames only, not a passed gallery",
+    "logSha256": "471e175faa4069b027e5787e7aa83284aaa3a9316f65ca965bd7ea64b4890e23",
+    "diagnosticChange": "stage progress retained per page; subsequent complete 60-frame render succeeded",
+    "rootCause": "not established; no claim of a general renderer hang fix"
+  },
+  "protectedDomainPathsUnchanged": [
+    "game/src/match_core.gd",
+    "game/src/content_catalog.gd",
+    "content/accepted/catalog.json",
+    "game/src/net/room_rules.gd",
+    "game/src/net/lan_session.gd",
+    "game/src/net/bluetooth_session.gd"
+  ],
+  "limitations": [
+    "Logical source viewport is not Android dp/TalkBack certification.",
+    "Disconnected transport is tested with the real status signal, not a physical radio link.",
+    "Gallery match and result states are synthetic, not balance or human games.",
+    "Small board tiles retain compact mode; full names remain available in selection context and inspection.",
+    "Engineering acceptance and physical delivery are separate later receipts."
+  ]
+}
