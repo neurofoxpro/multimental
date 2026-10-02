@@ -31,6 +31,7 @@ func setup(ui, index: int) -> void:
     title_label = make_label(17)
     title_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
     title_label.max_lines_visible = 2
+    title_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
     stats = make_label(21)
     health = make_label(21)
     terrain_label = make_label(13)
@@ -44,14 +45,20 @@ func arrange() -> void:
         return
     header.position = Vector2(9,8)
     header.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT if occupied else HORIZONTAL_ALIGNMENT_CENTER
-    header.size = Vector2(maxf(0,size.x*0.5-18 if occupied and size.x >= 140 else size.x-18),20)
-    terrain_label.visible = occupied and size.x >= 140
-    terrain_label.position = Vector2(size.x*0.5+12,8)
-    terrain_label.size = Vector2(maxf(0,size.x*0.5-22),20)
+    var available_width: float = maxf(0,size.x-18.0)
+    var owner_width: float = ceilf(header.get_theme_font("font").get_string_size(header.text,HORIZONTAL_ALIGNMENT_LEFT,-1,header.get_theme_font_size("font_size")).x)
+    var terrain_width: float = ceilf(terrain_label.get_theme_font("font").get_string_size(terrain_label.text,HORIZONTAL_ALIGNMENT_LEFT,-1,terrain_label.get_theme_font_size("font_size")).x)
+    terrain_label.visible = occupied and owner_width+terrain_width+12.0 <= available_width
+    header.size = Vector2(available_width-terrain_width-12.0 if terrain_label.visible else available_width,20)
+    terrain_label.position = Vector2(size.x-9.0-terrain_width,8)
+    terrain_label.size = Vector2(terrain_width,20)
     terrain_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
     title_label.visible = size.y >= 145
-    title_label.position = Vector2(9,size.y * 0.55)
-    title_label.size = Vector2(maxf(0,size.x-18),42)
+    # Reserve two complete shaped lines before placing the emblem or the stats.
+    var line_height: float = ceilf(title_label.get_theme_font("font").get_height(title_label.get_theme_font_size("font_size")))
+    var name_height: float = line_height * 2.0 + title_label.get_theme_constant("line_spacing") * 2.0
+    title_label.position = Vector2(9,size.y - 38.0 - name_height)
+    title_label.size = Vector2(maxf(0,size.x-18),name_height)
     stats.position = Vector2(8,size.y-32)
     stats.size = Vector2(maxf(0,size.x*0.5-16 if occupied else size.x-16),26)
     stats.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT if occupied else HORIZONTAL_ALIGNMENT_CENTER
@@ -64,7 +71,12 @@ func arrange() -> void:
     hint.size = Vector2(maxf(0,size.x-16),44)
     hint.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
     var span: float = minf(64,minf(size.x,size.y)*0.3)
-    emblem.position = Vector2((size.x-span)/2,size.y*0.31-span*0.16)
+    var emblem_y: float = size.y*0.31-span*0.16
+    if title_label.visible:
+        var available_height: float = maxf(0,title_label.position.y-38.0)
+        span = minf(span,available_height)
+        emblem_y = 32.0 + (available_height-span)/2.0
+    emblem.position = Vector2((size.x-span)/2,emblem_y)
     emblem.size = Vector2(span,span)
     queue_redraw()
 func present(ui, view: Dictionary, index: int, targets: Array, can_attack: bool) -> void:

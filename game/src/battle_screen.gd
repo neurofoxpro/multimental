@@ -66,7 +66,9 @@ static func build(ui) -> void:
     actions.add_child(ui.sweep_button)
     var cancel: Button = ui.button(ui.t("ОТМЕНА", "CANCEL"),ui.cancel_battle_selection,58)
     cancel.name = "CancelSelection"
-    cancel.custom_minimum_size.x = 94
+    cancel.autowrap_mode = TextServer.AUTOWRAP_OFF
+    var cancel_width: float = cancel.get_theme_font("font").get_string_size(cancel.text,HORIZONTAL_ALIGNMENT_LEFT,-1,cancel.get_theme_font_size("font_size")).x + cancel.get_theme_stylebox("normal").get_minimum_size().x
+    cancel.custom_minimum_size.x = maxf(94,ceilf(cancel_width)+2)
     cancel.size_flags_horizontal = Control.SIZE_SHRINK_END
     actions.add_child(cancel)
     ui.tutorial_hint = null
@@ -116,7 +118,10 @@ static func build(ui) -> void:
     ui.friendly_confirm.confirmed.connect(ui.confirm_friendly_attack)
     ui.friendly_confirm.canceled.connect(ui.cancel_friendly_attack)
     ui.add_child(ui.friendly_confirm)
-    Style.decorate_dialog(ui.friendly_confirm)
+    Style.decorate_dialog(ui.friendly_confirm,220,70)
+    var warning_border: StyleBoxFlat = ui.friendly_confirm.get_theme_stylebox("embedded_border").duplicate()
+    warning_border.expand_margin_top = maxf(32,ui.friendly_confirm.get_theme_constant("title_height"))
+    ui.friendly_confirm.add_theme_stylebox_override("embedded_border",warning_border)
     ui.leave_confirm = ConfirmationDialog.new()
     ui.leave_confirm.title = ui.t("Выйти из партии?", "Leave the match?")
     ui.leave_confirm.dialog_text = ui.t("Текущая партия будет прервана.", "The current match will be interrupted.")
@@ -130,7 +135,7 @@ static func build(ui) -> void:
     ui.add_child(ui.battle_inspector)
 
 static func render(ui, view: Dictionary) -> void:
-    var pending: bool = ui.online and not ui.lan.pending.is_empty()
+    var pending: bool = ui.battle_input_blocked()
     var selected_card: bool = ui.selected_hand >= 0 and ui.selected_hand < view.hand.size()
     var selected_unit: bool = ui.selected_unit >= 0 and ui.selected_unit < view.board.size() and view.board[ui.selected_unit] != null
     var preview: Dictionary = Intent.attack(view,ui.selected_unit,pending)
@@ -176,6 +181,8 @@ static func render(ui, view: Dictionary) -> void:
     if int(view.winner) != -1:
         ui.message.text = ui.t("ПОБЕДА", "VICTORY") if int(view.winner) == 0 else (ui.t("НИЧЬЯ", "DRAW") if int(view.winner) == 2 else ui.t("ПОРАЖЕНИЕ", "DEFEAT"))
         ui.message.text += " · " + ui.reason_text(str(view.reason))
+    elif ui.online and ui.lan.connection_status != "connected":
+        ui.message.text = ui.network_error(ui.lan.connection_status) + ui.t("\nОсмотр карт и поля доступен.", "\nCard and board details remain available.")
     elif pending:
         ui.message.text = ui.t("Ход отправлен. Ожидаем подтверждения…", "Move sent. Waiting for acknowledgement…")
     elif view.get("phase") == "reconnecting":

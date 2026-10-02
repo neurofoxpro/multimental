@@ -15,11 +15,25 @@ export const PAGES = [
   'rules',
   'settings'
 ];
+export const BATTLE_STATES = [
+  'battle-card',
+  'battle-unit',
+  'battle-allies',
+  'battle-opponent',
+  'battle-reconnecting',
+  'battle-result'
+];
+export const BATTLE_VIEWPORTS = [
+  [720, 1280],
+  [1280, 720],
+  [960, 540]
+];
 export const SOURCE_ROOTS = [
   'game/src',
   'game/project.godot',
   'game/icon.svg',
   'game/tests/gallery_capture.gd',
+  'game/tests/support/battle_gallery_fixture.gd',
   'tools/gallery.mjs',
   'skills/game-production/scripts/gallery-policy.mjs'
 ];
@@ -92,7 +106,17 @@ export function expectedCases() {
       page,
       width: 1280,
       height: 720
-    }))
+    })),
+    ...BATTLE_STATES.flatMap((page) =>
+      BATTLE_VIEWPORTS.map(([width, height]) => ({
+        id: `${locale}-${page}-${width}x${height}`,
+        locale,
+        page,
+        width,
+        height,
+        interactiveStateVerified: true
+      }))
+    )
   ]);
 }
 export function pngSize(bytes) {
@@ -204,7 +228,7 @@ export function readmeGallery(manifest) {
   });
   return (
     README_START +
-    '\n## Актуальные экраны\n\n[Галерея 24 реальных состояний RU/EN](docs/SCREENSHOTS.ru.md) · [проверяемый манифест](docs/media/gallery/current.json). Это source-preview из изолированного профиля, не снимки установленного APK.\n\n' +
+    '\n## Актуальные экраны\n\n[Галерея 60 реальных кадров RU/EN](docs/SCREENSHOTS.ru.md) · [проверяемый манифест](docs/media/gallery/current.json). Это source-preview из изолированного профиля, не снимки установленного APK.\n\n' +
     images.join(' ') +
     '\n' +
     README_END

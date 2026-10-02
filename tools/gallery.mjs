@@ -11,6 +11,7 @@ import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import {
   assertCapture,
+  expectedCases,
   assertManifest,
   sourceInputs,
   inputKey,
@@ -40,7 +41,13 @@ const CAPTION = {
   rewards: 'Награды и задания',
   connection: 'Подключение по LAN',
   rules: 'Карты и правила',
-  settings: 'Звук'
+  settings: 'Звук',
+  'battle-card': 'Бой: выбор карты и направление',
+  'battle-unit': 'Бой: выбор юнита и предпросмотр атаки',
+  'battle-allies': 'Бой: подтверждение удара по союзникам',
+  'battle-opponent': 'Бой: ход соперника и доступный осмотр',
+  'battle-reconnecting': 'Бой: восстановление связи',
+  'battle-result': 'Бой: завершение партии'
 };
 function command(root, exe, args, timeout = 30000) {
   const r = spawnSync(exe, args, {
@@ -74,6 +81,9 @@ function document(m) {
   }
   text += '## Альбомные контрольные виды · 1280×720\n\n';
   for (const a of m.assets.filter((a) => a.id.endsWith('1280x720')))
+    text += `<img src="${a.path.slice('docs/'.length)}" width="640" alt="${a.id}">\n\n`;
+  text += '## Невысокий альбомный экран · 960×540\n\n';
+  for (const a of m.assets.filter((a) => a.id.endsWith('960x540')))
     text += `<img src="${a.path.slice('docs/'.length)}" width="640" alt="${a.id}">\n\n`;
   text +=
     'Галерея фиксирует и недостатки текущей версии. Наличие картинки не означает удобство, доступность для скринридера, исправленную навигацию или аппаратную приёмку.\n';
@@ -337,7 +347,7 @@ export async function main(args = process.argv.slice(2)) {
         run.error ||
         run.status !== 0 ||
         lines.length !== 1 ||
-        !text.includes('MULTIMENTAL_GALLERY_PASS images=24') ||
+        !text.includes('MULTIMENTAL_GALLERY_PASS images=' + expectedCases().length) ||
         !runtimeSucceeded(run.status, text, 'MULTIMENTAL_GALLERY_PASS')
       )
         throw Error('Actual render failed: ' + text.slice(-2000));
