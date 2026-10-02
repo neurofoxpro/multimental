@@ -114,7 +114,7 @@ static func build(ui) -> void:
     ui.friendly_confirm.cancel_button_text = ui.t("Отмена", "Cancel")
     ui.friendly_confirm.dialog_autowrap = true
     ui.friendly_confirm.confirmed.connect(ui.confirm_friendly_attack)
-    ui.friendly_confirm.canceled.connect(func(): ui.friendly_pending = {})
+    ui.friendly_confirm.canceled.connect(ui.cancel_friendly_attack)
     ui.add_child(ui.friendly_confirm)
     Style.decorate_dialog(ui.friendly_confirm)
     ui.leave_confirm = ConfirmationDialog.new()

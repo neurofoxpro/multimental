@@ -330,6 +330,7 @@ func on_cell(index: int) -> void:
             message.text = t("Сначала выберите карту в руке.", "First select a card in your hand.")
 
 func cancel_battle_selection() -> void:
+    cancel_friendly_attack()
     selected_hand = -1
     selected_unit = -1
     selected_direction = 0
@@ -380,7 +381,7 @@ func request_sweep(command: Dictionary) -> void:
         if int(view.board[target].owner) == 0:
             allies += 1
     if allies > 0:
-        friendly_pending = command.duplicate()
+        friendly_pending = {"command":command.duplicate(true),"context":_friendly_confirmation_context(view)}
         friendly_confirm.dialog_text = t("Удар во все направления заденет союзников: %d. Продолжить?", "This sweep will hit %d allies. Continue?") % allies
         friendly_confirm.popup_centered_clamped(Vector2i(520, 230),0.9)
     else:
@@ -482,6 +483,8 @@ func refresh() -> void:
     var view: Dictionary = _view()
     if view.is_empty():
         return
+    if not friendly_pending.is_empty() and not _friendly_confirmation_current(view):
+        cancel_friendly_attack()
     preload("res://src/battle_screen.gd").render(self,view)
     if bool(view.center_unlocked) and not last_center_open:
         Feedback.show_unlock(board_buttons[4],t("ЦЕНТР ОТКРЫТ","CENTER OPEN"))
@@ -496,14 +499,32 @@ func rotate_card(step: int) -> void:
     selected_direction = posmod(selected_direction + step, 4)
     refresh()
 
-func confirm_friendly_attack() -> void:
-    if friendly_pending.is_empty():
-        return
-    var command: Dictionary = friendly_pending.duplicate()
+func _friendly_confirmation_context(view: Dictionary) -> Dictionary:
+    # Bind consent to this public board and turn, not a reusable source-cell command.
+    var snapshot: Dictionary = {}
+    for key in ["revision","event_id","turn","active","winner","phase","coins","placed_cell","board"]:
+        if view.has(key):
+            snapshot[key] = view[key]
+    return snapshot.duplicate(true)
+
+func _friendly_confirmation_current(view: Dictionary) -> bool:
+    var command: Dictionary = friendly_pending.get("command",{})
+    var pending: bool = online and not lan.pending.is_empty()
+    return not friendly_pending.is_empty() and not command.is_empty() and preload("res://src/battle_interaction.gd").available(view,pending) and friendly_pending.get("context",{}) == _friendly_confirmation_context(view) and command in view.get("legal",[])
+
+func cancel_friendly_attack() -> void:
     friendly_pending = {}
     if is_instance_valid(friendly_confirm):
         friendly_confirm.hide()
-    act(command)
+
+func confirm_friendly_attack() -> void:
+    if friendly_pending.is_empty():
+        return
+    var valid: bool = _friendly_confirmation_current(_view())
+    var command: Dictionary = friendly_pending.get("command",{}).duplicate(true)
+    cancel_friendly_attack()
+    if valid:
+        act(command)
 
 func animate_damage(view: Dictionary) -> void:
     var event_id: int = int(view.get("event_id", -1))
