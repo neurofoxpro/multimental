@@ -273,10 +273,51 @@ func change_card(code: String, delta: int) -> void:
         draft_cards = proposed
     else:
         return
-    _refresh_rows()
+    _update_visible_counts()
 
 func _inspect_card(id: int) -> void:
     inspector.open_card(id, ui.language, find_child("Details_" + Deck.code(id), true, false))
+
+func _card_caption(card: Dictionary, count: int) -> String:
+    var caption: String = "ⓘ " + str(card[ui.language])
+    caption += " · " + t(Core.ELEMENTS_RU[int(card.element)], Core.ELEMENTS_EN[int(card.element)])
+    caption += "\n" + t(Core.TYPES_RU[int(card.role)], Core.TYPES_EN[int(card.role)]) + " · " + Feedback.pattern(card, 0)
+    caption += "\n◉ %d  ⚔ %d  ♥ %d" % [card.cost, card.attack, card.health]
+    caption += t(" · в колоде %d / есть %d", " · in deck %d / owned %d") % [count, card.owned]
+    return caption
+
+func _update_visible_counts() -> void:
+    # A count edit never replaces the other 30 card controls or resets scroll/focus.
+    var state: Dictionary = ui.profile.state()
+    var definitions: Array[Dictionary] = Catalog.rows(state, search.text, elements.selected - 1)
+    var removed_focused: bool = false
+    for card in definitions:
+        var code: String = str(card.code)
+        var line: HBoxContainer = rows.get_node_or_null("Card_" + code)
+        if line == null:
+            continue
+        var count: int = draft_cards.count(code)
+        if tabs.current_tab == 1 and count == 0:
+            var focused: Control = get_viewport().gui_get_focus_owner()
+            if focused != null and line.is_ancestor_of(focused):
+                removed_focused = true
+            rows.remove_child(line)
+            line.queue_free()
+            continue
+        var details: Button = line.get_node("Details_" + code)
+        var remove: Button = line.get_node("Remove_" + code)
+        var add: Button = line.get_node("Add_" + code)
+        details.text = _card_caption(card, count)
+        remove.disabled = count == 0
+        var focused_add: bool = add.has_focus()
+        add.disabled = count >= mini(int(card.owned), Deck.MAX_COPIES) or draft_cards.size() >= Deck.SIZE
+        if focused_add and add.disabled:
+            details.grab_focus()
+    if rows.get_child_count() == 0:
+        rows.add_child(ui.label(t("Карты не найдены. Измени поиск или фильтр.", "No cards found. Change the search or filter."), 18))
+    if removed_focused:
+        tabs.grab_focus()
+    _update_status()
 
 func _refresh_rows() -> void:
     if not is_instance_valid(rows):
@@ -295,29 +336,25 @@ func _refresh_rows() -> void:
         var line := HBoxContainer.new()
         line.name = "Card_" + str(card.code)
         rows.add_child(line)
-        var description: String = str(card[ui.language])
-        description += " · " + t(Core.ELEMENTS_RU[int(card.element)], Core.ELEMENTS_EN[int(card.element)])
-        description += "\n" + t(Core.TYPES_RU[int(card.role)], Core.TYPES_EN[int(card.role)]) + " · " + Feedback.pattern(card, 0)
-        description += "\n◉ %d  ⚔ %d  ♥ %d" % [card.cost, card.attack, card.health]
-        description += t(" · в колоде %d / есть %d", " · in deck %d / owned %d") % [count, card.owned]
-        var text: Label = ui.label(description, 17)
-        text.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-        text.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
-        var description_column := VBoxContainer.new()
-        description_column.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-        line.add_child(description_column)
-        description_column.add_child(text)
-        var details: Button = ui.button(t("ПОДРОБНЕЕ О КАРТЕ", "CARD DETAILS"), _inspect_card.bind(int(card.id)), 56)
-        details.name = "Details_" + str(card.code)
-        description_column.add_child(details)
-        var remove: Button = ui.button("−", change_card.bind(str(card.code), -1), 66)
-        remove.name = "Remove_" + str(card.code)
+        line.add_theme_constant_override("separation", 6)
+        var code: String = str(card.code)
+        # The whole readable summary is the details target; mutation has independent buttons.
+        var details: Button = ui.button(_card_caption(card, count), _inspect_card.bind(int(card.id)), 108)
+        details.name = "Details_" + code
+        details.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+        details.alignment = HORIZONTAL_ALIGNMENT_LEFT
+        details.add_theme_font_size_override("font_size", 16)
+        details.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+        details.tooltip_text = t("Подробнее о карте, без изменения колоды", "Inspect this card without editing the deck")
+        line.add_child(details)
+        var remove: Button = ui.button("−", change_card.bind(code, -1), 60)
+        remove.name = "Remove_" + code
         remove.custom_minimum_size.x = 60
         remove.size_flags_horizontal = Control.SIZE_SHRINK_END
         remove.disabled = count == 0
         line.add_child(remove)
-        var add: Button = ui.button("+", change_card.bind(str(card.code), 1), 66)
-        add.name = "Add_" + str(card.code)
+        var add: Button = ui.button("+", change_card.bind(code, 1), 60)
+        add.name = "Add_" + code
         add.custom_minimum_size.x = 60
         add.size_flags_horizontal = Control.SIZE_SHRINK_END
         add.disabled = count >= mini(int(card.owned), Deck.MAX_COPIES) or draft_cards.size() >= Deck.SIZE
