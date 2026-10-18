@@ -1,21 +1,8 @@
 {
   "schemaVersion": 1,
   "repository": "neurofoxpro/multimental",
-  "revision": 420,
+  "revision": 421,
   "claims": {
-    "2f9500bd-96eb-4c85-a36d-7ca0c405c88e": {
-      "token": "2f9500bd-96eb-4c85-a36d-7ca0c405c88e",
-      "task": "UX-11",
-      "owner": "ux11-readable-20261002-l8v4",
-      "base": "89b4d1a5dc45aa9a411b1045ece0755d353444e6",
-      "resources": [
-        "area:game-ui",
-        "task:UX-11"
-      ],
-      "fence": 400,
-      "updatedAt": 1790935849914,
-      "expiresAt": 1790937649914
-    },
     "8d273a2b-cff0-484b-a416-ac4d7e6da1ee": {
       "token": "8d273a2b-cff0-484b-a416-ac4d7e6da1ee",
       "task": "AUTO-08",
@@ -31,25 +18,6 @@
     }
   },
   "events": [
-    {
-      "id": "e8297e5f-d5d8-4a8d-96e0-8297e669ebb4",
-      "hash": "d45ea84eb6c97d23879e49978a9c41c82ae63457c3904636e1c655b669be9bca",
-      "revision": 165,
-      "result": {
-        "status": "claimed",
-        "token": "e8297e5f-d5d8-4a8d-96e0-8297e669ebb4",
-        "task": "QA-02",
-        "owner": "all-phone-tests-20260926-2013",
-        "base": "a65cff7e862753283826f11527033e72b53f4539",
-        "resources": [
-          "area:devices",
-          "task:QA-02"
-        ],
-        "fence": 165,
-        "updatedAt": 1790442999970,
-        "expiresAt": 1790444799970
-      }
-    },
     {
       "id": "96c1b119-351a-47a2-80ee-9210ceadc353",
       "hash": "2fd47c8ad10d85fd404d6e186b1828a413b688b679652726bf89e2332ad62ed7",
@@ -4666,6 +4634,22 @@
         "fence": 414,
         "updatedAt": 1792287669054,
         "expiresAt": 1792289469054
+      }
+    },
+    {
+      "id": "ef58ee98-dfea-423d-ac23-a9cf530c179c",
+      "hash": "42e4c659f0e0574e78a6a92810ebb183529078a07e9c32e8c293f155c3a3215f",
+      "revision": 421,
+      "result": {
+        "status": "released_completed",
+        "token": "2f9500bd-96eb-4c85-a36d-7ca0c405c88e",
+        "task": "UX-11",
+        "owner": "ux11-readable-20261002-l8v4",
+        "fence": 400,
+        "operator": "mm18-auto08-offline-a3k7",
+        "proofDigest": "9d3863888c536a36980d5b035a1531de8b045a012d75449e60a2140498d523d6",
+        "head": "4c9a16bd80f3bc7adecddff9cf2e3a9a1afaa5bc",
+        "pr": 172
       }
     }
   ]
