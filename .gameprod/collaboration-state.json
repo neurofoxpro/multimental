@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "neurofoxpro/multimental",
-  "revision": 452,
+  "revision": 453,
   "claims": {
     "573a9d36-4018-4aff-be8a-d39dc645f280": {
       "token": "573a9d36-4018-4aff-be8a-d39dc645f280",
@@ -15,41 +15,9 @@
       "fence": 451,
       "updatedAt": 1792336144865,
       "expiresAt": 1792337944865
-    },
-    "87965ebd-5e2f-4847-9200-8ab2f6587f97": {
-      "token": "87965ebd-5e2f-4847-9200-8ab2f6587f97",
-      "task": "BALANCE-01",
-      "owner": "mm19-balance-analysis-v2k8",
-      "base": "5ab3619783dbe41d1e4ff8a8bdbdc5328217a879",
-      "resources": [
-        "area:game-core",
-        "task:BALANCE-01"
-      ],
-      "fence": 452,
-      "updatedAt": 1792361861601,
-      "expiresAt": 1792363661601
     }
   },
   "events": [
-    {
-      "id": "cadca433-ab23-4f34-b10e-b8c80b5ab2ac",
-      "hash": "c78c0449f865001faaa864584fba6ae0e2da92c46d8e932f3f9bca73ed3987ce",
-      "revision": 197,
-      "result": {
-        "status": "renewed",
-        "token": "3605c72c-121c-4458-ae23-343cb7678622",
-        "task": "AUTO-07",
-        "owner": "lab-auto-20260926-a91e",
-        "base": "135b34d130c9ba1e70535ceb0c98d8a279feb42c",
-        "resources": [
-          "area:automation",
-          "task:AUTO-07"
-        ],
-        "fence": 150,
-        "updatedAt": 1790451712392,
-        "expiresAt": 1790453512392
-      }
-    },
     {
       "id": "2000c633-52da-45ce-9279-5711c979cde1",
       "hash": "18a6a4a195c7ec7988e881179ded1dd52287958656ae21343af34337551b666a",
@@ -4639,6 +4607,18 @@
         "fence": 452,
         "updatedAt": 1792361861601,
         "expiresAt": 1792363661601
+      }
+    },
+    {
+      "id": "b96674e2-471f-4948-a737-b555675903ad",
+      "hash": "958212acd999a2c306e896740c3726f1578fd93a553a04ca858b2f9006a6b28a",
+      "revision": 453,
+      "result": {
+        "status": "released",
+        "token": "87965ebd-5e2f-4847-9200-8ab2f6587f97",
+        "task": "BALANCE-01",
+        "owner": "mm19-balance-analysis-v2k8",
+        "fence": 452
       }
     }
   ]
