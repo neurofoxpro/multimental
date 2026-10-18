@@ -2,6 +2,7 @@ extends Button
 ## Stable hand-slot control. Playing and reading are separate hit targets.
 const Style = preload("res://src/ui_theme.gd")
 const Feedback = preload("res://src/combat_feedback.gd")
+const CardArt = preload("res://src/card_art.gd")
 var card_id: int = -1
 var slot: int = -1
 var owner_ui: WeakRef
@@ -11,6 +12,7 @@ var stats: Label
 var pattern: Label
 var details: Button
 var emblem: Control
+var art_view: TextureRect
 func piece(font: int) -> Label:
     var result := Label.new()
     result.add_theme_font_size_override("font_size",font)
@@ -34,6 +36,11 @@ func setup(ui, index: int) -> void:
     pattern = piece(15)
     emblem = preload("res://src/tactical_emblem.gd").new()
     add_child(emblem)
+    art_view = TextureRect.new()
+    art_view.name = "ApprovedCardArt"
+    art_view.mouse_filter = Control.MOUSE_FILTER_IGNORE
+    art_view.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+    add_child(art_view)
     details = ui.button(ui.t("ОПИСАНИЕ", "DETAILS"), func():
         var host: Variant = owner_ui.get_ref()
         if host != null:
@@ -56,6 +63,8 @@ func arrange() -> void:
     cost.size = Vector2(76,29)
     emblem.position = Vector2(size.x - 47,4)
     emblem.size = Vector2(40,36)
+    art_view.position = emblem.position
+    art_view.size = emblem.size
     title_label.position = Vector2(10,40)
     title_label.size = Vector2(maxf(0,size.x-20),46)
     stats.position = Vector2(10,86)
@@ -82,4 +91,7 @@ func present(ui, definition: Dictionary, facing: int, selected: bool, reason: St
     details.disabled = false
     Style.hand_card(self,ui.COLORS[int(definition.element)],selected)
     emblem.configure(str(definition.kind),ui.COLORS[int(definition.element)])
+    art_view.texture = CardArt.texture_for(card_id)
+    art_view.visible = art_view.texture != null
+    emblem.visible = not art_view.visible
     arrange()

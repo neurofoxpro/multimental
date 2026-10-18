@@ -1,7 +1,9 @@
 extends AcceptDialog
 ## Explicit, keyboard-dismissible card details. Never writes a profile or edits a deck.
 const Description = preload("res://src/card_description.gd")
+const CardArt = preload("res://src/card_art.gd")
 var content: Label
+var art_view: TextureRect
 var scroll: ScrollContainer
 var origin: WeakRef
 var current_id: int = -1
@@ -19,12 +21,22 @@ func _ready() -> void:
     scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
     scroll.follow_focus = true
     add_child(scroll)
+    var column := VBoxContainer.new()
+    column.name = "CardDetailsColumn"
+    column.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+    scroll.add_child(column)
+    art_view = TextureRect.new()
+    art_view.name = "ApprovedDetailsArt"
+    art_view.mouse_filter = Control.MOUSE_FILTER_IGNORE
+    art_view.custom_minimum_size = Vector2(160,140)
+    art_view.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+    column.add_child(art_view)
     content = Label.new()
     content.name = "CardDetailsText"
     content.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
     content.size_flags_horizontal = Control.SIZE_EXPAND_FILL
     content.add_theme_font_size_override("font_size", 23)
-    scroll.add_child(content)
+    column.add_child(content)
     visibility_changed.connect(_visibility_changed)
 
 func open_card(id: int, language: String, source: Control = null) -> bool:
@@ -36,6 +48,8 @@ func open_card(id: int, language: String, source: Control = null) -> bool:
     title = "О КАРТЕ" if language == "ru" else "CARD DETAILS"
     get_ok_button().text = "ЗАКРЫТЬ" if language == "ru" else "CLOSE"
     content.text = str(description.title) + "\n\n" + str(description.body)
+    art_view.texture = CardArt.texture_for(id)
+    art_view.visible = art_view.texture != null
     scroll.scroll_vertical = 0
     popup_centered_clamped(Vector2i(600, 780), 0.88)
     call_deferred("_focus_close",weakref(get_ok_button()))

@@ -19,6 +19,7 @@ import {
   validateCatalog,
   candidate,
   compileRuntime,
+  compileArtPresentation,
   cardSchema,
   catalogMarkdown,
   contentHash,
@@ -75,6 +76,7 @@ export async function main(args = process.argv.slice(2)) {
   const artifacts = [
     { path: 'content/card.schema.json', content: JSON.stringify(cardSchema(), null, 2) + '\n' },
     { path: 'game/src/content_catalog.gd', content: compileRuntime(data, readAsset) },
+    { path: 'game/src/card_art_catalog.gd', content: compileArtPresentation(data, readAsset) },
     { path: 'docs/production/CARD_CATALOG.ru.md', content: catalogMarkdown(data) }
   ];
   const check = () => {
