@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "observedAt": "2026-10-02",
+  "observedAt": "2026-10-18",
   "repository": "neurofoxpro/multimental",
   "generatedFrom": ".gameprod/workplan.json",
   "evidenceSemantics": "Historical evidence only; not a fresh release gate or human approval.",
@@ -796,9 +796,17 @@
       "id": "UX-11",
       "text": "Тактическое управление: разделить выбор, осмотр и подтверждённую атаку; сделать карты читаемыми",
       "version": "P2. Коллекция, профиль и экономика",
-      "status": "planned",
+      "status": "verified",
       "kind": "ui",
-      "evidence": [],
+      "evidence": [
+        "docs/production/INTERACTION_RESEARCH.ru.md",
+        "docs/production/UX11_STALE_CONFIRMATION.ru.md",
+        "docs/production/UX11_READABILITY_STATES.ru.md",
+        "docs/production/evidence/ux11-stale-confirmation-20261002.json",
+        "docs/production/evidence/ux11-readable-states-20261002.json",
+        "docs/media/gallery/current.json",
+        "docs/production/evidence/ux11-completed-readable-20261002.json"
+      ],
       "source": "Прямое критическое замечание владельца26.09.2026 о неудобстве интерфейса и управления; анализ фактической реализации и первичных рекомендаций",
       "requiredForBeta": true
     },

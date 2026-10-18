@@ -16,6 +16,40 @@
     "note": "SDK package checksums verified by sdkmanager; package.xml retained on station"
   },
   "windows": "VENEL-SENDRIK only",
+  "offlineWindows": {
+    "schemaVersion": 1,
+    "node": "24.21.0",
+    "ciNode": "22",
+    "npm": "11.19.0",
+    "godot": "4.7.2",
+    "androidBuildTools": "35.0.1",
+    "packageLockSha256": "85a2abf36eef5de7c5ce9b9307204cc978f202b90b754fd21b198f9d7f9ae9be",
+    "archives": [
+      {
+        "name": "godot.zip",
+        "sha256": "731980f9608d61333e5baf54a2ef17210acc7a538446c0cb9969f002aca1e953"
+      },
+      {
+        "name": "adb.zip",
+        "sha256": "45f4d63113e895ebde0c90f194099a4676b6ac653bd28d54314a9e022bbc1a99"
+      },
+      {
+        "name": "build-tools.zip",
+        "sha256": "79748cb4ab64b61fa678af21639985c7e394d874a4e31f082f4026d5c57e01a3"
+      },
+      {
+        "name": "jre17.zip",
+        "sha256": "bc21a93923103cdaac93ee337b0ae4365e739fde36df823dd456bc67c8a9d352"
+      }
+    ],
+    "allowedLicenses": [
+      "MIT",
+      "Apache-2.0",
+      "BSD-2-Clause",
+      "BSD-3-Clause",
+      "ISC"
+    ]
+  },
   "githubAccount": "venelsendrik",
   "permissions": "MAINTAIN, git push checked; not ADMIN"
 }
