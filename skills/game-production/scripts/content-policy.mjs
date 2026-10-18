@@ -272,6 +272,24 @@ export function compileRuntime(catalog, readAsset) {
     '\n]\n\nstatic func card(id: int) -> Dictionary:\n    return ROWS[id].duplicate(true) if id >= 0 and id < CARD_COUNT else {}\n'
   );
 }
+export function compileArtPresentation(catalog, readAsset) {
+  validateCatalog(catalog, readAsset);
+  const entries = catalog.cards.map((card) => {
+    if (card.art.kind === 'none') return {};
+    return {
+      path: 'res://' + card.art.path.slice('game/'.length),
+      sha256: card.art.sha256,
+      kind: card.art.kind
+    };
+  });
+  return (
+    'extends RefCounted\n## Generated only from the accepted card catalog. Presentation, not match rules.\n' +
+    'const ROWS: Array[Dictionary] = [\n' +
+    entries.map((entry) => '    ' + JSON.stringify(entry)).join(',\n') +
+    '\n]\n\nstatic func entry(id: int) -> Dictionary:\n' +
+    '    return ROWS[id].duplicate(true) if id >= 0 and id < ROWS.size() else {}\n'
+  );
+}
 export function candidate(data, accepted, readAsset) {
   validateCatalog(accepted, readAsset);
   object(

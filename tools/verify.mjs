@@ -73,6 +73,7 @@ run(godot, ['--headless', '--editor', '--path', 'game', '--quit']);
 for (const [file, marker] of [
   ['core_test.gd', 'MULTIMENTAL_CORE_PASS'],
   ['content_runtime_test.gd', 'MULTIMENTAL_CONTENT_RUNTIME_PASS'],
+  ['card_art_ui_test.gd', 'MULTIMENTAL_CARD_ART_UI_PASS'],
   ['content_candidate_test.gd', 'MULTIMENTAL_CONTENT_CANDIDATE_PASS'],
   ['ui_test.gd', 'MULTIMENTAL_UI_PASS'],
   ['protocol_test.gd', 'MULTIMENTAL_PROTOCOL_PASS'],
