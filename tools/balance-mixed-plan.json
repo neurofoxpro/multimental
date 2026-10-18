@@ -1,0 +1,65 @@
+{
+  "schemaVersion": 1,
+  "id": "mixed-competition-v1",
+  "rules": "terrain-sweep-v3-balance1",
+  "task": "BALANCE-01",
+  "deckConstruction": {
+    "type": "cyclic-five-elements-v1",
+    "pattern": [0, 1, 3, 4, 7],
+    "cardsPerElement": ["basic_fighter", "basic_specialist", "elite"],
+    "deckSize": 15,
+    "copiesPerCard": 1,
+    "equalCatalogCoverage": true
+  },
+  "decks": {
+    "mix0": [0,1,20,2,3,21,6,7,23,8,9,24,14,15,27],
+    "mix1": [2,3,21,4,5,22,8,9,24,10,11,25,16,17,28],
+    "mix2": [4,5,22,6,7,23,10,11,25,12,13,26,18,19,29],
+    "mix3": [6,7,23,8,9,24,12,13,26,14,15,27,0,1,20],
+    "mix4": [8,9,24,10,11,25,14,15,27,16,17,28,2,3,21],
+    "mix5": [10,11,25,12,13,26,16,17,28,18,19,29,4,5,22],
+    "mix6": [12,13,26,14,15,27,18,19,29,0,1,20,6,7,23],
+    "mix7": [14,15,27,16,17,28,0,1,20,2,3,21,8,9,24],
+    "mix8": [16,17,28,18,19,29,2,3,21,4,5,22,10,11,25],
+    "mix9": [18,19,29,0,1,20,4,5,22,6,7,23,12,13,26]
+  },
+  "policyPairs": [
+    {"id":"greedy-greedy","left":"greedy","right":"greedy"},
+    {"id":"positional-positional","left":"positional","right":"positional"},
+    {"id":"greedy-positional","left":"greedy","right":"positional"},
+    {"id":"positional-greedy","left":"positional","right":"greedy"}
+  ],
+  "seedMethod": "sha256 multimental-mixed-competition-v1:BASE:INDEX; first uint32 mod 2147483646 plus 1",
+  "defaultCount": 32,
+  "defaultSeed": 20260929,
+  "shardSeeds": 2,
+  "maxCommands": 240,
+  "tolerances": {
+    "minimumSeedBlocks": 32,
+    "firstMoverScore": [0.45, 0.55],
+    "deckScore": [0.30, 0.70],
+    "maxForcedLimitRate": 0.01,
+    "replayMismatches": 0,
+    "deterministicCycles": 0
+  },
+  "uncertainty": {
+    "method": "percentile bootstrap of entire seed blocks",
+    "replicates": 2000,
+    "confidence": 0.95,
+    "diagnosticOnly": true
+  },
+  "humanTiming": {
+    "targetMinutes": 10,
+    "maximumMinutes": 15,
+    "measured": false,
+    "requiredSeparately": true
+  },
+  "authority": "Pre-registered engineering sampling plan. It does not approve card changes or define an optimal metagame.",
+  "limits": [
+    "Ten systematic mixed decks give equal accepted-card representation, not all legal deck combinations",
+    "Heuristic policies are not optimal or human play",
+    "Cross-policy results describe these two policies, not player skill",
+    "Command cap is simulator budget, not the game clock",
+    "No gameplay rules, accepted cards, profile, layout or network changed"
+  ]
+}

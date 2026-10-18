@@ -1,0 +1,226 @@
+{
+  "schemaVersion": 1,
+  "repository": "neurofoxpro/multimental",
+  "taskId": "AUTO-12",
+  "observedAt": "2026-09-27T11:12:42.063Z",
+  "kind": "real_manual_review_delivery_not_human_acceptance",
+  "implementationBase": "681777f0626af8ad00b840082b1245bc04e37606",
+  "computerRun": {
+    "target": "emulator-B",
+    "labRunId": "70fd0b8e-9aa2-4844-9e65-4947149a293d",
+    "suiteRunId": "ab75309e-0164-4385-b07a-0398a36248a7",
+    "testerSourceHash": "88310c9aad1d5d4e225ce8f93a4364091403f2078411a6f3ff1835c06fd4092a",
+    "finishedAt": "2026-09-27T11:09:30.094Z",
+    "originalSha256": "258d59f59bf37412139a97c0344e0bd8cc3415a7de3a5bfb28b4c2691fed43d1",
+    "testedInstalledSha256": "b9bffbb0067a9ec38cff330e2bcb60ab0e772937034de85a81af32635cffd735",
+    "steps": [
+      {
+        "mode": "close",
+        "status": "passed",
+        "receiptSha256": "4a3e516820170e6dcadae2ba27cb900056346789cbad784f903927bbf287af5c"
+      },
+      {
+        "mode": "launch",
+        "status": "passed",
+        "receiptSha256": "6951047ba476bfa74ae96dbf70bd81333e31d59abaaa14ee6ed1f658d6f09421"
+      },
+      {
+        "mode": "jni",
+        "status": "passed",
+        "receiptSha256": "266f5fca638128c13b31e55a7e5784d1ea34cafe9e620ac0d70f05e0fa037628"
+      },
+      {
+        "mode": "tutorial",
+        "status": "passed",
+        "receiptSha256": "058b03345f736786fd9f52d3cecd10ba509f1254e212a244db5fee147853bcc7"
+      },
+      {
+        "mode": "ui",
+        "status": "passed",
+        "receiptSha256": "3a110da3a61144e97f50a052248731083da424935a2875881b517087b19c71aa"
+      },
+      {
+        "mode": "inspector",
+        "status": "passed",
+        "receiptSha256": "9686b8ac5f6e83339f529afb2dcac1eb5b8479dac80811b48b2b7f11137bf3ac"
+      },
+      {
+        "mode": "collection",
+        "status": "passed",
+        "receiptSha256": "3a0560d0924d0b2beab320af431e408c7387bfaffebad032019629e0527d41fc"
+      },
+      {
+        "mode": "restore",
+        "status": "passed",
+        "receiptSha256": "0f097746ee4b1eb2834bbbab6139704cd077e79085afea435996b89c5fc5ce6f"
+      }
+    ],
+    "launcher": "not_a_gate_for_computer_review",
+    "humanAcceptance": "pending"
+  },
+  "packet": {
+    "schemaVersion": 1,
+    "repository": "neurofoxpro/multimental",
+    "kind": "developer-manual-review",
+    "status": "ready_for_human_review",
+    "reviewId": "6c504b33aeb8bc61add9",
+    "preparedAt": "2026-09-27T11:09:30.094Z",
+    "version": "0.13.7-alpha.272.1",
+    "sourceCommit": "fa45537006ccfd6efe1d30cdad572445ea432743",
+    "build": {
+      "runId": "36267766417",
+      "url": "https://github.com/neurofoxpro/multimental/actions/runs/36267766417"
+    },
+    "computer": {
+      "target": "emulator-B",
+      "labRunId": "70fd0b8e-9aa2-4844-9e65-4947149a293d",
+      "suiteRunId": "ab75309e-0164-4385-b07a-0398a36248a7",
+      "testerSourceHash": "88310c9aad1d5d4e225ce8f93a4364091403f2078411a6f3ff1835c06fd4092a",
+      "finishedAt": "2026-09-27T11:09:30.094Z",
+      "originalSha256": "258d59f59bf37412139a97c0344e0bd8cc3415a7de3a5bfb28b4c2691fed43d1",
+      "testedInstalledSha256": "b9bffbb0067a9ec38cff330e2bcb60ab0e772937034de85a81af32635cffd735",
+      "steps": [
+        {
+          "mode": "close",
+          "status": "passed",
+          "receiptSha256": "4a3e516820170e6dcadae2ba27cb900056346789cbad784f903927bbf287af5c"
+        },
+        {
+          "mode": "launch",
+          "status": "passed",
+          "receiptSha256": "6951047ba476bfa74ae96dbf70bd81333e31d59abaaa14ee6ed1f658d6f09421"
+        },
+        {
+          "mode": "jni",
+          "status": "passed",
+          "receiptSha256": "266f5fca638128c13b31e55a7e5784d1ea34cafe9e620ac0d70f05e0fa037628"
+        },
+        {
+          "mode": "tutorial",
+          "status": "passed",
+          "receiptSha256": "058b03345f736786fd9f52d3cecd10ba509f1254e212a244db5fee147853bcc7"
+        },
+        {
+          "mode": "ui",
+          "status": "passed",
+          "receiptSha256": "3a110da3a61144e97f50a052248731083da424935a2875881b517087b19c71aa"
+        },
+        {
+          "mode": "inspector",
+          "status": "passed",
+          "receiptSha256": "9686b8ac5f6e83339f529afb2dcac1eb5b8479dac80811b48b2b7f11137bf3ac"
+        },
+        {
+          "mode": "collection",
+          "status": "passed",
+          "receiptSha256": "3a0560d0924d0b2beab320af431e408c7387bfaffebad032019629e0527d41fc"
+        },
+        {
+          "mode": "restore",
+          "status": "passed",
+          "receiptSha256": "0f097746ee4b1eb2834bbbab6139704cd077e79085afea435996b89c5fc5ce6f"
+        }
+      ],
+      "launcher": "not_a_gate_for_computer_review",
+      "humanAcceptance": "pending"
+    },
+    "manualApk": {
+      "id": 592756517,
+      "name": "multimental-0.13.7-alpha.272.1-fa45537-manual-3c68effd1eae.apk",
+      "url": "https://github.com/neurofoxpro/multimental/releases/download/v0.13.7-alpha.272.1/multimental-0.13.7-alpha.272.1-fa45537-manual-3c68effd1eae.apk",
+      "sha256": "7a0cb024b549fe14b42f7722650fe41f10dece08cdfd2e94fddfc795e7e4872e",
+      "size": 57443134,
+      "certificateSha256": "3c68effd1eaea4c082a7f54f399c90a36a24ea08ec881a6130412111338aff72",
+      "originalSha256": "258d59f59bf37412139a97c0344e0bd8cc3415a7de3a5bfb28b4c2691fed43d1",
+      "payloadSha256": "fb05853b14ab3ee1324d078fb455e6012c8a0fadea0bcc64eadb9b7a862474d2",
+      "payloadFiles": 211,
+      "signatureOnlyTransformation": true,
+      "manualSignedVariantInstalledByThisCommand": false
+    },
+    "links": {
+      "apk": "https://github.com/neurofoxpro/multimental/releases/download/v0.13.7-alpha.272.1/multimental-0.13.7-alpha.272.1-fa45537-manual-3c68effd1eae.apk",
+      "release": "https://github.com/neurofoxpro/multimental/releases/tag/v0.13.7-alpha.272.1",
+      "source": "https://github.com/neurofoxpro/multimental/tree/fa45537006ccfd6efe1d30cdad572445ea432743",
+      "packet": "https://github.com/neurofoxpro/multimental/releases/download/v0.13.7-alpha.272.1/MANUAL_REVIEW-6c504b33aeb8bc61add9.json",
+      "instructions": "https://github.com/neurofoxpro/multimental/releases/download/v0.13.7-alpha.272.1/MANUAL_REVIEW-6c504b33aeb8bc61add9.md",
+      "feedback": "https://github.com/neurofoxpro/multimental/issues/new?title=%5BPLAYTEST+0.13.7-alpha.272.1%5D+%D0%A0%D0%B5%D0%B7%D1%83%D0%BB%D1%8C%D1%82%D0%B0%D1%82+%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B8&body=%D0%92%D0%B5%D1%80%D1%81%D0%B8%D1%8F%3A+0.13.7-alpha.272.1%0ACommit%3A+fa45537006ccfd6efe1d30cdad572445ea432743%0AAPK+SHA-256%3A+7a0cb024b549fe14b42f7722650fe41f10dece08cdfd2e94fddfc795e7e4872e%0A%0A%D0%A3%D1%81%D1%82%D1%80%D0%BE%D0%B9%D1%81%D1%82%D0%B2%D0%BE+%2F+Android%3A%0A%D0%A0%D0%B5%D0%B7%D1%83%D0%BB%D1%8C%D1%82%D0%B0%D1%82%3A+%D0%BF%D1%80%D0%BE%D0%B9%D0%B4%D0%B5%D0%BD%D0%BE+%2F+%D0%BF%D1%80%D0%BE%D0%B1%D0%BB%D0%B5%D0%BC%D0%B0+%2F+%D0%BD%D0%B5+%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%B5%D0%BD%D0%BE%0A%D0%A8%D0%B0%D0%B3%D0%B8+%D0%B2%D0%BE%D1%81%D0%BF%D1%80%D0%BE%D0%B8%D0%B7%D0%B2%D0%B5%D0%B4%D0%B5%D0%BD%D0%B8%D1%8F%3A%0A%D0%9E%D0%B6%D0%B8%D0%B4%D0%B0%D0%BB%D0%BE%D1%81%D1%8C%3A%0A%D0%9F%D0%BE%D0%BB%D1%83%D1%87%D0%B8%D0%BB%D0%BE%D1%81%D1%8C%3A%0A%D0%A1%D0%BA%D1%80%D0%B8%D0%BD%D1%88%D0%BE%D1%82%2F%D0%B2%D0%B8%D0%B4%D0%B5%D0%BE%3A"
+    },
+    "manualAcceptance": "pending",
+    "physicalPhoneMutations": false,
+    "keysOrPersonalDataPublished": false
+  },
+  "uploaded": [
+    {
+      "name": "multimental-0.13.7-alpha.272.1-fa45537-manual-3c68effd1eae.apk",
+      "id": 592756517,
+      "sha256": "7a0cb024b549fe14b42f7722650fe41f10dece08cdfd2e94fddfc795e7e4872e",
+      "size": 57443134,
+      "url": "https://github.com/neurofoxpro/multimental/releases/download/v0.13.7-alpha.272.1/multimental-0.13.7-alpha.272.1-fa45537-manual-3c68effd1eae.apk"
+    },
+    {
+      "name": "MANUAL_REVIEW-6c504b33aeb8bc61add9.json",
+      "id": 592756768,
+      "sha256": "b826639793306216c2fc2fae07447fad3f2904f64ec23ef8dab9ed27648078d6",
+      "size": 4951,
+      "url": "https://github.com/neurofoxpro/multimental/releases/download/v0.13.7-alpha.272.1/MANUAL_REVIEW-6c504b33aeb8bc61add9.json"
+    },
+    {
+      "name": "MANUAL_REVIEW-6c504b33aeb8bc61add9.md",
+      "id": 592756918,
+      "sha256": "2a1e2681b69ed0a6a52123d24c9e43e7dfcfac591796f7e8b7eb4e9d923ecc2d",
+      "size": 5709,
+      "url": "https://github.com/neurofoxpro/multimental/releases/download/v0.13.7-alpha.272.1/MANUAL_REVIEW-6c504b33aeb8bc61add9.md"
+    }
+  ],
+  "repeat": {
+    "command": "review resume",
+    "sameComputerRun": "ab75309e-0164-4385-b07a-0398a36248a7",
+    "sameAssetIdsConfirmed": true,
+    "newInstallationOrUploadRequired": false
+  },
+  "parallel": {
+    "source": "live_Issues_claims_PRs_and_registered_worktrees",
+    "chatTranscriptsRead": false,
+    "workers": [
+      {
+        "owner": "tactical-ui-20260926-f42b",
+        "task": "UX-11",
+        "branch": "feature/ux-11-tactical-ui-20260926-f42b",
+        "head": "135b34d130c9ba1e70535ceb0c98d8a279feb42c",
+        "localState": "draft_preserved",
+        "dirtyFileCount": 44,
+        "openPRs": [],
+        "automaticTakeover": false
+      },
+      {
+        "owner": "lab-auto-20260926-a91e",
+        "task": "AUTO-07",
+        "branch": "feature/auto-07-manual-review-3605c72c",
+        "head": "681777f0626af8ad00b840082b1245bc04e37606",
+        "localState": "draft_preserved",
+        "dirtyFileCount": 26,
+        "openPRs": [],
+        "automaticTakeover": false
+      }
+    ],
+    "confirmedOtherWork": {
+      "pr": 145,
+      "merge": "d109530ea03a5a9779264653c55778882dd83032",
+      "scope": "USB/Wi-Fi inventory and physical-identity deduplication; not two-phone installation acceptance"
+    }
+  },
+  "testNotes": {
+    "firstLiveRunTesterHash": "88310c9aad1d5d4e225ce8f93a4364091403f2078411a6f3ff1835c06fd4092a",
+    "additionalPostObservationRegressions": [
+      "canonical CI release remains unique when manual APK is added",
+      "per-step receipts must come from same exact suite run"
+    ],
+    "manualPolicyTests": 22,
+    "teamPolicyTests": 5
+  },
+  "limits": [
+    "This report records the first successful packet; later tooling changes do not rewrite its exact test identity.",
+    "Human review is still pending; no false task acceptance or phone installation is inferred.",
+    "Signing key and password remain local; only the public certificate and signed APK are published."
+  ]
+}

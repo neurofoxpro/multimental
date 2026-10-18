@@ -1,0 +1,144 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import { spawnSync } from 'node:child_process';
+import {
+  readJSON,
+  writeJSON,
+  context,
+  fingerprint
+} from '../skills/game-production/scripts/lib.mjs';
+const root = process.cwd(),
+  p = readJSON('.gameprod/project.json');
+context(root, p);
+const args = process.argv.slice(2);
+const work = path.dirname(root),
+  dir = path.resolve('.gameprod/evidence');
+const get = (f) => {
+  try {
+    return readJSON(f);
+  } catch {
+    return null;
+  }
+};
+const git = (a) => {
+  const r = spawnSync('git', a, { encoding: 'utf8', timeout: 10000 });
+  return r.status === 0 ? r.stdout.trim() : null;
+};
+const gh = (a) => {
+  const r = spawnSync('gh', a, { encoding: 'utf8', timeout: 30000 });
+  if (r.status !== 0) return { status: 'unavailable' };
+  try {
+    return JSON.parse(r.stdout);
+  } catch {
+    return { status: 'unavailable' };
+  }
+};
+function publicReceipt(r) {
+  if (!r) return null;
+  return Object.fromEntries(
+    [
+      'status',
+      'version',
+      'versionCode',
+      'sourceCommit',
+      'installedAt',
+      'originalSha256',
+      'installedSha256',
+      'certificateSha256',
+      'readyMarker',
+      'humanAcceptance',
+      'readinessWaitMs',
+      'settingsPreserved'
+    ]
+      .filter((k) => r[k] !== undefined)
+      .map((k) => [k, r[k]])
+  );
+}
+const installed = publicReceipt(get(path.join(work, 'installations/installed.local.json'))),
+  qual = get(path.join(dir, 'qualification.json'));
+const head = git(['rev-parse', 'HEAD']),
+  sourceDigest = fingerprint(root, p),
+  tests = get(path.join(dir, 'verify.json'));
+const report = {
+  schemaVersion: 1,
+  observedAt: new Date().toISOString(),
+  repository: p.repository,
+  branch: git(['branch', '--show-current']),
+  toolingHead: head,
+  dirty: !!git(['status', '--porcelain']),
+  sourceDigest,
+  latestRelease: gh([
+    'api',
+    'repos/' + p.repository + '/releases?per_page=1',
+    '--jq',
+    '.[0]|{tag_name,html_url,published_at}'
+  ]),
+  installed,
+  verification: tests
+    ? {
+        status: tests.status,
+        finishedAt: tests.finishedAt,
+        sourceDigest: tests.sourceDigest,
+        currentSourceMatches: tests.sourceDigest === sourceDigest,
+        logHash: tests.logHash
+      }
+    : null,
+  ci: get(path.join(dir, 'ci-dev.json')),
+  qualification: qual
+    ? {
+        status: qual.status,
+        candidateHead: qual.candidateHead,
+        apk: qual.apk,
+        startedAt: qual.startedAt,
+        finishedAt: qual.finishedAt,
+        results: qual.results.map((r) => ({
+          name: r.name,
+          status: r.status,
+          durationMs: r.durationMs
+        }))
+      }
+    : null,
+  network: get(path.join(dir, 'network-capabilities.json')),
+  limits: [
+    'Manual fun/usability acceptance is separate',
+    'Debug transport laboratory is not production multiplayer lobby',
+    'Physical signing is local transformation; two hashes recorded',
+    'main/stable unchanged unless separately authorized'
+  ]
+};
+for (const transport of ['tcp-usb', 'tcp-lan', 'tcp-peer', 'bluetooth']) {
+  const r = get(path.join(dir, 'device-phone-' + transport + '.json'));
+  if (r) {
+    report.network = report.network || {};
+    report.network[transport] = {
+      status: r.status,
+      observedAt: r.observedAt,
+      version: r.lab?.version || r.server?.version,
+      path: r.path,
+      messages: r.dialogue?.messages || r.lab?.requests
+    };
+  }
+}
+writeJSON(path.join(dir, 'summary.json'), report);
+if (args.includes('--write')) {
+  writeJSON('docs/production/evidence/production-v2-latest.json', report);
+  const state = get('.gameprod/state.json') || {};
+  state.updatedAt = report.observedAt;
+  state.report = 'docs/production/OPS_V2_RESULTS.ru.md';
+  state.automationReport = 'docs/production/evidence/production-v2-latest.json';
+  state.observed = {
+    ...(state.observed || {}),
+    lastVerifiedInstalledRelease: installed?.version ? 'v' + installed.version : null,
+    lastVerifiedVersionCode: installed?.versionCode,
+    productionV2: {
+      toolingHead: head,
+      qualification: report.qualification?.status,
+      realLan: report.network?.['tcp-lan']?.status,
+      realBluetooth: report.network?.bluetooth?.status,
+      checkedAt: report.observedAt
+    }
+  };
+  writeJSON('.gameprod/state.json', state);
+  console.log('PUBLIC_REPORT_WRITTEN');
+}
+console.log(JSON.stringify(report, null, 2));

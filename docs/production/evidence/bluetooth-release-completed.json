@@ -1,0 +1,310 @@
+{
+  "schemaVersion": 1,
+  "observedAt": "2026-09-24T09:08:49.047Z",
+  "repository": "neurofoxpro/multimental",
+  "host": "VENEL-SENDRIK",
+  "pr": 15,
+  "release": "v0.3.0-alpha.88.1",
+  "releaseUrl": "https://github.com/neurofoxpro/multimental/releases/tag/v0.3.0-alpha.88.1",
+  "mergeCommit": "ef990b2b899b237a344e02ab8ce38eb017dc3e3f",
+  "ci": {
+    "conclusion": "success",
+    "databaseId": 35978433737,
+    "headSha": "ef990b2b899b237a344e02ab8ce38eb017dc3e3f",
+    "status": "completed",
+    "url": "https://github.com/neurofoxpro/multimental/actions/runs/35978433737",
+    "workflowName": "Build Android"
+  },
+  "qualification": {
+    "candidateHead": "23911f31b0ffc512aa9e3810a4061b4183623f2f",
+    "apk": {
+      "version": "0.3.0-alpha.84.1",
+      "sha256": "c8f5f1a087e585d2c1342716201d3f6e809dfc4a93196cf8c5fb64d46e29c88b",
+      "commit": "0a666f82ce216208c21f067b24f346b586515a8e"
+    },
+    "status": "passed",
+    "startedAt": "2026-09-24T08:53:35.656Z",
+    "finishedAt": "2026-09-24T08:58:33.628Z",
+    "toolDigest": "ff4166fd9b5a9ba40398596e8d82f6afc46eb001798a7a58db6be9896fbf3877",
+    "toolDigestAfter": "ff4166fd9b5a9ba40398596e8d82f6afc46eb001798a7a58db6be9896fbf3877",
+    "results": [
+      {
+        "name": "emulator-A-clean-install",
+        "status": "passed",
+        "durationMs": 10569
+      },
+      {
+        "name": "emulator-A-install",
+        "status": "passed",
+        "durationMs": 689
+      },
+      {
+        "name": "emulator-A-ui",
+        "status": "passed",
+        "durationMs": 12070
+      },
+      {
+        "name": "emulator-A-tutorial",
+        "status": "passed",
+        "durationMs": 13354
+      },
+      {
+        "name": "emulator-A-jni",
+        "status": "passed",
+        "durationMs": 6311
+      },
+      {
+        "name": "emulator-A-reinstall",
+        "status": "passed",
+        "durationMs": 11815
+      },
+      {
+        "name": "emulator-A-close",
+        "status": "passed",
+        "durationMs": 440
+      },
+      {
+        "name": "emulator-A-launch",
+        "status": "passed",
+        "durationMs": 6047
+      },
+      {
+        "name": "emulator-B-install",
+        "status": "passed",
+        "durationMs": 12394
+      },
+      {
+        "name": "emulator-B-ui",
+        "status": "passed",
+        "durationMs": 15180
+      },
+      {
+        "name": "emulator-B-tutorial",
+        "status": "passed",
+        "durationMs": 16732
+      },
+      {
+        "name": "emulator-B-jni",
+        "status": "passed",
+        "durationMs": 7659
+      },
+      {
+        "name": "emulator-B-reinstall",
+        "status": "passed",
+        "durationMs": 14649
+      },
+      {
+        "name": "emulator-B-close",
+        "status": "passed",
+        "durationMs": 628
+      },
+      {
+        "name": "emulator-B-launch",
+        "status": "passed",
+        "durationMs": 7340
+      },
+      {
+        "name": "emulator-pair",
+        "status": "passed",
+        "durationMs": 16892
+      },
+      {
+        "name": "pvp-emulators",
+        "status": "passed",
+        "durationMs": 28504
+      },
+      {
+        "name": "phone-install",
+        "status": "passed",
+        "durationMs": 710
+      },
+      {
+        "name": "phone-ui",
+        "status": "passed",
+        "durationMs": 10452
+      },
+      {
+        "name": "phone-tutorial",
+        "status": "passed",
+        "durationMs": 9763
+      },
+      {
+        "name": "phone-tcp-usb",
+        "status": "passed",
+        "durationMs": 4261
+      },
+      {
+        "name": "phone-tcp-lan",
+        "status": "passed",
+        "durationMs": 4453
+      },
+      {
+        "name": "phone-tcp-peer",
+        "status": "passed",
+        "durationMs": 10522
+      },
+      {
+        "name": "phone-bluetooth",
+        "status": "passed",
+        "durationMs": 9790
+      },
+      {
+        "name": "bluetooth-player-room",
+        "status": "passed",
+        "durationMs": 18633
+      },
+      {
+        "name": "pvp-phone-lan",
+        "status": "passed",
+        "durationMs": 27726
+      },
+      {
+        "name": "phone-reinstall",
+        "status": "passed",
+        "durationMs": 15935
+      },
+      {
+        "name": "phone-close",
+        "status": "passed",
+        "durationMs": 362
+      },
+      {
+        "name": "phone-launch",
+        "status": "passed",
+        "durationMs": 3921
+      }
+    ]
+  },
+  "secureRadio": {
+    "schemaVersion": 1,
+    "observedAt": "2026-09-24T08:57:27.109Z",
+    "scope": "player_bluetooth_room",
+    "path": "PHYSICAL_SECURE_RFCOMM_WINDOWS_GUEST_ANDROID_HOST",
+    "status": "passed",
+    "physicalRadio": true,
+    "tls": false,
+    "pairing": {
+      "schemaVersion": 1,
+      "observedAt": "2026-09-24T08:57:27.8467085Z",
+      "radioPresent": true,
+      "selectedPhoneKnown": true,
+      "remembered": true,
+      "authenticated": true,
+      "connected": true,
+      "win32Code": 0,
+      "action": "none"
+    },
+    "wifiDisabled": true,
+    "host": {
+      "version": "0.3.0-alpha.84.1",
+      "winner": 1,
+      "turn": 9,
+      "actions": 4,
+      "secureBluetooth": true,
+      "privateView": true
+    },
+    "guest": {
+      "status": "passed",
+      "role": "windows_guest",
+      "actions": 5,
+      "winner": 0,
+      "turn": 9,
+      "scores": [
+        5,
+        4
+      ],
+      "reconnect": true,
+      "authenticatedRFCOMM": true,
+      "encryptedRFCOMM": true,
+      "tls": false,
+      "privateView": true
+    },
+    "wifiRestored": true,
+    "finishedAt": "2026-09-24T08:57:45.646Z"
+  },
+  "installed": {
+    "status": "installed_and_launched",
+    "version": "0.3.0-alpha.88.1",
+    "versionCode": 18801,
+    "sourceCommit": "ef990b2b899b237a344e02ab8ce38eb017dc3e3f",
+    "installedAt": "2026-09-24T09:07:45.202Z",
+    "originalSha256": "4cd345992c6d834703899b720b7ad3ca169296e1c14a58d98841e9a013c78842",
+    "installedSha256": "66211e724e73a39e983087c2a869f3c621fa6de71f653e477bd750df138b4836",
+    "certificateSha256": "3c68effd1eaea4c082a7f54f399c90a36a24ea08ec881a6130412111338aff72",
+    "readyMarker": true,
+    "humanAcceptance": "pending"
+  },
+  "hardware": {
+    "observedAt": "2026-09-24T09:08:49.046Z",
+    "selectedPhone": "device",
+    "physicalDevices": 1,
+    "secondPhysicalAndroidTested": false
+  },
+  "cycle": {
+    "status": "passed",
+    "resumed": true,
+    "deliveryRecovery": "Scheduled updater installed release; CI/release APK identity and resumed cycle confirmed existing install",
+    "startedAt": "2026-09-24T08:52:53.405Z",
+    "finishedAt": "2026-09-24T09:08:23.534Z",
+    "phases": [
+      {
+        "name": "prepare_sources",
+        "status": "passed",
+        "finishedAt": "2026-09-24T08:52:54.954Z"
+      },
+      {
+        "name": "verify",
+        "status": "passed",
+        "finishedAt": "2026-09-24T08:53:19.198Z"
+      },
+      {
+        "name": "publish",
+        "status": "passed",
+        "finishedAt": "2026-09-24T08:53:23.645Z"
+      },
+      {
+        "name": "candidate",
+        "status": "passed",
+        "finishedAt": "2026-09-24T08:53:29.929Z"
+      },
+      {
+        "name": "reviewed_test_agent",
+        "status": "passed",
+        "finishedAt": "2026-09-24T08:53:32.501Z"
+      },
+      {
+        "name": "emulator_qualification",
+        "status": "passed",
+        "finishedAt": "2026-09-24T08:58:34.131Z"
+      },
+      {
+        "name": "integrate_dev",
+        "status": "passed",
+        "finishedAt": "2026-09-24T08:58:42.255Z"
+      },
+      {
+        "name": "dev_ci",
+        "status": "passed",
+        "finishedAt": "2026-09-24T09:00:24.735Z"
+      },
+      {
+        "name": "deploy_reviewed_agent",
+        "status": "passed",
+        "finishedAt": "2026-09-24T09:00:27.183Z"
+      }
+    ]
+  },
+  "manualBoundary": {
+    "kind": "second_physical_android_device",
+    "needed": true,
+    "why": "Windows native guest does not validate Android guest radio implementation or two-phone UI",
+    "action": "Connect a second owner-approved Android to VENEL-SENDRIK by USB, authorize USB debugging, pair the two phones by Bluetooth; no credentials in chat"
+  },
+  "limits": [
+    "Full matrix applies to the identified candidate; published dev APK separately built, installed and launched",
+    "No two-physical-Android Bluetooth proof yet",
+    "Collection, shop, crafting and owner-deferred core mechanics are not implemented",
+    "No main/stable/Google Play changes",
+    "Human gameplay and sound acceptance remain pending"
+  ]
+}

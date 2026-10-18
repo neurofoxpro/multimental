@@ -1,0 +1,8 @@
+{
+  "id": "completed-slice-recovery-20260926",
+  "version": "0.12.0",
+  "kind": "added",
+  "scope": "automation",
+  "text": "Завершённый чужой срез освобождается проверяемой командой по точным PR/source/claim под блокировками; открытая работа и один лишь просроченный heartbeat не дают права на захват.",
+  "breaking": false
+}

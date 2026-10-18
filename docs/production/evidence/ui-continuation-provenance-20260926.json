@@ -1,0 +1,41 @@
+{
+    "result":  {
+                   "status":  "continuation_transferred",
+                   "token":  "c3b65f04-a578-4862-9583-c42b1c120521",
+                   "task":  "UX-07",
+                   "owner":  "ui-playability-20260926-1240",
+                   "base":  "9a74818707dc0d5044affeb3d7c4f26f65f8d675",
+                   "resources":  [
+                                     "area:game-ui",
+                                     "task:UX-07"
+                                 ],
+                   "fence":  103,
+                   "updatedAt":  1790426307873,
+                   "expiresAt":  1790428107873,
+                   "previousToken":  "4e21f0ac-a47d-4c3d-9bc0-4d2ed972d409",
+                   "previousOwner":  "card-details-20260926",
+                   "previousHead":  "408b5edd5f8eb9b6e30dc879f869bfa4e0db61f7",
+                   "previousPr":  119,
+                   "operatorReleased":  "AUTO-07",
+                   "sourceWrites":  0,
+                   "phoneChanges":  0,
+                   "coordinationHead":  "3da51c83331bccd4f3942882e50153e624f1d620",
+                   "readback":  true,
+                   "recoveredReply":  false
+               },
+    "portedChanges":  [
+                          "Native AcceptDialog buttons_min_width=260 and buttons_min_height=96",
+                          "Measured size assertion in card_inspector_test and inspector_device_lab"
+                      ],
+    "previousBranch":  "feature/ux-07-inspector-touch-size-4e21f0ac",
+    "repository":  "neurofoxpro/multimental",
+    "task":  "UX-07",
+    "previousHead":  "408b5edd5f8eb9b6e30dc879f869bfa4e0db61f7",
+    "observedAt":  "2026-09-26T12:56:36.2783748Z",
+    "kind":  "explicit_continuation_provenance",
+    "sourceWritesToOldTree":  0,
+    "scope":  "Former PR119 work preserved and reused in a new dev-based source slice; no old PR closure or merge inferred.",
+    "phoneChanges":  0,
+    "schemaVersion":  1,
+    "previousPr":  119
+}

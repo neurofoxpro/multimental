@@ -1,0 +1,8 @@
+{
+  "id": "launcher-icon-methods-20260926",
+  "version": "0.13.5",
+  "kind": "fixed",
+  "scope": "automation",
+  "text": "Нативная иконка для домашнего ярлыка теперь читается через Android getIconResource, а не неподдерживаемое свойство JavaObject. Регрессия больше не маскирует несовпадение JNI словарной заглушкой.",
+  "breaking": false
+}

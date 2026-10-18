@@ -1,0 +1,15 @@
+{
+  "base": "ae28a9f4de30aa824caca3c1d4810b13989c8c23",
+  "files": [
+    {
+      "path": "skills/game-production/scripts/content.mjs",
+      "expectedCurrentSha256": "4f13468e530d15c77605b1dec9988cfa8972aac7884894c886d9c0167817f23b",
+      "edits": [
+        {
+          "from": "    { path: 'game/src/card_art_catalog.gd', content: compileArtPresentation(data, readAsset) }\n",
+          "to": "    { path: 'game/src/card_art_catalog.gd', content: compileArtPresentation(data, readAsset) },\n"
+        }
+      ]
+    }
+  ]
+}

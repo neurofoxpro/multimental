@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "repository": "neurofoxpro/multimental",
+  "package": "pro.neurofox.multimental",
+  "developmentPackage": "pro.neurofox.multimental.dev",
+  "policyCheckedAt": "2026-09-25",
+  "minTargetSdk": 36,
+  "requireNative16kVerification": true,
+  "accountStatus": "unknown",
+  "budgetApproval": "not_given",
+  "appCreated": false,
+  "privacyPolicyUrl": null,
+  "audienceDeclarationApproved": false,
+  "dataSafetyApproved": false,
+  "publisherAdapterStatus": "not_implemented",
+  "productionApproval": "protected_workflow_and_explicit_owner_consent_required",
+  "tracks": ["internal", "closed", "production"],
+  "sources": [
+    "https://developer.android.com/google/play/requirements/target-sdk",
+    "https://developer.android.com/guide/practices/page-sizes",
+    "https://developer.android.com/studio/publish/app-signing",
+    "https://developers.google.com/android-publisher/getting_started",
+    "https://developers.google.com/android-publisher/edits"
+  ],
+  "note": "Inventory only. No credentials, automatic owner approval or live publication is represented here. Recheck current official policies and actual Play Console eligibility before RC."
+}

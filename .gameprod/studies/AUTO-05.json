@@ -1,0 +1,31 @@
+{
+    "acceptance":  [
+                       "Пакет содержит точный readset, гипотезу, контроль, лимиты и критерии.",
+                       "Повтор начинает с первой непроверенной стадии; старые входы не дают PASS."
+                   ],
+    "checks":  [
+                   "dispatch",
+                   "study"
+               ],
+    "hypothesis":  "Очередь по live определениям и ресурсам плюс точный checkpoint исследования сокращают повторные действия без ослабления gates.",
+    "readset":  [
+                    "AGENTS.md",
+                    "skills/game-production/SKILL.md",
+                    "skills/game-production/scripts/dispatch-policy.mjs",
+                    "skills/game-production/scripts/dispatch.mjs",
+                    "skills/game-production/scripts/collaboration-policy.mjs"
+                ],
+    "question":  "Как сократить повторную загрузку контекста и безопасно распределять исследование и разработку между чатами?",
+    "control":  "Сравнение с прежними resume/task и независимыми отрицательными сценариями: stale snapshot, занятые ресурсы, потерянный ответ, изменённые входы и неполные проверки.",
+    "task":  "AUTO-05",
+    "limits":  [
+                   "Теги не блокировки; claim выполняется существующим GitHub CAS.",
+                   "Захват среза не запускает независимый LLM; анализ и реализация выполняются активным агентом.",
+                   "Загрузка документа не равна проверке истинности его утверждений."
+               ],
+    "schemaVersion":  1,
+    "sources":  [
+                    "https://docs.github.com/en/rest/issues/issue-dependencies",
+                    "https://docs.github.com/en/rest/using-the-rest-api/best-practices-for-using-the-rest-api"
+                ]
+}

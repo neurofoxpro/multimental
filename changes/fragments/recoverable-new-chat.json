@@ -1,0 +1,8 @@
+{
+  "id": "recoverable-new-chat",
+  "version": "0.2.0",
+  "kind": "added",
+  "scope": "automation",
+  "text": "Команда handoff готовит перенос в новый чат: разрешённая станция, точный Git/PR, установленная версия, непройденный этап, решения и ручные пункты. Короткий Windows-вход chat.cmd не меняет системную execution policy.",
+  "breaking": false
+}

@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "auditDate": "2026-09-25",
+  "auditType": "roadmap_reconciliation_not_game_qualification",
+  "repository": "neurofoxpro/multimental",
+  "sourceCommit": "570ce2df053260badf1f64550e7da18611748822",
+  "implementationCommit": "017d811f5fefe27a006edc68b651d27ee705b940",
+  "latestObservedRelease": "v0.5.1-alpha.105.1",
+  "liveChecks": {
+    "release": "published_prerelease",
+    "ciRun": 36090853264,
+    "ciJobs": ["Production checks: success", "Publish development prerelease: success"],
+    "pr25": "merged_to_dev",
+    "openPullRequestsBeforeAudit": [2],
+    "executionHost": "VENEL-SENDRIK",
+    "executionHostStatus": "offline"
+  },
+  "installationEvidence": "docs/production/evidence/balance-release-completed.json",
+  "deviceCheckedNow": false,
+  "installedVersionRecorded": "0.5.1-alpha.105.1",
+  "installedAtRecorded": "2026-09-25T03:35:40.930Z",
+  "originalApkSha256": "e0fa2b0459f6da43d8a7130cf1aaec847ddfbb438ebba3a00e98fcd4a3bb9514",
+  "installedApkSha256": "e7e4a55b9bc881f052c0014baf27ea3921056b13ee074c0936d20ccd26a7a9fb",
+  "manualAcceptance": "pending_owner_gameplay",
+  "secondPhysicalAndroid": "not_tested",
+  "candidateMatrixScope": "29/29 belongs to .104.1 candidate; .105.1 has separate build/install/launch evidence",
+  "unchanged": ["game code", "rules", "keys", "historical device receipts", "main", "stable"],
+  "limits": [
+    "No new game tests, device query or installation in this roadmap audit",
+    "Legacy requirements.json retains older statuses and must not supply a current readiness percentage",
+    "Main PR2 is not merged or authorized by this document"
+  ]
+}

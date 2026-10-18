@@ -1,0 +1,191 @@
+{
+  "schemaVersion": 1,
+  "repository": "neurofoxpro/multimental",
+  "taskId": "CONTENT-03",
+  "observedAt": "2026-09-27T17:17:41.722Z",
+  "sourceCommit": "f48c9b2b6a2220145ae76584db75cf229f7f66bc",
+  "implementation": {
+    "pr": 153,
+    "head": "5b0ccd4cf0d69bd3137cea489e5c21e6ca957c16",
+    "build": {
+      "conclusion": "success",
+      "databaseId": 36334566161,
+      "headSha": "f48c9b2b6a2220145ae76584db75cf229f7f66bc",
+      "status": "completed",
+      "url": "https://github.com/neurofoxpro/multimental/actions/runs/36334566161",
+      "workflowName": "Build Android"
+    },
+    "ciRun": 36334419409
+  },
+  "verification": {
+    "schemaVersion": 1,
+    "step": "verify",
+    "status": "passed",
+    "exitCode": 0,
+    "sourceDigest": "5bcacff247203a2f7cd36be82838805039e6dbfa3bff8496f9ce8d758c56cea9",
+    "sourceDigestAfter": "5bcacff247203a2f7cd36be82838805039e6dbfa3bff8496f9ce8d758c56cea9",
+    "sourceChanged": false,
+    "startedAt": "2026-09-27T16:45:53.657Z",
+    "finishedAt": "2026-09-27T16:47:12.210Z",
+    "host": "github-hosted",
+    "command": [
+      "node",
+      "tools/verify.mjs"
+    ],
+    "log": ".gameprod/evidence/verify.log",
+    "logHash": "103ff2352f5435ca2b449dbaed1bc2f845a814c7cbf022bb4bffc8b057730db2",
+    "outputs": []
+  },
+  "acceptance": [
+    "Стабильный ID/версия; описание RU/EN не исполняемый код; неизвестный эффект отклоняется.",
+    "Кандидат отдельно от принятого набора; контроль seed, стоимости, комбинаций и происхождения иллюстраций.",
+    "Простая карта добавляется проверенными данными через команду; сложный эффект требует тестируемого обработчика."
+  ],
+  "evidence": [
+    "docs/production/CONTENT_FACTORY.ru.md",
+    "docs/production/CARD_CATALOG.ru.md",
+    "docs/SCREENSHOTS.ru.md",
+    "docs/production/evidence/content-factory-completed-20260927.json"
+  ],
+  "tests": {
+    "node": 970,
+    "acceptedCatalogueEquivalence": 2397,
+    "candidateSmokeMatches": 56,
+    "candidatePolicyTests": 41,
+    "publicationRecoveryTests": 15,
+    "fullGodotRegression": "passed"
+  },
+  "experiments": {
+    "source": "Observed CLI runs recorded in Issue32 comment5857736387; not reread or newly aggregated here",
+    "seed": 9001,
+    "count": 8,
+    "gamesEach": 448,
+    "replaysEach": 448,
+    "reusedOnRepeat": true,
+    "keys": [
+      "14f512171012e7c06062db7c6dd7e3e34ae8359b244f0e0cd9b4026aa76493dc",
+      "2adcf213da7111fcffa2604f7bb0e75e003b2e966347ed1a9b5229a349ddf62d"
+    ],
+    "winRates": "not_asserted",
+    "acceptedCatalogueChanged": false
+  },
+  "manualReview": {
+    "schemaVersion": 1,
+    "repository": "neurofoxpro/multimental",
+    "kind": "developer-manual-review",
+    "status": "ready_for_human_review",
+    "reviewId": "8dd869b083cad20d73d4",
+    "preparedAt": "2026-09-27T16:54:26.936Z",
+    "version": "0.14.0-alpha.281.1",
+    "sourceCommit": "f48c9b2b6a2220145ae76584db75cf229f7f66bc",
+    "build": {
+      "runId": "36334566161",
+      "url": "https://github.com/neurofoxpro/multimental/actions/runs/36334566161"
+    },
+    "computer": {
+      "target": "emulator-B",
+      "labRunId": "736537fe-6cf7-4cb8-bc53-2aab113dc469",
+      "suiteRunId": "fbbd3c92-3c19-4851-b00f-9a1dc46bdb5e",
+      "testerSourceHash": "6bda233f4ebe1961eb26ac40d60103cdd8f19c6e2d1b2be043f0c1feb86e4870",
+      "finishedAt": "2026-09-27T16:54:26.936Z",
+      "originalSha256": "f1aa53787302c4ca025748c3171f1da62064d135c6ae625d280924051989017b",
+      "testedInstalledSha256": "31a5ec4175d5a40890f5a517b788283da61c7aabc3d9ab393cd657bb895dd160",
+      "steps": [
+        {
+          "mode": "close",
+          "status": "passed",
+          "receiptSha256": "5494547400e2a7eff80d80fb5387adbf39c305cabe416f4c9bfe2a96451ad895"
+        },
+        {
+          "mode": "launch",
+          "status": "passed",
+          "receiptSha256": "bb3d202121d28e0ffd45cca4da39a8b6e3f4b049ecab39256c3bf0fef730a684"
+        },
+        {
+          "mode": "jni",
+          "status": "passed",
+          "receiptSha256": "098732fc6a636c2119a54579c4332255e4fdd575dcd346a0f203f90cd5dfc83c"
+        },
+        {
+          "mode": "tutorial",
+          "status": "passed",
+          "receiptSha256": "599db5c652636250a84b1c78ffea9bac7b8064d08895118b46c9d4eab8d3c213"
+        },
+        {
+          "mode": "ui",
+          "status": "passed",
+          "receiptSha256": "0088e03a830ad3a6b44ae9dded7ee109f0943840427499639160cfe7da5470f3"
+        },
+        {
+          "mode": "inspector",
+          "status": "passed",
+          "receiptSha256": "db594a0e75d72ad460d4e226a284e4ca240d8fbb33a1b4895f0131cb7b27b616"
+        },
+        {
+          "mode": "collection",
+          "status": "passed",
+          "receiptSha256": "b93bc7141c2277b38d5a6e80260a187d336aad9d052c598387baffb8d8167e7a"
+        },
+        {
+          "mode": "restore",
+          "status": "passed",
+          "receiptSha256": "4ea75882d9f2956c459acf7e6b1843dd80b923a8fde664b3a8066e9a67cc9824"
+        }
+      ],
+      "launcher": "not_a_gate_for_computer_review",
+      "humanAcceptance": "pending"
+    },
+    "manualApk": {
+      "id": 593346177,
+      "name": "multimental-0.14.0-alpha.281.1-f48c9b2-manual-3c68effd1eae.apk",
+      "url": "https://github.com/neurofoxpro/multimental/releases/download/v0.14.0-alpha.281.1/multimental-0.14.0-alpha.281.1-f48c9b2-manual-3c68effd1eae.apk",
+      "sha256": "cf555b6be7a4f7bf304a2c31accfc79e1dd2f488e0de41238f423eea521827d4",
+      "size": 57447387,
+      "certificateSha256": "3c68effd1eaea4c082a7f54f399c90a36a24ea08ec881a6130412111338aff72",
+      "originalSha256": "f1aa53787302c4ca025748c3171f1da62064d135c6ae625d280924051989017b",
+      "payloadSha256": "bebdfb0104ce9fab4e222b59b92fae172d6156e69577d2c08c2ecfdc33b4e70d",
+      "payloadFiles": 213,
+      "signatureOnlyTransformation": true,
+      "manualSignedVariantInstalledByThisCommand": false
+    },
+    "links": {
+      "apk": "https://github.com/neurofoxpro/multimental/releases/download/v0.14.0-alpha.281.1/multimental-0.14.0-alpha.281.1-f48c9b2-manual-3c68effd1eae.apk",
+      "release": "https://github.com/neurofoxpro/multimental/releases/tag/v0.14.0-alpha.281.1",
+      "source": "https://github.com/neurofoxpro/multimental/tree/f48c9b2b6a2220145ae76584db75cf229f7f66bc",
+      "packet": "https://github.com/neurofoxpro/multimental/releases/download/v0.14.0-alpha.281.1/MANUAL_REVIEW-8dd869b083cad20d73d4.json",
+      "instructions": "https://github.com/neurofoxpro/multimental/releases/download/v0.14.0-alpha.281.1/MANUAL_REVIEW-8dd869b083cad20d73d4.md",
+      "feedback": "https://github.com/neurofoxpro/multimental/issues/new?title=%5BPLAYTEST+0.14.0-alpha.281.1%5D+%D0%A0%D0%B5%D0%B7%D1%83%D0%BB%D1%8C%D1%82%D0%B0%D1%82+%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B8&body=%D0%92%D0%B5%D1%80%D1%81%D0%B8%D1%8F%3A+0.14.0-alpha.281.1%0ACommit%3A+f48c9b2b6a2220145ae76584db75cf229f7f66bc%0AAPK+SHA-256%3A+cf555b6be7a4f7bf304a2c31accfc79e1dd2f488e0de41238f423eea521827d4%0A%0A%D0%A3%D1%81%D1%82%D1%80%D0%BE%D0%B9%D1%81%D1%82%D0%B2%D0%BE+%2F+Android%3A%0A%D0%A0%D0%B5%D0%B7%D1%83%D0%BB%D1%8C%D1%82%D0%B0%D1%82%3A+%D0%BF%D1%80%D0%BE%D0%B9%D0%B4%D0%B5%D0%BD%D0%BE+%2F+%D0%BF%D1%80%D0%BE%D0%B1%D0%BB%D0%B5%D0%BC%D0%B0+%2F+%D0%BD%D0%B5+%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%B5%D0%BD%D0%BE%0A%D0%A8%D0%B0%D0%B3%D0%B8+%D0%B2%D0%BE%D1%81%D0%BF%D1%80%D0%BE%D0%B8%D0%B7%D0%B2%D0%B5%D0%B4%D0%B5%D0%BD%D0%B8%D1%8F%3A%0A%D0%9E%D0%B6%D0%B8%D0%B4%D0%B0%D0%BB%D0%BE%D1%81%D1%8C%3A%0A%D0%9F%D0%BE%D0%BB%D1%83%D1%87%D0%B8%D0%BB%D0%BE%D1%81%D1%8C%3A%0A%D0%A1%D0%BA%D1%80%D0%B8%D0%BD%D1%88%D0%BE%D1%82%2F%D0%B2%D0%B8%D0%B4%D0%B5%D0%BE%3A"
+    },
+    "manualAcceptance": "pending",
+    "physicalPhoneMutations": false,
+    "keysOrPersonalDataPublished": false
+  },
+  "phone": {
+    "attemptedAt": "2026-09-27T17:14:00Z",
+    "status": "not_detected_by_adb_or_usb_inventory",
+    "installation": "not_performed_by_this_turn",
+    "next": "existing known-primary updater or lab deliver after connection is observed"
+  },
+  "criteriaResults": [
+    {
+      "criterion": 0,
+      "implemented": "Strict unique-key JSON, stable slot/ID/version, known-handler allowlist and non-executable RU/EN data."
+    },
+    {
+      "criterion": 1,
+      "implemented": "Private candidate catalogue; paired seed, seat and archetype comparisons; bounded costs; exact art bytes/provenance or explicit no-art fallback."
+    },
+    {
+      "criterion": 2,
+      "implemented": "content add/trial executes a stat-only new card in an isolated candidate catalogue; accepted game and profiles reject its new ID. A complex effect cannot be introduced without a code handler and tests."
+    }
+  ],
+  "manualAcceptance": "pending",
+  "productionAuthorized": false,
+  "limitations": [
+    "Engineering acceptance is for the content factory, not promotion of experimental cards into the player collection.",
+    "Existing thirty cards, thirty-by-two grant, rules and save compatibility remain unchanged.",
+    "The UI rewrite owned by UX-11 is not included.",
+    "No new artwork, physical phone installation or human balance acceptance is inferred."
+  ]
+}

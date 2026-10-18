@@ -1,0 +1,220 @@
+{
+    "sourceDigestAtExperiment":  "2ad98c793c0a5c2a2bc2432cdec3ab2f19abe8bf9e2fecee1a3796ef865371ef",
+    "baseCommit":  "8160555dd006bf4c889d0ee6993c7ddad946c3a5",
+    "inputs":  [
+                   {
+                       "sha256":  "6273424466827ebffb9a681cd57b07ea2e4ebe9fe4dfd673a555ed46f57f6dbd",
+                       "path":  "game/tests/rewards_simulation_test.gd"
+                   },
+                   {
+                       "sha256":  "ff5e89ec6e73984f6d3a3115c232693892ec10c3d8fa0d2f6fdacac51ff83e00",
+                       "path":  "game/src/rewards_policy.gd"
+                   },
+                   {
+                       "sha256":  "405b3dcfe4dbb120407d6af0a7142e761a11044326f59515209aa54c0a351013",
+                       "path":  "game/src/economy_rules.gd"
+                   },
+                   {
+                       "sha256":  "955d9d827b77282a3b37d92b308f27eb8142c641b892ceb765d4102bc2537e90",
+                       "path":  "game/src/crafting_policy.gd"
+                   },
+                   {
+                       "sha256":  "ba29a05f6cf91b9e7e8b7f6d2fd7443fbb497c4325c5d1a9a9590085432d9aa3",
+                       "path":  "game/src/collection_rules.gd"
+                   },
+                   {
+                       "sha256":  "e6c996f479e1eb105cb05fd31a2da9f6eb3b7653ab59d6e08929e2d2d465d665",
+                       "path":  "game/src/deck_rules.gd"
+                   }
+               ],
+    "result":  {
+                   "actualAlpha":  {
+                                       "grant":  "alpha-open-30x2-v1",
+                                       "inventoryReset":  false,
+                                       "requiredMatchesForAnyCurrentLegalDeck":  0
+                                   },
+                   "assumptions":  {
+                                       "assumedMinutesPerMatch":  10,
+                                       "counterfactualInitialInventory":  "one copy of STARTER only, NOT production grant",
+                                       "craftStrategy":  "greedy target order, no recycling",
+                                       "dailyQuestsClaimed":  true,
+                                       "matchesPerDay":  3,
+                                       "maximumMatches":  300,
+                                       "pairedDraws":  true,
+                                       "percentiles":  "nearest rank among completed trials; censored counts reported separately",
+                                       "seedBase":  730100,
+                                       "targetCards":  [
+                                                           "c000",
+                                                           "c000",
+                                                           "c001",
+                                                           "c001",
+                                                           "c002",
+                                                           "c002",
+                                                           "c003",
+                                                           "c003",
+                                                           "c004",
+                                                           "c004",
+                                                           "c005",
+                                                           "c005",
+                                                           "c006",
+                                                           "c006",
+                                                           "c007"
+                                                       ],
+                                       "trialsPerScenario":  256,
+                                       "winPercent":  50
+                                   },
+                   "kind":  "source-simulation-not-player-telemetry",
+                   "limits":  [
+                                  "hypothetical deficits do not alter alpha inventory",
+                                  "device clock is not trusted server time",
+                                  "ten minutes is an assumption, not measured match duration",
+                                  "finite simulated trials do not prove worst-case acquisition time",
+                                  "no grind or purchase requirement is introduced"
+                              ],
+                   "policy":  "alpha-match20-win10-quests25x50-xp100-v1",
+                   "scenarios":  [
+                                     {
+                                         "assumedActiveMinutes":  {
+                                                                      "p10":  210,
+                                                                      "p50":  360,
+                                                                      "p90":  580,
+                                                                      "p95":  640
+                                                                  },
+                                         "censoredAtMatchLimit":  0,
+                                         "completed":  256,
+                                         "daysAtThreeMatchesPerDay":  {
+                                                                          "p10":  7,
+                                                                          "p50":  12,
+                                                                          "p90":  20,
+                                                                          "p95":  22
+                                                                      },
+                                         "matches":  {
+                                                         "maxObserved":  102,
+                                                         "mean":  38.1484375,
+                                                         "p10":  21,
+                                                         "p50":  36,
+                                                         "p90":  58,
+                                                         "p95":  64
+                                                     },
+                                         "quantilesConditionalOnCompletion":  true,
+                                         "scenario":  "hypothetical-starter-only-gold0-packs",
+                                         "trials":  256
+                                     },
+                                     {
+                                         "assumedActiveMinutes":  {
+                                                                      "p10":  150,
+                                                                      "p50":  170,
+                                                                      "p90":  210,
+                                                                      "p95":  220
+                                                                  },
+                                         "censoredAtMatchLimit":  0,
+                                         "completed":  256,
+                                         "daysAtThreeMatchesPerDay":  {
+                                                                          "p10":  5,
+                                                                          "p50":  6,
+                                                                          "p90":  7,
+                                                                          "p95":  8
+                                                                      },
+                                         "matches":  {
+                                                         "maxObserved":  27,
+                                                         "mean":  17.44921875,
+                                                         "p10":  15,
+                                                         "p50":  17,
+                                                         "p90":  21,
+                                                         "p95":  22
+                                                     },
+                                         "quantilesConditionalOnCompletion":  true,
+                                         "scenario":  "hypothetical-starter-only-gold0-packs-and-target-craft",
+                                         "trials":  256
+                                     },
+                                     {
+                                         "assumedActiveMinutes":  {
+                                                                      "p10":  100,
+                                                                      "p50":  270,
+                                                                      "p90":  480,
+                                                                      "p95":  540
+                                                                  },
+                                         "censoredAtMatchLimit":  0,
+                                         "completed":  256,
+                                         "daysAtThreeMatchesPerDay":  {
+                                                                          "p10":  4,
+                                                                          "p50":  9,
+                                                                          "p90":  16,
+                                                                          "p95":  18
+                                                                      },
+                                         "matches":  {
+                                                         "maxObserved":  91,
+                                                         "mean":  28.16015625,
+                                                         "p10":  10,
+                                                         "p50":  27,
+                                                         "p90":  48,
+                                                         "p95":  54
+                                                     },
+                                         "quantilesConditionalOnCompletion":  true,
+                                         "scenario":  "hypothetical-starter-only-gold500-packs",
+                                         "trials":  256
+                                     },
+                                     {
+                                         "assumedActiveMinutes":  {
+                                                                      "p10":  40,
+                                                                      "p50":  70,
+                                                                      "p90":  110,
+                                                                      "p95":  120
+                                                                  },
+                                         "censoredAtMatchLimit":  0,
+                                         "completed":  256,
+                                         "daysAtThreeMatchesPerDay":  {
+                                                                          "p10":  2,
+                                                                          "p50":  3,
+                                                                          "p90":  4,
+                                                                          "p95":  4
+                                                                      },
+                                         "matches":  {
+                                                         "maxObserved":  16,
+                                                         "mean":  7.3359375,
+                                                         "p10":  4,
+                                                         "p50":  7,
+                                                         "p90":  11,
+                                                         "p95":  12
+                                                     },
+                                         "quantilesConditionalOnCompletion":  true,
+                                         "scenario":  "hypothetical-starter-only-gold500-packs-and-target-craft",
+                                         "trials":  256
+                                     },
+                                     {
+                                         "assumedActiveMinutes":  {
+                                                                      "p10":  160,
+                                                                      "p50":  180,
+                                                                      "p90":  230,
+                                                                      "p95":  250
+                                                                  },
+                                         "censoredAtMatchLimit":  0,
+                                         "completed":  256,
+                                         "daysAtThreeMatchesPerDay":  {
+                                                                          "p10":  6,
+                                                                          "p50":  6,
+                                                                          "p90":  8,
+                                                                          "p95":  9
+                                                                      },
+                                         "matches":  {
+                                                         "maxObserved":  30,
+                                                         "mean":  19.26953125,
+                                                         "p10":  16,
+                                                         "p50":  18,
+                                                         "p90":  23,
+                                                         "p95":  25
+                                                     },
+                                         "quantilesConditionalOnCompletion":  true,
+                                         "scenario":  "hypothetical-starter-only-gold0-craft-zero-wins",
+                                         "trials":  256
+                                     }
+                                 ],
+                   "schemaVersion":  1
+               },
+    "command":  "npm run game -- profile-test rewards-simulation",
+    "logSha256":  "0f32c94e84c4c285c6ac4d9024841543b8833057e21c741ccd4471de34a020e2",
+    "observedAt":  "2026-09-26T07:29:49.303Z",
+    "engine":  "Godot 4.7.2.stable.official.ed1daf0bf",
+    "repository":  "neurofoxpro/multimental",
+    "schemaVersion":  1
+}

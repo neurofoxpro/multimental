@@ -1,0 +1,8 @@
+{
+  "id": "adb-console-normalization",
+  "version": "0.2.0",
+  "kind": "fixed",
+  "scope": "tests",
+  "text": "Идентификация выделенных эмуляторов учитывает двойной CR в выводе ADB на Windows, сохраняя строгую проверку имени и запрет очистки настоящего телефона.",
+  "breaking": false
+}

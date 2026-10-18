@@ -1,0 +1,63 @@
+{
+  "schemaVersion": 1,
+  "id": "standard-start-v1",
+  "rules": "terrain-sweep-v3-balance1",
+  "task": "BALANCE-01",
+  "start": "MatchCore.start_with_decks; no post-start hands/decks mutation",
+  "decks": [
+    "starter",
+    "guard",
+    "lancer",
+    "archer",
+    "flanker",
+    "rush",
+    "elite"
+  ],
+  "policies": [
+    "greedy",
+    "positional",
+    "random"
+  ],
+  "screenedPolicies": [
+    "greedy",
+    "positional"
+  ],
+  "seedMethod": "sha256 multimental-standard-start-v1:BASE:INDEX; first uint32 mod 2147483646 plus 1",
+  "defaultCount": 32,
+  "defaultSeed": 9001,
+  "shardSeeds": 4,
+  "maxCommands": 240,
+  "tolerances": {
+    "minimumSeedBlocks": 32,
+    "firstMoverScore": [
+      0.45,
+      0.55
+    ],
+    "maxForcedLimitRate": 0.01,
+    "maxArchetypeScore": 0.7,
+    "illegalCommands": 0,
+    "replayMismatches": 0,
+    "deterministicCycles": 0
+  },
+  "uncertainty": {
+    "method": "percentile bootstrap of entire seed blocks",
+    "replicates": 2000,
+    "confidence": 0.95,
+    "diagnosticOnly": true
+  },
+  "humanTiming": {
+    "targetMinutes": 10,
+    "maximumMinutes": 15,
+    "measured": false,
+    "requiredSeparately": true
+  },
+  "authority": "Engineering screening thresholds registered before the new series; not final owner-approved gameplay parameters",
+  "limits": [
+    "Heuristic policies are not optimal or human play",
+    "Random policy is exploratory and excluded from balance pass/fail",
+    "All ordered deck pairs; identical-deck mirrors counted once, not twice",
+    "Whole seed blocks preserve dependence between reversed pairings",
+    "Command cap is simulator budget, not the game clock",
+    "No gameplay rules, cards, profile, layout or network changed"
+  ]
+}

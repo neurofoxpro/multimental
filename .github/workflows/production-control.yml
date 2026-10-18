@@ -1,0 +1,51 @@
+name: Production controller
+on:
+  pull_request:
+    branches: [dev, main]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: production-control-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  controller:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020
+        with:
+          node-version-file: .nvmrc
+      - name: Install locked formatter without lifecycle scripts
+        run: npm ci --ignore-scripts --no-fund
+      - name: Controller regression tests
+        run: node --test skills/game-production/tests/control.test.mjs
+      - name: Validate task graph and synchronized projections
+        run: |
+          npm run game -- validate
+          npm run game -- render --check
+      - name: Preserve generated changes for explicit review
+        if: always()
+        run: |
+          mkdir -p .gameprod/evidence/control-review
+          npm run game -- render
+          node scripts/readiness.mjs render
+          node scripts/changelog.mjs render
+          node scripts/format.mjs write
+          git diff --binary > .gameprod/evidence/control-review/generated.patch
+          git rev-parse HEAD > .gameprod/evidence/control-review/source.txt
+          git ls-files -z | tar --null -T - -czf .gameprod/evidence/control-review/reviewed-source.tar.gz
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        if: always()
+        with:
+          name: production-control-review
+          path: .gameprod/evidence/control-review/
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 14
+      - name: Generated and formatted source must already be committed
+        run: git diff --exit-code

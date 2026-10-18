@@ -1,0 +1,8 @@
+{
+  "id": "auto09-zero-work-recovery-20260930",
+  "version": "0.14.3",
+  "kind": "fixed",
+  "scope": "automation",
+  "text": "Добавлено проверяемое освобождение просроченного zero-work claim: clean/base/remote/PR/CI/lock proof перечитывается под leases, а один CAS не меняет исходники, устройства и replacement claim.",
+  "breaking": false
+}

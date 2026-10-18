@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "repository": "neurofoxpro/multimental",
+  "task": "META-02",
+  "observedAt": "2026-09-26T04:52:00Z",
+  "sourceCommit": "099d0f5b61546b97407090c7e6a6e7793f050b75",
+  "pullRequest": 111,
+  "release": "0.9.0-alpha.178.1",
+  "workflowRun": 36218917805,
+  "originalApkSha256": "15a47da89d1b675cd106bcc5b5e8016c0a9c811263f076eed239540377a0e208",
+  "installedApkSha256": "284eacf2c9451bb438f8c22bdc8b0a0477b7fcef3afaf9e387df82ad5a7cd46f",
+  "nodeTests": 528,
+  "economyChecks": 468,
+  "distributionDraws": 2000,
+  "shopUiChecks": 33,
+  "physicalShop": {"runId": "d895a9ef-fddb-4dbb-8bab-e25bf977b29b", "status": "passed", "actualAndroidTaps": 4, "checksPassed": 6, "personalProfileUntouched": true},
+  "physicalStorage": {"runId": "9f5343c7-aa1a-49d2-80f9-98806cd505ad", "status": "passed", "writes": 77, "checksPassed": 17, "personalProfileUntouched": true},
+  "humanAcceptance": "not_inferred",
+  "limits": ["Local alpha economy, not trusted server currency", "Existing 30x2 collection preserved", "Crafting and ongoing rewards are separate tasks", "Only the primary physical Android was visible"]
+}

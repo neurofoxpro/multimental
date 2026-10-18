@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "repository": "neurofoxpro/multimental",
+  "testedCommit": "d1345081af49b4e1da31ed8a8bbc1819de4fe5c4",
+  "host": "VENEL-SENDRIK",
+  "step": "verify",
+  "status": "passed",
+  "exitCode": 0,
+  "sourceDigest": "ff18acb1aba48ba589925dd178582c4ca1f8b6a90641b448201b2069a99459f2",
+  "sourceDigestAfter": "ff18acb1aba48ba589925dd178582c4ca1f8b6a90641b448201b2069a99459f2",
+  "sourceChanged": false,
+  "startedAt": "2026-09-24T01:36:00.040Z",
+  "finishedAt": "2026-09-24T01:36:07.971Z",
+  "command": ["node", "tools/verify.mjs"],
+  "logHash": "18912930a16a61fbc8da56dffca1c25fcf06bff933ee39004949bef08aac53fa",
+  "nodeTestsPassed": 17,
+  "coreChecks": 3002,
+  "coreSimulations": 100,
+  "uiFlow": "passed",
+  "repeatedVerificationAndGate": "passed twice",
+  "personalEditorSettingsHashUnchanged": true,
+  "note": "Redacted summary of observed local receipt. Full log remains in the matching snapshot .gameprod/evidence. This is not an Android device or build receipt."
+}

@@ -1,0 +1,8 @@
+{
+  "id": "wifi-adb-control-d82a",
+  "version": "0.14.2",
+  "kind": "fixed",
+  "scope": "automation",
+  "text": "Bluetooth-тест больше не отключает единственный Wi-Fi-канал отладки; туннели Wi-Fi ADB и эмулятора не обозначаются физическим USB.",
+  "breaking": false
+}
