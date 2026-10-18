@@ -10,7 +10,7 @@
     "game/src", "game/tests", "game/project.godot", "game/export_presets.cfg",
     "tools", "scripts", "skills/game-production", ".gameprod/project.json",
     ".github/workflows", "package.json", ".nvmrc", "changes", ".prettierrc.json",
-    "package-lock.json", ".gameprod/research.json", ".gameprod/requirements.json", "game/audio",
+    "package-lock.json", ".gameprod/toolchain.json", ".gameprod/research.json", ".gameprod/requirements.json", "game/audio",
     ".gameprod/workplan.json", ".gameprod/studies", ".gameprod/play.json", ".gameprod/ideas", ".gameprod/collaboration.json"
   ],
   "generatedSuffixes": [".gd.uid", ".import"],

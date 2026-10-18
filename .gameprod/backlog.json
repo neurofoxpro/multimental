@@ -904,14 +904,22 @@
   },
   {
     "id": "UX-11",
-    "status": "pending",
+    "status": "done",
     "action": "Тактическое управление: разделить выбор, осмотр и подтверждённую атаку; сделать карты читаемыми",
     "dependsOn": [
       "UX-07"
     ],
     "manual": false,
     "generatedFrom": ".gameprod/workplan.json",
-    "evidence": [],
+    "evidence": [
+      "docs/production/INTERACTION_RESEARCH.ru.md",
+      "docs/production/UX11_STALE_CONFIRMATION.ru.md",
+      "docs/production/UX11_READABILITY_STATES.ru.md",
+      "docs/production/evidence/ux11-stale-confirmation-20261002.json",
+      "docs/production/evidence/ux11-readable-states-20261002.json",
+      "docs/media/gallery/current.json",
+      "docs/production/evidence/ux11-completed-readable-20261002.json"
+    ],
     "nextCommand": "npm run game -- task UX-11"
   },
   {
