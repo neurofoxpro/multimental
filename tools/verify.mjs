@@ -25,6 +25,7 @@ for (const dir of ['scripts', 'tools', 'skills/game-production/scripts'])
   for (const f of fs.readdirSync(dir))
     if (f.endsWith('.mjs')) run(process.execPath, ['--check', path.join(dir, f)]);
 run(process.execPath, ['tools/security-lint.mjs']);
+run(process.execPath, ['--test', 'tools/android-version-code.test.mjs']);
 run(process.execPath, ['tools/offline-toolchain.mjs', 'policy'], ['OFFLINE_TOOLCHAIN_POLICY_PASS']);
 run(process.execPath, ['--test', 'tools/offline-toolchain.test.mjs']);
 run(process.execPath, ['tools/review.mjs'], ['AUTOMATED_REVIEW_PASS']);
