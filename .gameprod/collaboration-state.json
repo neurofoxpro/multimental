@@ -1,35 +1,9 @@
 {
   "schemaVersion": 1,
   "repository": "neurofoxpro/multimental",
-  "revision": 421,
-  "claims": {
-    "8d273a2b-cff0-484b-a416-ac4d7e6da1ee": {
-      "token": "8d273a2b-cff0-484b-a416-ac4d7e6da1ee",
-      "task": "AUTO-08",
-      "owner": "mm18-auto08-offline-a3k7",
-      "base": "4e3ea606f49ee3ad57426228e3f762ed5a5bbe43",
-      "resources": [
-        "area:automation",
-        "task:AUTO-08"
-      ],
-      "fence": 414,
-      "updatedAt": 1792287669054,
-      "expiresAt": 1792289469054
-    }
-  },
+  "revision": 422,
+  "claims": {},
   "events": [
-    {
-      "id": "96c1b119-351a-47a2-80ee-9210ceadc353",
-      "hash": "2fd47c8ad10d85fd404d6e186b1828a413b688b679652726bf89e2332ad62ed7",
-      "revision": 166,
-      "result": {
-        "status": "released",
-        "token": "e8297e5f-d5d8-4a8d-96e0-8297e669ebb4",
-        "task": "QA-02",
-        "owner": "all-phone-tests-20260926-2013",
-        "fence": 165
-      }
-    },
     {
       "id": "9f41a582-7f80-4881-9661-bec82b952d0d",
       "hash": "04fed8d4cc4ada2c89bd7fd71e986269430c0f35dfc1e293edea29be26f68dc2",
@@ -4650,6 +4624,18 @@
         "proofDigest": "9d3863888c536a36980d5b035a1531de8b045a012d75449e60a2140498d523d6",
         "head": "4c9a16bd80f3bc7adecddff9cf2e3a9a1afaa5bc",
         "pr": 172
+      }
+    },
+    {
+      "id": "754d7be1-4545-4ed7-b33e-2abde446b188",
+      "hash": "79c2209236219daceadfb0720e4e11315d626052b53802db13d39f7532062c86",
+      "revision": 422,
+      "result": {
+        "status": "released",
+        "token": "8d273a2b-cff0-484b-a416-ac4d7e6da1ee",
+        "task": "AUTO-08",
+        "owner": "mm18-auto08-offline-a3k7",
+        "fence": 414
       }
     }
   ]
