@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "neurofoxpro/multimental",
-  "revision": 451,
+  "revision": 452,
   "claims": {
     "573a9d36-4018-4aff-be8a-d39dc645f280": {
       "token": "573a9d36-4018-4aff-be8a-d39dc645f280",
@@ -15,28 +15,22 @@
       "fence": 451,
       "updatedAt": 1792336144865,
       "expiresAt": 1792337944865
+    },
+    "87965ebd-5e2f-4847-9200-8ab2f6587f97": {
+      "token": "87965ebd-5e2f-4847-9200-8ab2f6587f97",
+      "task": "BALANCE-01",
+      "owner": "mm19-balance-analysis-v2k8",
+      "base": "5ab3619783dbe41d1e4ff8a8bdbdc5328217a879",
+      "resources": [
+        "area:game-core",
+        "task:BALANCE-01"
+      ],
+      "fence": 452,
+      "updatedAt": 1792361861601,
+      "expiresAt": 1792363661601
     }
   },
   "events": [
-    {
-      "id": "7e4adc28-6251-4b7e-88ac-6ebd650b66fb",
-      "hash": "39eada66c5a31b8cccbe248ec3484148e496721813f747ebf38eba3d01266f0d",
-      "revision": 196,
-      "result": {
-        "status": "renewed",
-        "token": "3605c72c-121c-4458-ae23-343cb7678622",
-        "task": "AUTO-07",
-        "owner": "lab-auto-20260926-a91e",
-        "base": "135b34d130c9ba1e70535ceb0c98d8a279feb42c",
-        "resources": [
-          "area:automation",
-          "task:AUTO-07"
-        ],
-        "fence": 150,
-        "updatedAt": 1790451585637,
-        "expiresAt": 1790453385637
-      }
-    },
     {
       "id": "cadca433-ab23-4f34-b10e-b8c80b5ab2ac",
       "hash": "c78c0449f865001faaa864584fba6ae0e2da92c46d8e932f3f9bca73ed3987ce",
@@ -4626,6 +4620,25 @@
         "fence": 451,
         "updatedAt": 1792336144865,
         "expiresAt": 1792337944865
+      }
+    },
+    {
+      "id": "87965ebd-5e2f-4847-9200-8ab2f6587f97",
+      "hash": "c4c69d5e836052860a1f15ccbb346664a94e28e12b7c2205cf764493639b7814",
+      "revision": 452,
+      "result": {
+        "status": "claimed",
+        "token": "87965ebd-5e2f-4847-9200-8ab2f6587f97",
+        "task": "BALANCE-01",
+        "owner": "mm19-balance-analysis-v2k8",
+        "base": "5ab3619783dbe41d1e4ff8a8bdbdc5328217a879",
+        "resources": [
+          "area:game-core",
+          "task:BALANCE-01"
+        ],
+        "fence": 452,
+        "updatedAt": 1792361861601,
+        "expiresAt": 1792363661601
       }
     }
   ]
