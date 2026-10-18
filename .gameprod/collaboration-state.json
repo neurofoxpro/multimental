@@ -1,28 +1,23 @@
 {
   "schemaVersion": 1,
   "repository": "neurofoxpro/multimental",
-  "revision": 450,
-  "claims": {},
+  "revision": 451,
+  "claims": {
+    "573a9d36-4018-4aff-be8a-d39dc645f280": {
+      "token": "573a9d36-4018-4aff-be8a-d39dc645f280",
+      "task": "UX-08",
+      "owner": "mm18-ux08-route-1829",
+      "base": "5ab3619783dbe41d1e4ff8a8bdbdc5328217a879",
+      "resources": [
+        "area:game-ui",
+        "task:UX-08"
+      ],
+      "fence": 451,
+      "updatedAt": 1792336144865,
+      "expiresAt": 1792337944865
+    }
+  },
   "events": [
-    {
-      "id": "ca3dc5f9-b306-4159-821a-ff9cc661b7f1",
-      "hash": "06f3cdac3effa2aff938752690a4453e3b1233a1b7822bb8976952b6e6cf935e",
-      "revision": 195,
-      "result": {
-        "status": "renewed",
-        "token": "3605c72c-121c-4458-ae23-343cb7678622",
-        "task": "AUTO-07",
-        "owner": "lab-auto-20260926-a91e",
-        "base": "135b34d130c9ba1e70535ceb0c98d8a279feb42c",
-        "resources": [
-          "area:automation",
-          "task:AUTO-07"
-        ],
-        "fence": 150,
-        "updatedAt": 1790451565866,
-        "expiresAt": 1790453365866
-      }
-    },
     {
       "id": "7e4adc28-6251-4b7e-88ac-6ebd650b66fb",
       "hash": "39eada66c5a31b8cccbe248ec3484148e496721813f747ebf38eba3d01266f0d",
@@ -4612,6 +4607,25 @@
         "task": "UX-13",
         "owner": "mm18-ux13-provenance-1829",
         "fence": 443
+      }
+    },
+    {
+      "id": "573a9d36-4018-4aff-be8a-d39dc645f280",
+      "hash": "8b0aea35cc45946c0fd9c7a7914b39e3ec1a3fe514e0557ac362be86bfca3eea",
+      "revision": 451,
+      "result": {
+        "status": "claimed",
+        "token": "573a9d36-4018-4aff-be8a-d39dc645f280",
+        "task": "UX-08",
+        "owner": "mm18-ux08-route-1829",
+        "base": "5ab3619783dbe41d1e4ff8a8bdbdc5328217a879",
+        "resources": [
+          "area:game-ui",
+          "task:UX-08"
+        ],
+        "fence": 451,
+        "updatedAt": 1792336144865,
+        "expiresAt": 1792337944865
       }
     }
   ]
