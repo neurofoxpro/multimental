@@ -1,0 +1,8 @@
+{
+  "id": "auto08-android-version-guard-q8m3",
+  "version": "0.14.3",
+  "kind": "fixed",
+  "scope": "automation",
+  "text": "Общая формула Android versionCode для CI, строгая проверка билда и защита от тихого пропуска версии в Godot export presets с независимыми регрессионными тестами.",
+  "breaking": false
+}
