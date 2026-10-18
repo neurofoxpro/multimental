@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "neurofoxpro/multimental",
-  "revision": 430,
+  "revision": 431,
   "claims": {
     "a2bd8c9e-2390-4f23-96c7-af3c5a535ac5": {
       "token": "a2bd8c9e-2390-4f23-96c7-af3c5a535ac5",
@@ -15,41 +15,9 @@
       "fence": 423,
       "updatedAt": 1792289329424,
       "expiresAt": 1792291129424
-    },
-    "546d9174-386a-49fd-b6e5-017364ffbf34": {
-      "token": "546d9174-386a-49fd-b6e5-017364ffbf34",
-      "task": "UX-13",
-      "owner": "mm18-ux13-assets-p4d8",
-      "base": "77e9a859c0558dbc1c8df36dde3a182b97ef8c2e",
-      "resources": [
-        "area:automation",
-        "task:UX-13"
-      ],
-      "fence": 430,
-      "updatedAt": 1792312067047,
-      "expiresAt": 1792313867047
     }
   },
   "events": [
-    {
-      "id": "bfacf4d5-1650-4b09-acaa-b8e37b36a30c",
-      "hash": "5943039ae33ec77aa86edd894beba9cdafb54f3c11fc97eef7c8bd001620bacc",
-      "revision": 175,
-      "result": {
-        "status": "renewed",
-        "token": "9f41a582-7f80-4881-9661-bec82b952d0d",
-        "task": "QA-02",
-        "owner": "all-phone-tests-20260926-2020",
-        "base": "a65cff7e862753283826f11527033e72b53f4539",
-        "resources": [
-          "area:devices",
-          "task:QA-02"
-        ],
-        "fence": 167,
-        "updatedAt": 1790444821904,
-        "expiresAt": 1790446621904
-      }
-    },
     {
       "id": "5c573231-59c4-4fd0-b20f-80d3cfd6b489",
       "hash": "92ba8ff729ce556a902101365f9304463dab8d8e27a70a3969285d3c557ef8df",
@@ -4663,6 +4631,18 @@
         "fence": 430,
         "updatedAt": 1792312067047,
         "expiresAt": 1792313867047
+      }
+    },
+    {
+      "id": "17b8b5f7-b286-439a-936f-5b2aa1f2a6fc",
+      "hash": "ff6542068ddb2afafd694185db137126d2e0177f413f91303afb75b40a92aa3d",
+      "revision": 431,
+      "result": {
+        "status": "released",
+        "token": "546d9174-386a-49fd-b6e5-017364ffbf34",
+        "task": "UX-13",
+        "owner": "mm18-ux13-assets-p4d8",
+        "fence": 430
       }
     }
   ]
