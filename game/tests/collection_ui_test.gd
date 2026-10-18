@@ -64,11 +64,35 @@ func run_test() -> void:
     check(not editor.existing and editor.draft_cards.is_empty(), "new deck is a local draft")
     editor.name_input.text = "Молния / Lightning"
     editor.name_input.text_changed.emit(editor.name_input.text)
+    var stable_row: HBoxContainer = editor.rows.get_node("Card_c015")
+    var stable_add: Button = stable_row.get_node("Add_c015")
+    var stable_remove: Button = stable_row.get_node("Remove_c015")
+    var stable_details: Button = stable_row.get_node("Details_c015")
+    check(stable_row.get_child_count() == 3, "compact card row uses one inspect target and distinct mutation buttons")
+    stable_add.grab_focus()
+    await process_frame
+    await process_frame
+    var available_scroll: int = int(editor.scroll.get_v_scroll_bar().max_value - editor.scroll.get_v_scroll_bar().page)
+    check(available_scroll > 0, "catalog has a real scroll range on portrait screen")
+    editor.scroll.scroll_vertical = mini(240, available_scroll)
+    await process_frame
+    var scroll_before: int = editor.scroll.scroll_vertical
+    check(scroll_before > 0, "explicit non-zero scroll is established before mutation")
     editor.change_card("c015", 1)
+    await process_frame
+    check(editor.rows.get_node("Card_c015") == stable_row and stable_add.has_focus(), "adding a copy preserves exact row and keyboard focus")
+    check(editor.scroll.scroll_vertical == scroll_before, "adding a copy does not reset list scroll")
+    check(stable_details.text.contains("в колоде 1"), "the visible count updates without rebuilding the row")
     editor.change_card("c015", 1)
     editor.change_card("c015", 1)
     check(editor.draft_cards.size() == 2, "third copy refused by UI")
+    stable_remove.grab_focus()
+    await process_frame
+    scroll_before = editor.scroll.scroll_vertical
     editor.change_card("c015", -1)
+    await process_frame
+    check(editor.rows.get_node("Card_c015") == stable_row and stable_remove.has_focus(), "removing a copy preserves exact row and keyboard focus")
+    check(editor.scroll.scroll_vertical == scroll_before, "removing a copy preserves catalog scroll")
     for id in range(16, 30):
         editor.change_card("c%03d" % id, 1)
     check(editor.draft_cards.size() == 15 and editor.choose_button.disabled, "complete but unsaved deck cannot be selected")
