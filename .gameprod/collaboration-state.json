@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "neurofoxpro/multimental",
-  "revision": 466,
+  "revision": 467,
   "claims": {
     "573a9d36-4018-4aff-be8a-d39dc645f280": {
       "token": "573a9d36-4018-4aff-be8a-d39dc645f280",
@@ -41,28 +41,22 @@
       "fence": 457,
       "updatedAt": 1794875756687,
       "expiresAt": 1794877556687
+    },
+    "146c9bb1-134a-442e-98a2-aab906311fdb": {
+      "token": "146c9bb1-134a-442e-98a2-aab906311fdb",
+      "task": "NET-06",
+      "owner": "mm11-net06-edge-20261118",
+      "base": "976246f588f9bef13c48e1de00126b0719784756",
+      "resources": [
+        "area:network",
+        "task:NET-06"
+      ],
+      "fence": 467,
+      "updatedAt": 1794959419051,
+      "expiresAt": 1794961219051
     }
   },
   "events": [
-    {
-      "id": "9269c143-1842-46b1-bd2d-b06f5f8f51ce",
-      "hash": "87dac7b3d30f4382778325105bec5f80b5e4fbbfebf45eea344121d73126381b",
-      "revision": 211,
-      "result": {
-        "status": "renewed",
-        "token": "3605c72c-121c-4458-ae23-343cb7678622",
-        "task": "AUTO-07",
-        "owner": "lab-auto-20260926-a91e",
-        "base": "135b34d130c9ba1e70535ceb0c98d8a279feb42c",
-        "resources": [
-          "area:automation",
-          "task:AUTO-07"
-        ],
-        "fence": 150,
-        "updatedAt": 1790507877487,
-        "expiresAt": 1790509677487
-      }
-    },
     {
       "id": "88e58e7b-b2f0-4117-aa5c-ee36040a7902",
       "hash": "e5e17a0d2c2d9b2ebc256a146ef58b67733fb6891ee17f310ccc9f6d7a44a855",
@@ -4624,6 +4618,25 @@
         "task": "QA-02",
         "owner": "mm7-huawei-20261118-p9n3",
         "fence": 465
+      }
+    },
+    {
+      "id": "146c9bb1-134a-442e-98a2-aab906311fdb",
+      "hash": "67d90dffd3928db8c695eb8eb24d642b1e3aba2df69c96b0fd971d3846074d82",
+      "revision": 467,
+      "result": {
+        "status": "claimed",
+        "token": "146c9bb1-134a-442e-98a2-aab906311fdb",
+        "task": "NET-06",
+        "owner": "mm11-net06-edge-20261118",
+        "base": "976246f588f9bef13c48e1de00126b0719784756",
+        "resources": [
+          "area:network",
+          "task:NET-06"
+        ],
+        "fence": 467,
+        "updatedAt": 1794959419051,
+        "expiresAt": 1794961219051
       }
     }
   ]
