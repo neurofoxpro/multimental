@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "neurofoxpro/multimental",
-  "revision": 465,
+  "revision": 466,
   "claims": {
     "573a9d36-4018-4aff-be8a-d39dc645f280": {
       "token": "573a9d36-4018-4aff-be8a-d39dc645f280",
@@ -41,41 +41,9 @@
       "fence": 457,
       "updatedAt": 1794875756687,
       "expiresAt": 1794877556687
-    },
-    "9a4df665-ff15-4b22-a401-dc478cc04ff5": {
-      "token": "9a4df665-ff15-4b22-a401-dc478cc04ff5",
-      "task": "QA-02",
-      "owner": "mm7-huawei-20261118-p9n3",
-      "base": "976246f588f9bef13c48e1de00126b0719784756",
-      "resources": [
-        "area:devices",
-        "task:QA-02"
-      ],
-      "fence": 465,
-      "updatedAt": 1794957420806,
-      "expiresAt": 1794959220806
     }
   },
   "events": [
-    {
-      "id": "a6620ddf-bc75-46ba-a4b5-4ad32b2fd30c",
-      "hash": "3be698dbbd74c198121de8dc22216fae8d048a6505e92371444dc9505eff5a92",
-      "revision": 210,
-      "result": {
-        "status": "renewed",
-        "token": "3605c72c-121c-4458-ae23-343cb7678622",
-        "task": "AUTO-07",
-        "owner": "lab-auto-20260926-a91e",
-        "base": "135b34d130c9ba1e70535ceb0c98d8a279feb42c",
-        "resources": [
-          "area:automation",
-          "task:AUTO-07"
-        ],
-        "fence": 150,
-        "updatedAt": 1790507734495,
-        "expiresAt": 1790509534495
-      }
-    },
     {
       "id": "9269c143-1842-46b1-bd2d-b06f5f8f51ce",
       "hash": "87dac7b3d30f4382778325105bec5f80b5e4fbbfebf45eea344121d73126381b",
@@ -4644,6 +4612,18 @@
         "fence": 465,
         "updatedAt": 1794957420806,
         "expiresAt": 1794959220806
+      }
+    },
+    {
+      "id": "3578d0fc-97f9-4a7f-874b-0abdb4f56cd1",
+      "hash": "b8ca33036dcc6af7a7d9ddf8c503ed4c587a13689b20eb4e0f53cc534cfe697f",
+      "revision": 466,
+      "result": {
+        "status": "released",
+        "token": "9a4df665-ff15-4b22-a401-dc478cc04ff5",
+        "task": "QA-02",
+        "owner": "mm7-huawei-20261118-p9n3",
+        "fence": 465
       }
     }
   ]
