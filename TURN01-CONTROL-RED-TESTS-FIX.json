@@ -1,0 +1,23 @@
+{
+  "base": "5ab3619783dbe41d1e4ff8a8bdbdc5328217a879",
+  "files": [
+    {
+      "path": "game/tests/battle_interaction_test.gd",
+      "expectedCurrentSha256": "0d1f34d11af492b0b023feba8339709e8c2768af8b8b872f06825100d5f887aa",
+      "edits": [
+        {
+          "from": "        check(Intent.cell({},0,-1,-1,0).kind == \"none\", \"no view has no action\")",
+          "to": "        check(Intent.cell({},0,-1,-1,0).kind == \"none\", \"no view has no action\")\n        check(Intent.cell(view,2,-1,0,0).kind == \"attack\", \"selected ally + highlighted enemy becomes one explicit attack intent\")\n        check(Intent.cell(view,2,-1,0,0,true).kind == \"inspect\", \"pending network command blocks tap-to-attack\")"
+        },
+        {
+          "from": "        ui.on_cell(0)\n        check(ui.selected_unit == 0 and ui.game.digest() == before, \"choosing own figure doesn't attack\")",
+          "to": "        await click_at(ui.board_buttons[0].get_global_rect().get_center())\n        check(ui.selected_unit == 0 and ui.game.digest() == before, \"real tap selects own unit without attacking\")\n        check(ui.message.text.find(\"Коснитесь\") >= 0 if language == \"ru\" else ui.message.text.find(\"Tap\") >= 0, \"UI explains tap-to-attack in both locales\")\n        await click_at(ui.board_buttons[2].get_global_rect().get_center())\n        check(ui.friendly_confirm.visible and ui.game.digest() == before, \"real target tap shows ally safety confirmation before attacking\")\n        ui.cancel_friendly_attack()\n        if ui.battle_inspector.visible:\n            ui.battle_inspector.hide()\n        fixture(ui)\n        await settle()\n        ui.on_cell(0)\n        check(ui.selected_unit == 0 and ui.game.digest() == before, \"choosing own figure doesn't attack\")"
+        },
+        {
+          "from": "        check(ui.game.commands.size() == 1, \"second activation has no stale selected source\")\n        fixture(ui)",
+          "to": "        check(ui.game.commands.size() == 1, \"second activation has no stale selected source\")\n        fixture(ui)\n        ui.game.state.board[1] = null\n        ui.refresh()\n        ui.on_cell(0)\n        ui.on_cell(2)\n        check(ui.game.commands.size() == 1 and int(ui.game.state.board[2].health) == 2 and not ui.friendly_confirm.visible, \"tap on sole enemy dispatches exactly one legal sweep without unnecessary warning\")\n        fixture(ui)"
+        }
+      ]
+    }
+  ]
+}

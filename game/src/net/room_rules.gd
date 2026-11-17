@@ -3,9 +3,10 @@ extends RefCounted
 ## Pure host authority. Time and randomness are injected; no nodes or transport.
 const Core = preload("res://src/match_core.gd")
 const Deck = preload("res://src/deck_rules.gd")
+const Clock = preload("res://src/turn_clock.gd")
 const VERSION: int = 3
 const RULES: String = Core.RULES_ID
-const TURN_MS: int = 30000
+const TURN_MS: int = Clock.BASE_MS
 const MATCH_MS: int = 900000
 const RECONNECT_MS: int = 60000
 var game = Core.new()
@@ -134,8 +135,8 @@ func tick(now: int) -> void:
         if int(game.state.active) == 1 and not guest_connected:
             break
         game.timeout(int(game.state.active))
-        turn_deadline += TURN_MS
-        paused_remaining = TURN_MS
+        turn_deadline += Clock.millis_for_turn(int(game.state.turn))
+        paused_remaining = Clock.millis_for_turn(int(game.state.turn))
         revision += 1
     if game.state.winner != -1:
         phase = "finished"
@@ -173,8 +174,8 @@ func act(player: int, sequence: Variant, value: Variant, now: int) -> Dictionary
     if receipts[player].size() > 64:
         receipts[player].erase(seq - 64)
     if response.ok and int(game.state.turn) != previous_turn:
-        turn_deadline = last_now + TURN_MS
-        paused_remaining = TURN_MS
+        turn_deadline = last_now + Clock.millis_for_turn(int(game.state.turn))
+        paused_remaining = Clock.millis_for_turn(int(game.state.turn))
     if game.state.winner != -1:
         phase = "finished"
     return response

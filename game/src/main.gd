@@ -1,6 +1,7 @@
 extends Control
 const Core = preload("res://src/match_core.gd")
 const UIStyle = preload("res://src/ui_theme.gd")
+const Clock = preload("res://src/turn_clock.gd")
 var leave_confirm: ConfirmationDialog
 var battle_inspector: AcceptDialog
 var invitation_drafts: Dictionary = {"lan": "", "bluetooth": ""}
@@ -276,7 +277,7 @@ func start_match(use_starter: bool = false) -> void:
     selected_direction = 0
     timed_turn = int(game.state.turn)
     match_end = Time.get_unix_time_from_system() + 900.0
-    deadline = Time.get_unix_time_from_system() + 30.0
+    deadline = Time.get_unix_time_from_system() + float(Clock.millis_for_turn(timed_turn)) / 1000.0
     bot_due = Time.get_unix_time_from_system() + 0.65
     battle = true
     selected_hand = -1
@@ -322,6 +323,8 @@ func on_cell(index: int) -> void:
     match intent.kind:
         "play":
             act(intent.command)
+        "attack":
+            request_sweep(intent.command)
         "select":
             selected_unit = int(intent.index)
             selected_hand = -1
@@ -421,7 +424,7 @@ func after_action() -> void:
         return
     if int(game.state.turn) != timed_turn:
         timed_turn = int(game.state.turn)
-        deadline = Time.get_unix_time_from_system() + 30.0
+        deadline = Time.get_unix_time_from_system() + float(Clock.millis_for_turn(timed_turn)) / 1000.0
     bot_due = Time.get_unix_time_from_system() + 0.65
     refresh()
     _save_finished_match()
@@ -447,7 +450,7 @@ func _save_finished_match() -> void:
 func _process(_delta: float) -> void:
     if online:
         if battle and is_instance_valid(timer_text) and not lan.current_view.is_empty():
-            timer_text.text = t("Ход %d · осталось %d с", "Turn %d · %d s remaining") % [lan.current_view.turn, lan.remaining_seconds()]
+            timer_text.text = t("Ход %d · %s", "Turn %d · %s") % [lan.current_view.turn, Clock.text_for_seconds(lan.remaining_seconds())]
         return
     if not battle or game.state.winner != -1:
         return
@@ -457,7 +460,7 @@ func _process(_delta: float) -> void:
         after_action()
         return
     if tutorial:
-        deadline = now + 30.0
+        deadline = now + float(Clock.millis_for_turn(int(game.state.turn))) / 1000.0
     # Reconcile missed deadlines after suspension without relying on rendered frames.
     for i in range(6):
         if now < deadline or game.state.winner != -1:
@@ -469,7 +472,7 @@ func _process(_delta: float) -> void:
                 game.apply(1, game.choose_ai())
         else:
             game.timeout(0)
-        deadline += 30.0
+        deadline += float(Clock.millis_for_turn(int(game.state.turn))) / 1000.0
         timed_turn = int(game.state.turn)
         bot_due = now + 0.65
         selected_hand = -1
@@ -482,7 +485,7 @@ func _process(_delta: float) -> void:
     var second: int = maxi(0, int(ceil(deadline - now)))
     if second != last_second:
         last_second = second
-        timer_text.text = t("Ход %d · осталось %d с", "Turn %d · %d s remaining") % [game.state.turn, second]
+        timer_text.text = t("Ход %d · %s", "Turn %d · %s") % [game.state.turn, Clock.text_for_seconds(second)]
 
 func _view() -> Dictionary:
     return lan.current_view if online else MatchView.for_player(game, 0)

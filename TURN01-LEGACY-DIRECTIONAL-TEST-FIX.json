@@ -1,0 +1,15 @@
+{
+  "base": "5ab3619783dbe41d1e4ff8a8bdbdc5328217a879",
+  "files": [
+    {
+      "path": "game/tests/directional_ui_test.gd",
+      "expectedCurrentSha256": "f57864a9e3917226b61154c45eab2d3e088a0cf3d1e6c90b3bc3b056b290691c",
+      "edits": [
+        {
+          "from": "    var damage_before: int = ui.damage_effects_total\n    ui.on_cell(0)\n    ui.on_cell(1)\n    check(ui.battle_inspector.visible and ui.game.state.board[1].health == 4, \"target tap inspects instead of attacking\")\n    ui.battle_inspector.hide()\n    ui.attack_selected()\n    check(ui.game.state.board[1].health == 3 and ui.game.state.active == 1, \"new unit attacks at user request\")",
+          "to": "    var damage_before: int = ui.damage_effects_total\n    ui.on_cell(1)\n    check(ui.battle_inspector.visible and ui.game.state.board[1].health == 4 and ui.game.state.active == 0, \"enemy tap without selected attacker only inspects\")\n    ui.battle_inspector.hide()\n    ui.on_cell(0)\n    ui.on_cell(1)\n    check(not ui.battle_inspector.visible and ui.game.state.board[1].health == 3 and ui.game.state.active == 1, \"selected attacker + enemy tap executes one legal sweep\")\n    ui.attack_selected()\n    check(ui.game.state.board[1].health == 3 and ui.game.state.active == 1, \"a stale repeat never attacks twice\")"
+        }
+      ]
+    }
+  ]
+}

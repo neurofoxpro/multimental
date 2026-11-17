@@ -3,6 +3,7 @@ extends RefCounted
 const Style = preload("res://src/ui_theme.gd")
 const Intent = preload("res://src/battle_interaction.gd")
 const Feedback = preload("res://src/combat_feedback.gd")
+const Clock = preload("res://src/turn_clock.gd")
 static func build(ui) -> void:
     ui.clear_screen()
     ui.root.add_theme_constant_override("separation",8)
@@ -16,6 +17,7 @@ static func build(ui) -> void:
     ui.timer_text.name = "TurnTimer"
     ui.timer_text.size_flags_horizontal = Control.SIZE_EXPAND_FILL
     ui.timer_text.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+    ui.timer_text.tooltip_text = ui.t("Первый личный ход 1:30, каждый следующий +0:05. Общий лимит партии — 15 минут.", "First personal turn 1:30, each following one +0:05. Match cap is 15 minutes.")
     heading.add_child(ui.timer_text)
     ui.root.add_child(heading)
     ui.info = ui.label("",22)
@@ -143,7 +145,7 @@ static func render(ui, view: Dictionary) -> void:
     ui.info.text = ui.t("ВЫ %d/5     ·     %s %d/5", "YOU %d/5     ·     %s %d/5") % [view.scores[0],opponent,view.scores[1]]
     ui.info.tooltip_text = ui.t("Побеждает тот, кто займёт пять клеток", "Occupy five cells to win")
     var remaining: int = ui.lan.remaining_seconds() if ui.online else maxi(0,int(ceil(ui.deadline-Time.get_unix_time_from_system())))
-    ui.timer_text.text = ui.t("Ход %d · %d с", "Turn %d · %d s") % [view.turn,remaining]
+    ui.timer_text.text = ui.t("Ход %d · %s", "Turn %d · %s") % [view.turn,Clock.text_for_seconds(remaining)]
     var resources: Label = ui.find_child("YourBattleResources",true,false)
     resources.text = "◉ %d  ·  " % view.coins + ui.t("В колоде %d", "Deck %d") % view.deck_count
     resources.tooltip_text = ui.t("Боевые монеты · доход поля +%d · карт в руке соперника %d", "Battle coins · board income +%d · opponent hand %d") % [int(view.get("income_bonus",0)),int(view.opponent_hand_count)]
@@ -156,7 +158,7 @@ static func render(ui, view: Dictionary) -> void:
     ui.sweep_button.text = ui.t("АТАКОВАТЬ · ◉ %d", "ATTACK · ◉ %d") % preview.cost
     ui.sweep_button.tooltip_text = ui.t("Удар по всем показанным направлениям. Союзников: %d.", "Attack along every shown direction. Allies: %d.") % preview.allies
     ui.aim_label.visible = not selected_unit
-    ui.aim_label.text = ui.t("Выбор не расходует ход", "Selection does not spend your turn")
+    ui.aim_label.text = ui.t("Осмотр не расходует ход", "Inspection does not spend your turn") if int(view.active) != 0 else ui.t("Карта/фигура → клетка/цель", "Card/unit → tile/target")
     if selected_card:
         ui.aim_label.text = Feedback.pattern(ui.game.card(int(view.hand[ui.selected_hand])),ui.selected_direction)
     var cancel: Button = ui.find_child("CancelSelection",true,false)
@@ -193,12 +195,13 @@ static func render(ui, view: Dictionary) -> void:
         var card: Dictionary = ui.game.card(int(view.hand[ui.selected_hand]))
         ui.message.text = str(card[ui.language]) + ui.t(" · ◉ %d\nПоверните при необходимости и коснитесь клетки.", " · ◉ %d\nRotate if needed, then tap an available cell.") % card.cost
     elif selected_unit:
-        var card: Dictionary = ui.game.card(int(view.board[ui.selected_unit].id))
-        ui.message.text = str(card[ui.language]) + " · " + (ui.t("нет доступной атаки", "no available attack") if preview.command.is_empty() else ui.t("врагов %d · союзников %d", "enemies %d · allies %d") % [preview.enemies,preview.allies])
-        ui.message.text += ui.t("\nСмена фигуры не атакует. Подтвердите кнопкой.", "\nChanging selection does not attack. Use the button.")
+        if preview.command.is_empty():
+            ui.message.text = ui.t("Нет доступной атаки.\nВыберите другую фигуру или завершите ход.", "No legal attack.\nSelect another unit or end the turn.")
+        else:
+            ui.message.text = ui.t("Враги: %d · союзники: %d\nКоснитесь красной цели или АТАКОВАТЬ", "Enemies: %d · allies: %d\nTap a red target or ATTACK") % [preview.enemies,preview.allies]
     elif int(view.placed_cell) >= 0:
         ui.message.text = ui.t("Карта размещена. Выберите юнита для атаки или закончите ход.", "Card deployed. Select a unit to attack, or end the turn.")
     else:
         ui.message.text = ui.t("Ваш ход: выберите карту для размещения или своего юнита.", "Your turn: select a card to deploy, or one of your units.")
     if ui.tutorial and is_instance_valid(ui.tutorial_hint):
-        ui.tutorial_hint.text = ui.t("Карта → клетка. Фигура → АТАКА. Описание — кнопкой на карте.", "Card → cell. Unit → ATTACK. Use the details button to inspect.")
+        ui.tutorial_hint.text = ui.t("Карта → клетка. Фигура → красная цель или АТАКОВАТЬ. Удар заденет всех.", "Card → cell. Unit → red target or ATTACK. Sweep affects all targets.")

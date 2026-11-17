@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
   "repository": "neurofoxpro/multimental",
-  "capturedAt": "2026-10-18T14:48:51.318Z",
-  "captureBaseCommit": "ae28a9f4de30aa824caca3c1d4810b13989c8c23",
+  "capturedAt": "2026-11-17T00:15:40.765Z",
+  "captureBaseCommit": "5ab3619783dbe41d1e4ff8a8bdbdc5328217a879",
   "captureWorktreeDirty": true,
   "sourceIdentity": "canonical-render-inputs-excluding-ci-build-stamp",
-  "inputKey": "51efb96b9d10055dfb139e10c0c72bdcd2881d0368134db48ffd48628ccb63fd",
+  "inputKey": "99296cbf0fb64a139c1d67d146129210b7d36cecfa04934e7b113d8eb17b7f18",
   "inputs": [
     {
       "path": "game/icon.svg",
@@ -29,7 +29,7 @@
     },
     {
       "path": "game/src/battle_interaction.gd",
-      "sha256": "60b05f9a2e346c4252e0af320f26aed6662baa752040d36f2337a8edab995ca1"
+      "sha256": "c01c6349dbc73df973146291a6d86ae5404ca071d8dbeeab1d495f0daebc03e1"
     },
     {
       "path": "game/src/battle_layout.gd",
@@ -37,11 +37,11 @@
     },
     {
       "path": "game/src/battle_screen.gd",
-      "sha256": "94ba78ecaeb30be7f694df9cdb299855d48ee376783624b11c404d10585d7d64"
+      "sha256": "e3fdb60c6f0a793bab09f089b396b25904ea94e265ac7f0e6d1f9bebf035463b"
     },
     {
       "path": "game/src/battle_tile.gd",
-      "sha256": "774815d0aa8f7b973264ac1e6e4072a2758d3cb90a258ae620b5791b6edc5f9e"
+      "sha256": "bf777a448610567fe53daa4215722292ab0ccd5bb8dee137cc8191cc537c405d"
     },
     {
       "path": "game/src/card_art_catalog.gd",
@@ -125,7 +125,7 @@
     },
     {
       "path": "game/src/main.gd",
-      "sha256": "3dadfbdd13935d62643083e17c6781f194d5b998589a55950838ccf842da3d18"
+      "sha256": "7206bbbf832aaea1046b6ac347ba9c87ef6ed93960f9db64bd62c6e9cabb9e9d"
     },
     {
       "path": "game/src/main.tscn",
@@ -185,7 +185,7 @@
     },
     {
       "path": "game/src/net/room_rules.gd",
-      "sha256": "8271bd2612ec36e8fd9ccbe27a5a1f8ca7f0c1cf0bd9a27c7a42000d410c2d29"
+      "sha256": "000aaf75ee7b40a4e77d84396ecf79c95d7371b28c67f6a526e8137050154786"
     },
     {
       "path": "game/src/net/room_view.gd",
@@ -256,6 +256,10 @@
       "sha256": "5c2346ddedc9f6e8d0e411d80208ec78f21278de2505be0427af2bea914a43f4"
     },
     {
+      "path": "game/src/turn_clock.gd",
+      "sha256": "bac26a89a98fc63542c2bc023c593f565d9b35bf21b71b1e38e31aeb33778024"
+    },
+    {
       "path": "game/src/ui_tap_geometry.gd",
       "sha256": "f756a296bb6c420d8d10fdc8506613f343a08000295877774e421adc5abb88db"
     },
@@ -265,11 +269,11 @@
     },
     {
       "path": "game/tests/gallery_capture.gd",
-      "sha256": "c6567346c2adfc15b34c37ecf9415c20b3f319f95a7af5f3222df1e646c20315"
+      "sha256": "3ec608008d1ac2a7ced6b9e489c0940accdbb7d481a2b933eb12f2b684f57104"
     },
     {
       "path": "game/tests/support/battle_gallery_fixture.gd",
-      "sha256": "f6c7fc7f940d426ff5d45ff6b49411f292d5ab1d3877b21e4ae86ac47da9a45b"
+      "sha256": "cda8b67130e847071f9bf8a12d9c64478b546268166eaffae777f39de0994eb5"
     },
     {
       "path": "skills/game-production/scripts/gallery-policy.mjs",
@@ -280,7 +284,7 @@
       "sha256": "b922608694546e34d5d5cf894bd376391476e5c1dcda84dbfe8375b1c972f9f3"
     }
   ],
-  "nonce": "63c946d0e9b55bce2ace9ef1ab35b173",
+  "nonce": "727c44ac466feb640c3b1113c617aa99",
   "capture": {
     "buildStamp": {
       "commit": "local",
@@ -336,8 +340,8 @@
         "interactiveStateVerified": false,
         "locale": "ru",
         "page": "battle",
-        "sampledColors": 196,
-        "sha256": "e4781b10ecb2fce67db8d66cc42a9a770a7274328de197eb7089114a81c7e8f7",
+        "sampledColors": 203,
+        "sha256": "b6a33e40211cdc9e38f5479232c7d8c956650c6aff24057f144909e57cbc48c5",
         "width": 720
       },
       {
@@ -424,8 +428,8 @@
         "interactiveStateVerified": false,
         "locale": "ru",
         "page": "battle",
-        "sampledColors": 188,
-        "sha256": "0d91d309c5377b0bdd809c0279ac64f8cfabdaa95a1e8b70c77d9cda02f3f72a",
+        "sampledColors": 187,
+        "sha256": "525cbfcdacad91bc88028bc3ad64495162fb00e824e9f01278e719d05e9e18b3",
         "width": 1280
       },
       {
@@ -435,8 +439,8 @@
         "interactiveStateVerified": true,
         "locale": "ru",
         "page": "battle-card",
-        "sampledColors": 190,
-        "sha256": "1c444d063f93ac4c30943277a0c589ce2819527390d443e5d86d64131fcb3b49",
+        "sampledColors": 193,
+        "sha256": "a2d589d2efd6441b4a383d419ff42029114b2659b9331b7a3eb6285b79a2438e",
         "width": 720
       },
       {
@@ -446,8 +450,8 @@
         "interactiveStateVerified": true,
         "locale": "ru",
         "page": "battle-card",
-        "sampledColors": 200,
-        "sha256": "964cdf4ec5e2028a8038ead572d3fa0000286a6355ba7a72879a50376ddecada",
+        "sampledColors": 201,
+        "sha256": "48868ee12dcffaca44bd70c739002c3480cb5f8c7b2e0a9481c9fd236096eaa4",
         "width": 1280
       },
       {
@@ -457,8 +461,8 @@
         "interactiveStateVerified": true,
         "locale": "ru",
         "page": "battle-card",
-        "sampledColors": 178,
-        "sha256": "2296072d4a6765a1eab38754acf6f012a243f14b3af7d94b5799fbf2837e8a78",
+        "sampledColors": 181,
+        "sha256": "8278f43459785363ca4b34bc4ea0bfeb1c13d73e4d614de2be83a81923851757",
         "width": 960
       },
       {
@@ -468,8 +472,8 @@
         "interactiveStateVerified": true,
         "locale": "ru",
         "page": "battle-unit",
-        "sampledColors": 210,
-        "sha256": "d5323cccdc7911d7619d1712cca62ff044df28c2c2f418586f3f485d19babc62",
+        "sampledColors": 213,
+        "sha256": "8fec4796d1e26501058a097b77e9c15205547615867b62ac29cafba770535a0f",
         "width": 720
       },
       {
@@ -480,7 +484,7 @@
         "locale": "ru",
         "page": "battle-unit",
         "sampledColors": 215,
-        "sha256": "ecf057c38806049a91ccd5041776ca6fbbb7db87a54c38c611ce28b79a579286",
+        "sha256": "f2332122346f644c50452b8c2680463a0d9aa7d668cd3b268f4b99858092ff6d",
         "width": 1280
       },
       {
@@ -491,7 +495,7 @@
         "locale": "ru",
         "page": "battle-unit",
         "sampledColors": 194,
-        "sha256": "db81d4f0d37fbcba3af2916d146a9b5031dad68673989296d2d59d44badf2ac6",
+        "sha256": "0c1b206f82fb176e6cd1926de2e7e26a7cd789852921cde1226d1705e31b1797",
         "width": 960
       },
       {
@@ -501,8 +505,8 @@
         "interactiveStateVerified": true,
         "locale": "ru",
         "page": "battle-allies",
-        "sampledColors": 252,
-        "sha256": "9b72dff704d401876a45d8c41f6027150def55fc1471955dd7aa58638539a5dc",
+        "sampledColors": 255,
+        "sha256": "15ded956f92edc458c229fae2e0294b85b99b496f3aead1853088ad6db5d4e5b",
         "width": 720
       },
       {
@@ -513,7 +517,7 @@
         "locale": "ru",
         "page": "battle-allies",
         "sampledColors": 208,
-        "sha256": "f9158c4caa74e1f8ffde7982f7ea103b6b7fcec6985eaecb8aa2375face3f9c5",
+        "sha256": "d6c6c07da8707c4d60245157196a8add82a84f14f5fc17c1cb8edd1eec1c94df",
         "width": 1280
       },
       {
@@ -523,8 +527,8 @@
         "interactiveStateVerified": true,
         "locale": "ru",
         "page": "battle-allies",
-        "sampledColors": 170,
-        "sha256": "cc35c7884f646f2be219db4aa09e955f880edc1e2fcd391f76062136726935be",
+        "sampledColors": 172,
+        "sha256": "66312bbca57fa2272eb759b861cfce9e36585f3cbfad563fe7224d667150bd4f",
         "width": 960
       },
       {
@@ -534,8 +538,8 @@
         "interactiveStateVerified": true,
         "locale": "ru",
         "page": "battle-opponent",
-        "sampledColors": 199,
-        "sha256": "cf7c44e9b0ded9c531ddf7ff04e7d0161248ddf290e362519ab4c2e0321e869a",
+        "sampledColors": 205,
+        "sha256": "d15392ef23c1fc895824c99687007b841a3988a2884d29a2392e4a81364580e9",
         "width": 720
       },
       {
@@ -545,8 +549,8 @@
         "interactiveStateVerified": true,
         "locale": "ru",
         "page": "battle-opponent",
-        "sampledColors": 189,
-        "sha256": "6008b29a02ef279744ce7c6b39bf9d5f93b9b57fc61bbf3f0f56802b044adeb5",
+        "sampledColors": 188,
+        "sha256": "38d743a35735e7b634c48303c3165232fbfd214869778bebbb085f3f84fd88e0",
         "width": 1280
       },
       {
@@ -556,8 +560,8 @@
         "interactiveStateVerified": true,
         "locale": "ru",
         "page": "battle-opponent",
-        "sampledColors": 176,
-        "sha256": "31025fdb063c3940ce81fb325f1cf0903a0cbb8e939e8bee2e3e05b44829ac03",
+        "sampledColors": 178,
+        "sha256": "fbdbeeeaba70a777fa7234849cba6439fc1cefa1bfd42c02f11e488d04ee9160",
         "width": 960
       },
       {
@@ -568,7 +572,7 @@
         "locale": "ru",
         "page": "battle-reconnecting",
         "sampledColors": 201,
-        "sha256": "d83c9a4a631a70da80765f0a0969cb73bf0e90a9e63f6b855243f7c738f7562c",
+        "sha256": "aae19889bfa785c6301f1c5d4cf9cfcc63f97c79e175815140543cdd8a3d9343",
         "width": 720
       },
       {
@@ -578,8 +582,8 @@
         "interactiveStateVerified": true,
         "locale": "ru",
         "page": "battle-reconnecting",
-        "sampledColors": 212,
-        "sha256": "3f5d1ec09e77728c2d56d6caec840bed8590a4ff0d15c57094597d796db1246c",
+        "sampledColors": 206,
+        "sha256": "9c782d8150557347dcfe93966dc30f2d38fec17fc19e0c9005ce763b33f98ac4",
         "width": 1280
       },
       {
@@ -589,8 +593,8 @@
         "interactiveStateVerified": true,
         "locale": "ru",
         "page": "battle-reconnecting",
-        "sampledColors": 197,
-        "sha256": "f84f7ace29a80f1f70d40f4f7b8087b8d8279f263f9ac64f494bdb8506a092ac",
+        "sampledColors": 192,
+        "sha256": "e6206e3f01a3dd4ff36d48b9363425ea5c1704f684bb5ac3a0787caff143f70f",
         "width": 960
       },
       {
@@ -600,8 +604,8 @@
         "interactiveStateVerified": true,
         "locale": "ru",
         "page": "battle-result",
-        "sampledColors": 221,
-        "sha256": "cd4093706f281537573285823792e84e6d096cfd2cb21fb0085e3cd91ed010d0",
+        "sampledColors": 219,
+        "sha256": "170231dc83e116680879be2116de98ea3c95068d055e286c57644ac4e79aa9f0",
         "width": 720
       },
       {
@@ -611,8 +615,8 @@
         "interactiveStateVerified": true,
         "locale": "ru",
         "page": "battle-result",
-        "sampledColors": 204,
-        "sha256": "4bc1c38ca183a0ed5c3d2c99cae3df49e9f075625c2e708348a6a8c3ce3f81bd",
+        "sampledColors": 208,
+        "sha256": "39462454926f5e1c4e53660e3d8e91732f7b4efd4d15b94930577aa0d05de4cf",
         "width": 1280
       },
       {
@@ -622,8 +626,8 @@
         "interactiveStateVerified": true,
         "locale": "ru",
         "page": "battle-result",
-        "sampledColors": 196,
-        "sha256": "7507d3f100eaa1c15b77ba683167231c2dd8d608b86fe270930fdaabed0fc6d0",
+        "sampledColors": 202,
+        "sha256": "dcf3f111c4c16ffb9993321b1ad4070fc9be2c6d4c133e294f7e2784b71cd8b5",
         "width": 960
       },
       {
@@ -666,8 +670,8 @@
         "interactiveStateVerified": false,
         "locale": "en",
         "page": "battle",
-        "sampledColors": 182,
-        "sha256": "696a555718188cbab8d46294b0e7caf1cc1884fc0cdfda092db877d72ce1af3a",
+        "sampledColors": 183,
+        "sha256": "4c9753c65a24550af5cf8766d59b3ea1f55cf3672efe3afbc1731b8c2f76fdb5",
         "width": 720
       },
       {
@@ -754,8 +758,8 @@
         "interactiveStateVerified": false,
         "locale": "en",
         "page": "battle",
-        "sampledColors": 179,
-        "sha256": "dba0a2ca3601d63b6f5f9458bb8ca63ba31befcbfb109478e30398361913126e",
+        "sampledColors": 183,
+        "sha256": "fddcd94591ffbd6d145c5910dfc203291fd1887a5c154b180cd91c08e6944bf6",
         "width": 1280
       },
       {
@@ -766,7 +770,7 @@
         "locale": "en",
         "page": "battle-card",
         "sampledColors": 167,
-        "sha256": "f1c60ccc5b3ae910a4937e736dedec07a0a5bfca3406dc9c07143a5f109a12b4",
+        "sha256": "cb73a10b96806b0d2cbc66e1b200144b7a3b103bda1589b7c860c6374e2c1eaa",
         "width": 720
       },
       {
@@ -777,7 +781,7 @@
         "locale": "en",
         "page": "battle-card",
         "sampledColors": 185,
-        "sha256": "53f0f62b2e451252e60059b5d50a0da4bedecdb7cdda58404eca63251595fc9e",
+        "sha256": "21a82ef77f3f8b1a7d5bfe92baac6b998ab7337b17b724ba3b99d90582764cad",
         "width": 1280
       },
       {
@@ -788,7 +792,7 @@
         "locale": "en",
         "page": "battle-card",
         "sampledColors": 173,
-        "sha256": "e3cc8edc1e9c582e7b2fe33bde86ee315c49311a20664310338d9655c7b05d58",
+        "sha256": "474ec3bbbb5304521d23cab23cf153e33a68a67361d79cc877518617e91b3736",
         "width": 960
       },
       {
@@ -798,8 +802,8 @@
         "interactiveStateVerified": true,
         "locale": "en",
         "page": "battle-unit",
-        "sampledColors": 182,
-        "sha256": "04464a7dbb65744092a95f667c8b7181977f4d81a8a388d5c4fbe8a34ebdd1c0",
+        "sampledColors": 177,
+        "sha256": "a2b4bd4d8fa8dc04c7aac17ff0467ae566e035ff5e1de6a848f6298c8a5a2237",
         "width": 720
       },
       {
@@ -809,8 +813,8 @@
         "interactiveStateVerified": true,
         "locale": "en",
         "page": "battle-unit",
-        "sampledColors": 188,
-        "sha256": "b7f2f8ab6d6f9b6efb87561dfd33841ab3d10efc0d82dbbc24eab4e0392e95d1",
+        "sampledColors": 178,
+        "sha256": "0843dd945e6cc4248054f78905881c30222ef8772d6fd2d8cc5ecd8678088044",
         "width": 1280
       },
       {
@@ -820,8 +824,8 @@
         "interactiveStateVerified": true,
         "locale": "en",
         "page": "battle-unit",
-        "sampledColors": 180,
-        "sha256": "87139effa9afbb2824268c968284323840969145aef73159940bdc97dabf95c6",
+        "sampledColors": 171,
+        "sha256": "98a9100fc4f67d85e6f2d7a9446fa2933fe87f27ca4e40125d5bd5703d2566fe",
         "width": 960
       },
       {
@@ -831,8 +835,8 @@
         "interactiveStateVerified": true,
         "locale": "en",
         "page": "battle-allies",
-        "sampledColors": 199,
-        "sha256": "ac12e5b43df3d5c153e568feec89afa782ab5f75355d9430ec18eedf0dbafe39",
+        "sampledColors": 194,
+        "sha256": "779d94bf99a528b92312d20774ad8fae684e0313724e4d8ca6c6b11832062dec",
         "width": 720
       },
       {
@@ -842,8 +846,8 @@
         "interactiveStateVerified": true,
         "locale": "en",
         "page": "battle-allies",
-        "sampledColors": 177,
-        "sha256": "b5fb2aa2860080f9e4fc10b59b2d09a06e135d9e22be714c70cc1c77d961f158",
+        "sampledColors": 167,
+        "sha256": "31c5a9c5f3edf46dd71b983b2db8dac7bb12480c989c2267a8c7c51b88a8b3a9",
         "width": 1280
       },
       {
@@ -853,8 +857,8 @@
         "interactiveStateVerified": true,
         "locale": "en",
         "page": "battle-allies",
-        "sampledColors": 158,
-        "sha256": "4f88723f1d0c519f4442f3fd6df75eef95d7e864304f62404eb6e7e571798a8b",
+        "sampledColors": 152,
+        "sha256": "f16fed69fabdc115cdac0e20ff3b996e359765788ac6a7419ab5f69f6ac1818e",
         "width": 960
       },
       {
@@ -864,8 +868,8 @@
         "interactiveStateVerified": true,
         "locale": "en",
         "page": "battle-opponent",
-        "sampledColors": 191,
-        "sha256": "623d6ad884364ed91944dbd454896b008d10e4fedf7714726b9ba098ddee3bc8",
+        "sampledColors": 192,
+        "sha256": "c1b82050cc736d419465d260195c3d2bbb966aad53049ab97b890ca25968bb7c",
         "width": 720
       },
       {
@@ -875,8 +879,8 @@
         "interactiveStateVerified": true,
         "locale": "en",
         "page": "battle-opponent",
-        "sampledColors": 173,
-        "sha256": "9c66545c2664d912d4a7aa693bc84da2df0d76677b9255736d59e77a8bd4b817",
+        "sampledColors": 176,
+        "sha256": "38fea5059e188a3776ad75403d6ba0b3d9374551e7eeec0bde9ea23e28c97e1e",
         "width": 1280
       },
       {
@@ -886,8 +890,8 @@
         "interactiveStateVerified": true,
         "locale": "en",
         "page": "battle-opponent",
-        "sampledColors": 167,
-        "sha256": "98a14feaaeee50a773d08a6c49d6e766c78887d7df2074f122c99585799d25b4",
+        "sampledColors": 172,
+        "sha256": "f65e464ff78b09739808ef3c8530fded9e4fc75579c39b27a37d82ffe27fdb7a",
         "width": 960
       },
       {
@@ -897,8 +901,8 @@
         "interactiveStateVerified": true,
         "locale": "en",
         "page": "battle-reconnecting",
-        "sampledColors": 182,
-        "sha256": "7238b27da37ceccd9fddf5315da2a31cecbb32931fbb55d5e7ed7369665844dc",
+        "sampledColors": 183,
+        "sha256": "206bbb44a7a91fd37555391d535371edf42a9016115230a480a8c2d1f3c2e868",
         "width": 720
       },
       {
@@ -908,8 +912,8 @@
         "interactiveStateVerified": true,
         "locale": "en",
         "page": "battle-reconnecting",
-        "sampledColors": 195,
-        "sha256": "0fbafdee6abb889c34437f411ab2c7b9eae0e44fa75d5dbc4dacc189d32ac22e",
+        "sampledColors": 190,
+        "sha256": "b39536d32139f98a2f862b421e19e865ad04b1b3560c90a4b67a7c86cbf5a933",
         "width": 1280
       },
       {
@@ -919,8 +923,8 @@
         "interactiveStateVerified": true,
         "locale": "en",
         "page": "battle-reconnecting",
-        "sampledColors": 182,
-        "sha256": "9496e3e5be6fb6499f72c9c02331e91863b3c0edf463df48f3f159c3cdef8368",
+        "sampledColors": 178,
+        "sha256": "4fd098157f7f8077e4db9860b5d077b7c093921c53edc58f1d02423dd568b80b",
         "width": 960
       },
       {
@@ -930,8 +934,8 @@
         "interactiveStateVerified": true,
         "locale": "en",
         "page": "battle-result",
-        "sampledColors": 208,
-        "sha256": "712f3c834c210185b5e6d187e0d302729054f9c5f85ab4ed924a7061163ffd95",
+        "sampledColors": 205,
+        "sha256": "d37ef94e217f24bc52ad5621e6c382a269eb2fafd3703a5b83aa468b9bc1f3fa",
         "width": 720
       },
       {
@@ -941,8 +945,8 @@
         "interactiveStateVerified": true,
         "locale": "en",
         "page": "battle-result",
-        "sampledColors": 184,
-        "sha256": "5785593be94f1cce29351a2d92d47daad16eb853496a428fec2b305276231cf4",
+        "sampledColors": 180,
+        "sha256": "15a91e8dcbeba4659a099ac9450c230ac74e360ef323ecf1893a8ff24470ab01",
         "width": 1280
       },
       {
@@ -952,13 +956,13 @@
         "interactiveStateVerified": true,
         "locale": "en",
         "page": "battle-result",
-        "sampledColors": 188,
-        "sha256": "69900ab90cb4ab0409b87babb808cdf70929cf9ef4de8b57c2e8a5aedf7f5ee9",
+        "sampledColors": 185,
+        "sha256": "be3d0f81385a2c6869262b9ec38a572aca43148ea229c216d337919dea67dc41",
         "width": 960
       }
     ],
     "installedApkCapture": false,
-    "nonce": "63c946d0e9b55bce2ace9ef1ab35b173",
+    "nonce": "727c44ac466feb640c3b1113c617aa99",
     "personalProfileUntouched": true,
     "renderer": "Windows",
     "schemaVersion": 1,
@@ -967,303 +971,303 @@
   "assets": [
     {
       "id": "ru-menu-720x1280",
-      "path": "docs/media/gallery/51efb96b9d10055dfb139e10c0c72bdcd2881d0368134db48ffd48628ccb63fd/63c946d0e9b55bce2ace9ef1ab35b173/ru-menu-720x1280.png",
+      "path": "docs/media/gallery/99296cbf0fb64a139c1d67d146129210b7d36cecfa04934e7b113d8eb17b7f18/727c44ac466feb640c3b1113c617aa99/ru-menu-720x1280.png",
       "sha256": "ab8ee1e0fae2a4a264fa95e790225d2aec2987fee4a31864bc844df4c64e65f9"
     },
     {
       "id": "ru-collection-720x1280",
-      "path": "docs/media/gallery/51efb96b9d10055dfb139e10c0c72bdcd2881d0368134db48ffd48628ccb63fd/63c946d0e9b55bce2ace9ef1ab35b173/ru-collection-720x1280.png",
+      "path": "docs/media/gallery/99296cbf0fb64a139c1d67d146129210b7d36cecfa04934e7b113d8eb17b7f18/727c44ac466feb640c3b1113c617aa99/ru-collection-720x1280.png",
       "sha256": "abd757868b7a364e338fddfbf88cd077c457863d7a47f08e465cc3664a17c35d"
     },
     {
       "id": "ru-card-720x1280",
-      "path": "docs/media/gallery/51efb96b9d10055dfb139e10c0c72bdcd2881d0368134db48ffd48628ccb63fd/63c946d0e9b55bce2ace9ef1ab35b173/ru-card-720x1280.png",
+      "path": "docs/media/gallery/99296cbf0fb64a139c1d67d146129210b7d36cecfa04934e7b113d8eb17b7f18/727c44ac466feb640c3b1113c617aa99/ru-card-720x1280.png",
       "sha256": "a9b2faf9f8eff9c9f2c1cc600001a4e00857596dd77f1aedabae8f8a79d9d9a2"
     },
     {
       "id": "ru-battle-720x1280",
-      "path": "docs/media/gallery/51efb96b9d10055dfb139e10c0c72bdcd2881d0368134db48ffd48628ccb63fd/63c946d0e9b55bce2ace9ef1ab35b173/ru-battle-720x1280.png",
-      "sha256": "e4781b10ecb2fce67db8d66cc42a9a770a7274328de197eb7089114a81c7e8f7"
+      "path": "docs/media/gallery/99296cbf0fb64a139c1d67d146129210b7d36cecfa04934e7b113d8eb17b7f18/727c44ac466feb640c3b1113c617aa99/ru-battle-720x1280.png",
+      "sha256": "b6a33e40211cdc9e38f5479232c7d8c956650c6aff24057f144909e57cbc48c5"
     },
     {
       "id": "ru-shop-720x1280",
-      "path": "docs/media/gallery/51efb96b9d10055dfb139e10c0c72bdcd2881d0368134db48ffd48628ccb63fd/63c946d0e9b55bce2ace9ef1ab35b173/ru-shop-720x1280.png",
+      "path": "docs/media/gallery/99296cbf0fb64a139c1d67d146129210b7d36cecfa04934e7b113d8eb17b7f18/727c44ac466feb640c3b1113c617aa99/ru-shop-720x1280.png",
       "sha256": "91e9aa0348eadb8b936018228cd2767b3ee5992673ea4e9f6701c029b5658dfe"
     },
     {
       "id": "ru-crafting-720x1280",
-      "path": "docs/media/gallery/51efb96b9d10055dfb139e10c0c72bdcd2881d0368134db48ffd48628ccb63fd/63c946d0e9b55bce2ace9ef1ab35b173/ru-crafting-720x1280.png",
+      "path": "docs/media/gallery/99296cbf0fb64a139c1d67d146129210b7d36cecfa04934e7b113d8eb17b7f18/727c44ac466feb640c3b1113c617aa99/ru-crafting-720x1280.png",
       "sha256": "698b9cf898e21b6bb347839090c1577c95fdde044a0cfd48233669ed975a7f5e"
     },
     {
       "id": "ru-rewards-720x1280",
-      "path": "docs/media/gallery/51efb96b9d10055dfb139e10c0c72bdcd2881d0368134db48ffd48628ccb63fd/63c946d0e9b55bce2ace9ef1ab35b173/ru-rewards-720x1280.png",
+      "path": "docs/media/gallery/99296cbf0fb64a139c1d67d146129210b7d36cecfa04934e7b113d8eb17b7f18/727c44ac466feb640c3b1113c617aa99/ru-rewards-720x1280.png",
       "sha256": "8dbe7a88644a0a4ca4c687fc9c33a47b51cc64f182cb5235fe2cb3f697c58780"
     },
     {
       "id": "ru-connection-720x1280",
-      "path": "docs/media/gallery/51efb96b9d10055dfb139e10c0c72bdcd2881d0368134db48ffd48628ccb63fd/63c946d0e9b55bce2ace9ef1ab35b173/ru-connection-720x1280.png",
+      "path": "docs/media/gallery/99296cbf0fb64a139c1d67d146129210b7d36cecfa04934e7b113d8eb17b7f18/727c44ac466feb640c3b1113c617aa99/ru-connection-720x1280.png",
       "sha256": "767da226bd34022b14e6c6599625ebccc00ec93261f0f89a9e5a1a67408df6b2"
     },
     {
       "id": "ru-rules-720x1280",
-      "path": "docs/media/gallery/51efb96b9d10055dfb139e10c0c72bdcd2881d0368134db48ffd48628ccb63fd/63c946d0e9b55bce2ace9ef1ab35b173/ru-rules-720x1280.png",
+      "path": "docs/media/gallery/99296cbf0fb64a139c1d67d146129210b7d36cecfa04934e7b113d8eb17b7f18/727c44ac466feb640c3b1113c617aa99/ru-rules-720x1280.png",
       "sha256": "ff71caa302126872bf7160886f32369e0dcc6cdb59c8e60423814c06aebd41b6"
     },
     {
       "id": "ru-settings-720x1280",
-      "path": "docs/media/gallery/51efb96b9d10055dfb139e10c0c72bdcd2881d0368134db48ffd48628ccb63fd/63c946d0e9b55bce2ace9ef1ab35b173/ru-settings-720x1280.png",
+      "path": "docs/media/gallery/99296cbf0fb64a139c1d67d146129210b7d36cecfa04934e7b113d8eb17b7f18/727c44ac466feb640c3b1113c617aa99/ru-settings-720x1280.png",
       "sha256": "5820dc453306b6e45e550fe44fc27d85b605193777e7f0971282d101755fe57f"
     },
     {
       "id": "ru-menu-1280x720",
-      "path": "docs/media/gallery/51efb96b9d10055dfb139e10c0c72bdcd2881d0368134db48ffd48628ccb63fd/63c946d0e9b55bce2ace9ef1ab35b173/ru-menu-1280x720.png",
+      "path": "docs/media/gallery/99296cbf0fb64a139c1d67d146129210b7d36cecfa04934e7b113d8eb17b7f18/727c44ac466feb640c3b1113c617aa99/ru-menu-1280x720.png",
       "sha256": "3689ab805954bef72bdd95954cf71641b5b98137151a8c2c464688f65fa01a12"
     },
     {
       "id": "ru-battle-1280x720",
-      "path": "docs/media/gallery/51efb96b9d10055dfb139e10c0c72bdcd2881d0368134db48ffd48628ccb63fd/63c946d0e9b55bce2ace9ef1ab35b173/ru-battle-1280x720.png",
-      "sha256": "0d91d309c5377b0bdd809c0279ac64f8cfabdaa95a1e8b70c77d9cda02f3f72a"
+      "path": "docs/media/gallery/99296cbf0fb64a139c1d67d146129210b7d36cecfa04934e7b113d8eb17b7f18/727c44ac466feb640c3b1113c617aa99/ru-battle-1280x720.png",
+      "sha256": "525cbfcdacad91bc88028bc3ad64495162fb00e824e9f01278e719d05e9e18b3"
     },
     {
       "id": "ru-battle-card-720x1280",
-      "path": "docs/media/gallery/51efb96b9d10055dfb139e10c0c72bdcd2881d0368134db48ffd48628ccb63fd/63c946d0e9b55bce2ace9ef1ab35b173/ru-battle-card-720x1280.png",
-      "sha256": "1c444d063f93ac4c30943277a0c589ce2819527390d443e5d86d64131fcb3b49"
+      "path": "docs/media/gallery/99296cbf0fb64a139c1d67d146129210b7d36cecfa04934e7b113d8eb17b7f18/727c44ac466feb640c3b1113c617aa99/ru-battle-card-720x1280.png",
+      "sha256": "a2d589d2efd6441b4a383d419ff42029114b2659b9331b7a3eb6285b79a2438e"
     },
     {
       "id": "ru-battle-card-1280x720",
-      "path": "docs/media/gallery/51efb96b9d10055dfb139e10c0c72bdcd2881d0368134db48ffd48628ccb63fd/63c946d0e9b55bce2ace9ef1ab35b173/ru-battle-card-1280x720.png",
-      "sha256": "964cdf4ec5e2028a8038ead572d3fa0000286a6355ba7a72879a50376ddecada"
+      "path": "docs/media/gallery/99296cbf0fb64a139c1d67d146129210b7d36cecfa04934e7b113d8eb17b7f18/727c44ac466feb640c3b1113c617aa99/ru-battle-card-1280x720.png",
+      "sha256": "48868ee12dcffaca44bd70c739002c3480cb5f8c7b2e0a9481c9fd236096eaa4"
     },
     {
       "id": "ru-battle-card-960x540",
-      "path": "docs/media/gallery/51efb96b9d10055dfb139e10c0c72bdcd2881d0368134db48ffd48628ccb63fd/63c946d0e9b55bce2ace9ef1ab35b173/ru-battle-card-960x540.png",
-      "sha256": "2296072d4a6765a1eab38754acf6f012a243f14b3af7d94b5799fbf2837e8a78"
+      "path": "docs/media/gallery/99296cbf0fb64a139c1d67d146129210b7d36cecfa04934e7b113d8eb17b7f18/727c44ac466feb640c3b1113c617aa99/ru-battle-card-960x540.png",
+      "sha256": "8278f43459785363ca4b34bc4ea0bfeb1c13d73e4d614de2be83a81923851757"
     },
     {
       "id": "ru-battle-unit-720x1280",
-      "path": "docs/media/gallery/51efb96b9d10055dfb139e10c0c72bdcd2881d0368134db48ffd48628ccb63fd/63c946d0e9b55bce2ace9ef1ab35b173/ru-battle-unit-720x1280.png",
-      "sha256": "d5323cccdc7911d7619d1712cca62ff044df28c2c2f418586f3f485d19babc62"
+      "path": "docs/media/gallery/99296cbf0fb64a139c1d67d146129210b7d36cecfa04934e7b113d8eb17b7f18/727c44ac466feb640c3b1113c617aa99/ru-battle-unit-720x1280.png",
+      "sha256": "8fec4796d1e26501058a097b77e9c15205547615867b62ac29cafba770535a0f"
     },
     {
       "id": "ru-battle-unit-1280x720",
-      "path": "docs/media/gallery/51efb96b9d10055dfb139e10c0c72bdcd2881d0368134db48ffd48628ccb63fd/63c946d0e9b55bce2ace9ef1ab35b173/ru-battle-unit-1280x720.png",
-      "sha256": "ecf057c38806049a91ccd5041776ca6fbbb7db87a54c38c611ce28b79a579286"
+      "path": "docs/media/gallery/99296cbf0fb64a139c1d67d146129210b7d36cecfa04934e7b113d8eb17b7f18/727c44ac466feb640c3b1113c617aa99/ru-battle-unit-1280x720.png",
+      "sha256": "f2332122346f644c50452b8c2680463a0d9aa7d668cd3b268f4b99858092ff6d"
     },
     {
       "id": "ru-battle-unit-960x540",
-      "path": "docs/media/gallery/51efb96b9d10055dfb139e10c0c72bdcd2881d0368134db48ffd48628ccb63fd/63c946d0e9b55bce2ace9ef1ab35b173/ru-battle-unit-960x540.png",
-      "sha256": "db81d4f0d37fbcba3af2916d146a9b5031dad68673989296d2d59d44badf2ac6"
+      "path": "docs/media/gallery/99296cbf0fb64a139c1d67d146129210b7d36cecfa04934e7b113d8eb17b7f18/727c44ac466feb640c3b1113c617aa99/ru-battle-unit-960x540.png",
+      "sha256": "0c1b206f82fb176e6cd1926de2e7e26a7cd789852921cde1226d1705e31b1797"
     },
     {
       "id": "ru-battle-allies-720x1280",
-      "path": "docs/media/gallery/51efb96b9d10055dfb139e10c0c72bdcd2881d0368134db48ffd48628ccb63fd/63c946d0e9b55bce2ace9ef1ab35b173/ru-battle-allies-720x1280.png",
-      "sha256": "9b72dff704d401876a45d8c41f6027150def55fc1471955dd7aa58638539a5dc"
+      "path": "docs/media/gallery/99296cbf0fb64a139c1d67d146129210b7d36cecfa04934e7b113d8eb17b7f18/727c44ac466feb640c3b1113c617aa99/ru-battle-allies-720x1280.png",
+      "sha256": "15ded956f92edc458c229fae2e0294b85b99b496f3aead1853088ad6db5d4e5b"
     },
     {
       "id": "ru-battle-allies-1280x720",
-      "path": "docs/media/gallery/51efb96b9d10055dfb139e10c0c72bdcd2881d0368134db48ffd48628ccb63fd/63c946d0e9b55bce2ace9ef1ab35b173/ru-battle-allies-1280x720.png",
-      "sha256": "f9158c4caa74e1f8ffde7982f7ea103b6b7fcec6985eaecb8aa2375face3f9c5"
+      "path": "docs/media/gallery/99296cbf0fb64a139c1d67d146129210b7d36cecfa04934e7b113d8eb17b7f18/727c44ac466feb640c3b1113c617aa99/ru-battle-allies-1280x720.png",
+      "sha256": "d6c6c07da8707c4d60245157196a8add82a84f14f5fc17c1cb8edd1eec1c94df"
     },
     {
       "id": "ru-battle-allies-960x540",
-      "path": "docs/media/gallery/51efb96b9d10055dfb139e10c0c72bdcd2881d0368134db48ffd48628ccb63fd/63c946d0e9b55bce2ace9ef1ab35b173/ru-battle-allies-960x540.png",
-      "sha256": "cc35c7884f646f2be219db4aa09e955f880edc1e2fcd391f76062136726935be"
+      "path": "docs/media/gallery/99296cbf0fb64a139c1d67d146129210b7d36cecfa04934e7b113d8eb17b7f18/727c44ac466feb640c3b1113c617aa99/ru-battle-allies-960x540.png",
+      "sha256": "66312bbca57fa2272eb759b861cfce9e36585f3cbfad563fe7224d667150bd4f"
     },
     {
       "id": "ru-battle-opponent-720x1280",
-      "path": "docs/media/gallery/51efb96b9d10055dfb139e10c0c72bdcd2881d0368134db48ffd48628ccb63fd/63c946d0e9b55bce2ace9ef1ab35b173/ru-battle-opponent-720x1280.png",
-      "sha256": "cf7c44e9b0ded9c531ddf7ff04e7d0161248ddf290e362519ab4c2e0321e869a"
+      "path": "docs/media/gallery/99296cbf0fb64a139c1d67d146129210b7d36cecfa04934e7b113d8eb17b7f18/727c44ac466feb640c3b1113c617aa99/ru-battle-opponent-720x1280.png",
+      "sha256": "d15392ef23c1fc895824c99687007b841a3988a2884d29a2392e4a81364580e9"
     },
     {
       "id": "ru-battle-opponent-1280x720",
-      "path": "docs/media/gallery/51efb96b9d10055dfb139e10c0c72bdcd2881d0368134db48ffd48628ccb63fd/63c946d0e9b55bce2ace9ef1ab35b173/ru-battle-opponent-1280x720.png",
-      "sha256": "6008b29a02ef279744ce7c6b39bf9d5f93b9b57fc61bbf3f0f56802b044adeb5"
+      "path": "docs/media/gallery/99296cbf0fb64a139c1d67d146129210b7d36cecfa04934e7b113d8eb17b7f18/727c44ac466feb640c3b1113c617aa99/ru-battle-opponent-1280x720.png",
+      "sha256": "38d743a35735e7b634c48303c3165232fbfd214869778bebbb085f3f84fd88e0"
     },
     {
       "id": "ru-battle-opponent-960x540",
-      "path": "docs/media/gallery/51efb96b9d10055dfb139e10c0c72bdcd2881d0368134db48ffd48628ccb63fd/63c946d0e9b55bce2ace9ef1ab35b173/ru-battle-opponent-960x540.png",
-      "sha256": "31025fdb063c3940ce81fb325f1cf0903a0cbb8e939e8bee2e3e05b44829ac03"
+      "path": "docs/media/gallery/99296cbf0fb64a139c1d67d146129210b7d36cecfa04934e7b113d8eb17b7f18/727c44ac466feb640c3b1113c617aa99/ru-battle-opponent-960x540.png",
+      "sha256": "fbdbeeeaba70a777fa7234849cba6439fc1cefa1bfd42c02f11e488d04ee9160"
     },
     {
       "id": "ru-battle-reconnecting-720x1280",
-      "path": "docs/media/gallery/51efb96b9d10055dfb139e10c0c72bdcd2881d0368134db48ffd48628ccb63fd/63c946d0e9b55bce2ace9ef1ab35b173/ru-battle-reconnecting-720x1280.png",
-      "sha256": "d83c9a4a631a70da80765f0a0969cb73bf0e90a9e63f6b855243f7c738f7562c"
+      "path": "docs/media/gallery/99296cbf0fb64a139c1d67d146129210b7d36cecfa04934e7b113d8eb17b7f18/727c44ac466feb640c3b1113c617aa99/ru-battle-reconnecting-720x1280.png",
+      "sha256": "aae19889bfa785c6301f1c5d4cf9cfcc63f97c79e175815140543cdd8a3d9343"
     },
     {
       "id": "ru-battle-reconnecting-1280x720",
-      "path": "docs/media/gallery/51efb96b9d10055dfb139e10c0c72bdcd2881d0368134db48ffd48628ccb63fd/63c946d0e9b55bce2ace9ef1ab35b173/ru-battle-reconnecting-1280x720.png",
-      "sha256": "3f5d1ec09e77728c2d56d6caec840bed8590a4ff0d15c57094597d796db1246c"
+      "path": "docs/media/gallery/99296cbf0fb64a139c1d67d146129210b7d36cecfa04934e7b113d8eb17b7f18/727c44ac466feb640c3b1113c617aa99/ru-battle-reconnecting-1280x720.png",
+      "sha256": "9c782d8150557347dcfe93966dc30f2d38fec17fc19e0c9005ce763b33f98ac4"
     },
     {
       "id": "ru-battle-reconnecting-960x540",
-      "path": "docs/media/gallery/51efb96b9d10055dfb139e10c0c72bdcd2881d0368134db48ffd48628ccb63fd/63c946d0e9b55bce2ace9ef1ab35b173/ru-battle-reconnecting-960x540.png",
-      "sha256": "f84f7ace29a80f1f70d40f4f7b8087b8d8279f263f9ac64f494bdb8506a092ac"
+      "path": "docs/media/gallery/99296cbf0fb64a139c1d67d146129210b7d36cecfa04934e7b113d8eb17b7f18/727c44ac466feb640c3b1113c617aa99/ru-battle-reconnecting-960x540.png",
+      "sha256": "e6206e3f01a3dd4ff36d48b9363425ea5c1704f684bb5ac3a0787caff143f70f"
     },
     {
       "id": "ru-battle-result-720x1280",
-      "path": "docs/media/gallery/51efb96b9d10055dfb139e10c0c72bdcd2881d0368134db48ffd48628ccb63fd/63c946d0e9b55bce2ace9ef1ab35b173/ru-battle-result-720x1280.png",
-      "sha256": "cd4093706f281537573285823792e84e6d096cfd2cb21fb0085e3cd91ed010d0"
+      "path": "docs/media/gallery/99296cbf0fb64a139c1d67d146129210b7d36cecfa04934e7b113d8eb17b7f18/727c44ac466feb640c3b1113c617aa99/ru-battle-result-720x1280.png",
+      "sha256": "170231dc83e116680879be2116de98ea3c95068d055e286c57644ac4e79aa9f0"
     },
     {
       "id": "ru-battle-result-1280x720",
-      "path": "docs/media/gallery/51efb96b9d10055dfb139e10c0c72bdcd2881d0368134db48ffd48628ccb63fd/63c946d0e9b55bce2ace9ef1ab35b173/ru-battle-result-1280x720.png",
-      "sha256": "4bc1c38ca183a0ed5c3d2c99cae3df49e9f075625c2e708348a6a8c3ce3f81bd"
+      "path": "docs/media/gallery/99296cbf0fb64a139c1d67d146129210b7d36cecfa04934e7b113d8eb17b7f18/727c44ac466feb640c3b1113c617aa99/ru-battle-result-1280x720.png",
+      "sha256": "39462454926f5e1c4e53660e3d8e91732f7b4efd4d15b94930577aa0d05de4cf"
     },
     {
       "id": "ru-battle-result-960x540",
-      "path": "docs/media/gallery/51efb96b9d10055dfb139e10c0c72bdcd2881d0368134db48ffd48628ccb63fd/63c946d0e9b55bce2ace9ef1ab35b173/ru-battle-result-960x540.png",
-      "sha256": "7507d3f100eaa1c15b77ba683167231c2dd8d608b86fe270930fdaabed0fc6d0"
+      "path": "docs/media/gallery/99296cbf0fb64a139c1d67d146129210b7d36cecfa04934e7b113d8eb17b7f18/727c44ac466feb640c3b1113c617aa99/ru-battle-result-960x540.png",
+      "sha256": "dcf3f111c4c16ffb9993321b1ad4070fc9be2c6d4c133e294f7e2784b71cd8b5"
     },
     {
       "id": "en-menu-720x1280",
-      "path": "docs/media/gallery/51efb96b9d10055dfb139e10c0c72bdcd2881d0368134db48ffd48628ccb63fd/63c946d0e9b55bce2ace9ef1ab35b173/en-menu-720x1280.png",
+      "path": "docs/media/gallery/99296cbf0fb64a139c1d67d146129210b7d36cecfa04934e7b113d8eb17b7f18/727c44ac466feb640c3b1113c617aa99/en-menu-720x1280.png",
       "sha256": "a663971fc780f5fede2710bb45f8da7e530f3d40f92fdce1a119735c1575131d"
     },
     {
       "id": "en-collection-720x1280",
-      "path": "docs/media/gallery/51efb96b9d10055dfb139e10c0c72bdcd2881d0368134db48ffd48628ccb63fd/63c946d0e9b55bce2ace9ef1ab35b173/en-collection-720x1280.png",
+      "path": "docs/media/gallery/99296cbf0fb64a139c1d67d146129210b7d36cecfa04934e7b113d8eb17b7f18/727c44ac466feb640c3b1113c617aa99/en-collection-720x1280.png",
       "sha256": "42dafcf33d230d70a0985bca83e3f78cb99e2559dbe394cdfc1eed5e324f83bc"
     },
     {
       "id": "en-card-720x1280",
-      "path": "docs/media/gallery/51efb96b9d10055dfb139e10c0c72bdcd2881d0368134db48ffd48628ccb63fd/63c946d0e9b55bce2ace9ef1ab35b173/en-card-720x1280.png",
+      "path": "docs/media/gallery/99296cbf0fb64a139c1d67d146129210b7d36cecfa04934e7b113d8eb17b7f18/727c44ac466feb640c3b1113c617aa99/en-card-720x1280.png",
       "sha256": "38710478a80c0f6f05c08df66ef0db10439206b3aac4557105087c1785fa49d0"
     },
     {
       "id": "en-battle-720x1280",
-      "path": "docs/media/gallery/51efb96b9d10055dfb139e10c0c72bdcd2881d0368134db48ffd48628ccb63fd/63c946d0e9b55bce2ace9ef1ab35b173/en-battle-720x1280.png",
-      "sha256": "696a555718188cbab8d46294b0e7caf1cc1884fc0cdfda092db877d72ce1af3a"
+      "path": "docs/media/gallery/99296cbf0fb64a139c1d67d146129210b7d36cecfa04934e7b113d8eb17b7f18/727c44ac466feb640c3b1113c617aa99/en-battle-720x1280.png",
+      "sha256": "4c9753c65a24550af5cf8766d59b3ea1f55cf3672efe3afbc1731b8c2f76fdb5"
     },
     {
       "id": "en-shop-720x1280",
-      "path": "docs/media/gallery/51efb96b9d10055dfb139e10c0c72bdcd2881d0368134db48ffd48628ccb63fd/63c946d0e9b55bce2ace9ef1ab35b173/en-shop-720x1280.png",
+      "path": "docs/media/gallery/99296cbf0fb64a139c1d67d146129210b7d36cecfa04934e7b113d8eb17b7f18/727c44ac466feb640c3b1113c617aa99/en-shop-720x1280.png",
       "sha256": "a3bdd6d2089b48010d5d6e2fc0feffd10152547986a60785ae1ec7091feb25fe"
     },
     {
       "id": "en-crafting-720x1280",
-      "path": "docs/media/gallery/51efb96b9d10055dfb139e10c0c72bdcd2881d0368134db48ffd48628ccb63fd/63c946d0e9b55bce2ace9ef1ab35b173/en-crafting-720x1280.png",
+      "path": "docs/media/gallery/99296cbf0fb64a139c1d67d146129210b7d36cecfa04934e7b113d8eb17b7f18/727c44ac466feb640c3b1113c617aa99/en-crafting-720x1280.png",
       "sha256": "17b3ac5e78ceb39501fa5b3828e4765e8e80450c4f4b2c29614c8c62ebc22645"
     },
     {
       "id": "en-rewards-720x1280",
-      "path": "docs/media/gallery/51efb96b9d10055dfb139e10c0c72bdcd2881d0368134db48ffd48628ccb63fd/63c946d0e9b55bce2ace9ef1ab35b173/en-rewards-720x1280.png",
+      "path": "docs/media/gallery/99296cbf0fb64a139c1d67d146129210b7d36cecfa04934e7b113d8eb17b7f18/727c44ac466feb640c3b1113c617aa99/en-rewards-720x1280.png",
       "sha256": "27af0162364b7d7ad6953ff75ee28f67f862bcd4e09989e0bca318a856adfb2c"
     },
     {
       "id": "en-connection-720x1280",
-      "path": "docs/media/gallery/51efb96b9d10055dfb139e10c0c72bdcd2881d0368134db48ffd48628ccb63fd/63c946d0e9b55bce2ace9ef1ab35b173/en-connection-720x1280.png",
+      "path": "docs/media/gallery/99296cbf0fb64a139c1d67d146129210b7d36cecfa04934e7b113d8eb17b7f18/727c44ac466feb640c3b1113c617aa99/en-connection-720x1280.png",
       "sha256": "ac941d1122ad510bd01f4a2907525fb78f306a7e5d7c2051b6bab72728c368e0"
     },
     {
       "id": "en-rules-720x1280",
-      "path": "docs/media/gallery/51efb96b9d10055dfb139e10c0c72bdcd2881d0368134db48ffd48628ccb63fd/63c946d0e9b55bce2ace9ef1ab35b173/en-rules-720x1280.png",
+      "path": "docs/media/gallery/99296cbf0fb64a139c1d67d146129210b7d36cecfa04934e7b113d8eb17b7f18/727c44ac466feb640c3b1113c617aa99/en-rules-720x1280.png",
       "sha256": "334bd199e33665412986a2c72e6c45e2ea5f8afe6017e977b44fda53e3228cc6"
     },
     {
       "id": "en-settings-720x1280",
-      "path": "docs/media/gallery/51efb96b9d10055dfb139e10c0c72bdcd2881d0368134db48ffd48628ccb63fd/63c946d0e9b55bce2ace9ef1ab35b173/en-settings-720x1280.png",
+      "path": "docs/media/gallery/99296cbf0fb64a139c1d67d146129210b7d36cecfa04934e7b113d8eb17b7f18/727c44ac466feb640c3b1113c617aa99/en-settings-720x1280.png",
       "sha256": "2a950f33b2c35d283a0f4c0a8fbc8b62e446ca97e5bd62bfe57fd67e39662d9a"
     },
     {
       "id": "en-menu-1280x720",
-      "path": "docs/media/gallery/51efb96b9d10055dfb139e10c0c72bdcd2881d0368134db48ffd48628ccb63fd/63c946d0e9b55bce2ace9ef1ab35b173/en-menu-1280x720.png",
+      "path": "docs/media/gallery/99296cbf0fb64a139c1d67d146129210b7d36cecfa04934e7b113d8eb17b7f18/727c44ac466feb640c3b1113c617aa99/en-menu-1280x720.png",
       "sha256": "82905ad6aa5d020ab1b25c6094ab7256d0b62cb70491c71af556f6f19965021a"
     },
     {
       "id": "en-battle-1280x720",
-      "path": "docs/media/gallery/51efb96b9d10055dfb139e10c0c72bdcd2881d0368134db48ffd48628ccb63fd/63c946d0e9b55bce2ace9ef1ab35b173/en-battle-1280x720.png",
-      "sha256": "dba0a2ca3601d63b6f5f9458bb8ca63ba31befcbfb109478e30398361913126e"
+      "path": "docs/media/gallery/99296cbf0fb64a139c1d67d146129210b7d36cecfa04934e7b113d8eb17b7f18/727c44ac466feb640c3b1113c617aa99/en-battle-1280x720.png",
+      "sha256": "fddcd94591ffbd6d145c5910dfc203291fd1887a5c154b180cd91c08e6944bf6"
     },
     {
       "id": "en-battle-card-720x1280",
-      "path": "docs/media/gallery/51efb96b9d10055dfb139e10c0c72bdcd2881d0368134db48ffd48628ccb63fd/63c946d0e9b55bce2ace9ef1ab35b173/en-battle-card-720x1280.png",
-      "sha256": "f1c60ccc5b3ae910a4937e736dedec07a0a5bfca3406dc9c07143a5f109a12b4"
+      "path": "docs/media/gallery/99296cbf0fb64a139c1d67d146129210b7d36cecfa04934e7b113d8eb17b7f18/727c44ac466feb640c3b1113c617aa99/en-battle-card-720x1280.png",
+      "sha256": "cb73a10b96806b0d2cbc66e1b200144b7a3b103bda1589b7c860c6374e2c1eaa"
     },
     {
       "id": "en-battle-card-1280x720",
-      "path": "docs/media/gallery/51efb96b9d10055dfb139e10c0c72bdcd2881d0368134db48ffd48628ccb63fd/63c946d0e9b55bce2ace9ef1ab35b173/en-battle-card-1280x720.png",
-      "sha256": "53f0f62b2e451252e60059b5d50a0da4bedecdb7cdda58404eca63251595fc9e"
+      "path": "docs/media/gallery/99296cbf0fb64a139c1d67d146129210b7d36cecfa04934e7b113d8eb17b7f18/727c44ac466feb640c3b1113c617aa99/en-battle-card-1280x720.png",
+      "sha256": "21a82ef77f3f8b1a7d5bfe92baac6b998ab7337b17b724ba3b99d90582764cad"
     },
     {
       "id": "en-battle-card-960x540",
-      "path": "docs/media/gallery/51efb96b9d10055dfb139e10c0c72bdcd2881d0368134db48ffd48628ccb63fd/63c946d0e9b55bce2ace9ef1ab35b173/en-battle-card-960x540.png",
-      "sha256": "e3cc8edc1e9c582e7b2fe33bde86ee315c49311a20664310338d9655c7b05d58"
+      "path": "docs/media/gallery/99296cbf0fb64a139c1d67d146129210b7d36cecfa04934e7b113d8eb17b7f18/727c44ac466feb640c3b1113c617aa99/en-battle-card-960x540.png",
+      "sha256": "474ec3bbbb5304521d23cab23cf153e33a68a67361d79cc877518617e91b3736"
     },
     {
       "id": "en-battle-unit-720x1280",
-      "path": "docs/media/gallery/51efb96b9d10055dfb139e10c0c72bdcd2881d0368134db48ffd48628ccb63fd/63c946d0e9b55bce2ace9ef1ab35b173/en-battle-unit-720x1280.png",
-      "sha256": "04464a7dbb65744092a95f667c8b7181977f4d81a8a388d5c4fbe8a34ebdd1c0"
+      "path": "docs/media/gallery/99296cbf0fb64a139c1d67d146129210b7d36cecfa04934e7b113d8eb17b7f18/727c44ac466feb640c3b1113c617aa99/en-battle-unit-720x1280.png",
+      "sha256": "a2b4bd4d8fa8dc04c7aac17ff0467ae566e035ff5e1de6a848f6298c8a5a2237"
     },
     {
       "id": "en-battle-unit-1280x720",
-      "path": "docs/media/gallery/51efb96b9d10055dfb139e10c0c72bdcd2881d0368134db48ffd48628ccb63fd/63c946d0e9b55bce2ace9ef1ab35b173/en-battle-unit-1280x720.png",
-      "sha256": "b7f2f8ab6d6f9b6efb87561dfd33841ab3d10efc0d82dbbc24eab4e0392e95d1"
+      "path": "docs/media/gallery/99296cbf0fb64a139c1d67d146129210b7d36cecfa04934e7b113d8eb17b7f18/727c44ac466feb640c3b1113c617aa99/en-battle-unit-1280x720.png",
+      "sha256": "0843dd945e6cc4248054f78905881c30222ef8772d6fd2d8cc5ecd8678088044"
     },
     {
       "id": "en-battle-unit-960x540",
-      "path": "docs/media/gallery/51efb96b9d10055dfb139e10c0c72bdcd2881d0368134db48ffd48628ccb63fd/63c946d0e9b55bce2ace9ef1ab35b173/en-battle-unit-960x540.png",
-      "sha256": "87139effa9afbb2824268c968284323840969145aef73159940bdc97dabf95c6"
+      "path": "docs/media/gallery/99296cbf0fb64a139c1d67d146129210b7d36cecfa04934e7b113d8eb17b7f18/727c44ac466feb640c3b1113c617aa99/en-battle-unit-960x540.png",
+      "sha256": "98a9100fc4f67d85e6f2d7a9446fa2933fe87f27ca4e40125d5bd5703d2566fe"
     },
     {
       "id": "en-battle-allies-720x1280",
-      "path": "docs/media/gallery/51efb96b9d10055dfb139e10c0c72bdcd2881d0368134db48ffd48628ccb63fd/63c946d0e9b55bce2ace9ef1ab35b173/en-battle-allies-720x1280.png",
-      "sha256": "ac12e5b43df3d5c153e568feec89afa782ab5f75355d9430ec18eedf0dbafe39"
+      "path": "docs/media/gallery/99296cbf0fb64a139c1d67d146129210b7d36cecfa04934e7b113d8eb17b7f18/727c44ac466feb640c3b1113c617aa99/en-battle-allies-720x1280.png",
+      "sha256": "779d94bf99a528b92312d20774ad8fae684e0313724e4d8ca6c6b11832062dec"
     },
     {
       "id": "en-battle-allies-1280x720",
-      "path": "docs/media/gallery/51efb96b9d10055dfb139e10c0c72bdcd2881d0368134db48ffd48628ccb63fd/63c946d0e9b55bce2ace9ef1ab35b173/en-battle-allies-1280x720.png",
-      "sha256": "b5fb2aa2860080f9e4fc10b59b2d09a06e135d9e22be714c70cc1c77d961f158"
+      "path": "docs/media/gallery/99296cbf0fb64a139c1d67d146129210b7d36cecfa04934e7b113d8eb17b7f18/727c44ac466feb640c3b1113c617aa99/en-battle-allies-1280x720.png",
+      "sha256": "31c5a9c5f3edf46dd71b983b2db8dac7bb12480c989c2267a8c7c51b88a8b3a9"
     },
     {
       "id": "en-battle-allies-960x540",
-      "path": "docs/media/gallery/51efb96b9d10055dfb139e10c0c72bdcd2881d0368134db48ffd48628ccb63fd/63c946d0e9b55bce2ace9ef1ab35b173/en-battle-allies-960x540.png",
-      "sha256": "4f88723f1d0c519f4442f3fd6df75eef95d7e864304f62404eb6e7e571798a8b"
+      "path": "docs/media/gallery/99296cbf0fb64a139c1d67d146129210b7d36cecfa04934e7b113d8eb17b7f18/727c44ac466feb640c3b1113c617aa99/en-battle-allies-960x540.png",
+      "sha256": "f16fed69fabdc115cdac0e20ff3b996e359765788ac6a7419ab5f69f6ac1818e"
     },
     {
       "id": "en-battle-opponent-720x1280",
-      "path": "docs/media/gallery/51efb96b9d10055dfb139e10c0c72bdcd2881d0368134db48ffd48628ccb63fd/63c946d0e9b55bce2ace9ef1ab35b173/en-battle-opponent-720x1280.png",
-      "sha256": "623d6ad884364ed91944dbd454896b008d10e4fedf7714726b9ba098ddee3bc8"
+      "path": "docs/media/gallery/99296cbf0fb64a139c1d67d146129210b7d36cecfa04934e7b113d8eb17b7f18/727c44ac466feb640c3b1113c617aa99/en-battle-opponent-720x1280.png",
+      "sha256": "c1b82050cc736d419465d260195c3d2bbb966aad53049ab97b890ca25968bb7c"
     },
     {
       "id": "en-battle-opponent-1280x720",
-      "path": "docs/media/gallery/51efb96b9d10055dfb139e10c0c72bdcd2881d0368134db48ffd48628ccb63fd/63c946d0e9b55bce2ace9ef1ab35b173/en-battle-opponent-1280x720.png",
-      "sha256": "9c66545c2664d912d4a7aa693bc84da2df0d76677b9255736d59e77a8bd4b817"
+      "path": "docs/media/gallery/99296cbf0fb64a139c1d67d146129210b7d36cecfa04934e7b113d8eb17b7f18/727c44ac466feb640c3b1113c617aa99/en-battle-opponent-1280x720.png",
+      "sha256": "38fea5059e188a3776ad75403d6ba0b3d9374551e7eeec0bde9ea23e28c97e1e"
     },
     {
       "id": "en-battle-opponent-960x540",
-      "path": "docs/media/gallery/51efb96b9d10055dfb139e10c0c72bdcd2881d0368134db48ffd48628ccb63fd/63c946d0e9b55bce2ace9ef1ab35b173/en-battle-opponent-960x540.png",
-      "sha256": "98a14feaaeee50a773d08a6c49d6e766c78887d7df2074f122c99585799d25b4"
+      "path": "docs/media/gallery/99296cbf0fb64a139c1d67d146129210b7d36cecfa04934e7b113d8eb17b7f18/727c44ac466feb640c3b1113c617aa99/en-battle-opponent-960x540.png",
+      "sha256": "f65e464ff78b09739808ef3c8530fded9e4fc75579c39b27a37d82ffe27fdb7a"
     },
     {
       "id": "en-battle-reconnecting-720x1280",
-      "path": "docs/media/gallery/51efb96b9d10055dfb139e10c0c72bdcd2881d0368134db48ffd48628ccb63fd/63c946d0e9b55bce2ace9ef1ab35b173/en-battle-reconnecting-720x1280.png",
-      "sha256": "7238b27da37ceccd9fddf5315da2a31cecbb32931fbb55d5e7ed7369665844dc"
+      "path": "docs/media/gallery/99296cbf0fb64a139c1d67d146129210b7d36cecfa04934e7b113d8eb17b7f18/727c44ac466feb640c3b1113c617aa99/en-battle-reconnecting-720x1280.png",
+      "sha256": "206bbb44a7a91fd37555391d535371edf42a9016115230a480a8c2d1f3c2e868"
     },
     {
       "id": "en-battle-reconnecting-1280x720",
-      "path": "docs/media/gallery/51efb96b9d10055dfb139e10c0c72bdcd2881d0368134db48ffd48628ccb63fd/63c946d0e9b55bce2ace9ef1ab35b173/en-battle-reconnecting-1280x720.png",
-      "sha256": "0fbafdee6abb889c34437f411ab2c7b9eae0e44fa75d5dbc4dacc189d32ac22e"
+      "path": "docs/media/gallery/99296cbf0fb64a139c1d67d146129210b7d36cecfa04934e7b113d8eb17b7f18/727c44ac466feb640c3b1113c617aa99/en-battle-reconnecting-1280x720.png",
+      "sha256": "b39536d32139f98a2f862b421e19e865ad04b1b3560c90a4b67a7c86cbf5a933"
     },
     {
       "id": "en-battle-reconnecting-960x540",
-      "path": "docs/media/gallery/51efb96b9d10055dfb139e10c0c72bdcd2881d0368134db48ffd48628ccb63fd/63c946d0e9b55bce2ace9ef1ab35b173/en-battle-reconnecting-960x540.png",
-      "sha256": "9496e3e5be6fb6499f72c9c02331e91863b3c0edf463df48f3f159c3cdef8368"
+      "path": "docs/media/gallery/99296cbf0fb64a139c1d67d146129210b7d36cecfa04934e7b113d8eb17b7f18/727c44ac466feb640c3b1113c617aa99/en-battle-reconnecting-960x540.png",
+      "sha256": "4fd098157f7f8077e4db9860b5d077b7c093921c53edc58f1d02423dd568b80b"
     },
     {
       "id": "en-battle-result-720x1280",
-      "path": "docs/media/gallery/51efb96b9d10055dfb139e10c0c72bdcd2881d0368134db48ffd48628ccb63fd/63c946d0e9b55bce2ace9ef1ab35b173/en-battle-result-720x1280.png",
-      "sha256": "712f3c834c210185b5e6d187e0d302729054f9c5f85ab4ed924a7061163ffd95"
+      "path": "docs/media/gallery/99296cbf0fb64a139c1d67d146129210b7d36cecfa04934e7b113d8eb17b7f18/727c44ac466feb640c3b1113c617aa99/en-battle-result-720x1280.png",
+      "sha256": "d37ef94e217f24bc52ad5621e6c382a269eb2fafd3703a5b83aa468b9bc1f3fa"
     },
     {
       "id": "en-battle-result-1280x720",
-      "path": "docs/media/gallery/51efb96b9d10055dfb139e10c0c72bdcd2881d0368134db48ffd48628ccb63fd/63c946d0e9b55bce2ace9ef1ab35b173/en-battle-result-1280x720.png",
-      "sha256": "5785593be94f1cce29351a2d92d47daad16eb853496a428fec2b305276231cf4"
+      "path": "docs/media/gallery/99296cbf0fb64a139c1d67d146129210b7d36cecfa04934e7b113d8eb17b7f18/727c44ac466feb640c3b1113c617aa99/en-battle-result-1280x720.png",
+      "sha256": "15a91e8dcbeba4659a099ac9450c230ac74e360ef323ecf1893a8ff24470ab01"
     },
     {
       "id": "en-battle-result-960x540",
-      "path": "docs/media/gallery/51efb96b9d10055dfb139e10c0c72bdcd2881d0368134db48ffd48628ccb63fd/63c946d0e9b55bce2ace9ef1ab35b173/en-battle-result-960x540.png",
-      "sha256": "69900ab90cb4ab0409b87babb808cdf70929cf9ef4de8b57c2e8a5aedf7f5ee9"
+      "path": "docs/media/gallery/99296cbf0fb64a139c1d67d146129210b7d36cecfa04934e7b113d8eb17b7f18/727c44ac466feb640c3b1113c617aa99/en-battle-result-960x540.png",
+      "sha256": "be3d0f81385a2c6869262b9ec38a572aca43148ea229c216d337919dea67dc41"
     }
   ]
 }

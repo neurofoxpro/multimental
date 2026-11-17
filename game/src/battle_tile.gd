@@ -135,6 +135,7 @@ func present(ui, view: Dictionary, index: int, targets: Array, can_attack: bool)
     if threatened:
         border = Color("efb36e") if int(unit.owner) == 0 else Color("ec7e77")
         header.text = ui.t("СОЮЗНИК!", "ALLY!") if int(unit.owner) == 0 else ui.t("ЦЕЛЬ", "TARGET")
+        tooltip_text = ui.t("Союзник пострадает от удара; его касание меняет выбор.", "This ally will be hit; tapping it only changes selection.") if int(unit.owner) == 0 else ui.t("Коснитесь цели для атаки по всем направлениям. Союзники под ударом потребуют подтверждения.", "Tap to sweep in every direction. Allied damage requires confirmation.")
     if selected:
         border = Color("f1d899")
         header.text = ui.t("ВЫБРАН", "SELECTED")
