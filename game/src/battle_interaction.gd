@@ -57,4 +57,12 @@ static func cell(view: Dictionary, index: int, hand: int, source: int, direction
         return {"kind": "empty"}
     if int(unit.owner) == 0 and available(view, pending):
         return {"kind": "select", "index": -1 if source == index else index}
+    # A second explicit tap on a highlighted enemy is the same legal full sweep
+    # as the attack button. Never convert a tap on a friendly unit to damage.
+    if int(unit.owner) == 1 and available(view, pending) and source >= 0 and source < view.board.size():
+        var attacker: Variant = view.board[source]
+        if attacker != null and int(attacker.owner) == 0:
+            for command in view.get("legal", []):
+                if command.get("type") == "attack" and int(command.source) == source and int(command.target) == index:
+                    return {"kind": "attack", "command": command.duplicate(true)}
     return {"kind": "inspect", "id": int(unit.id)}

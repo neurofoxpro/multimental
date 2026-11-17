@@ -12,6 +12,8 @@ static func show(ui, page: String) -> bool:
     ui.game.start(42)
     ui.game.state.active = 0
     ui.game.state.turn = 7
+    ui.timed_turn = int(ui.game.state.turn)
+    ui.deadline = Time.get_unix_time_from_system() + float(preload("res://src/turn_clock.gd").millis_for_turn(ui.timed_turn)) / 1000.0
     ui.game.state.center_unlocked = true
     ui.game.state.players[0].coins = 10
     ui.game.state.players[0].hand = [0,1,2,3,4,5]

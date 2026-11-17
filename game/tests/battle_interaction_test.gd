@@ -71,6 +71,18 @@ func run_test() -> void:
         check(Intent.attack(view,2).command.is_empty(), "enemy cannot become controllable")
         check(Intent.cell(view,-1,-1,-1,0).kind == "none", "bad cell index ignored")
         check(Intent.cell({},0,-1,-1,0).kind == "none", "no view has no action")
+        check(Intent.cell(view,2,-1,0,0).kind == "attack", "selected ally + highlighted enemy becomes one explicit attack intent")
+        check(Intent.cell(view,2,-1,0,0,true).kind == "inspect", "pending network command blocks tap-to-attack")
+        await click_at(ui.board_buttons[0].get_global_rect().get_center())
+        check(ui.selected_unit == 0 and ui.game.digest() == before, "real tap selects own unit without attacking")
+        check(ui.message.text.find("Коснитесь") >= 0 if language == "ru" else ui.message.text.find("Tap") >= 0, "UI explains tap-to-attack in both locales")
+        await click_at(ui.board_buttons[2].get_global_rect().get_center())
+        check(ui.friendly_confirm.visible and ui.game.digest() == before, "real target tap shows ally safety confirmation before attacking")
+        ui.cancel_friendly_attack()
+        if ui.battle_inspector.visible:
+            ui.battle_inspector.hide()
+        fixture(ui)
+        await settle()
         ui.on_cell(0)
         check(ui.selected_unit == 0 and ui.game.digest() == before, "choosing own figure doesn't attack")
         ui.on_cell(1)
@@ -92,6 +104,15 @@ func run_test() -> void:
         check(ui.game.state.players[0].coins == 9 and ui.game.state.active == 1, "domain cost and turn progression are preserved")
         ui.attack_selected()
         check(ui.game.commands.size() == 1, "second activation has no stale selected source")
+        fixture(ui)
+        ui.game.state.board[1] = null
+        ui.refresh()
+        ui.on_cell(0)
+        ui.on_cell(2)
+        check(ui.game.commands.size() == 1 and int(ui.game.state.board[2].health) == 2 and not ui.friendly_confirm.visible, "tap on sole enemy dispatches exactly one legal sweep without unnecessary warning")
+        if ui.battle_inspector.visible:
+            ui.battle_inspector.hide()
+        await settle()
         fixture(ui)
         ui.on_cell(0)
         ui.attack_selected()
@@ -180,6 +201,7 @@ func run_test() -> void:
         ui.game.state.active = 1
         ui.refresh()
         await settle()
+        check(ui.aim_label.text == ("Осмотр не расходует ход" if language == "ru" else "Inspection does not spend your turn"), "opponent turn shows only inspection affordance, not own action steps")
         card = ui.hand_row.get_child(0)
         hand_scroll.scroll_horizontal = 0
         await settle()

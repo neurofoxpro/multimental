@@ -52,6 +52,8 @@ func show_page(page: String) -> bool:
                 if ui.game.state.winner != -1:
                     break
                 ui.game.apply(int(ui.game.state.active), ui.game.choose_ai())
+            ui.timed_turn = int(ui.game.state.turn)
+            ui.deadline = Time.get_unix_time_from_system() + float(preload("res://src/turn_clock.gd").millis_for_turn(ui.timed_turn)) / 1000.0
             ui.refresh()
         "shop": ui.show_shop()
         "crafting":

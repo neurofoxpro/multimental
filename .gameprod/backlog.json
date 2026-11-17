@@ -962,5 +962,17 @@
       "docs/production/evidence/manual-review-completed-20260927.json"
     ],
     "nextCommand": "npm run game -- task AUTO-12"
+  },
+  {
+    "id": "TURN-01",
+    "status": "pending",
+    "action": "Увеличить время хода до 90 секунд с +5 сек за каждый личный ход и сделать боевое управление понятным",
+    "dependsOn": [
+      "UX-11"
+    ],
+    "manual": false,
+    "generatedFrom": ".gameprod/workplan.json",
+    "evidence": [],
+    "nextCommand": "npm run game -- task TURN-01"
   }
 ]
