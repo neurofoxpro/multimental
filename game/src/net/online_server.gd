@@ -24,6 +24,18 @@ func listen(port: int, tls: TLSOptions, bind: String = "*") -> Error:
     running = true
     return OK
 
+## For a deployment where Render/Koyeb terminates public TLS at a trusted edge.
+## Never use this entrypoint for a directly exposed public WebSocket port.
+func listen_trusted_edge(port: int, profile: Dictionary, bind: String = "*") -> Error:
+    if running:
+        return ERR_ALREADY_IN_USE
+    var error: Error = wire.listen_trusted_edge(port, profile, bind)
+    if error != OK:
+        return error
+    wire.peer.peer_disconnected.connect(_peer_disconnected)
+    running = true
+    return OK
+
 func _peer_disconnected(id: int) -> void:
     var room: String = service.detach_peer(id,_now())
     if not room.is_empty():
