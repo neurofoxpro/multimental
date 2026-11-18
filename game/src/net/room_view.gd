@@ -7,7 +7,7 @@ static func valid(v: Variant) -> bool:
         return false
     if v.get("phase") not in ["waiting", "playing", "reconnecting", "finished"] or not v.get("reason") is String:
         return false
-    for field in ["revision", "coins", "deck_count", "opponent_hand_count", "opponent_deck_count", "turn_remaining_ms", "reconnect_remaining_ms", "event_id"]:
+    for field in ["revision", "coins", "mana", "crystals", "deck_count", "opponent_hand_count", "opponent_deck_count", "turn_remaining_ms", "reconnect_remaining_ms", "event_id"]:
         if not Rules.is_integer(v.get(field), 0, 1000000000):
             return false
     if not Rules.is_integer(v.get("active"), 0, 1) or not Rules.is_integer(v.get("winner"), -1, 2) or not Rules.is_integer(v.get("turn"), 1, 1000000) or not Rules.is_integer(v.get("next_sequence"), 1, 1000001):

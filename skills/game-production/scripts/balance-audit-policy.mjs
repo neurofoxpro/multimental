@@ -7,7 +7,7 @@ export function validatePlan(p) {
   if (
     p?.schemaVersion !== 1 ||
     p.id !== 'standard-start-v1' ||
-    p.rules !== 'terrain-sweep-v3-balance1' ||
+    p.rules !== 'terrain-sweep-v4-accumulated-resources' ||
     p.task !== 'BALANCE-01' ||
     JSON.stringify(p.decks) !== JSON.stringify(DECKS) ||
     JSON.stringify(p.policies) !== JSON.stringify(POLICIES) ||
@@ -113,7 +113,7 @@ export function validateShard(data, request) {
     data?.schemaVersion !== 1 ||
     data.ok !== true ||
     data.plan !== 'standard-start-v1' ||
-    data.rules !== 'terrain-sweep-v3-balance1' ||
+    data.rules !== 'terrain-sweep-v4-accumulated-resources' ||
     data.sourceGameplayChanged !== false ||
     data.limitsAreClockMinutes !== false ||
     data.engine?.major !== 4 ||

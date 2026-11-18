@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "mixed-competition-v1",
-  "rules": "terrain-sweep-v3-balance1",
+  "rules": "terrain-sweep-v4-accumulated-resources",
   "task": "BALANCE-01",
   "deckConstruction": {
     "type": "cyclic-five-elements-v1",

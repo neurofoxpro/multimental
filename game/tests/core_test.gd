@@ -12,6 +12,37 @@ func _initialize() -> void:
     game.start(42)
     check(game.state.board.size() == 9, "nine cells")
     check(game.state.players.size() == 2, "two players")
+    var income_game = Core.new()
+    income_game.start(42)
+    var first_player: int = int(income_game.state.first)
+    var second_player: int = 1 - first_player
+    check(income_game.state.players[first_player].coins == 1 and income_game.state.players[second_player].coins == 1, "opening coins include only first-turn income and second-player compensation")
+    check(income_game.state.players[0].mana == 0 and income_game.state.players[0].crystals == 0 and income_game.state.players[1].mana == 0 and income_game.state.players[1].crystals == 0, "future battle resources initialized at zero")
+    check(income_game.apply(first_player, {"type": "pass"}).ok, "first pass advances turn")
+    check(income_game.state.players[second_player].coins == 2, "second player opening income + one-time compensation")
+    check(income_game.apply(second_player, {"type": "pass"}).ok, "second pass advances turn")
+    check(income_game.state.players[first_player].coins == 2, "unused first player coins accumulate")
+    for cell in range(4):
+        income_game.state.board[cell] = {"id": 0, "owner": cell % 2, "attack": 1, "health": 2, "direction": 0}
+    income_game._observe_board([])
+    check(int(income_game.state.income_bonus) == 1, "four units unlock global +2 income")
+    check(income_game.apply(first_player, {"type": "pass"}).ok, "four-unit pass")
+    check(income_game.state.players[second_player].coins == 4, "next personal turn gets +2 and keeps prior coins")
+    income_game.state.board[3] = null
+    income_game._observe_board([])
+    check(int(income_game.state.income_bonus) == 1, "income threshold persists when unit dies")
+    check(income_game.apply(second_player, {"type": "pass"}).ok, "post-loss pass")
+    check(income_game.state.players[first_player].coins == 4, "first player also gets permanent +2")
+    for cell in range(6):
+        income_game.state.board[cell] = {"id": 0, "owner": cell % 2, "attack": 1, "health": 2, "direction": 0}
+    income_game._observe_board([])
+    check(int(income_game.state.income_bonus) == 2, "six units unlock global +3 income")
+    check(income_game.apply(first_player, {"type": "pass"}).ok, "six-unit pass")
+    check(income_game.state.players[second_player].coins == 7, "income +3 accumulates without cap")
+    income_game.state.board[4] = null
+    income_game._observe_board([])
+    check(int(income_game.state.income_bonus) == 2, "higher income threshold survives board loss")
+    check(income_game.state.players[0].mana == 0 and income_game.state.players[0].crystals == 0 and income_game.state.players[1].mana == 0 and income_game.state.players[1].crystals == 0, "mana and crystals stay inert")
     check(game.state.players[game.state.active].hand.size() == 5, "opening draw")
     var before: String = game.digest()
     check(not game.apply(1 - int(game.state.active), {"type": "pass"}).ok, "reject other player")

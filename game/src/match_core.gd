@@ -13,7 +13,7 @@ const ELITES_EN: Array[String] = ["Ifrit", "Deep Guardian", "Thunderlord", "Sky 
 const OUTER_ELEMENTS: Array[int] = [0, 1, 2, 3, 4, 8]
 const CENTER_ELEMENTS: Array[int] = [5, 6, 7]
 const CARD_COUNT: int = 30
-const RULES_ID: String = "terrain-sweep-v3-balance1"
+const RULES_ID: String = "terrain-sweep-v4-accumulated-resources"
 const TYPES: Array[String] = ["fighter", "guard", "lancer", "archer", "flanker"]
 const TYPES_RU: Array[String] = ["Боец", "Страж", "Копейщик", "Стрелок", "Фланкер"]
 const TYPES_EN: Array[String] = ["Fighter", "Guard", "Lancer", "Archer", "Flanker"]
@@ -65,7 +65,7 @@ func _start_checked(seed_value: int, deck_lists: Array) -> void:
         var hand: Array[int] = []
         for i in range(4):
             hand.append(deck.pop_back())
-        state.players.append({"deck": deck, "hand": hand, "coins": 1 if player == first else 2, "maximum": 1, "missed": 0, "started": 1 if player == first else 0})
+        state.players.append({"deck": deck, "hand": hand, "coins": 1, "mana": 0, "crystals": 0, "maximum": 1, "missed": 0, "started": 1 if player == first else 0})
     _draw(first)
     state.terrain = generate_terrain()
 
@@ -311,9 +311,11 @@ func _finish_turn() -> void:
     state.placed_cell = -1
     _observe_board(state.events)
     var next: Dictionary = state.players[int(state.active)]
-    next.maximum = mini(6, 1 + int((int(state.turn) - 1) / 2)) + int(state.income_bonus)
-    # The second player receives +1 only for their opening turn, not every turn.
-    next.coins = int(next.maximum) + (1 if int(next.started) == 0 else 0)
+    # Previously unlocked board income is global and permanent. No coin cap or reset.
+    next.maximum = 1 + int(state.income_bonus)
+    # First player already started with first-turn income (1 coin).
+    # The other player started with a one-time +1 compensation and earns +1 now.
+    next.coins = int(next.coins) + int(next.maximum)
     next.started = int(next.started) + 1
     _draw(int(state.active))
 

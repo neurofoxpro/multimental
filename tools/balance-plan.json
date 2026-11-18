@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "standard-start-v1",
-  "rules": "terrain-sweep-v3-balance1",
+  "rules": "terrain-sweep-v4-accumulated-resources",
   "task": "BALANCE-01",
   "start": "MatchCore.start_with_decks; no post-start hands/decks mutation",
   "decks": [

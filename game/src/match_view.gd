@@ -13,7 +13,7 @@ static func for_player(core, player: int) -> Dictionary:
     var winner: int = int(core.state.winner)
     if winner in [0, 1]:
         winner = 0 if winner == player else 1
-    return {"board": board, "hand": me.hand.duplicate(), "coins": me.coins,
+    return {"board": board, "hand": me.hand.duplicate(), "coins": me.coins, "mana": me.get("mana", 0), "crystals": me.get("crystals", 0),
         "deck_count": me.deck.size(), "opponent_hand_count": other.hand.size(),
         "opponent_deck_count": other.deck.size(), "active": 0 if int(core.state.active) == player else 1,
         "turn": core.state.turn, "winner": winner, "reason": core.state.reason,

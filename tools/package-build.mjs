@@ -23,7 +23,7 @@ writeJSON('artifacts/build-manifest.json', {
   sha256: digest,
   signing:
     'ephemeral CI debug; authorized device station applies persistent private local dev signature',
-  gameRules: 'terrain-sweep-v3-balance1',
+  gameRules: 'terrain-sweep-v4-accumulated-resources',
   sourceDigest: evidence.sourceDigest
 });
 fs.writeFileSync('artifacts/SHA256SUMS.txt', digest + '  ' + apk + '\n');

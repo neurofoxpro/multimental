@@ -147,8 +147,8 @@ static func render(ui, view: Dictionary) -> void:
     var remaining: int = ui.lan.remaining_seconds() if ui.online else maxi(0,int(ceil(ui.deadline-Time.get_unix_time_from_system())))
     ui.timer_text.text = ui.t("Ход %d · %s", "Turn %d · %s") % [view.turn,Clock.text_for_seconds(remaining)]
     var resources: Label = ui.find_child("YourBattleResources",true,false)
-    resources.text = "◉ %d  ·  " % view.coins + ui.t("В колоде %d", "Deck %d") % view.deck_count
-    resources.tooltip_text = ui.t("Боевые монеты · доход поля +%d · карт в руке соперника %d", "Battle coins · board income +%d · opponent hand %d") % [int(view.get("income_bonus",0)),int(view.opponent_hand_count)]
+    resources.text = "◉ %d  ·  ✧ %d  ·  ◆ %d  ·  " % [int(view.coins), int(view.get("mana", 0)), int(view.get("crystals", 0))] + ui.t("В колоде %d", "Deck %d") % view.deck_count
+    resources.tooltip_text = ui.t("Монеты · доход +%d/ход · Мана 0 (позже) · Кристаллы 0 (позже) · карт в руке соперника %d", "Coins · income +%d/turn · Mana 0 (future) · Crystals 0 (future) · opponent hand %d") % [1 + int(view.get("income_bonus",0)), int(view.opponent_hand_count)]
     ui.rotation_left.visible = selected_card
     ui.rotation_right.visible = selected_card
     ui.rotation_left.disabled = not selected_card or not Intent.available(view,pending) or int(view.placed_cell) >= 0
