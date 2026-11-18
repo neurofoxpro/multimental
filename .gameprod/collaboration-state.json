@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "neurofoxpro/multimental",
-  "revision": 515,
+  "revision": 516,
   "claims": {
     "5769688a-4b88-4390-b585-09db38d5bc0f": {
       "token": "5769688a-4b88-4390-b585-09db38d5bc0f",
@@ -15,19 +15,6 @@
       "fence": 456,
       "updatedAt": 1792362576792,
       "expiresAt": 1792364376792
-    },
-    "186a1b8e-6c4e-4031-af5a-6efc97bc7997": {
-      "token": "186a1b8e-6c4e-4031-af5a-6efc97bc7997",
-      "task": "UX-12",
-      "owner": "mm18-collection-focus-20261118",
-      "base": "88706492209d0d69d430fb3d3a79f4d028a5a2bb",
-      "resources": [
-        "area:game-ui",
-        "task:UX-12"
-      ],
-      "fence": 493,
-      "updatedAt": 1795003242103,
-      "expiresAt": 1795005042103
     },
     "3f4f472e-4cc8-41f6-b0a6-b77814937ae4": {
       "token": "3f4f472e-4cc8-41f6-b0a6-b77814937ae4",
@@ -44,25 +31,6 @@
     }
   },
   "events": [
-    {
-      "id": "f1e54019-bd97-475c-a2dd-4b4985962dde",
-      "hash": "3ec28273bda16ff8cf61374762f82cdb4128a5475a173bdcb75b782d51928c12",
-      "revision": 260,
-      "result": {
-        "status": "renewed",
-        "token": "959c5ad2-0c24-4712-bfb9-72b5ea5a2717",
-        "task": "QA-02",
-        "owner": "fleet-delivery-20260928-d82a",
-        "base": "fdcea113231a7e388c471e374b0feeb706450a96",
-        "resources": [
-          "area:devices",
-          "task:QA-02"
-        ],
-        "fence": 259,
-        "updatedAt": 1790555007620,
-        "expiresAt": 1790556807620
-      }
-    },
     {
       "id": "4b0f73d8-6fee-44b7-a80d-e9afb15463b6",
       "hash": "8ac5520ba7dae6faf018062ee2155770b255074c26926814cffae79b18d6db2e",
@@ -4624,6 +4592,18 @@
         "task": "NET-06",
         "owner": "mm6-lead-net06-20261118",
         "fence": 507
+      }
+    },
+    {
+      "id": "b44bd761-417a-479c-9c1b-1a6f715a6dc6",
+      "hash": "74511eec6a665c46c032f3c6efb613669840de68920fb64aa8ee8e96d49c637b",
+      "revision": 516,
+      "result": {
+        "status": "released",
+        "token": "186a1b8e-6c4e-4031-af5a-6efc97bc7997",
+        "task": "UX-12",
+        "owner": "mm18-collection-focus-20261118",
+        "fence": 493
       }
     }
   ]
