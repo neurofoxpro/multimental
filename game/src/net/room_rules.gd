@@ -13,6 +13,7 @@ var game = Core.new()
 var secret: String = ""
 var guest_identity: String = ""
 var guest_connected: bool = false
+var host_connected: bool = true
 var phase: String = "waiting"
 var revision: int = 0
 var next_sequence: Array[int] = [1, 1]
@@ -21,7 +22,9 @@ var last_now: int = 0
 var turn_deadline: int = 0
 var match_deadline: int = 0
 var reconnect_deadline: int = 0
+var host_reconnect_deadline: int = 0
 var paused_remaining: int = TURN_MS
+var host_paused_remaining: int = TURN_MS
 var host_deck: Array[int] = []
 var guest_deck: Array[int] = []
 var configured_seed: int = 1
@@ -46,6 +49,7 @@ func configure(seed_value: int, room_secret: String, now: int, chosen: Variant =
     secret = room_secret
     guest_identity = ""
     guest_connected = false
+    host_connected = true
     phase = "waiting"
     revision = 1
     next_sequence = [1, 1]
@@ -54,7 +58,9 @@ func configure(seed_value: int, room_secret: String, now: int, chosen: Variant =
     turn_deadline = now + TURN_MS
     match_deadline = now + MATCH_MS
     reconnect_deadline = 0
+    host_reconnect_deadline = 0
     paused_remaining = TURN_MS
+    host_paused_remaining = TURN_MS
     return {"ok": true}
 
 func connect_guest(room_secret: String, identity: String, now: int, chosen: Variant = null) -> Dictionary:
@@ -83,7 +89,7 @@ func connect_guest(room_secret: String, identity: String, now: int, chosen: Vari
     guest_identity = identity
     guest_connected = true
     reconnect_deadline = 0
-    phase = "playing"
+    phase = "playing" if host_connected else "reconnecting"
     if first_join:
         match_deadline = last_now + MATCH_MS
         turn_deadline = last_now + TURN_MS
@@ -102,6 +108,33 @@ func disconnect_guest(now: int) -> void:
         paused_remaining = maxi(1, turn_deadline - last_now)
         phase = "reconnecting"
     revision += 1
+
+## An online host has the same reconnect grace as the guest.
+func disconnect_host(now: int) -> void:
+    tick(now)
+    if not host_connected:
+        return
+    host_connected = false
+    if phase != "finished" and phase != "waiting":
+        host_reconnect_deadline = last_now + RECONNECT_MS
+        if int(game.state.active) == 0:
+            host_paused_remaining = maxi(1, turn_deadline - last_now)
+        phase = "reconnecting"
+    revision += 1
+
+func resume_host(now: int) -> Dictionary:
+    tick(now)
+    if phase == "finished":
+        return {"ok": false, "error": "finished"}
+    if host_connected:
+        return {"ok": false, "error": "already_connected"}
+    host_connected = true
+    host_reconnect_deadline = 0
+    if int(game.state.active) == 0 and not guest_identity.is_empty():
+        turn_deadline = last_now + maxi(1, host_paused_remaining)
+    phase = "waiting" if guest_identity.is_empty() else ("playing" if guest_connected else "reconnecting")
+    revision += 1
+    return {"ok": true}
 
 func resign(player: int, now: int) -> void:
     tick(now)
@@ -129,13 +162,22 @@ func tick(now: int) -> void:
         phase = "finished"
         revision += 1
         return
+    if not host_connected and host_reconnect_deadline > 0 and last_now >= host_reconnect_deadline:
+        game.state.winner = 1
+        game.state.reason = "disconnect"
+        phase = "finished"
+        revision += 1
+        return
     for i in range(6):
         if game.state.winner != -1 or last_now < turn_deadline:
             break
-        if int(game.state.active) == 1 and not guest_connected:
+        if (int(game.state.active) == 1 and not guest_connected) or (int(game.state.active) == 0 and not host_connected):
             break
-        game.timeout(int(game.state.active))
+        var previous_active: int = int(game.state.active)
+        game.timeout(previous_active)
         turn_deadline += Clock.millis_for_turn(int(game.state.turn))
+        if previous_active != int(game.state.active) and int(game.state.active) == 0 and not host_connected:
+            host_paused_remaining = Clock.millis_for_turn(int(game.state.turn))
         paused_remaining = Clock.millis_for_turn(int(game.state.turn))
         revision += 1
     if game.state.winner != -1:
@@ -160,7 +202,7 @@ func act(player: int, sequence: Variant, value: Variant, now: int) -> Dictionary
         return old.response.duplicate(true)
     if seq != next_sequence[player]:
         return {"ok": false, "error": "out_of_order", "next_sequence": next_sequence[player]}
-    if phase == "waiting" or (player == 1 and not guest_connected):
+    if phase == "waiting" or (player == 1 and not guest_connected) or (player == 0 and not host_connected):
         return {"ok": false, "error": "not_connected"}
     if phase == "finished":
         return {"ok": false, "error": "finished"}
@@ -184,10 +226,18 @@ func view_for(player: int) -> Dictionary:
     var result: Dictionary = MatchView.for_player(game, player)
     if result.is_empty():
         return result
+    var remaining: int = maxi(0, turn_deadline - last_now)
+    if int(game.state.active) == 0 and not host_connected:
+        remaining = host_paused_remaining
+    elif int(game.state.active) == 1 and not guest_connected:
+        remaining = paused_remaining
+    var reconnect_at: int = reconnect_deadline if not guest_connected else host_reconnect_deadline
+    if not guest_connected and not host_connected and host_reconnect_deadline > 0:
+        reconnect_at = mini(reconnect_deadline, host_reconnect_deadline)
     result.merge({"v": VERSION, "rules": RULES, "revision": revision, "phase": phase,
         "next_sequence": next_sequence[player], "peer_connected": guest_connected,
-        "turn_remaining_ms": maxi(0, turn_deadline - last_now),
-        "reconnect_remaining_ms": maxi(0, reconnect_deadline - last_now)}, true)
+        "turn_remaining_ms": remaining,
+        "reconnect_remaining_ms": maxi(0, reconnect_at - last_now)}, true)
     if phase == "waiting" or (player == 1 and not guest_connected):
         result.legal = []
     return result
