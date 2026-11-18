@@ -140,6 +140,10 @@ func request(peer: int, value: Variant, now: int, entropy: Dictionary = {}) -> D
         peer_rooms[peer] = id
         return {"ok":true,"kind":"joined","room":id,"player":1,"resumed":joined.resumed,"view":_view(row,peer)}
     if kind == "resume":
+        # A connected peer must not steal the transport binding of another room.
+        # Reconnection is only valid after detach_peer has released the old binding.
+        if peer_rooms.has(peer):
+            return {"ok":false,"error":"already_joined"}
         if not Crypto.new().constant_time_compare(str(row.token).to_utf8_buffer(),str(message.token).to_utf8_buffer()):
             return {"ok":false,"error":"unauthorized"}
         if message.identity == row.host_identity and int(row.host_peer) < 0:
