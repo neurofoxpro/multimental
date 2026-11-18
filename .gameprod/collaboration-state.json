@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "neurofoxpro/multimental",
-  "revision": 476,
+  "revision": 477,
   "claims": {
     "573a9d36-4018-4aff-be8a-d39dc645f280": {
       "token": "573a9d36-4018-4aff-be8a-d39dc645f280",
@@ -41,28 +41,22 @@
       "fence": 457,
       "updatedAt": 1794875756687,
       "expiresAt": 1794877556687
+    },
+    "06cb469c-66f2-4550-8455-6cda01fce232": {
+      "token": "06cb469c-66f2-4550-8455-6cda01fce232",
+      "task": "NET-06",
+      "owner": "mm12-host-reconnect-20261118",
+      "base": "945a15b65a97aba3f3f9a007f6a84adcb01a238c",
+      "resources": [
+        "area:network",
+        "task:NET-06"
+      ],
+      "fence": 477,
+      "updatedAt": 1794961743921,
+      "expiresAt": 1794963543921
     }
   },
   "events": [
-    {
-      "id": "cd8a1bb3-b2cc-4d16-90f5-c768310a4d86",
-      "hash": "e89e1d6318d1426d27db3ffcf6808fb6585965aec44213d03db1813aa11dd4f1",
-      "revision": 221,
-      "result": {
-        "status": "claimed",
-        "token": "cd8a1bb3-b2cc-4d16-90f5-c768310a4d86",
-        "task": "CONTENT-03",
-        "owner": "content-pipeline-20260927-c82f",
-        "base": "82cc8faecedd3b5d786c3ca0424f08be2ef14764",
-        "resources": [
-          "area:automation",
-          "task:CONTENT-03"
-        ],
-        "fence": 221,
-        "updatedAt": 1790525395849,
-        "expiresAt": 1790527195849
-      }
-    },
     {
       "id": "26d6a964-5bef-4568-bf13-e575f275cd4f",
       "hash": "86d8ce9d1e123991f1e0854d04d4ef280fa0a59ba72926b97de10d4c1bd560ce",
@@ -4631,6 +4625,25 @@
         "task": "NET-06",
         "owner": "mm11-net06-edge-20261118",
         "fence": 467
+      }
+    },
+    {
+      "id": "06cb469c-66f2-4550-8455-6cda01fce232",
+      "hash": "6b7cc1a2be74e2fe0bafd1cbebb72106343a761f5892628c9d58821635f45cd5",
+      "revision": 477,
+      "result": {
+        "status": "claimed",
+        "token": "06cb469c-66f2-4550-8455-6cda01fce232",
+        "task": "NET-06",
+        "owner": "mm12-host-reconnect-20261118",
+        "base": "945a15b65a97aba3f3f9a007f6a84adcb01a238c",
+        "resources": [
+          "area:network",
+          "task:NET-06"
+        ],
+        "fence": 477,
+        "updatedAt": 1794961743921,
+        "expiresAt": 1794963543921
       }
     }
   ]
