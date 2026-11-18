@@ -57,7 +57,7 @@ function part(request, winner = 'first') {
       schemaVersion: 1,
       ok: true,
       plan: 'standard-start-v1',
-      rules: 'terrain-sweep-v3-balance1',
+      rules: 'terrain-sweep-v4-accumulated-resources',
       rows,
       engine: { major: 4, minor: 7, patch: 2, status: 'stable' },
       limitsAreClockMinutes: false,

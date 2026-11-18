@@ -17,7 +17,7 @@ func _init(secret: String = "") -> void:
 func view() -> Dictionary:
     var me: Dictionary = game.state.players[0]
     var other: Dictionary = game.state.players[1]
-    return {"board": game.state.board.duplicate(true), "hand": me.hand.duplicate(), "coins": me.coins, "deck_count": me.deck.size(), "opponent_hand_count": other.hand.size(), "opponent_deck_count": other.deck.size(), "active": game.state.active, "turn": game.state.turn, "winner": game.state.winner, "legal": game.legal(0)}
+    return {"board": game.state.board.duplicate(true), "hand": me.hand.duplicate(), "coins": me.coins, "mana": me.get("mana", 0), "crystals": me.get("crystals", 0), "deck_count": me.deck.size(), "opponent_hand_count": other.hand.size(), "opponent_deck_count": other.deck.size(), "active": game.state.active, "turn": game.state.turn, "winner": game.state.winner, "legal": game.legal(0)}
 func integer(value: Variant, low: int, high: int) -> bool:
     if typeof(value) not in [TYPE_INT, TYPE_FLOAT]:
         return false

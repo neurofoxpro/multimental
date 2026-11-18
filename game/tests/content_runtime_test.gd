@@ -13,7 +13,7 @@ func _initialize()->void:
     var g=Core.new()
     var old=Legacy.new()
     check(Core.CARD_COUNT==30 and Core.Deck.CARD_COUNT==30,"thirty accepted IDs and grant unchanged")
-    check(Core.RULES_ID=="terrain-sweep-v3-balance1","same compatible combat rules")
+    check(Core.RULES_ID=="terrain-sweep-v4-accumulated-resources","same compatible combat rules")
     for id in range(30):
         check(g.card(id)==old.card(id),"accepted row matches legacy formula "+str(id))
         var changed:Dictionary=g.card(id)

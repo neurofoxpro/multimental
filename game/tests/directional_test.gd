@@ -108,12 +108,12 @@ func _initialize() -> void:
         g.start(seed_value)
         var first: int = g.state.first
         var second: int = 1 - first
-        check(g.state.players[first].coins == 1 and g.state.players[second].coins == 2, "second player +1 from match start")
+        check(g.state.players[first].coins == 1 and g.state.players[second].coins == 1, "first income and pending second-player compensation initialized once")
         g.apply(first, {"type": "pass"})
         check(g.state.players[second].coins == 2, "opening bonus survives first handover")
         g.apply(second, {"type": "pass"})
         g.apply(first, {"type": "pass"})
-        check(g.state.players[second].coins == 2, "bonus does not recur next round")
+        check(g.state.players[second].coins == 3 and g.state.players[first].coins == 2, "base income accumulates each personal turn without repeating compensation")
     var room = Rules.new()
     var secret: String = "a".repeat(64)
     room.configure(42, secret, 1000)

@@ -23,7 +23,7 @@ export function validatePlan(plan) {
   if (
     plan?.schemaVersion !== 1 ||
     plan.id !== 'mixed-competition-v1' ||
-    plan.rules !== 'terrain-sweep-v3-balance1' ||
+    plan.rules !== 'terrain-sweep-v4-accumulated-resources' ||
     plan.task !== 'BALANCE-01' ||
     plan.defaultCount !== 32 ||
     plan.defaultSeed !== 20260929 ||
@@ -153,7 +153,7 @@ export function validateShard(data, request) {
     data?.schemaVersion !== 1 ||
     data.ok !== true ||
     data.plan !== 'mixed-competition-v1' ||
-    data.rules !== 'terrain-sweep-v3-balance1' ||
+    data.rules !== 'terrain-sweep-v4-accumulated-resources' ||
     data.sourceGameplayChanged !== false ||
     data.limitsAreClockMinutes !== false ||
     data.engine?.major !== 4 ||
