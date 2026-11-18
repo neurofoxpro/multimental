@@ -62,6 +62,10 @@ static func build(ui) -> void:
     ui.rotation_right.custom_minimum_size.x = 54
     ui.rotation_right.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
     actions.add_child(ui.rotation_right)
+    ui.confirm_placement_button = ui.button(ui.t("РАЗМЕСТИТЬ", "DEPLOY"),ui.confirm_card_placement,58)
+    ui.confirm_placement_button.name = "ConfirmPlacement"
+    Style.decorate_button(ui.confirm_placement_button,true)
+    actions.add_child(ui.confirm_placement_button)
     ui.sweep_button = ui.button("",ui.attack_selected,58)
     ui.sweep_button.name = "SweepAttack"
     Style.decorate_button(ui.sweep_button,true)
@@ -91,7 +95,7 @@ static func build(ui) -> void:
     layout.panel.add_child(hand_caption)
     var hand_scroll := ScrollContainer.new()
     hand_scroll.name = "HandScroll"
-    hand_scroll.custom_minimum_size.y = 200
+    hand_scroll.custom_minimum_size.y = 210
     hand_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_AUTO
     hand_scroll.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
     hand_scroll.follow_focus = true
@@ -149,8 +153,10 @@ static func render(ui, view: Dictionary) -> void:
     var resources: Label = ui.find_child("YourBattleResources",true,false)
     resources.text = "◉ %d  ·  ✧ %d  ·  ◆ %d  ·  " % [int(view.coins), int(view.get("mana", 0)), int(view.get("crystals", 0))] + ui.t("В колоде %d", "Deck %d") % view.deck_count
     resources.tooltip_text = ui.t("Монеты · доход +%d/ход · Мана 0 (позже) · Кристаллы 0 (позже) · карт в руке соперника %d", "Coins · income +%d/turn · Mana 0 (future) · Crystals 0 (future) · opponent hand %d") % [1 + int(view.get("income_bonus",0)), int(view.opponent_hand_count)]
-    ui.rotation_left.visible = selected_card
-    ui.rotation_right.visible = selected_card
+    ui.rotation_left.visible = selected_card and ui.selected_cell >= 0
+    ui.rotation_right.visible = selected_card and ui.selected_cell >= 0
+    ui.confirm_placement_button.visible = selected_card and ui.selected_cell >= 0
+    ui.confirm_placement_button.disabled = not selected_card or ui.selected_cell < 0 or Intent.play(view,ui.selected_hand,ui.selected_cell,ui.selected_direction,pending).is_empty()
     ui.rotation_left.disabled = not selected_card or not Intent.available(view,pending) or int(view.placed_cell) >= 0
     ui.rotation_right.disabled = ui.rotation_left.disabled
     ui.sweep_button.visible = selected_unit
@@ -160,11 +166,13 @@ static func render(ui, view: Dictionary) -> void:
     ui.aim_label.visible = not selected_unit
     ui.aim_label.text = ui.t("Осмотр не расходует ход", "Inspection does not spend your turn") if int(view.active) != 0 else ui.t("Карта/фигура → клетка/цель", "Card/unit → tile/target")
     if selected_card:
-        ui.aim_label.text = Feedback.pattern(ui.game.card(int(view.hand[ui.selected_hand])),ui.selected_direction)
+        ui.aim_label.text = Feedback.pattern(ui.game.card(int(view.hand[ui.selected_hand])),ui.selected_direction) if ui.selected_cell >= 0 else ui.t("Выберите клетку", "Choose a tile")
     var cancel: Button = ui.find_child("CancelSelection",true,false)
     cancel.visible = selected_card or selected_unit
     ui.end_turn_button.disabled = not Intent.available(view,pending)
     Style.decorate_button(ui.end_turn_button,not selected_card and not selected_unit)
+    if ui.selected_cell >= 0 and (not selected_card or Intent.play(view,ui.selected_hand,ui.selected_cell,ui.selected_direction,pending).is_empty()):
+        ui.selected_cell = -1
     for index in range(9):
         ui.board_buttons[index].present(ui,view,index,preview.targets,not preview.command.is_empty())
     # Keep slot identity, focus, and the horizontal scroll position on presentation-only refresh.
@@ -193,7 +201,7 @@ static func render(ui, view: Dictionary) -> void:
         ui.message.text = ui.t("Ход соперника. Можно изучить карты и поле.", "Opponent's turn. Inspect your cards and the board.")
     elif selected_card:
         var card: Dictionary = ui.game.card(int(view.hand[ui.selected_hand]))
-        ui.message.text = str(card[ui.language]) + ui.t(" · ◉ %d\nПоверните при необходимости и коснитесь клетки.", " · ◉ %d\nRotate if needed, then tap an available cell.") % card.cost
+        ui.message.text = (ui.t("Поверните парящую карту и нажмите РАЗМЕСТИТЬ", "Rotate the hovering card and press DEPLOY") if ui.selected_cell >= 0 else ui.t("Выберите подсвеченную клетку для предпросмотра", "Choose a highlighted tile to preview")) + " · " + str(card[ui.language])
     elif selected_unit:
         if preview.command.is_empty():
             ui.message.text = ui.t("Нет доступной атаки.\nВыберите другую фигуру или завершите ход.", "No legal attack.\nSelect another unit or end the turn.")

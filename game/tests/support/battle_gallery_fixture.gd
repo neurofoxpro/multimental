@@ -32,7 +32,9 @@ static func show(ui, page: String) -> bool:
     ui.game.state.board[2] = unit(ui,0,1,3)
     ui.refresh()
     match page:
-        "battle-card": ui.on_hand(0)
+        "battle-card":
+            ui.on_hand(0)
+            ui.on_cell(3)
         "battle-unit": ui.on_cell(0)
         "battle-allies":
             ui.on_cell(0)
@@ -60,7 +62,7 @@ static func show(ui, page: String) -> bool:
     return matches(ui,page) and ui.game.commands.is_empty()
 static func matches(ui, page: String) -> bool:
     match page:
-        "battle-card": return ui.selected_hand == 0 and ui.rotation_left.visible
+        "battle-card": return ui.selected_hand == 0 and ui.selected_cell == 3 and ui.rotation_left.visible and ui.confirm_placement_button.visible
         "battle-unit": return ui.selected_unit == 0 and ui.sweep_button.visible and not ui.sweep_button.disabled
         "battle-allies": return ui.friendly_confirm.visible and not ui.friendly_pending.is_empty()
         "battle-opponent": return ui._view().active == 1 and ui.end_turn_button.disabled

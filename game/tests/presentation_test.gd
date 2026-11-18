@@ -42,6 +42,8 @@ func run_test() -> void:
         ui.on_hand(int(chosen.hand))
         check(ui.tutorial_step == 1, "tutorial responds to card selection")
         ui.on_cell(int(chosen.cell))
+        check(ui.game.count_cells(0) == 0, "tutorial hover has no gameplay effect")
+        ui.confirm_card_placement()
         check(ui.game.count_cells(0) == 1 and ui.tutorial_step == 2, "tutorial places real unit")
     var count: int = ui.game.commands.size()
     ui.deadline = Time.get_unix_time_from_system() - 60

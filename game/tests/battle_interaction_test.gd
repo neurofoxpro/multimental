@@ -181,6 +181,8 @@ func run_test() -> void:
         card.grab_focus()
         var offset: int = hand_scroll.scroll_horizontal
         before = ui.game.digest()
+        ui.on_cell(3)
+        check(ui.selected_cell == 3 and ui.game.digest() == before, "hover preview never sends a play command")
         ui.rotate_card(1)
         await settle()
         check(ui.game.digest() == before and ui.selected_direction == 1, "rotation previews without changing game")
@@ -196,6 +198,8 @@ func run_test() -> void:
         check(not command.is_empty(), "real legal placement fixture")
         if not command.is_empty():
             await click_at(ui.board_buttons[int(command.cell)].get_global_rect().get_center())
+            check(ui.game.commands.is_empty() and ui.game.digest() == before, "tap changes hover target, not domain state")
+            ui.confirm_card_placement()
             check(ui.game.commands.size() == 1 and ui.game.state.board[int(command.cell)].direction == 1, "second actual hit deploys the selected oriented card")
         fixture(ui,false)
         ui.game.state.active = 1
