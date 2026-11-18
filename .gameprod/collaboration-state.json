@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "neurofoxpro/multimental",
-  "revision": 477,
+  "revision": 478,
   "claims": {
     "573a9d36-4018-4aff-be8a-d39dc645f280": {
       "token": "573a9d36-4018-4aff-be8a-d39dc645f280",
@@ -52,30 +52,11 @@
         "task:NET-06"
       ],
       "fence": 477,
-      "updatedAt": 1794961743921,
-      "expiresAt": 1794963543921
+      "updatedAt": 1794962360329,
+      "expiresAt": 1794964160329
     }
   },
   "events": [
-    {
-      "id": "26d6a964-5bef-4568-bf13-e575f275cd4f",
-      "hash": "86d8ce9d1e123991f1e0854d04d4ef280fa0a59ba72926b97de10d4c1bd560ce",
-      "revision": 222,
-      "result": {
-        "status": "renewed",
-        "token": "cd8a1bb3-b2cc-4d16-90f5-c768310a4d86",
-        "task": "CONTENT-03",
-        "owner": "content-pipeline-20260927-c82f",
-        "base": "82cc8faecedd3b5d786c3ca0424f08be2ef14764",
-        "resources": [
-          "area:automation",
-          "task:CONTENT-03"
-        ],
-        "fence": 221,
-        "updatedAt": 1790526246097,
-        "expiresAt": 1790528046097
-      }
-    },
     {
       "id": "8d81b145-4b50-4b99-99b1-854a7fec3cc4",
       "hash": "aac8cdee8a12495f177e513a409a6174b5dfde4616b995fa5f307f3ba697f634",
@@ -4644,6 +4625,25 @@
         "fence": 477,
         "updatedAt": 1794961743921,
         "expiresAt": 1794963543921
+      }
+    },
+    {
+      "id": "4fd29084-aa58-473c-8505-d06c5eff3a29",
+      "hash": "b61c4307a62a8352796248ea5ac8ec73373100d601302151fd4cab763de15657",
+      "revision": 478,
+      "result": {
+        "status": "renewed",
+        "token": "06cb469c-66f2-4550-8455-6cda01fce232",
+        "task": "NET-06",
+        "owner": "mm12-host-reconnect-20261118",
+        "base": "945a15b65a97aba3f3f9a007f6a84adcb01a238c",
+        "resources": [
+          "area:network",
+          "task:NET-06"
+        ],
+        "fence": 477,
+        "updatedAt": 1794962360329,
+        "expiresAt": 1794964160329
       }
     }
   ]
