@@ -201,7 +201,7 @@ export function validateShard(data, request) {
         (player, i) =>
           player.hand !== (i === row.first ? 5 : 4) ||
           player.deck !== 15 - player.hand ||
-          player.coins !== (i === row.first ? 1 : 2)
+          player.coins !== 1
       )
     )
       throw Error('MIXED_BALANCE_PATCHED_OPENING');
