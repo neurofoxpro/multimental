@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "neurofoxpro/multimental",
-  "revision": 498,
+  "revision": 499,
   "claims": {
     "5769688a-4b88-4390-b585-09db38d5bc0f": {
       "token": "5769688a-4b88-4390-b585-09db38d5bc0f",
@@ -28,28 +28,22 @@
       "fence": 493,
       "updatedAt": 1795003242103,
       "expiresAt": 1795005042103
+    },
+    "3f4f472e-4cc8-41f6-b0a6-b77814937ae4": {
+      "token": "3f4f472e-4cc8-41f6-b0a6-b77814937ae4",
+      "task": "BALANCE-01",
+      "owner": "mm19-post-resource-balance-20261118",
+      "base": "0db51c8624dbd8a0a610a3563a41ce567b9fc995",
+      "resources": [
+        "area:game-core",
+        "task:BALANCE-01"
+      ],
+      "fence": 499,
+      "updatedAt": 1795004553073,
+      "expiresAt": 1795006353073
     }
   },
   "events": [
-    {
-      "id": "98666474-80b0-40d7-9e22-610971ace06d",
-      "hash": "03e5fe7a5a8d5b021c8d6f3e1aa8ff650f5dc6582b4c77cc62c298d3436f5dc2",
-      "revision": 243,
-      "result": {
-        "status": "claimed",
-        "token": "98666474-80b0-40d7-9e22-610971ace06d",
-        "task": "BALANCE-01",
-        "owner": "balance-standard-start-20260928-b617",
-        "base": "28f74ecca395131e6f6a78ff42046b800318c11e",
-        "resources": [
-          "area:game-core",
-          "task:BALANCE-01"
-        ],
-        "fence": 243,
-        "updatedAt": 1790547338125,
-        "expiresAt": 1790549138125
-      }
-    },
     {
       "id": "0d4e1d6b-2499-445d-bf57-090b38b41e71",
       "hash": "fafe2c62232642a83d27e6e2320d013bfaf96d08c134d93a41f465cc529255f7",
@@ -4611,6 +4605,25 @@
         "fence": 493,
         "updatedAt": 1795003242103,
         "expiresAt": 1795005042103
+      }
+    },
+    {
+      "id": "3f4f472e-4cc8-41f6-b0a6-b77814937ae4",
+      "hash": "b956a174b52c6dbba5e6cbf6c0c88ac09e002f6632caae05233cbf86701a2847",
+      "revision": 499,
+      "result": {
+        "status": "claimed",
+        "token": "3f4f472e-4cc8-41f6-b0a6-b77814937ae4",
+        "task": "BALANCE-01",
+        "owner": "mm19-post-resource-balance-20261118",
+        "base": "0db51c8624dbd8a0a610a3563a41ce567b9fc995",
+        "resources": [
+          "area:game-core",
+          "task:BALANCE-01"
+        ],
+        "fence": 499,
+        "updatedAt": 1795004553073,
+        "expiresAt": 1795006353073
       }
     }
   ]
