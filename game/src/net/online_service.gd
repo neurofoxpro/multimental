@@ -143,6 +143,9 @@ func request(peer: int, value: Variant, now: int, entropy: Dictionary = {}) -> D
         if not Crypto.new().constant_time_compare(str(row.token).to_utf8_buffer(),str(message.token).to_utf8_buffer()):
             return {"ok":false,"error":"unauthorized"}
         if message.identity == row.host_identity and int(row.host_peer) < 0:
+            var host_resumed: Dictionary = row.authority.resume_host(now)
+            if not host_resumed.ok:
+                return host_resumed
             row.host_peer = peer
             peer_rooms[peer] = id
             return {"ok":true,"kind":"resumed","room":id,"player":0,"view":_view(row,peer)}
@@ -181,6 +184,7 @@ func detach_peer(peer: int, now: int) -> String:
     var row: Dictionary = rooms[id]
     if int(row.host_peer) == peer:
         row.host_peer = -1
+        row.authority.disconnect_host(now)
     elif int(row.guest_peer) == peer:
         row.guest_peer = -1
         row.authority.disconnect_guest(now)
