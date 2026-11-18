@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "neurofoxpro/multimental",
-  "revision": 516,
+  "revision": 517,
   "claims": {
     "5769688a-4b88-4390-b585-09db38d5bc0f": {
       "token": "5769688a-4b88-4390-b585-09db38d5bc0f",
@@ -28,28 +28,22 @@
       "fence": 499,
       "updatedAt": 1795006457819,
       "expiresAt": 1795008257819
+    },
+    "c949a96f-7204-448a-8121-03dae8d17c1c": {
+      "token": "c949a96f-7204-448a-8121-03dae8d17c1c",
+      "task": "UX-05",
+      "owner": "mm-ui-hover-rollback-20261118-b",
+      "base": "d3becc6bd1f0588e102e0dea31aeb20071d14bf0",
+      "resources": [
+        "area:game-ui",
+        "task:UX-05"
+      ],
+      "fence": 517,
+      "updatedAt": 1795016345758,
+      "expiresAt": 1795018145758
     }
   },
   "events": [
-    {
-      "id": "4b0f73d8-6fee-44b7-a80d-e9afb15463b6",
-      "hash": "8ac5520ba7dae6faf018062ee2155770b255074c26926814cffae79b18d6db2e",
-      "revision": 261,
-      "result": {
-        "status": "renewed",
-        "token": "959c5ad2-0c24-4712-bfb9-72b5ea5a2717",
-        "task": "QA-02",
-        "owner": "fleet-delivery-20260928-d82a",
-        "base": "fdcea113231a7e388c471e374b0feeb706450a96",
-        "resources": [
-          "area:devices",
-          "task:QA-02"
-        ],
-        "fence": 259,
-        "updatedAt": 1790555017597,
-        "expiresAt": 1790556817597
-      }
-    },
     {
       "id": "b32b9aea-2356-4c6b-9d9f-17fb4b7cff52",
       "hash": "79100030bcbdeece8c6f5459c58e4d9ceaea23513d2caa1235d5904464dbc9e5",
@@ -4604,6 +4598,25 @@
         "task": "UX-12",
         "owner": "mm18-collection-focus-20261118",
         "fence": 493
+      }
+    },
+    {
+      "id": "c949a96f-7204-448a-8121-03dae8d17c1c",
+      "hash": "25a9f978a06000a02dc917d551c2dc67369d3bebbd8ed7fe61d9d4dda5eb8127",
+      "revision": 517,
+      "result": {
+        "status": "claimed",
+        "token": "c949a96f-7204-448a-8121-03dae8d17c1c",
+        "task": "UX-05",
+        "owner": "mm-ui-hover-rollback-20261118-b",
+        "base": "d3becc6bd1f0588e102e0dea31aeb20071d14bf0",
+        "resources": [
+          "area:game-ui",
+          "task:UX-05"
+        ],
+        "fence": 517,
+        "updatedAt": 1795016345758,
+        "expiresAt": 1795018145758
       }
     }
   ]
