@@ -20,6 +20,16 @@ func listen(port: int, tls: TLSOptions, bind: String = "*") -> Error:
     _fresh()
     return peer.create_server(port,bind,tls)
 
+## A cleartext backend is permitted only by an explicit trusted platform-edge profile.
+## Public clients still use wss://; this must not be exposed directly to the internet.
+func listen_trusted_edge(port: int, profile: Dictionary, bind: String = "*") -> Error:
+    if profile.get("kind", "") != "trusted-platform-tls-edge-v1" or profile.get("external_scheme", "") != "wss" or profile.get("provider", "") not in ["render", "koyeb"]:
+        return ERR_INVALID_PARAMETER
+    if port < 1024 or port > 65535 or bind.length() > 255 or bind.is_empty():
+        return ERR_INVALID_PARAMETER
+    _fresh()
+    return peer.create_server(port, bind)
+
 func connect_to(url: String, tls: TLSOptions) -> Error:
     if tls == null or not url.begins_with("wss://") or url.length() > 2048:
         return ERR_INVALID_PARAMETER

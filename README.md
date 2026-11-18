@@ -22,7 +22,7 @@ check — полный прогон; profile-test list — целевые наб
 
 [Галерея 60 реальных кадров RU/EN](docs/SCREENSHOTS.ru.md) · [проверяемый манифест](docs/media/gallery/current.json). Это source-preview из изолированного профиля, не снимки установленного APK.
 
-<img src="docs/media/gallery/99296cbf0fb64a139c1d67d146129210b7d36cecfa04934e7b113d8eb17b7f18/727c44ac466feb640c3b1113c617aa99/ru-menu-720x1280.png" width="230" alt="ru-menu-720x1280"> <img src="docs/media/gallery/99296cbf0fb64a139c1d67d146129210b7d36cecfa04934e7b113d8eb17b7f18/727c44ac466feb640c3b1113c617aa99/ru-battle-720x1280.png" width="230" alt="ru-battle-720x1280"> <img src="docs/media/gallery/99296cbf0fb64a139c1d67d146129210b7d36cecfa04934e7b113d8eb17b7f18/727c44ac466feb640c3b1113c617aa99/ru-card-720x1280.png" width="230" alt="ru-card-720x1280">
+<img src="docs/media/gallery/6e6a0b7491769e29aabc84d1af84c93c4216edd7996d300f9d5adb58e428077d/8fff94066a1752a392c46f4dc694c222/ru-menu-720x1280.png" width="230" alt="ru-menu-720x1280"> <img src="docs/media/gallery/6e6a0b7491769e29aabc84d1af84c93c4216edd7996d300f9d5adb58e428077d/8fff94066a1752a392c46f4dc694c222/ru-battle-720x1280.png" width="230" alt="ru-battle-720x1280"> <img src="docs/media/gallery/6e6a0b7491769e29aabc84d1af84c93c4216edd7996d300f9d5adb58e428077d/8fff94066a1752a392c46f4dc694c222/ru-card-720x1280.png" width="230" alt="ru-card-720x1280">
 <!-- gameprod:gallery:end -->
 
 Очередь: `work plan --tag beta`; новый изолированный срез: `work next UNIQUE_ALIAS --tag kind:automation`. Исследование: `study packet TASK` → `study run TASK` → анализ агента → `study record TASK RESULT.json`. Короткий релизный цикл: `focus` → `apply` → `ship`.

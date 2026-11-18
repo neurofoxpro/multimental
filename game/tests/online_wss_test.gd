@@ -74,6 +74,19 @@ func run_test() -> void:
     server.stop()
     server.queue_free()
     await process_frame
+    var edge := Server.new({"max_rooms":2})
+    root.add_child(edge)
+    var profile: Dictionary = {"kind":"trusted-platform-tls-edge-v1","external_scheme":"wss","provider":"render"}
+    check(edge.listen_trusted_edge(PORT + 1, {}, "127.0.0.1") == ERR_INVALID_PARAMETER,"edge mode requires explicit trusted profile")
+    check(edge.listen_trusted_edge(PORT + 1, {"kind":"trusted-platform-tls-edge-v1","external_scheme":"ws","provider":"render"}, "127.0.0.1") == ERR_INVALID_PARAMETER,"edge mode rejects public plain WS")
+    check(edge.listen_trusted_edge(PORT + 1, {"kind":"trusted-platform-tls-edge-v1","external_scheme":"wss","provider":"unknown"}, "127.0.0.1") == ERR_INVALID_PARAMETER,"edge mode requires known platform")
+    check(edge.listen_trusted_edge(PORT + 1, profile, "127.0.0.1") == OK,"trusted edge backend listens without local TLS")
+    check(edge.listen_trusted_edge(PORT + 2, profile, "127.0.0.1") == ERR_ALREADY_IN_USE,"edge listener rejects duplicate start")
+    var disallowed := Wire.new()
+    check(disallowed.connect_to("ws://127.0.0.1:%d" % (PORT + 1), TLSOptions.client(cert)) == ERR_INVALID_PARAMETER,"public client continues to reject plain WS")
+    edge.stop()
+    edge.queue_free()
+    await process_frame
     if failures == 0:
         print("MULTIMENTAL_ONLINE_WSS_PASS checks=%d tls=true subprotocol=%s authority=RoomRules" % [checks,Protocol.SUBPROTOCOL])
     quit(0 if failures == 0 else 1)
