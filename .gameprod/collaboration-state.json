@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "neurofoxpro/multimental",
-  "revision": 482,
+  "revision": 483,
   "claims": {
     "573a9d36-4018-4aff-be8a-d39dc645f280": {
       "token": "573a9d36-4018-4aff-be8a-d39dc645f280",
@@ -41,41 +41,9 @@
       "fence": 457,
       "updatedAt": 1794875756687,
       "expiresAt": 1794877556687
-    },
-    "06cb469c-66f2-4550-8455-6cda01fce232": {
-      "token": "06cb469c-66f2-4550-8455-6cda01fce232",
-      "task": "NET-06",
-      "owner": "mm12-host-reconnect-20261118",
-      "base": "945a15b65a97aba3f3f9a007f6a84adcb01a238c",
-      "resources": [
-        "area:network",
-        "task:NET-06"
-      ],
-      "fence": 477,
-      "updatedAt": 1794962893596,
-      "expiresAt": 1794964693596
     }
   },
   "events": [
-    {
-      "id": "ceb2a912-f3a7-4c31-8172-c57299e17609",
-      "hash": "23d3eb6d43e83826a91939dbd2c8dc761cad44f8b6eed29b18e9c0d8f88135fc",
-      "revision": 227,
-      "result": {
-        "status": "renewed",
-        "token": "cd8a1bb3-b2cc-4d16-90f5-c768310a4d86",
-        "task": "CONTENT-03",
-        "owner": "content-pipeline-20260927-c82f",
-        "base": "82cc8faecedd3b5d786c3ca0424f08be2ef14764",
-        "resources": [
-          "area:automation",
-          "task:CONTENT-03"
-        ],
-        "fence": 221,
-        "updatedAt": 1790527517448,
-        "expiresAt": 1790529317448
-      }
-    },
     {
       "id": "1b803286-9edc-4d88-8979-64fe8beea1a4",
       "hash": "59126c63521646fe3b7631fbe2221a71e428647755e68510f95b89f4cf0349d7",
@@ -4644,6 +4612,18 @@
         "fence": 477,
         "updatedAt": 1794962893596,
         "expiresAt": 1794964693596
+      }
+    },
+    {
+      "id": "9b65ff07-5a10-4a50-9afd-7253952213c4",
+      "hash": "b2b17ca791a7acc56c0606e131e4c388cfac2bc2db2557e31439243bf6a0455d",
+      "revision": 483,
+      "result": {
+        "status": "released",
+        "token": "06cb469c-66f2-4550-8455-6cda01fce232",
+        "task": "NET-06",
+        "owner": "mm12-host-reconnect-20261118",
+        "fence": 477
       }
     }
   ]
