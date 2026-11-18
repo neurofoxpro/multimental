@@ -124,7 +124,16 @@ func run_test() -> void:
     ui.show_collection()
     editor = ui.find_child("CollectionScreen", true, false)
     check(editor.draft_id == deck_id and editor.draft_cards == expected, "restart restores selected deck and names")
+    editor.tabs.current_tab = 1
+    editor._refresh_rows()
+    var removed_row: HBoxContainer = editor.rows.get_node("Card_c015")
+    removed_row.get_node("Remove_c015").grab_focus()
+    await process_frame
     editor.change_card("c015", -1)
+    await process_frame
+    await process_frame
+    check(editor.rows.get_node_or_null("Card_c015") == null, "last copy disappears from deck-only tab")
+    check(editor.rows.get_node("Card_c016").get_node("Details_c016").has_focus(), "removing focused last copy moves focus to next card, not tabs")
     editor.request_new()
     check(editor.confirmation.visible and editor.draft_id == deck_id, "unsaved changes require explicit discard")
     editor.confirmation.canceled.emit()

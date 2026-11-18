@@ -291,6 +291,7 @@ func _update_visible_counts() -> void:
     var state: Dictionary = ui.profile.state()
     var definitions: Array[Dictionary] = Catalog.rows(state, search.text, elements.selected - 1)
     var removed_focused: bool = false
+    var fallback_focus: Control = null
     for card in definitions:
         var code: String = str(card.code)
         var line: HBoxContainer = rows.get_node_or_null("Card_" + code)
@@ -301,6 +302,13 @@ func _update_visible_counts() -> void:
             var focused: Control = get_viewport().gui_get_focus_owner()
             if focused != null and line.is_ancestor_of(focused):
                 removed_focused = true
+                var siblings: Array[Node] = rows.get_children()
+                var index: int = line.get_index()
+                var sibling_index: int = index + 1 if index + 1 < siblings.size() else index - 1
+                if sibling_index >= 0:
+                    var sibling: Node = siblings[sibling_index]
+                    if sibling is HBoxContainer:
+                        fallback_focus = sibling.get_child(0) as Control
             rows.remove_child(line)
             line.queue_free()
             continue
@@ -316,7 +324,10 @@ func _update_visible_counts() -> void:
     if rows.get_child_count() == 0:
         rows.add_child(ui.label(t("Карты не найдены. Измени поиск или фильтр.", "No cards found. Change the search or filter."), 18))
     if removed_focused:
-        tabs.grab_focus()
+        if is_instance_valid(fallback_focus):
+            fallback_focus.call_deferred("grab_focus")
+        else:
+            tabs.call_deferred("grab_focus")
     _update_status()
 
 func _refresh_rows() -> void:
