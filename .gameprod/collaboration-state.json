@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "neurofoxpro/multimental",
-  "revision": 485,
+  "revision": 486,
   "claims": {
     "5769688a-4b88-4390-b585-09db38d5bc0f": {
       "token": "5769688a-4b88-4390-b585-09db38d5bc0f",
@@ -15,28 +15,22 @@
       "fence": 456,
       "updatedAt": 1792362576792,
       "expiresAt": 1792364376792
+    },
+    "f3ac0bff-aea1-4847-ad42-f4f2fd8428ff": {
+      "token": "f3ac0bff-aea1-4847-ad42-f4f2fd8428ff",
+      "task": "BALANCE-01",
+      "owner": "mm17-battle-resources-20261118",
+      "base": "36f6886612a90786c7e957c09c36d7c01a3df5cc",
+      "resources": [
+        "area:game-core",
+        "task:BALANCE-01"
+      ],
+      "fence": 486,
+      "updatedAt": 1794969631597,
+      "expiresAt": 1794971431597
     }
   },
   "events": [
-    {
-      "id": "b1542d20-fef2-4c75-b6f2-91b94fa25203",
-      "hash": "c99b26a2c61a785223791957995cd1fa79ed7c402dcbee59c9fed4ec281d798d",
-      "revision": 230,
-      "result": {
-        "status": "renewed",
-        "token": "cd8a1bb3-b2cc-4d16-90f5-c768310a4d86",
-        "task": "CONTENT-03",
-        "owner": "content-pipeline-20260927-c82f",
-        "base": "82cc8faecedd3b5d786c3ca0424f08be2ef14764",
-        "resources": [
-          "area:automation",
-          "task:CONTENT-03"
-        ],
-        "fence": 221,
-        "updatedAt": 1790527832038,
-        "expiresAt": 1790529632038
-      }
-    },
     {
       "id": "712fecbb-a9ca-42fd-8d17-f34013586c88",
       "hash": "ed78be9ad28f421c621ae1db94bf82f181bdc7b2b6df08d1205150fef7107ece",
@@ -4584,6 +4578,25 @@
         "task": "UX-08",
         "owner": "mm18-ux08-route-1829",
         "fence": 451
+      }
+    },
+    {
+      "id": "f3ac0bff-aea1-4847-ad42-f4f2fd8428ff",
+      "hash": "7c741b123fb3794279bbcb7ee9d9d3dcaefb80ac8d5174c6be5d296152feca9f",
+      "revision": 486,
+      "result": {
+        "status": "claimed",
+        "token": "f3ac0bff-aea1-4847-ad42-f4f2fd8428ff",
+        "task": "BALANCE-01",
+        "owner": "mm17-battle-resources-20261118",
+        "base": "36f6886612a90786c7e957c09c36d7c01a3df5cc",
+        "resources": [
+          "area:game-core",
+          "task:BALANCE-01"
+        ],
+        "fence": 486,
+        "updatedAt": 1794969631597,
+        "expiresAt": 1794971431597
       }
     }
   ]
