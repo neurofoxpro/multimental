@@ -40,7 +40,7 @@ function part(request, winner = 'first') {
           opening: [0, 1].map((i) => ({
             hand: i === first ? 5 : 4,
             deck: i === first ? 10 : 11,
-            coins: i === first ? 1 : 2
+            coins: 1
           })),
           openingPasses: 0,
           plays: { 0: 2 },
@@ -124,6 +124,7 @@ for (const change of [
   (p) => (p.data.rows[0].seed = 0),
   (p) => (p.data.rows[1].first = 1 - p.data.rows[1].first),
   (p) => (p.data.rows[0].opening[0].hand = 6),
+  (p) => (p.data.rows[0].opening[1 - p.data.rows[0].first].coins = 2),
   (p) => (p.data.rows[0].canonicalStart = false),
   (p) => (p.data.rows[0].replayVerified = false),
   (p) => (p.data.rows[0].forcedLimit = true),

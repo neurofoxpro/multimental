@@ -155,10 +155,7 @@ export function validateShard(data, request) {
       !Array.isArray(r.opening) ||
       r.opening.length !== 2 ||
       r.opening.some(
-        (p, i) =>
-          p.hand !== (i === r.first ? 5 : 4) ||
-          p.deck !== 15 - p.hand ||
-          p.coins !== (i === r.first ? 1 : 2)
+        (p, i) => p.hand !== (i === r.first ? 5 : 4) || p.deck !== 15 - p.hand || p.coins !== 1
       )
     )
       throw Error('BALANCE_PATCHED_OPENING');

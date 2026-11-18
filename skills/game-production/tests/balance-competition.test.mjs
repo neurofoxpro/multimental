@@ -72,7 +72,7 @@ function row(seed, left, right, policyPair) {
     opening: [0, 1].map((player) => ({
       hand: player === first ? 5 : 4,
       deck: player === first ? 10 : 11,
-      coins: player === first ? 1 : 2
+      coins: 1
     })),
     plays: {},
     initialHash: H,
@@ -108,6 +108,10 @@ test('one mixed shard is exact ordered 10x10 per seed and rejects corruption', (
   const bad = structuredClone(valid);
   bad.data.rows[0].leftPolicy = 'random';
   assert.throws(() => validateShard(bad.data, request), /BAD_ROW/);
+  const oldOpening = structuredClone(valid);
+  const first = oldOpening.data.rows[0].first;
+  oldOpening.data.rows[0].opening[1 - first].coins = 2;
+  assert.throws(() => validateShard(oldOpening.data, request), /PATCHED_OPENING/);
   const duplicate = structuredClone(valid);
   duplicate.data.rows[1] = structuredClone(duplicate.data.rows[0]);
   assert.throws(() => validateShard(duplicate.data, request), /DUPLICATE/);
