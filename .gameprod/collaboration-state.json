@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "neurofoxpro/multimental",
-  "revision": 506,
+  "revision": 507,
   "claims": {
     "5769688a-4b88-4390-b585-09db38d5bc0f": {
       "token": "5769688a-4b88-4390-b585-09db38d5bc0f",
@@ -41,21 +41,22 @@
       "fence": 499,
       "updatedAt": 1795006457819,
       "expiresAt": 1795008257819
+    },
+    "00b6b97e-539d-4e11-9fe9-e9abe6da4962": {
+      "token": "00b6b97e-539d-4e11-9fe9-e9abe6da4962",
+      "task": "NET-06",
+      "owner": "mm6-lead-net06-20261118",
+      "base": "4ce2153c42bf07a75010ec61d810125904665790",
+      "resources": [
+        "area:network",
+        "task:NET-06"
+      ],
+      "fence": 507,
+      "updatedAt": 1795009667667,
+      "expiresAt": 1795011467667
     }
   },
   "events": [
-    {
-      "id": "02b2b9dc-b3f5-4bc1-9219-a338004cadd1",
-      "hash": "d62a3aab4b57af67c4919794fd3d3f0b2306f48659067852f11234c8a38bae98",
-      "revision": 251,
-      "result": {
-        "status": "released",
-        "token": "98666474-80b0-40d7-9e22-610971ace06d",
-        "task": "BALANCE-01",
-        "owner": "balance-standard-start-20260928-b617",
-        "fence": 243
-      }
-    },
     {
       "id": "d74ef2b0-3081-4ce6-a88e-2b95ececd556",
       "hash": "f0233ffb7431c12ac2d29ec324674e2632d06478e5a966551e583b7c565655fd",
@@ -4617,6 +4618,25 @@
         "task": "QA-02",
         "owner": "mm6-lead-qa02-20261118",
         "fence": 505
+      }
+    },
+    {
+      "id": "00b6b97e-539d-4e11-9fe9-e9abe6da4962",
+      "hash": "aadf33b02c1162f54616b96a510022cbcb55f9d9c865a10aa61fc120900a4cee",
+      "revision": 507,
+      "result": {
+        "status": "claimed",
+        "token": "00b6b97e-539d-4e11-9fe9-e9abe6da4962",
+        "task": "NET-06",
+        "owner": "mm6-lead-net06-20261118",
+        "base": "4ce2153c42bf07a75010ec61d810125904665790",
+        "resources": [
+          "area:network",
+          "task:NET-06"
+        ],
+        "fence": 507,
+        "updatedAt": 1795009667667,
+        "expiresAt": 1795011467667
       }
     }
   ]
