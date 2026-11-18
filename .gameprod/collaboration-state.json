@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "neurofoxpro/multimental",
-  "revision": 523,
+  "revision": 524,
   "claims": {
     "5769688a-4b88-4390-b585-09db38d5bc0f": {
       "token": "5769688a-4b88-4390-b585-09db38d5bc0f",
@@ -28,41 +28,9 @@
       "fence": 499,
       "updatedAt": 1795006457819,
       "expiresAt": 1795008257819
-    },
-    "c949a96f-7204-448a-8121-03dae8d17c1c": {
-      "token": "c949a96f-7204-448a-8121-03dae8d17c1c",
-      "task": "UX-05",
-      "owner": "mm-ui-hover-rollback-20261118-b",
-      "base": "d3becc6bd1f0588e102e0dea31aeb20071d14bf0",
-      "resources": [
-        "area:game-ui",
-        "task:UX-05"
-      ],
-      "fence": 517,
-      "updatedAt": 1795018417312,
-      "expiresAt": 1795020217312
     }
   },
   "events": [
-    {
-      "id": "33364576-8c8c-416a-809f-1d09b34b367b",
-      "hash": "258937d493e1108183b9f9d79b28f4c63b1a0d4f45939386696eb74ea589cc3c",
-      "revision": 268,
-      "result": {
-        "status": "claimed",
-        "token": "33364576-8c8c-416a-809f-1d09b34b367b",
-        "task": "BALANCE-01",
-        "owner": "balance-holdout-20260928-e71c",
-        "base": "161324944d674706c125f8c42d587c98cfac688e",
-        "resources": [
-          "area:game-core",
-          "task:BALANCE-01"
-        ],
-        "fence": 268,
-        "updatedAt": 1790556039501,
-        "expiresAt": 1790557839501
-      }
-    },
     {
       "id": "f799280d-0ba4-422f-83b4-79927e547612",
       "hash": "5921390d133617b98ed836e100a942081e831313070bc7e3a007199c82ada328",
@@ -4624,6 +4592,18 @@
         "fence": 517,
         "updatedAt": 1795018417312,
         "expiresAt": 1795020217312
+      }
+    },
+    {
+      "id": "52771d4c-6c9e-4aef-8c33-6c8d60773bc6",
+      "hash": "e260025c1076739b52feed9f365b2d67d8ddb644df0f7320d95bad45792c6aa9",
+      "revision": 524,
+      "result": {
+        "status": "released",
+        "token": "c949a96f-7204-448a-8121-03dae8d17c1c",
+        "task": "UX-05",
+        "owner": "mm-ui-hover-rollback-20261118-b",
+        "fence": 517
       }
     }
   ]
