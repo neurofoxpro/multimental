@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "neurofoxpro/multimental",
-  "revision": 491,
+  "revision": 492,
   "claims": {
     "5769688a-4b88-4390-b585-09db38d5bc0f": {
       "token": "5769688a-4b88-4390-b585-09db38d5bc0f",
@@ -15,41 +15,9 @@
       "fence": 456,
       "updatedAt": 1792362576792,
       "expiresAt": 1792364376792
-    },
-    "f3ac0bff-aea1-4847-ad42-f4f2fd8428ff": {
-      "token": "f3ac0bff-aea1-4847-ad42-f4f2fd8428ff",
-      "task": "BALANCE-01",
-      "owner": "mm17-battle-resources-20261118",
-      "base": "36f6886612a90786c7e957c09c36d7c01a3df5cc",
-      "resources": [
-        "area:game-core",
-        "task:BALANCE-01"
-      ],
-      "fence": 486,
-      "updatedAt": 1794972437670,
-      "expiresAt": 1794974237670
     }
   },
   "events": [
-    {
-      "id": "27b73504-bb15-4c28-97bb-b13890204eae",
-      "hash": "21134e190a12c919142e46b4470f318f0d17975d3cbcb3a59936ae32c3a5d0c6",
-      "revision": 236,
-      "result": {
-        "status": "renewed",
-        "token": "cd8a1bb3-b2cc-4d16-90f5-c768310a4d86",
-        "task": "CONTENT-03",
-        "owner": "content-pipeline-20260927-c82f",
-        "base": "82cc8faecedd3b5d786c3ca0424f08be2ef14764",
-        "resources": [
-          "area:automation",
-          "task:CONTENT-03"
-        ],
-        "fence": 221,
-        "updatedAt": 1790529706552,
-        "expiresAt": 1790531506552
-      }
-    },
     {
       "id": "fd24c309-0b12-49e5-a1c6-25fcd85cde8e",
       "hash": "634e50cc319e9ffc88d2daa8d75250c937fa2977bf21417feeb1655ff26baa17",
@@ -4597,6 +4565,18 @@
         "fence": 486,
         "updatedAt": 1794972437670,
         "expiresAt": 1794974237670
+      }
+    },
+    {
+      "id": "ff1ebf53-4e16-4235-8f6c-1587a61aef5c",
+      "hash": "7472c18d47cc38525d4f46da248fcf9cc1d165abd25357c1e0ea243fd0ab2425",
+      "revision": 492,
+      "result": {
+        "status": "released",
+        "token": "f3ac0bff-aea1-4847-ad42-f4f2fd8428ff",
+        "task": "BALANCE-01",
+        "owner": "mm17-battle-resources-20261118",
+        "fence": 486
       }
     }
   ]
