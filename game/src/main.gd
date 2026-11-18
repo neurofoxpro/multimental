@@ -26,6 +26,7 @@ var tutorial_hint: Label
 var language: String = "ru"
 var battle: bool = false
 var selected_hand: int = -1
+var selected_cell: int = -1
 var selected_unit: int = -1
 var selected_direction: int = 0
 var timed_turn: int = -1
@@ -33,6 +34,7 @@ var last_animated_event: int = -1
 var damage_effects_total: int = 0
 var rotation_left: Button
 var rotation_right: Button
+var confirm_placement_button: Button
 var aim_label: Label
 var end_turn_button: Button
 var sweep_button: Button
@@ -310,6 +312,7 @@ func on_hand(index: int) -> void:
         open_battle_card(int(view.hand[index]))
         return
     selected_hand = -1 if selected_hand == index else index
+    selected_cell = -1
     selected_direction = 0
     selected_unit = -1
     if tutorial and selected_hand >= 0:
@@ -322,12 +325,15 @@ func on_cell(index: int) -> void:
     var intent: Dictionary = preload("res://src/battle_interaction.gd").cell(view,index,selected_hand,selected_unit,selected_direction,pending)
     match intent.kind:
         "play":
-            act(intent.command)
+            # Selecting a target changes only the UI. The domain command is sent on confirmation.
+            selected_cell = index
+            refresh()
         "attack":
             request_sweep(intent.command)
         "select":
             selected_unit = int(intent.index)
             selected_hand = -1
+            selected_cell = -1
             refresh()
         "inspect":
             open_battle_card(int(intent.id),board_buttons[index])
@@ -338,6 +344,11 @@ func on_cell(index: int) -> void:
 
 func cancel_battle_selection() -> void:
     cancel_friendly_attack()
+    if selected_cell >= 0:
+        selected_cell = -1
+        selected_direction = 0
+        refresh()
+        return
     selected_hand = -1
     selected_unit = -1
     selected_direction = 0
@@ -365,7 +376,7 @@ func open_battle_card(id: int, source: Control = null) -> void:
 func _unhandled_input(event: InputEvent) -> void:
     if not battle or not event.is_action_pressed("ui_cancel"):
         return
-    if selected_hand >= 0 or selected_unit >= 0:
+    if selected_hand >= 0 or selected_unit >= 0 or selected_cell >= 0:
         cancel_battle_selection()
     else:
         request_leave_match()
@@ -411,12 +422,24 @@ func act(command: Dictionary) -> void:
         tutorial_step = maxi(tutorial_step, 2)
     after_action()
 
+func confirm_card_placement() -> void:
+    if selected_hand < 0 or selected_cell < 0 or battle_input_blocked():
+        return
+    var view: Dictionary = _view()
+    var command: Dictionary = preload("res://src/battle_interaction.gd").play(view,selected_hand,selected_cell,selected_direction,battle_input_blocked())
+    if command.is_empty():
+        selected_cell = -1
+        refresh()
+        return
+    act(command)
+
 func pass_turn() -> void:
     var view: Dictionary = _view()
     if not view.is_empty() and view.active == 0 and view.winner == -1:
         act({"type": "pass"})
 
 func after_action() -> void:
+    selected_cell = -1
     selected_hand = -1
     selected_unit = -1
     if online:
@@ -476,6 +499,7 @@ func _process(_delta: float) -> void:
         timed_turn = int(game.state.turn)
         bot_due = now + 0.65
         selected_hand = -1
+        selected_cell = -1
         selected_unit = -1
         refresh()
     if game.state.winner == -1 and game.state.active == 1 and now >= bot_due:
@@ -804,6 +828,7 @@ func _network_view(view: Dictionary) -> void:
     if int(view.revision) != displayed_revision:
         displayed_revision = int(view.revision)
         selected_hand = -1
+        selected_cell = -1
         selected_unit = -1
         refresh()
         _save_network_result(view)

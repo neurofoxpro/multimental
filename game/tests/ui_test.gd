@@ -27,6 +27,8 @@ func run_test() -> void:
         if action.type == "play":
             ui.on_hand(action.hand)
             ui.on_cell(action.cell)
+            check(ui.game.count_cells(0) == 0, "preview does not summon")
+            ui.confirm_card_placement()
             played = true
             break
     check(played, "fixture contains an affordable playable card")

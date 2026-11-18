@@ -3,6 +3,7 @@ extends Button
 const Style = preload("res://src/ui_theme.gd")
 const Feedback = preload("res://src/combat_feedback.gd")
 const CardArt = preload("res://src/card_art.gd")
+const Element = preload("res://src/element_mark.gd")
 var card_id: int = -1
 var slot: int = -1
 var owner_ui: WeakRef
@@ -13,6 +14,7 @@ var pattern: Label
 var details: Button
 var emblem: Control
 var art_view: TextureRect
+var element_icon: Label
 func piece(font: int) -> Label:
     var result := Label.new()
     result.add_theme_font_size_override("font_size",font)
@@ -25,7 +27,7 @@ func setup(ui, index: int) -> void:
     name = "HandCard" + str(index)
     slot = index
     owner_ui = weakref(ui)
-    custom_minimum_size = Vector2(174,184)
+    custom_minimum_size = Vector2(190,190)
     size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
     Style.decorate_button(self)
     cost = piece(22)
@@ -36,6 +38,8 @@ func setup(ui, index: int) -> void:
     pattern = piece(15)
     emblem = preload("res://src/tactical_emblem.gd").new()
     add_child(emblem)
+    element_icon = piece(28)
+    element_icon.name = "HandElementIcon"
     art_view = TextureRect.new()
     art_view.name = "ApprovedCardArt"
     art_view.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -59,20 +63,22 @@ func setup(ui, index: int) -> void:
 func arrange() -> void:
     if not is_instance_valid(cost):
         return
-    cost.position = Vector2(10,7)
-    cost.size = Vector2(76,29)
-    emblem.position = Vector2(size.x - 47,4)
-    emblem.size = Vector2(40,36)
-    art_view.position = emblem.position
-    art_view.size = emblem.size
-    title_label.position = Vector2(10,40)
-    title_label.size = Vector2(maxf(0,size.x-20),46)
-    stats.position = Vector2(10,86)
-    stats.size = Vector2(maxf(0,size.x-20),25)
-    pattern.position = Vector2(10,111)
-    pattern.size = Vector2(maxf(0,size.x-20),22)
-    details.position = Vector2(6,size.y-48)
-    details.size = Vector2(maxf(0,size.x-12),42)
+    cost.position = Vector2(10,5)
+    cost.size = Vector2(67,29)
+    element_icon.position = Vector2(size.x-42,5)
+    element_icon.size = Vector2(34,34)
+    emblem.position = Vector2((size.x-75)/2,30)
+    emblem.size = Vector2(75,70)
+    art_view.position = Vector2(34,29)
+    art_view.size = Vector2(size.x-68,77)
+    title_label.position = Vector2(10,107)
+    title_label.size = Vector2(maxf(0,size.x-20),34)
+    stats.position = Vector2(10,138)
+    stats.size = Vector2(maxf(0,size.x-20),20)
+    pattern.position = Vector2(10,163)
+    pattern.size = Vector2(maxf(0,size.x-86),18)
+    details.position = Vector2(size.x-70,size.y-34)
+    details.size = Vector2(60,28)
 func present(ui, definition: Dictionary, facing: int, selected: bool, reason: String) -> void:
     card_id = int(definition.id)
     disabled = reason != "ready"
@@ -87,7 +93,9 @@ func present(ui, definition: Dictionary, facing: int, selected: bool, reason: St
         why = ui.t(descriptions[reason][0],descriptions[reason][1])
     tooltip_text = title_label.text + "\n" + why + "\n" + ui.t("Описание доступно всегда", "Details always available")
     details.tooltip_text = tooltip_text
-    details.text = ui.t("ОПИСАНИЕ", "DETAILS")
+    details.text = ui.t("ИНФО", "INFO")
+    element_icon.text = Element.symbol(int(definition.element))
+    element_icon.add_theme_color_override("font_color",ui.COLORS[int(definition.element)].lightened(0.18))
     details.disabled = false
     Style.hand_card(self,ui.COLORS[int(definition.element)],selected)
     emblem.configure(str(definition.kind),ui.COLORS[int(definition.element)])

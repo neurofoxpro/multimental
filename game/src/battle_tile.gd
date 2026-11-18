@@ -2,6 +2,8 @@ extends Button
 ## Public board rendering with position-stable stats and a separate direction ring.
 const Core = preload("res://src/match_core.gd")
 const Style = preload("res://src/ui_theme.gd")
+const Element = preload("res://src/element_mark.gd")
+const CardArt = preload("res://src/card_art.gd")
 var header: Label
 var title_label: Label
 var stats: Label
@@ -10,6 +12,10 @@ var terrain_label: Label
 var occupied: bool = false
 var hint: Label
 var emblem: Control
+var element_badge: Label
+var hover_art: TextureRect
+var hover_arrow: Label
+var hovering: bool = false
 var directions: Array[Vector2] = []
 var arrow_color: Color = Color.WHITE
 func make_label(font: int) -> Label:
@@ -35,7 +41,16 @@ func setup(ui, index: int) -> void:
     stats = make_label(21)
     health = make_label(21)
     terrain_label = make_label(13)
+    element_badge = make_label(25)
+    element_badge.name = "TerrainElementIcon"
     hint = make_label(15)
+    hover_art = TextureRect.new()
+    hover_art.name = "HoverPlacementCard"
+    hover_art.mouse_filter = Control.MOUSE_FILTER_IGNORE
+    hover_art.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+    add_child(hover_art)
+    hover_arrow = make_label(26)
+    hover_arrow.name = "HoverFacingArrow"
     emblem = preload("res://src/tactical_emblem.gd").new()
     add_child(emblem)
     pressed.connect(ui.on_cell.bind(index))
@@ -67,6 +82,12 @@ func arrange() -> void:
     health.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
     health.add_theme_font_size_override("font_size",21 if size.x >= 140 else 16)
     stats.add_theme_font_size_override("font_size",21 if size.x >= 140 else 16)
+    element_badge.position = Vector2(size.x-38,26) if occupied else Vector2((size.x-42)/2, (size.y-42)/2)
+    element_badge.size = Vector2(42,42)
+    hover_art.position = Vector2(size.x*0.17,-maxf(5,size.y*0.12))
+    hover_art.size = Vector2(size.x*0.66,size.y*0.66)
+    hover_arrow.position = Vector2(size.x*0.53,size.y*0.54)
+    hover_arrow.size = Vector2(size.x*0.4,35)
     hint.position = Vector2(8,size.y * 0.32)
     hint.size = Vector2(maxf(0,size.x-16),44)
     hint.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
@@ -83,6 +104,15 @@ func present(ui, view: Dictionary, index: int, targets: Array, can_attack: bool)
     var unit: Variant = view.board[index]
     occupied = unit != null
     var terrain: int = int(view.terrain[index])
+    hovering = index == ui.selected_cell and ui.selected_hand >= 0 and ui.selected_hand < view.hand.size() and unit == null
+    element_badge.text = Element.symbol(terrain)
+    element_badge.add_theme_color_override("font_color",ui.COLORS[terrain].lightened(0.25))
+    hover_art.visible = hovering
+    hover_arrow.visible = hovering
+    if hovering:
+        hover_art.texture = CardArt.texture_for(int(view.hand[ui.selected_hand]))
+        hover_arrow.text = ["↑","→","↓","←"][ui.selected_direction]
+        hover_arrow.add_theme_color_override("font_color",Color("f8da90"))
     var color: Color = ui.COLORS[terrain]
     var field: String = ui.t(Core.ELEMENTS_RU[terrain],Core.ELEMENTS_EN[terrain])
     var locked: bool = index == 4 and not bool(view.center_unlocked)
@@ -97,7 +127,8 @@ func present(ui, view: Dictionary, index: int, targets: Array, can_attack: bool)
     var bg: Color = color.darkened(0.91)
     directions.clear()
     emblem.visible = unit != null
-    hint.visible = unit == null
+    hint.visible = unit == null and not hovering
+    element_badge.visible = not hovering or hover_art.texture == null
     stats.text = ""
     health.text = ""
     terrain_label.text = field
@@ -136,6 +167,9 @@ func present(ui, view: Dictionary, index: int, targets: Array, can_attack: bool)
         border = Color("efb36e") if int(unit.owner) == 0 else Color("ec7e77")
         header.text = ui.t("СОЮЗНИК!", "ALLY!") if int(unit.owner) == 0 else ui.t("ЦЕЛЬ", "TARGET")
         tooltip_text = ui.t("Союзник пострадает от удара; его касание меняет выбор.", "This ally will be hit; tapping it only changes selection.") if int(unit.owner) == 0 else ui.t("Коснитесь цели для атаки по всем направлениям. Союзники под ударом потребуют подтверждения.", "Tap to sweep in every direction. Allied damage requires confirmation.")
+    if hovering:
+        border = Color("f8d98c")
+        bg = Color("3a3425")
     if selected:
         border = Color("f1d899")
         header.text = ui.t("ВЫБРАН", "SELECTED")
@@ -150,6 +184,10 @@ func present(ui, view: Dictionary, index: int, targets: Array, can_attack: bool)
     modulate = Color.WHITE
     arrange()
 func _draw() -> void:
+    if hovering:
+        var hover_bounds := Rect2(Vector2(size.x*0.16,size.y*0.1),Vector2(size.x*0.68,size.y*0.7))
+        draw_rect(hover_bounds.grow(4),Color(0.03,0.02,0.01,0.58),true)
+        draw_rect(hover_bounds,Color(0.98,0.78,0.31,0.3),false,3)
     for direction in directions:
         var radius: float = minf(size.x,size.y)*0.45
         var point: Vector2 = size/2 + direction*radius
