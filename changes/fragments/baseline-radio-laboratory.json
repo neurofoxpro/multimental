@@ -1,0 +1,8 @@
+{
+  "id": "baseline-radio-laboratory",
+  "version": "0.1.1",
+  "kind": "added",
+  "scope": "network",
+  "text": "Лабораторная сессия проверена через реальный LAN и RFCOMM Bluetooth при выключенном Wi-Fi; пользовательское PvP-лобби в эту версию не входит.",
+  "breaking": false
+}

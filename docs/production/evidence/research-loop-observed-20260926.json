@@ -1,0 +1,63 @@
+{
+    "assessment":  {
+                       "inputKey":  "fe3ee3e9abd011f0fcde8d1fc946b0e306f957967525729ab4437b3c5c5a82ff",
+                       "verdict":  "partial",
+                       "limitations":  [
+                                           "Ускорение размышления или качество игрового дизайна не измерены этими тестами.",
+                                           "Нет постоянно запущенных LLM-агентов: работу ведёт текущий активный чат.",
+                                           "Внешние отказы инструмента и чужие активные claims остаются границами; два телефона и их ярлыки этим исследованием не проверены."
+                                       ],
+                       "sourceHashes":  [
+                                            "84b67870277782c2a0da3109241bf2623cdc629607c5007792b1ba9511a2b5f1",
+                                            "485c2f2c70c7187ffba6c17ff5818850eba6b6bbcd2073f78e036b08d8e87716"
+                                        ],
+                       "schemaVersion":  1,
+                       "conclusion":  "Проверенные определения исследования и очередь отделяют первичные Issues/ресурсы от исполняемых команд. Источники документации GitHub подтверждают назначение нативных зависимостей и необходимость осторожных повторов mutative requests; фактический код сохраняет CAS claims, не считает метки блокировкой и не исполняет текст Issue. 21 тест очереди и 14 тестов исследования прошли; полный регрессионный прогон содержит 754 Node-теста. Новый реальный захват через work next ещё не выполнен, поэтому он не объявляется эксплуатационно подтверждённым."
+                   },
+    "checks":  [
+                   {
+                       "id":  "dispatch",
+                       "status":  "passed",
+                       "exitCode":  0,
+                       "log":  ".gameprod/evidence/studies/AUTO-05-dispatch.log",
+                       "logHash":  "6dd21a76a33831b8c87dd7c81a824ac59ebdb91b91c786e22a39147391dad4e4",
+                       "sourceDigest":  "650f2b832c7a27ea7718f7699a9d8afc977a4f0f7f294bda6e7e45bc790e5e9e"
+                   },
+                   {
+                       "id":  "study",
+                       "status":  "passed",
+                       "exitCode":  0,
+                       "log":  ".gameprod/evidence/studies/AUTO-05-study.log",
+                       "logHash":  "6883bc2c13f6208ccca6eaf8abf6e534681f4fafb79efc5ca77b239a5e8c159a",
+                       "sourceDigest":  "650f2b832c7a27ea7718f7699a9d8afc977a4f0f7f294bda6e7e45bc790e5e9e"
+                   }
+               ],
+    "sourceDigest":  "650f2b832c7a27ea7718f7699a9d8afc977a4f0f7f294bda6e7e45bc790e5e9e",
+    "kind":  "research_observation_not_task_acceptance",
+    "sources":  [
+                    {
+                        "url":  "https://docs.github.com/en/rest/issues/issue-dependencies",
+                        "finalUrl":  "https://docs.github.com/en/rest/issues/issue-dependencies",
+                        "observedAt":  "2026-09-26T10:47:44.238Z",
+                        "sha256":  "84b67870277782c2a0da3109241bf2623cdc629607c5007792b1ba9511a2b5f1",
+                        "bytes":  533582,
+                        "contentType":  "text/html; charset=utf-8",
+                        "downloadedNotReviewed":  true
+                    },
+                    {
+                        "url":  "https://docs.github.com/en/rest/using-the-rest-api/best-practices-for-using-the-rest-api",
+                        "finalUrl":  "https://docs.github.com/en/rest/using-the-rest-api/best-practices-for-using-the-rest-api",
+                        "observedAt":  "2026-09-26T10:47:44.240Z",
+                        "sha256":  "485c2f2c70c7187ffba6c17ff5818850eba6b6bbcd2073f78e036b08d8e87716",
+                        "bytes":  326653,
+                        "contentType":  "text/html; charset=utf-8",
+                        "downloadedNotReviewed":  true
+                    }
+                ],
+    "inputKey":  "fe3ee3e9abd011f0fcde8d1fc946b0e306f957967525729ab4437b3c5c5a82ff",
+    "taskId":  "AUTO-05",
+    "observedAt":  "2026-09-26T10:48:31.8458165Z",
+    "uxMeasurement":  "Existing ux-audit completed on this source slice; no visual redesign or dp certification claimed.",
+    "repository":  "neurofoxpro/multimental",
+    "schemaVersion":  1
+}

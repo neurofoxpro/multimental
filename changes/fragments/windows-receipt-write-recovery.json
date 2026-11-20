@@ -1,0 +1,8 @@
+{
+  "id": "windows-receipt-write-recovery",
+  "version": "0.2.0",
+  "kind": "fixed",
+  "scope": "automation",
+  "text": "Общий JSON-писатель повторяет временный Windows sharing violation; при длительной блокировке rename сохраняет предыдущую и новую версии, проверяет запись и явно отмечает неатомарный fallback. Ошибки прав, диска и конкурирующего изменения не обходятся.",
+  "breaking": false
+}

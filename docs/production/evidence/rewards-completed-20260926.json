@@ -1,0 +1,196 @@
+{
+    "verification":  {
+                         "schemaVersion":  1,
+                         "step":  "verify",
+                         "status":  "passed",
+                         "exitCode":  0,
+                         "sourceDigest":  "903614e171f76577590b337ef54f1266cbeb08c4b3cd21186c5b9b3fe394e813",
+                         "sourceDigestAfter":  "903614e171f76577590b337ef54f1266cbeb08c4b3cd21186c5b9b3fe394e813",
+                         "sourceChanged":  false,
+                         "startedAt":  "2026-09-26T07:34:25.780Z",
+                         "finishedAt":  "2026-09-26T07:35:48.815Z",
+                         "host":  "VENEL-SENDRIK",
+                         "command":  [
+                                         "node",
+                                         "tools/verify.mjs"
+                                     ],
+                         "log":  ".gameprod/evidence/verify.log",
+                         "logHash":  "b29d9b85d6e13c3c6c397777a20098c6af67aab19638e26553561f41086b5abb",
+                         "outputs":  [
+
+                                     ]
+                     },
+    "sourceCommit":  "d53d8d55ee43ed4aacd4034193345c26124b7d7e",
+    "manualAcceptance":  "not_inferred",
+    "mainStablePlay":  "not_changed",
+    "repository":  "neurofoxpro/multimental",
+    "observedAt":  "2026-09-26T07:44:27.6761626Z",
+    "evidence":  [
+                     "docs/production/REWARDS_PROGRESS.ru.md",
+                     "docs/production/evidence/rewards-acquisition-20260926.json"
+                 ],
+    "tests":  {
+                  "rewards":  149,
+                  "simulationTrials":  1280,
+                  "labSignals":  5,
+                  "rewardsUI":  76,
+                  "fixtureMatchesByAPI":  3,
+                  "simulationChecks":  16604,
+                  "hardwareTaps":  5
+              },
+    "taskId":  "META-04",
+    "implementation":  {
+                           "head":  "a76502a5b2260dacb12033f1a1459eb9e84c2b99",
+                           "base":  "8160555dd006bf4c889d0ee6993c7ddad946c3a5",
+                           "devBuildStatus":  "success",
+                           "devBuild":  36227415766,
+                           "prBuild":  36227316927,
+                           "sourceQuality":  36227316951,
+                           "pr":  120,
+                           "controller":  36227317269
+                       },
+    "personalProfileUntouched":  true,
+    "deviceSuites":  [
+                         {
+                             "results":  [
+                                             {
+                                                 "mode":  "rewards",
+                                                 "status":  "passed",
+                                                 "verdict":  "passed",
+                                                 "exitCode":  0,
+                                                 "durationMs":  9924,
+                                                 "receipt":  "device-phone-rewards-7fda48e3-47a9-414f-8ad5-268091395bb9.json",
+                                                 "receiptSha256":  "e8690d919e3e145e654b43d8433865ce758182da8ad7129f47d880eac7ac2a04",
+                                                 "log":  "suites/7fda48e3-47a9-414f-8ad5-268091395bb9/rewards.local.log",
+                                                 "logSha256":  "e8690d919e3e145e654b43d8433865ce758182da8ad7129f47d880eac7ac2a04"
+                                             }
+                                         ],
+                             "toolDigest":  "903614e171f76577590b337ef54f1266cbeb08c4b3cd21186c5b9b3fe394e813",
+                             "installation":  {
+                                                  "package":  "pro.neurofox.multimental.dev",
+                                                  "sourceCommit":  "d53d8d55ee43ed4aacd4034193345c26124b7d7e",
+                                                  "version":  "0.12.0-alpha.204.1",
+                                                  "versionCode":  30401,
+                                                  "originalSha256":  "58631cf917b4e3662902a256abede71fd3427b2c61ac9312c994d51c0806610f",
+                                                  "installedSha256":  "f49e4716b46b0c3664c88c9afe28b93152fe294ce1a7a1a35c4b8dbde66193dc",
+                                                  "certificateSha256":  "3c68effd1eaea4c082a7f54f399c90a36a24ea08ec881a6130412111338aff72"
+                                              },
+                             "reportSha256":  "e03bec08284d8bf995b8a6b0cb0794297712ac138c7b4684dabe64f39b690e4e",
+                             "finishedAt":  "2026-09-26T07:42:57.989Z",
+                             "suite":  "rewards",
+                             "status":  "passed",
+                             "runId":  "7fda48e3-47a9-414f-8ad5-268091395bb9"
+                         },
+                         {
+                             "results":  [
+                                             {
+                                                 "mode":  "profile",
+                                                 "status":  "passed",
+                                                 "verdict":  "passed",
+                                                 "exitCode":  0,
+                                                 "durationMs":  6075,
+                                                 "receipt":  "device-phone-profile-3c2e5b54-317f-4736-af83-6dd15cecb61b.json",
+                                                 "receiptSha256":  "44025811953c423d412b37d77eaefcff1c405c12ab20ebaf73be6cd44570ff47",
+                                                 "log":  "suites/3c2e5b54-317f-4736-af83-6dd15cecb61b/profile.local.log",
+                                                 "logSha256":  "44025811953c423d412b37d77eaefcff1c405c12ab20ebaf73be6cd44570ff47"
+                                             }
+                                         ],
+                             "toolDigest":  "903614e171f76577590b337ef54f1266cbeb08c4b3cd21186c5b9b3fe394e813",
+                             "installation":  {
+                                                  "package":  "pro.neurofox.multimental.dev",
+                                                  "sourceCommit":  "d53d8d55ee43ed4aacd4034193345c26124b7d7e",
+                                                  "version":  "0.12.0-alpha.204.1",
+                                                  "versionCode":  30401,
+                                                  "originalSha256":  "58631cf917b4e3662902a256abede71fd3427b2c61ac9312c994d51c0806610f",
+                                                  "installedSha256":  "f49e4716b46b0c3664c88c9afe28b93152fe294ce1a7a1a35c4b8dbde66193dc",
+                                                  "certificateSha256":  "3c68effd1eaea4c082a7f54f399c90a36a24ea08ec881a6130412111338aff72"
+                                              },
+                             "reportSha256":  "84e15c2bda6fe40391b435712b14526234974d3b8fc5c68d78cef87d973c2f15",
+                             "finishedAt":  "2026-09-26T07:43:07.423Z",
+                             "suite":  "profile",
+                             "status":  "passed",
+                             "runId":  "3c2e5b54-317f-4736-af83-6dd15cecb61b"
+                         },
+                         {
+                             "results":  [
+                                             {
+                                                 "mode":  "close",
+                                                 "status":  "passed",
+                                                 "verdict":  "passed",
+                                                 "exitCode":  0,
+                                                 "durationMs":  324,
+                                                 "receipt":  "device-phone-close-ae10bf8b-c1b6-4bed-9620-ca5f1749a64c.json",
+                                                 "receiptSha256":  "3bfda2fe0904a8b4ecc419f579a0916d9fc6c22811c7314dfdf033608c1b4713",
+                                                 "log":  "suites/ae10bf8b-c1b6-4bed-9620-ca5f1749a64c/close.local.log",
+                                                 "logSha256":  "3bfda2fe0904a8b4ecc419f579a0916d9fc6c22811c7314dfdf033608c1b4713"
+                                             },
+                                             {
+                                                 "mode":  "launch",
+                                                 "status":  "passed",
+                                                 "verdict":  "passed",
+                                                 "exitCode":  0,
+                                                 "durationMs":  4813,
+                                                 "receipt":  "device-phone-launch-ae10bf8b-c1b6-4bed-9620-ca5f1749a64c.json",
+                                                 "receiptSha256":  "c2593979b20306f02f6c18d94253cd2c18fbeffdf48be7fad18410a91dc37245",
+                                                 "log":  "suites/ae10bf8b-c1b6-4bed-9620-ca5f1749a64c/launch.local.log",
+                                                 "logSha256":  "c2593979b20306f02f6c18d94253cd2c18fbeffdf48be7fad18410a91dc37245"
+                                             },
+                                             {
+                                                 "mode":  "jni",
+                                                 "status":  "passed",
+                                                 "verdict":  "passed",
+                                                 "exitCode":  0,
+                                                 "durationMs":  5391,
+                                                 "receipt":  "device-phone-jni-ae10bf8b-c1b6-4bed-9620-ca5f1749a64c.json",
+                                                 "receiptSha256":  "758dbc1e1e9780b1c3c5ff56bca179602dc4ed9373847198cc736667efbb46cd",
+                                                 "log":  "suites/ae10bf8b-c1b6-4bed-9620-ca5f1749a64c/jni.local.log",
+                                                 "logSha256":  "758dbc1e1e9780b1c3c5ff56bca179602dc4ed9373847198cc736667efbb46cd"
+                                             },
+                                             {
+                                                 "mode":  "tutorial",
+                                                 "status":  "passed",
+                                                 "verdict":  "passed",
+                                                 "exitCode":  0,
+                                                 "durationMs":  11482,
+                                                 "receipt":  "device-phone-tutorial-ae10bf8b-c1b6-4bed-9620-ca5f1749a64c.json",
+                                                 "receiptSha256":  "064626ce76fcc60a3624f489739091987d7ffb32536f10724c54be680e8cccdb",
+                                                 "log":  "suites/ae10bf8b-c1b6-4bed-9620-ca5f1749a64c/tutorial.local.log",
+                                                 "logSha256":  "064626ce76fcc60a3624f489739091987d7ffb32536f10724c54be680e8cccdb"
+                                             },
+                                             {
+                                                 "mode":  "ui",
+                                                 "status":  "passed",
+                                                 "verdict":  "passed",
+                                                 "exitCode":  0,
+                                                 "durationMs":  9642,
+                                                 "receipt":  "device-phone-ui-ae10bf8b-c1b6-4bed-9620-ca5f1749a64c.json",
+                                                 "receiptSha256":  "bb2afc84638dba7b51a4da5ec241a67dd85d566d7ddd2bbcb06e66dda765d023",
+                                                 "log":  "suites/ae10bf8b-c1b6-4bed-9620-ca5f1749a64c/ui.local.log",
+                                                 "logSha256":  "bb2afc84638dba7b51a4da5ec241a67dd85d566d7ddd2bbcb06e66dda765d023"
+                                             }
+                                         ],
+                             "toolDigest":  "903614e171f76577590b337ef54f1266cbeb08c4b3cd21186c5b9b3fe394e813",
+                             "installation":  {
+                                                  "package":  "pro.neurofox.multimental.dev",
+                                                  "sourceCommit":  "d53d8d55ee43ed4aacd4034193345c26124b7d7e",
+                                                  "version":  "0.12.0-alpha.204.1",
+                                                  "versionCode":  30401,
+                                                  "originalSha256":  "58631cf917b4e3662902a256abede71fd3427b2c61ac9312c994d51c0806610f",
+                                                  "installedSha256":  "f49e4716b46b0c3664c88c9afe28b93152fe294ce1a7a1a35c4b8dbde66193dc",
+                                                  "certificateSha256":  "3c68effd1eaea4c082a7f54f399c90a36a24ea08ec881a6130412111338aff72"
+                                              },
+                             "reportSha256":  "6ae9d3f8d42166c53ac56a7a782c3e03e9e6bff836d65356c6e38e20612a7b28",
+                             "finishedAt":  "2026-09-26T07:43:43.074Z",
+                             "suite":  "smoke",
+                             "status":  "passed",
+                             "runId":  "ae10bf8b-c1b6-4bed-9620-ca5f1749a64c"
+                         }
+                     ],
+    "acceptance":  [
+                       "Награды победы/заданий идемпотентны; отрицательный результат не отнимает коллекцию.",
+                       "Ежедневные задания не требуют вечного онлайна; локальные часы не являются доверенной рейтинговой экономикой.",
+                       "Симуляция времени получения нужной колоды: распределение, не только среднее."
+                   ],
+    "schemaVersion":  1,
+    "secondPhone":  "observed_authorized_not_installed"
+}

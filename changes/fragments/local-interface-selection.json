@@ -1,0 +1,8 @@
+{
+  "id": "local-interface-selection",
+  "version": "0.2.0",
+  "kind": "fixed",
+  "scope": "network",
+  "text": "При создании комнаты Wi-Fi и проводная локальная сеть предпочитаются VPN и мобильному интерфейсу; подходящий адрес можно явно выбрать в лобби.",
+  "breaking": false
+}

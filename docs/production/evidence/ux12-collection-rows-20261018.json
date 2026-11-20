@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "repository": "neurofoxpro/multimental",
+  "taskId": "UX-12",
+  "sourceBase": "3b585336fb89f3720811a1ecf7e7384758ba7761",
+  "observedAt": "2026-10-18T01:58:48.603Z",
+  "source": [
+    {
+      "path": "game/src/collection_screen.gd",
+      "sha256": "6ac76504bcf9a877d5142978d935b84a4e99ffe59ef48be60f9ea4d6524479e6"
+    },
+    {
+      "path": "game/tests/collection_ui_test.gd",
+      "sha256": "86b37e924e34b0f1ec7b8884a1742a0b7de01fe0615ca7b91cf31d519f88fbad"
+    }
+  ],
+  "tests": {
+    "test": "game/tests/collection_ui_test.gd",
+    "observedMarker": "MULTIMENTAL_COLLECTION_UI_PASS checks=55",
+    "failures": 0,
+    "properties": [
+      "stable row on +/-",
+      "focus continuity",
+      "nonzero scroll continuity",
+      "visible count updated",
+      "30-card catalog tests",
+      "profile and replay regression"
+    ],
+    "engine": "Godot 4.7.2"
+  },
+  "gallery": {
+    "manifest": "docs/media/gallery/current.json",
+    "inputKey": "4a993dbbe69ce9a7847c428f667b13ce0365566f0aba866d3475a6b5698332a6",
+    "images": 60,
+    "installedApkCapture": false,
+    "reviewed": [
+      {
+        "id": "ru-collection-720x1280",
+        "path": "docs/media/gallery/4a993dbbe69ce9a7847c428f667b13ce0365566f0aba866d3475a6b5698332a6/03ba0e3823998f3255da85c7753ee16c/ru-collection-720x1280.png",
+        "sha256": "abd757868b7a364e338fddfbf88cd077c457863d7a47f08e465cc3664a17c35d"
+      },
+      {
+        "id": "en-collection-720x1280",
+        "path": "docs/media/gallery/4a993dbbe69ce9a7847c428f667b13ce0365566f0aba866d3475a6b5698332a6/03ba0e3823998f3255da85c7753ee16c/en-collection-720x1280.png",
+        "sha256": "42dafcf33d230d70a0985bca83e3f78cb99e2559dbe394cdfc1eed5e324f83bc"
+      }
+    ]
+  },
+  "observedVisual": [
+    "The compact details button is a single clickable summary; plus/minus are separate adjacent controls",
+    "Portrait RU/EN collection shows more catalog rows than the earlier full-width details button layout",
+    "Current excerpt labels and cost/stats appear readable without clipping in the reviewed views"
+  ],
+  "limitations": [
+    "Not installed or human-accepted on Redmi",
+    "Physical Android dp and accessibility certification not measured",
+    "UX-12 remains open for delete/primary action separation, end-to-end navigation, long-name and landscape manual acceptance"
+  ]
+}

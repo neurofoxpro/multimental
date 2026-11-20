@@ -1,0 +1,8 @@
+{
+  "id": "balance-human-recorder-r8k5",
+  "version": "0.14.4",
+  "kind": "added",
+  "scope": "automation",
+  "text": "BALANCE-01 получил read-only проверку журнала человеческих партий: exact release/source identity, длительность только из timestamps, interrupted-наблюдения отдельно и описательная сводка без автоматической human acceptance.",
+  "breaking": false
+}

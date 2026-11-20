@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "status": "installed_and_launched",
+  "repository": "neurofoxpro/multimental",
+  "sourceCommit": "cc689248267558ee3620e0e094bc79c972dadf0e",
+  "version": "0.1.0-alpha.23.1",
+  "versionCode": 12301,
+  "package": "pro.neurofox.multimental.dev",
+  "originalSha256": "4f44ef90fa5a71a0e287c5bb09160619c903285dda506d09ebc42d9b492c9643",
+  "installedSha256": "1f858fe486a4ce9473927320d9e7e1f9b93d761e4da2cf6a9d87352667df0e9e",
+  "transformation": "re-signed with persistent private local development key; CI APK preserved",
+  "certificateSha256": "3c68effd1eaea4c082a7f54f399c90a36a24ea08ec881a6130412111338aff72",
+  "installedAt": "2026-09-24T00:47:20.834Z",
+  "androidVersion": "15",
+  "readyMarker": true,
+  "readinessWaitMs": 4319,
+  "humanAcceptance": "pending",
+  "observedDelivery": "Windows scheduled task on VENEL-SENDRIK, exit code 0",
+  "updateFrom": "0.1.0-alpha.20.1",
+  "settingsPreserved": true,
+  "privacy": "Device serial, private signing key/password, full logs and screenshots are not included. This is a redacted summary of the locally observed receipt."
+}

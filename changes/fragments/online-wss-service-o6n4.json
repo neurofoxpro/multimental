@@ -1,0 +1,8 @@
+{
+  "id": "online-wss-service-o6n4",
+  "version": "0.15.0",
+  "kind": "added",
+  "scope": "network",
+  "text": "NET-06 получил первую headless-friendly online-границу: versioned bounded protocol, независимые authoritative rooms поверх RoomRules/MatchCore, resource/rate/TTL limits и реальный WSS/TLS loopback. Публичный hosting и симметричная reconnect grace ещё не объявляются готовыми.",
+  "breaking": false
+}

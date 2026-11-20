@@ -1,0 +1,219 @@
+{
+  "schemaVersion": 1,
+  "observedAt": "2026-09-24T04:08:40.225Z",
+  "repository": "neurofoxpro/multimental",
+  "branch": "docs/production-v2-results-20260924",
+  "toolingHead": "720063302dfe156a8186e8d2d68c5111a8fc1917",
+  "dirty": false,
+  "sourceDigest": "bc1a79b60ec73805145b999032d77da815b3a5bb8d90dcc83843c7d44b23f213",
+  "latestRelease": {
+    "html_url": "https://github.com/neurofoxpro/multimental/releases/tag/v0.1.1-alpha.50.1",
+    "published_at": "2026-09-24T04:06:06Z",
+    "tag_name": "v0.1.1-alpha.50.1"
+  },
+  "installed": {
+    "status": "installed_and_launched",
+    "version": "0.1.1-alpha.50.1",
+    "versionCode": 15001,
+    "sourceCommit": "720063302dfe156a8186e8d2d68c5111a8fc1917",
+    "installedAt": "2026-09-24T04:06:45.735Z",
+    "originalSha256": "3638bca5401291a3de4b53fd44aa9cb61d8c1128b2c09e5bdd402973848cd695",
+    "installedSha256": "b90352dd3eb6009c8b253c2fdebe170152962756b4f498775cb8dddfd0bfb21e",
+    "certificateSha256": "3c68effd1eaea4c082a7f54f399c90a36a24ea08ec881a6130412111338aff72",
+    "readyMarker": true,
+    "humanAcceptance": "pending",
+    "readinessWaitMs": 3397
+  },
+  "verification": {
+    "status": "passed",
+    "finishedAt": "2026-09-24T03:59:03.835Z",
+    "sourceDigest": "bc1a79b60ec73805145b999032d77da815b3a5bb8d90dcc83843c7d44b23f213",
+    "currentSourceMatches": true,
+    "logHash": "0971c8510dc7fc0b06b2bb4286919e6b1a5864b49ec493f83b2e36a6986db6c7"
+  },
+  "ci": {
+    "conclusion": "success",
+    "databaseId": 35954123735,
+    "headSha": "720063302dfe156a8186e8d2d68c5111a8fc1917",
+    "status": "completed",
+    "url": "https://github.com/neurofoxpro/multimental/actions/runs/35954123735",
+    "workflowName": "Build Android"
+  },
+  "qualification": {
+    "status": "passed",
+    "candidateHead": "c929608f7fb425f65501fef0af4fd1b150dba6b5",
+    "apk": {
+      "version": "0.1.1-alpha.49.1",
+      "sha256": "505f843e02590e95e1ce0eef0e4fe04d5c40e9c618d6e71fea853f55f4f616a3",
+      "commit": "5462c370fef666f40341794d94c9f7bc49f98fe0"
+    },
+    "startedAt": "2026-09-24T04:01:53.537Z",
+    "finishedAt": "2026-09-24T04:04:51.909Z",
+    "results": [
+      {
+        "name": "emulator-A-clean-install",
+        "status": "passed",
+        "durationMs": 9815
+      },
+      {
+        "name": "emulator-A-install",
+        "status": "passed",
+        "durationMs": 590
+      },
+      {
+        "name": "emulator-A-ui",
+        "status": "passed",
+        "durationMs": 10916
+      },
+      {
+        "name": "emulator-A-jni",
+        "status": "passed",
+        "durationMs": 5927
+      },
+      {
+        "name": "emulator-A-reinstall",
+        "status": "passed",
+        "durationMs": 10118
+      },
+      {
+        "name": "emulator-A-close",
+        "status": "passed",
+        "durationMs": 416
+      },
+      {
+        "name": "emulator-A-launch",
+        "status": "passed",
+        "durationMs": 4626
+      },
+      {
+        "name": "emulator-B-install",
+        "status": "passed",
+        "durationMs": 11300
+      },
+      {
+        "name": "emulator-B-ui",
+        "status": "passed",
+        "durationMs": 13995
+      },
+      {
+        "name": "emulator-B-jni",
+        "status": "passed",
+        "durationMs": 6969
+      },
+      {
+        "name": "emulator-B-reinstall",
+        "status": "passed",
+        "durationMs": 13446
+      },
+      {
+        "name": "emulator-B-close",
+        "status": "passed",
+        "durationMs": 641
+      },
+      {
+        "name": "emulator-B-launch",
+        "status": "passed",
+        "durationMs": 6355
+      },
+      {
+        "name": "emulator-pair",
+        "status": "passed",
+        "durationMs": 15157
+      },
+      {
+        "name": "phone-install",
+        "status": "passed",
+        "durationMs": 13426
+      },
+      {
+        "name": "phone-ui",
+        "status": "passed",
+        "durationMs": 8613
+      },
+      {
+        "name": "phone-tcp-usb",
+        "status": "passed",
+        "durationMs": 4514
+      },
+      {
+        "name": "phone-tcp-lan",
+        "status": "passed",
+        "durationMs": 4766
+      },
+      {
+        "name": "phone-tcp-peer",
+        "status": "passed",
+        "durationMs": 12231
+      },
+      {
+        "name": "phone-bluetooth",
+        "status": "passed",
+        "durationMs": 7784
+      },
+      {
+        "name": "phone-reinstall",
+        "status": "passed",
+        "durationMs": 12472
+      },
+      {
+        "name": "phone-close",
+        "status": "passed",
+        "durationMs": 399
+      },
+      {
+        "name": "phone-launch",
+        "status": "passed",
+        "durationMs": 3807
+      }
+    ]
+  },
+  "network": {
+    "observedAt": "2026-09-24T02:12:27.834Z",
+    "usb": {
+      "authorized": true,
+      "purpose": "control_only_not_LAN"
+    },
+    "lan": {
+      "phoneWifiEnabled": false,
+      "phoneHasWifiAddress": false,
+      "hardwareStatus": "blocked_phone_not_on_wifi",
+      "gameSession": "not_implemented"
+    },
+    "bluetooth": {
+      "status": "passed",
+      "observedAt": "2026-09-24T04:04:27.575Z",
+      "version": "0.1.1-alpha.49.1",
+      "path": "PHYSICAL_RFCOMM_NO_WIFI_NO_USB_PAYLOAD",
+      "messages": 6
+    },
+    "emulator": {
+      "note": "virtual radio/loopback tests are not proof of physical Wi-Fi or Bluetooth"
+    },
+    "tcp-usb": {
+      "status": "passed",
+      "observedAt": "2026-09-24T04:04:06.072Z",
+      "version": "0.1.1-alpha.49.1",
+      "path": "ADB_USB_TUNNEL_NOT_WIFI",
+      "messages": 6
+    },
+    "tcp-lan": {
+      "status": "passed",
+      "observedAt": "2026-09-24T04:04:10.573Z",
+      "version": "0.1.1-alpha.49.1",
+      "path": "PHYSICAL_WIFI_DIRECT_TCP",
+      "messages": 6
+    },
+    "tcp-peer": {
+      "status": "passed",
+      "observedAt": "2026-09-24T04:04:15.349Z",
+      "version": "0.1.1-alpha.49.1",
+      "path": "ANDROID_EMULATOR_TO_PHYSICAL_PHONE_OVER_LAN"
+    }
+  },
+  "limits": [
+    "Manual fun/usability acceptance is separate",
+    "Debug transport laboratory is not production multiplayer lobby",
+    "Physical signing is local transformation; two hashes recorded",
+    "main/stable unchanged unless separately authorized"
+  ]
+}

@@ -1,0 +1,1105 @@
+{
+  "schemaVersion": 1,
+  "repository": "neurofoxpro/multimental",
+  "taskId": "BALANCE-01",
+  "kind": "independent_seed_validation_not_final_balance_acceptance",
+  "observedAt": "2026-09-28T00:49:06.179Z",
+  "sourceCommit": "161324944d674706c125f8c42d587c98cfac688e",
+  "preregistration": {
+    "url": "https://github.com/neurofoxpro/multimental/issues/57#issuecomment-5861352751",
+    "id": 5861352751,
+    "createdAt": "2026-09-28T00:41:41Z",
+    "plan": {
+      "schemaVersion": 1,
+      "taskId": "BALANCE-01",
+      "kind": "preregistered_independent_seed_validation",
+      "observedAt": "2026-09-28T00:41:37.902Z",
+      "sourceCommit": "161324944d674706c125f8c42d587c98cfac688e",
+      "primaryExperiment": "0be3a22fd62cc8958ee72be8a49b05c499d2573ec04af5013ef8dbb7f6a8c529",
+      "primarySourceCommit": "b03b780894c66574220a83c0c1c50976871c3ee6",
+      "seedBase": 55101,
+      "seedBlocks": 32,
+      "seeds": [
+        149117485,
+        2095874442,
+        803940963,
+        1243200921,
+        1001975431,
+        1093432956,
+        1438685778,
+        1373864625,
+        1626614398,
+        1047343587,
+        1872575907,
+        2001934972,
+        72629283,
+        1927444886,
+        1968714871,
+        41406301,
+        402214385,
+        2145854521,
+        423684336,
+        128967393,
+        1843539787,
+        1582973818,
+        1318148032,
+        76830265,
+        357840231,
+        152438526,
+        1794516181,
+        1123645664,
+        2073782119,
+        317180885,
+        944912003,
+        581717004
+      ],
+      "expectedMatches": 4704,
+      "planHash": "5b1d83e2c85fcbee7dfd43404d62459cb997c9cd58f434ae51f1075bab477c45",
+      "unchangedExperimentFiles": [
+        "game/src/match_core.gd",
+        "game/src/deck_rules.gd",
+        "game/src/content_catalog.gd",
+        "content/accepted/catalog.json",
+        "game/tests/support/balance_scenarios.gd",
+        "game/tests/support/balance_audit.gd",
+        "game/tests/balance_audit_runner.gd",
+        "tools/balance-plan.json",
+        "skills/game-production/scripts/balance-audit-policy.mjs",
+        "skills/game-production/scripts/balance-audit.mjs"
+      ],
+      "firstMoverScoreBand": [
+        0.45,
+        0.55
+      ],
+      "minimumSeedBlocks": 32,
+      "screenedPolicies": [
+        "greedy",
+        "positional"
+      ],
+      "randomDiagnosticOnly": true,
+      "parametersChanged": false,
+      "decisionRule": "Report all results and intervals. Do not retune after looking at this validation series; concerns are not automatic accepted parameter changes.",
+      "remainingLimit": "Same seven deliberately sampled deck archetypes, not an independent sample of deck designs or human durations."
+    }
+  },
+  "verification": {
+    "schemaVersion": 1,
+    "step": "verify",
+    "status": "passed",
+    "exitCode": 0,
+    "sourceDigest": "31fe4e0c8a63cbae58b084af253aaa608e15ebfa6c02ec2e721989ac22804ab5",
+    "sourceDigestAfter": "31fe4e0c8a63cbae58b084af253aaa608e15ebfa6c02ec2e721989ac22804ab5",
+    "sourceChanged": false,
+    "startedAt": "2026-09-28T00:41:47.815Z",
+    "finishedAt": "2026-09-28T00:43:51.626Z",
+    "host": "VENEL-SENDRIK",
+    "command": [
+      "node",
+      "tools/verify.mjs"
+    ],
+    "log": ".gameprod/evidence/verify.log",
+    "logHash": "e355b1c1247f6c2a5cc030bdec3bc67d809c940e4dba97345752faf5d42d8f03",
+    "outputs": []
+  },
+  "nodeTests": 1041,
+  "primaryEvidence": "docs/production/evidence/balance-standard-start-20260928.json",
+  "experiment": {
+    "schemaVersion": 1,
+    "repository": "neurofoxpro/multimental",
+    "status": "passed",
+    "kind": "engineering_experiment_not_balance_acceptance",
+    "key": "9d0c7bac48c9182d07f0ddaafa16c6fe8f333fe049d0ddd4cb18dcbc42077f56",
+    "sourceDigest": "31fe4e0c8a63cbae58b084af253aaa608e15ebfa6c02ec2e721989ac22804ab5",
+    "sourceDigestAfter": "31fe4e0c8a63cbae58b084af253aaa608e15ebfa6c02ec2e721989ac22804ab5",
+    "sourceBase": "161324944d674706c125f8c42d587c98cfac688e",
+    "observedHead": "161324944d674706c125f8c42d587c98cfac688e",
+    "engineHash": "c8f0a6bc45a19b33541501e57f6f7cd972ab18453743266339d495cbbe846643",
+    "planHash": "5b1d83e2c85fcbee7dfd43404d62459cb997c9cd58f434ae51f1075bab477c45",
+    "seedBase": 55101,
+    "seeds": [
+      149117485,
+      2095874442,
+      803940963,
+      1243200921,
+      1001975431,
+      1093432956,
+      1438685778,
+      1373864625,
+      1626614398,
+      1047343587,
+      1872575907,
+      2001934972,
+      72629283,
+      1927444886,
+      1968714871,
+      41406301,
+      402214385,
+      2145854521,
+      423684336,
+      128967393,
+      1843539787,
+      1582973818,
+      1318148032,
+      76830265,
+      357840231,
+      152438526,
+      1794516181,
+      1123645664,
+      2073782119,
+      317180885,
+      944912003,
+      581717004
+    ],
+    "profile": "current",
+    "games": 4704,
+    "shards": [
+      {
+        "index": 0,
+        "request": {
+          "schemaVersion": 1,
+          "plan": "standard-start-v1",
+          "seeds": [
+            149117485,
+            2095874442,
+            803940963,
+            1243200921
+          ],
+          "policy": "greedy",
+          "profile": "current",
+          "maxCommands": 240
+        },
+        "identity": "6e7093fd921c4185bdb1d51389fd4dfc1e095461a7cf3cddaa04789449325cb5",
+        "resultHash": "9fb672d84c3642b4837bde5e220df2fd1313906e917fa67e60901aadf0dfc091",
+        "logHash": "22b5ddc4b071c3b7b90af2f5666d612d1b925a0d587bb7012055f95acb57978b"
+      },
+      {
+        "index": 1,
+        "request": {
+          "schemaVersion": 1,
+          "plan": "standard-start-v1",
+          "seeds": [
+            1001975431,
+            1093432956,
+            1438685778,
+            1373864625
+          ],
+          "policy": "greedy",
+          "profile": "current",
+          "maxCommands": 240
+        },
+        "identity": "57d712a881085b0ed3aa015f2395ed38ece12016563df902104a90c18877e274",
+        "resultHash": "30c761e1292a1e37b5d75c91dc72a52f26a4ea1e721c59fc02dba786bfd6e087",
+        "logHash": "22b5ddc4b071c3b7b90af2f5666d612d1b925a0d587bb7012055f95acb57978b"
+      },
+      {
+        "index": 2,
+        "request": {
+          "schemaVersion": 1,
+          "plan": "standard-start-v1",
+          "seeds": [
+            1626614398,
+            1047343587,
+            1872575907,
+            2001934972
+          ],
+          "policy": "greedy",
+          "profile": "current",
+          "maxCommands": 240
+        },
+        "identity": "da67a7a4eeb211e293a43718e066164579929f1a4ae0f2dbef6ba472ff3ff8d9",
+        "resultHash": "74b57dd1f75f93ed2c50df1a79696d1b96e8848a51e2dd584f97185cd0cef90a",
+        "logHash": "22b5ddc4b071c3b7b90af2f5666d612d1b925a0d587bb7012055f95acb57978b"
+      },
+      {
+        "index": 3,
+        "request": {
+          "schemaVersion": 1,
+          "plan": "standard-start-v1",
+          "seeds": [
+            72629283,
+            1927444886,
+            1968714871,
+            41406301
+          ],
+          "policy": "greedy",
+          "profile": "current",
+          "maxCommands": 240
+        },
+        "identity": "67606640d3ca7373bea0a2a4281e69be161a64a878f16b67c2b6da09f72f51f9",
+        "resultHash": "d458786df875f6bc19eea5dfd7a24dd9c562be5373f031db61677fad6934aa59",
+        "logHash": "22b5ddc4b071c3b7b90af2f5666d612d1b925a0d587bb7012055f95acb57978b"
+      },
+      {
+        "index": 4,
+        "request": {
+          "schemaVersion": 1,
+          "plan": "standard-start-v1",
+          "seeds": [
+            402214385,
+            2145854521,
+            423684336,
+            128967393
+          ],
+          "policy": "greedy",
+          "profile": "current",
+          "maxCommands": 240
+        },
+        "identity": "885b9401e91cb791793992167d790dd672ee30cc850ca8bc1506df290ffea9a3",
+        "resultHash": "2edc1a9fc0994b1b615c6cffeac93cb016bbfcaa7952194d2b2e50b51d963c17",
+        "logHash": "22b5ddc4b071c3b7b90af2f5666d612d1b925a0d587bb7012055f95acb57978b"
+      },
+      {
+        "index": 5,
+        "request": {
+          "schemaVersion": 1,
+          "plan": "standard-start-v1",
+          "seeds": [
+            1843539787,
+            1582973818,
+            1318148032,
+            76830265
+          ],
+          "policy": "greedy",
+          "profile": "current",
+          "maxCommands": 240
+        },
+        "identity": "7c667ad2058d122fa18b7b56c8d9e1812e417dd1ec52d57ace8bb5640995c947",
+        "resultHash": "d2a2d096d936c7814382b48c4db6e186b8ef17ba6d86633c82672bc2346cb168",
+        "logHash": "22b5ddc4b071c3b7b90af2f5666d612d1b925a0d587bb7012055f95acb57978b"
+      },
+      {
+        "index": 6,
+        "request": {
+          "schemaVersion": 1,
+          "plan": "standard-start-v1",
+          "seeds": [
+            357840231,
+            152438526,
+            1794516181,
+            1123645664
+          ],
+          "policy": "greedy",
+          "profile": "current",
+          "maxCommands": 240
+        },
+        "identity": "006b0c1e08708aff305f2884d95b8b7c3bff2e6bad439a92ad4e08112b5d6b68",
+        "resultHash": "5982e46c8cd7365643bb6019c18f55e97589f5b8cbaa7fa8e30e22dca5d870cd",
+        "logHash": "22b5ddc4b071c3b7b90af2f5666d612d1b925a0d587bb7012055f95acb57978b"
+      },
+      {
+        "index": 7,
+        "request": {
+          "schemaVersion": 1,
+          "plan": "standard-start-v1",
+          "seeds": [
+            2073782119,
+            317180885,
+            944912003,
+            581717004
+          ],
+          "policy": "greedy",
+          "profile": "current",
+          "maxCommands": 240
+        },
+        "identity": "834d83b93cc4fefbb49a74a2960fa5096693b947d05ffc128348e1abb7141256",
+        "resultHash": "1df18ba821edc9614c618ca36cfee02332471a393c310e10d7c8f4345fa62de3",
+        "logHash": "22b5ddc4b071c3b7b90af2f5666d612d1b925a0d587bb7012055f95acb57978b"
+      },
+      {
+        "index": 8,
+        "request": {
+          "schemaVersion": 1,
+          "plan": "standard-start-v1",
+          "seeds": [
+            149117485,
+            2095874442,
+            803940963,
+            1243200921
+          ],
+          "policy": "positional",
+          "profile": "current",
+          "maxCommands": 240
+        },
+        "identity": "5b294f65135dd7b3f14a50770a4ff2ff52a9f180f00d2a1130201224a4d608f6",
+        "resultHash": "cc57654033e31742ff57581d2b52fb7ec3d5fe3e0784e2d713170e509637f4fe",
+        "logHash": "22b5ddc4b071c3b7b90af2f5666d612d1b925a0d587bb7012055f95acb57978b"
+      },
+      {
+        "index": 9,
+        "request": {
+          "schemaVersion": 1,
+          "plan": "standard-start-v1",
+          "seeds": [
+            1001975431,
+            1093432956,
+            1438685778,
+            1373864625
+          ],
+          "policy": "positional",
+          "profile": "current",
+          "maxCommands": 240
+        },
+        "identity": "5130962ee6814524df7d8574b569c12f807bacc79b43b627bf4ac5ccb637c407",
+        "resultHash": "50e755edab1b0bbf15bd8a4b0abc761f337d637a48aab8bddd8186035918cb06",
+        "logHash": "22b5ddc4b071c3b7b90af2f5666d612d1b925a0d587bb7012055f95acb57978b"
+      },
+      {
+        "index": 10,
+        "request": {
+          "schemaVersion": 1,
+          "plan": "standard-start-v1",
+          "seeds": [
+            1626614398,
+            1047343587,
+            1872575907,
+            2001934972
+          ],
+          "policy": "positional",
+          "profile": "current",
+          "maxCommands": 240
+        },
+        "identity": "cb722cfeae21eae9bf348b2afa03ee1df84db12df951f5b8d7753b14a9a0caa7",
+        "resultHash": "ab93d11ed3a7aa5805c03e1dcc2c9d39c2ef0ca95a157e36f19774c3404f305d",
+        "logHash": "22b5ddc4b071c3b7b90af2f5666d612d1b925a0d587bb7012055f95acb57978b"
+      },
+      {
+        "index": 11,
+        "request": {
+          "schemaVersion": 1,
+          "plan": "standard-start-v1",
+          "seeds": [
+            72629283,
+            1927444886,
+            1968714871,
+            41406301
+          ],
+          "policy": "positional",
+          "profile": "current",
+          "maxCommands": 240
+        },
+        "identity": "2144ee1d7304f71849c20f52dfdfe2b0a42a8d5d17c6c5c31b88ff6be227fdda",
+        "resultHash": "c174714b1a3d84b8213dea0e3e942849a5da3c8b9382e9279327723948bd0c26",
+        "logHash": "22b5ddc4b071c3b7b90af2f5666d612d1b925a0d587bb7012055f95acb57978b"
+      },
+      {
+        "index": 12,
+        "request": {
+          "schemaVersion": 1,
+          "plan": "standard-start-v1",
+          "seeds": [
+            402214385,
+            2145854521,
+            423684336,
+            128967393
+          ],
+          "policy": "positional",
+          "profile": "current",
+          "maxCommands": 240
+        },
+        "identity": "e7addd623bb505f1042d86de9875e598c631a23016d316765b519e736e11c387",
+        "resultHash": "cbab6ec6c4d07bc5d12c2985c458d24e373dd7b96470d23c8b627c09ed447c74",
+        "logHash": "22b5ddc4b071c3b7b90af2f5666d612d1b925a0d587bb7012055f95acb57978b"
+      },
+      {
+        "index": 13,
+        "request": {
+          "schemaVersion": 1,
+          "plan": "standard-start-v1",
+          "seeds": [
+            1843539787,
+            1582973818,
+            1318148032,
+            76830265
+          ],
+          "policy": "positional",
+          "profile": "current",
+          "maxCommands": 240
+        },
+        "identity": "398ccdae77191a868b347dead6fbd5695eff38137be3bc39583d1199f37f9cc4",
+        "resultHash": "e12a87795701847fba07b86edce25514c9595b235ed876ece251d5e79a9a20f9",
+        "logHash": "22b5ddc4b071c3b7b90af2f5666d612d1b925a0d587bb7012055f95acb57978b"
+      },
+      {
+        "index": 14,
+        "request": {
+          "schemaVersion": 1,
+          "plan": "standard-start-v1",
+          "seeds": [
+            357840231,
+            152438526,
+            1794516181,
+            1123645664
+          ],
+          "policy": "positional",
+          "profile": "current",
+          "maxCommands": 240
+        },
+        "identity": "e0dd8a339883e18b5957cfb4727b5587c69c75513d2b0d3c35c2c096dc2f62ac",
+        "resultHash": "70d92ce275b94f116f801bb9e75d683fb34bda8d978c7f5c7045042e7f1b0b00",
+        "logHash": "22b5ddc4b071c3b7b90af2f5666d612d1b925a0d587bb7012055f95acb57978b"
+      },
+      {
+        "index": 15,
+        "request": {
+          "schemaVersion": 1,
+          "plan": "standard-start-v1",
+          "seeds": [
+            2073782119,
+            317180885,
+            944912003,
+            581717004
+          ],
+          "policy": "positional",
+          "profile": "current",
+          "maxCommands": 240
+        },
+        "identity": "e280925c1a192f917567366b640dc319734f7d769ece27359deadb1a8ff3d86c",
+        "resultHash": "0c8208bed17f4953267754e197154fef48ddaef5ff18bd207cae5d27547dcec8",
+        "logHash": "22b5ddc4b071c3b7b90af2f5666d612d1b925a0d587bb7012055f95acb57978b"
+      },
+      {
+        "index": 16,
+        "request": {
+          "schemaVersion": 1,
+          "plan": "standard-start-v1",
+          "seeds": [
+            149117485,
+            2095874442,
+            803940963,
+            1243200921
+          ],
+          "policy": "random",
+          "profile": "current",
+          "maxCommands": 240
+        },
+        "identity": "03bc21afaf5d273585a13dd7ea8c91a79a1239782e0205f46eec9c20976dcd6d",
+        "resultHash": "79396b3f531ba768e035249090efd6ddd88f0b4acfaf3cb8fe8e88df95c0a390",
+        "logHash": "22b5ddc4b071c3b7b90af2f5666d612d1b925a0d587bb7012055f95acb57978b"
+      },
+      {
+        "index": 17,
+        "request": {
+          "schemaVersion": 1,
+          "plan": "standard-start-v1",
+          "seeds": [
+            1001975431,
+            1093432956,
+            1438685778,
+            1373864625
+          ],
+          "policy": "random",
+          "profile": "current",
+          "maxCommands": 240
+        },
+        "identity": "7e069278e12b2171df67f2063682c4bc8d4911cc161c87eaca7d103b9bb5773f",
+        "resultHash": "acc2504545f624a1013d2cd44efe7d999da54976e5f723b95f5f15c44793181d",
+        "logHash": "22b5ddc4b071c3b7b90af2f5666d612d1b925a0d587bb7012055f95acb57978b"
+      },
+      {
+        "index": 18,
+        "request": {
+          "schemaVersion": 1,
+          "plan": "standard-start-v1",
+          "seeds": [
+            1626614398,
+            1047343587,
+            1872575907,
+            2001934972
+          ],
+          "policy": "random",
+          "profile": "current",
+          "maxCommands": 240
+        },
+        "identity": "38217fff6c100aca647f9bdfd885274318f8b2352dd9e79cba812af562caae30",
+        "resultHash": "331c6ba07f57fc29338ff1bdd738358cb4c5074a5282f89d8af50855fb100fa2",
+        "logHash": "22b5ddc4b071c3b7b90af2f5666d612d1b925a0d587bb7012055f95acb57978b"
+      },
+      {
+        "index": 19,
+        "request": {
+          "schemaVersion": 1,
+          "plan": "standard-start-v1",
+          "seeds": [
+            72629283,
+            1927444886,
+            1968714871,
+            41406301
+          ],
+          "policy": "random",
+          "profile": "current",
+          "maxCommands": 240
+        },
+        "identity": "77ee96eba9080b69e088da2e5924f6b22277514513b789b40c2834e6e395c605",
+        "resultHash": "004d1cfdf44f02fc8c18e237fd83ba918d7ce583a1da26962f465e7ab0a83d6c",
+        "logHash": "22b5ddc4b071c3b7b90af2f5666d612d1b925a0d587bb7012055f95acb57978b"
+      },
+      {
+        "index": 20,
+        "request": {
+          "schemaVersion": 1,
+          "plan": "standard-start-v1",
+          "seeds": [
+            402214385,
+            2145854521,
+            423684336,
+            128967393
+          ],
+          "policy": "random",
+          "profile": "current",
+          "maxCommands": 240
+        },
+        "identity": "354660678d07921e1f80f00540fb2e3579828d0826085fe0c832bf75fe1ed376",
+        "resultHash": "5a6a9f0f6918563a81db26fa8fca3073993f763d34e81258529464c4c0f7b983",
+        "logHash": "22b5ddc4b071c3b7b90af2f5666d612d1b925a0d587bb7012055f95acb57978b"
+      },
+      {
+        "index": 21,
+        "request": {
+          "schemaVersion": 1,
+          "plan": "standard-start-v1",
+          "seeds": [
+            1843539787,
+            1582973818,
+            1318148032,
+            76830265
+          ],
+          "policy": "random",
+          "profile": "current",
+          "maxCommands": 240
+        },
+        "identity": "c87b98d25271726ec9890810d9a052063471f99bfc01867377ad2e6bd7250655",
+        "resultHash": "40b52d653c1acd51241c2d747235c9af76d2e0adb3369745a3ad82da164f9e50",
+        "logHash": "22b5ddc4b071c3b7b90af2f5666d612d1b925a0d587bb7012055f95acb57978b"
+      },
+      {
+        "index": 22,
+        "request": {
+          "schemaVersion": 1,
+          "plan": "standard-start-v1",
+          "seeds": [
+            357840231,
+            152438526,
+            1794516181,
+            1123645664
+          ],
+          "policy": "random",
+          "profile": "current",
+          "maxCommands": 240
+        },
+        "identity": "1d2873d5a0f89148071d79aa9cc0700817fe39343021b249c92f0a2ee16c9d98",
+        "resultHash": "37ccc022bc21f0654d7f73760a482de96316b18107c560979009ef9da11349ef",
+        "logHash": "22b5ddc4b071c3b7b90af2f5666d612d1b925a0d587bb7012055f95acb57978b"
+      },
+      {
+        "index": 23,
+        "request": {
+          "schemaVersion": 1,
+          "plan": "standard-start-v1",
+          "seeds": [
+            2073782119,
+            317180885,
+            944912003,
+            581717004
+          ],
+          "policy": "random",
+          "profile": "current",
+          "maxCommands": 240
+        },
+        "identity": "6bc44c5761aaae254ee862373e9be560d861753bbafd438207019d032e1ce6f0",
+        "resultHash": "c791a21cdbe9e3a8aa74a762628d88bd6a5d620416bed58017c988402edf4a1e",
+        "logHash": "22b5ddc4b071c3b7b90af2f5666d612d1b925a0d587bb7012055f95acb57978b"
+      }
+    ],
+    "summary": ".gameprod/evidence/balance-standard/9d0c7bac48c9182d07f0ddaafa16c6fe8f333fe049d0ddd4cb18dcbc42077f56/summary.json",
+    "summaryHash": "8b03c42cf75a8cf07af0d3d1cc5f5cc2cbb8b3db057393e4109b58be1c9a6f43",
+    "report": ".gameprod/evidence/balance-standard/9d0c7bac48c9182d07f0ddaafa16c6fe8f333fe049d0ddd4cb18dcbc42077f56/REPORT.ru.md",
+    "reportHash": "f34227db6f7957974ec0376ccb3fdabf261b2c1f3706bf7e6f961d9e813bc5db",
+    "reusedShards": 24,
+    "observedAt": "2026-09-28T00:49:04.836Z",
+    "humanAcceptance": "pending",
+    "coreGameplayChanged": false
+  },
+  "findings": {
+    "schemaVersion": 1,
+    "kind": "software_balance_audit_not_human_acceptance",
+    "plan": "standard-start-v1",
+    "games": 4704,
+    "seedBlocks": 32,
+    "firstSeatCounts": [
+      13,
+      19
+    ],
+    "policies": [
+      {
+        "policy": "greedy",
+        "screened": true,
+        "games": 1568,
+        "firstWins": 837,
+        "draws": 0,
+        "firstMoverScore": {
+          "method": "seed-block percentile bootstrap, descriptive only",
+          "blocks": 32,
+          "mean": 0.5338010204081632,
+          "lower": 0.5108418367346939,
+          "upper": 0.5580357142857144
+        },
+        "firstMoverScreen": "inconclusive",
+        "mirrorScore": 0.5982142857142857,
+        "turns": {
+          "median": 25,
+          "p90": 41,
+          "maximum": 53
+        },
+        "forcedLimits": 0,
+        "forcedRate": 0,
+        "deterministicCycles": 0,
+        "archetypes": [
+          {
+            "deck": "starter",
+            "games": 384,
+            "score": 0.9036458333333334,
+            "aboveScreen": true
+          },
+          {
+            "deck": "guard",
+            "games": 384,
+            "score": 0.4635416666666667,
+            "aboveScreen": false
+          },
+          {
+            "deck": "lancer",
+            "games": 384,
+            "score": 0.4505208333333333,
+            "aboveScreen": false
+          },
+          {
+            "deck": "archer",
+            "games": 384,
+            "score": 0.3854166666666667,
+            "aboveScreen": false
+          },
+          {
+            "deck": "flanker",
+            "games": 384,
+            "score": 0.3125,
+            "aboveScreen": false
+          },
+          {
+            "deck": "rush",
+            "games": 384,
+            "score": 0.07291666666666667,
+            "aboveScreen": false
+          },
+          {
+            "deck": "elite",
+            "games": 384,
+            "score": 0.9114583333333334,
+            "aboveScreen": true
+          }
+        ],
+        "screenConcerns": [
+          "dominance:starter",
+          "dominance:elite"
+        ]
+      },
+      {
+        "policy": "positional",
+        "screened": true,
+        "games": 1568,
+        "firstWins": 945,
+        "draws": 0,
+        "firstMoverScore": {
+          "method": "seed-block percentile bootstrap, descriptive only",
+          "blocks": 32,
+          "mean": 0.6026785714285713,
+          "lower": 0.5567602040816326,
+          "upper": 0.6517857142857144
+        },
+        "firstMoverScreen": "outside_screen",
+        "mirrorScore": 0.6205357142857143,
+        "turns": {
+          "median": 13,
+          "p90": 21,
+          "maximum": 37
+        },
+        "forcedLimits": 0,
+        "forcedRate": 0,
+        "deterministicCycles": 0,
+        "archetypes": [
+          {
+            "deck": "starter",
+            "games": 384,
+            "score": 0.8697916666666666,
+            "aboveScreen": true
+          },
+          {
+            "deck": "guard",
+            "games": 384,
+            "score": 0.3802083333333333,
+            "aboveScreen": false
+          },
+          {
+            "deck": "lancer",
+            "games": 384,
+            "score": 0.53125,
+            "aboveScreen": false
+          },
+          {
+            "deck": "archer",
+            "games": 384,
+            "score": 0.4270833333333333,
+            "aboveScreen": false
+          },
+          {
+            "deck": "flanker",
+            "games": 384,
+            "score": 0.3151041666666667,
+            "aboveScreen": false
+          },
+          {
+            "deck": "rush",
+            "games": 384,
+            "score": 0.11979166666666667,
+            "aboveScreen": false
+          },
+          {
+            "deck": "elite",
+            "games": 384,
+            "score": 0.8567708333333334,
+            "aboveScreen": true
+          }
+        ],
+        "screenConcerns": [
+          "first_mover",
+          "dominance:starter",
+          "dominance:elite"
+        ]
+      },
+      {
+        "policy": "random",
+        "screened": false,
+        "games": 1568,
+        "firstWins": 936,
+        "draws": 0,
+        "firstMoverScore": {
+          "method": "seed-block percentile bootstrap, descriptive only",
+          "blocks": 32,
+          "mean": 0.5969387755102041,
+          "lower": 0.5274234693877551,
+          "upper": 0.6639030612244896
+        },
+        "firstMoverScreen": "diagnostic_only",
+        "mirrorScore": 0.5848214285714286,
+        "turns": {
+          "median": 10,
+          "p90": 14,
+          "maximum": 40
+        },
+        "forcedLimits": 0,
+        "forcedRate": 0,
+        "deterministicCycles": 0,
+        "archetypes": [
+          {
+            "deck": "starter",
+            "games": 384,
+            "score": 0.546875,
+            "aboveScreen": false
+          },
+          {
+            "deck": "guard",
+            "games": 384,
+            "score": 0.4322916666666667,
+            "aboveScreen": false
+          },
+          {
+            "deck": "lancer",
+            "games": 384,
+            "score": 0.4947916666666667,
+            "aboveScreen": false
+          },
+          {
+            "deck": "archer",
+            "games": 384,
+            "score": 0.4427083333333333,
+            "aboveScreen": false
+          },
+          {
+            "deck": "flanker",
+            "games": 384,
+            "score": 0.4869791666666667,
+            "aboveScreen": false
+          },
+          {
+            "deck": "rush",
+            "games": 384,
+            "score": 0.5260416666666666,
+            "aboveScreen": false
+          },
+          {
+            "deck": "elite",
+            "games": 384,
+            "score": 0.5703125,
+            "aboveScreen": false
+          }
+        ],
+        "screenConcerns": []
+      }
+    ],
+    "allReplaysVerified": true,
+    "acceptedRulesChanged": false,
+    "humanDuration": {
+      "status": "not_measured",
+      "targetMinutes": 10,
+      "maximumMinutes": 15
+    },
+    "overall": "concerns_observed",
+    "limits": [
+      "Heuristic policies are not optimal or human play",
+      "Random policy is exploratory and excluded from balance pass/fail",
+      "All ordered deck pairs; identical-deck mirrors counted once, not twice",
+      "Whole seed blocks preserve dependence between reversed pairings",
+      "Command cap is simulator budget, not the game clock",
+      "No gameplay rules, cards, profile, layout or network changed"
+    ]
+  },
+  "comparison": [
+    {
+      "policy": "greedy",
+      "primaryGames": 1568,
+      "primaryFirstScore": {
+        "method": "seed-block percentile bootstrap, descriptive only",
+        "blocks": 32,
+        "mean": 0.5210459183673469,
+        "lower": 0.5025510204081632,
+        "upper": 0.5401785714285714
+      },
+      "validationGames": 1568,
+      "validationFirstScore": {
+        "method": "seed-block percentile bootstrap, descriptive only",
+        "blocks": 32,
+        "mean": 0.5338010204081632,
+        "lower": 0.5108418367346939,
+        "upper": 0.5580357142857144
+      },
+      "screen": "inconclusive",
+      "concerns": [
+        "dominance:starter",
+        "dominance:elite"
+      ],
+      "turns": {
+        "median": 25,
+        "p90": 41,
+        "maximum": 53
+      },
+      "cycles": 0,
+      "forcedLimits": 0,
+      "archetypes": [
+        {
+          "deck": "starter",
+          "games": 384,
+          "score": 0.9036458333333334,
+          "aboveScreen": true
+        },
+        {
+          "deck": "guard",
+          "games": 384,
+          "score": 0.4635416666666667,
+          "aboveScreen": false
+        },
+        {
+          "deck": "lancer",
+          "games": 384,
+          "score": 0.4505208333333333,
+          "aboveScreen": false
+        },
+        {
+          "deck": "archer",
+          "games": 384,
+          "score": 0.3854166666666667,
+          "aboveScreen": false
+        },
+        {
+          "deck": "flanker",
+          "games": 384,
+          "score": 0.3125,
+          "aboveScreen": false
+        },
+        {
+          "deck": "rush",
+          "games": 384,
+          "score": 0.07291666666666667,
+          "aboveScreen": false
+        },
+        {
+          "deck": "elite",
+          "games": 384,
+          "score": 0.9114583333333334,
+          "aboveScreen": true
+        }
+      ]
+    },
+    {
+      "policy": "positional",
+      "primaryGames": 1568,
+      "primaryFirstScore": {
+        "method": "seed-block percentile bootstrap, descriptive only",
+        "blocks": 32,
+        "mean": 0.5663265306122448,
+        "lower": 0.5274234693877552,
+        "upper": 0.6033163265306123
+      },
+      "validationGames": 1568,
+      "validationFirstScore": {
+        "method": "seed-block percentile bootstrap, descriptive only",
+        "blocks": 32,
+        "mean": 0.6026785714285713,
+        "lower": 0.5567602040816326,
+        "upper": 0.6517857142857144
+      },
+      "screen": "outside_screen",
+      "concerns": [
+        "first_mover",
+        "dominance:starter",
+        "dominance:elite"
+      ],
+      "turns": {
+        "median": 13,
+        "p90": 21,
+        "maximum": 37
+      },
+      "cycles": 0,
+      "forcedLimits": 0,
+      "archetypes": [
+        {
+          "deck": "starter",
+          "games": 384,
+          "score": 0.8697916666666666,
+          "aboveScreen": true
+        },
+        {
+          "deck": "guard",
+          "games": 384,
+          "score": 0.3802083333333333,
+          "aboveScreen": false
+        },
+        {
+          "deck": "lancer",
+          "games": 384,
+          "score": 0.53125,
+          "aboveScreen": false
+        },
+        {
+          "deck": "archer",
+          "games": 384,
+          "score": 0.4270833333333333,
+          "aboveScreen": false
+        },
+        {
+          "deck": "flanker",
+          "games": 384,
+          "score": 0.3151041666666667,
+          "aboveScreen": false
+        },
+        {
+          "deck": "rush",
+          "games": 384,
+          "score": 0.11979166666666667,
+          "aboveScreen": false
+        },
+        {
+          "deck": "elite",
+          "games": 384,
+          "score": 0.8567708333333334,
+          "aboveScreen": true
+        }
+      ]
+    },
+    {
+      "policy": "random",
+      "primaryGames": 1568,
+      "primaryFirstScore": {
+        "method": "seed-block percentile bootstrap, descriptive only",
+        "blocks": 32,
+        "mean": 0.631377551020408,
+        "lower": 0.5510204081632654,
+        "upper": 0.712372448979592
+      },
+      "validationGames": 1568,
+      "validationFirstScore": {
+        "method": "seed-block percentile bootstrap, descriptive only",
+        "blocks": 32,
+        "mean": 0.5969387755102041,
+        "lower": 0.5274234693877551,
+        "upper": 0.6639030612244896
+      },
+      "screen": "diagnostic_only",
+      "concerns": [],
+      "turns": {
+        "median": 10,
+        "p90": 14,
+        "maximum": 40
+      },
+      "cycles": 0,
+      "forcedLimits": 0,
+      "archetypes": [
+        {
+          "deck": "starter",
+          "games": 384,
+          "score": 0.546875,
+          "aboveScreen": false
+        },
+        {
+          "deck": "guard",
+          "games": 384,
+          "score": 0.4322916666666667,
+          "aboveScreen": false
+        },
+        {
+          "deck": "lancer",
+          "games": 384,
+          "score": 0.4947916666666667,
+          "aboveScreen": false
+        },
+        {
+          "deck": "archer",
+          "games": 384,
+          "score": 0.4427083333333333,
+          "aboveScreen": false
+        },
+        {
+          "deck": "flanker",
+          "games": 384,
+          "score": 0.4869791666666667,
+          "aboveScreen": false
+        },
+        {
+          "deck": "rush",
+          "games": 384,
+          "score": 0.5260416666666666,
+          "aboveScreen": false
+        },
+        {
+          "deck": "elite",
+          "games": 384,
+          "score": 0.5703125,
+          "aboveScreen": false
+        }
+      ]
+    }
+  ],
+  "totalDistinctMatchesAcrossBothSeries": 9408,
+  "repeatedInvocationAddedMatches": 0,
+  "allJournalsReplayed": true,
+  "overlappingSeeds": [],
+  "acceptedRulesChanged": false,
+  "cardParametersChanged": false,
+  "humanDurationMeasured": false,
+  "limitations": [
+    "Validation uses new initial-condition seeds, not new deck archetypes, policies or real players.",
+    "Do not describe changes between sample means as improvement or regression: game parameters did not change.",
+    "A powerful mixed starter or elite deck beating deliberately weak single-role decks is a sampling concern, not sufficient evidence to weaken a card.",
+    "The random strategy is only a diagnostic and is excluded from the predeclared balance decision.",
+    "Human duration and subjective game quality remain unmeasured; BALANCE-01 is not accepted from this report."
+  ],
+  "nextEngineeringStep": "Before parameter tuning, add independently designed competitive mixed-deck opponents and cross-policy matchups, keep this validation frozen."
+}

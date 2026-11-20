@@ -1,0 +1,95 @@
+extends SceneTree
+const Core = preload("res://src/match_core.gd")
+var failures: int = 0
+var checks: int = 0
+func check(value: bool, message: String) -> void:
+    checks += 1
+    if not value:
+        failures += 1
+        printerr("PRODUCTION_TEST_FAIL: " + message)
+func _initialize() -> void:
+    call_deferred("run_test")
+func fixture(ui) -> void:
+    ui.game.start(42)
+    ui.game.state.players[0].hand = [0, 2, 4]
+    ui.game.state.players[0].coins = 3
+    ui.game.state.center_unlocked = true # This fixture tests rotation, not lock thresholds.
+    ui.selected_hand = -1
+    ui.selected_unit = -1
+    ui.selected_direction = 0
+    ui.last_animated_event = -1
+    ui.timed_turn = int(ui.game.state.turn)
+    ui.refresh()
+func run_test() -> void:
+    var ui = load("res://src/main.tscn").instantiate()
+    ui.profile.enabled = false
+    root.add_child(ui)
+    await process_frame
+    ui.set_process(false)
+    ui.start_match()
+    ui.set_process(false)
+    fixture(ui)
+    ui.game.state.board[1] = {"id": 2, "owner": 1, "attack": 1, "health": 4, "direction": 0}
+    ui.refresh()
+    var digest: String = ui.game.digest()
+    ui.on_hand(0)
+    ui.on_cell(0)
+    check(ui.selected_cell == 0 and ui.game.digest() == digest, "hovering placement is UI-only")
+    var preview_cell = ui.board_buttons[0]
+    check(preview_cell.attack_overlay.visible and preview_cell.preview_rotate_left.visible and preview_cell.preview_rotate_right.visible, "both rotation buttons flank the floating card")
+    var initial_rays: Array[Vector2] = preview_cell.attack_overlay.rays.duplicate()
+    ui.rotate_card(1)
+    check(ui.selected_direction == 1 and ui.game.digest() == digest, "rotation preview never mutates the match")
+    check(preview_cell.attack_overlay.rays != initial_rays and preview_cell.attack_overlay.visible, "attack arrows on card rotate with orientation")
+    check("→" in ui.aim_label.text, "preview shows chosen direction")
+    var deadline: float = ui.deadline
+    check(ui.game.state.board[0] == null and ui.game.digest() == digest, "orientation preview never places a unit")
+    ui.confirm_card_placement()
+    check(ui.game.state.board[0].direction == 1 and ui.game.state.active == 0, "oriented placement retains turn")
+    check(ui.deadline == deadline, "UI does not renew timer after placement")
+    check(ui.rotation_left.disabled and ui.rotation_right.disabled, "rotation disabled after placement")
+    for b in ui.hand_row.get_children():
+        check(b.disabled, "second summon disabled in UI")
+    ui.rotate_card(1)
+    check(ui.game.state.board[0].direction == 1, "no rotation of a deployed card")
+    var damage_before: int = ui.damage_effects_total
+    ui.on_cell(1)
+    check(ui.battle_inspector.visible and ui.game.state.board[1].health == 4 and ui.game.state.active == 0, "enemy tap without selected attacker only inspects")
+    ui.battle_inspector.hide()
+    ui.on_cell(0)
+    ui.on_cell(1)
+    check(not ui.battle_inspector.visible and ui.game.state.board[1].health == 3 and ui.game.state.active == 1, "selected attacker + enemy tap executes one legal sweep")
+    ui.attack_selected()
+    check(ui.game.state.board[1].health == 3 and ui.game.state.active == 1, "a stale repeat never attacks twice")
+    check(ui.damage_effects_total == damage_before + 1, "damage visualization invoked")
+    check(ui.board_buttons[1].find_child("DamageNumber", true, false) != null, "damage number attached to target")
+    ui.refresh()
+    check(ui.damage_effects_total == damage_before + 1, "refresh does not duplicate damage animation")
+    fixture(ui)
+    ui.game.state.board[0] = {"id": 0, "owner": 0, "attack": 1, "health": 3, "direction": 1}
+    ui.game.state.board[1] = {"id": 2, "owner": 0, "attack": 1, "health": 3, "direction": 3}
+    ui.refresh()
+    ui.on_cell(0)
+    digest = ui.game.digest()
+    ui.on_cell(1)
+    check(ui.selected_unit == 1 and ui.game.digest() == digest, "own unit tap switches selection without friendly fire")
+    ui.on_cell(0)
+    ui.attack_selected()
+    check(ui.friendly_confirm.visible and ui.game.digest() == digest, "friendly fire asks before applying")
+    ui.confirm_friendly_attack()
+    check(ui.game.state.board[1].health == 2 and ui.game.state.board[0].health == 3, "confirmed friendly damage applied")
+    check(ui.game.state.players[0].coins == 2, "old attacker fee shown and charged")
+    fixture(ui)
+    ui.on_hand(0)
+    ui.on_cell(4)
+    ui.confirm_card_placement()
+    ui.pass_turn()
+    check(ui.game.state.active == 1 and ui.game.state.board[4] != null, "optional attack can be skipped with End Turn")
+    ui.show_card_guide()
+    check(not ui.battle, "catalogue guide screen opens")
+    ui.show_menu()
+    ui.queue_free()
+    await process_frame
+    if failures == 0:
+        print("MULTIMENTAL_DIRECTIONAL_UI_PASS checks=%d" % checks)
+    quit(0 if failures == 0 else 1)

@@ -1,0 +1,577 @@
+{
+    "deviceValidation":  "not_performed",
+    "humanAcceptance":  "not_inferred",
+    "repeat":  {
+                   "observedOnRenderKey":  "74a03baf2a777eabd58defa33cd20550acf4047fe7e81f7bb5e7fad4b6967516",
+                   "scope":  "repeat verified on previous generation; current generation rerendered with managed README and explicit menu scroll",
+                   "currentManifestBytesUnchanged":  true,
+                   "mtimeUnchanged":  true,
+                   "mode":  "gallery promote",
+                   "status":  "passed"
+               },
+    "repository":  "neurofoxpro/multimental",
+    "task":  "UX-09",
+    "renderInputs":  [
+                         {
+                             "path":  "game/icon.svg",
+                             "sha256":  "c9ca2d86eb2e5738fa4cf0ed848cbb4cfc4dd34b53293c70924050ebaa891f9b"
+                         },
+                         {
+                             "path":  "game/project.godot",
+                             "sha256":  "b48db0d3ecf5fd59e075f1ee19d7957b11b5d1b96f20d6205235e2f87e33c69a"
+                         },
+                         {
+                             "path":  "game/src/audio_director.gd",
+                             "sha256":  "e7a4803e094d2d6c18a538af8441d2dbf403cd299667c2cb4b27014c4e18267c"
+                         },
+                         {
+                             "path":  "game/src/card_description.gd",
+                             "sha256":  "f269f2d4891d3d5ca42a87d1cde4ebe592cb99d6983b68c105af2221c547380a"
+                         },
+                         {
+                             "path":  "game/src/card_inspector.gd",
+                             "sha256":  "beb9a542cf4667759101bea40ee77f6c76bf71b5fe77f29ac0fee3827364cb44"
+                         },
+                         {
+                             "path":  "game/src/catalog_view.gd",
+                             "sha256":  "cb052da568d2fd54c35339adfe57ffc8ea56e75cbf17c2cd25165202d10b951a"
+                         },
+                         {
+                             "path":  "game/src/collection_device_lab.gd",
+                             "sha256":  "2d50b3374b130ff97a10481e43f36fbc8594393305277a59207ae3072b3ac83d"
+                         },
+                         {
+                             "path":  "game/src/collection_rules.gd",
+                             "sha256":  "ba29a05f6cf91b9e7e8b7f6d2fd7443fbb497c4325c5d1a9a9590085432d9aa3"
+                         },
+                         {
+                             "path":  "game/src/collection_screen.gd",
+                             "sha256":  "df7b0e8ea53758bb8639e24cdf8b52665867761a918ca9d5bd20de7352a1a366"
+                         },
+                         {
+                             "path":  "game/src/combat_feedback.gd",
+                             "sha256":  "4d30fec7c44350dc397d882cdaf9fdf071f18863ddc51c2c94cd61f7d2867d77"
+                         },
+                         {
+                             "path":  "game/src/crafting_device_lab.gd",
+                             "sha256":  "2f1c64694faca113020285d3697e676d17dda1b01195ba1f3a1971a403a0dba1"
+                         },
+                         {
+                             "path":  "game/src/crafting_policy.gd",
+                             "sha256":  "955d9d827b77282a3b37d92b308f27eb8142c641b892ceb765d4102bc2537e90"
+                         },
+                         {
+                             "path":  "game/src/crafting_rules.gd",
+                             "sha256":  "ef0ecba30531d13a8f5f22b1349ef3c67cbf1ff1f19a6f3dc19093fa80cd2961"
+                         },
+                         {
+                             "path":  "game/src/crafting_screen.gd",
+                             "sha256":  "4bfcdb45256eb5a8fd7f92b50ac402d0efa5924b2c2034cacc08eee905f9612c"
+                         },
+                         {
+                             "path":  "game/src/deck_rules.gd",
+                             "sha256":  "e6c996f479e1eb105cb05fd31a2da9f6eb3b7653ab59d6e08929e2d2d465d665"
+                         },
+                         {
+                             "path":  "game/src/device_lab.gd",
+                             "sha256":  "0a43959293ce876d9d4c97e52eafe2053d97fe622191d629734b4a75ff7b5da1"
+                         },
+                         {
+                             "path":  "game/src/economy_rules.gd",
+                             "sha256":  "405b3dcfe4dbb120407d6af0a7142e761a11044326f59515209aa54c0a351013"
+                         },
+                         {
+                             "path":  "game/src/inspector_device_lab.gd",
+                             "sha256":  "ef99db1d41c573cf7cc9e6f8758e21eb481432849d34dd488a7ea9d60192068c"
+                         },
+                         {
+                             "path":  "game/src/main.gd",
+                             "sha256":  "e677aa70eae1a50402d7dc91c0ddb62f04ee19a6af59d3ecd0785ce13f59b867"
+                         },
+                         {
+                             "path":  "game/src/main.tscn",
+                             "sha256":  "974f0c16c780553070a312e96c40fab81d495b4a714b228e0b9b23344fefe448"
+                         },
+                         {
+                             "path":  "game/src/match_core.gd",
+                             "sha256":  "2367b47b9a66b7491bb43e5eaa8d9728de4480b3cda6fc7ca63f801491741a5a"
+                         },
+                         {
+                             "path":  "game/src/match_view.gd",
+                             "sha256":  "d1c5261f282e63ddc07ca5658498c42dbef903ca7be1f75b84b73a9113df1049"
+                         },
+                         {
+                             "path":  "game/src/net/bluetooth_channel.gd",
+                             "sha256":  "0b9fb05ee43b0dde618499e69898810ea45a07d39ae5cb4b0747aeb1d4760685"
+                         },
+                         {
+                             "path":  "game/src/net/bluetooth_session.gd",
+                             "sha256":  "925a417629fbeceb354c0cbb3f181c0474fde374369cfbd90ffe5e92ad10b678"
+                         },
+                         {
+                             "path":  "game/src/net/json_channel.gd",
+                             "sha256":  "43533d36c86711b89ad95e9fa6c8386d19e0bba20d955422a8c32251174ad502"
+                         },
+                         {
+                             "path":  "game/src/net/lan_session.gd",
+                             "sha256":  "4fd5318ac5076d67fbc59db3ba5443adcc3d3534f8811f09410256b4aa8ed61e"
+                         },
+                         {
+                             "path":  "game/src/net/room_certificate.gd",
+                             "sha256":  "5c316c90d5a83ce6b506224c99b84905d67207a51a3833729efb656fd5a30b6f"
+                         },
+                         {
+                             "path":  "game/src/net/room_device_test.gd",
+                             "sha256":  "9e046ea0e86e1f049eae3415516540fdede89bf1694765db25f686548150c159"
+                         },
+                         {
+                             "path":  "game/src/net/room_invite.gd",
+                             "sha256":  "57c49b5a3aa3561134308053761b3e623c9f7ea38e6ecb65dc3e943a8a9000a5"
+                         },
+                         {
+                             "path":  "game/src/net/room_rules.gd",
+                             "sha256":  "8271bd2612ec36e8fd9ccbe27a5a1f8ca7f0c1cf0bd9a27c7a42000d410c2d29"
+                         },
+                         {
+                             "path":  "game/src/net/room_view.gd",
+                             "sha256":  "33940f3a099a5643513d6d1d5cfa17b2f2dcd66d8e30ccb6fdc725051261fdb2"
+                         },
+                         {
+                             "path":  "game/src/profile_controller.gd",
+                             "sha256":  "ec0b518ad19391b117ae2407e43cfe77de9dadc1c6e906aae9a5245d971f6e5b"
+                         },
+                         {
+                             "path":  "game/src/profile_journal.gd",
+                             "sha256":  "6ede704347e4399c65194ec03eec02d13ac832c40eb5ac052a125dc2e29af292"
+                         },
+                         {
+                             "path":  "game/src/profile_lab.gd",
+                             "sha256":  "3f664abc2fcb89e43249b4094f5a59ebabbad37924b15615b9cbe00bfd7d72ac"
+                         },
+                         {
+                             "path":  "game/src/profile_state.gd",
+                             "sha256":  "ab721d6cbbc3b3ca9f023f54326e4cba4bf9ddd54895b3518c1f221e0ee62583"
+                         },
+                         {
+                             "path":  "game/src/profile_store.gd",
+                             "sha256":  "598e47c9856ff77d48582f4c1e27b73e917958d6445195e5ef084529ea31620a"
+                         },
+                         {
+                             "path":  "game/src/rewards_device_lab.gd",
+                             "sha256":  "5f930ce84886152d6c3471bff66bab0ae1dd58d5d6f6ea1190c5317a2b9bfcbc"
+                         },
+                         {
+                             "path":  "game/src/rewards_policy.gd",
+                             "sha256":  "ff5e89ec6e73984f6d3a3115c232693892ec10c3d8fa0d2f6fdacac51ff83e00"
+                         },
+                         {
+                             "path":  "game/src/rewards_rules.gd",
+                             "sha256":  "0cde13739aa26b7873daa90d7771e344434d4056d8d46a223c6b8dc7157ff9d3"
+                         },
+                         {
+                             "path":  "game/src/rewards_screen.gd",
+                             "sha256":  "64c37337253d4ebea756d9b23842c84927d11ac3c93547ca00c9fec540671438"
+                         },
+                         {
+                             "path":  "game/src/scrollable_page.gd",
+                             "sha256":  "3bdf7634448bac1d868c8dc7e1a275c624df133358bbc532a98dcf2a82ca3595"
+                         },
+                         {
+                             "path":  "game/src/session_protocol.gd",
+                             "sha256":  "f2dcc53d45d94749724c9d581c920a3195f99d281d9f3747160a891e2259b3bc"
+                         },
+                         {
+                             "path":  "game/src/shop_device_lab.gd",
+                             "sha256":  "e6cbe217d5cdf75a5570dc81e3adf805ea2e86ab002cfc552ee741280c26f649"
+                         },
+                         {
+                             "path":  "game/src/shop_screen.gd",
+                             "sha256":  "d074601d0aa52211dfba26610d21d79495a31b16377e19423a7d1accca6a92d7"
+                         },
+                         {
+                             "path":  "game/src/ui_tap_geometry.gd",
+                             "sha256":  "f756a296bb6c420d8d10fdc8506613f343a08000295877774e421adc5abb88db"
+                         },
+                         {
+                             "path":  "game/tests/gallery_capture.gd",
+                             "sha256":  "d05878a1c973f53b7cf7de658afb5656fc35e6585b1511c6ea2fffea6c5c7555"
+                         },
+                         {
+                             "path":  "skills/game-production/scripts/gallery-policy.mjs",
+                             "sha256":  "a845c5d0e7c7de467887e139f6147da47d55119c08c1e7404b794811d09d6634"
+                         },
+                         {
+                             "path":  "tools/gallery.mjs",
+                             "sha256":  "326f1ad07444fb00f06a3ad36556ffdea59a6c6243d6f3ea6d3b0322fe97c42d"
+                         }
+                     ],
+    "dispatch":  {
+                     "baseCommit":  "45398c0fe59e4804e74527f259fc56ba01e88f1f",
+                     "fence":  79,
+                     "command":  "work next screenshots-20260926-1100 --tag task:UX-09",
+                     "automaticLlmStarted":  false,
+                     "status":  "task_claimed",
+                     "task":  "UX-09"
+                 },
+    "observedAt":  "2026-09-26T11:33:33.2104963Z",
+    "uiDefects":  [
+                      {
+                          "observed":  "en-battle-1280x720: lower hand and turn/menu actions below viewport",
+                          "implemented":  false,
+                          "id":  "landscape-battle-clipped",
+                          "severity":  "blocks-visible-actions"
+                      },
+                      {
+                          "observed":  "ru-battle-720x1280: text dimmed during opponent turn",
+                          "implemented":  false,
+                          "id":  "disabled-hand-reading",
+                          "severity":  "legibility"
+                      },
+                      {
+                          "observed":  "ru-card-720x1280: native close button smaller than assigned minimum; existing PR119",
+                          "implemented":  false,
+                          "id":  "inspector-close-size",
+                          "severity":  "touch-target"
+                      }
+                  ],
+    "kind":  "rendered_source_observation",
+    "renderInputKey":  "d3b279cbc3cc9ad4cc245fbcec6420295af3948dfe33d2cf49ced9ed4cf66c2c",
+    "sourceStudy":  {
+                        "sources":  [
+                                        {
+                                            "url":  "https://docs.godotengine.org/en/stable/classes/class_viewport.html",
+                                            "finalUrl":  "https://docs.godotengine.org/en/stable/classes/class_viewport.html",
+                                            "observedAt":  "2026-09-26T11:32:31.154Z",
+                                            "sha256":  "1346709885f6323af1137926fde6c9cfe90a33e8590e180c40bb9e33b25c153c",
+                                            "bytes":  1516117,
+                                            "contentType":  "text/html; charset=utf-8",
+                                            "downloadedNotReviewed":  true
+                                        },
+                                        {
+                                            "url":  "https://docs.godotengine.org/en/stable/classes/class_subviewport.html",
+                                            "finalUrl":  "https://docs.godotengine.org/en/stable/classes/class_subviewport.html",
+                                            "observedAt":  "2026-09-26T11:32:31.155Z",
+                                            "sha256":  "443cb45ae291c778c0b0f30d8c6c7358a843e4fb930d8e93faa3d1c06ceddc2f",
+                                            "bytes":  1304916,
+                                            "contentType":  "text/html; charset=utf-8",
+                                            "downloadedNotReviewed":  true
+                                        },
+                                        {
+                                            "url":  "https://developer.android.com/guide/topics/ui/accessibility/apps",
+                                            "finalUrl":  "https://developer.android.com/guide/topics/ui/accessibility/apps",
+                                            "observedAt":  "2026-09-26T11:32:31.596Z",
+                                            "sha256":  "0d01e4165e6ada8eff767720bf0c1e9596d9ab102b6dea16c512355187b63b33",
+                                            "bytes":  280737,
+                                            "contentType":  "text/html; charset=utf-8",
+                                            "downloadedNotReviewed":  true
+                                        }
+                                    ],
+                        "inputKey":  "09294b9e61291eb2330d042ec3d1a1ab7827f1e4f4ef2f00a6c7f2569e96c2e1",
+                        "checks":  [
+                                       {
+                                           "id":  "gallery",
+                                           "status":  "passed",
+                                           "exitCode":  0,
+                                           "log":  ".gameprod/evidence/studies/UX-09-gallery.log",
+                                           "logHash":  "00d4ee5b43daa75c939ac38d2a7d4b007d7dce5b5d74bf5894325cb5c579e9cb",
+                                           "sourceDigest":  "031fa995fd70651536262caabe4233b92e32737c29b3bd67755c6a4abd626103"
+                                       },
+                                       {
+                                           "id":  "menu",
+                                           "status":  "passed",
+                                           "exitCode":  0,
+                                           "log":  ".gameprod/evidence/studies/UX-09-menu.log",
+                                           "logHash":  "237d3dc5435edaaa3832c102e4f68e10b54ceaf1e4ca586749e24b25a8728e19",
+                                           "sourceDigest":  "031fa995fd70651536262caabe4233b92e32737c29b3bd67755c6a4abd626103"
+                                       },
+                                       {
+                                           "id":  "inspector",
+                                           "status":  "passed",
+                                           "exitCode":  0,
+                                           "log":  ".gameprod/evidence/studies/UX-09-inspector.log",
+                                           "logHash":  "74d34ec3fdf3018c1573adcce93994dcfb4e46524026734b57c431e85277bd11",
+                                           "sourceDigest":  "031fa995fd70651536262caabe4233b92e32737c29b3bd67755c6a4abd626103"
+                                       }
+                                   ],
+                        "assessment":  {
+                                           "inputKey":  "09294b9e61291eb2330d042ec3d1a1ab7827f1e4f4ef2f00a6c7f2569e96c2e1",
+                                           "verdict":  "supported",
+                                           "limitations":  [
+                                                               "Снята Windows-отрисовка исходников с тестовым профилем, не установленный Android APK; dp/TalkBack/ярлыки не проверены.",
+                                                               "Меню в финальной фикстуре явно прокручивается к верхнему основному действию после перехода с других страниц; это настройка воспроизводимой съёмки, не исправление пользовательской навигации.",
+                                                               "Открытый PR119 и чужой UI-claim сохранены; дефекты требуют отдельного продолжения разработки.",
+                                                               "Наличие документации и скриншотов не является ручной оценкой интереса игры."
+                                                           ],
+                                           "sourceHashes":  [
+                                                                "1346709885f6323af1137926fde6c9cfe90a33e8590e180c40bb9e33b25c153c",
+                                                                "443cb45ae291c778c0b0f30d8c6c7358a843e4fb930d8e93faa3d1c06ceddc2f",
+                                                                "0d01e4165e6ada8eff767720bf0c1e9596d9ab102b6dea16c512355187b63b33"
+                                                            ],
+                                           "schemaVersion":  1,
+                                           "conclusion":  "Изолированный настоящий SubViewport дал24разных PNG с точными размерами и привязкой к исходным байтам. Команда gallery check, существующие menu/inspector тесты прошли; реальная повторная promote не изменила SHA256 и mtime манифеста. Картинки выявили не покрытые прежними тестами недостатки: обрезанный landscape battle (рука и нижние действия вне экрана), слабочитаемую отключённую руку и маленькую кнопку закрытия инспектора. Это поддерживает полезность галереи для исследований, но не означает исправление выявленных UX-дефектов."
+                                       }
+                    },
+    "schemaVersion":  1,
+    "capture":  {
+                    "buildStamp":  {
+                                       "commit":  "local",
+                                       "version":  "0.0.1-alpha.1"
+                                   },
+                    "engine":  "4.7.2-stable (official)",
+                    "fixtures":  [
+                                     "isolated full alpha collection",
+                                     "one deterministic pack",
+                                     "three API match results, not played games",
+                                     "battle seed42 with12 API actions",
+                                     "LAN address replaced by documentation example192.0.2.1; no room joined"
+                                 ],
+                    "images":  [
+                                   {
+                                       "file":  "ru-menu-720x1280.png",
+                                       "height":  1280,
+                                       "id":  "ru-menu-720x1280",
+                                       "locale":  "ru",
+                                       "page":  "menu",
+                                       "sampledColors":  131,
+                                       "sha256":  "1a100a25355203518e809e6ffc613c98d6f542cbfcffdf3e737c0abae0446036",
+                                       "width":  720
+                                   },
+                                   {
+                                       "file":  "ru-collection-720x1280.png",
+                                       "height":  1280,
+                                       "id":  "ru-collection-720x1280",
+                                       "locale":  "ru",
+                                       "page":  "collection",
+                                       "sampledColors":  164,
+                                       "sha256":  "75f39a4a1c2c894607d9eb8b8d71b8cd2a8710b8c3614718a79ffdc1c59034b4",
+                                       "width":  720
+                                   },
+                                   {
+                                       "file":  "ru-card-720x1280.png",
+                                       "height":  1280,
+                                       "id":  "ru-card-720x1280",
+                                       "locale":  "ru",
+                                       "page":  "card",
+                                       "sampledColors":  178,
+                                       "sha256":  "d42d547ae5bc36d644d461fe3c885d62f507a1c3773379de5f1ca53124ad76d6",
+                                       "width":  720
+                                   },
+                                   {
+                                       "file":  "ru-battle-720x1280.png",
+                                       "height":  1280,
+                                       "id":  "ru-battle-720x1280",
+                                       "locale":  "ru",
+                                       "page":  "battle",
+                                       "sampledColors":  179,
+                                       "sha256":  "eb3211e650623b085342ac38b4ba93efb9a9f3d64fde95befea74a7d182151a5",
+                                       "width":  720
+                                   },
+                                   {
+                                       "file":  "ru-shop-720x1280.png",
+                                       "height":  1280,
+                                       "id":  "ru-shop-720x1280",
+                                       "locale":  "ru",
+                                       "page":  "shop",
+                                       "sampledColors":  168,
+                                       "sha256":  "7505f89a66d68a60c61d1372ef33c7dffb7e3d14378a5d5a6fa4fec4d6f56ecd",
+                                       "width":  720
+                                   },
+                                   {
+                                       "file":  "ru-crafting-720x1280.png",
+                                       "height":  1280,
+                                       "id":  "ru-crafting-720x1280",
+                                       "locale":  "ru",
+                                       "page":  "crafting",
+                                       "sampledColors":  165,
+                                       "sha256":  "5ab9992a47dfed4e92c2efd2ab246a64bdf701c0590c93f696965cf25cbc4ce5",
+                                       "width":  720
+                                   },
+                                   {
+                                       "file":  "ru-rewards-720x1280.png",
+                                       "height":  1280,
+                                       "id":  "ru-rewards-720x1280",
+                                       "locale":  "ru",
+                                       "page":  "rewards",
+                                       "sampledColors":  167,
+                                       "sha256":  "0dc37ef43942cc451e80e32c87508ac60329f88af4f53096aaced4b2b90f4bfa",
+                                       "width":  720
+                                   },
+                                   {
+                                       "file":  "ru-connection-720x1280.png",
+                                       "height":  1280,
+                                       "id":  "ru-connection-720x1280",
+                                       "locale":  "ru",
+                                       "page":  "connection",
+                                       "sampledColors":  77,
+                                       "sha256":  "9e238755ea260902370f71eae818d9dfa7f50f9a916ec5aa158d42130ffef93a",
+                                       "width":  720
+                                   },
+                                   {
+                                       "file":  "ru-rules-720x1280.png",
+                                       "height":  1280,
+                                       "id":  "ru-rules-720x1280",
+                                       "locale":  "ru",
+                                       "page":  "rules",
+                                       "sampledColors":  229,
+                                       "sha256":  "83109973e712f00bae6195e556f6c7dc49b0e96abd2414e443b064520a3bc193",
+                                       "width":  720
+                                   },
+                                   {
+                                       "file":  "ru-settings-720x1280.png",
+                                       "height":  1280,
+                                       "id":  "ru-settings-720x1280",
+                                       "locale":  "ru",
+                                       "page":  "settings",
+                                       "sampledColors":  78,
+                                       "sha256":  "c76cceb00232d589ec97ab4b4a37d473f25617f1747964fb6c367e82b76a90f2",
+                                       "width":  720
+                                   },
+                                   {
+                                       "file":  "ru-menu-1280x720.png",
+                                       "height":  720,
+                                       "id":  "ru-menu-1280x720",
+                                       "locale":  "ru",
+                                       "page":  "menu",
+                                       "sampledColors":  93,
+                                       "sha256":  "f3b23ef94fc1ab08266e3a65002f3d3ba40a0c55af9a58594a3e9196cf74606c",
+                                       "width":  1280
+                                   },
+                                   {
+                                       "file":  "ru-battle-1280x720.png",
+                                       "height":  720,
+                                       "id":  "ru-battle-1280x720",
+                                       "locale":  "ru",
+                                       "page":  "battle",
+                                       "sampledColors":  163,
+                                       "sha256":  "86ca784106e7d8a85c8e943a3b38d7da934c701d7a7bf62abe08a3808a037d18",
+                                       "width":  1280
+                                   },
+                                   {
+                                       "file":  "en-menu-720x1280.png",
+                                       "height":  1280,
+                                       "id":  "en-menu-720x1280",
+                                       "locale":  "en",
+                                       "page":  "menu",
+                                       "sampledColors":  111,
+                                       "sha256":  "77cac22b5f369b20228d18f89fd53d52be99c0c9f3ab8ceac59aeffed507efb2",
+                                       "width":  720
+                                   },
+                                   {
+                                       "file":  "en-collection-720x1280.png",
+                                       "height":  1280,
+                                       "id":  "en-collection-720x1280",
+                                       "locale":  "en",
+                                       "page":  "collection",
+                                       "sampledColors":  155,
+                                       "sha256":  "52955f51b4cbb2140772b527bc3e400ae132599a2fc0d9a018f2ba1499c708d1",
+                                       "width":  720
+                                   },
+                                   {
+                                       "file":  "en-card-720x1280.png",
+                                       "height":  1280,
+                                       "id":  "en-card-720x1280",
+                                       "locale":  "en",
+                                       "page":  "card",
+                                       "sampledColors":  157,
+                                       "sha256":  "f78a93e47555c5c4543f58a850c856f7e0360ba3d27c961275e9c356f3af38ad",
+                                       "width":  720
+                                   },
+                                   {
+                                       "file":  "en-battle-720x1280.png",
+                                       "height":  1280,
+                                       "id":  "en-battle-720x1280",
+                                       "locale":  "en",
+                                       "page":  "battle",
+                                       "sampledColors":  174,
+                                       "sha256":  "2a7a38ee66c23fc805ccde125fbd4ff15d697512570d52c1db4a3fc193a2185a",
+                                       "width":  720
+                                   },
+                                   {
+                                       "file":  "en-shop-720x1280.png",
+                                       "height":  1280,
+                                       "id":  "en-shop-720x1280",
+                                       "locale":  "en",
+                                       "page":  "shop",
+                                       "sampledColors":  149,
+                                       "sha256":  "2161e9ae8deda3ce69c54a0fe66dbb161e817349423663cc8d8ca8e718a2b8fb",
+                                       "width":  720
+                                   },
+                                   {
+                                       "file":  "en-crafting-720x1280.png",
+                                       "height":  1280,
+                                       "id":  "en-crafting-720x1280",
+                                       "locale":  "en",
+                                       "page":  "crafting",
+                                       "sampledColors":  155,
+                                       "sha256":  "90b83ea419946d286db36b1a73d06bdb9b73f916463ef7c580e6c9c3cc91b5fd",
+                                       "width":  720
+                                   },
+                                   {
+                                       "file":  "en-rewards-720x1280.png",
+                                       "height":  1280,
+                                       "id":  "en-rewards-720x1280",
+                                       "locale":  "en",
+                                       "page":  "rewards",
+                                       "sampledColors":  159,
+                                       "sha256":  "43db552fa84316a47d6ce11929078c73fd78d960a757bb3869e33df3ce7e1640",
+                                       "width":  720
+                                   },
+                                   {
+                                       "file":  "en-connection-720x1280.png",
+                                       "height":  1280,
+                                       "id":  "en-connection-720x1280",
+                                       "locale":  "en",
+                                       "page":  "connection",
+                                       "sampledColors":  69,
+                                       "sha256":  "6a49e667ae7388f28f5349bf35235451ad9055382f15a1d32003ec76568f1e9c",
+                                       "width":  720
+                                   },
+                                   {
+                                       "file":  "en-rules-720x1280.png",
+                                       "height":  1280,
+                                       "id":  "en-rules-720x1280",
+                                       "locale":  "en",
+                                       "page":  "rules",
+                                       "sampledColors":  213,
+                                       "sha256":  "d72be5e773b899d80815c6bbbb72cb6512dd8e5ad174f4485c12e1f1e66fd181",
+                                       "width":  720
+                                   },
+                                   {
+                                       "file":  "en-settings-720x1280.png",
+                                       "height":  1280,
+                                       "id":  "en-settings-720x1280",
+                                       "locale":  "en",
+                                       "page":  "settings",
+                                       "sampledColors":  49,
+                                       "sha256":  "bad6d019286e49d297fdefd450472a9961d3af1f9ea4ed0f7e84df9a3fc6151b",
+                                       "width":  720
+                                   },
+                                   {
+                                       "file":  "en-menu-1280x720.png",
+                                       "height":  720,
+                                       "id":  "en-menu-1280x720",
+                                       "locale":  "en",
+                                       "page":  "menu",
+                                       "sampledColors":  86,
+                                       "sha256":  "06ccf585b4a3ef16be587e8f8a678a524b13d6f6ecec7e3c917f75ee91f30bc5",
+                                       "width":  1280
+                                   },
+                                   {
+                                       "file":  "en-battle-1280x720.png",
+                                       "height":  720,
+                                       "id":  "en-battle-1280x720",
+                                       "locale":  "en",
+                                       "page":  "battle",
+                                       "sampledColors":  145,
+                                       "sha256":  "e09ba299f88fafb1160b58a94ff4812a0d637ae4e6a995e25cabb210cf09812f",
+                                       "width":  1280
+                                   }
+                               ],
+                    "installedApkCapture":  false,
+                    "nonce":  "073f2fcb0d081d35c7d8931f2d652369",
+                    "personalProfileUntouched":  true,
+                    "renderer":  "Windows",
+                    "schemaVersion":  1,
+                    "sourcePreview":  true
+                }
+}

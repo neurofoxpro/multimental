@@ -1,0 +1,15 @@
+{
+  "base": "5ab3619783dbe41d1e4ff8a8bdbdc5328217a879",
+  "files": [
+    {
+      "path": ".gameprod/ideas/turn01-owner-request-20261117.json",
+      "expectedCurrentSha256": "5597143a614235ea8b311a2c8585aaa4e19605473d82d175ffb014ae14e460c1",
+      "edits": [
+        {
+          "from": "  \"schemaVersion\": 1,\n  \"tasks\": [",
+          "to": "  \"schemaVersion\": 1,\n  \"id\": \"TURN-01\",\n  \"type\": \"task_enrollment\",\n  \"tasks\": ["
+        }
+      ]
+    }
+  ]
+}

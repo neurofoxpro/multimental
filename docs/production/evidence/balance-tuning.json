@@ -1,0 +1,2219 @@
+{
+  "schemaVersion": 1,
+  "observedAt": "2026-09-25T02:29:57.287Z",
+  "repository": "neurofoxpro/multimental",
+  "sourceCommitBefore": "fb273133a8f113d1a4ff4416d0768bdaf8e50aaf",
+  "coreSha256Before": "3ab796e45c29215903fbea74ec7f330c32fdb221274c1dfdc5a809ce0db9b8cc",
+  "harnessSha256": "8438b14204138e0a7cd47c3e59066eb4dc3e6920cb2d0fa46725aa6ed2a4dd46",
+  "totalGames": 7040,
+  "selectedVariant": "C",
+  "trainingSeeds": [
+    1001,
+    1020
+  ],
+  "validationSeeds": [
+    9001,
+    9040
+  ],
+  "selectedOverrides": {
+    "3": {
+      "health": 3
+    },
+    "5": {
+      "attack": 2
+    },
+    "7": {
+      "health": 2
+    },
+    "11": {
+      "health": 3
+    },
+    "13": {
+      "attack": 2
+    },
+    "15": {
+      "health": 2
+    },
+    "19": {
+      "health": 3
+    }
+  },
+  "studies": {
+    "baseline": {
+      "games": 640,
+      "failures": 0,
+      "firstWins": 356,
+      "draws": 0,
+      "forced": 0,
+      "pairs": {
+        "guard/lancer/greedy": {
+          "games": 40,
+          "score": 30,
+          "rate": 0.75
+        },
+        "guard/lancer/positional": {
+          "games": 40,
+          "score": 19,
+          "rate": 0.475
+        },
+        "archer/guard/greedy": {
+          "games": 40,
+          "score": 1,
+          "rate": 0.025
+        },
+        "archer/guard/positional": {
+          "games": 40,
+          "score": 4,
+          "rate": 0.1
+        },
+        "flanker/guard/greedy": {
+          "games": 40,
+          "score": 16,
+          "rate": 0.4
+        },
+        "flanker/guard/positional": {
+          "games": 40,
+          "score": 28,
+          "rate": 0.7
+        },
+        "archer/lancer/greedy": {
+          "games": 40,
+          "score": 7,
+          "rate": 0.175
+        },
+        "archer/lancer/positional": {
+          "games": 40,
+          "score": 7,
+          "rate": 0.175
+        },
+        "flanker/lancer/greedy": {
+          "games": 40,
+          "score": 32,
+          "rate": 0.8
+        },
+        "flanker/lancer/positional": {
+          "games": 40,
+          "score": 30,
+          "rate": 0.75
+        },
+        "archer/flanker/greedy": {
+          "games": 40,
+          "score": 4,
+          "rate": 0.1
+        },
+        "archer/flanker/positional": {
+          "games": 40,
+          "score": 2,
+          "rate": 0.05
+        },
+        "rush/starter/greedy": {
+          "games": 40,
+          "score": 0,
+          "rate": 0
+        },
+        "rush/starter/positional": {
+          "games": 40,
+          "score": 0,
+          "rate": 0
+        },
+        "elite/starter/greedy": {
+          "games": 40,
+          "score": 27,
+          "rate": 0.675
+        },
+        "elite/starter/positional": {
+          "games": 40,
+          "score": 21,
+          "rate": 0.525
+        }
+      },
+      "roles": {
+        "guard": {
+          "games": 240,
+          "score": 160,
+          "rate": 0.667
+        },
+        "lancer": {
+          "games": 240,
+          "score": 115,
+          "rate": 0.479
+        },
+        "archer": {
+          "games": 240,
+          "score": 25,
+          "rate": 0.104
+        },
+        "flanker": {
+          "games": 240,
+          "score": 180,
+          "rate": 0.75
+        },
+        "starter": {
+          "games": 160,
+          "score": 112,
+          "rate": 0.7
+        },
+        "rush": {
+          "games": 80,
+          "score": 0,
+          "rate": 0
+        },
+        "elite": {
+          "games": 80,
+          "score": 48,
+          "rate": 0.6
+        }
+      },
+      "cards": {
+        "0": {
+          "plays": 1157,
+          "attacks": 1107,
+          "damage": 1107,
+          "kills": 368
+        },
+        "1": {
+          "plays": 584,
+          "attacks": 1044,
+          "damage": 1589,
+          "kills": 589
+        },
+        "2": {
+          "plays": 725,
+          "attacks": 680,
+          "damage": 680,
+          "kills": 225
+        },
+        "3": {
+          "plays": 556,
+          "attacks": 844,
+          "damage": 1688,
+          "kills": 519
+        },
+        "4": {
+          "plays": 874,
+          "attacks": 797,
+          "damage": 797,
+          "kills": 245
+        },
+        "5": {
+          "plays": 347,
+          "attacks": 470,
+          "damage": 624,
+          "kills": 156
+        },
+        "6": {
+          "plays": 823,
+          "attacks": 835,
+          "damage": 835,
+          "kills": 246
+        },
+        "7": {
+          "plays": 336,
+          "attacks": 425,
+          "damage": 990,
+          "kills": 310
+        },
+        "8": {
+          "plays": 725,
+          "attacks": 763,
+          "damage": 763,
+          "kills": 236
+        },
+        "9": {
+          "plays": 394,
+          "attacks": 761,
+          "damage": 1196,
+          "kills": 481
+        },
+        "10": {
+          "plays": 440,
+          "attacks": 380,
+          "damage": 380,
+          "kills": 102
+        },
+        "11": {
+          "plays": 356,
+          "attacks": 464,
+          "damage": 928,
+          "kills": 285
+        },
+        "12": {
+          "plays": 448,
+          "attacks": 396,
+          "damage": 396,
+          "kills": 112
+        },
+        "13": {
+          "plays": 356,
+          "attacks": 472,
+          "damage": 680,
+          "kills": 160
+        },
+        "14": {
+          "plays": 423,
+          "attacks": 348,
+          "damage": 348,
+          "kills": 105
+        },
+        "15": {
+          "plays": 329,
+          "attacks": 510,
+          "damage": 1332,
+          "kills": 409
+        },
+        "16": {
+          "plays": 787,
+          "attacks": 939,
+          "damage": 939,
+          "kills": 259
+        },
+        "18": {
+          "plays": 357,
+          "attacks": 312,
+          "damage": 312,
+          "kills": 78
+        },
+        "20": {
+          "plays": 72,
+          "attacks": 93,
+          "damage": 372,
+          "kills": 79
+        },
+        "21": {
+          "plays": 132,
+          "attacks": 215,
+          "damage": 942,
+          "kills": 240
+        },
+        "23": {
+          "plays": 201,
+          "attacks": 228,
+          "damage": 1092,
+          "kills": 214
+        },
+        "24": {
+          "plays": 134,
+          "attacks": 160,
+          "damage": 585,
+          "kills": 155
+        },
+        "26": {
+          "plays": 74,
+          "attacks": 128,
+          "damage": 615,
+          "kills": 136
+        }
+      },
+      "turnSummary": {
+        "median": 18,
+        "p90": 39,
+        "mean": 21.565625
+      }
+    },
+    "A": {
+      "games": 640,
+      "failures": 0,
+      "firstWins": 353,
+      "draws": 0,
+      "forced": 0,
+      "pairs": {
+        "guard/lancer/greedy": {
+          "games": 40,
+          "score": 30,
+          "rate": 0.75
+        },
+        "guard/lancer/positional": {
+          "games": 40,
+          "score": 19,
+          "rate": 0.475
+        },
+        "archer/guard/greedy": {
+          "games": 40,
+          "score": 12,
+          "rate": 0.3
+        },
+        "archer/guard/positional": {
+          "games": 40,
+          "score": 21,
+          "rate": 0.525
+        },
+        "flanker/guard/greedy": {
+          "games": 40,
+          "score": 16,
+          "rate": 0.4
+        },
+        "flanker/guard/positional": {
+          "games": 40,
+          "score": 28,
+          "rate": 0.7
+        },
+        "archer/lancer/greedy": {
+          "games": 40,
+          "score": 26,
+          "rate": 0.65
+        },
+        "archer/lancer/positional": {
+          "games": 40,
+          "score": 28,
+          "rate": 0.7
+        },
+        "flanker/lancer/greedy": {
+          "games": 40,
+          "score": 32,
+          "rate": 0.8
+        },
+        "flanker/lancer/positional": {
+          "games": 40,
+          "score": 30,
+          "rate": 0.75
+        },
+        "archer/flanker/greedy": {
+          "games": 40,
+          "score": 21,
+          "rate": 0.525
+        },
+        "archer/flanker/positional": {
+          "games": 40,
+          "score": 14,
+          "rate": 0.35
+        },
+        "rush/starter/greedy": {
+          "games": 40,
+          "score": 0,
+          "rate": 0
+        },
+        "rush/starter/positional": {
+          "games": 40,
+          "score": 0,
+          "rate": 0
+        },
+        "elite/starter/greedy": {
+          "games": 40,
+          "score": 27,
+          "rate": 0.675
+        },
+        "elite/starter/positional": {
+          "games": 40,
+          "score": 21,
+          "rate": 0.525
+        }
+      },
+      "roles": {
+        "guard": {
+          "games": 240,
+          "score": 132,
+          "rate": 0.55
+        },
+        "lancer": {
+          "games": 240,
+          "score": 75,
+          "rate": 0.313
+        },
+        "archer": {
+          "games": 240,
+          "score": 122,
+          "rate": 0.508
+        },
+        "flanker": {
+          "games": 240,
+          "score": 151,
+          "rate": 0.629
+        },
+        "starter": {
+          "games": 160,
+          "score": 112,
+          "rate": 0.7
+        },
+        "rush": {
+          "games": 80,
+          "score": 0,
+          "rate": 0
+        },
+        "elite": {
+          "games": 80,
+          "score": 48,
+          "rate": 0.6
+        }
+      },
+      "cards": {
+        "0": {
+          "plays": 1253,
+          "attacks": 1225,
+          "damage": 1225,
+          "kills": 390
+        },
+        "1": {
+          "plays": 590,
+          "attacks": 1043,
+          "damage": 1591,
+          "kills": 571
+        },
+        "2": {
+          "plays": 768,
+          "attacks": 751,
+          "damage": 751,
+          "kills": 248
+        },
+        "3": {
+          "plays": 560,
+          "attacks": 830,
+          "damage": 1660,
+          "kills": 508
+        },
+        "4": {
+          "plays": 922,
+          "attacks": 860,
+          "damage": 860,
+          "kills": 273
+        },
+        "5": {
+          "plays": 396,
+          "attacks": 624,
+          "damage": 1510,
+          "kills": 447
+        },
+        "6": {
+          "plays": 882,
+          "attacks": 892,
+          "damage": 892,
+          "kills": 267
+        },
+        "7": {
+          "plays": 364,
+          "attacks": 466,
+          "damage": 1088,
+          "kills": 338
+        },
+        "8": {
+          "plays": 777,
+          "attacks": 841,
+          "damage": 841,
+          "kills": 275
+        },
+        "9": {
+          "plays": 403,
+          "attacks": 764,
+          "damage": 1217,
+          "kills": 471
+        },
+        "10": {
+          "plays": 501,
+          "attacks": 437,
+          "damage": 437,
+          "kills": 107
+        },
+        "11": {
+          "plays": 363,
+          "attacks": 467,
+          "damage": 934,
+          "kills": 294
+        },
+        "12": {
+          "plays": 485,
+          "attacks": 432,
+          "damage": 432,
+          "kills": 118
+        },
+        "13": {
+          "plays": 412,
+          "attacks": 600,
+          "damage": 1530,
+          "kills": 463
+        },
+        "14": {
+          "plays": 493,
+          "attacks": 413,
+          "damage": 413,
+          "kills": 134
+        },
+        "15": {
+          "plays": 351,
+          "attacks": 553,
+          "damage": 1424,
+          "kills": 446
+        },
+        "16": {
+          "plays": 845,
+          "attacks": 987,
+          "damage": 987,
+          "kills": 269
+        },
+        "18": {
+          "plays": 420,
+          "attacks": 384,
+          "damage": 384,
+          "kills": 114
+        },
+        "20": {
+          "plays": 72,
+          "attacks": 93,
+          "damage": 372,
+          "kills": 79
+        },
+        "21": {
+          "plays": 132,
+          "attacks": 215,
+          "damage": 942,
+          "kills": 240
+        },
+        "23": {
+          "plays": 201,
+          "attacks": 228,
+          "damage": 1092,
+          "kills": 214
+        },
+        "24": {
+          "plays": 134,
+          "attacks": 160,
+          "damage": 585,
+          "kills": 155
+        },
+        "26": {
+          "plays": 74,
+          "attacks": 128,
+          "damage": 615,
+          "kills": 136
+        }
+      },
+      "turnSummary": {
+        "median": 19,
+        "p90": 40,
+        "mean": 23.2078125
+      }
+    },
+    "B": {
+      "games": 640,
+      "failures": 0,
+      "firstWins": 360,
+      "draws": 0,
+      "forced": 0,
+      "pairs": {
+        "guard/lancer/greedy": {
+          "games": 40,
+          "score": 30,
+          "rate": 0.75
+        },
+        "guard/lancer/positional": {
+          "games": 40,
+          "score": 19,
+          "rate": 0.475
+        },
+        "archer/guard/greedy": {
+          "games": 40,
+          "score": 1,
+          "rate": 0.025
+        },
+        "archer/guard/positional": {
+          "games": 40,
+          "score": 5,
+          "rate": 0.125
+        },
+        "flanker/guard/greedy": {
+          "games": 40,
+          "score": 13,
+          "rate": 0.325
+        },
+        "flanker/guard/positional": {
+          "games": 40,
+          "score": 16,
+          "rate": 0.4
+        },
+        "archer/lancer/greedy": {
+          "games": 40,
+          "score": 11,
+          "rate": 0.275
+        },
+        "archer/lancer/positional": {
+          "games": 40,
+          "score": 16,
+          "rate": 0.4
+        },
+        "flanker/lancer/greedy": {
+          "games": 40,
+          "score": 28,
+          "rate": 0.7
+        },
+        "flanker/lancer/positional": {
+          "games": 40,
+          "score": 26,
+          "rate": 0.65
+        },
+        "archer/flanker/greedy": {
+          "games": 40,
+          "score": 15,
+          "rate": 0.375
+        },
+        "archer/flanker/positional": {
+          "games": 40,
+          "score": 18,
+          "rate": 0.45
+        },
+        "rush/starter/greedy": {
+          "games": 40,
+          "score": 0,
+          "rate": 0
+        },
+        "rush/starter/positional": {
+          "games": 40,
+          "score": 0,
+          "rate": 0
+        },
+        "elite/starter/greedy": {
+          "games": 40,
+          "score": 27,
+          "rate": 0.675
+        },
+        "elite/starter/positional": {
+          "games": 40,
+          "score": 21,
+          "rate": 0.525
+        }
+      },
+      "roles": {
+        "guard": {
+          "games": 240,
+          "score": 174,
+          "rate": 0.725
+        },
+        "lancer": {
+          "games": 240,
+          "score": 110,
+          "rate": 0.458
+        },
+        "archer": {
+          "games": 240,
+          "score": 66,
+          "rate": 0.275
+        },
+        "flanker": {
+          "games": 240,
+          "score": 130,
+          "rate": 0.542
+        },
+        "starter": {
+          "games": 160,
+          "score": 112,
+          "rate": 0.7
+        },
+        "rush": {
+          "games": 80,
+          "score": 0,
+          "rate": 0
+        },
+        "elite": {
+          "games": 80,
+          "score": 48,
+          "rate": 0.6
+        }
+      },
+      "cards": {
+        "0": {
+          "plays": 1356,
+          "attacks": 1410,
+          "damage": 1410,
+          "kills": 515
+        },
+        "1": {
+          "plays": 591,
+          "attacks": 1099,
+          "damage": 1641,
+          "kills": 695
+        },
+        "2": {
+          "plays": 836,
+          "attacks": 844,
+          "damage": 844,
+          "kills": 311
+        },
+        "3": {
+          "plays": 573,
+          "attacks": 842,
+          "damage": 1684,
+          "kills": 555
+        },
+        "4": {
+          "plays": 952,
+          "attacks": 927,
+          "damage": 927,
+          "kills": 325
+        },
+        "5": {
+          "plays": 393,
+          "attacks": 492,
+          "damage": 1214,
+          "kills": 374
+        },
+        "6": {
+          "plays": 927,
+          "attacks": 1005,
+          "damage": 1005,
+          "kills": 327
+        },
+        "7": {
+          "plays": 377,
+          "attacks": 493,
+          "damage": 1166,
+          "kills": 372
+        },
+        "8": {
+          "plays": 812,
+          "attacks": 949,
+          "damage": 949,
+          "kills": 346
+        },
+        "9": {
+          "plays": 409,
+          "attacks": 759,
+          "damage": 1186,
+          "kills": 504
+        },
+        "10": {
+          "plays": 533,
+          "attacks": 485,
+          "damage": 485,
+          "kills": 148
+        },
+        "11": {
+          "plays": 390,
+          "attacks": 489,
+          "damage": 978,
+          "kills": 332
+        },
+        "12": {
+          "plays": 524,
+          "attacks": 475,
+          "damage": 475,
+          "kills": 164
+        },
+        "13": {
+          "plays": 401,
+          "attacks": 420,
+          "damage": 1120,
+          "kills": 329
+        },
+        "14": {
+          "plays": 541,
+          "attacks": 501,
+          "damage": 501,
+          "kills": 176
+        },
+        "15": {
+          "plays": 381,
+          "attacks": 521,
+          "damage": 1368,
+          "kills": 426
+        },
+        "16": {
+          "plays": 873,
+          "attacks": 1013,
+          "damage": 1013,
+          "kills": 321
+        },
+        "18": {
+          "plays": 449,
+          "attacks": 416,
+          "damage": 416,
+          "kills": 123
+        },
+        "20": {
+          "plays": 72,
+          "attacks": 93,
+          "damage": 372,
+          "kills": 79
+        },
+        "21": {
+          "plays": 132,
+          "attacks": 215,
+          "damage": 942,
+          "kills": 240
+        },
+        "23": {
+          "plays": 201,
+          "attacks": 228,
+          "damage": 1092,
+          "kills": 214
+        },
+        "24": {
+          "plays": 134,
+          "attacks": 160,
+          "damage": 585,
+          "kills": 155
+        },
+        "26": {
+          "plays": 74,
+          "attacks": 128,
+          "damage": 615,
+          "kills": 136
+        }
+      },
+      "turnSummary": {
+        "median": 21,
+        "p90": 40,
+        "mean": 24.0828125
+      }
+    },
+    "C": {
+      "games": 640,
+      "failures": 0,
+      "firstWins": 358,
+      "draws": 0,
+      "forced": 0,
+      "pairs": {
+        "guard/lancer/greedy": {
+          "games": 40,
+          "score": 23,
+          "rate": 0.575
+        },
+        "guard/lancer/positional": {
+          "games": 40,
+          "score": 10,
+          "rate": 0.25
+        },
+        "archer/guard/greedy": {
+          "games": 40,
+          "score": 12,
+          "rate": 0.3
+        },
+        "archer/guard/positional": {
+          "games": 40,
+          "score": 21,
+          "rate": 0.525
+        },
+        "flanker/guard/greedy": {
+          "games": 40,
+          "score": 13,
+          "rate": 0.325
+        },
+        "flanker/guard/positional": {
+          "games": 40,
+          "score": 16,
+          "rate": 0.4
+        },
+        "archer/lancer/greedy": {
+          "games": 40,
+          "score": 12,
+          "rate": 0.3
+        },
+        "archer/lancer/positional": {
+          "games": 40,
+          "score": 16,
+          "rate": 0.4
+        },
+        "flanker/lancer/greedy": {
+          "games": 40,
+          "score": 16,
+          "rate": 0.4
+        },
+        "flanker/lancer/positional": {
+          "games": 40,
+          "score": 12,
+          "rate": 0.3
+        },
+        "archer/flanker/greedy": {
+          "games": 40,
+          "score": 32,
+          "rate": 0.8
+        },
+        "archer/flanker/positional": {
+          "games": 40,
+          "score": 28,
+          "rate": 0.7
+        },
+        "rush/starter/greedy": {
+          "games": 40,
+          "score": 0,
+          "rate": 0
+        },
+        "rush/starter/positional": {
+          "games": 40,
+          "score": 0,
+          "rate": 0
+        },
+        "elite/starter/greedy": {
+          "games": 40,
+          "score": 27,
+          "rate": 0.675
+        },
+        "elite/starter/positional": {
+          "games": 40,
+          "score": 16,
+          "rate": 0.4
+        }
+      },
+      "roles": {
+        "guard": {
+          "games": 240,
+          "score": 131,
+          "rate": 0.546
+        },
+        "lancer": {
+          "games": 240,
+          "score": 151,
+          "rate": 0.629
+        },
+        "archer": {
+          "games": 240,
+          "score": 121,
+          "rate": 0.504
+        },
+        "flanker": {
+          "games": 240,
+          "score": 77,
+          "rate": 0.321
+        },
+        "starter": {
+          "games": 160,
+          "score": 117,
+          "rate": 0.731
+        },
+        "rush": {
+          "games": 80,
+          "score": 0,
+          "rate": 0
+        },
+        "elite": {
+          "games": 80,
+          "score": 43,
+          "rate": 0.537
+        }
+      },
+      "cards": {
+        "0": {
+          "plays": 1257,
+          "attacks": 1245,
+          "damage": 1245,
+          "kills": 399
+        },
+        "1": {
+          "plays": 583,
+          "attacks": 995,
+          "damage": 1499,
+          "kills": 522
+        },
+        "2": {
+          "plays": 793,
+          "attacks": 774,
+          "damage": 774,
+          "kills": 257
+        },
+        "3": {
+          "plays": 556,
+          "attacks": 877,
+          "damage": 1754,
+          "kills": 566
+        },
+        "4": {
+          "plays": 938,
+          "attacks": 924,
+          "damage": 924,
+          "kills": 301
+        },
+        "5": {
+          "plays": 393,
+          "attacks": 614,
+          "damage": 1480,
+          "kills": 449
+        },
+        "6": {
+          "plays": 906,
+          "attacks": 925,
+          "damage": 925,
+          "kills": 248
+        },
+        "7": {
+          "plays": 359,
+          "attacks": 480,
+          "damage": 1110,
+          "kills": 324
+        },
+        "8": {
+          "plays": 773,
+          "attacks": 849,
+          "damage": 849,
+          "kills": 271
+        },
+        "9": {
+          "plays": 409,
+          "attacks": 794,
+          "damage": 1258,
+          "kills": 488
+        },
+        "10": {
+          "plays": 503,
+          "attacks": 415,
+          "damage": 415,
+          "kills": 110
+        },
+        "11": {
+          "plays": 387,
+          "attacks": 560,
+          "damage": 1120,
+          "kills": 394
+        },
+        "12": {
+          "plays": 509,
+          "attacks": 434,
+          "damage": 434,
+          "kills": 127
+        },
+        "13": {
+          "plays": 417,
+          "attacks": 586,
+          "damage": 1490,
+          "kills": 468
+        },
+        "14": {
+          "plays": 507,
+          "attacks": 465,
+          "damage": 465,
+          "kills": 151
+        },
+        "15": {
+          "plays": 373,
+          "attacks": 520,
+          "damage": 1386,
+          "kills": 407
+        },
+        "16": {
+          "plays": 850,
+          "attacks": 1043,
+          "damage": 1043,
+          "kills": 313
+        },
+        "18": {
+          "plays": 425,
+          "attacks": 384,
+          "damage": 384,
+          "kills": 112
+        },
+        "20": {
+          "plays": 72,
+          "attacks": 97,
+          "damage": 388,
+          "kills": 77
+        },
+        "21": {
+          "plays": 130,
+          "attacks": 215,
+          "damage": 939,
+          "kills": 242
+        },
+        "23": {
+          "plays": 197,
+          "attacks": 233,
+          "damage": 1168,
+          "kills": 232
+        },
+        "24": {
+          "plays": 138,
+          "attacks": 161,
+          "damage": 600,
+          "kills": 160
+        },
+        "26": {
+          "plays": 76,
+          "attacks": 133,
+          "damage": 657,
+          "kills": 142
+        }
+      },
+      "turnSummary": {
+        "median": 20,
+        "p90": 41,
+        "mean": 23.7203125
+      }
+    },
+    "D": {
+      "games": 640,
+      "failures": 0,
+      "firstWins": 359,
+      "draws": 0,
+      "forced": 0,
+      "pairs": {
+        "guard/lancer/greedy": {
+          "games": 40,
+          "score": 10,
+          "rate": 0.25
+        },
+        "guard/lancer/positional": {
+          "games": 40,
+          "score": 7,
+          "rate": 0.175
+        },
+        "archer/guard/greedy": {
+          "games": 40,
+          "score": 26,
+          "rate": 0.65
+        },
+        "archer/guard/positional": {
+          "games": 40,
+          "score": 29,
+          "rate": 0.725
+        },
+        "flanker/guard/greedy": {
+          "games": 40,
+          "score": 17,
+          "rate": 0.425
+        },
+        "flanker/guard/positional": {
+          "games": 40,
+          "score": 19,
+          "rate": 0.475
+        },
+        "archer/lancer/greedy": {
+          "games": 40,
+          "score": 12,
+          "rate": 0.3
+        },
+        "archer/lancer/positional": {
+          "games": 40,
+          "score": 16,
+          "rate": 0.4
+        },
+        "flanker/lancer/greedy": {
+          "games": 40,
+          "score": 16,
+          "rate": 0.4
+        },
+        "flanker/lancer/positional": {
+          "games": 40,
+          "score": 12,
+          "rate": 0.3
+        },
+        "archer/flanker/greedy": {
+          "games": 40,
+          "score": 32,
+          "rate": 0.8
+        },
+        "archer/flanker/positional": {
+          "games": 40,
+          "score": 28,
+          "rate": 0.7
+        },
+        "rush/starter/greedy": {
+          "games": 40,
+          "score": 0,
+          "rate": 0
+        },
+        "rush/starter/positional": {
+          "games": 40,
+          "score": 0,
+          "rate": 0
+        },
+        "elite/starter/greedy": {
+          "games": 40,
+          "score": 24,
+          "rate": 0.6
+        },
+        "elite/starter/positional": {
+          "games": 40,
+          "score": 17,
+          "rate": 0.425
+        }
+      },
+      "roles": {
+        "guard": {
+          "games": 240,
+          "score": 86,
+          "rate": 0.358
+        },
+        "lancer": {
+          "games": 240,
+          "score": 167,
+          "rate": 0.696
+        },
+        "archer": {
+          "games": 240,
+          "score": 143,
+          "rate": 0.596
+        },
+        "flanker": {
+          "games": 240,
+          "score": 84,
+          "rate": 0.35
+        },
+        "starter": {
+          "games": 160,
+          "score": 119,
+          "rate": 0.744
+        },
+        "rush": {
+          "games": 80,
+          "score": 0,
+          "rate": 0
+        },
+        "elite": {
+          "games": 80,
+          "score": 41,
+          "rate": 0.512
+        }
+      },
+      "cards": {
+        "0": {
+          "plays": 1290,
+          "attacks": 1282,
+          "damage": 1282,
+          "kills": 431
+        },
+        "1": {
+          "plays": 582,
+          "attacks": 873,
+          "damage": 1303,
+          "kills": 403
+        },
+        "2": {
+          "plays": 796,
+          "attacks": 812,
+          "damage": 812,
+          "kills": 285
+        },
+        "3": {
+          "plays": 554,
+          "attacks": 890,
+          "damage": 1780,
+          "kills": 592
+        },
+        "4": {
+          "plays": 941,
+          "attacks": 980,
+          "damage": 980,
+          "kills": 350
+        },
+        "5": {
+          "plays": 393,
+          "attacks": 608,
+          "damage": 1458,
+          "kills": 451
+        },
+        "6": {
+          "plays": 909,
+          "attacks": 947,
+          "damage": 947,
+          "kills": 269
+        },
+        "7": {
+          "plays": 365,
+          "attacks": 484,
+          "damage": 1126,
+          "kills": 336
+        },
+        "8": {
+          "plays": 784,
+          "attacks": 873,
+          "damage": 873,
+          "kills": 288
+        },
+        "9": {
+          "plays": 416,
+          "attacks": 720,
+          "damage": 1135,
+          "kills": 406
+        },
+        "10": {
+          "plays": 517,
+          "attacks": 454,
+          "damage": 454,
+          "kills": 146
+        },
+        "11": {
+          "plays": 383,
+          "attacks": 565,
+          "damage": 1130,
+          "kills": 409
+        },
+        "12": {
+          "plays": 516,
+          "attacks": 449,
+          "damage": 449,
+          "kills": 134
+        },
+        "13": {
+          "plays": 416,
+          "attacks": 557,
+          "damage": 1406,
+          "kills": 461
+        },
+        "14": {
+          "plays": 513,
+          "attacks": 482,
+          "damage": 482,
+          "kills": 160
+        },
+        "15": {
+          "plays": 372,
+          "attacks": 540,
+          "damage": 1440,
+          "kills": 438
+        },
+        "16": {
+          "plays": 870,
+          "attacks": 1107,
+          "damage": 1107,
+          "kills": 333
+        },
+        "18": {
+          "plays": 445,
+          "attacks": 422,
+          "damage": 422,
+          "kills": 131
+        },
+        "20": {
+          "plays": 74,
+          "attacks": 97,
+          "damage": 388,
+          "kills": 77
+        },
+        "21": {
+          "plays": 133,
+          "attacks": 208,
+          "damage": 894,
+          "kills": 223
+        },
+        "23": {
+          "plays": 198,
+          "attacks": 228,
+          "damage": 1148,
+          "kills": 230
+        },
+        "24": {
+          "plays": 140,
+          "attacks": 156,
+          "damage": 594,
+          "kills": 162
+        },
+        "26": {
+          "plays": 75,
+          "attacks": 141,
+          "damage": 693,
+          "kills": 159
+        }
+      },
+      "turnSummary": {
+        "median": 20,
+        "p90": 41,
+        "mean": 23.98125
+      }
+    },
+    "validation-baseline": {
+      "games": 1280,
+      "failures": 0,
+      "firstWins": 746,
+      "draws": 0,
+      "forced": 0,
+      "pairs": {
+        "guard/lancer/greedy": {
+          "games": 80,
+          "score": 64,
+          "rate": 0.8
+        },
+        "guard/lancer/positional": {
+          "games": 80,
+          "score": 42,
+          "rate": 0.525
+        },
+        "archer/guard/greedy": {
+          "games": 80,
+          "score": 6,
+          "rate": 0.075
+        },
+        "archer/guard/positional": {
+          "games": 80,
+          "score": 17,
+          "rate": 0.212
+        },
+        "flanker/guard/greedy": {
+          "games": 80,
+          "score": 45,
+          "rate": 0.563
+        },
+        "flanker/guard/positional": {
+          "games": 80,
+          "score": 61,
+          "rate": 0.762
+        },
+        "archer/lancer/greedy": {
+          "games": 80,
+          "score": 24,
+          "rate": 0.3
+        },
+        "archer/lancer/positional": {
+          "games": 80,
+          "score": 17,
+          "rate": 0.212
+        },
+        "flanker/lancer/greedy": {
+          "games": 80,
+          "score": 67,
+          "rate": 0.838
+        },
+        "flanker/lancer/positional": {
+          "games": 80,
+          "score": 59,
+          "rate": 0.738
+        },
+        "archer/flanker/greedy": {
+          "games": 80,
+          "score": 16,
+          "rate": 0.2
+        },
+        "archer/flanker/positional": {
+          "games": 80,
+          "score": 11,
+          "rate": 0.138
+        },
+        "rush/starter/greedy": {
+          "games": 80,
+          "score": 0,
+          "rate": 0
+        },
+        "rush/starter/positional": {
+          "games": 80,
+          "score": 1,
+          "rate": 0.013
+        },
+        "elite/starter/greedy": {
+          "games": 80,
+          "score": 41,
+          "rate": 0.512
+        },
+        "elite/starter/positional": {
+          "games": 80,
+          "score": 39,
+          "rate": 0.487
+        }
+      },
+      "roles": {
+        "guard": {
+          "games": 480,
+          "score": 297,
+          "rate": 0.619
+        },
+        "lancer": {
+          "games": 480,
+          "score": 207,
+          "rate": 0.431
+        },
+        "archer": {
+          "games": 480,
+          "score": 91,
+          "rate": 0.19
+        },
+        "flanker": {
+          "games": 480,
+          "score": 365,
+          "rate": 0.76
+        },
+        "starter": {
+          "games": 320,
+          "score": 239,
+          "rate": 0.747
+        },
+        "rush": {
+          "games": 160,
+          "score": 1,
+          "rate": 0.006
+        },
+        "elite": {
+          "games": 160,
+          "score": 80,
+          "rate": 0.5
+        }
+      },
+      "cards": {
+        "0": {
+          "plays": 2388,
+          "attacks": 2165,
+          "damage": 2165,
+          "kills": 662
+        },
+        "1": {
+          "plays": 1161,
+          "attacks": 2021,
+          "damage": 3127,
+          "kills": 1140
+        },
+        "2": {
+          "plays": 1509,
+          "attacks": 1598,
+          "damage": 1598,
+          "kills": 504
+        },
+        "3": {
+          "plays": 1135,
+          "attacks": 1691,
+          "damage": 3382,
+          "kills": 1009
+        },
+        "4": {
+          "plays": 1703,
+          "attacks": 1891,
+          "damage": 1891,
+          "kills": 551
+        },
+        "5": {
+          "plays": 729,
+          "attacks": 1086,
+          "damage": 1424,
+          "kills": 354
+        },
+        "6": {
+          "plays": 1630,
+          "attacks": 1535,
+          "damage": 1535,
+          "kills": 446
+        },
+        "7": {
+          "plays": 716,
+          "attacks": 1088,
+          "damage": 2604,
+          "kills": 788
+        },
+        "8": {
+          "plays": 1488,
+          "attacks": 1460,
+          "damage": 1460,
+          "kills": 426
+        },
+        "9": {
+          "plays": 767,
+          "attacks": 1503,
+          "damage": 2356,
+          "kills": 926
+        },
+        "10": {
+          "plays": 871,
+          "attacks": 733,
+          "damage": 733,
+          "kills": 235
+        },
+        "11": {
+          "plays": 668,
+          "attacks": 832,
+          "damage": 1664,
+          "kills": 510
+        },
+        "12": {
+          "plays": 802,
+          "attacks": 740,
+          "damage": 740,
+          "kills": 189
+        },
+        "13": {
+          "plays": 651,
+          "attacks": 851,
+          "damage": 1215,
+          "kills": 291
+        },
+        "14": {
+          "plays": 817,
+          "attacks": 736,
+          "damage": 736,
+          "kills": 199
+        },
+        "15": {
+          "plays": 633,
+          "attacks": 939,
+          "damage": 2408,
+          "kills": 728
+        },
+        "16": {
+          "plays": 1489,
+          "attacks": 1453,
+          "damage": 1453,
+          "kills": 476
+        },
+        "18": {
+          "plays": 585,
+          "attacks": 480,
+          "damage": 480,
+          "kills": 144
+        },
+        "20": {
+          "plays": 140,
+          "attacks": 169,
+          "damage": 676,
+          "kills": 131
+        },
+        "21": {
+          "plays": 253,
+          "attacks": 382,
+          "damage": 1761,
+          "kills": 433
+        },
+        "23": {
+          "plays": 399,
+          "attacks": 437,
+          "damage": 2088,
+          "kills": 406
+        },
+        "24": {
+          "plays": 256,
+          "attacks": 299,
+          "damage": 1113,
+          "kills": 305
+        },
+        "26": {
+          "plays": 136,
+          "attacks": 258,
+          "damage": 1098,
+          "kills": 256
+        }
+      },
+      "turnSummary": {
+        "median": 17,
+        "p90": 38,
+        "mean": 21.2625
+      }
+    },
+    "validation-A": {
+      "games": 1280,
+      "failures": 0,
+      "firstWins": 752,
+      "draws": 0,
+      "forced": 0,
+      "pairs": {
+        "guard/lancer/greedy": {
+          "games": 80,
+          "score": 64,
+          "rate": 0.8
+        },
+        "guard/lancer/positional": {
+          "games": 80,
+          "score": 42,
+          "rate": 0.525
+        },
+        "archer/guard/greedy": {
+          "games": 80,
+          "score": 27,
+          "rate": 0.338
+        },
+        "archer/guard/positional": {
+          "games": 80,
+          "score": 40,
+          "rate": 0.5
+        },
+        "flanker/guard/greedy": {
+          "games": 80,
+          "score": 45,
+          "rate": 0.563
+        },
+        "flanker/guard/positional": {
+          "games": 80,
+          "score": 61,
+          "rate": 0.762
+        },
+        "archer/lancer/greedy": {
+          "games": 80,
+          "score": 55,
+          "rate": 0.688
+        },
+        "archer/lancer/positional": {
+          "games": 80,
+          "score": 53,
+          "rate": 0.662
+        },
+        "flanker/lancer/greedy": {
+          "games": 80,
+          "score": 67,
+          "rate": 0.838
+        },
+        "flanker/lancer/positional": {
+          "games": 80,
+          "score": 59,
+          "rate": 0.738
+        },
+        "archer/flanker/greedy": {
+          "games": 80,
+          "score": 29,
+          "rate": 0.362
+        },
+        "archer/flanker/positional": {
+          "games": 80,
+          "score": 29,
+          "rate": 0.362
+        },
+        "rush/starter/greedy": {
+          "games": 80,
+          "score": 0,
+          "rate": 0
+        },
+        "rush/starter/positional": {
+          "games": 80,
+          "score": 1,
+          "rate": 0.013
+        },
+        "elite/starter/greedy": {
+          "games": 80,
+          "score": 41,
+          "rate": 0.512
+        },
+        "elite/starter/positional": {
+          "games": 80,
+          "score": 39,
+          "rate": 0.487
+        }
+      },
+      "roles": {
+        "guard": {
+          "games": 480,
+          "score": 253,
+          "rate": 0.527
+        },
+        "lancer": {
+          "games": 480,
+          "score": 140,
+          "rate": 0.292
+        },
+        "archer": {
+          "games": 480,
+          "score": 233,
+          "rate": 0.485
+        },
+        "flanker": {
+          "games": 480,
+          "score": 334,
+          "rate": 0.696
+        },
+        "starter": {
+          "games": 320,
+          "score": 239,
+          "rate": 0.747
+        },
+        "rush": {
+          "games": 160,
+          "score": 1,
+          "rate": 0.006
+        },
+        "elite": {
+          "games": 160,
+          "score": 80,
+          "rate": 0.5
+        }
+      },
+      "cards": {
+        "0": {
+          "plays": 2647,
+          "attacks": 2487,
+          "damage": 2487,
+          "kills": 788
+        },
+        "1": {
+          "plays": 1195,
+          "attacks": 2016,
+          "damage": 3143,
+          "kills": 1124
+        },
+        "2": {
+          "plays": 1604,
+          "attacks": 1819,
+          "damage": 1819,
+          "kills": 570
+        },
+        "3": {
+          "plays": 1142,
+          "attacks": 1699,
+          "damage": 3398,
+          "kills": 1006
+        },
+        "4": {
+          "plays": 1794,
+          "attacks": 2018,
+          "damage": 2018,
+          "kills": 600
+        },
+        "5": {
+          "plays": 813,
+          "attacks": 1315,
+          "damage": 3108,
+          "kills": 941
+        },
+        "6": {
+          "plays": 1715,
+          "attacks": 1657,
+          "damage": 1657,
+          "kills": 494
+        },
+        "7": {
+          "plays": 757,
+          "attacks": 1133,
+          "damage": 2722,
+          "kills": 826
+        },
+        "8": {
+          "plays": 1585,
+          "attacks": 1654,
+          "damage": 1654,
+          "kills": 497
+        },
+        "9": {
+          "plays": 787,
+          "attacks": 1491,
+          "damage": 2316,
+          "kills": 882
+        },
+        "10": {
+          "plays": 981,
+          "attacks": 837,
+          "damage": 837,
+          "kills": 269
+        },
+        "11": {
+          "plays": 698,
+          "attacks": 869,
+          "damage": 1738,
+          "kills": 538
+        },
+        "12": {
+          "plays": 924,
+          "attacks": 846,
+          "damage": 846,
+          "kills": 235
+        },
+        "13": {
+          "plays": 761,
+          "attacks": 1020,
+          "damage": 2604,
+          "kills": 772
+        },
+        "14": {
+          "plays": 936,
+          "attacks": 892,
+          "damage": 892,
+          "kills": 230
+        },
+        "15": {
+          "plays": 684,
+          "attacks": 1038,
+          "damage": 2666,
+          "kills": 829
+        },
+        "16": {
+          "plays": 1602,
+          "attacks": 1634,
+          "damage": 1634,
+          "kills": 527
+        },
+        "18": {
+          "plays": 702,
+          "attacks": 584,
+          "damage": 584,
+          "kills": 186
+        },
+        "20": {
+          "plays": 140,
+          "attacks": 169,
+          "damage": 676,
+          "kills": 131
+        },
+        "21": {
+          "plays": 253,
+          "attacks": 382,
+          "damage": 1761,
+          "kills": 433
+        },
+        "23": {
+          "plays": 399,
+          "attacks": 437,
+          "damage": 2088,
+          "kills": 406
+        },
+        "24": {
+          "plays": 256,
+          "attacks": 299,
+          "damage": 1113,
+          "kills": 305
+        },
+        "26": {
+          "plays": 136,
+          "attacks": 258,
+          "damage": 1098,
+          "kills": 256
+        }
+      },
+      "turnSummary": {
+        "median": 19,
+        "p90": 41,
+        "mean": 23.01484375
+      }
+    },
+    "validation-C": {
+      "games": 1280,
+      "failures": 0,
+      "firstWins": 791,
+      "draws": 0,
+      "forced": 0,
+      "pairs": {
+        "guard/lancer/greedy": {
+          "games": 80,
+          "score": 37,
+          "rate": 0.463
+        },
+        "guard/lancer/positional": {
+          "games": 80,
+          "score": 23,
+          "rate": 0.287
+        },
+        "archer/guard/greedy": {
+          "games": 80,
+          "score": 27,
+          "rate": 0.338
+        },
+        "archer/guard/positional": {
+          "games": 80,
+          "score": 40,
+          "rate": 0.5
+        },
+        "flanker/guard/greedy": {
+          "games": 80,
+          "score": 32,
+          "rate": 0.4
+        },
+        "flanker/guard/positional": {
+          "games": 80,
+          "score": 38,
+          "rate": 0.475
+        },
+        "archer/lancer/greedy": {
+          "games": 80,
+          "score": 31,
+          "rate": 0.388
+        },
+        "archer/lancer/positional": {
+          "games": 80,
+          "score": 34,
+          "rate": 0.425
+        },
+        "flanker/lancer/greedy": {
+          "games": 80,
+          "score": 33,
+          "rate": 0.412
+        },
+        "flanker/lancer/positional": {
+          "games": 80,
+          "score": 27,
+          "rate": 0.338
+        },
+        "archer/flanker/greedy": {
+          "games": 80,
+          "score": 54,
+          "rate": 0.675
+        },
+        "archer/flanker/positional": {
+          "games": 80,
+          "score": 45,
+          "rate": 0.563
+        },
+        "rush/starter/greedy": {
+          "games": 80,
+          "score": 0,
+          "rate": 0
+        },
+        "rush/starter/positional": {
+          "games": 80,
+          "score": 1,
+          "rate": 0.013
+        },
+        "elite/starter/greedy": {
+          "games": 80,
+          "score": 45,
+          "rate": 0.563
+        },
+        "elite/starter/positional": {
+          "games": 80,
+          "score": 38,
+          "rate": 0.475
+        }
+      },
+      "roles": {
+        "guard": {
+          "games": 480,
+          "score": 243,
+          "rate": 0.506
+        },
+        "lancer": {
+          "games": 480,
+          "score": 295,
+          "rate": 0.615
+        },
+        "archer": {
+          "games": 480,
+          "score": 231,
+          "rate": 0.481
+        },
+        "flanker": {
+          "games": 480,
+          "score": 191,
+          "rate": 0.398
+        },
+        "starter": {
+          "games": 320,
+          "score": 236,
+          "rate": 0.738
+        },
+        "rush": {
+          "games": 160,
+          "score": 1,
+          "rate": 0.006
+        },
+        "elite": {
+          "games": 160,
+          "score": 83,
+          "rate": 0.519
+        }
+      },
+      "cards": {
+        "0": {
+          "plays": 2665,
+          "attacks": 2548,
+          "damage": 2548,
+          "kills": 801
+        },
+        "1": {
+          "plays": 1203,
+          "attacks": 2002,
+          "damage": 3097,
+          "kills": 1093
+        },
+        "2": {
+          "plays": 1580,
+          "attacks": 1787,
+          "damage": 1787,
+          "kills": 549
+        },
+        "3": {
+          "plays": 1153,
+          "attacks": 1847,
+          "damage": 3694,
+          "kills": 1183
+        },
+        "4": {
+          "plays": 1829,
+          "attacks": 2061,
+          "damage": 2061,
+          "kills": 607
+        },
+        "5": {
+          "plays": 817,
+          "attacks": 1292,
+          "damage": 3032,
+          "kills": 911
+        },
+        "6": {
+          "plays": 1742,
+          "attacks": 1762,
+          "damage": 1762,
+          "kills": 549
+        },
+        "7": {
+          "plays": 768,
+          "attacks": 1057,
+          "damage": 2600,
+          "kills": 727
+        },
+        "8": {
+          "plays": 1610,
+          "attacks": 1701,
+          "damage": 1701,
+          "kills": 515
+        },
+        "9": {
+          "plays": 790,
+          "attacks": 1421,
+          "damage": 2167,
+          "kills": 815
+        },
+        "10": {
+          "plays": 991,
+          "attacks": 885,
+          "damage": 885,
+          "kills": 277
+        },
+        "11": {
+          "plays": 700,
+          "attacks": 980,
+          "damage": 1960,
+          "kills": 687
+        },
+        "12": {
+          "plays": 917,
+          "attacks": 910,
+          "damage": 910,
+          "kills": 269
+        },
+        "13": {
+          "plays": 760,
+          "attacks": 1040,
+          "damage": 2614,
+          "kills": 804
+        },
+        "14": {
+          "plays": 988,
+          "attacks": 919,
+          "damage": 919,
+          "kills": 273
+        },
+        "15": {
+          "plays": 693,
+          "attacks": 970,
+          "damage": 2578,
+          "kills": 748
+        },
+        "16": {
+          "plays": 1589,
+          "attacks": 1635,
+          "damage": 1635,
+          "kills": 503
+        },
+        "18": {
+          "plays": 705,
+          "attacks": 571,
+          "damage": 571,
+          "kills": 179
+        },
+        "20": {
+          "plays": 141,
+          "attacks": 163,
+          "damage": 652,
+          "kills": 132
+        },
+        "21": {
+          "plays": 252,
+          "attacks": 383,
+          "damage": 1755,
+          "kills": 432
+        },
+        "23": {
+          "plays": 395,
+          "attacks": 436,
+          "damage": 2136,
+          "kills": 420
+        },
+        "24": {
+          "plays": 254,
+          "attacks": 296,
+          "damage": 1122,
+          "kills": 301
+        },
+        "26": {
+          "plays": 136,
+          "attacks": 256,
+          "damage": 1182,
+          "kills": 258
+        }
+      },
+      "turnSummary": {
+        "median": 19,
+        "p90": 41,
+        "mean": 23.2890625
+      }
+    }
+  },
+  "limits": [
+    "Exploratory comparison, not a proof of perfect balance",
+    "Two heuristic policies; no human gameplay inference",
+    "Validation compares predeclared candidates on different seeds, not an untouched final statistical holdout",
+    "Finite sample of deck compositions, not all thirty-card combinations",
+    "Opening pass metric excluded because it also counts optional end-turn commands",
+    "First-player advantage remains; owner-prescribed opening coin rule unchanged"
+  ]
+}

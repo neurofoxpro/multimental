@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "repository": "neurofoxpro/multimental",
+  "observedAt": "2026-09-26T05:51:57.260Z",
+  "readOnly": true,
+  "adbUsb": {"ready": 1, "unauthorized": 0, "offline": 0},
+  "windowsUsbGroups": [{"alias": "usb-group-1", "interfaces": ["ADB", "MTP"], "status": "OK"}, {"alias": "usb-group-2", "interfaces": ["AndroidCandidate"], "status": "OK"}],
+  "groupingUnavailable": 0,
+  "sourceDigest": "654ab6387220853918ea40f085ed2ed4c9107056cfda256c3193eae5638d9a0e",
+  "sourceDigestAfter": "654ab6387220853918ea40f085ed2ed4c9107056cfda256c3193eae5638d9a0e",
+  "secondPhoneConfirmed": false,
+  "secondaryDelivery": "not_deployed",
+  "identifiersRedacted": true,
+  "interpretation": "Windows sees an additional Android-named USB group, but ADB exposes only the primary authorized phone. This does not establish a second ready Android device or diagnose a specific driver/cable fault.",
+  "changedDriversOrPermissions": false
+}

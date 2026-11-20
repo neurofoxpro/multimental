@@ -1,0 +1,8 @@
+{
+  "id": "strict-short-workflow-20260926",
+  "version": "0.12.0",
+  "kind": "changed",
+  "scope": "automation",
+  "text": "Короткий строгий скилл: focus для актуальной задачи, возобновляемый ship для проверенного dev-выпуска и accept для приёмки по версионным доказательствам.",
+  "breaking": false
+}

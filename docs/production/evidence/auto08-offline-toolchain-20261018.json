@@ -1,0 +1,75 @@
+{
+  "schemaVersion": 1,
+  "repository": "neurofoxpro/multimental",
+  "taskId": "AUTO-08",
+  "sourceBase": "4e3ea606f49ee3ad57426228e3f762ed5a5bbe43",
+  "observedAt": "2026-10-18T01:31:14.570Z",
+  "host": "VENEL-SENDRIK",
+  "scope": "offline Windows toolchain / source-only CI policy",
+  "inputs": [
+    {
+      "path": ".gameprod/toolchain.json",
+      "sha256": "c1c8f91278c360a016c78682fa4dcab059f00a9a01f8bc2bdc134d4c3c5cacb9"
+    },
+    {
+      "path": "tools/offline-toolchain.mjs",
+      "sha256": "42b737212cb5def0304c2e5021cadef5b4a1e5aa1caa7b7a04c6058010d9dcdb"
+    },
+    {
+      "path": "tools/offline-toolchain.test.mjs",
+      "sha256": "c036a0c6f0e93f6aaf4ed46abba7bd5ffba191c09d945ff7ffaf7397c0aaaebb"
+    },
+    {
+      "path": "tools/verify.mjs",
+      "sha256": "bef34be1135f2bde3c0220330778394475a455e6eac8886c05b4e78c2a0116de"
+    },
+    {
+      "path": "package-lock.json",
+      "sha256": "85a2abf36eef5de7c5ce9b9307204cc978f202b90b754fd21b198f9d7f9ae9be"
+    }
+  ],
+  "pinnedArchives": [
+    {
+      "name": "godot.zip",
+      "sha256": "731980f9608d61333e5baf54a2ef17210acc7a538446c0cb9969f002aca1e953"
+    },
+    {
+      "name": "adb.zip",
+      "sha256": "45f4d63113e895ebde0c90f194099a4676b6ac653bd28d54314a9e022bbc1a99"
+    },
+    {
+      "name": "build-tools.zip",
+      "sha256": "79748cb4ab64b61fa678af21639985c7e394d874a4e31f082f4026d5c57e01a3"
+    },
+    {
+      "name": "jre17.zip",
+      "sha256": "bc21a93923103cdaac93ee337b0ae4365e739fde36df823dd456bc67c8a9d352"
+    }
+  ],
+  "measured": {
+    "node": "24.21.0",
+    "npm": "11.19.0",
+    "godot": "4.7.2",
+    "CI_node": "22",
+    "androidBuildTools": "35.0.1",
+    "licensePolicy": "prettier 3.9.9 MIT, integrity and SHA-512 from npm lock"
+  },
+  "results": {
+    "archiveChecks": "OFFLINE_TOOLCHAIN_CACHE_PASS",
+    "packageInstallation": "OFFLINE_NPM_INSTALL_PASS",
+    "sourceBoundVerification": "OFFLINE_TOOLCHAIN_VERIFY_PASS",
+    "command": "node tools/offline-toolchain.mjs verify",
+    "exitCode": 0,
+    "localPolicyUnitTests": {
+      "passed": 13,
+      "failed": 0
+    },
+    "ephemeralNpmInstall": true
+  },
+  "nonClaims": [
+    "HTTP(S) placeholder proxies and npm offline mode are not a kernel-level network air gap",
+    "This evidence does not prove disconnected Internet or physical Android radio testing",
+    "This increment does not upgrade Godot, Android SDK, package versions, or production",
+    "Does not imply AUTO-08 full acceptance or human gameplay acceptance"
+  ]
+}

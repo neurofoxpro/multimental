@@ -1,0 +1,131 @@
+{
+  "schemaVersion": 1,
+  "repository": "neurofoxpro/multimental",
+  "taskId": "QA-02",
+  "kind": "verified_engineering_increment_not_two_phone_acceptance",
+  "observedAt": "2026-09-28T00:23:22.539Z",
+  "sourceBase": "fdcea113231a7e388c471e374b0feeb706450a96",
+  "verification": {
+    "schemaVersion": 1,
+    "step": "verify",
+    "status": "passed",
+    "exitCode": 0,
+    "sourceDigest": "cf3ed3afadcb6dac1d58968f432ff20b7a23bc07953b9885030216ba1d46fa0f",
+    "sourceDigestAfter": "cf3ed3afadcb6dac1d58968f432ff20b7a23bc07953b9885030216ba1d46fa0f",
+    "sourceChanged": false,
+    "startedAt": "2026-09-28T00:18:09.616Z",
+    "finishedAt": "2026-09-28T00:20:10.255Z",
+    "host": "VENEL-SENDRIK",
+    "command": [
+      "node",
+      "tools/verify.mjs"
+    ],
+    "log": ".gameprod/evidence/verify.log",
+    "logHash": "70cf48014cc647a45ae1014431285c24bc71261ff91d445eec3e0ae067d8f840",
+    "outputs": []
+  },
+  "nodeTests": 1041,
+  "targetedPolicyTests": 37,
+  "fleet": {
+    "schemaVersion": 1,
+    "runId": "6f5fabaa-f822-46c3-9100-086e4a060935",
+    "repository": "neurofoxpro/multimental",
+    "commit": "b03b780894c66574220a83c0c1c50976871c3ee6",
+    "sourceDigest": "cf3ed3afadcb6dac1d58968f432ff20b7a23bc07953b9885030216ba1d46fa0f",
+    "observedAt": "2026-09-28T00:22:40.605Z",
+    "status": "partially_ready",
+    "requestedPhones": 2,
+    "readyPhones": 1,
+    "twoPhysicalPhonesReady": false,
+    "radioTestPassed": false,
+    "humanAcceptance": "pending",
+    "phones": [
+      {
+        "alias": "phone-A",
+        "status": "ready",
+        "model": "25028RN03A",
+        "brand": "Redmi",
+        "transport": "wifi",
+        "previousVersionCode": 38701,
+        "profileFilesObserved": 2,
+        "install": {
+          "disposition": "already_installed",
+          "mutated": false,
+          "recoveredPriorCompletion": false
+        },
+        "actualApkVerified": true,
+        "version": "0.14.1-alpha.287.1",
+        "apkSha256": "863fa0ec1db25c9a44bae0c87bd535d3147b14c28cce8247409399d3fcbc33cf",
+        "certificateSha256": "3c68effd1eaea4c082a7f54f399c90a36a24ea08ec881a6130412111338aff72",
+        "launcher": {
+          "method": "am_start_explicit_component",
+          "display": {
+            "wakeRequested": false,
+            "dismissRequested": false,
+            "credentialBypass": false
+          },
+          "durationMs": 2125
+        },
+        "profilePreserved": true,
+        "suite": {
+          "status": "passed",
+          "runId": "63aa3d5f-628e-4602-bf18-8d67b8331e24",
+          "report": "suites/63aa3d5f-628e-4602-bf18-8d67b8331e24/report.json"
+        },
+        "homeIcon": {
+          "status": "passed",
+          "runId": "48626dfe-4df8-4efd-9db4-5c4aa2ef52b8",
+          "target": "phone",
+          "version": "0.14.1-alpha.287.1",
+          "home": {
+            "page": 2,
+            "direction": "left",
+            "label": "Multimental Dev",
+            "launchConfirmed": true
+          },
+          "pinCreated": false,
+          "profilePreserved": true,
+          "report": ".gameprod/evidence/launcher/48626dfe-4df8-4efd-9db4-5c4aa2ef52b8/report.json"
+        },
+        "manualApk": "https://github.com/neurofoxpro/multimental/releases/download/v0.14.1-alpha.287.1/multimental-0.14.1-alpha.287.1-b03b780-manual-3c68effd1eae.apk"
+      },
+      {
+        "alias": "phone-B",
+        "status": "unavailable",
+        "reason": "Explicit phone unavailable; no substitution"
+      }
+    ],
+    "report": ".gameprod/evidence/fleet/6f5fabaa-f822-46c3-9100-086e4a060935/report.json"
+  },
+  "wifiControlNegative": {
+    "schemaVersion": 1,
+    "status": "expected_refusal",
+    "reason": "BLUETOOTH_NO_WIFI_TEST_REQUIRES_USB_CONTROL",
+    "runId": "682f45ab-e9fe-4deb-9543-66be47cf3a99",
+    "observedAt": "2026-09-28T00:20:17.235Z",
+    "sourceDigest": "cf3ed3afadcb6dac1d58968f432ff20b7a23bc07953b9885030216ba1d46fa0f",
+    "sourceDigestAfter": "cf3ed3afadcb6dac1d58968f432ff20b7a23bc07953b9885030216ba1d46fa0f",
+    "wifiKeptOn": true,
+    "sameProcess": true,
+    "samePhysicalDevice": true,
+    "requestFilesUnchanged": true,
+    "noBluetoothPermissionChangeAttempted": true,
+    "logSha256": "2573d567511d9fbec9c49bbc805268ccd0474575333257c1bf91b9c6d0102acb",
+    "phoneIdentifiersPublished": false
+  },
+  "signingScope": "same already-published manual APK, no private key copied or generated",
+  "observedMutations": {
+    "primaryApkReinstalled": false,
+    "primaryProfilePreserved": true,
+    "primaryConfigurationChanged": false,
+    "secondPhoneTouched": false
+  },
+  "limits": [
+    "Actual positive lifecycle test is Redmi only; Honor was not connected and no second-phone PASS is claimed.",
+    "The secondary route is implemented and unit-tested but its real installation/READY/launcher result still requires the known Honor online.",
+    "This does not prove a two-phone LAN/Bluetooth session.",
+    "The new gate preserves Wi-Fi ADB; it does not claim the legacy no-Wi-Fi radio test can run over wireless control.",
+    "The source probe uses current physical identities; cached descriptors are not online availability.",
+    "No accepted game rules, art, personal saved decks or another UI worktree were changed."
+  ]
+}

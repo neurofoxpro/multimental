@@ -1,0 +1,190 @@
+{
+  "schemaVersion": 1,
+  "observedAt": "2026-09-24T08:20:34.288Z",
+  "repository": "neurofoxpro/multimental",
+  "host": "VENEL-SENDRIK",
+  "candidate": {
+    "version": "0.2.1-alpha.73.1",
+    "sha256": "4b34c36dfc8942668e5d07e3dc7739549dd909b5615f81ab62001f5c39d1ac3b",
+    "commit": "be849c00b90f9523bacc806bbac7e5fa9e15c23a"
+  },
+  "head": "704551b19ea894800378e660a825248c8f5900af",
+  "pairing": {
+    "observedAt": "2026-09-24T08:06:15Z",
+    "remembered": true,
+    "authenticated": true
+  },
+  "qualification": {
+    "status": "failed",
+    "startedAt": "2026-09-24T08:07:31.151Z",
+    "finishedAt": "2026-09-24T08:17:13.320Z",
+    "toolDigest": "8ae8b174bd7fe48f3f12749f9d66b3916d3d316a78b3da36458616068740797d",
+    "toolDigestAfter": "8ae8b174bd7fe48f3f12749f9d66b3916d3d316a78b3da36458616068740797d",
+    "passed": 25,
+    "total": 28,
+    "results": [
+      {
+        "name": "emulator-A-clean-install",
+        "status": "passed",
+        "durationMs": 10191
+      },
+      {
+        "name": "emulator-A-install",
+        "status": "passed",
+        "durationMs": 619
+      },
+      {
+        "name": "emulator-A-ui",
+        "status": "passed",
+        "durationMs": 11727
+      },
+      {
+        "name": "emulator-A-tutorial",
+        "status": "passed",
+        "durationMs": 13642
+      },
+      {
+        "name": "emulator-A-jni",
+        "status": "passed",
+        "durationMs": 5284
+      },
+      {
+        "name": "emulator-A-reinstall",
+        "status": "passed",
+        "durationMs": 11840
+      },
+      {
+        "name": "emulator-A-close",
+        "status": "passed",
+        "durationMs": 523
+      },
+      {
+        "name": "emulator-A-launch",
+        "status": "passed",
+        "durationMs": 5844
+      },
+      {
+        "name": "emulator-B-install",
+        "status": "passed",
+        "durationMs": 637
+      },
+      {
+        "name": "emulator-B-ui",
+        "status": "passed",
+        "durationMs": 20901
+      },
+      {
+        "name": "emulator-B-tutorial",
+        "status": "passed",
+        "durationMs": 16438
+      },
+      {
+        "name": "emulator-B-jni",
+        "status": "passed",
+        "durationMs": 7595
+      },
+      {
+        "name": "emulator-B-reinstall",
+        "status": "passed",
+        "durationMs": 13990
+      },
+      {
+        "name": "emulator-B-close",
+        "status": "passed",
+        "durationMs": 540
+      },
+      {
+        "name": "emulator-B-launch",
+        "status": "passed",
+        "durationMs": 6820
+      },
+      {
+        "name": "emulator-pair",
+        "status": "passed",
+        "durationMs": 16597
+      },
+      {
+        "name": "pvp-emulators",
+        "status": "passed",
+        "durationMs": 26636
+      },
+      {
+        "name": "phone-install",
+        "status": "passed",
+        "durationMs": 652
+      },
+      {
+        "name": "phone-ui",
+        "status": "passed",
+        "durationMs": 9969
+      },
+      {
+        "name": "phone-tutorial",
+        "status": "passed",
+        "durationMs": 10050
+      },
+      {
+        "name": "phone-tcp-usb",
+        "status": "passed",
+        "durationMs": 4195
+      },
+      {
+        "name": "phone-tcp-lan",
+        "status": "passed",
+        "durationMs": 4302
+      },
+      {
+        "name": "phone-tcp-peer",
+        "status": "passed",
+        "durationMs": 10346
+      },
+      {
+        "name": "phone-bluetooth",
+        "status": "passed",
+        "durationMs": 10090
+      },
+      {
+        "name": "pvp-phone-lan",
+        "status": "passed",
+        "durationMs": 26375
+      },
+      {
+        "name": "phone-reinstall",
+        "status": "failed",
+        "durationMs": 210024
+      },
+      {
+        "name": "phone-close",
+        "status": "failed",
+        "durationMs": 78304
+      },
+      {
+        "name": "phone-launch",
+        "status": "failed",
+        "durationMs": 114
+      }
+    ]
+  },
+  "manualBlocker": {
+    "kind": "android_usb_rsa_consent",
+    "observedAt": "2026-09-24T08:17:22Z",
+    "adbState": "unauthorized",
+    "action": "Unlock selected phone and confirm Allow USB debugging for this computer; Bluetooth pairing already complete"
+  },
+  "integrationPerformed": false,
+  "newReleasePublished": false,
+  "phoneDataCleared": false,
+  "orphanLockRecovery": {
+    "action": "archived_without_deletion",
+    "ownerConfirmedDead": true,
+    "liveOperationsAbsent": true
+  },
+  "next": [
+    "Restore authorized ADB access",
+    "Return to feature/tutorial-audio-20260924 and verify candidate identity",
+    "Fresh full physical qualification of PR17",
+    "Dev integration and exact release delivery only on PASS",
+    "Merge latest dev into PR15 preserving tutorial/audio; build newer candidate before phone install",
+    "Secure Bluetooth PvP qualification; no insecure fallback"
+  ]
+}

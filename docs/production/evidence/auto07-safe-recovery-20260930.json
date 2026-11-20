@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "repository": "neurofoxpro/multimental",
+  "taskId": "AUTO-07",
+  "sourceCommit": "6ec23b3249aecb1d1082a49793e21760a0bd9795",
+  "implementation": {
+    "pr": 160,
+    "head": "dfb9600e3574a654c5dfadfa7a2503ecd46d2eb4"
+  },
+  "verification": {
+    "status": "passed",
+    "exitCode": 0,
+    "sourceChanged": false,
+    "sourceDigest": "2d7e483cb48f8434b9e329ce41d8a47057b8c5c1c2acc994249c9914a3149463",
+    "sourceDigestAfter": "2d7e483cb48f8434b9e329ce41d8a47057b8c5c1c2acc994249c9914a3149463",
+    "logHash": "c2818f7c6acfff7f8bbb488c41a10e8274ec13324871dbc545a8c9c59d8a0c1d"
+  },
+  "observedAt": "2026-09-29T22:35:00.860Z",
+  "acceptance": [
+    "Каждый шаг имеет ограничения времени, lock, fingerprint входов, журнал результата и команду возобновления.",
+    "После обрыва чтение состояния предшествует повтору записи; устаревшая квитанция отклоняется.",
+    "Тесты: сбой до/после commit, upload, merge, sign, install; не повторять побочные эффекты."
+  ],
+  "evidence": [
+    "docs/production/RECOVERY_EFFECTS.ru.md"
+  ],
+  "results": {
+    "targetedRecoveryTests": {
+      "tests": 90,
+      "passed": 90,
+      "failed": 0
+    },
+    "localProductionCheck": "passed",
+    "pullRequest": 160,
+    "prCi": [
+      "Build Android",
+      "Production controller",
+      "Cross-platform source quality",
+      "Source seal"
+    ],
+    "devBuild": {
+      "run": 36640128223,
+      "status": "success"
+    },
+    "devRelease": {
+      "id": 399576582,
+      "tag": "v0.14.3-alpha.302.1",
+      "apkSha256": "e464611247b9eb1649b5b9aebd04c8d09fefd640b83af019907500d95eae489e",
+      "manifestSha256": "498e18b2f637726e781cb13c97c9e5841dce045291023d38c1589f55caa7905d"
+    },
+    "phoneChanges": 0
+  },
+  "limits": [
+    "Recovery never infers completion of the interrupted operation; the ordinary command resumes and revalidates its checkpoint.",
+    "Physical-device installation and hardware acceptance are separate from this automation proof."
+  ]
+}

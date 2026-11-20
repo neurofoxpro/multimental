@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "observedDate": "2026-09-26",
+  "repository": "neurofoxpro/multimental",
+  "task": "META-01",
+  "issue": 31,
+  "sourceCommit": "94acbcb8a991d2d3df1d96a68d606794075e0d68",
+  "installedVersion": "0.8.0-alpha.162.1",
+  "originalApkSha256": "3e25d5e9e5253eee8c2811c8c1abffcec072cf5277dc0422dacbc32295ad4827",
+  "installedApkSha256": "ce2d6316100407b96a3125cf18cbc18e846c2412ecc2519772a2a49f379b8b59",
+  "editorSuite": {"runId": "7460d9cf-7a29-4049-b1b4-c167f43b9392", "status": "passed", "externalAndroidTaps": 8, "fixtureCardsAddedByApi": 13, "diskReopen": true, "selectedDeckInRealMatch": true, "personalProfileUntouched": true, "receiptSha256": "c6c3d4fad7322b21d9e614302bad3e0064dc232806fbccd9151c5c4109547e3a"},
+  "bluetooth": {"path": "WINDOWS_GUEST_ANDROID_HOST", "status": "passed", "finishedAt": "2026-09-26T02:34:14.791Z", "turn": 11, "guestComposition": "15..29", "reconnected": true, "authenticated": true, "encrypted": true, "wifiDisabled": true},
+  "sourceTests": {"collection": 336, "seededMatches": 40, "editorUi": 47, "networkDeckAuthority": 91},
+  "limitations": ["Not two physical Android phones", "Not a shop or crafting system", "Not subjective human acceptance", "The local host is trusted and sees authoritative private state"],
+  "classification": "historical source/device evidence, not automatic approval of future artifacts"
+}

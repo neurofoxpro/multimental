@@ -1,0 +1,122 @@
+{
+  "schemaVersion": 1,
+  "repository": "neurofoxpro/multimental",
+  "taskId": "UX-11",
+  "sourceCommit": "211d1094e3d3f14d93bd5301f344c133e67808df",
+  "implementation": {
+    "pr": 171,
+    "head": "d1264bc37af9118348835abf068624a0e77b6540"
+  },
+  "observedAt": "2026-10-02T10:06:02.794Z",
+  "acceptance": [
+    "Осмотр, смена выбора и отмена не расходуют ход; атака выполняется только явным действием с предпросмотром целей и сохранённой защитой союзников.",
+    "Рука не пересоздаётся при неизменном составе; фокус/прокрутка сохраняются, сведения доступны и для неиграбельных карт.",
+    "HUD/поле/карты/контекст имеют устойчивую иерархию в RU/EN и портретном/альбомном режиме; исходные правила и replay не меняются.",
+    "Обновлены реальные снимки и воспроизводимые проверки; не утверждается аппаратная или пользовательская приёмка без её квитанции."
+  ],
+  "verification": {
+    "schemaVersion": 1,
+    "step": "verify",
+    "status": "passed",
+    "exitCode": 0,
+    "sourceDigest": "6b9c7118662eb91d9bd9c9050e710ebd023a119dcecf2351c9ae825e265d635a",
+    "sourceDigestAfter": "6b9c7118662eb91d9bd9c9050e710ebd023a119dcecf2351c9ae825e265d635a",
+    "sourceChanged": false,
+    "startedAt": "2026-10-02T09:55:17.985Z",
+    "finishedAt": "2026-10-02T09:58:18.694Z",
+    "host": "VENEL-SENDRIK",
+    "command": [
+      "node",
+      "tools/verify.mjs"
+    ],
+    "log": ".gameprod/evidence/verify.log",
+    "logHash": "42ace80aad915908b6fd1337804f945da37b6e422ee437138063f20f663da16d",
+    "outputs": []
+  },
+  "evidence": [
+    "docs/production/INTERACTION_RESEARCH.ru.md",
+    "docs/production/UX11_STALE_CONFIRMATION.ru.md",
+    "docs/production/UX11_READABILITY_STATES.ru.md",
+    "docs/production/evidence/ux11-stale-confirmation-20261002.json",
+    "docs/production/evidence/ux11-readable-states-20261002.json",
+    "docs/media/gallery/current.json"
+  ],
+  "criteriaEvidence": [
+    {
+      "criterion": "Осмотр, смена выбора и отмена не расходуют ход; атака выполняется только явным действием с предпросмотром целей и сохранённой защитой союзников.",
+      "tests": [
+        "battle_interaction_test.gd",
+        "battle_reconnect_test.gd"
+      ],
+      "result": "126 interaction assertions plus 20 transport-status UI assertions passed; explicit intent and context-bound allied damage consent retained."
+    },
+    {
+      "criterion": "Рука не пересоздаётся при неизменном составе; фокус/прокрутка сохраняются, сведения доступны и для неиграбельных карт.",
+      "tests": [
+        "battle_interaction_test.gd"
+      ],
+      "result": "Stable node IDs, focus/scroll preservation and disabled-card inspection exercised through pointer events; catalog and core unchanged."
+    },
+    {
+      "criterion": "HUD/поле/карты/контекст имеют устойчивую иерархию в RU/EN и портретном/альбомном режиме; исходные правила и replay не меняются.",
+      "tests": [
+        "battle_readability_test.gd",
+        "battle_visual_layout_test.gd",
+        "directional_ui_test.gd"
+      ],
+      "result": "1500 shaped-name/layout assertions across 30 cards/two locales/five tile sizes; 78 button/header/modal assertions in three exact viewports. Existing deterministic core/replay/network suites passed."
+    },
+    {
+      "criterion": "Обновлены реальные снимки и воспроизводимые проверки; не утверждается аппаратная или пользовательская приёмка без её квитанции.",
+      "gallery": "3cf92edf8df4f617f7d588d904152c5d499289cf6682a331ad7a9f60d7407462",
+      "images": 60,
+      "interactiveStates": 36,
+      "visuallyReviewed": [
+        "ru-battle-card-720x1280",
+        "ru-battle-unit-1280x720",
+        "ru-battle-allies-960x540",
+        "ru-battle-opponent-1280x720",
+        "ru-battle-reconnecting-960x540",
+        "ru-battle-result-720x1280",
+        "en-battle-card-720x1280",
+        "en-battle-unit-1280x720",
+        "en-battle-allies-960x540",
+        "en-battle-opponent-1280x720",
+        "en-battle-reconnecting-960x540",
+        "en-battle-result-720x1280"
+      ],
+      "result": "60 actual source-render PNGs with hashes, source identity and 36 required state predicates. Twelve representative battle images reviewed. No physical/human acceptance inferred."
+    }
+  ],
+  "nodeTests": {
+    "passed": 1200,
+    "failed": 0
+  },
+  "release": {
+    "status": "published",
+    "sourceCommit": "211d1094e3d3f14d93bd5301f344c133e67808df",
+    "id": 401709725,
+    "tag": "v0.14.3-alpha.333.1",
+    "apkSha256": "f6838722cfb2c3edcae01588fde0281551f7d380051bb6d39c95e5247c11f7e7",
+    "manifestSha256": "cc2bcebea564f607d97744cf4925f2dac165d9d60a4e9ffe5f9d631156ecdd48",
+    "verification": "successful_dev_build_and_github_asset_metadata",
+    "installation": "not_inferred"
+  },
+  "limitations": [
+    "Logical source viewport is not Android dp/TalkBack certification.",
+    "Disconnected transport is tested with the real status signal, not a physical radio link.",
+    "Gallery match and result states are synthetic, not balance or human games.",
+    "Small board tiles retain compact mode; full names remain available in selection context and inspection.",
+    "Engineering acceptance and physical delivery are separate later receipts."
+  ],
+  "rendererLimitation": {
+    "priorCapture": "0703d503978790414a30da56551f6dec",
+    "outcome": "timeout; four frames only, not a passed gallery",
+    "logSha256": "471e175faa4069b027e5787e7aa83284aaa3a9316f65ca965bd7ea64b4890e23",
+    "diagnosticChange": "stage progress retained per page; subsequent complete 60-frame render succeeded",
+    "rootCause": "not established; no claim of a general renderer hang fix"
+  },
+  "humanAcceptance": "not_inferred",
+  "physicalPhone": "last independently observed release .330.1; this implementation not yet installed by this proof",
+  "productionAuthorized": false
+}

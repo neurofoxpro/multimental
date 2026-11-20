@@ -1,0 +1,213 @@
+{
+  "schemaVersion": 1,
+  "repository": "neurofoxpro/multimental",
+  "taskId": "AUTO-12",
+  "observedAt": "2026-09-27T11:27:52.799Z",
+  "sourceCommit": "857654eb23443f0da4793a8de0b96e667e3a21ac",
+  "implementation": {
+    "pr": 151,
+    "head": "9337e5bfc83a30f207a6be7974666bb299f647bb",
+    "base": "fa45537006ccfd6efe1d30cdad572445ea432743"
+  },
+  "verification": {
+    "schemaVersion": 1,
+    "step": "verify",
+    "status": "passed",
+    "exitCode": 0,
+    "sourceDigest": "0ac8ae01e86f5d83e8dfcd4b66401650eff27866ad9140251ee26f222fc65c78",
+    "sourceDigestAfter": "0ac8ae01e86f5d83e8dfcd4b66401650eff27866ad9140251ee26f222fc65c78",
+    "sourceChanged": false,
+    "startedAt": "2026-09-27T11:13:13.939Z",
+    "finishedAt": "2026-09-27T11:15:04.486Z",
+    "host": "VENEL-SENDRIK",
+    "command": [
+      "node",
+      "tools/verify.mjs"
+    ],
+    "log": ".gameprod/evidence/verify.log",
+    "logHash": "470f922e1cc92fc784eef4e48aaf9c0334455c74d1d7b7fce7be95731edb83be",
+    "outputs": []
+  },
+  "acceptance": [
+    "Одна команда после полной компьютерной проверки выдаёт ссылки на закреплённый APK, GitHub-релиз, исходники и сценарий ручной проверки без обязательного телефона.",
+    "Manual APK сохраняет постоянную dev-подпись, проверенную полезную нагрузку и SHA-256; ключи/личные данные не публикуются, прежние файлы не перезаписываются.",
+    "Повтор сверяет фактические тесты/удалённые assets и не дублирует публикацию; ручная приёмка остаётся pending до отзыва.",
+    "Параллельные исполнители видят live задачи, владельцев, ветки, PR и конфликты файлов; чужие черновики и claims сохраняются."
+  ],
+  "evidence": [
+    "docs/production/MANUAL_REVIEW.ru.md",
+    "docs/production/PARALLEL_COORDINATION.ru.md",
+    "docs/production/evidence/manual-review-observed-20260927.json"
+  ],
+  "verificationInputs": [
+    "skills/game-production/scripts/manual-review.mjs",
+    "skills/game-production/scripts/manual-review-policy.mjs",
+    "skills/game-production/scripts/apk-payload.mjs",
+    "skills/game-production/scripts/team.mjs",
+    "skills/game-production/tests/manual-review.test.mjs",
+    "skills/game-production/tests/team.test.mjs"
+  ],
+  "tests": {
+    "node": 914,
+    "manualReviewPolicy": 22,
+    "teamPolicy": 5,
+    "fullGodotRegression": "passed",
+    "computerHandoffSteps": 8
+  },
+  "publishedRelease": {
+    "status": "published",
+    "sourceCommit": "857654eb23443f0da4793a8de0b96e667e3a21ac",
+    "id": 397619558,
+    "tag": "v0.13.8-alpha.275.1",
+    "apkSha256": "546cda66f24746437638cc1cff5b21e56e5a78d4b51451d57d53da8ca657e364",
+    "manifestSha256": "853892db4970d1e60c9acafdaef26af93291269a548fe67b40c1a41ff061393d",
+    "verification": "successful_dev_build_and_github_asset_metadata",
+    "installation": "not_inferred"
+  },
+  "manualPacket": {
+    "schemaVersion": 1,
+    "repository": "neurofoxpro/multimental",
+    "kind": "developer-manual-review",
+    "status": "ready_for_human_review",
+    "reviewId": "119c5b2bffd0ae110062",
+    "preparedAt": "2026-09-27T11:23:58.123Z",
+    "version": "0.13.8-alpha.275.1",
+    "sourceCommit": "857654eb23443f0da4793a8de0b96e667e3a21ac",
+    "build": {
+      "runId": "36315272498",
+      "url": "https://github.com/neurofoxpro/multimental/actions/runs/36315272498"
+    },
+    "computer": {
+      "target": "emulator-B",
+      "labRunId": "33f94c80-4f7a-477f-bb3a-6e613f6c956d",
+      "suiteRunId": "095e51a0-49c1-424e-81ff-cf317740a47d",
+      "testerSourceHash": "0ac8ae01e86f5d83e8dfcd4b66401650eff27866ad9140251ee26f222fc65c78",
+      "finishedAt": "2026-09-27T11:23:58.123Z",
+      "originalSha256": "546cda66f24746437638cc1cff5b21e56e5a78d4b51451d57d53da8ca657e364",
+      "testedInstalledSha256": "bf2af224c1dcf81d42b208c52ae2089b31657c0fb8ab751ce339178a65d1f5ee",
+      "steps": [
+        {
+          "mode": "close",
+          "status": "passed",
+          "receiptSha256": "a0f772525e3097dfa4dbf9c621f80f559089382d4d32299d5a8808dcade6f60c"
+        },
+        {
+          "mode": "launch",
+          "status": "passed",
+          "receiptSha256": "a59e63ce0b1ed1f6dd29da155ecc7be72297e85e21529b01abcafcd35a849b3d"
+        },
+        {
+          "mode": "jni",
+          "status": "passed",
+          "receiptSha256": "78e02dcc2c4f67dedadca8c39f5eb33af8d32f2a063ba4a490f385dcd5c73080"
+        },
+        {
+          "mode": "tutorial",
+          "status": "passed",
+          "receiptSha256": "bab9d8aab7ae1014b8f924d042f3875a0d8ca242aa3fcacc05529636704a9019"
+        },
+        {
+          "mode": "ui",
+          "status": "passed",
+          "receiptSha256": "49e4ec6ad033330c64d1a00f8734c5751f20d86785a48e8bc24d5aa4847a11e4"
+        },
+        {
+          "mode": "inspector",
+          "status": "passed",
+          "receiptSha256": "8aa67cb01851cb697b4aaa10d9e07f769af00591924a3696d260233ecf3e7791"
+        },
+        {
+          "mode": "collection",
+          "status": "passed",
+          "receiptSha256": "640b16ffac1c2a552a0f1aad7bc6387454257329bba408befdc3e31245c8df38"
+        },
+        {
+          "mode": "restore",
+          "status": "passed",
+          "receiptSha256": "b996d7c66aebdaa9d4e449cb234de3aae0b9ec356c1dd81970544850bd84b2c4"
+        }
+      ],
+      "launcher": "not_a_gate_for_computer_review",
+      "humanAcceptance": "pending"
+    },
+    "manualApk": {
+      "id": 592778924,
+      "name": "multimental-0.13.8-alpha.275.1-857654e-manual-3c68effd1eae.apk",
+      "url": "https://github.com/neurofoxpro/multimental/releases/download/v0.13.8-alpha.275.1/multimental-0.13.8-alpha.275.1-857654e-manual-3c68effd1eae.apk",
+      "sha256": "1a28178b18c1e9a1511d1f64e8e1c81da3d4bbbf915bf6730fa8dd2949ce304d",
+      "size": 57443134,
+      "certificateSha256": "3c68effd1eaea4c082a7f54f399c90a36a24ea08ec881a6130412111338aff72",
+      "originalSha256": "546cda66f24746437638cc1cff5b21e56e5a78d4b51451d57d53da8ca657e364",
+      "payloadSha256": "7ee1497b0687063a5f2aaae9ea856d02b78d4898532a60145f059b0f050261c9",
+      "payloadFiles": 211,
+      "signatureOnlyTransformation": true,
+      "manualSignedVariantInstalledByThisCommand": false
+    },
+    "links": {
+      "apk": "https://github.com/neurofoxpro/multimental/releases/download/v0.13.8-alpha.275.1/multimental-0.13.8-alpha.275.1-857654e-manual-3c68effd1eae.apk",
+      "release": "https://github.com/neurofoxpro/multimental/releases/tag/v0.13.8-alpha.275.1",
+      "source": "https://github.com/neurofoxpro/multimental/tree/857654eb23443f0da4793a8de0b96e667e3a21ac",
+      "packet": "https://github.com/neurofoxpro/multimental/releases/download/v0.13.8-alpha.275.1/MANUAL_REVIEW-119c5b2bffd0ae110062.json",
+      "instructions": "https://github.com/neurofoxpro/multimental/releases/download/v0.13.8-alpha.275.1/MANUAL_REVIEW-119c5b2bffd0ae110062.md",
+      "feedback": "https://github.com/neurofoxpro/multimental/issues/new?title=%5BPLAYTEST+0.13.8-alpha.275.1%5D+%D0%A0%D0%B5%D0%B7%D1%83%D0%BB%D1%8C%D1%82%D0%B0%D1%82+%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B8&body=%D0%92%D0%B5%D1%80%D1%81%D0%B8%D1%8F%3A+0.13.8-alpha.275.1%0ACommit%3A+857654eb23443f0da4793a8de0b96e667e3a21ac%0AAPK+SHA-256%3A+1a28178b18c1e9a1511d1f64e8e1c81da3d4bbbf915bf6730fa8dd2949ce304d%0A%0A%D0%A3%D1%81%D1%82%D1%80%D0%BE%D0%B9%D1%81%D1%82%D0%B2%D0%BE+%2F+Android%3A%0A%D0%A0%D0%B5%D0%B7%D1%83%D0%BB%D1%8C%D1%82%D0%B0%D1%82%3A+%D0%BF%D1%80%D0%BE%D0%B9%D0%B4%D0%B5%D0%BD%D0%BE+%2F+%D0%BF%D1%80%D0%BE%D0%B1%D0%BB%D0%B5%D0%BC%D0%B0+%2F+%D0%BD%D0%B5+%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%B5%D0%BD%D0%BE%0A%D0%A8%D0%B0%D0%B3%D0%B8+%D0%B2%D0%BE%D1%81%D0%BF%D1%80%D0%BE%D0%B8%D0%B7%D0%B2%D0%B5%D0%B4%D0%B5%D0%BD%D0%B8%D1%8F%3A%0A%D0%9E%D0%B6%D0%B8%D0%B4%D0%B0%D0%BB%D0%BE%D1%81%D1%8C%3A%0A%D0%9F%D0%BE%D0%BB%D1%83%D1%87%D0%B8%D0%BB%D0%BE%D1%81%D1%8C%3A%0A%D0%A1%D0%BA%D1%80%D0%B8%D0%BD%D1%88%D0%BE%D1%82%2F%D0%B2%D0%B8%D0%B4%D0%B5%D0%BE%3A"
+    },
+    "manualAcceptance": "pending",
+    "physicalPhoneMutations": false,
+    "keysOrPersonalDataPublished": false
+  },
+  "uploaded": [
+    {
+      "id": 592778924,
+      "name": "multimental-0.13.8-alpha.275.1-857654e-manual-3c68effd1eae.apk",
+      "sha256": "1a28178b18c1e9a1511d1f64e8e1c81da3d4bbbf915bf6730fa8dd2949ce304d",
+      "size": 57443134,
+      "url": "https://github.com/neurofoxpro/multimental/releases/download/v0.13.8-alpha.275.1/multimental-0.13.8-alpha.275.1-857654e-manual-3c68effd1eae.apk"
+    },
+    {
+      "id": 592779312,
+      "name": "MANUAL_REVIEW-119c5b2bffd0ae110062.json",
+      "sha256": "d699b7905a6c51c47eba670efed63c9d44b7f6169522c2b31a9f23efc7f2567f",
+      "size": 4951,
+      "url": "https://github.com/neurofoxpro/multimental/releases/download/v0.13.8-alpha.275.1/MANUAL_REVIEW-119c5b2bffd0ae110062.json"
+    },
+    {
+      "id": 592779438,
+      "name": "MANUAL_REVIEW-119c5b2bffd0ae110062.md",
+      "sha256": "d36b75395e54b537da593133d11573c9baa14729fdc99c53449338981fac4d37",
+      "size": 5709,
+      "url": "https://github.com/neurofoxpro/multimental/releases/download/v0.13.8-alpha.275.1/MANUAL_REVIEW-119c5b2bffd0ae110062.md"
+    }
+  ],
+  "repeat": {
+    "command": "review resume",
+    "sameSuiteRunId": "095e51a0-49c1-424e-81ff-cf317740a47d",
+    "samePublishedAssetIds": [
+      592778924,
+      592779312,
+      592779438
+    ],
+    "newUpload": false,
+    "repeatedShipAfterSupplementalApks": "complete_without_publish_or_merge"
+  },
+  "parallel": {
+    "coordination": "live Issue29, claims, registered worktrees and PRs",
+    "otherImplementedPR": 145,
+    "otherMerge": "d109530ea03a5a9779264653c55778882dd83032",
+    "preservedDraftTask": "UX-11",
+    "preservedDraftOwner": "tactical-ui-20260926-f42b",
+    "closedChatTranscriptAccessClaimed": false,
+    "newLLMAgentsSpawned": false
+  },
+  "manualAcceptance": "pending",
+  "physicalPhoneRequired": false,
+  "physicalPhoneModified": false,
+  "privateKeysPublished": false,
+  "productionAuthorized": false,
+  "limitations": [
+    "This task accepts the engineering workflow, not subjective game acceptance.",
+    "The signed manual APK is payload-equivalent to the emulator-tested original; it was not installed onto a physical phone by this workflow.",
+    "The existing primary certificate is preserved; an unknown device with another installed certificate must not remove app data to force an update.",
+    "The prior UI draft remains uncommitted and is not included in this release.",
+    "General AUTO-07 recovery and physical QA-02/Bluetooth have separate criteria and are not closed here."
+  ]
+}

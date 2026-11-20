@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "id": "storm-before-balance",
+  "revision": 1,
+  "baseHash": "4d2f62a1870387678981ed6135e3816f2bce43f535dea0f912c7af961b27059b",
+  "operation": "revise",
+  "fromVersion": 1,
+  "card": {
+    "id": "c005",
+    "version": 2,
+    "slot": 5,
+    "element": "lightning",
+    "role": "archer",
+    "cost": 2,
+    "attack": 1,
+    "health": 2,
+    "effect": "directional-sweep-v1",
+    "text": {
+      "ru": {
+        "name": "Гроза",
+        "description": "Две клетки впереди, в том числе через промежуточного юнита."
+      },
+      "en": {
+        "name": "Storm",
+        "description": "Up to two cells in front, including past an intervening unit."
+      }
+    },
+    "art": {
+      "kind": "none"
+    },
+    "origin": {
+      "author": "Multimental research",
+      "reference": "CONTENT-03: counterfactual restoration of pre-balance Storm attack, never auto-promoted"
+    }
+  },
+  "trial": {
+    "replace": "c005",
+    "copies": 2
+  }
+}

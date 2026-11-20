@@ -1,0 +1,8 @@
+{
+  "id": "net06-trusted-edge-20261118",
+  "version": "0.14.3",
+  "kind": "added",
+  "scope": "network",
+  "text": "Добавлен отдельный серверный режим WebSocket за доверенным TLS-прокси для Render и Koyeb с проверкой профиля; клиентский WSS остаётся обязательным.",
+  "breaking": false
+}

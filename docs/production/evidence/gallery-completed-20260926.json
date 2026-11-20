@@ -1,0 +1,100 @@
+{
+    "productionAuthorized":  false,
+    "acceptance":  [
+                       "Скриншоты сняты с реального отрисованного приложения в изолированном профиле, не заменены нарисованными макетами.",
+                       "Манифест связывает каждый снимок с точным исходником, локалью, viewport и хешем; личных данных нет.",
+                       "Одна команда проверяет полноту/актуальность галереи; README и документация используют существующие файлы."
+                   ],
+    "sourceCommit":  "9056ed759110d2ae6e7c4f4f2a1a30c22f274547",
+    "taskId":  "UX-09",
+    "tests":  {
+                  "realRenderedImages":  24,
+                  "node":  780,
+                  "godotRegression":  "passed",
+                  "galleryPolicy":  26
+              },
+    "limitations":  [
+                        "Gallery reflects current source and includes existing design defects; it does not claim those defects fixed.",
+                        "Landscape battle clips lower actions; disabled hand is dim; inspector close target remains pending PR119.",
+                        "No phone installation, home-screen icon, physical dp, TalkBack or two-Android test is inferred.",
+                        "Earlier study/capture observations are retained with their own input keys and are not recast as tests of a later version."
+                    ],
+    "verificationInputs":  [
+                               "game/tests/gallery_capture.gd",
+                               "tools/gallery.mjs",
+                               "skills/game-production/scripts/gallery-policy.mjs",
+                               "skills/game-production/tests/gallery-policy.test.mjs"
+                           ],
+    "schemaVersion":  1,
+    "initialCandidateFailure":  {
+                                    "run":  36239408701,
+                                    "resolution":  "single explicit stamp canonicalized; layout changes still invalidate screenshots; fresh head CI passed",
+                                    "head":  "2bc45d813a1fab166d4b07b25686c030cb1303e1",
+                                    "cause":  "project.godot config/version stamping"
+                                },
+    "repository":  "neurofoxpro/multimental",
+    "evidence":  [
+                     "docs/production/GALLERY_CAPTURE.ru.md",
+                     "docs/SCREENSHOTS.ru.md",
+                     "docs/media/gallery/current.json",
+                     "docs/production/evidence/gallery-research-observed-20260926.json"
+                 ],
+    "release":  {
+                    "status":  "published",
+                    "sourceCommit":  "9056ed759110d2ae6e7c4f4f2a1a30c22f274547",
+                    "id":  397216244,
+                    "tag":  "v0.12.1-alpha.227.1",
+                    "apkSha256":  "da1689302f3c8f52140d79aa82e0190c4db92096dd5f9ef98cabf4375fa6668c",
+                    "manifestSha256":  "e52b9e6e174273fecb65ed7c682a3f60934251e874aadf17d480eba8a6e37618",
+                    "verification":  "successful_dev_build_and_github_asset_metadata",
+                    "installation":  "not_inferred"
+                },
+    "observedAt":  "2026-09-26T11:50:49.6963945Z",
+    "verification":  {
+                         "schemaVersion":  1,
+                         "step":  "verify",
+                         "status":  "passed",
+                         "exitCode":  0,
+                         "sourceDigest":  "fea39599cde05d68213cd003dd77c72d5084c0d3c2b965780ed86aab65e978f6",
+                         "sourceDigestAfter":  "fea39599cde05d68213cd003dd77c72d5084c0d3c2b965780ed86aab65e978f6",
+                         "sourceChanged":  false,
+                         "startedAt":  "2026-09-26T11:42:20.767Z",
+                         "finishedAt":  "2026-09-26T11:43:56.833Z",
+                         "host":  "VENEL-SENDRIK",
+                         "command":  [
+                                         "node",
+                                         "tools/verify.mjs"
+                                     ],
+                         "log":  ".gameprod/evidence/verify.log",
+                         "logHash":  "933db133a32d2b0f3bd3688c5ea45024cd9aab0c0f8a5805e582c14002855028",
+                         "outputs":  [
+
+                                     ]
+                     },
+    "gallery":  {
+                    "locales":  [
+                                    "ru",
+                                    "en"
+                                ],
+                    "captureRepeat":  "promote preserved exact SHA256 and mtime on final generation",
+                    "nonce":  "fd4c29ec6816321cb88ef85063836d1f",
+                    "manifestSHA256":  "a8f58598f3f57bfa1a03fcfc88eb3432e9f96a5b521cb02646d3b5f27ffdb9be",
+                    "renderer":  "Windows",
+                    "inputKey":  "d2fdbdc57fdab5a2eb0536fddaed27bca1fd314e409cc0cda7780a9e47b5ed97",
+                    "captureBaseCommit":  "2bc45d813a1fab166d4b07b25686c030cb1303e1",
+                    "landscape":  "1280x720",
+                    "portrait":  "720x1280",
+                    "personalProfileUntouched":  true,
+                    "engine":  "4.7.2-stable (official)",
+                    "logHash":  "4db023caa49db4832a02d5725fdce7b60711dfe23a547a36ef5eeb84c3c10581",
+                    "captureWorktreeDirty":  true,
+                    "scope":  "source_preview_not_installed_APK"
+                },
+    "implementation":  {
+                           "testedBase":  "45398c0fe59e4804e74527f259fc56ba01e88f1f",
+                           "pr":  132,
+                           "head":  "4f3a5c039adf05e0bfc9942dc7d55611d65881a0",
+                           "sourceSealedBuild":  null
+                       },
+    "manualAcceptance":  "not_inferred"
+}
