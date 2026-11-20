@@ -15,6 +15,9 @@ var emblem: Control
 var element_badge: Label
 var hover_art: TextureRect
 var hover_arrow: Label
+var attack_overlay: Control
+var preview_rotate_left: Button
+var preview_rotate_right: Button
 var hovering: bool = false
 var directions: Array[Vector2] = []
 var arrow_color: Color = Color.WHITE
@@ -51,6 +54,18 @@ func setup(ui, index: int) -> void:
     add_child(hover_art)
     hover_arrow = make_label(26)
     hover_arrow.name = "HoverFacingArrow"
+    attack_overlay = preload("res://src/battle_attack_overlay.gd").new()
+    attack_overlay.name = "PreviewAttackDirections"
+    attack_overlay.mouse_filter = Control.MOUSE_FILTER_IGNORE
+    add_child(attack_overlay)
+    preview_rotate_left = ui.button("↶", ui.rotate_card.bind(-1), 38)
+    preview_rotate_left.name = "PreviewRotateLeft"
+    preview_rotate_left.tooltip_text = ui.t("Поворот против часовой стрелки", "Rotate counterclockwise")
+    add_child(preview_rotate_left)
+    preview_rotate_right = ui.button("↷", ui.rotate_card.bind(1), 38)
+    preview_rotate_right.name = "PreviewRotateRight"
+    preview_rotate_right.tooltip_text = ui.t("Поворот по часовой стрелке", "Rotate clockwise")
+    add_child(preview_rotate_right)
     emblem = preload("res://src/tactical_emblem.gd").new()
     add_child(emblem)
     pressed.connect(ui.on_cell.bind(index))
@@ -84,8 +99,15 @@ func arrange() -> void:
     stats.add_theme_font_size_override("font_size",21 if size.x >= 140 else 16)
     element_badge.position = Vector2(size.x-38,26) if occupied else Vector2((size.x-42)/2, (size.y-42)/2)
     element_badge.size = Vector2(42,42)
-    hover_art.position = Vector2(size.x*0.17,-maxf(5,size.y*0.12))
-    hover_art.size = Vector2(size.x*0.66,size.y*0.66)
+    hover_art.position = Vector2(size.x*0.21,-maxf(5,size.y*0.07))
+    hover_art.size = Vector2(size.x*0.58,size.y*0.70)
+    attack_overlay.position = Vector2.ZERO
+    attack_overlay.size = size
+    var side: float = clampf(size.x*0.17, 30.0, 42.0)
+    preview_rotate_left.position = Vector2(2.0,size.y*0.38-side*0.5)
+    preview_rotate_left.size = Vector2(side,side)
+    preview_rotate_right.position = Vector2(size.x-side-2.0,size.y*0.38-side*0.5)
+    preview_rotate_right.size = Vector2(side,side)
     hover_arrow.position = Vector2(size.x*0.53,size.y*0.54)
     hover_arrow.size = Vector2(size.x*0.4,35)
     hint.position = Vector2(8,size.y * 0.32)
@@ -108,8 +130,15 @@ func present(ui, view: Dictionary, index: int, targets: Array, can_attack: bool)
     element_badge.text = Element.symbol(terrain)
     element_badge.add_theme_color_override("font_color",ui.COLORS[terrain].lightened(0.25))
     hover_art.visible = hovering
-    hover_arrow.visible = hovering
+    hover_arrow.visible = false
+    attack_overlay.visible = hovering
+    preview_rotate_left.visible = hovering
+    preview_rotate_right.visible = hovering
+    preview_rotate_left.disabled = not hovering
+    preview_rotate_right.disabled = not hovering
     if hovering:
+        var preview_definition: Dictionary = ui.game.card(int(view.hand[ui.selected_hand]))
+        attack_overlay.configure(str(preview_definition.kind), ui.selected_direction)
         hover_art.texture = CardArt.texture_for(int(view.hand[ui.selected_hand]))
         hover_arrow.text = ["↑","→","↓","←"][ui.selected_direction]
         hover_arrow.add_theme_color_override("font_color",Color("f8da90"))
