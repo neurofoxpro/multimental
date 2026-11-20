@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "id": "pattern-left-right",
+  "revision": 1,
+  "baseHash": "4d2f62a1870387678981ed6135e3816f2bce43f535dea0f912c7af961b27059b",
+  "operation": "add",
+  "fromVersion": 0,
+  "card": {
+    "id": "c030",
+    "version": 1,
+    "slot": 30,
+    "element": "mecha",
+    "role": "fighter",
+    "cost": 4,
+    "attack": 2,
+    "health": 4,
+    "effect": "directional-sweep-v1",
+    "pattern": "left_right",
+    "text": {
+      "ru": {
+        "name": "Перекрёстный дрон",
+        "description": "Соседние клетки по обе стороны."
+      },
+      "en": {
+        "name": "Cross Drone",
+        "description": "Attacks both adjacent side cells."
+      }
+    },
+    "art": {
+      "kind": "none"
+    },
+    "origin": {
+      "author": "MultiMental",
+      "reference": "issue:190"
+    }
+  },
+  "trial": {
+    "replace": "c020",
+    "copies": 1
+  }
+}

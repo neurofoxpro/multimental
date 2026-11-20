@@ -5,7 +5,7 @@ export function summarizeTrial(report, request) {
     report?.schemaVersion !== 1 ||
     report.ok !== true ||
     report.acceptedCatalogueChanged !== false ||
-    report.rules !== 'terrain-sweep-v3-balance1' ||
+    report.rules !== 'terrain-sweep-v4-accumulated-resources' ||
     report.seedStart !== request.seed ||
     report.count !== request.count ||
     !Array.isArray(report.rows) ||

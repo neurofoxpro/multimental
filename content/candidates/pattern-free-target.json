@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "id": "pattern-free-target",
+  "revision": 2,
+  "baseHash": "4d2f62a1870387678981ed6135e3816f2bce43f535dea0f912c7af961b27059b",
+  "operation": "add",
+  "fromVersion": 0,
+  "card": {
+    "id": "c030",
+    "version": 1,
+    "slot": 30,
+    "element": "mystery",
+    "role": "fighter",
+    "cost": 8,
+    "attack": 3,
+    "health": 3,
+    "effect": "directional-sweep-v1",
+    "pattern": "free_target",
+    "text": {
+      "ru": {
+        "name": "Астральный снайпер",
+        "description": "Выбирает одну занятую клетку в любой точке поля. Не поражает всех одновременно."
+      },
+      "en": {
+        "name": "Astral Sniper",
+        "description": "Choose one occupied cell anywhere on the board. Does not sweep all targets."
+      }
+    },
+    "art": {
+      "kind": "none"
+    },
+    "origin": {
+      "author": "MultiMental",
+      "reference": "issue:190"
+    }
+  },
+  "trial": {
+    "replace": "c020",
+    "copies": 1
+  }
+}

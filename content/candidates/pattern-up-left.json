@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "id": "pattern-up-left",
+  "revision": 1,
+  "baseHash": "4d2f62a1870387678981ed6135e3816f2bce43f535dea0f912c7af961b27059b",
+  "operation": "add",
+  "fromVersion": 0,
+  "card": {
+    "id": "c030",
+    "version": 1,
+    "slot": 30,
+    "element": "water",
+    "role": "fighter",
+    "cost": 4,
+    "attack": 2,
+    "health": 4,
+    "effect": "directional-sweep-v1",
+    "pattern": "up_left",
+    "text": {
+      "ru": {
+        "name": "Левый прилив",
+        "description": "Соседние клетки впереди и слева."
+      },
+      "en": {
+        "name": "Left Tide",
+        "description": "Attacks adjacent cells in front and to the left."
+      }
+    },
+    "art": {
+      "kind": "none"
+    },
+    "origin": {
+      "author": "MultiMental",
+      "reference": "issue:190"
+    }
+  },
+  "trial": {
+    "replace": "c020",
+    "copies": 1
+  }
+}

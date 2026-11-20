@@ -103,21 +103,44 @@ func take(page: String, locale: String, size: Vector2i) -> bool:
             return false
     await create_timer(2.0 if page == "battle" or page in BattleFixture.STATES else 0.12).timeout
     progress(page,locale,size,"timer_complete")
-    await RenderingServer.frame_post_draw
+    # frame_post_draw may never fire for an offscreen SubViewport on Windows gl_compatibility.
+    # Two regular rendered frames plus the full pixel/size/PNG validation below are bounded.
+    await process_frame
+    await process_frame
     progress(page,locale,size,"frame_drawn")
     if ui.get_viewport_rect().size != Vector2(size):
+        progress(page,locale,size,"ui_viewport_mismatch_" + str(ui.get_viewport_rect().size))
         return false
     if page in BattleFixture.STATES and not BattleFixture.matches(ui,page):
         return false
     var image: Image = viewport.get_texture().get_image()
     if image == null or image.is_empty() or image.get_size() != size:
+        progress(page,locale,size,"image_invalid_" + str(image.get_size() if image != null else "null"))
         return false
     var colors: Dictionary = {}
     for y in range(0, size.y, 12):
         for x in range(0, size.x, 12):
             colors[image.get_pixel(x, y).to_rgba32()] = true
     if colors.size() < 8:
-        return false
+        # OpenGL Compatibility sometimes returns a cleared texture immediately after
+        # a portrait/landscape resize. Retry actual GPU draws, never accept black frames.
+        for retry in range(12):
+            viewport.render_target_update_mode = SubViewport.UPDATE_ALWAYS
+            RenderingServer.force_draw(false)
+            await process_frame
+            await process_frame
+            image = viewport.get_texture().get_image()
+            if image == null or image.is_empty() or image.get_size() != size:
+                continue
+            colors.clear()
+            for y in range(0,size.y,12):
+                for x in range(0,size.x,12):
+                    colors[image.get_pixel(x,y).to_rgba32()] = true
+            if colors.size() >= 8:
+                break
+        if colors.size() < 8:
+            progress(page,locale,size,"colors_low_" + str(colors.size()))
+            return false
     var id: String = locale + "-" + page + "-" + str(size.x) + "x" + str(size.y)
     var filename: String = output.path_join(id + ".png")
     progress(page,locale,size,"encoding")

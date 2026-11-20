@@ -14,6 +14,7 @@ export const ELEMENTS = [
 export const ROLES = ['fighter', 'guard', 'lancer', 'archer', 'flanker'];
 export const RULES = 'terrain-sweep-v3-balance1';
 export const EFFECT = 'directional-sweep-v1';
+export const OPTIONAL_PATTERNS = ['up_right', 'up_left', 'left_right', 'up_down', 'free_target'];
 export const ACCEPTED_COUNT = 30;
 export const STARTER = [0, 1, 2, 3, 4, 6, 8, 10, 12, 14, 16, 18, 21, 23, 24];
 export const hash = (x) => createHash('sha256').update(x).digest('hex');
@@ -84,6 +85,7 @@ export function cardSchema() {
       attack: { type: 'integer', minimum: 1, maximum: 12 },
       health: { type: 'integer', minimum: 1, maximum: 30 },
       effect: { const: EFFECT },
+      pattern: { enum: OPTIONAL_PATTERNS },
       text: {
         type: 'object',
         additionalProperties: false,
@@ -182,24 +184,24 @@ export function validateArt(art, readAsset) {
     throw Error('CONTENT_ART_WEBP');
 }
 export function validateCard(card, readAsset) {
-  object(
-    card,
-    [
-      'id',
-      'version',
-      'slot',
-      'element',
-      'role',
-      'cost',
-      'attack',
-      'health',
-      'effect',
-      'text',
-      'art',
-      'origin'
-    ],
-    'card'
-  );
+  const keys = [
+    'id',
+    'version',
+    'slot',
+    'element',
+    'role',
+    'cost',
+    'attack',
+    'health',
+    'effect',
+    'text',
+    'art',
+    'origin'
+  ];
+  if (Object.hasOwn(card, 'pattern')) keys.push('pattern');
+  object(card, keys, 'card');
+  if (Object.hasOwn(card, 'pattern') && !OPTIONAL_PATTERNS.includes(card.pattern))
+    throw Error('CONTENT_UNKNOWN_PATTERN');
   if (
     !integer(card.slot, 0, 255) ||
     card.id !== 'c' + String(card.slot).padStart(3, '0') ||
@@ -254,7 +256,8 @@ export function runtimeRows(cards) {
     attack: c.attack,
     health: c.health,
     role: ROLES.indexOf(c.role),
-    kind: c.role
+    kind: c.role,
+    ...(c.pattern ? { pattern: c.pattern } : {})
   }));
 }
 export function compileRuntime(catalog, readAsset) {
