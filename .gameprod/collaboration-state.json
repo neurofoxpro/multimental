@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "neurofoxpro/multimental",
-  "revision": 537,
+  "revision": 538,
   "claims": {
     "5769688a-4b88-4390-b585-09db38d5bc0f": {
       "token": "5769688a-4b88-4390-b585-09db38d5bc0f",
@@ -26,8 +26,8 @@
         "task:BALANCE-01"
       ],
       "fence": 530,
-      "updatedAt": 1795168409135,
-      "expiresAt": 1795170209135
+      "updatedAt": 1795168619457,
+      "expiresAt": 1795170419457
     },
     "00119a48-d9f1-4fa9-8e6b-68fecb62bf9d": {
       "token": "00119a48-d9f1-4fa9-8e6b-68fecb62bf9d",
@@ -44,25 +44,6 @@
     }
   },
   "events": [
-    {
-      "id": "e6d29b14-297d-4902-af97-b5280904a2fd",
-      "hash": "e2cfef5515e9938fe5b623a4de431f51aa3c785dd13399f7b84cd5cb5c373b82",
-      "revision": 282,
-      "result": {
-        "status": "renewed",
-        "token": "c0ed7a05-ccc9-4bb8-a9e5-37a473ff81f2",
-        "task": "QA-02",
-        "owner": "honor-update-20260928-h4e9",
-        "base": "bf9488d677b208f3fe57358a29b0024f5e245113",
-        "resources": [
-          "area:devices",
-          "task:QA-02"
-        ],
-        "fence": 281,
-        "updatedAt": 1790586163961,
-        "expiresAt": 1790587963961
-      }
-    },
     {
       "id": "50ba2d54-ef52-4c21-be98-eb4648490146",
       "hash": "a3b1db68d99be6a677cb7e3e57faf8ef794e9abf507327e22457dee0830853de",
@@ -4617,6 +4598,25 @@
         "fence": 537,
         "updatedAt": 1795168461684,
         "expiresAt": 1795170261684
+      }
+    },
+    {
+      "id": "e8b8f716-5dfa-41f4-805b-56f6d8721d98",
+      "hash": "96def8a54c8c79240813458d7eebbfd2fbd697916276b00733f57e5a0250e24a",
+      "revision": 538,
+      "result": {
+        "status": "renewed",
+        "token": "2b771443-2b76-47ca-aa48-aa5d396b68cc",
+        "task": "BALANCE-01",
+        "owner": "mm-paired-arrows-20261120",
+        "base": "7bd9061e9700ce0093a95b585f17f91ea86eb879",
+        "resources": [
+          "area:game-core",
+          "task:BALANCE-01"
+        ],
+        "fence": 530,
+        "updatedAt": 1795168619457,
+        "expiresAt": 1795170419457
       }
     }
   ]
