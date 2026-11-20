@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "neurofoxpro/multimental",
-  "revision": 533,
+  "revision": 534,
   "claims": {
     "5769688a-4b88-4390-b585-09db38d5bc0f": {
       "token": "5769688a-4b88-4390-b585-09db38d5bc0f",
@@ -28,21 +28,22 @@
       "fence": 530,
       "updatedAt": 1795140929288,
       "expiresAt": 1795142729288
+    },
+    "410cb9df-cf7e-45ed-aafd-136deadd8e36": {
+      "token": "410cb9df-cf7e-45ed-aafd-136deadd8e36",
+      "task": "QA-02",
+      "owner": "mm-redmi-rotation-qa-20261120",
+      "base": "d12846084ad619590f3ba661e705c982a1a9f2db",
+      "resources": [
+        "area:devices",
+        "task:QA-02"
+      ],
+      "fence": 534,
+      "updatedAt": 1795141950192,
+      "expiresAt": 1795143750192
     }
   },
   "events": [
-    {
-      "id": "34dcb572-65a2-4d61-81a4-09f3c1e16cd7",
-      "hash": "bacdaf6ab7980c177b9d7e33b69242ecd103472a0fb121964b5f6628a9e96c58",
-      "revision": 278,
-      "result": {
-        "status": "released",
-        "token": "fce2a53c-fd1e-4529-b2e3-1a7f85909425",
-        "task": "AUTO-08",
-        "owner": "offline-proof-20260928-c4f8",
-        "fence": 276
-      }
-    },
     {
       "id": "6f940e78-7763-4959-a1f8-0f68ffd7c5b2",
       "hash": "818f327a90d72242c70032336f0a54b907de1cd0a45b7f75157d3ada352aa86c",
@@ -4597,6 +4598,25 @@
         "task": "UX-05",
         "owner": "mm-rotation-arrows-20261120",
         "fence": 525
+      }
+    },
+    {
+      "id": "410cb9df-cf7e-45ed-aafd-136deadd8e36",
+      "hash": "62b4de9d7e8d5c7fad17d18edb199a712100198591171120d1128ad0d7a0221b",
+      "revision": 534,
+      "result": {
+        "status": "claimed",
+        "token": "410cb9df-cf7e-45ed-aafd-136deadd8e36",
+        "task": "QA-02",
+        "owner": "mm-redmi-rotation-qa-20261120",
+        "base": "d12846084ad619590f3ba661e705c982a1a9f2db",
+        "resources": [
+          "area:devices",
+          "task:QA-02"
+        ],
+        "fence": 534,
+        "updatedAt": 1795141950192,
+        "expiresAt": 1795143750192
       }
     }
   ]
