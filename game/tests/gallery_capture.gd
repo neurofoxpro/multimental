@@ -6,6 +6,12 @@ var output: String = ""
 var viewport: SubViewport
 var ui
 var personal_before: Array[String] = []
+var previous_pixels: Dictionary = {}
+func pixels_hash(img: Image) -> String:
+    var digest := HashingContext.new()
+    digest.start(HashingContext.HASH_SHA256)
+    digest.update(img.get_data())
+    return digest.finish().hex_encode()
 const BattleFixture = preload("res://tests/support/battle_gallery_fixture.gd")
 const BATTLE_SIZES: Array[Vector2i] = [Vector2i(720,1280),Vector2i(1280,720),Vector2i(960,540)]
 const PAGES: Array[String] = ["menu", "collection", "card", "battle", "shop", "crafting", "rewards", "connection", "rules", "settings"]
@@ -121,13 +127,17 @@ func take(page: String, locale: String, size: Vector2i) -> bool:
     for y in range(0, size.y, 12):
         for x in range(0, size.x, 12):
             colors[image.get_pixel(x, y).to_rgba32()] = true
-    if colors.size() < 8:
-        # OpenGL Compatibility sometimes returns a cleared texture immediately after
+    var image_hash: String = pixels_hash(image)
+    var previous_hash: String = str(previous_pixels.get(str(size), ""))
+    if colors.size() < 8 or image_hash == previous_hash:
+        # OpenGL Compatibility sometimes returns a cleared or outdated texture after
         # a portrait/landscape resize. Retry actual GPU draws, never accept black frames.
         for retry in range(12):
-            viewport.render_target_update_mode = SubViewport.UPDATE_ALWAYS
+            viewport.render_target_update_mode = SubViewport.UPDATE_ONCE
+            await process_frame
             RenderingServer.force_draw(false)
             await process_frame
+            viewport.render_target_update_mode = SubViewport.UPDATE_ALWAYS
             await process_frame
             image = viewport.get_texture().get_image()
             if image == null or image.is_empty() or image.get_size() != size:
@@ -136,9 +146,10 @@ func take(page: String, locale: String, size: Vector2i) -> bool:
             for y in range(0,size.y,12):
                 for x in range(0,size.x,12):
                     colors[image.get_pixel(x,y).to_rgba32()] = true
-            if colors.size() >= 8:
+            image_hash = pixels_hash(image)
+            if colors.size() >= 8 and image_hash != previous_hash:
                 break
-        if colors.size() < 8:
+        if colors.size() < 8 or image_hash == previous_hash:
             progress(page,locale,size,"colors_low_" + str(colors.size()))
             return false
     var id: String = locale + "-" + page + "-" + str(size.x) + "x" + str(size.y)
@@ -146,6 +157,7 @@ func take(page: String, locale: String, size: Vector2i) -> bool:
     progress(page,locale,size,"encoding")
     if FileAccess.file_exists(filename) or image.save_png(filename) != OK:
         return false
+    previous_pixels[str(size)] = image_hash
     captured.append({"id": id, "page": page, "locale": locale, "width": size.x, "height": size.y, "file": id + ".png", "sha256": FileAccess.get_sha256(filename), "sampledColors": colors.size(),"interactiveStateVerified":page in BattleFixture.STATES})
     return true
 func run_capture() -> void:
