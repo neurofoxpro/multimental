@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "neurofoxpro/multimental",
-  "revision": 532,
+  "revision": 533,
   "claims": {
     "5769688a-4b88-4390-b585-09db38d5bc0f": {
       "token": "5769688a-4b88-4390-b585-09db38d5bc0f",
@@ -15,19 +15,6 @@
       "fence": 456,
       "updatedAt": 1792362576792,
       "expiresAt": 1792364376792
-    },
-    "9cb7fb36-3314-49ee-bbcd-bfe3e3a523ae": {
-      "token": "9cb7fb36-3314-49ee-bbcd-bfe3e3a523ae",
-      "task": "UX-05",
-      "owner": "mm-rotation-arrows-20261120",
-      "base": "7bd9061e9700ce0093a95b585f17f91ea86eb879",
-      "resources": [
-        "area:game-ui",
-        "task:UX-05"
-      ],
-      "fence": 525,
-      "updatedAt": 1795141250541,
-      "expiresAt": 1795143050541
     },
     "2b771443-2b76-47ca-aa48-aa5d396b68cc": {
       "token": "2b771443-2b76-47ca-aa48-aa5d396b68cc",
@@ -44,25 +31,6 @@
     }
   },
   "events": [
-    {
-      "id": "9c8c31d2-9008-4e33-8ae7-d4b5f6af09b5",
-      "hash": "4a3953509a3e5517f8de66ac1db55ba23ca7ccc612ce6a72e93699948f633bfe",
-      "revision": 277,
-      "result": {
-        "status": "renewed",
-        "token": "fce2a53c-fd1e-4529-b2e3-1a7f85909425",
-        "task": "AUTO-08",
-        "owner": "offline-proof-20260928-c4f8",
-        "base": "bf9488d677b208f3fe57358a29b0024f5e245113",
-        "resources": [
-          "area:automation",
-          "task:AUTO-08"
-        ],
-        "fence": 276,
-        "updatedAt": 1790559616335,
-        "expiresAt": 1790561416335
-      }
-    },
     {
       "id": "34dcb572-65a2-4d61-81a4-09f3c1e16cd7",
       "hash": "bacdaf6ab7980c177b9d7e33b69242ecd103472a0fb121964b5f6628a9e96c58",
@@ -4617,6 +4585,18 @@
         "fence": 525,
         "updatedAt": 1795141250541,
         "expiresAt": 1795143050541
+      }
+    },
+    {
+      "id": "60126d53-f3bc-4433-a172-2990fce2b2ff",
+      "hash": "b531c5e68e8e5130f6accbc6f830a803218fe7ee4e7883f3a5995af1665a410e",
+      "revision": 533,
+      "result": {
+        "status": "released",
+        "token": "9cb7fb36-3314-49ee-bbcd-bfe3e3a523ae",
+        "task": "UX-05",
+        "owner": "mm-rotation-arrows-20261120",
+        "fence": 525
       }
     }
   ]
