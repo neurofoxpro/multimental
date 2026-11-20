@@ -222,7 +222,7 @@ function report() {
     schemaVersion: 1,
     ok: true,
     acceptedCatalogueChanged: false,
-    rules: 'terrain-sweep-v3-balance1',
+    rules: 'terrain-sweep-v4-accumulated-resources',
     seedStart: 42,
     count: 1,
     rows,

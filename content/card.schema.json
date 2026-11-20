@@ -73,6 +73,15 @@
     "effect": {
       "const": "directional-sweep-v1"
     },
+    "pattern": {
+      "enum": [
+        "up_right",
+        "up_left",
+        "left_right",
+        "up_down",
+        "free_target"
+      ]
+    },
     "text": {
       "type": "object",
       "additionalProperties": false,

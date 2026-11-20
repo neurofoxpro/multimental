@@ -2,6 +2,7 @@ class_name MatchCore
 extends RefCounted
 const Deck = preload("res://src/deck_rules.gd")
 const Content = preload("res://src/content_catalog.gd")
+const AttackPattern = preload("res://src/attack_pattern.gd")
 ## Directional prototype v2. No scenes, clocks, UI or transport dependencies.
 const ELEMENTS: Array[String] = ["fire", "water", "lightning", "air", "earth", "light", "dark", "mecha", "poison", "mystery"]
 const ELEMENTS_RU: Array[String] = ["Огонь", "Вода", "Молния", "Воздух", "Земля", "Свет", "Тьма", "Меха", "Яд", "Тайна"]
@@ -129,11 +130,13 @@ func attack_cells(source: int, unit: Dictionary, board: Array) -> Array[int]:
     if source < 0 or source >= 9 or board.size() != 9 or definition.is_empty():
         return result
     var kind: String = str(definition.kind)
-    var rays: Array[Vector2i] = [Vector2i(0, -1)]
-    if kind == "guard":
-        rays = [Vector2i(0, -1), Vector2i(-1, 0), Vector2i(1, 0)]
-    elif kind == "flanker":
-        rays = [Vector2i(-1, -1), Vector2i(1, -1)]
+    if str(definition.get("pattern", "")) == "free_target":
+        # One expensive aimed shot may select any other board cell, regardless of range.
+        for target in range(9):
+            if target != source:
+                result.append(target)
+        return result
+    var rays: Array[Vector2i] = AttackPattern.rays(kind, str(definition.get("pattern", "")))
     var reach: int = 2 if kind in ["lancer", "archer"] else 1
     for ray in rays:
         var forward: Vector2i = rotated(ray, int(unit.get("direction", 0)))
@@ -228,7 +231,7 @@ func apply(player: int, value: Dictionary) -> Dictionary:
     elif command.type == "attack":
         var source: int = int(command.source)
         p.coins = int(p.coins) - attack_cost(source)
-        _resolve_sweep(source, player, events)
+        _resolve_sweep(source, player, events, int(command.target))
     _observe_board(events)
     p.missed = 0
     commands.append({"player": player, "command": command.duplicate(true)})
@@ -239,9 +242,16 @@ func apply(player: int, value: Dictionary) -> Dictionary:
         _finish_turn()
     return {"ok": true, "events": events}
 
-func _resolve_sweep(source: int, player: int, events: Array) -> void:
+func _resolve_sweep(source: int, player: int, events: Array, chosen_target: int = -1) -> void:
     var a: Dictionary = state.board[source]
     var targets: Array[int] = attack_targets(source, a, state.board)
+    var definition: Dictionary = card(int(a.id))
+    if str(definition.get("pattern", "")) == "free_target":
+        # Unlike a sweep, the costly free-aim unit attacks exactly the chosen cell.
+        var selected_valid: bool = chosen_target in targets
+        targets.clear()
+        if selected_valid:
+            targets.append(chosen_target)
     var damage: int = int(a.attack)
     # Freeze the target set: outgoing strikes happen together, never pierce newly killed blockers.
     for target in targets:

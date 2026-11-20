@@ -16,7 +16,9 @@ class CandidateCore:
             if not values[index] is Dictionary:
                 return false
             var row:Dictionary=values[index].duplicate(true)
-            if row.size()!=9 or not integer(row.get("id"),index,index) or not integer(row.get("element"),0,9) or not integer(row.get("role"),0,4):
+            if row.size() not in [9,10] or not integer(row.get("id"),index,index) or not integer(row.get("element"),0,9) or not integer(row.get("role"),0,4):
+                return false
+            if row.has("pattern") and str(row.pattern) not in ["up_right","up_left","left_right","up_down","free_target"]:
                 return false
             for name in ["cost","attack","health"]:
                 if not integer(row.get(name),1,8 if name=="cost" else (12 if name=="attack" else 30)):
