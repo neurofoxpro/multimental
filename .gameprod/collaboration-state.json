@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "neurofoxpro/multimental",
-  "revision": 550,
+  "revision": 551,
   "claims": {
     "5769688a-4b88-4390-b585-09db38d5bc0f": {
       "token": "5769688a-4b88-4390-b585-09db38d5bc0f",
@@ -41,28 +41,22 @@
       "fence": 546,
       "updatedAt": 1795176408400,
       "expiresAt": 1795178208400
+    },
+    "7802cba2-3a26-46d9-ade4-1db121fa197b": {
+      "token": "7802cba2-3a26-46d9-ade4-1db121fa197b",
+      "task": "QA-02",
+      "owner": "mm-nophone-qa-confirm-20261120",
+      "base": "e4b43c8bdfb72ff5844dff5bdf01748a8d8f6b6e",
+      "resources": [
+        "area:devices",
+        "task:QA-02"
+      ],
+      "fence": 551,
+      "updatedAt": 1795176439887,
+      "expiresAt": 1795178239887
     }
   },
   "events": [
-    {
-      "id": "bf719cb9-aa84-4802-93db-dfc6cfeed3a1",
-      "hash": "e2e1d2148b2886d6602d0cba3a21b544a49905589b5ecf92cd3a6dfe0dc33e71",
-      "revision": 295,
-      "result": {
-        "status": "renewed",
-        "token": "e0e2e111-64f4-48e6-9463-8a4ffad7d7a9",
-        "task": "AUTO-07",
-        "owner": "auto07-recovery-20260930-r7f3",
-        "base": "9d1b268cb210a3fec3bfd76ae9cc371531e7ba0f",
-        "resources": [
-          "area:automation",
-          "task:AUTO-07"
-        ],
-        "fence": 294,
-        "updatedAt": 1790720537954,
-        "expiresAt": 1790722337954
-      }
-    },
     {
       "id": "7e99d435-1ebc-4ade-a0df-0a558b334db0",
       "hash": "e5f8ad6f87a621782eae83ff6f19a3c912920162b046083cbdb4415d72b0b019",
@@ -4624,6 +4618,25 @@
         "task": "QA-02",
         "owner": "mm-redmi-device-ux-fix-20261120",
         "fence": 537
+      }
+    },
+    {
+      "id": "7802cba2-3a26-46d9-ade4-1db121fa197b",
+      "hash": "35fbfda26004972acda0250bb67c7c92c733d3dc0cbb46c386cfa77bf80e1766",
+      "revision": 551,
+      "result": {
+        "status": "claimed",
+        "token": "7802cba2-3a26-46d9-ade4-1db121fa197b",
+        "task": "QA-02",
+        "owner": "mm-nophone-qa-confirm-20261120",
+        "base": "e4b43c8bdfb72ff5844dff5bdf01748a8d8f6b6e",
+        "resources": [
+          "area:devices",
+          "task:QA-02"
+        ],
+        "fence": 551,
+        "updatedAt": 1795176439887,
+        "expiresAt": 1795178239887
       }
     }
   ]
