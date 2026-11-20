@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "neurofoxpro/multimental",
-  "revision": 541,
+  "revision": 542,
   "claims": {
     "5769688a-4b88-4390-b585-09db38d5bc0f": {
       "token": "5769688a-4b88-4390-b585-09db38d5bc0f",
@@ -39,30 +39,11 @@
         "task:QA-02"
       ],
       "fence": 537,
-      "updatedAt": 1795172290132,
-      "expiresAt": 1795174090132
+      "updatedAt": 1795172442084,
+      "expiresAt": 1795174242084
     }
   },
   "events": [
-    {
-      "id": "4cfb731f-d683-4a1d-9b8a-c9d8d546619f",
-      "hash": "62957c9cb94aee7636649790ef8b6b23165bf8823f268642b129a8b40b5a6343",
-      "revision": 286,
-      "result": {
-        "status": "renewed",
-        "token": "c0ed7a05-ccc9-4bb8-a9e5-37a473ff81f2",
-        "task": "QA-02",
-        "owner": "honor-update-20260928-h4e9",
-        "base": "bf9488d677b208f3fe57358a29b0024f5e245113",
-        "resources": [
-          "area:devices",
-          "task:QA-02"
-        ],
-        "fence": 281,
-        "updatedAt": 1790586485794,
-        "expiresAt": 1790588285794
-      }
-    },
     {
       "id": "5fa3829a-3cc9-4c45-b1c7-fd6e34ba29b0",
       "hash": "f9e9ec4e9443802e28f81a717c4150d142009c6d887288400a762e7619bd8a86",
@@ -4617,6 +4598,25 @@
         "fence": 537,
         "updatedAt": 1795172290132,
         "expiresAt": 1795174090132
+      }
+    },
+    {
+      "id": "30e19a8c-c382-4e5e-be27-f1f45663b67a",
+      "hash": "6df89e16996667d5178fec607028d89beeeac408e195d3b54df754d8e3f0dba6",
+      "revision": 542,
+      "result": {
+        "status": "renewed",
+        "token": "00119a48-d9f1-4fa9-8e6b-68fecb62bf9d",
+        "task": "QA-02",
+        "owner": "mm-redmi-device-ux-fix-20261120",
+        "base": "d12846084ad619590f3ba661e705c982a1a9f2db",
+        "resources": [
+          "area:devices",
+          "task:QA-02"
+        ],
+        "fence": 537,
+        "updatedAt": 1795172442084,
+        "expiresAt": 1795174242084
       }
     }
   ]
