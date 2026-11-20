@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "neurofoxpro/multimental",
-  "revision": 549,
+  "revision": 550,
   "claims": {
     "5769688a-4b88-4390-b585-09db38d5bc0f": {
       "token": "5769688a-4b88-4390-b585-09db38d5bc0f",
@@ -15,19 +15,6 @@
       "fence": 456,
       "updatedAt": 1792362576792,
       "expiresAt": 1792364376792
-    },
-    "00119a48-d9f1-4fa9-8e6b-68fecb62bf9d": {
-      "token": "00119a48-d9f1-4fa9-8e6b-68fecb62bf9d",
-      "task": "QA-02",
-      "owner": "mm-redmi-device-ux-fix-20261120",
-      "base": "d12846084ad619590f3ba661e705c982a1a9f2db",
-      "resources": [
-        "area:devices",
-        "task:QA-02"
-      ],
-      "fence": 537,
-      "updatedAt": 1795176270683,
-      "expiresAt": 1795178070683
     },
     "e8726785-f508-4488-a934-d9132e35a847": {
       "token": "e8726785-f508-4488-a934-d9132e35a847",
@@ -57,25 +44,6 @@
     }
   },
   "events": [
-    {
-      "id": "e0e2e111-64f4-48e6-9463-8a4ffad7d7a9",
-      "hash": "6490a6085735463fca036fbb9beae16a38c1c43fd4030edf4f27171bac357440",
-      "revision": 294,
-      "result": {
-        "status": "claimed",
-        "token": "e0e2e111-64f4-48e6-9463-8a4ffad7d7a9",
-        "task": "AUTO-07",
-        "owner": "auto07-recovery-20260930-r7f3",
-        "base": "9d1b268cb210a3fec3bfd76ae9cc371531e7ba0f",
-        "resources": [
-          "area:automation",
-          "task:AUTO-07"
-        ],
-        "fence": 294,
-        "updatedAt": 1790719855832,
-        "expiresAt": 1790721655832
-      }
-    },
     {
       "id": "bf719cb9-aa84-4802-93db-dfc6cfeed3a1",
       "hash": "e2e1d2148b2886d6602d0cba3a21b544a49905589b5ecf92cd3a6dfe0dc33e71",
@@ -4644,6 +4612,18 @@
         "fence": 546,
         "updatedAt": 1795176408400,
         "expiresAt": 1795178208400
+      }
+    },
+    {
+      "id": "fc1f2532-46e5-4d72-9ef6-dd27a3e7cd70",
+      "hash": "ea6eea3f81aebf60c9f98229acdf6fc7f196a180cc22dce1d93ae87e04c2c7b4",
+      "revision": 550,
+      "result": {
+        "status": "released",
+        "token": "00119a48-d9f1-4fa9-8e6b-68fecb62bf9d",
+        "task": "QA-02",
+        "owner": "mm-redmi-device-ux-fix-20261120",
+        "fence": 537
       }
     }
   ]
