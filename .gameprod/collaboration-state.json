@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "neurofoxpro/multimental",
-  "revision": 534,
+  "revision": 535,
   "claims": {
     "5769688a-4b88-4390-b585-09db38d5bc0f": {
       "token": "5769688a-4b88-4390-b585-09db38d5bc0f",
@@ -28,41 +28,9 @@
       "fence": 530,
       "updatedAt": 1795140929288,
       "expiresAt": 1795142729288
-    },
-    "410cb9df-cf7e-45ed-aafd-136deadd8e36": {
-      "token": "410cb9df-cf7e-45ed-aafd-136deadd8e36",
-      "task": "QA-02",
-      "owner": "mm-redmi-rotation-qa-20261120",
-      "base": "d12846084ad619590f3ba661e705c982a1a9f2db",
-      "resources": [
-        "area:devices",
-        "task:QA-02"
-      ],
-      "fence": 534,
-      "updatedAt": 1795141950192,
-      "expiresAt": 1795143750192
     }
   },
   "events": [
-    {
-      "id": "6f940e78-7763-4959-a1f8-0f68ffd7c5b2",
-      "hash": "818f327a90d72242c70032336f0a54b907de1cd0a45b7f75157d3ada352aa86c",
-      "revision": 279,
-      "result": {
-        "status": "claimed",
-        "token": "6f940e78-7763-4959-a1f8-0f68ffd7c5b2",
-        "task": "QA-02",
-        "owner": "redmi-current-20260928-r7c2",
-        "base": "bf9488d677b208f3fe57358a29b0024f5e245113",
-        "resources": [
-          "area:devices",
-          "task:QA-02"
-        ],
-        "fence": 279,
-        "updatedAt": 1790584711253,
-        "expiresAt": 1790586511253
-      }
-    },
     {
       "id": "179ae7e1-d1cf-40b6-ab4d-d4360e900ad1",
       "hash": "d63999ec280bec6ac03fd677d560e5c0c6639d52682af06a3cfc1a164f1d5fd5",
@@ -4617,6 +4585,18 @@
         "fence": 534,
         "updatedAt": 1795141950192,
         "expiresAt": 1795143750192
+      }
+    },
+    {
+      "id": "af7f0b68-52e9-4602-8c1f-d0fa5da188c7",
+      "hash": "edf5b90a8a415fef16a21ffe74eb8fc462ad77e98f6d49937b012d89144a754c",
+      "revision": 535,
+      "result": {
+        "status": "released",
+        "token": "410cb9df-cf7e-45ed-aafd-136deadd8e36",
+        "task": "QA-02",
+        "owner": "mm-redmi-rotation-qa-20261120",
+        "fence": 534
       }
     }
   ]
