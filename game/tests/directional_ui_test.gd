@@ -35,8 +35,12 @@ func run_test() -> void:
     ui.on_hand(0)
     ui.on_cell(0)
     check(ui.selected_cell == 0 and ui.game.digest() == digest, "hovering placement is UI-only")
+    var preview_cell = ui.board_buttons[0]
+    check(preview_cell.attack_overlay.visible and preview_cell.preview_rotate_left.visible and preview_cell.preview_rotate_right.visible, "both rotation buttons flank the floating card")
+    var initial_rays: Array[Vector2] = preview_cell.attack_overlay.rays.duplicate()
     ui.rotate_card(1)
     check(ui.selected_direction == 1 and ui.game.digest() == digest, "rotation preview never mutates the match")
+    check(preview_cell.attack_overlay.rays != initial_rays and preview_cell.attack_overlay.visible, "attack arrows on card rotate with orientation")
     check("→" in ui.aim_label.text, "preview shows chosen direction")
     var deadline: float = ui.deadline
     check(ui.game.state.board[0] == null and ui.game.digest() == digest, "orientation preview never places a unit")
