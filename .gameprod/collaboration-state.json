@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "neurofoxpro/multimental",
-  "revision": 535,
+  "revision": 536,
   "claims": {
     "5769688a-4b88-4390-b585-09db38d5bc0f": {
       "token": "5769688a-4b88-4390-b585-09db38d5bc0f",
@@ -26,23 +26,11 @@
         "task:BALANCE-01"
       ],
       "fence": 530,
-      "updatedAt": 1795140929288,
-      "expiresAt": 1795142729288
+      "updatedAt": 1795168409135,
+      "expiresAt": 1795170209135
     }
   },
   "events": [
-    {
-      "id": "179ae7e1-d1cf-40b6-ab4d-d4360e900ad1",
-      "hash": "d63999ec280bec6ac03fd677d560e5c0c6639d52682af06a3cfc1a164f1d5fd5",
-      "revision": 280,
-      "result": {
-        "status": "released",
-        "token": "6f940e78-7763-4959-a1f8-0f68ffd7c5b2",
-        "task": "QA-02",
-        "owner": "redmi-current-20260928-r7c2",
-        "fence": 279
-      }
-    },
     {
       "id": "c0ed7a05-ccc9-4bb8-a9e5-37a473ff81f2",
       "hash": "32b57d504f8c5489b3d66bca5a6a66bf380659a541ea57c3ab725e5b2a74977a",
@@ -4597,6 +4585,25 @@
         "task": "QA-02",
         "owner": "mm-redmi-rotation-qa-20261120",
         "fence": 534
+      }
+    },
+    {
+      "id": "7b403e23-f894-4055-9534-54a6a90320eb",
+      "hash": "08f7e5f47d21b8e80480d2c67e4ed11768abc5ac5f6149ba21197d84be0b0a62",
+      "revision": 536,
+      "result": {
+        "status": "renewed",
+        "token": "2b771443-2b76-47ca-aa48-aa5d396b68cc",
+        "task": "BALANCE-01",
+        "owner": "mm-paired-arrows-20261120",
+        "base": "7bd9061e9700ce0093a95b585f17f91ea86eb879",
+        "resources": [
+          "area:game-core",
+          "task:BALANCE-01"
+        ],
+        "fence": 530,
+        "updatedAt": 1795168409135,
+        "expiresAt": 1795170209135
       }
     }
   ]
