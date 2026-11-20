@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "neurofoxpro/multimental",
-  "revision": 558,
+  "revision": 559,
   "claims": {
     "5769688a-4b88-4390-b585-09db38d5bc0f": {
       "token": "5769688a-4b88-4390-b585-09db38d5bc0f",
@@ -28,41 +28,9 @@
       "fence": 545,
       "updatedAt": 1795172710649,
       "expiresAt": 1795174510649
-    },
-    "7802cba2-3a26-46d9-ade4-1db121fa197b": {
-      "token": "7802cba2-3a26-46d9-ade4-1db121fa197b",
-      "task": "QA-02",
-      "owner": "mm-nophone-qa-confirm-20261120",
-      "base": "e4b43c8bdfb72ff5844dff5bdf01748a8d8f6b6e",
-      "resources": [
-        "area:devices",
-        "task:QA-02"
-      ],
-      "fence": 551,
-      "updatedAt": 1795177043963,
-      "expiresAt": 1795178843963
     }
   },
   "events": [
-    {
-      "id": "12bf8c23-06db-4651-9ee5-bc5532787149",
-      "hash": "bf5666539f16fbb7c2df011d1739d8fd8f841851fe03a9cd7fd5825745604f33",
-      "revision": 303,
-      "result": {
-        "status": "renewed",
-        "token": "e0e2e111-64f4-48e6-9463-8a4ffad7d7a9",
-        "task": "AUTO-07",
-        "owner": "auto07-recovery-20260930-r7f3",
-        "base": "9d1b268cb210a3fec3bfd76ae9cc371531e7ba0f",
-        "resources": [
-          "area:automation",
-          "task:AUTO-07"
-        ],
-        "fence": 294,
-        "updatedAt": 1790721679869,
-        "expiresAt": 1790723479869
-      }
-    },
     {
       "id": "eb37d3d8-f426-4173-8578-6e139a15309b",
       "hash": "578ab74e6611bc86046f02fcdc2cd0f42a6e5ece4e86517d7964d2aa70a0f74c",
@@ -4617,6 +4585,18 @@
         "task": "UX-08",
         "owner": "mm-nophone-faststart-20261120",
         "fence": 546
+      }
+    },
+    {
+      "id": "2a3c002a-96f7-496b-8cee-4d13042e6c0a",
+      "hash": "6c202aee65d8ce08b864b2ad20319e0238ecf9dde30f305d1f60c398efa483d0",
+      "revision": 559,
+      "result": {
+        "status": "released",
+        "token": "7802cba2-3a26-46d9-ade4-1db121fa197b",
+        "task": "QA-02",
+        "owner": "mm-nophone-qa-confirm-20261120",
+        "fence": 551
       }
     }
   ]
