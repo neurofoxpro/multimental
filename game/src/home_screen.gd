@@ -23,17 +23,26 @@ static func build(ui, content: VBoxContainer) -> void:
     var play: Button = action(ui, content, "PlayAI", ui.t("ИГРАТЬ ПРОТИВ ИИ", "PLAY AGAINST AI"), ui.start_match, 78)
     Style.decorate_button(play, true)
     var state: Dictionary = ui.profile.state()
-    var collection: Dictionary = state.get("collection", {})
-    var selected: String = str(collection.get("selected", ""))
-    var deck_name: String = str(collection.get("names", {}).get(selected, ui.t("Стартовая колода", "Starter deck")))
-    var deck_text: String = ui.t("В бой с колодой: ", "Play with deck: ") + deck_name
-    if not collection.is_empty() and selected.is_empty():
+    var readiness: Dictionary = preload("res://src/home_deck_status.gd").inspect(state)
+    var deck_text: String = ""
+    if readiness.starter:
+        deck_text = ui.t("Быстрый старт: стандартная колода", "Quick start: starter deck")
+    elif readiness.ready:
+        deck_text = ui.t("Готова колода: ", "Ready deck: ") + str(readiness.name) + " · %d/%d" % [int(readiness.count), preload("res://src/deck_rules.gd").SIZE]
+    else:
         play.text = ui.t("ВЫБРАТЬ КОЛОДУ ДЛЯ ИГРЫ", "CHOOSE A DECK TO PLAY")
-        deck_text = ui.t("Нет выбранной полной колоды — откроется редактор.", "No complete deck selected — opens the editor.")
+        var reason: String = str(readiness.reason)
+        if reason == "DECK_SIZE":
+            deck_text = ui.t("Колода неполная: ", "Incomplete deck: ") + "%d/%d" % [int(readiness.count), preload("res://src/deck_rules.gd").SIZE]
+        elif reason == "CARD_NOT_OWNED":
+            deck_text = ui.t("В колоде отсутствуют доступные карты", "Some cards in the deck are not owned")
+        else:
+            deck_text = ui.t("Нет выбранной полной колоды", "No complete deck selected")
     var deck: Label = ui.label(deck_text, 18)
     deck.name = "SelectedDeckSummary"
-    deck.add_theme_color_override("font_color", Style.MUTED)
+    deck.add_theme_color_override("font_color", Style.ACCENT if readiness.ready else Style.MUTED)
     content.add_child(deck)
+    action(ui, content, "ChangeSelectedDeck", ui.t("СМЕНИТЬ КОЛОДУ", "CHANGE DECK"), ui.show_collection, 56)
     var friends: GridContainer = section(ui, content, ui.t("СЫГРАТЬ С ДРУГОМ", "PLAY WITH A FRIEND"))
     action(ui, friends, "OpenLAN", ui.t("ЛОКАЛЬНАЯ СЕТЬ / WI-FI", "LOCAL NETWORK / WI-FI"), ui.show_lan_menu)
     if OS.has_feature("android"):
