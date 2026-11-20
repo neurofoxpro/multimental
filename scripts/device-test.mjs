@@ -334,8 +334,8 @@ try {
     const stages =
       spec?.stages ||
       (mode === 'tutorial'
-        ? ['waiting_volume_tap', 'waiting_card_tap', 'waiting_target_tap']
-        : ['waiting_card_tap', 'waiting_target_tap']);
+        ? ['waiting_volume_tap', 'waiting_card_tap', 'waiting_target_tap', 'waiting_confirm_tap']
+        : ['waiting_card_tap', 'waiting_target_tap', 'waiting_confirm_tap']);
     for (const stage of stages) {
       const prompt = await awaitLab(nonce, stage);
       tapTarget(prompt, { stage, nonce });

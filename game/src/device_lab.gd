@@ -197,11 +197,20 @@ func _ui() -> void:
             await get_tree().process_frame
             _stage({"stage": "waiting_target_tap", "tap": _screen_center(ui.board_buttons[int(chosen.cell)])})
             end = Time.get_ticks_msec() + 25000
-            while Time.get_ticks_msec() < end and ui.game.count_cells(0) != 1:
+            while Time.get_ticks_msec() < end and ui.selected_cell != int(chosen.cell):
                 await get_tree().create_timer(0.05).timeout
-            placed = ui.game.count_cells(0) == 1
+            var preview_ready: bool = ui.selected_cell == int(chosen.cell) and ui.game.count_cells(0) == 0
+            checks.append({"name": "os_target_tap_preview_only", "ok": preview_ready})
+            if preview_ready:
+                await get_tree().process_frame
+                await get_tree().process_frame
+                _stage({"stage": "waiting_confirm_tap", "tap": _screen_center(ui.confirm_placement_button)})
+                end = Time.get_ticks_msec() + 25000
+                while Time.get_ticks_msec() < end and ui.game.count_cells(0) != 1:
+                    await get_tree().create_timer(0.05).timeout
+                placed = ui.game.count_cells(0) == 1
     checks.append({"name": "os_card_tap", "ok": selected})
-    checks.append({"name": "os_target_tap_and_placement", "ok": placed})
+    checks.append({"name": "os_confirm_tap_and_placement", "ok": placed})
     var rect: Rect2 = ui.get_viewport_rect()
     var bounds_ok: bool = true
     for button in ui.board_buttons:
