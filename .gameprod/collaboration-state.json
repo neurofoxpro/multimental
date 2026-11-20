@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "neurofoxpro/multimental",
-  "revision": 527,
+  "revision": 528,
   "claims": {
     "5769688a-4b88-4390-b585-09db38d5bc0f": {
       "token": "5769688a-4b88-4390-b585-09db38d5bc0f",
@@ -15,19 +15,6 @@
       "fence": 456,
       "updatedAt": 1792362576792,
       "expiresAt": 1792364376792
-    },
-    "3f4f472e-4cc8-41f6-b0a6-b77814937ae4": {
-      "token": "3f4f472e-4cc8-41f6-b0a6-b77814937ae4",
-      "task": "BALANCE-01",
-      "owner": "mm19-post-resource-balance-20261118",
-      "base": "0db51c8624dbd8a0a610a3563a41ce567b9fc995",
-      "resources": [
-        "area:game-core",
-        "task:BALANCE-01"
-      ],
-      "fence": 499,
-      "updatedAt": 1795006457819,
-      "expiresAt": 1795008257819
     },
     "9cb7fb36-3314-49ee-bbcd-bfe3e3a523ae": {
       "token": "9cb7fb36-3314-49ee-bbcd-bfe3e3a523ae",
@@ -44,25 +31,6 @@
     }
   },
   "events": [
-    {
-      "id": "1488be7c-dfa4-466b-8922-e4ca94a57783",
-      "hash": "543cc99dc2243cbfa39845aa21cac5ef3ece3417682e474d5ff99a6f59563be1",
-      "revision": 272,
-      "result": {
-        "status": "renewed",
-        "token": "33364576-8c8c-416a-809f-1d09b34b367b",
-        "task": "BALANCE-01",
-        "owner": "balance-holdout-20260928-e71c",
-        "base": "161324944d674706c125f8c42d587c98cfac688e",
-        "resources": [
-          "area:game-core",
-          "task:BALANCE-01"
-        ],
-        "fence": 268,
-        "updatedAt": 1790556722630,
-        "expiresAt": 1790558522630
-      }
-    },
     {
       "id": "217687f0-7a62-4f76-88b6-0915f9928f2c",
       "hash": "ed0961fe8e7147609bdcac6a9f0e74ffe9e7c60be797e604982a25efb9b63be7",
@@ -4617,6 +4585,18 @@
         "fence": 525,
         "updatedAt": 1795140796550,
         "expiresAt": 1795142596550
+      }
+    },
+    {
+      "id": "23100dc3-3947-4416-9cee-3bbabc46ca54",
+      "hash": "22f6834d7a2ac16ed2bb2a11a6b8b5b97a64c4b5d00a5b23448b879ef12d18ea",
+      "revision": 528,
+      "result": {
+        "status": "released",
+        "token": "3f4f472e-4cc8-41f6-b0a6-b77814937ae4",
+        "task": "BALANCE-01",
+        "owner": "mm19-post-resource-balance-20261118",
+        "fence": 499
       }
     }
   ]
