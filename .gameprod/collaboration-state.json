@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "neurofoxpro/multimental",
-  "revision": 547,
+  "revision": 548,
   "claims": {
     "5769688a-4b88-4390-b585-09db38d5bc0f": {
       "token": "5769688a-4b88-4390-b585-09db38d5bc0f",
@@ -26,8 +26,8 @@
         "task:QA-02"
       ],
       "fence": 537,
-      "updatedAt": 1795176098419,
-      "expiresAt": 1795177898419
+      "updatedAt": 1795176270683,
+      "expiresAt": 1795178070683
     },
     "e8726785-f508-4488-a934-d9132e35a847": {
       "token": "e8726785-f508-4488-a934-d9132e35a847",
@@ -57,25 +57,6 @@
     }
   },
   "events": [
-    {
-      "id": "06b8a387-2913-435f-aa03-422af84eda28",
-      "hash": "9aa658109ebad85ac6bc7b17569354311420280177f5b82e335979942e47ced9",
-      "revision": 292,
-      "result": {
-        "status": "claimed",
-        "token": "06b8a387-2913-435f-aa03-422af84eda28",
-        "task": "BALANCE-01",
-        "owner": "balance-mixed-20260929-k8d4",
-        "base": "9d1b268cb210a3fec3bfd76ae9cc371531e7ba0f",
-        "resources": [
-          "area:game-core",
-          "task:BALANCE-01"
-        ],
-        "fence": 292,
-        "updatedAt": 1790639400434,
-        "expiresAt": 1790641200434
-      }
-    },
     {
       "id": "43554603-f295-4245-93ce-3030c6d606f4",
       "hash": "236f44cee95b44b96a198992675f31ab9a68c7e112083a44b991f90b393a91f2",
@@ -4637,6 +4618,25 @@
         "fence": 537,
         "updatedAt": 1795176098419,
         "expiresAt": 1795177898419
+      }
+    },
+    {
+      "id": "ced3049f-c9ce-4ba8-ac06-4922975a147b",
+      "hash": "6f878cabcd12e604b32c8ad5a3e5d4183a80d1e28b388fcf3f94a77ed0228d62",
+      "revision": 548,
+      "result": {
+        "status": "renewed",
+        "token": "00119a48-d9f1-4fa9-8e6b-68fecb62bf9d",
+        "task": "QA-02",
+        "owner": "mm-redmi-device-ux-fix-20261120",
+        "base": "d12846084ad619590f3ba661e705c982a1a9f2db",
+        "resources": [
+          "area:devices",
+          "task:QA-02"
+        ],
+        "fence": 537,
+        "updatedAt": 1795176270683,
+        "expiresAt": 1795178070683
       }
     }
   ]
