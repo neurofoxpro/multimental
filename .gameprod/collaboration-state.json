@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "neurofoxpro/multimental",
-  "revision": 557,
+  "revision": 558,
   "claims": {
     "5769688a-4b88-4390-b585-09db38d5bc0f": {
       "token": "5769688a-4b88-4390-b585-09db38d5bc0f",
@@ -29,19 +29,6 @@
       "updatedAt": 1795172710649,
       "expiresAt": 1795174510649
     },
-    "b9a346e8-510b-45ee-a290-e1f5257f8d04": {
-      "token": "b9a346e8-510b-45ee-a290-e1f5257f8d04",
-      "task": "UX-08",
-      "owner": "mm-nophone-faststart-20261120",
-      "base": "e4b43c8bdfb72ff5844dff5bdf01748a8d8f6b6e",
-      "resources": [
-        "area:game-ui",
-        "task:UX-08"
-      ],
-      "fence": 546,
-      "updatedAt": 1795176799659,
-      "expiresAt": 1795178599659
-    },
     "7802cba2-3a26-46d9-ade4-1db121fa197b": {
       "token": "7802cba2-3a26-46d9-ade4-1db121fa197b",
       "task": "QA-02",
@@ -57,25 +44,6 @@
     }
   },
   "events": [
-    {
-      "id": "2eb79c2c-393c-450c-9742-e8c199aa6f5a",
-      "hash": "1acff5ef0c117add141d3dfd54aa9c94a3828a2ef751988e3e490a62c8e68938",
-      "revision": 302,
-      "result": {
-        "status": "renewed",
-        "token": "e0e2e111-64f4-48e6-9463-8a4ffad7d7a9",
-        "task": "AUTO-07",
-        "owner": "auto07-recovery-20260930-r7f3",
-        "base": "9d1b268cb210a3fec3bfd76ae9cc371531e7ba0f",
-        "resources": [
-          "area:automation",
-          "task:AUTO-07"
-        ],
-        "fence": 294,
-        "updatedAt": 1790721535764,
-        "expiresAt": 1790723335764
-      }
-    },
     {
       "id": "12bf8c23-06db-4651-9ee5-bc5532787149",
       "hash": "bf5666539f16fbb7c2df011d1739d8fd8f841851fe03a9cd7fd5825745604f33",
@@ -4637,6 +4605,18 @@
         "fence": 551,
         "updatedAt": 1795177043963,
         "expiresAt": 1795178843963
+      }
+    },
+    {
+      "id": "9d23120d-b70c-45e5-adc3-822ba199849c",
+      "hash": "6767d7264ceb948f3912733fc66e85c6ab758b81f454c360c0c4ecc5db48aecd",
+      "revision": 558,
+      "result": {
+        "status": "released",
+        "token": "b9a346e8-510b-45ee-a290-e1f5257f8d04",
+        "task": "UX-08",
+        "owner": "mm-nophone-faststart-20261120",
+        "fence": 546
       }
     }
   ]
