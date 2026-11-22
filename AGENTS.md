@@ -2,7 +2,7 @@
 
 Only neurofoxpro/multimental and personal station VENEL-SENDRIK; hosted CI is allowed. Verify hostname/origin. No other host/repository, force-push, phone data removal or signing-key rotation. Main/stable/Play, paid dependencies, incompatible saves and accepted-concept changes need explicit owner approval. Dev after automatic checks is delegated.
 
-Read skills/game-production/SKILL.md, then scripts/chat.cmd focus TASK (or focus in an owned slice). Read the returned task, initial/changed decisions and relevant inputs fully. task ID provides the full discussion; .gameprod/evidence/focus.local.json retains omitted detail. Issue29/task Issues are primary memory; old state/handoff versions are historical.
+Read skills/game-production/SKILL.md and docs/production/CHAT_CONTEXT.ru.md once per session, then scripts/chat.cmd focus TASK (or focus in an owned slice). Keep chat output compact; store complete logs/evidence outside conversation, and retrieve only changed inputs. Read the returned task, initial/changed decisions and relevant inputs fully. task ID provides the full discussion; .gameprod/evidence/focus.local.json retains omitted detail. Issue29/task Issues are primary memory; old state/handoff versions are historical.
 
 One chat owns one task/worktree: collab start TASK UNIQUE_ALIAS, use only the returned directory, renew and deliberately release. Never steal an expired foreign claim. Preserve drafts; after a closed PR use collab branch suffix.
 
